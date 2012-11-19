@@ -1,1 +1,6 @@
-Hello, is this on Github?
+Dusk is a multiplayer game engine, written in java. Gameplay is similar to text MUDS, but completely redesigned to fit in a graphical game world.
+This project was created by Tom Weingarten and was intended to be a classic MUD with a graphical output similar to todays MMORPGs. The server and client are both very lightweight; the client can be run as an applet or application and the server uses very little resources and a flatfile database system.
+Multiple servers can be run featuring different worlds with different rules/graphics.
+The program was also worked on by lone_wolf_ga, wildern, Cyril, javalou and others.
+
+More information about these Dusk files see "README.txt" in the "DuskFiles" folder.
