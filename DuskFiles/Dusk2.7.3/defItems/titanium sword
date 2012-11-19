@@ -1,0 +1,18 @@
+type
+weapon
+description
+The first and last of its kind, the one and only sword made of titanium alloy.
+cost
+950
+mod
+350
+image
+9
+durability
+200000
+onWear
+qs_start
+onUnwear
+qs_end
+.
+

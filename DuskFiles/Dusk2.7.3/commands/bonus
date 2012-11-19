@@ -1,0 +1,22 @@
+if < trigger privs 3
+    chat trigger "huh?"
+    endscript
+end
+#
+# So I don't have to change caster to trigger and back again
+#
+livingthing caster trigger
+if variableisstring param0
+    livingthing target param0
+end
+inc target strengthbonus 500
+inc target acbonus 1000
+#
+chat trigger concat "Bonus added to " name target
+#
+# Always end the script
+#
+endscript
+
+
+

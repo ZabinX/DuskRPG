@@ -1,0 +1,27 @@
+maxhp
+1000
+maxmp
+800
+stre
+200
+inte
+120
+dext
+120
+cons
+120
+wisd
+80
+image
+14
+bravery
+0.9
+grouprelation
+0.25
+giveitem
+Demon Horns
+0.5
+faction
+Demon
+.
+

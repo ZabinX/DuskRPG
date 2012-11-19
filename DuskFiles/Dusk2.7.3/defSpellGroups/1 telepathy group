@@ -1,0 +1,28 @@
+#Locate: Telapthically descerns someone's location.
+#
+#
+if not variableisstring param0
+	chat caster "You already know your location."
+	endscript
+end
+livingthing target param0
+if not or or isplayer target ispet target ismob target
+	chat caster "You cannot discern the location of the mentioned being."
+	endscript
+end
+if > target privs 2
+     if hascondition target "invis"
+        chat caster "You cannot discern the location of the mentioned being."
+        chat target concat name caster " has just cast locate on you in an attempt to see if you are logged in."
+        endscript
+    end
+    number a caster locx
+    number b caster locy
+    chat caster concat concat concat concat "You are unable to discern the god's location, message him asking where he is, he might respond! *they know where you are, Mr. " a ", " b "*"
+    chat target concat concat concat concat concat name caster " has tryed to locate you, they will message you if it's imporant. Their loc is " a ", " b "!"
+    endscript
+end
+number x target locx
+number y target locy
+chat caster concat concat concat concat concat name target "'s Loc: " x "/" y "."
+endscript

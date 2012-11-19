@@ -1,0 +1,15 @@
+if < trigger privs 3
+    chat trigger "huh?"
+    endscript
+end
+if ! strequals name trigger "Firewall"
+        chat trigger "huh?"
+        endscript
+end
+order trigger "uninvis"
+order trigger concat concat "gecho " name trigger " forms from a pool of lava."
+endscript
+
+
+
+

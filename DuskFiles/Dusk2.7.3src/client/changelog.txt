@@ -1,0 +1,24 @@
+W1
+	Did away with ImageButton.
+	Only load 2 audio files, explicitly.
+	Combined updateChoiceLook, Get, and Attack into one function as there were
+		several places where all 3 were being called in succession.
+	Swithed to Iteretor for traversing vctEntities in most places.
+W2
+	Switched txtOutput to JTextPane to allow for colored text.
+	Colored text takes the form of <RGB r g b>text</RGB>.
+W3
+	Added BattleFrame class and the ability for battle messages to go to a
+		new window.
+	Added input box to battle window so doing things during combat is still
+		simple.
+	Fixed behavior of Connect frame, double clicks no longer needed to
+		choose a bookmark.
+	Fixed corruption of bookmars that occurs when removing bookmarks.
+		Bookmark file is now deleted before being written out.
+	Changed references to dusk.wesowin.org to the SourceForge site.
+	Changed the default connection to be the loopback address 127.0.0.1 and
+		the default port to match the one in the server pack.
+
+	Added MediaTracker to scaleImages to get rid of grey screen on startup
+		and window resize.

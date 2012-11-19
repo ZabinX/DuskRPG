@@ -1,0 +1,42 @@
+description
+This appears initially to be a large clump of kelp, but you quickly realize that it is carnivorous.  Quite beloved by Darkunder residents, the bloodwart happily 'recycles' outsiders.
+maxhp
+4000
+maxmp
+1000
+stre
+800
+inte
+100
+dext
+150
+wisd
+100
+cons
+340
+bravery
+1
+grouprelation
+1
+image
+26
+condition
+detect invis
+0
+-1
+faction
+smurf
+skill
+Double Attack
+80
+skill
+Triple Attack
+80
+skill
+Quadruple Attack
+70
+skill
+Dodge
+50
+.
+

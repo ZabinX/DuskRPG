@@ -1,0 +1,16 @@
+type
+weapon
+description
+a heavy, double sided axe.  There is definitely a right side and a wrong side to this weapon.  The right side is holding it
+cost
+1000
+mod
+325
+image
+9
+durability
+50000
+.
+
+
+

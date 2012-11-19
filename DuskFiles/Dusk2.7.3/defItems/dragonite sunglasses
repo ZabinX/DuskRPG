@@ -1,0 +1,19 @@
+type
+armor
+kind
+eyes
+description
+a bad ass pair of sunglasses constructed of the legendary metal dragonite
+cost
+20000
+mod
+5000
+image
+7
+durability
+2900000
+onWear
+wear_normal_armor
+.
+
+

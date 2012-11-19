@@ -1,0 +1,27 @@
+maxhp
+2000
+maxmp
+0
+stre
+1500
+inte
+50
+dext
+70
+wisd
+2
+cons
+1000
+bravery
+1.5
+grouprelation
+1
+image
+5
+faction
+ork
+condition
+detect invis
+0
+-1
+.

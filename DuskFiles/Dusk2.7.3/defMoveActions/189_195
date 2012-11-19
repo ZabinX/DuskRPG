@@ -1,0 +1,10 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger "walk"
+    removecondition trigger "walk"
+    set trigger locxy 189 195
+    endscript
+end
+
+

@@ -1,0 +1,22 @@
+#Killer: For the duration of the casters intelligence,
+# add the conditioon "killer instinct" (+5 DamModBonus)
+#
+#
+if variableisstring param0 #If a target is specified
+	livingthing target local caster param0
+	if or or isplayer target ispet target ismob target
+		chat caster concat concat "You convince the mind of " name target " that to kill is good."
+		chat target concat name caster " inculcates on you the killer instinct."
+		addconditionwithduration target "killer instinct" caster inte
+		endscript
+	end
+	chat caster "You do not see them here."
+	endscript
+end
+#
+#Else no target is specified
+chat caster "You start thinking that kill is a wonderful thing"
+addconditionwithduration caster "killer instinct" caster inte
+endscript
+
+

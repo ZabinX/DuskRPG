@@ -1,0 +1,22 @@
+#Eclipse
+#Pinefar Equipment
+type
+armor
+kind
+skull
+description
+a dwarven helm
+cost
+500
+mod
+100
+image
+7
+durability
+7000
+onWear
+wear_normal_armor
+.
+
+
+

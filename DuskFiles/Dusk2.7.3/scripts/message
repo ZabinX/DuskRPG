@@ -1,0 +1,82 @@
+removecondition trigger message
+log trigger "got wildern's message."
+#
+#
+#
+if or strequals name trigger "unred" strequals name trigger "twiddledee"
+    chat trigger "
+
+Wildern left you the following message:
+	Welcome back :)
+	New god commands... invis, invis2, uninvis2, send.
+	When you are invis, you don't show up in who and login/out is silent.
+	invis2 makes it so players cannot see you at all.
+"
+	endscript
+end
+#
+#
+#
+if strequals name trigger "Wildern"
+    chatwindow trigger "Message from Wildern" "hi there
+I really hope
+This works"
+	endscript
+end
+#
+#
+#
+if strequals name trigger "Robot"
+    chat trigger "
+
+Wildern left you the following message:
+'Robot gossips: i wonder if i should cause yal lagg yes i should huh?'
+2518 MPtoken in your inventory.
+You have been erased because you intentionally caused harm to the game.
+"
+	endscript
+end
+if strequals name trigger "DarkCrono"
+    chat trigger "
+
+Wildern left you the following message:
+Server pack available at http://darkstardusk.net/wesowin/newdusk/server_pack_w29.tar
+"
+	endscript
+end
+#
+#
+#
+if strequals name trigger "firewall"
+    chat trigger "
+Wildern left you the following message:
+	The move action at 59_341 is fine, it is your condition that is wrong
+Conditions must be all lower case when you create them, and probably should be all lower
+case when you use them as well.
+"
+	endscript
+end
+#
+#
+#
+if strequals name trigger "godslayer"
+    chat trigger "
+
+Wildern left you the following message:
+	My apologies for the repeated message, it was only supposed to display
+once, but I had a typo in the script.
+
+"
+	endscript
+end
+#
+#
+#
+if strequals name trigger "newplayermessage"
+    chat trigger "
+Wildern left you the following message:
+"
+	endscript
+end
+endscript
+

@@ -1,0 +1,51 @@
+# flowris
+#
+#
+#
+if not isPlayer trigger
+	endscript
+	end
+#
+if not isClan trigger global unredowner
+	chat trigger "Your clan doesn't own Unred's Shrine"
+	endscript
+	end
+#
+if hasCondition trigger safe
+	chat trigger "Not while you're safe"
+	endscript
+	end
+#
+if hasCondition trigger jailed
+	chat trigger "Not while you're in jail"
+	endscript
+	end
+#
+if isInBattle trigger
+	chat trigger "Not while you're figthing"
+	endscript
+	end
+#
+if hascondition trigger "hot springs"
+    removecondition trigger "hot springs"
+end
+if hascondition trigger "lava bath"
+    removecondition trigger "lava bath"
+end
+if hascondition trigger "ice bath"
+    removecondition trigger "ice bath"
+end
+if hascondition trigger "ogrefight"
+    removecondition trigger "ogrefight"
+end
+if hascondition trigger "allowedboat"
+    removecondition trigger "allowedboat"
+    removeitem trigger boat
+end
+#
+set trigger locxy 157 12
+endscript
+
+
+
+

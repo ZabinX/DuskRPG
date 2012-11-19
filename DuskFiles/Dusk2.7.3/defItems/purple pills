@@ -1,0 +1,13 @@
+type
+food
+description
+a way to quiet the voices in your head
+cost
+500
+image
+6
+onuse
+purplepill
+uses
+10
+.

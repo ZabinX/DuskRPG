@@ -1,0 +1,11 @@
+if < trigger cp 2000
+    chat trigger "You must experience more before you can wield this sword."
+    string command concat "unwear " itemname
+    order trigger command
+    endscript
+end
+inc trigger strengthbonus 40
+endscript
+
+
+

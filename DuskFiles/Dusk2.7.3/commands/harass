@@ -1,0 +1,16 @@
+if not variableisstring param0
+	order trigger "emote harasses himself quietly and hopes no one noticed.."
+	endscript
+end
+livingthing target local trigger param0
+if not isplayer target
+	chat trigger "They are not here to harass."
+	endscript
+end
+chat trigger concat concat "You harass " name target " with a maniacal glee."
+chat target concat name trigger " harasses you and your mother."
+order trigger concat concat "emote harasses " name target " with a maniacal glee."
+endscript
+
+
+

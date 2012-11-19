@@ -1,0 +1,46 @@
+#balance command (for the Death Mountain Bank)
+#usage: balance
+if hasCondition trigger banktransaction
+	chat trigger "Transaction going on. Try again in a while."
+	endscript
+end
+addCondition trigger banktransaction
+number result 0
+    if hasCondition trigger dmb30 number result + result 1073741824
+end if hasCondition trigger dmb29 number result + result 536870912
+end if hasCondition trigger dmb28 number result + result 268435456
+end if hasCondition trigger dmb27 number result + result 134217728
+end if hasCondition trigger dmb26 number result + result 67108864
+end if hasCondition trigger dmb25 number result + result 33554432
+end if hasCondition trigger dmb24 number result + result 16777216
+end if hasCondition trigger dmb23 number result + result 8388608
+end if hasCondition trigger dmb22 number result + result 4194304
+end if hasCondition trigger dmb21 number result + result 2097152
+end if hasCondition trigger dmb20 number result + result 1048576
+end if hasCondition trigger dmb19 number result + result 524288
+end if hasCondition trigger dmb18 number result + result 262146
+end if hasCondition trigger dmb17 number result + result 131072
+end if hasCondition trigger dmb16 number result + result 65536
+end if hasCondition trigger dmb15 number result + result 32768
+end if hasCondition trigger dmb14 number result + result 16384
+end if hasCondition trigger dmb13 number result + result 8192
+end if hasCondition trigger dmb12 number result + result 4096
+end if hasCondition trigger dmb11 number result + result 2048
+end if hasCondition trigger dmb10 number result + result 1024
+end if hasCondition trigger dmb09 number result + result 512
+end if hasCondition trigger dmb08 number result + result 256
+end if hasCondition trigger dmb07 number result + result 128
+end if hasCondition trigger dmb06 number result + result 64
+end if hasCondition trigger dmb05 number result + result 32
+end if hasCondition trigger dmb04 number result + result 16
+end if hasCondition trigger dmb03 number result + result 8
+end if hasCondition trigger dmb02 number result + result 4
+end if hasCondition trigger dmb01 number result + result 2
+end if hasCondition trigger dmb00 number result + result 1
+end
+chat trigger concat concat "You have " result " gp stored at the Death Mountain Bank."
+removeCondition trigger banktransaction
+endscript
+
+
+

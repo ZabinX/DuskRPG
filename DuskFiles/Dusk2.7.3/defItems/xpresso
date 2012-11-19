@@ -1,0 +1,13 @@
+type
+food
+description
+a strong, dark potion, good for when you are tired
+cost
+1000
+image
+6
+onuse
+xpresso
+uses
+5
+.

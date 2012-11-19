@@ -1,0 +1,13 @@
+type
+weapon
+description
+a long quarter staff
+cost
+20
+mod
+120
+image
+8
+durability
+1500
+

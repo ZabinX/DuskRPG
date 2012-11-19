@@ -1,0 +1,19 @@
+type
+weapon
+description
+a blade that sparks with raw energy.
+cost
+50000
+mod
+1300
+image
+9
+durability
+99000000
+onWear
+wearthunderblade
+onUnWear
+unwearthunderblade
+
+
+

@@ -1,0 +1,1 @@
+duration * caster wisd 6 %param0 target local caster param0 'target (target )target *caster concat concat "You create a magic shield to surround "name target "." *target concat name caster "'s magical shield surrounds you." 	target "armor"duration *caster "You do not see them here." *caster "Your surround yourself in a magical shield" 	caster "armor"duration  

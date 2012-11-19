@@ -1,0 +1,11 @@
+if and hascondition trigger tired
+        hascondition trigger sleep
+    chat trigger "You are too tired to wake up!"
+    endcommand
+    endscript
+end
+if hascondition trigger sleep
+    removecondition trigger sleep
+    endscript
+end
+endscript

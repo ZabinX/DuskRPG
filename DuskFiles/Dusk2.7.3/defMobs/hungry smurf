@@ -1,0 +1,47 @@
+description
+A blue man with a lean and hungry look...and an apple.
+maxhp
+350
+maxmp
+0
+stre
+85
+inte
+50
+dext
+20
+wisd
+30
+cons
+45
+bravery
+-1
+grouprelation
+1
+image
+5
+wield
+long sword
+-1
+-1
+torso
+steel suit
+-1
+-1
+giveitem
+apple
+1
+faction
+smurf
+condition
+armor
+0
+-1
+skill
+Double Attack
+60
+.
+
+
+
+

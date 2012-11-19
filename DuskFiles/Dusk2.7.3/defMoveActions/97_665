@@ -1,0 +1,13 @@
+if ispet trigger
+    endscript
+end
+chat trigger "Heres how to use the bank:
+
+1. Make sure you have a bank card.
+2. Go up to one of the desks.  Stand in front of a Bank Teller.
+3. Type deposit <amount of gp> to deposit money.  (example: deposit 345)
+4. Type withdraw <amount of gp> to withdraw money. (example: withdraw 120)
+5. Type balance to check your amount of GP you have saved.
+6. Only balance command will work outside of the bank."
+endscript
+

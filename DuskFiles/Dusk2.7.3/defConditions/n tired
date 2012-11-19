@@ -1,0 +1,3 @@
+onstart tiredstart
+onoccurance tiredtick
+onend tiredend

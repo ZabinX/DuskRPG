@@ -1,0 +1,14 @@
+type
+weapon
+description
+a blade worn by a once strong and powerful king.
+cost
+2000
+mod
+975
+image
+9
+durability
+1000000
+.
+

@@ -1,0 +1,56 @@
+maxhp
+50000
+maxmp
+1000
+stre
+5000
+inte
+5
+dext
+1300
+wisd
+5
+cons
+10000
+image
+14
+bravery
+1.3
+grouprelation
+1.1
+giveitem
+thunder orb
+0.1
+royal sabre
+0.01
+sabre
+.3
+faction
+beast
+condition
+detect invis
+0
+-1
+condition
+invis
+0
+-1
+skill
+double attack
+100
+skill
+triple attack
+100
+skill
+quadruple attack
+100
+skill
+dodge
+35
+.
+
+
+
+
+
+

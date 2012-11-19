@@ -1,0 +1,19 @@
+type
+armor
+kind
+waist
+description
+a nicly designed belt with lightning bolt design on it.
+cost
+10000
+mod
+2500
+image
+7
+durability
+3000000
+onWear
+wearlightningbelt
+.
+
+

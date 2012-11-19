@@ -1,0 +1,6 @@
+if < trigger cp 200
+	set trigger locXY 388 489
+end
+endscript
+
+

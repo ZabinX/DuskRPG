@@ -1,0 +1,20 @@
+#Create Drink: Creates drink in your hand for eating
+#
+#
+if hasitem caster "10.ale"
+    chat caster "10 ales is enough for now."
+    addconditionwithduration caster cast_limit_ale 600
+    endscript
+end
+if hascondition caster cast_limit_ale
+    chat caster "You need to wait a bit before casting this again."
+    endscript
+end
+if > caster wisd * rand 100
+    chat caster "Some ale appears in your hand."
+    giveitem caster "ale"
+    endscript
+end
+chat caster "You search your mind for the words to conjure drink, but fail to find them."
+endscript
+

@@ -1,0 +1,4 @@
+if isplayer trigger
+    order trigger "quit"
+end
+endscript

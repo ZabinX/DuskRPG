@@ -1,0 +1,4 @@
+chat trigger "Yum yum"
+removecondition trigger hunger
+addcondition trigger nohunger
+endscript

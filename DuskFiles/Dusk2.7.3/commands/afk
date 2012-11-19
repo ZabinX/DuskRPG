@@ -1,0 +1,8 @@
+if ! hasflag trigger "afk"
+    order trigger ";I am currently away from my keyboard"
+    addflag trigger "afk"
+end
+endscript
+
+
+

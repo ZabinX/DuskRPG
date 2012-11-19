@@ -1,0 +1,20 @@
+type
+armor
+kind
+skull
+description
+a nicly designed helmet with lightning bolt design on it
+cost
+20000
+mod
+2500
+image
+7
+durability
+2400000
+onWear
+wearlightninghelm
+.
+
+
+

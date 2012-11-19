@@ -1,0 +1,8 @@
+if isPlayer trigger
+  chat trigger "  Your eyes refocus."
+  removeCondition trigger invis
+end
+endscript
+
+
+

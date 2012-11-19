@@ -1,0 +1,22 @@
+# Sting: add the condition "poison" to the target
+#
+# god command
+if < trigger privs 3
+	chat trigger "huh?"
+	endscript
+	end
+# check for a valid argument
+livingthing target local trigger param0
+if ! variableislivingthing target
+	chat trigger "You don't see him"
+	endscript
+	end
+# code
+addcondition target poison
+chat trigger concat name target " is poisoned"
+chat target "Something stings you..."
+endscript
+
+
+# debug
+#chat trigger "CheckPoint"

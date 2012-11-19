@@ -1,0 +1,90 @@
+# Wildern is still working on this command
+# related commands
+#	peace (god only)
+#	truce (clan leader from clan who declared the war only)
+#	surrender (clan leader from clan war was declared upon only)
+if < trigger privs 3
+    chat trigger "Coming soon."
+    endscript
+end
+if < trigger privs 1
+    chat trigger "Only clan leaders can surrender."
+    endscript
+end
+if < trigger cash 20000
+    chat trigger "You need 20,000gp to surrender!"
+    endscript
+end
+if ! variableisstring param0
+    chat trigger "You must name a person in the clan you are at war with, and they must be in the world."
+    endscript
+end
+livingthing target global param0
+if ! isplayer target
+    chat trigger "You must name a person in the clan you are at war with, and they must be in the world."
+    endscript
+end
+if ! strequals global war1clan1 "none"
+    if or and strequals global war1clan2 clan trigger
+            strequals global war1clan1 clan target
+            and strequals global war1clan1 clan trigger
+            strequals global war1clan2 clan target
+        chat trigger concat concat concat concat "The " clan trigger " clan has surrendered to the " clan target " clan."
+        global string war1clan1 "none"
+        global string war1clan2 "none"
+        inc trigger cash -20000
+        inc target cash 20000
+        chat trigger concat concat "You give " name target " 20,000gp as part of the surrender."
+        chat target "You get 20,000gp from the surrender."
+        endscript
+    end
+end
+if ! strequals global war2clan1 "none"
+    if or and strequals global war2clan2 clan trigger
+            strequals global war2clan1 clan target
+            and strequals global war2clan1 clan trigger
+            strequals global war2clan2 clan target
+        chat trigger concat concat concat concat "The " clan trigger " clan has surrendered to the " clan target " clan."
+        global string war2clan1 "none"
+        global string war2clan2 "none"
+        inc trigger cash -20000
+        inc target cash 20000
+        chat trigger concat concat "You give " name target " 20,000gp as part of the surrender."
+        chat target "You get 20,000gp from the surrender."
+        endscript
+    end
+end
+if ! strequals global war3clan1 "none"
+    if or and strequals global war3clan2 clan trigger
+            strequals global war3clan1 clan target
+            and strequals global war3clan1 clan trigger
+            strequals global war3clan2 clan target
+        chat trigger concat concat concat concat "The " clan trigger " clan has surrendered to the " clan target " clan."
+        global string war3clan1 "none"
+        global string war3clan2 "none"
+        inc trigger cash -20000
+        inc target cash 20000
+        chat trigger concat concat "You give " name target " 20,000gp as part of the surrender."
+        chat target "You get 20,000gp from the surrender."
+        endscript
+    end
+end
+if ! strequals global war4clan1 "none"
+    if or and strequals global war4clan2 clan trigger
+            strequals global war4clan1 clan target
+            and strequals global war4clan1 clan trigger
+            strequals global war4clan2 clan target
+        chat trigger concat concat concat concat "The " clan trigger " clan has surrendered to the " clan target " clan."
+        global string war4clan1 "none"
+        global string war4clan2 "none"
+        inc trigger cash -20000
+        inc target cash 20000
+        chat trigger concat concat "You give " name target " 20,000gp as part of the surrender."
+        chat target "You get 20,000gp from the surrender."
+        endscript
+    end
+end
+char trigger "You cannot surrender to them as their clan is not at war with you."
+endscript
+
+

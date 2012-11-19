@@ -1,0 +1,15 @@
+type
+food
+description
+the food of the gods.
+cost
+1
+image
+6
+onuse
+nectar
+uses
+1
+.
+
+

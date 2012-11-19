@@ -1,0 +1,123 @@
+# flowris
+#
+# Syntax: bet amount even|odd
+#
+#
+if not isPlayer trigger
+	endscript
+end
+#
+# check player position
+#######################
+#
+number x trigger locx
+number y trigger locy
+#chat trigger concat concat x "/" y
+if ! = x 118
+	chat trigger "huh?"
+	endscript
+end
+#
+if ! = y 88
+	chat trigger "huh?"
+	endscript
+end
+#
+# check amount param
+####################
+#
+if ! variableIsString param0
+	chat trigger "How much do you want to bet ?"
+	endscript
+end
+#
+number gold param0
+if not variableIsNumber gold
+	chat trigger "That is not a valid amount"
+	endscript
+end
+if < gold 1
+	chat trigger "That is not a valid amount"
+	endscript
+end
+if < trigger cash gold
+	chat trigger "You don't have so much gold"
+	endscript
+end
+if > gold 100
+	chat trigger "100 gold pieces is the max bet I can accept"
+	endscript
+end
+#
+# check bet param
+#################
+#
+if ! variableIsString param1
+	chat trigger "On what do you bet, even or odd ?"
+	endscript
+end
+#
+string bet param1
+if ! or strEquals bet odd strEquals bet even
+	chat trigger "On what do you ber, even or odd ?"
+	endscript
+end
+#
+# start
+############
+#
+inc trigger cash * -1 gold
+# note the 8 !!!
+number die + 1 * rand 8
+#chat trigger die
+# trick
+#######
+#
+if > die 6
+	if strEquals bet odd
+		number r * rand 3
+		if = r 0
+			number die 2
+		end
+		if = r 1
+			number die 4
+		end
+		if = r 2
+			number die 6
+		end
+	end
+	if strEquals bet even
+		number r * rand 3
+		if = r 0
+			number die 1
+		end
+		if = r 1
+			number die 3
+		end
+		if = r 2
+			number die 5
+		end
+	end
+end
+#
+#
+if or or = die 1 = die 3 = die 5
+	if strEquals bet odd
+		number win * 2 gold
+		chat trigger concat concat concat concat "The dice stops rolling on the " die "... you win " win " gold pieces"
+		inc trigger cash win
+		endscript
+	end
+	chat trigger concat concat "The dice stops rolling on the " die "... you lose"
+	endscript
+end
+#
+if strEquals bet even
+	number win * 2 gold
+	chat trigger concat concat concat concat "The dice stops rolling on the " die "... you win " win " gold pieces"
+	inc trigger cash win
+	endscript
+end
+chat trigger concat concat "The dice stops rolling on the " die "... you lose"
+endscript
+

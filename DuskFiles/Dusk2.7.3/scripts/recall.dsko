@@ -1,0 +1,8 @@
+*trigger "You read the scroll and the area around you fills up with smoke." !trigger recall trigger "emote vanishes in a puff of smoke" trigger "hot springs" 
+trigger "hot springs" trigger "lava bath" 
+trigger "lava bath" trigger "ice bath" 
+trigger "ice bath" trigger "ogrefight" 
+trigger "ogrefight" trigger "intown" 
+trigger "intown" trigger inside 
+trigger inside trigger "necrofight" 
+trigger "necrofight" -trigger 100 100 trigger "emote arrives in a flash of light." /clan trigger "arena_fight" 8trigger "none"  

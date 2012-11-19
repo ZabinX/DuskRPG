@@ -1,0 +1,17 @@
+number duration * caster inte 3
+if variableisstring param0
+	livingthing target local caster param0
+	if or or isplayer target ispet target ismob target
+		chat caster concat concat "You make " name target " blend in better with their surroundings."
+		chat target "You seem to blend into your surroundings better."
+		addconditionwithduration target "natural colors" caster inte
+		endscript
+	end
+	chat caster "You do not see them here."
+	endscript
+end
+#
+#Else no target is specified
+chat caster "You seem to blend into your surroundings better."
+addconditionwithduration caster "natural colors" caster inte
+endscript

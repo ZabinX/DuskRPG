@@ -1,0 +1,4 @@
+chat trigger "You sip on the glowing potion"
+inc trigger mp 1000
+removeitem trigger minormana
+endscript

@@ -1,0 +1,9 @@
+if ! hasCondition trigger "swordinstone"
+chat trigger "Baal says: If you can pull that sword out of the stone, trust me, you will regret it...."
+endscript
+end
+chat trigger "Well it looks like I am going to have to kill you!  Sorry about this."
+endscript
+
+
+

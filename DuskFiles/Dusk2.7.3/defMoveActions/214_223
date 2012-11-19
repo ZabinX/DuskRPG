@@ -1,0 +1,11 @@
+if ispet trigger
+    endscript
+end
+chat trigger "Hermit says:  Long has it been since I have had a visitor."
+chat trigger "Hermit says:  Perhaps I can be of some assistance.  I was once a powerful Mage."
+chat trigger "The air around you begins to swirl with magical energy."
+addconditionwithduration trigger strength 400
+addconditionwithduration trigger armor 400
+chat trigger "You feel stronger."
+endscript
+

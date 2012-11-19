@@ -1,0 +1,16 @@
+type
+weapon
+description
+fragdaddy's test sword!
+cost
+100
+mod
+120
+image
+9
+durability
+100000
+onWear
+fragtest
+onUnWear
+fragtestend

@@ -1,0 +1,61 @@
+# Wildern is still working on this command
+# related commands
+#	peace (god only)
+#	truce (clan leader from clan who declared the war only)
+#	surrender (clan leader from clan war was declared upon only)
+if < trigger privs 3
+    chat trigger "Coming soon."
+    endscript
+end
+if < trigger privs 1
+    chat trigger "Only clan leaders can declare a truce."
+    endscript
+end
+if ! strequals global war1clan1 "none"
+    if or and strequals global war1clan2 clan trigger
+            strequals global war1clan1 clan target
+            and strequals global war1clan1 clan trigger
+            strequals global war1clan2 clan target
+        chat trigger concat concat concat concat "The " clan trigger " clan has ended its war with the " clan target " clan."
+        global string war1clan1 "none"
+        global string war1clan2 "none"
+        endscript
+    end
+end
+if ! strequals global war2clan1 "none"
+    if or and strequals global war2clan2 clan trigger
+            strequals global war2clan1 clan target
+            and strequals global war2clan1 clan trigger
+            strequals global war2clan2 clan target
+        chat trigger concat concat concat concat "The " clan trigger " clan has ended its war with the " clan target " clan."
+        global string war2clan1 "none"
+        global string war2clan2 "none"
+        endscript
+    end
+end
+if ! strequals global war3clan1 "none"
+    if or and strequals global war3clan2 clan trigger
+            strequals global war3clan1 clan target
+            and strequals global war3clan1 clan trigger
+            strequals global war3clan2 clan target
+        chat trigger concat concat concat concat "The " clan trigger " clan has ended its war with the " clan target " clan."
+        global string war3clan1 "none"
+        global string war3clan2 "none"
+        endscript
+    end
+end
+if ! strequals global war4clan1 "none"
+    if or and strequals global war4clan2 clan trigger
+            strequals global war4clan1 clan target
+            and strequals global war4clan1 clan trigger
+            strequals global war4clan2 clan target
+        chat trigger concat concat concat concat "The " clan trigger " clan has ended its war with the " clan target " clan."
+        global string war4clan1 "none"
+        global string war4clan2 "none"
+        endscript
+    end
+end
+chat trigger "You cannot declare a truce as you have not declared war on anyone."
+endscript
+
+
