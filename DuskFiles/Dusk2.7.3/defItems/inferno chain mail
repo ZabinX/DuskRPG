@@ -1,0 +1,21 @@
+type
+armor
+kind
+torso
+description
+armor bearing the glowing crest of the Inferno God
+cost
+8000
+mod
+750
+image
+7
+durability
+3000000
+onWear
+wear_normal_armor
+.
+
+
+
+

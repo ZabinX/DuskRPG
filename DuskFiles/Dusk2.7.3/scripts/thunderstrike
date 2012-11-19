@@ -1,0 +1,10 @@
+if isInBattle trigger
+	livingthing target enemy trigger
+	number damage * trigger stre + 10 * rand 0.75
+	inc target hp * -1 damage
+	inc trigger damdone damage
+	chat trigger concat concat concat concat concat concat "***	" name trigger " did " damage " to " name target " using a lightning strike"
+	chat target concat concat concat concat concat concat "***	" name trigger " has hit you with " damage " using a lightning strike"
+end
+endscript
+endscript

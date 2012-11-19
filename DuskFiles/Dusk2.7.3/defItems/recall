@@ -1,0 +1,14 @@
+type
+item
+description
+a scroll that returns you to New Sanctuary
+cost
+500
+image
+6
+onuse
+recall
+uses
+1
+.
+

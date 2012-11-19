@@ -1,0 +1,21 @@
+#Warfire is here command
+if < trigger privs 4
+    chat trigger "huh?"
+    endscript
+end
+if variableisstring param0
+	livingthing target param0
+	if variableislivingthing target
+        		set target hp target maxhp
+		set target mp target maxmp
+		chat trigger "Adding reward condition..."
+		addcondition target "reward"
+		order trigger concat concat "gecho The fire elements flash in a burst of energy and the hand of Warfire rewards " name target " for their devotion."
+	end
+	if ! isplayer target
+		chat trigger "Who?"
+	end
+end
+#chat trigger "cast invis"
+endscript
+

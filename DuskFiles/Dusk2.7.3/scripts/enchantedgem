@@ -1,0 +1,8 @@
+inc trigger acBonus 10
+chat trigger "A shield of defense surrounds you."
+removeitem trigger "enchantedgem"
+endscript
+
+
+
+

@@ -1,0 +1,23 @@
+number dir * 4 rand
+if < dir 1
+	order trigger n
+	order trigger "emote burps"
+	endscript
+	end
+if < dir 2
+	order trigger s
+	order trigger "emote burps"
+	endscript
+	end
+if < dir 3
+	order trigger e
+	order trigger "emote burps"
+	endscript
+	end
+if < dir 4
+	order trigger w
+	order trigger "emote burps"
+	endscript
+	end
+endscript
+

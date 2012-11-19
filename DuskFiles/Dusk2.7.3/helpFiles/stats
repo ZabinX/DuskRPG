@@ -1,0 +1,11 @@
+cp is Character Points.  You get 1 cp for each point in str, int, dex, con, and wis.
+        and 1 cp for every 10 HP and 1 cp for every 10 MP .
+100 is max for all stats except HP and MP (no real max for those two).
+str: strength, the most important stat.  The higher this is, the more damage you do.
+int: intelligence controls spell power/duration for most spell groups.
+dex: dexterity gives you added AC (1AC for every 10 dex) and helps dodge.
+con: constitution controls how fast you regain HP.  1/2 con per tick while awake,
+        and full con per tick while asleep.
+wis: wisdom is just like con, only for MP.
+DamMod: damage modifier is how much your weapon multiplies your damage from strength.
+AC: armor class - the higher this is, the harder you are to hit.

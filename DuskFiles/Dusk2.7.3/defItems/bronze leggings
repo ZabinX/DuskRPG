@@ -1,0 +1,20 @@
+type
+armor
+kind
+legs
+description
+a pair of leather chaps with bronze protection
+cost
+60
+mod
+40
+image
+169
+durability
+2400
+onWear
+wear_normal_armor
+.
+
+
+

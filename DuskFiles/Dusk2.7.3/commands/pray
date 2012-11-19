@@ -1,0 +1,9 @@
+if = trigger locx 84
+	if = trigger locy 209
+		addconditionwithduration trigger "killer instinct" 100
+		chat trigger "flowris bless you"
+		endscript
+		end
+	end
+chat trigger "huh?"
+endscript

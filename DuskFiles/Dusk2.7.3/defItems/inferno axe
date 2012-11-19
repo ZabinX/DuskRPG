@@ -1,0 +1,20 @@
+type
+weapon
+description
+a huge axe with a large spike at the end, the metal appears black and somewhat hot to the touch, strange runes are also carved into the head.
+cost
+1000
+mod
+750
+image
+10
+durability
+10000000
+onWear
+infernoaxstart
+onUnWear
+infernoaxend
+.
+
+
+

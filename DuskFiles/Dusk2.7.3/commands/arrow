@@ -1,0 +1,27 @@
+if < trigger privs 4
+	chat trigger "huh?"
+	endscript
+	end
+#
+if not strEquals name trigger flowris
+	chat trigger "huh?"
+	endscript
+	end
+#
+if not variableisstring param0
+	endscript
+	end
+#
+livingthing target param0
+if not variableIsLivingThing target
+	endscript
+	end
+#
+addcondition target poison
+chat target "Flowris throws a poisoned arrow at you"
+chat trigger concat "You throw a poisoned arrow to " name target
+endscript
+
+
+
+

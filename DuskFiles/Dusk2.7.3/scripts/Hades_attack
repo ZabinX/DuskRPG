@@ -1,0 +1,13 @@
+# flowris
+#
+# 20%
+if < 2 * 10 rand
+	endscript
+	end
+#
+number damage + 500 * 5500 rand
+livingthing target enemy trigger
+inc target hp * -1 damage
+chat target concat concat " *** exodus special attack hits you for " damage " damage"
+endscript
+

@@ -1,0 +1,6 @@
+chat trigger "The apple goes down with a soothing ease."
+inc trigger hp 5000
+removeitem trigger "golden apple"
+endscript
+
+

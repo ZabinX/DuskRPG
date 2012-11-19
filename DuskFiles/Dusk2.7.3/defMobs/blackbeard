@@ -1,0 +1,39 @@
+maxhp
+25000
+maxmp
+1000
+stre
+1500
+inte
+100
+dext
+1000
+wisd
+0
+cons
+500
+image
+5
+bravery
+1.0
+grouprelation
+1.0
+giveitem
+crown
+1
+faction
+pirates
+description
+the pirates' boss
+skill
+double attack
+60
+skill
+triple attack
+20
+.
+
+
+
+
+

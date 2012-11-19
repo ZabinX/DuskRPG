@@ -1,0 +1,177 @@
+if or ispet trigger ismob trigger
+    endscript
+end
+removeitem trigger "tiny statue"
+if hascondition trigger safe
+    removecondition trigger safe
+end
+chat trigger "As you touch the statue, it begins to grow into a life-size version of you."
+#
+# Let's make a mimic
+#
+livingthing mimic local trigger "mimic"
+if ismob mimic
+    endscript
+end
+number x trigger locx
+number y trigger locy
+createoneusemob mimic x y
+livingthing m local trigger "mimic"
+string command concat "description I am a duplicate of " name trigger
+order m command
+set m maxhp trigger maxhp
+set m hp m maxhp
+set m maxmp trigger maxmp
+set m mp m maxmp
+set m strength trigger stre
+set m strengthbonus - trigger stre m stre
+set m dexterity trigger dext
+set m dexteritybonus - trigger dext m dext
+set m intelligence trigger inte
+set m intelligencebonus - trigger inte m inte
+set m wisdom trigger wisd
+set m wisdombonus - trigger wisd m wisd
+set m constitution trigger cons
+set m constitutionbonus - trigger cons m cons
+set m skill "Dodge" trigger skill "Dodge"
+set m skill "Double Attack" trigger skill "Double Attack"
+set m skill "Triple Attack" trigger skill "Triple Attack"
+set m skill "Quadruple Attack" trigger skill "Quadruple Attack"
+set m skill "Disguise" trigger skill "Disguise"
+set m skill "clerical group" trigger skill "clerical group"
+set m skill "druidic group" trigger skill "druidic group"
+set m skill "enchantment group" trigger skill "enchantment group"
+set m skill "telepathy group" trigger skill "telepathy group"
+set m skill "summons group" trigger skill "summons group"
+set m skill "warrior group" trigger skill "warrior group"
+set m skill "black magic group" trigger skill "black magic group"
+set m skill "white magic group" trigger skill "white magic group"
+set m skill "alchemy group" trigger skill "alchemy group"
+set m skill "elemental fire group" trigger skill "elemental fire group"
+set m skill "elemental ice group" trigger skill "elemental ice group"
+set m dammodbonus - trigger dammod m dammod
+set m acbonus - trigger ac m ac
+#
+# Need to duplicate spell compnents from inventory
+#
+number n trigger count "Fire Dragon Scale"
+if > n 0
+    string thing concat n ".Fire Dragon Scale"
+    giveitem m thing
+end
+number n trigger count "Fire Dragon Tooth"
+if > n 0
+    string thing concat n ".Fire Dragon Tooth"
+    giveitem m thing
+end
+number n trigger count "Fire Dragon Blood"
+if > n 0
+    string thing concat n ".Fire Dragon Blood"
+    giveitem m thing
+end
+number n trigger count "Ice Dragon Scale"
+if > n 0
+    string thing concat n ".Ice Dragon Scale"
+    giveitem m thing
+end
+number n trigger count "Ice Dragon Tooth"
+if > n 0
+    string thing concat n ".Ice Dragon Tooth"
+    giveitem m thing
+end
+number n trigger count "Ice Dragon Blood"
+if > n 0
+    string thing concat n ".Ice Dragon Blood"
+    giveitem m thing
+end
+#
+# Let's make a pet mimic
+#
+livingthing their_pet pet trigger
+if ispet their_pet
+    createoneusemob "pet mimic" x y
+    livingthing pm local trigger "pet mimic"
+    string command concat "description I am a duplicate of " name their_pet
+    order pm command
+    set pm maxhp their_pet maxhp
+    set pm hp pm maxhp
+    set pm maxmp their_pet maxmp
+    set pm mp pm maxmp
+    set pm strength their_pet stre
+    set pm strengthbonus - their_pet stre pm stre
+    set pm dexterity their_pet dext
+    set pm dexteritybonus - their_pet dext pm dext
+    set pm intelligence their_pet inte
+    set pm intelligencebonus - their_pet inte pm inte
+    set pm wisdom their_pet wisd
+    set pm wisdombonus - their_pet wisd pm wisd
+    set pm constitution their_pet cons
+    set pm constitutionbonus - their_pet cons pm cons
+    set pm skill "Dodge" their_pet skill "Dodge"
+    set pm skill "Double Attack" their_pet skill "Double Attack"
+    set pm skill "Triple Attack" their_pet skill "Triple Attack"
+    set pm skill "Quadruple Attack" their_pet skill "Quadruple Attack"
+    set pm skill "Disguise" their_pet skill "Disguise"
+    set pm skill "clerical group" their_pet skill "clerical group"
+    set pm skill "druidic group" their_pet skill "druidic group"
+    set pm skill "enchantment group" their_pet skill "enchantment group"
+    set pm skill "telepathy group" their_pet skill "telepathy group"
+    set pm skill "summons group" their_pet skill "summons group"
+    set pm skill "warrior group" their_pet skill "warrior group"
+    set pm skill "black magic group" their_pet skill "black magic group"
+    set pm skill "white magic group" their_pet skill "white magic group"
+    set pm skill "alchemy group" their_pet skill "alchemy group"
+    set pm skill "elemental fire group" their_pet skill "elemental fire group"
+    set pm skill "elemental ice group" their_pet skill "elemental ice group"
+    set pm dammodbonus - their_pet dammod pm dammod
+    set pm acbonus - their_pet ac pm ac
+    #
+    # Need to duplicate spell compnents from inventory
+    #
+    number n their_pet count "Fire Dragon Scale"
+    if > n 0
+        string thing concat n ".Fire Dragon Scale"
+        giveitem pm thing
+    end
+    number n their_pet count "Fire Dragon Tooth"
+    if > n 0
+        string thing concat n ".Fire Dragon Tooth"
+        giveitem pm thing
+    end
+    number n their_pet count "Fire Dragon Blood"
+    if > n 0
+        string thing concat n ".Fire Dragon Blood"
+        giveitem pm thing
+    end
+    number n their_pet count "Ice Dragon Scale"
+    if > n 0
+        string thing concat n ".Ice Dragon Scale"
+        giveitem pm thing
+    end
+    number n their_pet count "Ice Dragon Tooth"
+    if > n 0
+        string thing concat n ".Ice Dragon Tooth"
+        giveitem pm thing
+    end
+    number n their_pet count "Ice Dragon Blood"
+    if > n 0
+        string thing concat n ".Ice Dragon Blood"
+        giveitem pm thing
+    end
+    #
+    # Need to make pet mimic follow mimic
+    #
+    order m "nofollow off"
+    string command concat "follow " name m
+    order pm command
+    string command concat "a "  name trigger
+    order m command
+    endscript
+end
+# This extra end is needed, not sure why... something not happening
+# correctly for parseValue() to skip over body of if when it is false
+end
+string command concat "a "  name trigger
+order m command
+endscript
+

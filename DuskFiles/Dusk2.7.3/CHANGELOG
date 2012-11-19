@@ -1,0 +1,250 @@
+DuskClient:
+v2.7.2
+-fixed alignment bug
+-fixed graphic hang in IE bug in client
+v2.7.1
+-bug fixes
+v2.7
+-highlighting
+v2.6
+-pre-compiled scripts
+-mob battle AIs
+-unique IP Filter
+-new script commands: change Tile, strEquals, input
+-fixed goto out-of-bounds problem
+-scripts for walking through living things (scrCanMoveThroughLivingThing)
+-fixed unwear problem
+-fixed attacking other players in clans, and your own group
+v2.5.6
+-major bugfixes
+v2.5.5 (sync'ed w/ server 2.4.5)
+-added movement animation
+v2.5
+-uses Swing
+-can be compiled as either an applet or application
+v2.4
+-optimized refresh on move
+-new merchant GUI
+v2.3
+-can now open messages in seperate windows
+v2.2
+-network updates
+-bug fixes
+v2.1.1
+-bug fixes
+v2.1
+-map caching
+-larger field of view
+v2.0.1
+-fixed Windows compatability problems
+v2.0
+-new entity refreshing method
+-new menu loading method
+-new image loading method
+-audio
+v1.7.4
+-Fixes bug with not being able to attack other players.
+v1.7.3
+-Seperates halt/proceed
+v1.7.2
+-Reverses way entities are loaded
+-Fixes flicker
+v1.7.1
+-Fixes problems with some applet viewers
+-Improved image scaling
+v1.7
+-image scaling
+-always floats
+v1.6
+-float/unfloat
+-lots less deprecation
+-images loaded in seperate thread
+v1.5
+-New image loading code
+v1.3
+-Mouse support
+v1.2.1
+-Minor networking rewrites
+v1.2:
+-All commands sent to server are now text-only
+v1.1:
+-Netscape compatibility
+-Changes in image storage
+v1.0:
+-Public release
+
+DuskServer:
+v2.7.2
+-fixed major bug with mob activating
+-fixed error with setting DuskTracker port
+-teleporting now cancels movement queque
+-fixed bug causing explosemod and gplosemod not to be set
+v2.7.1
+-major bug fixes
+-AI optimizations
+v2.7
+-old spell system removed, spells are now completely scripted
+-support for Dusk Tracker
+-new script commands: log, inc/set skill, gecho
+-new god commands: makegod
+-gods can now access user files (but not passwords)
+-fixed bug causing partial character deletion
+-fixed bug causing broken weapons/armor not to update
+-onDrop script is now called in selling
+-deleting script files now deletes associated .dsko files
+-WizInvis: allows Gods to log in unseen to users with lower statuses than themselves
+-away messages
+-scripted commands can override built-in ones
+-large battle system improvments: projectile weapons and movement in battle
+v2.6.2
+-fixed another security hole
+v2.6.1
+-added script command: checkviewable
+-fixed following bug
+-fixed duplication security hole
+v2.6
+-fixed bug causing some objects to be seen multiple times in pull down menus
+-minor graphical changes
+v2.5.1
+-major bugfixes
+v2.5 (sync'ed w/ client 2.5.5)
+-added movement animation
+-added one use mobs
+v2.4.5
+-supports both applet and application clients
+v2.4.4
+-modified experience system
+-password command
+-createmob function for DuskScript
+v2.4.3
+-fixed train pet name conflict
+-fixed problems with player saving and backup restoration
+v2.4.2
+-fixed multiple train bug
+-backups now auto-replace damaged files
+-new exp system
+v2.4.1
+-fixed multiple train bug
+-backups now auto-replace damaged files
+v2.4
+-player files are backed up and automatically moved to backup directory if damage is detected
+-added onBoot/onLogOut scripts
+-moved pref files and global scripts to conf folder to allow access by high/master gods
+-game no longer hangs during world save
+-fixed bug with view script
+-fixed included tile action scripts to support sound
+-fixed bug causing food and drink to appear wearable
+-fixed bug causing left behind pets to remain in game
+-fixed included spell files
+-fixed load order of entites (ex. couches no longer appear on top of players)
+-optimized refreshEntities
+v2.3.1
+-fixes new syncrhonization bug
+v2.3
+-mobs can be added to any faction
+-save-to-backup
+-new level-less mob system (still supports old system for compatibility)
+-new experience gaining system, including scripting support through "damdone" (pre-2.3 servers should update their spell files accordingly)
+-changed sp(spell points) to mp(mana points)
+-auto-detects races and pet types
+-gods can list/view files
+-add new level of god, "high god",  with ability to edit files (using new seperate window)
+-multiple word mob names allowed
+-help files now load in a seperate window
+-new help files for scripting and god commands
+v2.2
+-removed map cacheing due to excessive ram requirements
+-variable view range
+-fixed multiply merchant bug
+-eat/drink
+-fixed sleep while following bug
+-mobs give items, not gp
+-nochannel/allowchannel
+v2.1.6
+-fixed deadlock bug
+-script synchronization control
+-fixed bug causing battles to freeze
+v2.1.5
+-fixed deadlock bug
+v2.1.4
+-fixed bug causing server to freeze when changeLocBypass was called on the same location quickly twice.
+v2.1.3
+-bug fixes
+v2.1.2
+-fixed bug that caused server to crash when more a following player started a battle.
+v2.1.1
+-bug fixes
+v2.1
+-map caching
+-larger field of view
+-bug fixes
+v2.0.2
+-more bug fixes
+v2.0.1
+-bug fixes
+v2.0
+-AI
+-new entity refreshing method
+-major scripting additions
+-customizeable commands
+-onEvent scripts
+-new login sequence
+-breakable weapons/armor
+-useable items
+-conditions
+-new map format allows for more tiles
+-audio support
+-many many small changes
+v1.9.2
+-fixes logon and pet name bugs
+v1.9.1
+-bug fixes
+v1.9
+-title
+-description
+-new look command
+-inv/inventory command
+-reloadprefs now reloads tile scripts as well
+-customizeable in-game help
+-order command
+v1.8.2
+-fixes follow bug
+-corrects character point calculation flaw
+v1.8.1
+-fixes bugs with battles ending follow chains incorectly
+-optimizes DuskEngine.canMoveTo()
+v1.8
+-follow/unfollow
+-teleport
+-kick
+-many optimizations
+v1.7
+-new optimized entitiy refreshing.
+-merchantimage and signimage variables.
+-fixes bug allowing players to give negative money.
+v1.6.6
+-fixes bug that caused players not to save when they disconnected abruptly.
+v1.6.5
+-new experience code
+-more preference options
+v1.6.1
+-fixes a bug that caused file descriptors to leak everytime a spell was cast
+v1.6
+-map scripting
+-clan leader control
+-god clan control
+v1.6b
+-bug fixes
+v1.5
+-spell scripting
+-new mob and item file format
+v1.3
+-pets
+-improved pathfinding
+-improved battle system (allows for multiple combatants on each side)
+v1.1
+-new character files
+-preferences file
+-pathfinding
+v1.0:
+-public release

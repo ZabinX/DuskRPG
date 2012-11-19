@@ -1,0 +1,15 @@
+type
+drink
+description
+a can with a frog on it
+cost
+30
+image
+6
+onuse
+beer
+uses
+1
+.
+
+

@@ -1,0 +1,19 @@
+type
+weapon
+description
+a gnome version of the short sword (that is short even for a gnome).  Strangely, this one is covered with odd runes.
+cost
+0
+mod
+175
+image
+6
+uses
+4
+onuse
+shortswordGuide
+durability
+500
+.
+
+

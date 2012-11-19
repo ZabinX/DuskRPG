@@ -1,0 +1,74 @@
+#To comment, use a pound symbol (#)
+#You cannot put comments in between a preference name and the value.
+#
+#
+#What port will the server run on:
+Port=7474
+#
+#Where have you stored the game resources:
+#WARNING: Make sure this address is followed by a slash!!
+RCAddress=http://127.0.0.1/dusk/rc/somedusk/
+#
+RCName=somedusk
+#
+#How many connections will you allow to your server (0=infinite):
+MaxConnections=0
+#
+Tracker=false
+#
+TrackerPort=7401
+#
+Name=Just Some Dusk
+#
+Site=http://127.0.0.1/dusk/client.html
+#
+#How much gp should a pet cost:
+PetCost=100
+#
+#Should the game check use line-of-sight
+LineOfSight=false
+#
+#Should the game use AI (Artificial Intelligence)
+Ai=true
+#
+#Only a player from a given IP address
+UniqueIPFilter=false
+#
+#Should the game tell the client to use music:
+#NOTE:Java applets do not currently support midi, so this feature is useless
+Music=true
+#
+#What is the image number of merchants and signs?
+merchantimage=0
+SignImage=101
+#
+#How much should it cost to train?
+TrainCost=100
+#
+#How much exp should a player win by defeating someone of the exact same strength?
+ExpGainMod=18
+#
+#How many seconds should it take for mobs to respawn?
+MobReSpawnSpeed=300
+#
+#How far should a player be allowed to see?
+ViewRange=6
+#How large can player titles be?
+TitleCap=100
+#How large can player messages be?
+MessageCap=300
+#How fast are mobs allowed to move? (default is 1 second = 1000)
+MobTicks=400
+#How fast are players allowed to move? (default is 1/4 second = 250)
+PlayerTicks=250
+#Log file name.  Comment out the line to have messages go to standard out.
+LogFileName=log/dusk.txt
+#Level of detail output by game (the higher the number, the more you see).
+#  0(ALWAYS messages)
+#  1(ALWAYS,INFO messages)
+#  2(ALWAYS,INFO,ERROR messages)
+#  3(ALWAYS,INFO,ERROR,VERBOSE messages)
+#  4(ALWAYS,INFO,ERROR,VERBOSE,DEBUG messages)
+#  The level can also be changed in-game with the "loglevel" command.
+LoggingLevel=4
+.

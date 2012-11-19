@@ -1,0 +1,13 @@
+type
+item
+description
+a scroll of detect invisibility
+cost
+500
+image
+6
+onuse
+detectinvis
+uses
+1
+.

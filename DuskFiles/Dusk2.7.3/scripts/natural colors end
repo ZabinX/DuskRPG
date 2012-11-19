@@ -1,0 +1,4 @@
+inc trigger acBonus -5
+inc trigger dexterityBonus -5
+chat trigger "You no longer seem to blend into your surroundings."
+endscript

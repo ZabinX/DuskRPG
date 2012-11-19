@@ -1,0 +1,36 @@
+maxhp
+10000
+maxmp
+15
+stre
+500
+dext
+700
+wisd
+15
+cons
+4000
+image
+5
+bravery
+1
+grouprelation
+2
+giveitem
+sabre
+0.4
+goblin edge
+.01
+faction
+hunter
+skill
+double attack
+100
+triple attack
+50
+quadruple attack
+30
+dodge
+30
+.
+

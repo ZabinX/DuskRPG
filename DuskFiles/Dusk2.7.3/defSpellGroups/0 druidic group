@@ -1,0 +1,17 @@
+#Quarterstaff: summons a quarterstaff for druidic use
+#
+#
+if hasitem caster "10.quarter staff"
+    chat caster "10 quarter staffs is enough for now."
+    addconditionwithduration caster cast_limit_qs 600
+    endscript
+end
+if hascondition caster cast_limit_qs
+    chat caster "You need to wait a bit before casting this again."
+    endscript
+end
+chat caster "A druidic quarter staff appears in your inventory."
+giveitem caster "quarter staff"
+endscript
+
+

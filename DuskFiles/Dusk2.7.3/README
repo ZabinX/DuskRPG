@@ -1,0 +1,43 @@
+All software and files contained in this package are copyright Tom Weingarten 2000.
+This readme provided for DuskServer Version 2.0.2 and DuskClient version 2.0.1
+Dusk Readme
+For more specific help, view the included help files in the help directory.
+For more information about Dusk, please visit http://dusk.wesowin.org.
+Or contact Tom Weingarten at captaint@home.com
+
+More information on being a game god and on setting up game files can be found at:
+http://dusk.wesowin.org/gods.html
+
+The included files are based upon the "New Dusk" world, but you are encouraged to edit these files and customize your world as much as possible.
+
+
+Setting up Dusk:
+
+-Using the applet client-
+For security reasons, most applet veiwers will only alllow the applet to connect to servers on the same host that it's downloaded from. Therefore you will have to run a web server, like apache (http://www.apache.org), on the same server as you're running Dusk, and put the contents of the directory "for web page" on there.
+
+-Using the application client-
+The application client does not need to be made available directly through you. In fact, it is recommended that you link to http://dusk.wesowin.org/client.html and let your users download the client on their own. You should then make available both tarred and zipped (recommended) versions of your resources, which should be formatted like the directory "newdusk" in the rc directory of the client. Change the name from newdusk to anything else, and set the RCName preference in your prefs file to it. If you want to use resources provided by another game, just enter that game's rc name as yours in the prefs file.
+-E-mail captaint@home.com and tell him that you are setting up a dusk world and where it is, as well as whether or not you wish to be placed in the dusk directory. This is one of the few things we ask for in exchange for our free software, so please help us out by sending this information, which we will keep entirely private at your request!
+
+-After unpacking the tar file, you may need to go through the files and replace the underscores with spaces. Having underscores in some files may cause problems. This does NOT apply to the names of files in the following directories: defMoveActions,defCanMoveScripts,devCanSeeScripts
+
+-Edit the prefs file to your liking. If you want the applet client to be available to your users, you must specify a web url where you will put your game resources. The directory that this url points to must be divided into two subdirectories, audio and images. Audio will have one sub-directory, sfx. In sfx you will store sound files. The images directory will contain 3 files: map.gif, players.gif, and sprites.gif. All images must be .gif files, but can be of any size (they will be scaled to match the window size in-game). Example files can be found at: http://dusk.wesowin.org/newrc/
+
+-Then, edit the file god included in the users directory. Change the name of the file to change the name of the god. Change the first line of the file to change the password. If you want to make new gods, just change their privs setting.
+
+Privs levels:
+5+:superuser
+4:high god
+3:god
+1:clan leader
+0:player
+
+-Edit the player file default if you wish. This is the file of default statistics. Never remove this file or change it's name!
+
+-Edit the defItems and defMobs directories to add new items and mobs.
+
+-Edit the files in defTileScripts to choose which tiles are walkable. If no file is specified, false, or unwalkable is the default. To make a tile walkable, put true in the file with it's tile #. To make it unwalkable, put false. All files up to the max number must be included. So, using the files 0,1,2,3,4 would work. But using 0,1,2,3,4,5,7 would include information for all the lower files, but not file 7. You can also use DuskScript in these files, for more complicated walking rules. You can use the variable Trigger to find out who stepped on the tile. This also applies to defCanMoveScripts scripts, which are named x_y (ex "1_3"). defMoveActions scripts are named the same way, and also can use the trigger variable. They define what happens when you step on a tile.
+
+Now you should be all set! Run the class DuskServer.class in your java virtual machine and you should be on your way.
+if you need a java virtual machine (JVM) check out: http://java.sun.com/j2se/1.3/jre/

@@ -1,0 +1,7 @@
+if ispet trigger
+     endscript
+end
+inc trigger strengthbonus -150
+endscript
+
+

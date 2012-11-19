@@ -1,0 +1,32 @@
+# flowris
+#
+# steal command
+#
+endscript
+#
+if not variableisstring param0
+	chat trigger "steal from who who ?"
+	endscript
+	end
+#
+livingthing target local trigger param0
+if not isplayer target
+	chat trigger "You do not see them here."
+	endscript
+	end
+#
+if and < - trigger locx target locx 2 > - trigger locx target locx -2
+	if and < - trigger locy target locy 2 > - trigger locy target locy -2
+		number r * rand 10
+		if and > trigger dext target dext > r 3
+# PUT CODE HERE
+			endscript
+			end
+		endscript
+	end
+	chat trigger "You are too far away."
+	endscript
+end
+chat trigger "You are too far away."
+endscript
+

@@ -1,0 +1,16 @@
+type
+armor
+kind
+hands
+description
+a small wooden shield
+cost
+100
+mod
+20
+image
+7
+durability
+3000
+.
+

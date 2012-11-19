@@ -1,0 +1,10 @@
+if < trigger privs 2
+    chat trigger "huh?"
+    endscript
+end
+#order trigger "uninvis"
+order trigger "gecho Fragdaddy fades into oblivion."
+order trigger quit
+#order trigger "cast invis"
+endscript
+

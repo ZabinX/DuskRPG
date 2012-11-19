@@ -1,0 +1,20 @@
+type
+armor
+kind
+neck
+description
+Amulet created by the god DarkCrono
+cost
+3000
+mod
+0
+image
+7
+durability
+8000
+onwear
+justiceamulet
+onunwear
+justiceamuletunwear
+.
+

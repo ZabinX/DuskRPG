@@ -1,0 +1,20 @@
+type
+armor
+kind
+hands
+description
+some red gauntlets
+cost
+600
+mod
+100
+image
+7
+durability
+2000000
+onwear
+wear_normal_armor
+.
+
+
+

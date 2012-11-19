@@ -1,0 +1,30 @@
+Licenses
+========
+
+Last update: 2012.11.18
+
+**NOTE**Dusk's sourcecode is GPL, and any art Dusk used back in the day is also GPL.  The art included in "DuskMapEditor" and in the "www/rc/somedusk/images" is not licensed and is just there as a placeholder until Dusk get's developed further.  I've included "img" folder with proper licenses because I would *love* to use those tiles in Dusk.
+
+This file is listing all the files licenses from the point of the fork
+from the Allacrost project.
+Note: The licensing of the allacrost's files is assumed to be GPLv2 or later,
+as told on the allacrost web site:
+http://www.allacrost.org
+
+'OGA' stands for: Open Game Art - http://opengameart.org
+dA stands for: Deviant Art - http://deviantart.com
+
+Files                                                            Licenses                 Authors and details
+--------------------------------------------------------------- ------------------------ --------------------------------------------------------------------
+img/tilesets/ancient_ruins_interior.png                         CC by SA 3.0             Adapted Circle 2D graphics from Daniel Cook (lostgarden.com)
+img/tilesets/ancient_ruins_exterior.png                         CC by SA 3.0             Adapted Circle 2D graphics from Daniel Cook (lostgarden.com)
+img/tilesets/building_interior_objects_01.png                   CC by SA 3.0             Allacrost + From Jetrel's mockups + Bertram + adapted other Circle 2D graphics from Daniel Cook (lostgarden.com)
+img/tilesets/desert_house_tileset.png                           GPLv2                    From Jetrel's mockups + Bertram
+img/tilesets/harrvah_house_interior.png                         GPLv2                    Allacrost + From Jetrel's mockups + Bertram
+img/tilesets/mountain_house_interior.png                        GPLv2                    Allacrost + From Jetrel's mockups + Bertram
+img/tilesets/mountain_house_exterior2.png                       CC by SA 3.0             Allacrost + adapted other Circle 2D graphics from Daniel Cook (lostgarden.com)
+img/tilesets/mountain_landscape.png                             CC by 3.0                Daniel Cook + Jetrel's mockups + Bertram + Zabin (OGA) modification and additions + Saphy (themanaworld.com) high grass
+img/tilesets/village_exterior.png                               CC by SA 3.0             C. Nilsson for the top-left three flowers (OGA), Guido Bos (OGA) for the other flowers, Daniel Eddeland (OGA) for everything else, except for the vertical bridge that I (Bertram) made based upon his style.
+img/tilesets/water_tileset.png                                  CC by SA 3.0/GPLv2       From C. Nilsson for the water lilies with transparent background (OGA/CC by SA 3.0) + LPC Team for the water lights (OGA/CC by SA 3.0), Leonard Pabin (Len) GPLv2 for the stones, the water original tiles, and the water lili with a dark blue background + Bertram's small variations.
+img/tilesets/wood_tileset.png                                   CC by SA 3.0             Daniel Cook + Jetrel's mockups + Bertram additions + Zabin (OGA) additions.
+img/tilesets/snow_tileset.png                                   CC by SA 3.0             Daniel Cook + Jetrel's mockups + Zabin (OGA) + snow tree and ground from Yd (OGA)

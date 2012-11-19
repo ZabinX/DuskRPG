@@ -1,0 +1,26 @@
+maxhp
+900
+maxmp
+5
+stre
+250
+inte
+3
+dext
+230
+wisd
+5
+cons
+50
+image
+14
+bravery
+1.3
+grouprelation
+0.25
+giveitem
+expert sword
+0.6
+faction
+demon
+.

@@ -1,0 +1,458 @@
+W3
+	Fixed 3 places where files were not being closed
+W4
+	Fixed 3 parse errors in Script.java
+	Added hard-coded location restriction to god movement
+W5
+	Notify gods of players loading/saving in who
+	Notify gods of players no longer working in who
+	Added check for title equal to string "null" in who
+	Added hard-coded location restriction to teleport livingthing
+	Reduced error messages from savePlayer
+	Close and open of second save attempt now in seperate try blocks
+	Added a second IPFilter check to catch multiple connects with
+		delayed logins
+	Removed block of players from who if blnCanSave was false
+W6
+	Added closeNoMsgPlayer function to close a player that is !blnWorking
+		put 2 checks in DuskEngine to catch !blnWorking players and
+		close them
+	Changed command "hardkill" to call closeNoMsgPlayer
+	Added blnIsClosing and checks for it in all the close functions
+	Fixed bug in getItemAndRemove, now removes muliple items if given
+		the dot notation (23.dagger) for quantities
+	Changed drop and give to accept the dot notation for quantities
+	Dropping items with a cost of zero now calls updateItems
+W7
+	Removed calls to closeNoMsgPlayer if !blnWorking in DuskEngine
+		These apparently caused a major lockup
+	Added blnIsWorking=false; to catch code in all send functions
+W8
+	Removed check for blnIsClosing in closeNoMsgPlayer
+	Changed map bounds check to use MapColumns and MapRows.
+		Gods without the privs to resize the map cannot move off of it.
+	Fixed incorrect default values for gplose, explose, and gpflee.
+	The change to getItemAndRemove was buggy... caused a major sell bug
+		Fixed this bug.  Removing items from a list while traversing it,
+		skips list elements.
+W9
+	Added the mob created by createMob script command to games vector
+		of mobs.
+	Added script variable "condition" which will be the name of the
+		condition that triggered the script
+	Made 2 changes to improve detection of bad sockets. (I know 2 changes
+		at the same time is a bad thing... won't know wich one worked or
+		made things worse)  Dropped the timeout just before a send to 30
+		seconds and then returned it to 10 minutes after the send.  Also,
+		turned so_linger offer (no linger on close for the socket)
+	Can now inc/set skills/spells within scripts inc/set skill <name> <value>
+	Removed debug statements from Script.java
+	Replaced Thread.close() calls with a blnCloseThread and a check in
+		LivingThing.run()
+W10
+	Added chatwindow script command to open up a new window the way help does.
+	Delete will now delete the .dsko file, if it exists.
+	Fixed give message to giver when giving item with dot notation.
+W11
+	Added logging of gods dropping items as well
+	Fixed the deletion of .dsko files (again) and added a message to let
+		the god know they were deleted.
+	Still trying to fix chatwindow script function
+	Fixed drop message when dropping items
+W12
+	Added x and y values to the warning logged when a script calls changemap
+		with 0
+	Added dot notation to giveitem in Script.java
+	Changed player give so that drop and get scripts are called for every
+		item given with dot notation (could be slow)
+	Added noChannel check to say
+	Added a maximum value to noChannel (can be set in conf)
+	Added reporting of time being noChanneled to god and player.
+	Changed follow command to allow mobs to follow other mobs
+	GetItemAndRemove did not check for 0.item and removed all items when
+		0. was given
+W13
+	Added "itemname" variable to OnWear, OnUnwear, OnUse, OnGet, OnDrop scripts
+		in LivingThing.java and to OnGet in Battle.java and Script.java
+		This will contain the name of the item that triggered the script
+	Added "mod" variable to OnWear, OnUnwear, OnUse, OnGet, OnDrop scripts
+		in LivingThing.java and to OnGet in Battle.java and Script.java
+		This will contain the mod of the item that triggered the script
+	Madd and Mremove will no longer boot you if you are not on top of a
+		merchant.
+W14
+	Added socket closings to closnosaveplayer when the user name is null.
+		An attempt to get rid of "Too many open files" error
+	Added some file closing statements to livingthing
+		An attempt to get rid of "Too many open files" error
+	Dropping items with dot notation now calls onDrop script for each
+		item
+	Dropping items with dot notation now drops the right number of items
+	Selling items now calls onDrop script for each item
+	Moved calls to updateItems() updateStats() outside of the loop when
+		selling multiple times to get rid of sell lag
+	Removed two synchronized statements from livingthing that did not
+		appear to be needed
+	Attempted to optimize scanning of surroundings in Faction.runAI()
+	Only decrement duration on condition if it is > 0
+		This prevents permanent conditions from getting larger and larger
+		negative durations (they would eventually go away when the duration
+		hits negative max int)
+	When reading player files, if condition duration < -1 set it to -1
+		cosmetic fix to repair conditions corrupted by above bug
+W15
+	Added e.printStackTrace(System.out); to the Error at run start()
+	Fixed pets not regenning to full mp + mpbonus if asleep
+	Fixed players not regenning to full mp + mpbonus if asleep
+	Added Tracker support
+	Increased timeout at send to 1 minute
+	Added stack trace to error at send
+	Added close for pets whose masters are ! blnWorking
+	Added e.printStackTrace(System.out); to "diconnected at run()"
+W16
+	Changed socket reads to be seperate from trim()
+		changed method to check for valid name to check for null input
+		changed parseCommand to check for null input
+	Fixed bug where dropping items with 0 cost left them on the map
+	Don't let players logout/quit while fighting.
+W17
+    Added close of pet if thnMaster == null to DuskEngine.java
+	Added "ignore" and "unignore" commands to allow players to ignore
+		other players.
+		LivingThing was given a new vector to hold the list of ignored
+		players.  This vector is not saved to the player's file.
+		chatMessage in DuskEngine was modified to accept another argument
+		which is the name of the player sending the message.  The vector of
+		ignored players is checked for that name before sending the message
+		to a specific player.  Tell specifically checks ignore vector too.
+	Added code that let's who display in a new window (like help), but it
+		is commented out as some players cannot display help windows.
+	Added "recovermap:" logging of script commands to re-draw map in the
+		event of game shutdown without save.
+W18
+	Added "recovermap: end/begin" to "save" command as well.
+	Changed tell behavior for when god is ignoring player.  Now returns
+		"They're not in this world."
+W19
+	Updated isGoodName in DuskEngine.java to use a list of allowed chars.
+	Added check to see if vctUpdate already contains thnStore to Script.java.
+	Improved fix for parsing of quoted params passed to scripts.
+W20
+	Added isGoodIP to DuskEngine to allow banning by IP address.  Modified
+		getPlayer in LivingThing to call it.  Added god commands to LivingThing
+		to block a player's IP address.
+	Added "kill livingthing bywhat" to Script.java.  Will gecho a message
+		about what killed the player and run the onDeath script.
+W21
+	Moved the check for isGoodIP to a better location.
+	Added blnSavingGame to DuskEngine and checks for it in LivingThing where
+		save is called.
+	Fixed ipban (needed to return a message)
+W22
+	Fixed isGoodName in DuskEngine (it was allowing invalid chars)
+	Uncommented the call to thnStore.stillThere() when inviting new members
+W23
+	Added check for blnIsClosing in all the send functions in an attempt
+		to prevent lockups.
+	Re-commented the call to thnStore.stillThere() when inviting new members
+		as it seems to cause the clanleader to get booted.
+W24
+	Added IP logging for exception in getPlayer for invalid password loop.
+		This logs some form of password hack attempts.
+	Fixed kill command in Script.java so that gp and exp loss occurs.
+	Added date/time stamp to most log messages.
+W25
+	Fixed gecho script command to only gecho one line, hopefully, this gets
+		rid of the player lockup associated with it.
+W26
+	Global variables (number and string only) are written to a file called
+		globals on save and read into global variables on server start.
+	Added variable "killer" to the onDeath script calls so that the script
+		has access to the livingthing (if any) that killed the trigger.
+W27
+	Fixed reading in of global numbers (they are doubles, not ints)
+	Added clanleader and changeclan script commands (now maybe gods can get
+		some peace)
+	Wear and unwear are now case-insensitive
+	Changed livingthing to allow scripts to happen before in-game commands.
+	Added script command endcommand that will stop in-game commands from
+		being processed after the scripted command. (this is so a script
+		called wake could conditionally prevent the char from waking up)
+	Fixed the empty tell check for invis gods, now they have to send a
+		message, so the god will know they have been found.
+	Commented out the "Goodbye" message from LivingThing close.
+	Moved the "<person> has logged out" message to end of close function.
+W28
+	Fixed (I hope) the endcommand script command.
+	Changed view and submit to be force lowercase for items.
+	Filtered out .dsko files from list command output.
+	Added ItemList class to replace Vector for player items.
+		inv command for player will now show count of items.
+		equipment menus will only show one of each item when multiples exist.
+			(if you have 20 short swords, only one will show in the wield menu)
+	Moved skills and spells to before equipment in writePlayerFile, this should
+		keep cp restricted weapons/armor from unwearing on login.
+W29
+	Fixed the endcommand script command (it helps if it is not commented out)
+	Filtered out / from the scripted commands.
+W30
+	Fixed addflag and removeflag script commands, they should update in the
+		client immediately now. (also changed sleep/wake commands)
+	*** didn't work either ***
+	Did the same thing for inc/set and skills.
+	Modified StillThere in LivingThing.java to read from the socket until it
+		encounters the "notdead" message from the client.
+	Called StillThere after addmember halt and Script.java "input" halt.
+		Hopefully, the new behaviour of StillThere will allow those commands
+		to work the way they are supposed to.
+	*** changes to StillThere didn't work ***
+	*** W30 pretty much a bust ... no real changes ***
+W31
+	Changed traversal of vectors to iterator from elementAt(i)
+***************************
+REVERTED BACK TO W29, ITERATOR CHANGE WAS UN-RECOVERABLE
+***************************
+W30
+	Adding PlayerMerchant class.  This merchant will allow the owner to stock
+		it with items.  Other players can buy items at this merchant for 3/4
+		normal sale price.  The owner will be able to get that money from the
+		merchant.  Only the owner can "sell" items at this merchant and when
+		he "sells" he is merely giving the merchant an inventory.
+	Removed use of Iterator when dealing with vctItems and the ItemList class.
+	Added booleans to DuskEngine.saveGame() to only save things that have
+		changed.
+	Created SaveThread class to auto-save the game once an hour(should be
+		doing nothing if nothing has changed).
+W31
+	Changed LivingThing getItem to use an iterator on the vector of items
+		that are the same in an attempt to get rid of the pet problem using
+		item that are the same. (but if it works for players, it should work
+		for pets, argh)
+	Added a SendThread class and modified LivingThing to use it (had to comment
+		it out, works for all forms of gossip, but moving disconnects)
+	Added an auto-ban to ban IP address for 1 hour after 5 failed logins in a
+		row from the same IP.
+	Added a floodLimit variable to DuskEngine and checks for elapsed time in
+		LivingThing in all forms of messages (did not add casting, may need to)
+	Added "tracker on" and "tracker off" to prefs for turning turning tracker
+		on and off.
+	Added date/time stamp to the second set of say functions in LivingThing
+W32
+	Adding limits to stats that can be modified by things like race.  This will
+		allow different races/clans/etc to have different maximum values for
+		the various stats.  This will also allow the amount of exp a player can
+		save to be limited.  This change applies to pets as well.
+	Fixed an error in loadRace, was referencing thnMaster for non-pet.
+	Added "change race" command and a changeRaceCpLimit prefs option.
+	Changed loadRace to detect if it is a pet or not, this allows "change race"
+		to work for pets as well.
+	Fixed problem with changes to flags not appearing right away by adding
+		engGame.removeDuskObject() and engGame.addDuskObject in Script.java
+		and LivingThing.java. This caused an error loading mobs with conditions
+		that add flags, as the mob gets addDuskObject called on it while
+		loading conditions and then again when the mob has finished loading.
+		Changed pushDuskObject to detect the case where the object is already
+		there.
+	Added blnHalted to LivingThing.  This is false when normal processing of
+		user commands should occur, and true otherwise.  It gets set to true
+		in LivingThing.halt(). This ensures that the next change works.
+	Fixed the addmember problem by adding the following to LivingThing
+		while (thnStore.bfrSocketIn.ready()) thnStore.bfrSocketIn.read();
+		I put a call to halt() and then stillThere() to make sure that
+		there is something in the BufferedReader to remove and then the while
+		loop makes sure it is empty for the answer to the invite.
+	Made the addmember change to Script.java input... this should fix that
+		functionality as well.
+	Changed Battle.java to ((Math.random()*100)<thnStore.getSkill(""))
+		for all skill checks.  When it was (random*100)+1, skills of 1 would
+		*never* work and skills of 100 could still fail to work.
+	Fixed Battle.java to prevent players in clans from joining mobs in fights
+		against players who are not in clans.
+	Had one too many zeroes in the SaveThread class, was only saving every
+		ten hours, instead of once an hour.
+	Added use of SendThread class for strings only and it seems to work
+		fine.  Hopefully this gets rid of player lockup associated with
+		dropped connections.
+	Pulled parseCommand out of LivingThing into its own static class.  This
+		should reduce the memory overhead associated with LivingThing.
+	Changed ItemList to be derived from hashTable instead of Vector.  This
+		should speed up inventory access.
+	Added two new booleans to LivingThing, one checks to see if a player's file
+		has been read in (to bypass methods in DuskEngine while loading)
+		The other prevents the user from showing up in who until they are ready
+		to interact.  This should also keep hidden gods from briefly showing
+		up during login.
+	Removed the copy of DuskEngine from Item, it was only being used to assign
+		the ID, so the constructor was changed to accept this ID.
+	Added a script command "floodoff" for resetting the auto flood check to
+		allow for multiple forced chats/emotes/etc from a script.  Must call
+		this before each force.
+	Scripted modifications of skills now update the stats on the player right
+		away.
+	Fixed clanleader and changeclan commands in Script.java
+	Turned off redundant error reporting when SendThread fails.
+		(attempted to... doesn't seem to work)
+	Added lt.thnMaster.thrConnection.sleep(300);  // wait for it...
+		to commands.java "addmember"/"change race" and script.java "input" as
+		the code was getting to the emptying of the read buffer before the
+		"notdead" from stillThere() arrived.
+W33
+	Changed behavior of tell in Commands.java.  If a god is invis and invis2,
+		they cannot receive tells "They are not in this world." and when they
+		send them while invis and invis2, it is sent as "A god tells you".
+	Did the same thing for gossip, emote, and say.
+	Turned off error reporting when SendThread fails (had to do it in the
+		SendThread class, not LivingThing)
+	Created Config class (extends Properites) and changed DuskEngine.loadPrefs()
+		to use it.  All entries in the prefs file are now key=value on a single
+		line.  (follow the rules for Properties class)
+		This means that the prefs file is now case sensitive.
+	Fixed a bug where (gp/exp)losemod would be set to (gp/exp)fleemod if the
+		entries for flee came after the entries for lose.
+	Modified DuskEngine.loadPrefs() to only send a resizeMap() to all players
+		if the viewrange actually changed.
+	Modified DuskEngine.loadPrefs() so that all actions on the pre-loaded
+		scripts are within synchronized blocks.
+	Change lt.thnMaster.thrConnection.sleep(300);  // wait for it...
+		to lt.thnMaster.thrConnection.sleep(750);  // wait for it...
+		As it was failing.
+	Also prevented addmember from working while the clan leader was in
+		combat as well as the server was locking up on addmember.
+	Slowed battles down by 1/2 second per round.
+W34
+	Removed call to stillThere and sleep from change race and input commands
+		as they *shouldn't* be needed ... will test that theory.
+	Added 2 calls to stillThere for input and addmember as they may be needed.
+	Added "gc" and "finalize" commands to call System.gc() and
+		System.runFinalization() respectively.
+	Added "cleanup" command to scan the map's object list looking for defunct
+		players and pets, removing them as they are discovered.
+	Added a "LogFileName" parameter to preferences, if set, the game will
+		attempt to open the named file in append mode, and replace Syste.out
+		with a PrintStream associated with the file.
+	Changed "order" command to chat the return value to the one doing the
+		ordering so that players will get "You don't have that" etc. from their
+		pets when ordering them to do things.
+	Changed LivingThing chatMessages commands to return immediately on a null
+		message.
+	Who goes to a seperate window (ala help)
+	Added a popup variable to livingthing and commands to set/unset it so that
+		players can decide if they want help/who to open new windows.
+W35
+	Fixed error when wearing an item you do not have.
+	Got popup window for battles working.  Now need to get messages from spells
+		going to that window during combat.
+	Added battlechat script command for sending chats to the battle window
+		during combat.
+	Changed the way that threads are created, no longer using reference to this
+		in the constructor.  Cleaner to create the object, the thread, and
+		then call run on the thread.  All threads are also given a name now
+		as well, which should be useful in debugging (the name gets logged
+		if logging level is set to DEBUG)
+	Changed almost all System.out.println to use the new log class.
+		In the process of converting to log class, some exceptions were
+		coded out (no longer needed).
+	Added loglevel master god command to get and set the logging level from
+		within the game.
+	Changed SendThread class to use a FifoQueue.  Messages to be sent to the
+		client get added to the queue and the player's SendThread instance
+		pops them off of the queue and does the sending.  That way only one
+		extra thread per player is ever created and that is the thread that
+		will lock up when the player abnormally disconnects.  Also did away
+		with send of message type other than string (this required a client
+		change as well).
+	Changed ItemList class to use a LifoQueue, should be faster and have the
+		advantage of always using the most recent item of the same type.
+	Removed DuskEnging engGame from DuskObject base class (not sure if this
+		will have and impact on memory and performance, but I can hope)
+	Changed Item and DuskObject classes to use static final constants for the
+		various types of objects/items.
+	Moved "removeIfCanNoLongerSee" function to LivingThing as it only works
+		on one.  This function really needs to go away, anyway as it is just
+		covering up an error somewhere else.
+	Added check for fctFaction being not null in TickThread.  Only attempt
+		to runAI on mobs that have a faction.
+	Fixed parsing of quoted strings for cross platform in Script.java.
+	Fixed parsing of CR/LF pairs.  Multi-line quotes are no longer double
+		spaced on Windows.
+	Created RandomAccessString and used it to replace RandomAccessFile in
+		Script.java This gets rid of the open file for every script
+		(3 x number_of_images in open files for the pre-loaded scripts)
+	Automatically create a script file named "shortmap_redraw" containing
+		the ocmmands to redraw the map as the gods change map tiles.  A
+		comment line is inserted into this file when the map has been
+		saved.  Primary use is to recover lost mapping whent he game
+		crashes or is shutdown before a save of the map.  Could also be
+		used to undo damage done by a rogue/hacked god.
+W36
+	Merging in more of 2.7.3 changes
+		Command "makegod"
+		Added viewing of user (and pet) files
+		Fixed submitting of user files (password line was not saved)
+	Changing all of parseCommand to use strCommand and strArgs parsed out
+		at the beginning of the function.
+	Changed teleport command to allow both "x y" and "x_y" to be valid.
+	Merged seperate versions of the commands for gossip, say, tell, emote,
+		clan.  Both command and shortcut use same code now.
+	Merges seperate forms of attack, kill, and a.  All use same code now.
+	Changed Battle.java to use single dodge and attack functions.
+	Added ranged combat code to Battle.java.
+	Added ranged attack to Faction.java
+	Moved code that fills vctMovement on a goto into LivingThing.java
+	Call the goto method for mob movement in Faction.java
+	Mobs/players can move during combat as long as they are not at range
+		one or less.
+	Added code to TickThread to check vctMovement for mobs.
+	Added friendly/enemy hilighiting to combat.
+	Players/mobs are not longer teleported when joining a battle.
+W37
+	Added "ranged combat" skill
+	Battles end when viewrange is exceeded
+	Fixed view error that was causing submits to fail
+W38
+	Ignore mobs, props, signs, etc that are outside of map area on load
+W39
+	Fixed bug where pets were not able to train
+	Fixed bug where pets would get same amount of gp as player for kill
+	Fixed errors generated on XP when saving player/pet files
+	Fixed errors in split exp as well
+	Added range to race file for adding a range bonus to a race
+	    Allows for a work-around for pets in combat being out of
+	    range.
+	Cleaned up chatMessage.  Newline is now added ONLY in LivingThing
+	    just before the send.  Fixes problems with messages from pets.
+	Fixed bug where client would get into a bad state after entering
+	    and invalid password (chatMessage strings can only have one
+	    newline in them and it must be at the end.)
+W40
+	Fixed several problems with messages not being sent
+	    during startup (had to do with the new send thread)
+	Added "stay" command for pets.
+	Pets can be ordered to move and re-follow by their owners.
+	Fixed typo in clanleader command that prevented it from working.
+	Changed splitmoney in battle.java to count all livingthings on the
+	    winning side (even mobs)
+	Changed splitexp to count all livingthings on the winning side
+	    (if a mob helped you win, it takes away from your exp)
+	Fixed bug where players could move away from close range combat.
+W41
+	Fixed another typo in clanleader command that prevented it from working.
+	Adjusted affect dex has on dodging (only count up to 100 dex)
+	Added "close combat" skill
+	Changed way "ranged combat" skill works
+	    Both "ranged combat" and "close combat" affect how well you combat
+	    dodging.
+	Fixed execution of scripted commands matching player names when
+	    doing a tell to that player.
+	Fixed problem with scripts, manifested itself in "and"/"or" scripts
+	    like canSeeLivingThing, but was an issue with spaces between
+	    commands in the precompiled scripts.
+	Messages from pets in battle should now be sent when their owner
+	    is no longer in the battle.
+	Message saying you can't attack pets now goes to attacker instead of pet.
+	Changed newBattle in DuskEngine to not allow other members of group
+	    to join a battle if they are already in one
+	Moved "...has joined the battle" message to addToBattle in Battle.java
+	    This will now generate a message for everyone in the attacker's
+	    group that joins the battle, including pets.
+	Added command "highlight" to turn highlighting of mobs in battle on/off.

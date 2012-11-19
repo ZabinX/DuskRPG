@@ -1,0 +1,10 @@
+if < trigger privs 3
+    chat trigger "huh?"
+    endscript
+end
+order trigger concat concat "gecho " name trigger " rises up from the shadows."
+order trigger "uninvis"
+endscript
+
+
+

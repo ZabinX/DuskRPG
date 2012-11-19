@@ -1,0 +1,5 @@
+if < trigger cp 2000
+    endscript
+end
+inc trigger strengthbonus -40
+endscript

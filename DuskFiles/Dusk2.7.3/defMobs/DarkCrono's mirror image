@@ -1,0 +1,35 @@
+maxhp
+100000000
+maxmp
+100000000
+stre
+100000000
+inte
+3000
+dext
+100000000
+wisd
+2000
+cons
+100000
+image
+14
+bravery
+0.9
+grouprelation
+0.25
+faction
+demon
+skill
+double attack
+100
+triple attack
+100
+quadruple attack
+100
+conditions
+detect invis
+.
+
+
+

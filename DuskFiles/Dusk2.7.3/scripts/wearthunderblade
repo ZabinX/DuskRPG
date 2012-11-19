@@ -1,0 +1,18 @@
+# only players can use this weapon
+if ! isPlayer trigger
+	order trigger "unwear thunder blade"
+	chat trigger "Only players can use this weapon"
+	endscript
+	end
+# u need 3000cp to use it
+if < trigger cp 3000
+	order trigger "unwear thunder blade"
+	chat trigger "You can't handle this weapon"
+	endscript
+	end
+#
+inc trigger strengthbonus 150
+endscript
+
+
+

@@ -1,0 +1,18 @@
+if < trigger privs 3
+	chat trigger "huh?"
+	endscript	
+end
+if variableisstring param0
+	livingthing target param0
+	if or or isplayer target ismob trigger ispet trigger
+		if not isInBattle target
+			set target locxy trigger locx trigger locy
+			endscript
+		end
+		chat trigger "He's figthing"
+		endscript
+	end
+	endscript
+end
+chat trigger "GetOverHere who?"
+endscript

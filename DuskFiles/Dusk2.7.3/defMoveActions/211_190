@@ -1,0 +1,5 @@
+chat trigger "Welcome to the weapon/armor shop."
+set trigger locxy 43 653
+endscript
+
+

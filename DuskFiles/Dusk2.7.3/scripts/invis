@@ -1,0 +1,8 @@
+chat trigger "As you read the text of the scroll, it disappears and so do you."
+removeitem trigger invis
+addconditionwithduration trigger invis 300
+endscript
+
+
+
+

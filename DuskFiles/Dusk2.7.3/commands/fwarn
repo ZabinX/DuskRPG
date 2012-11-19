@@ -1,0 +1,6 @@
+if < trigger privs 3
+    chat trigger "huh?"
+    endscript
+end
+order trigger "gecho Firewall begins to pour gasoline over a newbie."
+endscript

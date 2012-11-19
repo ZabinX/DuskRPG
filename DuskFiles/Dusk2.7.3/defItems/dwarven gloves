@@ -1,0 +1,18 @@
+type
+armor
+kind
+hands
+description
+a pair of dwarven gloves
+cost
+400
+mod
+90
+image
+7
+durability
+7000
+onWear
+wear_normal_armor
+.
+

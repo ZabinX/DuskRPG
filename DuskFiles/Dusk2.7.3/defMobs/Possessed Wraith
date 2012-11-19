@@ -1,0 +1,39 @@
+maxhp
+21000
+maxmp
+0
+stre
+4000
+inte
+1300
+dext
+4000
+wisd
+1000
+cons
+3200
+bravery
+3
+grouprelation
+2
+image
+3
+giveitem
+powerblade
+0.40
+giveitem
+Questsword
+0.10
+faction
+wraith
+condition
+detect invis
+1
+-1
+skill
+double attack
+100
+skill
+triple attack
+35
+.

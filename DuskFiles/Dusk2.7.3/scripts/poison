@@ -1,0 +1,3 @@
+inc trigger hp * -0.05 trigger hp
+chat trigger "Poison acts"
+endscript

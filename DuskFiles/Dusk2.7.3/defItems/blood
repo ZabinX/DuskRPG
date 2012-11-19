@@ -1,0 +1,13 @@
+type
+drink
+description
+blood from a former human
+cost
+10
+image
+6
+onuse
+ale
+uses
+1
+.

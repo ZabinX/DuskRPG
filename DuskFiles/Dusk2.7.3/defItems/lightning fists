@@ -1,0 +1,19 @@
+type
+armor
+kind
+hands
+description
+a pair of gloves that has an electric aura surronding them.
+cost
+10000
+mod
+2500
+image
+7
+durability
+3500000
+onWear
+wearlightningfist
+.
+
+

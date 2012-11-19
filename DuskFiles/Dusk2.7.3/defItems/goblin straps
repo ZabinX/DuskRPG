@@ -1,0 +1,20 @@
+type
+armor
+kind
+legs
+description
+sturdy leggings straps created by the horrific goblins.
+cost
+400
+mod
+100
+image
+7
+durability
+5300
+onWear
+wear_normal_armor
+.
+
+
+

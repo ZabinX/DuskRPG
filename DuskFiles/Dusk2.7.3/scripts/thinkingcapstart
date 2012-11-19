@@ -1,0 +1,4 @@
+inc trigger wisdomBonus 100
+inc trigger intelligenceBonus 50
+inc trigger acBonus -30
+endscript

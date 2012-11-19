@@ -1,0 +1,18 @@
+type
+armor
+kind
+torso
+description
+an iron suit
+cost
+75
+mod
+15
+image
+7
+durability
+1200
+onWear
+wear_normal_armor
+.
+

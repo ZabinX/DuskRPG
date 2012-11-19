@@ -1,0 +1,18 @@
+type
+weapon
+description
+a Kaizer Blade.  It looks unusually sharp.
+cost
+10
+mod
+200
+image
+206
+durability
+500000
+onWear
+start_kaizer_sword
+onUnWear
+end_kaizer_sword
+.
+

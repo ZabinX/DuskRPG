@@ -1,0 +1,12 @@
+if < trigger privs 3
+    chat trigger "huh?"
+    endscript
+end
+set trigger strength 10
+set trigger dexterity 10
+set trigger intelligence 10
+set trigger constitution 10
+set trigger wisdom 10
+set trigger maxhp 25
+set trigger maxmp 25
+endscript

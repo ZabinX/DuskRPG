@@ -1,0 +1,18 @@
+type
+item
+description
+a glimmering health stone
+cost
+155
+image
+6
+onuse
+tminorheal
+uses
+1
+.
+
+
+
+
+

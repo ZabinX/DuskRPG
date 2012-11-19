@@ -1,0 +1,21 @@
+type
+armor
+kind
+neck
+description
+A very rare amulet that gives energy to the one who wears it
+cost
+50000
+mod
+0
+image
+7
+durability
+10000000
+onwear
+wearenergyamulet
+onunwear
+unwearenergyamulet
+.
+
+

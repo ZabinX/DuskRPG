@@ -1,0 +1,13 @@
+type
+food
+description
+A potion that will restore up to 10,000 MP.  It has one use.
+cost
+100000
+image
+6
+onuse
+manap
+uses
+1
+.

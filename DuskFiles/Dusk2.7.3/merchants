@@ -1,0 +1,55 @@
+48
+684
+ale
+sandwich
+end
+210
+218
+cloth shirt
+wooden dagger
+end
+218
+219
+train:Strength
+end
+28
+650
+wooden dagger
+dagger
+short sword
+long sword
+broad sword
+broad axe
+heavy axe
+end
+43
+650
+bronze suit
+bronze helmet
+bronze sleeves
+bronze leggings
+bronze belt
+bronze gloves
+end
+11
+612
+train:Strength
+train:Constitution
+train:HP
+train:MP
+train:Dexterity
+train:Wisdom
+train:Intelligence
+train:Double Attack
+end
+37
+636
+cookie
+milk
+sandwich
+healpotion
+mendpotion
+minormend
+minormana
+meat
+end

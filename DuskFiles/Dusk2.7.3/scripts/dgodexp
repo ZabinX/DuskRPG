@@ -1,0 +1,8 @@
+order trigger "get godexp"
+if < trigger privs 3
+    chat trigger "You are stuck with the evidence, now."
+    log trigger "has attempted to drop godexp!"
+    endscript
+end
+removeitem trigger godexp
+endscript
