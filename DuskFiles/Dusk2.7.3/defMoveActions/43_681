@@ -1,0 +1,15 @@
+if ! hasitem trigger "ale"
+chat trigger "Redshrike says: Hey, you need a drink here ya go brother"
+giveitem trigger "ale"
+chat trigger "Obtained: ale"
+endscript
+end
+chat trigger "Redshrike says: Man dont try to rip me off you didn't even use the one I gave you last time yet"
+end
+endscript
+
+
+
+
+
+

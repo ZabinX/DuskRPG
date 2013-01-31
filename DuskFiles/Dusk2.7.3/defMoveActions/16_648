@@ -1,0 +1,12 @@
+if < trigger cp 100
+	chat trigger "Courtney says:  You again?  I see you in here way more then any other villager."
+	chat trigger "**Courtney casts heal on you and are totally rejuvinated**."
+	set trigger hp trigger maxHP
+	set trigger mp trigger maxMP
+	endscript
+end
+if > trigger cp 100
+	chat trigger "chat trigger "Courtney says:  I'm sorry but I don't have enough MP to be able to heal you for free anymore."
+	endscript
+end
+

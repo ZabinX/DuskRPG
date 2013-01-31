@@ -1,9 +1,9 @@
 maxhp
-500
+300
 maxmp
 5000
 stre
-50
+30
 inte
 50
 dext
@@ -13,7 +13,7 @@ wisd
 cons
 50
 image
-38
+71
 bravery
 1.3
 grouprelation
@@ -34,3 +34,5 @@ invis
 0
 -1
 .
+
+

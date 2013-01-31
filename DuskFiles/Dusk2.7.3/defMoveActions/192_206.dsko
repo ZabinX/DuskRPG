@@ -1,0 +1,1 @@
+(trigger trigger cp 39 *trigger "You need to visit the Newbie Tutorial first, it's south of the village." trigger leave ,trigger +1  

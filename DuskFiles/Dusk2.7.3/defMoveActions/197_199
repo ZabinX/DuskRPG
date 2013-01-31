@@ -1,4 +1,5 @@
-chat trigger "Yum yum"
+chat trigger "**Yum Yum**"
 removecondition trigger hunger
 addcondition trigger nohunger
 endscript
+

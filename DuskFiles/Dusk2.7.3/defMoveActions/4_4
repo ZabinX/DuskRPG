@@ -55,3 +55,4 @@ if ! hascondition trigger mob2_attack
     endscript
 end
 endscript
+

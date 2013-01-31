@@ -1,0 +1,15 @@
+if ispet trigger
+    endscript
+end
+if ! hascondition trigger "ballswarning"
+	addcondition trigger "ballswarning"
+	chat trigger "Ball says:  Don't even think about pulling that sword form the stone..  If you do trust me you will regret it."
+	chat trigger "*Ball conjurs up a flameling*"
+	createoneusemob "flameling" 200 190
+	addcondition trigger "ballswarning"
+	endscript
+end
+if hascondition trigger "ballswarning"
+	chat trigger "Ball says:  Go ahead and give it a pull... I DARE YOU!!"
+	endscript
+end

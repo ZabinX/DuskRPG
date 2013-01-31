@@ -1,0 +1,6 @@
+if ! isWearing trigger fireproofjacket
+	chat trigger " YEEEEOOOUUUUCHHHHH!!!!!!! That's hot!"
+	inc trigger hp -10
+end
+endscript
+
