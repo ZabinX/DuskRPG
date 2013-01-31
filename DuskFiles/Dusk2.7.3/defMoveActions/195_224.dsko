@@ -1,0 +1,1 @@
+(trigger trigger cp 39 *trigger "You need to visit the Newbie Tutorial first.  Go to your right." trigger leave ,trigger -1  

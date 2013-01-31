@@ -1,11 +1,6 @@
-if hascondition trigger "onlake"
-    number x trigger locx
-    number y trigger locy
-    if and = x 142
-        and < y 96
-        < y 86
-            changetile x y 2
-    end
+if hascondition trigger "excaliburquest"
+	changetile 199 191 56
+	end
 end
 if hascondition trigger "silencer_fight"
     removecondition trigger "silencer_fight"

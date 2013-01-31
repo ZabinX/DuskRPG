@@ -1,0 +1,36 @@
+if  hascondition trigger "excaliburquest"
+	inc trigger locx 1
+	endscript
+end
+if < trigger cp 200
+	inc trigger locx 1
+	chat trigger "Baal says:  Looks like your still too weak.  Lucky for you I don't have to kill you."
+	endscript
+end
+if > trigger cp 200
+	inc trigger locx 1
+	chat trigger "Ball says:  I TOLD YOU NOT TO!!!  YOU DIE NOW MORTAL!"
+	chat trigger "*Baal orders his pet flameling to attack*"
+	chat trigger "Obtained:  Excalibur"
+	giveitem trigger "Excalibur"
+	changetile 199 191 81
+	addcondition trigger "excaliburquest"
+	endscript
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

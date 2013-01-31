@@ -1,0 +1,1 @@
+(trigger *trigger "Pets cannot wield this sword." trigger "unwear Sword of Slaying" trigger cp 2300 *trigger "You must experience more before you can wield this sword." trigger "unwear Sword of Slaying" ,trigger 60  

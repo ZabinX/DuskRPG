@@ -57,7 +57,7 @@ if and and hasCondition trigger shenville_gfq_0 hasItem trigger black_tooth hasI
 	end
 #
 if hasCondition trigger shenville_gfq_0
-	chat trigger "Eduardo says: Another citizen has been killed"
+	chat trigger "Eduardo says: Another citizen has been killed by shades"
 	chat trigger "Eduardo says: his corpse was barely recognizable, Please, go investigate"
 	endscript
 	end
@@ -81,7 +81,7 @@ if hasCondition trigger shenville_pq_0
 	end
 #
 if hasCondition trigger shenville_0	
-	chat trigger "Eduardo says: pirates south of here stole my Royal Crown"
+	chat trigger "Eduardo says: pirates at the harbor east of the village stole my Royal Crown"
 	chat trigger "Eduardo says: can you bring it back to me?"
 	removeCondition trigger shenville_0
 	addCondition trigger shenville_pq_0
@@ -99,4 +99,5 @@ chat trigger "Eduardo says: I got some work for you, remember to talk to me ofte
 chat trigger "Eduardo says: and with the guys at the bar, they'll help you"
 addCondition trigger shenville_0
 endscript
+
 

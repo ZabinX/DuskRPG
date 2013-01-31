@@ -1,4 +1,4 @@
-if hasitem trigger "strabo key"
+if hasitem trigger "Strabo Key"
     number oldx trigger locx
     number oldy trigger locy
     removeitem trigger "strabo key"

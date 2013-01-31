@@ -1,0 +1,1 @@
+(trigger *trigger "Hermit says:  Long has it been since I have had a visitor." *trigger "Hermit says:  Perhaps I can be of some assistance.  I was once a powerful Mage." *trigger "The air around you begins to swirl with magical energy." 	trigger strength 400 	trigger armor 400 *trigger "You feel stronger."  

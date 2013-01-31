@@ -1,0 +1,18 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger "excaliburquest"
+	chat trigger "Ball says:  You must like getting your face pounded.  Which reminds me, looking forward to seeing you in hell!!"
+    	livingthing ismob local trigger "flameling"
+    	string command concat "a " name trigger
+    	order flameling command
+	end
+if < trigger cp 200
+    	chat trigger "Ball says:  You might be interested in pulling that sword from the stone, right?  Well... I'll sik my powerful pet on you and you'll be dead for sure and then I'll have you where I want you.  IN HELL!!!BWAHAHA."
+    	endscript
+end
+endscript
+
+
+
+

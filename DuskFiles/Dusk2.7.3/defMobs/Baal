@@ -3,7 +3,7 @@ maxhp
 maxmp
 800
 stre
-200
+100
 inte
 120
 dext
@@ -22,4 +22,5 @@ giveitem
 Demon Horns
 1
 .
+
 
