@@ -1,0 +1,14 @@
+1. Install Java - http://java.com/en/download/manual.jsp
+2. Install Apache - http://apache.spinellicreations.com//httpd/binaries/win32/httpd-2.2.22-win32-x86-no_ssl.msi
+3. Clone Dusk files from Github to C:\GitHub
+4. Add the following lines to the bottom of <Apache Install>\conf\httpd.conf
+	Alias /dusk "C:\GitHub\DuskRPG\DuskFiles\Dusk2.7.3\www"
+	<Location /dusk>
+		Order allow,deny
+		Allow from all
+		DirectoryIndex client.html
+	</Location>
+5. Restart Apache
+6. Start DuskServer in a command prompt 
+	cd C:\GitHub\DuskFiles\Dusk2.7.3
+	java -cp . DuskServer
