@@ -11,9 +11,45 @@ Note: The licensing of the allacrost's files is assumed to be GPLv2 or later, as
 
 Files                                                            Licenses                 Authors and details
 --------------------------------------------------------------- ------------------------ --------------------------------------------------------------------
+img/sprites/armor.png						CCO			 Clint Bellanger, Blarumyrran, crowline, Justin Nichol (OGA)
+img/sprites/BlarumyrranSprites.png				CCO			 Blarumyrran@gmail.com (OGA)
+img/sprites/redshrikesremix.png					CC by 3.0		 Stephen "Redshrike" Challener (Sprites) 5hiroi (concepts) Heather Lee Harvey (concept) (EmeraldActivities.com) www.OpenGameArt.org
+img/sprites/swinethug2.png					CC by SA 3.0		 Katarzyna Zalecka (concept) http://kasia88.deviantart.com Daniel Eddeland (Painted version) Stephen "Redshrike" Challener (pixelled version) Ancient Beast http://AncientBeast.com
+img/sprites/morerpgenemies.png					CC by 3.0		 Credit to Stephen "Redshrike" Challener, Blarumyrran and LordNeo
+img/sprites/dragons5.png					CC by 3.0		 Credit to: Stephen "Redshrike" Challener, MrBeast, Surt, Blarumyrran, Sharm, Zabin
+img/sprites/stavabytracy.png					CC by 3.0		 Tracy OGA
+img/sprites/threeforms.png					CC by 3.0		 Stephen "Redshrike" Challener, www.OpenGameArt.org
+img/sprites/flamelingsprites.png				CC by 3.0 		 Original artist Surt, pixeled by leeor_net (OGA)
+img/sprites/darksoldier.png					CC by SA 3.0		 Created by Stephen 'Redshrike' Challener, on commission for Bertram.
+img/sprites/helmetfish.png					CC by 3.0		 Stephen "Redshrike" www.OpenGameArt.org
+img/sprites/knightsprite.png					CC by SA 3.0		 killyoverdrive OGA
+img/sprites/skeleton.png					CCO			 LordNeo (OGA)
+img/sprites/arenagamesprites.png				CC by SA 3.0		 Arena Game Sprites by RedKnight91 (OGA) <http://redknight91.deviantart.com/>
+img/sprites/wesnothfrankenpack.png				GPL 2.0			 Wesnoth!
+img/sprites/radioactivemobs.png					CC by SA 3.0		 Antifarea (CharlesGabriel), recolorized by bart OGA
+img/sprites/enemies.png						CC by 3.0		 Antifarea (CharlesGabriel) (OGA)
+img/sprites/10mobs.png						CC by SA 3.0		 Antifarea (CharlesGabriel) (OGA)
+img/sprites/inbattlesprites.png					CC by SA 3.0		 Stephen Challener, Matthew Nash, Tunicate, Ben "Cookiez" Potter (with a link to this page: http://cookiez999.deviantart.com/), Charles Gabriel OpenGameArt.org
+img/sprites/icegolem.png					CC by 3.0		 Stephen "Redshrike" Challener www.OpenGameArt.org
+img/sprites/fossils.png						CC by 3.0		 Stephen "Redshrike" Challener www.OpenGameArt.org
+img/sprites/9rpgenemies.png					CC by 3.0		 Stephen "Redshrike" Challener www.OpenGameArt.org
+img/sprites/sarasprites.png					CC by 3.0		 Stephen "Redshrike" Challener www.OpenGameArt.org Clone of the original Sara design (by Mandi Paugh: http://opengameart.org/content/sara-wizard),
+img/sprites/dwarf.png						CC by 3.0		 Stephen "Redshrike" Challener www.OpenGameArt.org
+img/sprites/evilpumpkin.png					CC by 3.0 		 Stephen "Redshrike" Challener www.OpenGameArt.org
+img/sprites/goblins.png						CC by 3.0		 Stephen "Redshrike" Challener www.OpenGameArt.org
+img/sprites/leocepas.png					CC by 3.0		 Stephen "Redshrike" Challener www.OpenGameArt.org
+img/sprites/basilisk.png					CC by 3.0		 Blarumyrran, Stephen "Redshrike" Challener www.OpenGameArt.org
+img/sprites/rpgcritters.png					CC by 3.0		 Stephen "Redshrike" Challener www.OpenGameArt.org
+img/sprites/rats.png						CC by 3.0		 MrBeast and Redshrike (OGA)
+img/sprites/ratking.png						CC by 3.0		 Stephen "Redshrike" Challener www.OpenGameArt.org
+img/sprites/sunmob.png						CC by 3.0		 MrBeast (OGA)
+img/sprites/icyarmor.png					CC by 3.0		 MrBeast (OGA)
+
 img/tilesets/ancient_ruins_interior.png                         CC by SA 3.0             Adapted Circle 2D graphics from Daniel Cook (lostgarden.com)
 img/tilesets/ancient_ruins_exterior.png                         CC by SA 3.0             Adapted Circle 2D graphics from Daniel Cook (lostgarden.com)
 img/tilesets/building_interior_objects_01.png                   CC by SA 3.0             Allacrost + From Jetrel's mockups + Bertram + adapted other Circle 2D graphics from Daniel Cook (lostgarden.com)
+img/tilesets/Castle.png						CC by 3.0		 Zabin, Hyptosis, and Danial Cook (http://opengameart.org/content/castle-tiles-for-rpgs) visually see who did what
+img/tilesets/castle_exterior_01.png				GPLv2			 From Allacrost and Irukards bridge for The Mana World project
 img/tilesets/desert_house_tileset.png                           GPLv2                    From Jetrel's mockups + Bertram
 img/tilesets/harrvah_house_interior.png                         GPLv2                    Allacrost + From Jetrel's mockups + Bertram
 img/tilesets/mountain_house_interior.png                        GPLv2                    Allacrost + From Jetrel's mockups + Bertram
@@ -21,5 +57,11 @@ img/tilesets/mountain_house_exterior2.png                       CC by SA 3.0    
 img/tilesets/mountain_landscape.png                             CC by 3.0                Daniel Cook + Jetrel's mockups + Bertram + Zabin (OGA) modification and additions + Saphy (themanaworld.com) high grass
 img/tilesets/village_exterior.png                               CC by SA 3.0             C. Nilsson for the top-left three flowers (OGA), Guido Bos (OGA) for the other flowers, Daniel Eddeland (OGA) for everything else, except for the vertical bridge that I (Bertram) made based upon his style.
 img/tilesets/water_tileset.png                                  CC by SA 3.0/GPLv2       From C. Nilsson for the water lilies with transparent background (OGA/CC by SA 3.0) + LPC Team for the water lights (OGA/CC by SA 3.0), Leonard Pabin (Len) GPLv2 for the stones, palm tree, the water original tiles, and the water lili with a dark blue background + Bertram's small variations.
-img/tilesets/wood_tileset.png                                   CC by SA 3.0             Daniel Cook + Jetrel's mockups + Bertram additions + Zabin (OGA) additions.
+img/tilesets/path_objects.png					CC by SA 3.0		 Zabin, Daneeklu, Jetrel, Hyptosis, Redshrike, Bertram. (http://opengameart.org/content/rpg-tiles-cobble-stone-paths-town-objects) visually see who did what
 img/tilesets/snow_tileset.png                                   CC by SA 3.0             Daniel Cook + Jetrel's mockups + Zabin (OGA) + snow tree and ground from Yd (OGA)
+img/tilesets/town.png						CC by 3.0		 Hyptosis organized by Zabin
+img/tilesets/trees.png						CC by 3.0		 Hyptosis organized by Zabin
+img/tilesets/trees_plants.png					CC by 3.0		 Hyptosis organized by Zabin
+img/tilesets/trees_plants_rocks.png				CC by 3.0		 Hyptosis organized by Zabin
+img/tilesets/treevariations.png					CC by SA 3.0		 Jetrel, Zabin, and Bertram from OGA
+img/tilesets/wood_tileset.png                                   CC by SA 3.0             Daniel Cook + Jetrel's mockups + Bertram additions + Zabin (OGA) additions.
