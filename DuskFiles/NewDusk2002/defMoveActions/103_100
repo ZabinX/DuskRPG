@@ -1,0 +1,39 @@
+if ispet trigger
+    endscript
+end
+if > trigger privs 2
+    endscript
+end
+if = trigger cp 39
+    chat trigger "You need to visit the tutorial for newbies first."
+    order trigger leave
+    inc trigger locx -1
+    endscript
+end
+if = trigger cp 40
+    chat trigger "You need to explore the Newbie Quarter first."
+    order trigger leave
+    inc trigger locx -1
+    endscript
+end
+if < trigger cp 45
+    order trigger leave
+    inc trigger locx -1
+    number truecp + trigger cp / trigger exp 100
+    if > truecp 45
+        chat trigger "You need to spend some of your experience before leaving the Newbie Quarter."
+        endscript
+    end
+    chat trigger "You need spend a little more time in the Newbie Quarter."
+    endscript
+end
+if ! hascondition trigger intown
+    addcondition trigger intown
+    endscript
+end
+endscript
+
+
+
+
+

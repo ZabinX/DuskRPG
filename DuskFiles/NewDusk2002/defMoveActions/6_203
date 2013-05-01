@@ -1,0 +1,6 @@
+if ! isPlayer trigger
+  endscript
+end
+chat trigger "Green vegetables decorate this stand.  You scan the selection and start to negotiate prices.  You're not"
+chat trigger "really interested in buying, but figure that honing your trading skills can't hurt."
+endscript

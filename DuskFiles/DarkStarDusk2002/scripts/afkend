@@ -1,0 +1,3 @@
+removeflag trigger "AFK"
+order trigger "gossip I am back."
+endscript

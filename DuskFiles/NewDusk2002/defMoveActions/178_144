@@ -1,0 +1,7 @@
+if ! hascondition trigger "inbath"
+    addcondition trigger "hot springs"
+    addcondition trigger "inbath"
+    chat trigger "As you sit and relax in the old couch you feel as if your achy muscles are recoveringl."
+    endscript
+end
+endscript

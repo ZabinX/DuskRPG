@@ -1,0 +1,13 @@
+#
+if < trigger privs 3
+	chat trigger "huh?"
+	endscript
+	end
+#
+LivingThing target local trigger param0
+addConditionWithDuration target "killer instinct" 60
+chat trigger "ok"
+chat target "You start thinking that to kill is a wonderful thing"
+endscript
+
+

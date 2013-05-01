@@ -1,0 +1,7 @@
+removecondition trigger sin5
+removecondition trigger sin4
+removecondition trigger sin3
+removecondition trigger sin2
+removecondition trigger sin1
+chat trigger " You have been forgiven for your sins."
+

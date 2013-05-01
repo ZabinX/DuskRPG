@@ -1,0 +1,22 @@
+inc trigger strengthbonus -10
+inc trigger dexteritybonus -10
+inc trigger intelligencebonus -10
+inc trigger constitutionbonus -10
+inc trigger wisdombonus -10
+inc trigger hp -1000
+inc trigger mp -500
+inc trigger acbonus -100
+inc trigger dammodbonus -100
+if < trigger maxHp trigger hp
+	set trigger hp trigger maxHp
+end
+if < trigger maxMp trigger mp
+	set trigger mp trigger maxMp
+end
+endscript
+
+
+
+
+
+

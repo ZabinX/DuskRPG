@@ -1,0 +1,13 @@
+type
+item
+description
+a red swirling potion
+cost
+2000
+image
+6
+onuse
+redpotion
+uses
+1
+.

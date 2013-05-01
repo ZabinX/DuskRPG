@@ -1,0 +1,4 @@
+if isMob trigger "Morph Octopus"
+inc trigger locy 1
+endscript
+

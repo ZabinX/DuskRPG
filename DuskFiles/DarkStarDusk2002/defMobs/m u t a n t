@@ -1,0 +1,41 @@
+maxhp
+5000
+maxsp
+400
+stre
+500
+inte
+100
+dext
+230
+cons
+500
+wisd
+150
+bravery
+0.99
+group relation
+0.99
+faction
+mutant
+skill
+Dodge
+50
+skill
+Double Attack
+75
+skill
+Triple Attack
+50
+skill
+Quadruple Attack
+25
+image
+26
+wield
+long sword
+-1
+-1
+.
+
+

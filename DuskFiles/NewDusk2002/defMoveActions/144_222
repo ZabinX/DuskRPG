@@ -1,0 +1,17 @@
+if ! ismob trigger
+    endscript
+end
+if hascondition trigger "inside"
+    removecondition trigger "inside"
+    if hascondition trigger treasure15
+        changetile 144 226 11
+        changetile 144 227 0
+        changetile 144 228 0
+        changetile 144 229 0
+        changetile 144 230 0
+        changetile 144 231 11
+        endscript
+    end
+    endscript
+end
+endscript

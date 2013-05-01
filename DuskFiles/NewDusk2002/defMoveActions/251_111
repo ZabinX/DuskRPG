@@ -1,0 +1,6 @@
+if ispet trigger
+	endscript
+end
+set trigger locxy 100 100
+chat trigger "Be safe, Traveler..."
+endscript

@@ -1,0 +1,13 @@
+type
+weapon
+description
+a lumberjack's axe
+cost
+50
+mod
+120
+image
+10
+durability
+3000
+.

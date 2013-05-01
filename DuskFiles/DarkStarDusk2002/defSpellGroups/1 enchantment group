@@ -1,0 +1,18 @@
+#Invis: hides the caster/target from view
+#
+#
+if variableisstring param0 #If a target is specified
+	livingthing target local caster param0
+	if variableislivingthing target
+		chat caster concat name target "  fades slowly from vision."
+		chat target " You fade slowly from vision."
+		addconditionwithduration target "invis" * caster inte 3
+		endscript
+	end
+	chat caster "You do not see them here."
+	endscript
+end
+#Else no target is specified
+chat caster " You fade slowly from vision."
+addconditionwithduration caster "invis" * caster inte 3
+endscript

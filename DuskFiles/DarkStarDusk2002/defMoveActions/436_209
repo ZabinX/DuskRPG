@@ -1,0 +1,3 @@
+if ismob Hydra
+	inc trigger locx 1
+endscript

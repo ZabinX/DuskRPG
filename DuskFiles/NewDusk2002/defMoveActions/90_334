@@ -1,0 +1,3 @@
+chat trigger "With all your courage you push forward into the evil maze."
+set trigger locxy 99 311
+endscript

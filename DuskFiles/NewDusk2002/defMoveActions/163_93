@@ -1,0 +1,16 @@
+if hascondition trigger current
+    removecondition trigger current
+end
+if hascondition trigger northcurrent
+    removecondition trigger northcurrent
+end
+if hascondition trigger southcurrent
+    removecondition trigger southcurrent
+end
+if hascondition trigger eastcurrent
+    removecondition trigger eastcurrent
+end
+if hascondition trigger westcurrent
+    removecondition trigger westcurrent
+end
+endscript

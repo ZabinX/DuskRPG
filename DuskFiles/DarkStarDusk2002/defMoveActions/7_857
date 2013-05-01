@@ -1,0 +1,2 @@
+set trigger locxy 35 878
+chat trigger "You walk down the steps and end up in a cave."

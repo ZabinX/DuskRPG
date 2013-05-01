@@ -1,0 +1,12 @@
+type
+weapon
+description
+a small knife
+cost
+150
+mod
+20000
+image
+10
+durability
+20000

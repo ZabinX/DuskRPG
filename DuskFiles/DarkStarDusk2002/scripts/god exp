@@ -1,0 +1,3 @@
+inc trigger exp 1000000000
+chat trigger "woohoo"
+endscript

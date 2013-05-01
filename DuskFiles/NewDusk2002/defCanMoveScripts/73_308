@@ -1,0 +1,5 @@
+or
+! isPlayer trigger
+and
+hasCondition trigger shenville_gfq_0
+< 20 * 100 rand

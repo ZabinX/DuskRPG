@@ -1,0 +1,10 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger "onlake"
+    chat trigger "The lake returns to normal."
+    changetile 142 95 2
+    removecondition trigger "onlake"
+    endscript
+end
+endscript

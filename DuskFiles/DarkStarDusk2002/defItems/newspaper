@@ -1,0 +1,13 @@
+type
+item
+description
+the latest issue of 'Dark Star News !!
+onUse
+readNewspaper
+uses
+-1
+image
+1
+.
+
+

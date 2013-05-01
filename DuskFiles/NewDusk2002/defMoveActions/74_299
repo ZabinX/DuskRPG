@@ -1,0 +1,5 @@
+if hasCondition trigger "guard_attack"
+	removeCondition trigger "guard_attack"
+	end
+endscript
+

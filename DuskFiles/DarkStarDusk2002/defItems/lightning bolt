@@ -1,0 +1,23 @@
+type
+weapon
+description
+"The mighty BOLT of Zeus."
+cost
+0
+mod
+5000
+image
+9
+uses
+-1
+onWear
+Lightning Bolt Wear
+onUnwear
+Lightning Bolt Unwear
+onUse
+Lightning Bolt Use
+.
+
+
+
+

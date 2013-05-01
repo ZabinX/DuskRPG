@@ -1,0 +1,4 @@
+if hasCondition trigger afk
+	removeCondition trigger afk
+end
+endscript

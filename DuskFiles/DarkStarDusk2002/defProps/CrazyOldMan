@@ -1,0 +1,11 @@
+image
+25
+description
+A crazy Old Man That says he can lead you to Xyphoid's maze if you have the right stone for him.
+onuses
+t "prop CrazyOldMan"
+uses
+1
+.
+
+

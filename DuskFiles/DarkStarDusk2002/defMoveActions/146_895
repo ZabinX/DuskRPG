@@ -1,0 +1,9 @@
+if ! isclan trigger MTH
+chat trigger "You get 100 gp stolen from you"
+inc trigger cash -100
+endscript
+end
+chat trigger "Dont worry brother we would never steal from MTH"
+end
+endscript
+

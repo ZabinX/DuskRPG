@@ -1,0 +1,6 @@
+if hasCondition trigger "thief"
+	chat trigger "All the thieves clap for you. Hurray!"
+	endscript
+end
+endscript
+

@@ -1,0 +1,11 @@
+if ispet trigger
+	endscript
+end
+if > trigger cash 9
+	inc trigger cash -10
+	addconditionwithduration trigger nohunger 1200
+	chat trigger "You grab yourself a piece of gargoyle meat and eat it..."
+	enscript
+end
+chat trigger "If you only had 10gp you could try the gargoyle meat..."
+endscript

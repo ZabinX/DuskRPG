@@ -1,0 +1,5 @@
+inc trigger hp -10000
+order trigger "unwear satans spear"
+chat trigger "AHH that hurt me bad"
+end
+endscript

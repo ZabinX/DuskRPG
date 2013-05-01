@@ -1,0 +1,5 @@
+removecondition trigger exit
+if ! hascondition trigger enter
+addcondition trigger enter
+endscript
+end

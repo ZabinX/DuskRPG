@@ -1,0 +1,19 @@
+type
+weapon
+description
+A sword made of diamond
+mod
+600
+cost
+10000
+image
+9
+onWear
+diamondoff
+.
+
+
+
+
+
+

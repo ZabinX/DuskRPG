@@ -1,0 +1,4 @@
+set trigger hp trigger maxhp
+set trigger mp trigger maxmp
+addcondition trigger hero
+endscript

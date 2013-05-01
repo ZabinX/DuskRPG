@@ -1,0 +1,5 @@
+if ! hasItem trigger travelerRoom2Key
+	chat trigger "You don't have the key to this room."
+	inc trigger locy 1
+end
+endscript

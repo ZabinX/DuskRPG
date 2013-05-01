@@ -1,0 +1,15 @@
+type
+ranged
+description
+a lightning staff
+cost
+6000
+image
+8
+mod
+600
+durability
+1000000
+range
+25
+.

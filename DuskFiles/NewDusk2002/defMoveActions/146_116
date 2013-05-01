@@ -1,0 +1,11 @@
+if ispet trigger
+    endscript
+end
+if and hasitem trigger "housewildernkey" hascondition trigger "wilderndoor5"
+     if ! hascondition trigger "inside"
+        addcondition trigger "inside"
+        chat trigger "Wildern's house key begins to glow steadily."
+        endscript
+    end
+end
+endscript

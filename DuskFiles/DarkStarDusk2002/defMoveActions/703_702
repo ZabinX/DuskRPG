@@ -1,0 +1,8 @@
+if hasitem trigger "knight" set trigger locxy 650 651
+chat trigger "you have entered the Super Dragons lair."
+endscript
+if ! hasitem trigger "knight"
+chat trigger "you must kill the Dragon Knight to gain entrance to Super Dragons Lair"
+endscript
+
+

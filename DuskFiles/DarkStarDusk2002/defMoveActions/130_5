@@ -1,0 +1,3 @@
+set trigger locxy 302 152
+chat trigger "*You dematerialize for a moment and find yourself in a town full of tweeking teleporters*"
+endscript

@@ -1,0 +1,10 @@
+image
+25
+description
+A crazy old man that clams that he knows there Xyphoid's maze is... and will only let you on if you have the special item he needs it to open up the door.
+onuses
+t "prop OldCrazyMan"
+uses
+1
+.
+

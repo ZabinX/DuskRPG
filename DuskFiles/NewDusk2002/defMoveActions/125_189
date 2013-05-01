@@ -1,0 +1,23 @@
+#
+# Path out is n, n, n, n, e
+if ispet trigger
+    endscript
+end
+if hascondition trigger maze1
+    chat trigger "You are in a maze of twisting passages... exits are north, south, east, and west."
+    endscript
+end
+if hascondition trigger maze2
+    chat trigger "You are in a maze of twisting passages... exits are north, south, east, and west."
+    endscript
+end
+if hascondition trigger maze3
+    chat trigger "You are in a maze of twisting passages... exits are north, south, east, and west."
+    endscript
+end
+if hascondition trigger maze4
+    chat trigger "You are in a maze of twisting passages... exits are east, west, south, and north."
+    endscript
+end
+chat trigger "You are in a maze of twisting passages... exits are north, south, east, and west."
+endscript

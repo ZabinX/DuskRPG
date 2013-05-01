@@ -1,0 +1,9 @@
+
+if isWearing trigger "Flame Robe"
+	order trigger "unwear Flame Robe"
+	removeItem trigger "Flame Robe"
+	giveItem trigger "Flame Robe"
+	order trigger "wear Flame Robe"
+end
+endscript
+

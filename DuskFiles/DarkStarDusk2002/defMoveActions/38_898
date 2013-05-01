@@ -1,0 +1,2 @@
+set trigger locxy 34 923
+chat trigger "You walk up the steps and end up in a field."

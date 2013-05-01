@@ -1,0 +1,12 @@
+if hasItem trigger ruby 
+	chat trigger "You don't see anything very interesting."
+	endscript
+end
+if ! hasItem trigger ruby
+	chat trigger "Hey! there's a ruby in this pile of junk! Score!"
+	giveItem trigger ruby
+end
+endscript
+
+
+

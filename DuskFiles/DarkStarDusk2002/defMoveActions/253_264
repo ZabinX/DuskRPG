@@ -1,0 +1,4 @@
+if < trigger privs 3
+	inc trigger locx 1
+end
+endscript

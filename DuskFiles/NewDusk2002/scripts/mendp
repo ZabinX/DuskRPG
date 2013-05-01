@@ -1,0 +1,3 @@
+chat trigger "You sip on the potion"
+inc trigger hp 100
+endscript

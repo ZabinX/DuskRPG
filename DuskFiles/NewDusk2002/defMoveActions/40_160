@@ -1,0 +1,8 @@
+if ispet trigger
+	endscript
+end
+chat trigger "The citizens of Kilika bid you farewall!"
+set trigger locxy 146 101
+end
+endscript
+

@@ -1,0 +1,24 @@
+# flowris
+#
+if not isPlayer trigger
+	endscript
+	end
+#
+if isClan trigger global unredowner
+	endscript
+	end
+#
+set trigger locxy 155 11
+addCondition trigger unredintruder
+number level / trigger cp 1000
+order trigger "gossip I WANNA CONQUER UNRED SHRINE"
+addConditionWithDuration trigger unredconquestattempt 5000
+removeCondition trigger safe
+# use clan gecho
+# BUGGY
+#gecho concat concat "WARNING: an intruder entered Unred's Shrine (about " level "K cp)"
+endscript
+
+
+
+

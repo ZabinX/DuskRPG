@@ -1,0 +1,51 @@
+maxhp
+2500
+maxsp
+20
+stre
+120
+inte
+100
+dext
+500
+wisd
+100
+cons
+100
+skill
+Dodge
+30
+skill
+Double Attack
+80
+skill
+Triple Attack
+80
+wield
+expert sword
+arms
+titanium sleeves
+legs
+titanium leggings
+torso
+titanium suit
+waist
+titanium belt
+neck
+none
+skull
+titanium helmet
+eyes
+none
+hands
+titanium gauntlets
+image
+41
+bravery
+0.9
+giveitem
+key
+1.0
+.
+
+

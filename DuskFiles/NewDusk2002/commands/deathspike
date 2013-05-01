@@ -1,0 +1,30 @@
+#This script was created by Orky long ago, Please do not modify this.
+#If you do want to use it, please leave the command name, "deathspike",
+#and leave this note at the top. Thanks.
+#                  .-=Orky=-.
+if < trigger privs 3
+    chat trigger "huh?"
+    endscript	
+end
+if variableisstring param0
+    livingthing target param0
+    if variableislivingthing target
+        if > target privs 2
+            chat trigger "You realize you are striking a god and trip trying to stop."
+            chat trigger "You fall on the spike and kill yourself."
+            order trigger concat concat "gecho " name trigger " trips and falls on a large metal spike and dies... how embarrassing."
+            set target hp 5
+            set target mp 5
+            set target locxy 100 100
+            endscript
+        end
+        chat target "You have been killed by a god!"
+        order trigger concat concat "gecho A large metal spike flys from the sky striking " name target " killing him!"
+        set target hp 5
+        set target mp 5
+        set target locxy 100 100
+        endscript
+    end
+end
+endscript
+

@@ -1,0 +1,13 @@
+# flowris (ShenVille)
+#
+# 12.5%
+number chance * 8 rand
+if < 1 chance
+	endscript
+end
+#
+number damage + 250 * 500 rand
+livingthing target enemy trigger
+inc target hp * -1 damage
+chat enemy trigger concat concat concat name trigger " bites you for " damage " damage."
+endscript

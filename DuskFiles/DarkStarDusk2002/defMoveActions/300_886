@@ -1,0 +1,3 @@
+set trigger locXY 301 874
+chat trigger "....Even more ruins... I guess there's no turning back now..."
+endscript

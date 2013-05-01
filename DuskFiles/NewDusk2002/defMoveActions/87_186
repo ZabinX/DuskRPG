@@ -1,0 +1,7 @@
+# wards go to guild master to remove them
+if ! hascondition trigger wardremoval
+     inc trigger locx -1
+     chat trigger "The powerful magical wards throw you back."
+     endscript
+end
+endscript

@@ -1,0 +1,8 @@
+if ! hasCondition trigger "elderchat"
+chat trigger " Guard: Sorry. I cant let you pass until youve gotten permission from Salharasha our towns elder. He lives in a cave somewhere on the beach."
+inc trigger locx -1
+endscript
+end
+chat trigger "Guard: Well Salharasha says you may leave so do so if you wish. Please be careful"
+endscript
+

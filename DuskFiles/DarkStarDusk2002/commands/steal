@@ -1,0 +1,59 @@
+if ! variableisstring param0
+	chat trigger " Take from whome??"
+endscript
+end
+if ! variableisstring param1
+	chat trigger " Remove what?"
+	endscript
+end
+livingthing target param0
+if hascondition trigger sin5
+	chat trigger " Your sin rate is too high, you must go to church before to confess your sins"
+endscript
+end
+if iswearing target param1
+	unwear target param1
+end
+if ! hasitem target param1
+	chat trigger " They dont have that."
+endscript
+end
+if hascondition target protect
+chat trigger " They have a special force securing their items to their person, you cannot steal from them."
+endscript
+end
+if hasitem target param1
+	number steal * 1 * 50 rand
+	if < steal 5
+		removeitem target param1
+		giveitem trigger param1
+		chat Shifty02 concat concat concat concat name trigger " Just stole " param1 " , off of " name target " ."
+	endscript
+	end
+	chat trigger " You failed to steal off of that person."
+	chat trigger " When u have the condition sin5 you must confess your sins."
+	if hascondition trigger sin1
+		removecondition trigger sin1
+		addcondition trigger sin2
+	endscript
+	end
+	if hascondition trigger sin2
+		removecondition trigger sin2
+		addcondition trigger sin3
+	endscript
+	end
+	if hascondition trigger sin3
+		removecondition trigger sin3
+		addcondition trigger sin4
+	endscript
+	end
+	if hascondition trigger sin4
+		removecondition trigger sin4
+		addcondition trigger sin5
+	endscript
+	end
+addcondition trigger sin1
+endscript
+end
+
+

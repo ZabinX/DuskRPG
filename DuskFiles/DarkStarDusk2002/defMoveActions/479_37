@@ -1,0 +1,9 @@
+if ! hasCondition trigger "thief"
+	chat trigger "Trank says: If you are sure about being a thief, go up on the steps and you shal be one..."
+	endscript
+end
+if hasCondition trigger "thief"
+	chat trigger "Trank says: Congratulations! I know you'll be one of our best!"
+	endscript
+end
+endscript

@@ -1,0 +1,4 @@
+chat trigger "input: "
+input trigger var
+chat trigger var
+endscript

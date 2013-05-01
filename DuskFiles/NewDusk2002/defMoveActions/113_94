@@ -1,0 +1,16 @@
+if ispet trigger
+    endscript
+end
+if ! hasitem trigger HPToken
+    giveitem trigger HPToken
+    chat trigger "The cost of HP restoration is 1 gp for every 2 HP restored.
+Do not enter the HP bath with an HPtoken if you do not wish to pay this fee.
+The same goes for your pet."
+    chat trigger "You got an HPToken."
+    endscript
+end
+chat trigger "You already have an HPToken."
+endscript
+
+
+

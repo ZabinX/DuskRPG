@@ -1,0 +1,4 @@
+set trigger hp trigger maxhp
+chat trigger " You fall asleep, your body is relaxed. "
+end script
+

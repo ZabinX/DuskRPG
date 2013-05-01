@@ -1,0 +1,22 @@
+if ! hasItem trigger Trankpass
+	chat trigger "bouncer says: You're not welcome here, get out!"
+	inc trigger locy 1
+	endscript
+end
+if hasItem trigger Trankpass
+	if hasCondition trigger "trank"
+		chat trigger "bouncer says: Welcome to the thief training center. If you see Trank, tell him I said hi."
+		inc trigger locy -5
+		endscript
+	end
+	if ! hasCondition trigger "trank"
+		chat trigger "bouncer says: YOU DIDN'T GET THIS PASS FROM TRANK, DID YOU, YOU ARE GONNA HAVE TO GO AND TALK TO HIM LIKE ALL OF THE OTHER THIEVES DID. AND IM GONNA HAVE TO TAKE THAT USED PASS..."
+		removeItem trigger Trankpass
+		chat trigger "bouncer says: You're not welcome here, get out!"
+		inc trigger locy 1
+		endscript
+	end
+end
+endscript
+
+		

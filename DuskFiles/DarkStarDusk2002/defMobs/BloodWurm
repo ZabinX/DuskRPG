@@ -1,0 +1,66 @@
+maxhp
+2500
+maxsp
+20
+stre
+150
+inte
+30
+dext
+180
+cons
+100
+wisd
+30
+bravery
+0.99
+group relation
+0.99
+faction
+Grinder
+skill
+Dodge
+30
+skill
+Double Attack
+100
+skill
+Triple Attack
+50
+skill
+Quadruple Attack
+20
+wield
+curved dagger
+-1
+-1
+arms
+platinum sleeves
+-1
+-1
+legs
+platinum leggings
+-1
+-1
+torso
+platinum suit
+-1
+-1
+waist
+plantinum belt
+-1
+-1
+skull
+titanium helmet
+-1
+-1
+hands
+titanium gloves
+-1
+-1
+giveitem
+Azgant
+1.0
+image
+35
+.

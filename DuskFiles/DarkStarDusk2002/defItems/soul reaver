@@ -1,0 +1,17 @@
+type
+weapon
+description
+Soul Reaver
+cost
+3600
+mod
+500
+image
+9
+onWear
+sr
+onUnWear
+srend
+durability
+1000000
+.

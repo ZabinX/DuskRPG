@@ -1,0 +1,14 @@
+type
+weapon
+description
+a sword so good that it would not hurt a flea.
+cost
+1000
+mod
+0
+image
+8
+durability
+3000
+.
+

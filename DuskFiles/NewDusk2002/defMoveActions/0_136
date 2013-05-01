@@ -1,0 +1,5 @@
+if isPlayer trigger
+  chat trigger "Sensing the heat from your warm flesh, a horde of adventurer-hungry grues sets upon you, and you are promptly devoured."
+  addCondition trigger dead
+end
+endscript

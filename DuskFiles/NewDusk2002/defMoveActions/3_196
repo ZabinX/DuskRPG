@@ -1,0 +1,15 @@
+if isPlayer trigger
+  if ! hasCondition trigger umbra1
+    addCondition trigger umbra1
+    chat trigger "Glowing faintly in the myrridic, runes over the portal proclaim 'Welcome to Darkunder'.  A long list of laws follows."
+    chat trigger "Regulation #82, however, catches your eye: 'Burnt life (i.e. surface dwellers) should be killed on sight.'  You begin"
+    chat trigger "to think that a disguise may be in order."
+  end
+  if hasCondition trigger umbra2
+    removeCondition trigger umbra2
+  end
+  if hasCondition trigger umbra3
+    removeCondition trigger umbra3
+  end
+end
+endscript

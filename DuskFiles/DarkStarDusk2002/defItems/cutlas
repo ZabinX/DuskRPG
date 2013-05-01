@@ -1,0 +1,12 @@
+type
+weapon
+description
+a weapon widely used by the strongest of pirates.
+cost
+10000
+mod
+450
+image
+8
+durability
+500000

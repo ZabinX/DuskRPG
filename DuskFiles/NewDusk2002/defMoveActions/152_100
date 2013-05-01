@@ -1,0 +1,5 @@
+if isPlayer trigger
+  chat trigger "The drunk lifts his head from the table and grunts, 'what do you want?', but the odor sends you scurrying."
+  inc trigger locx 1
+end
+endscript

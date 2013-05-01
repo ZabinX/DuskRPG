@@ -1,0 +1,12 @@
+if ispet trigger
+    endscript
+end
+if ! hascondition trigger "inside"
+    chat trigger "You have found the entrance to the underground Temple of the Ogres."
+    chat trigger "There are five identical passages before you.  Make your choice carefully."
+    addcondition trigger "inside"
+    endscript
+end
+endscript
+
+

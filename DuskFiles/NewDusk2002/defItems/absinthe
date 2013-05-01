@@ -1,0 +1,16 @@
+type
+drink
+description
+a mug of a green liqueur flavored with wormwood
+cost
+1
+image
+6
+onuse
+absinthe
+ondrop
+absintheDrop
+uses
+1
+.
+

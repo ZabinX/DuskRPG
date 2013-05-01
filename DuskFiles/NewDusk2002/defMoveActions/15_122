@@ -1,0 +1,11 @@
+if isPlayer trigger
+  chat trigger "You have died."
+  set trigger hp 5
+  set trigger locxy 100 100
+  if hasCondition trigger dead
+    removeCondition trigger dead
+    endscript
+  end
+  order trigger "emote died a horrible death."
+end
+endscript

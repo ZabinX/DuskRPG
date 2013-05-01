@@ -1,0 +1,35 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger "oq_door1"
+    removecondition trigger "oq_door1"
+end
+if hascondition trigger "oq_door2"
+    removecondition trigger "oq_door2"
+end
+if hascondition trigger "oq_door3"
+    removecondition trigger "oq_door3"
+end
+if hascondition trigger "oq_door4"
+    removecondition trigger "oq_door4"
+end
+if ! hascondition trigger "oq_door5"
+    addcondition trigger "oq_door5"
+end
+if hascondition trigger "oq_switch1"
+    removecondition trigger "oq_switch1"
+end
+if hascondition trigger "oq_switch2"
+    removecondition trigger "oq_switch2"
+end
+if hascondition trigger "oq_switch3"
+    removecondition trigger "oq_switch3"
+end
+if hascondition trigger "oq_switch4"
+    removecondition trigger "oq_switch4"
+end
+if hascondition trigger "oq_switch5"
+    removecondition trigger "oq_switch5"
+end
+set trigger locxy 125 209
+endscript

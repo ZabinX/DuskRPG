@@ -1,0 +1,8 @@
+if ispet trigger
+    endscript
+end
+livingthing clanmage local trigger "Clan Mage"
+string command concat "cast bless " name trigger
+order clanmage command
+endscript
+

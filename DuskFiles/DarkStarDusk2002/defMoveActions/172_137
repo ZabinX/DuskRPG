@@ -1,0 +1,10 @@
+if ! isClan trigger "Aop"
+inc trigger locx -1
+chat trigger "Only Aop members are aloud in here"
+endscript
+end
+chat trigger "Welcome to the Aop clan hall"
+end
+endscpirt
+
+

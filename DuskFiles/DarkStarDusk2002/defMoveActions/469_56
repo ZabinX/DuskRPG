@@ -1,0 +1,9 @@
+if hasItem trigger opal
+	chat trigger "please stay out of my bedroom, im remodeling."
+	inc trigger locx 1
+	endscript
+end
+if ! hasItem trigger opal
+endscript
+end
+endscript

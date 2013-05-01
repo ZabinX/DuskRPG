@@ -1,0 +1,15 @@
+type
+armor
+kind
+torso
+description
+a Wizards cloak
+cost
+800
+mod
+40
+image
+7
+durability
+4800
+

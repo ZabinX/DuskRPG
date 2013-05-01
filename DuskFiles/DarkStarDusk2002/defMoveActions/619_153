@@ -1,0 +1,4 @@
+set trigger locxy 832 116
+chat trigger " Wow! A whole underground forest."
+addcondition trigger "forest"
+endscript

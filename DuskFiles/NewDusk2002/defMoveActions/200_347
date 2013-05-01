@@ -1,0 +1,19 @@
+if ! isPlayer trigger
+	endscript
+	end
+#
+set trigger locxy 100 100
+chat trigger "Congratulations !!!"
+#number num * rand 2
+#if < num 1
+	giveitem trigger chelm
+	chat trigger "You get a cobalt helm"
+	endscript
+	end
+#end
+#giveitem trigger "dragon sword"
+#chat trigger "You get a dragon sword"
+endscript
+
+
+

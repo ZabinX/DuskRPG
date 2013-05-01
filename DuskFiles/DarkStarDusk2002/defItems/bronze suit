@@ -1,0 +1,18 @@
+type
+armor
+kind
+torso
+description
+a bronze suit
+cost
+300
+mod
+45
+image
+7
+durability
+60000
+.
+
+
+

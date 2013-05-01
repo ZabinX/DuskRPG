@@ -1,0 +1,7 @@
+if isPet trigger
+     endscript
+end
+chat trigger "Mage says: If your nice to Firewall he will give you a spoon."
+chat trigger "Mage says: SPOOOOOOOOOOOOOON!"
+inc trigger locy -1
+endscript

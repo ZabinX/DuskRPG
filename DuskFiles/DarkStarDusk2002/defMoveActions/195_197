@@ -1,0 +1,5 @@
+chat trigger " The ExitMan waves as you walk away, hopeing you come back again."
+set trigger locxy 104 29
+endscript
+
+

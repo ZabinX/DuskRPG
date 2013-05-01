@@ -1,0 +1,3 @@
+set trigger locxy 1 1
+chat trigger " You end up in town 1"
+endscript

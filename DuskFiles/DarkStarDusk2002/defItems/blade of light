@@ -1,0 +1,14 @@
+type
+weapon
+description
+You see a gleaming light coming from the blade
+cost
+7500
+mod
+400
+image
+10
+durability
+150000
+
+

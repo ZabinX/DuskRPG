@@ -1,0 +1,36 @@
+maxhp
+2800
+maxmp
+2000
+stre
+150
+inte
+100
+dext
+150
+wisd
+100
+cons
+200
+bravery
+50.0
+grouprelation
+0.05
+image
+35
+skill
+Double Attack
+100
+skill
+Triple Attack 
+40
+giveitem
+vampire fangs
+0.01
+faction
+vampire
+.
+
+
+
+

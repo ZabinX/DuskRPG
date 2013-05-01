@@ -1,0 +1,6 @@
+if isPet trigger
+     endscript
+end
+chat trigger "Mage says: Their is a Mage out in the forest across the river who makes wonderful equipment for us to sell."
+inc trigger locx -1
+endscript

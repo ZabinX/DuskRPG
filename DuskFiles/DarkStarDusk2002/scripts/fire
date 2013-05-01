@@ -1,0 +1,4 @@
+chat trigger "The power of fire flows through your body."
+inc trigger strengthBonus 10
+inc trigger dexterityBonus 10
+endscript

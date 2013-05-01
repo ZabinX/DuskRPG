@@ -1,0 +1,10 @@
+if ispet trigger
+    endscript
+end
+if ! hascondition trigger eastcurrent
+    addcondition trigger eastcurrent
+end
+if ! hascondition trigger current
+    addcondition trigger current
+end
+endscript

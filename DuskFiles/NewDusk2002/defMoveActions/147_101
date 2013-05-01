@@ -1,0 +1,6 @@
+if ispet trigger
+	endscript
+end
+chat trigger "You feel dizzy, and appear in a land unknown to you."
+set trigger locxy 40 159
+endscript

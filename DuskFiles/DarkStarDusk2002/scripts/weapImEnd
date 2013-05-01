@@ -1,0 +1,4 @@
+inc trigger dexterityBonus -2000000000
+removeflag trigger "non-corporeal"
+endscript
+

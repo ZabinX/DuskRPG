@@ -1,0 +1,51 @@
+if ispet trigger
+    endscript
+end
+livingthing keeper local trigger "Kilgore's Keeper"
+if ismob keeper
+    if < trigger privs 1
+        chat trigger "Kilgore's Keeper says:  None may pass until a leader shows me the key to this castle."
+        endscript
+    end
+    if hasitem trigger "kilgore key"
+        if or strequals clan trigger global baronclan
+                strequals clan trigger global straboclan
+            chat trigger "You clan can only control one castle at a time.  You relinquish control of Castle Kilgore."
+            removeitem trigger "kilgore key"
+            set trigger locxy 100 100
+            order trigger concat concat "gossip The " clan trigger " clan no longer controls Castle Kilgore."
+            global string baronclan "nokilgoreclan"
+            createitem "kilgore key" 43 101
+            endscript
+        end
+        if < trigger cash 4000
+            chat trigger "Kilgore's Keeper says:  I require 4,000gp to let you pass for a time."
+            endscript
+        end
+        inc trigger cash -4000
+        chat trigger "Kilgore's Keeper says:  You and your clan may pass for a time, but I will be back."
+        chat trigger "Kilgore's Keeper says:  I have left you a little something in the castle treasure room."
+        number hour * 60 60
+        number day * hour 24
+        addconditionwithduration keeper "hidekeeper" * day 3
+        global string kilgoreclan clan trigger
+        order trigger concat concat "gossip The " global kilgoreclan " clan now controls Castle Kilgore."
+        createitem "Ice Dragon Scale" 42 121
+        createitem "Ice Dragon Scale" 42 122
+        createitem "Ice Dragon Scale" 44 121
+        createitem "Ice Dragon Scale" 44 122
+        endscript
+    end
+    chat trigger "Kilgore's Keeper says: Your clan may not pass until you show me the key to this castle and pay my fee."
+    endscript
+end
+if or hascondition trigger mob_attack
+        hascondition trigger mob2_attack
+    removecondition trigger mob_attack
+    removecondition trigger mob2_attack
+    chat trigger "You are lucky to have gotten away from the guards alive."
+    endscript
+end
+endscript
+
+

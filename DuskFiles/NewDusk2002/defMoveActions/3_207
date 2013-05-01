@@ -1,0 +1,16 @@
+# will finish this script later FW.
+if ! isPlayer trigger
+  endscript
+end
+if hascondtion FWcookquest
+     chat trigger "  You ask the merchant for any magenta fungus, and he hands you some."
+     addcondtion FWcookquest1
+     giveitem trigger magenta_fungus
+     endscript
+end
+
+chat trigger "Never have you seen so many different varieties of morel, woodear, creeping mold, or magenta fungus in"
+chat trigger "one place.  This might be a useful place to get exotic ingredients.  You'll have to remember that it's here."
+endscript
+
+

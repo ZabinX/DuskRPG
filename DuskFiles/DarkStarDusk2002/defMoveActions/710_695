@@ -1,0 +1,7 @@
+if ! hasitem trigger "tree climbing gear" set trigger locxy 710 694
+chat trigger "you cant climb this tree without gera, the Forest Ogre King might give you some if you defeat him"
+end
+if hasitem "tree climbing gear"
+chat trigger you "can climb these trees now"
+endscript
+

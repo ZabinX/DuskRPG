@@ -1,0 +1,4 @@
+set trigger locxy 420 410
+chat trigger " Entering the Chaos Sanctuary....."
+endscript
+

@@ -1,0 +1,18 @@
+type
+weapon
+description
+a finely crafted sword
+cost
+1500
+mod
+350
+image
+9
+onWear
+fire
+onunWear
+fire2
+durability
+50000
+
+

@@ -1,0 +1,5 @@
+inc trigger locy -4
+removeCondition trigger inCoL
+chat trigger "We are looking forward to your visit."
+endscript
+

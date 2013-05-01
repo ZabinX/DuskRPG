@@ -1,0 +1,5 @@
+if ! hascondition trigger "shifty"
+	chat trigger "This isnt your room!."
+	set trigger locxy 97 88
+endscript
+end

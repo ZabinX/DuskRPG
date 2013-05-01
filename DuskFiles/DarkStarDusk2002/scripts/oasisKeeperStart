@@ -1,0 +1,10 @@
+chat trigger "
+You are now the Keeper of the Oasis!
+==============================
+ - It is your duty to keep Order in the Oasis
+   as well as in the other parts of the world.
+ - Carry on the honor of you predesors.
+"
+addCondition trigger peaceful
+order trigger "title the Keeper of the Oasis."
+endscript

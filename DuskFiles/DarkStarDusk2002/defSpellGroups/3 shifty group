@@ -1,0 +1,57 @@
+#Psychopath : Attacks the enemy multiple times around there body.
+#
+#
+if ! isinbattle caster
+	chat caster " You must be in battle to cast this"
+	endscript
+end
+	number damage * 1 * 200 rand
+	if < damage 20
+		chat caster " You miss the enemy!"
+		number damage 0
+	end
+	if > damage 175
+		number damage6 * 120 * 150 rand
+		chat caster concat concat concat concat " You hit " name enemy caster " in the head with tremendous force, for " damage6 " damage."
+		inc enemy caster hp * -1 damage6
+		inc caster damdone damage6
+		endscript
+	end
+	if > damage 20
+		number damage1 * 20 * 20 rand
+		chat caster concat concat concat concat " You hit " name enemy caster "in the leg, for " damage1 " damage."
+		inc enemy caster hp * -1 damage1
+		inc caster damdone damage1
+	end
+	if > damage 40
+		number damage2 * 20 * 40 rand
+		chat caster concat concat concat concat " You hit " name enemy caster "in the arm, for " damage2 " damage."
+		inc enemy caster hp * -1 damage2
+		inc caster damdone damage2
+	end
+	if > damage 60
+		number damage3 * 20 * 60 rand
+		chat caster concat concat concat concat " You hit " name enemy caster "in the stomache, for " damage3 " damage."
+		inc enemy caster hp * -1 damage3
+		inc caster damdone damage3
+	end
+	if > damage 80
+		number damage4 * 20 * 80 rand
+		chat caster concat concat concat concat " You hit " name enemy caster "in the chest, for " damage4 " damage."
+		inc enemy caster hp * -1 damage4
+		inc caster damdone damage4
+	end
+	if > damage 100
+		number damage5 * 20 * 100 rand
+		chat caster concat concat concat concat " You hit " name enemy caster "in the head, for " damage5 " damage."
+		inc enemy caster hp * -1 damage5
+		inc caster damdone damage5
+	end
+endscript
+
+
+
+
+
+
+

@@ -1,0 +1,5 @@
+giveitem trigger "sandwich"
+giveitem trigger "ale"
+giveitem trigger "crisps"
+removeitem trigger "Packed Lunch"
+endscript

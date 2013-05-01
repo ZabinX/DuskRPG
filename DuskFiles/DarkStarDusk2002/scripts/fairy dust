@@ -1,0 +1,11 @@
+number dif 1
+if < trigger maxMp trigger mp
+	number dif + 1 - trigger mp trigger maxMp
+end
+inc trigger maxMp dif
+inc trigger mp 1
+inc trigger maxMp - 0 dif
+removeItem trigger "fairy dust"
+chat trigger " You temporarily gain an extra MP  (Thats it?!?!?)"
+endscript
+

@@ -1,0 +1,15 @@
+type
+weapon
+description
+A Tiny Ball Of Flames Used By The Great Mars
+mod
+1000000
+onWear
+FireballWear
+onUnWear
+FireballUnwear
+image
+14
+durability
+99999999999999999999999999999
+

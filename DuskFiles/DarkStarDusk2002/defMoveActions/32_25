@@ -1,0 +1,9 @@
+if ! hasItem trigger t1healhousekey
+	inc trigger locy 1
+	chat trigger "This is not your house."
+	endscript
+end
+endscript
+
+
+

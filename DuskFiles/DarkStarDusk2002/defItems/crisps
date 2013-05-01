@@ -1,0 +1,13 @@
+type
+item
+description
+a pack of crisps
+cost
+10
+image
+6
+onuse
+crisp
+uses
+1
+.

@@ -1,0 +1,5 @@
+if ispet trigger
+     endscript
+end
+chat trigger "The Hermits Hideaway"
+endscript

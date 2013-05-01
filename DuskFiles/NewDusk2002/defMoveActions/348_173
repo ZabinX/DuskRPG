@@ -1,0 +1,18 @@
+if not isPlayer trigger
+	endscript
+	end
+if hasItem trigger half_frag_key
+	removeItem trigger half_frag_key
+	if hasItem trigger half_frag_key
+		removeItem trigger half_frag_key
+		set trigger locxy 348 177
+		endscript
+		end
+	giveItem trigger half_frag_key	
+	end
+chat trigger "You have to kill both guards to go ahead"
+endscript
+
+
+
+

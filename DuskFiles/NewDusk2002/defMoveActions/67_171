@@ -1,0 +1,6 @@
+if isPet trigger
+     endscript
+end
+chat trigger "Mage says: I heard that there is a man who can make spare keys way in the south."
+inc trigger locx -1
+endscript

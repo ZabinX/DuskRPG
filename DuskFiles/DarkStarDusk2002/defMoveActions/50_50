@@ -1,0 +1,6 @@
+if ! hasItem trigger "fairy dust"
+	giveItem trigger "fairy dust"
+	chat trigger " The Fairy King gives some fairy dust to help you."
+end
+endscript
+

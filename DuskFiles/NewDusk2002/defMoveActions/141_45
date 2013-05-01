@@ -1,0 +1,13 @@
+if hascondition trigger "allowedboat"
+    removecondition trigger "allowedboat"
+    if hasItem trigger boat
+        removeItem trigger boat
+        chat trigger "The Boat of Tilgovi vanishes."
+    end
+end
+if hasItem trigger boat
+    removeItem trigger boat
+    set trigger locxy 141 45
+end
+endscript
+

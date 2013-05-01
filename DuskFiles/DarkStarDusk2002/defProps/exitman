@@ -1,0 +1,11 @@
+image
+24
+description
+A nice man that will lead you out of this place.
+onuses
+t "prop ExitMan"
+uses
+1
+.
+
+

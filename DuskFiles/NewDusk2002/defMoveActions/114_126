@@ -1,0 +1,8 @@
+if ispet trigger
+    endscript
+end
+set trigger locxy 100 100
+chat trigger "To start playing, head west into the Newbie Quarter."
+endscript
+
+

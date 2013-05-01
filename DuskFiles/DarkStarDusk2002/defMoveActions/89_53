@@ -1,0 +1,7 @@
+if hasItem trigger Xyphoidstone
+	set trigger locxy 200 200
+	removeItem trigger Xyphoidstone
+	chat trigger " No turning back now!"
+end
+endscript
+

@@ -1,0 +1,19 @@
+type
+armor
+kind
+torso
+description
+a suit of mail worn by the pheonix pharoh.
+cost
+2000
+mod
+120
+image
+7
+durability
+200000
+onWear
+pheonix
+onUnWear
+pheonixend
+.

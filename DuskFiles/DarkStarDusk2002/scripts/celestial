@@ -1,0 +1,12 @@
+# DO NOT TOUCH ----Cyril
+if < trigger cp 2500
+chat trigger " Your CP isnt high enough to wield this weapon"
+order trigger "unwear celestial bow"
+endscript
+end
+if hasItem trigger "celestial arrow"
+	inc trigger strengthbonus 50
+	inc trigger dexteritybonus 50
+	inc trigger wisdombonus 50
+endscript
+

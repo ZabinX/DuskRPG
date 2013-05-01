@@ -1,0 +1,6 @@
+if ispet trigger
+     endscript
+end
+chat trigger "Silencer says: Come and get some buddy, daddy is bored :P."
+endscript
+

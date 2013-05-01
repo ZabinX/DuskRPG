@@ -1,0 +1,19 @@
+type
+weapon
+description
+A sword with incredible power
+mod
+700
+cost
+10000
+image
+9
+onWear
+bs
+onUnWear
+bsend
+durability
+9999999
+.
+
+

@@ -1,0 +1,13 @@
+type
+item
+description
+A soul, devour it and it will rejuvenate your health
+cost
+50
+image
+6
+onuse
+eatsoul
+uses
+1
+.

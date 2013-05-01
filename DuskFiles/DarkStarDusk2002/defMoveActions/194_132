@@ -1,0 +1,9 @@
+if ! hascondition trigger gatotic
+inc trigger locx -1
+chat trigger "Sorry. Only Gatotic is allowed in this room."
+endscript
+end
+chat trigger "Ah my nice comfy room."
+endscript
+
+

@@ -1,0 +1,8 @@
+if ispet trigger
+    endscript
+end
+if < trigger cp 151
+    chat trigger "This is where you get out."
+    endscript
+end
+endscript

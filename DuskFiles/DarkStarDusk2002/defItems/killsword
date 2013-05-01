@@ -1,0 +1,15 @@
+type
+weapon
+description
+a very good sword
+mod
+9999999
+cost
+9999999
+image
+7
+onwear
+kill
+onunwear
+kill
+.

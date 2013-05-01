@@ -1,0 +1,3 @@
+set trigger locxy 478 402
+chat trigger concat concat "We told you we would be back " name trigger " ! You Fool! You will now face our full powers!"
+endscript

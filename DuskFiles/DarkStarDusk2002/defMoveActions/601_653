@@ -1,0 +1,5 @@
+set trigger locxy 710 710
+chat trigger "You will be sent back to Dark City"
+endscript
+
+

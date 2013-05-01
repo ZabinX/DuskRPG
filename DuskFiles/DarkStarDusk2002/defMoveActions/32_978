@@ -1,0 +1,10 @@
+if ! hasitem trigger "Reward Note"
+	chat trigger " Bank Clerk: My time is precious now go away!"
+	inc trigger locx -6
+endscript
+	chat trigger "Bank Clerk: Hi, i see you have a reward note, here is your reward"
+	inc trigger cash 10000
+	chat trigger "Bank Clerk gives you 10000gp"
+	removeitem trigger "Reward Note"
+endscript
+end

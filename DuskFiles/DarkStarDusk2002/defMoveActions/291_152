@@ -1,0 +1,5 @@
+chat trigger "Pet Shop"
+set trigger locxy 285 152
+endscript
+
+

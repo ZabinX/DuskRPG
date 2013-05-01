@@ -1,0 +1,9 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger intown
+    removecondition trigger intown
+    endscript
+end
+endscript
+

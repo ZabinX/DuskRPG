@@ -1,0 +1,16 @@
+type
+weapon
+description
+Serpents Claw
+cost
+40
+image
+8
+mod
+500
+durability
+-1
+.
+
+
+

@@ -1,0 +1,5 @@
+if not isplayer trigger
+	endscript
+end
+chat trigger "The water bubbles and boils as you approach, heaving with the power of Tilgovi, God of Elves."
+endscript

@@ -1,0 +1,4 @@
+if isPlayer trigger
+  set trigger locxy 5 154
+end
+endscript

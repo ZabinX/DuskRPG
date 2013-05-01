@@ -1,0 +1,23 @@
+if ispet trigger
+    endscript
+end
+if < trigger privs 3
+    chat trigger "You dare to defile the garden of the gods!"
+	set trigger locxy 100 100
+	set trigger hp 5
+	addcondition trigger safe
+    endscript
+end
+set trigger hp trigger maxHp
+set trigger mp trigger maxMp
+chat trigger concat "Your HP and MP have been fully restored."
+#
+# Give them God invis
+#
+addcondition trigger "invis"
+addcondition trigger "detect invis"
+chat trigger "You have been given invis and detect invis."
+addcondition trigger "invis2"
+addcondition trigger "detect invis2"
+chat trigger "You have been given invis2 and detect invis2."
+endscript

@@ -1,0 +1,4 @@
+if isPlayer trigger
+	removeCondition trigger peaceful
+end
+endscript

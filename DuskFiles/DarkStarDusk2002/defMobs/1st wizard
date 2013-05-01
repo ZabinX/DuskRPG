@@ -1,0 +1,42 @@
+maxhp
+800
+maxsp
+200
+stre
+175
+inte
+100
+dext
+70
+wisd
+100
+cons
+70
+skill
+Dodge
+10
+skill
+Double Attack
+10
+skill
+Triple Attack
+10
+skill
+Quadruple Attack
+10
+image
+25
+bravery
+1.0
+giveitem
+1st Crystal
+1.0
+giveitem
+Wizard Rod
+1.0
+.
+
+
+
+
+

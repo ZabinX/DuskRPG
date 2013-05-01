@@ -1,0 +1,4 @@
+chat trigger "I CANT ESCAPE"
+inc trigger locx -1
+endscript
+

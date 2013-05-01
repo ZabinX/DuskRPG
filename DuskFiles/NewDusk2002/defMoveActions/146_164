@@ -1,0 +1,5 @@
+if isMob trigger
+     inc trigger locy -1
+     endscript
+end
+endscript

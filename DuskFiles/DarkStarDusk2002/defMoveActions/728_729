@@ -1,0 +1,3 @@
+if ! hasitem trigger "Basterd Sword"
+chat trigger "DraN has trapped me in this cave with these Dragons and taken put a spell on me so I cannot use my teleporting  power, please kill DraN and break the spell"
+endscript

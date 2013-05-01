@@ -1,0 +1,13 @@
+type
+weapon
+description
+A test sword
+cost
+300
+mod
+250
+image
+9
+durability
+18000
+

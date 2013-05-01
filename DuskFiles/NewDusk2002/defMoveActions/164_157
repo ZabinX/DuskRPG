@@ -1,0 +1,4 @@
+if ! isPet trigger
+	chat trigger "you fiddle with the doorknob for a few moments, but then give up in fustration.  there must be another way in."
+end
+endscript

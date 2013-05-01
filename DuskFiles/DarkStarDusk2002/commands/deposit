@@ -1,0 +1,203 @@
+#deposit command (for the CoL City Bank)
+#usage: deposit <amount>
+if ! hasCondition trigger atCoLBank
+	chat trigger "huh?"
+	endscript
+end
+if ! > trigger cash 0
+	chat trigger "You don't have any money to deposit!"
+	endscript
+end
+if ! variableIsString param0
+	chat trigger "This command needs a parameter."
+	endscript
+end
+number toStore param0
+if ! variableIsNumber toStore
+	chat trigger "Parameter not a number."
+	endscript
+end
+if hasCondition trigger BankTransaction
+	chat trigger "Transaction going on. Try again in a while."
+	endscript
+end
+addCondition trigger BankTransaction
+number toStore param0
+if < trigger cash toStore
+	number toStore trigger cash
+end
+number maxStore 2147483647
+number stored 0
+if hasCondition trigger CoLB30 number stored + stored 1073741824
+end if hasCondition trigger CoLB29 number stored + stored 536870912
+end if hasCondition trigger CoLB28 number stored + stored 268435456
+end if hasCondition trigger CoLB27 number stored + stored 134217728
+end if hasCondition trigger CoLB26 number stored + stored 67108864
+end if hasCondition trigger CoLB25 number stored + stored 33554432
+end if hasCondition trigger CoLB24 number stored + stored 16777216
+end if hasCondition trigger CoLB23 number stored + stored 8388608
+end if hasCondition trigger CoLB22 number stored + stored 4194304
+end if hasCondition trigger CoLB21 number stored + stored 2097152
+end if hasCondition trigger CoLB20 number stored + stored 1048576
+end if hasCondition trigger CoLB19 number stored + stored 524288
+end if hasCondition trigger CoLB18 number stored + stored 262146
+end if hasCondition trigger CoLB17 number stored + stored 131072
+end if hasCondition trigger CoLB16 number stored + stored 65536
+end if hasCondition trigger CoLB15 number stored + stored 32768
+end if hasCondition trigger CoLB14 number stored + stored 16384
+end if hasCondition trigger CoLB13 number stored + stored 8192
+end if hasCondition trigger CoLB12 number stored + stored 4096
+end if hasCondition trigger CoLB11 number stored + stored 2048
+end if hasCondition trigger CoLB10 number stored + stored 1024
+end if hasCondition trigger CoLB09 number stored + stored 512
+end if hasCondition trigger CoLB08 number stored + stored 256
+end if hasCondition trigger CoLB07 number stored + stored 128
+end if hasCondition trigger CoLB06 number stored + stored 64
+end if hasCondition trigger CoLB05 number stored + stored 32
+end if hasCondition trigger CoLB04 number stored + stored 16
+end if hasCondition trigger CoLB03 number stored + stored 8
+end if hasCondition trigger CoLB02 number stored + stored 4
+end if hasCondition trigger CoLB01 number stored + stored 2
+end if hasCondition trigger CoLB00 number stored + stored 1
+end 
+#
+number diff - maxStore stored
+if toStore > diff
+	number toStore diff
+	chat trigger concat concat "You can deposit only " toStore " gp."
+end
+inc trigger cash - 0 toStore
+#
+removeCondition trigger CoLB30
+removeCondition trigger CoLB29
+removeCondition trigger CoLB28
+removeCondition trigger CoLB27
+removeCondition trigger CoLB26
+removeCondition trigger CoLB25
+removeCondition trigger CoLB24
+removeCondition trigger CoLB23
+removeCondition trigger CoLB22
+removeCondition trigger CoLB21
+removeCondition trigger CoLB20
+removeCondition trigger CoLB19
+removeCondition trigger CoLB18
+removeCondition trigger CoLB17
+removeCondition trigger CoLB16
+removeCondition trigger CoLB15
+removeCondition trigger CoLB14
+removeCondition trigger CoLB13
+removeCondition trigger CoLB12
+removeCondition trigger CoLB11
+removeCondition trigger CoLB10
+removeCondition trigger CoLB09
+removeCondition trigger CoLB08
+removeCondition trigger CoLB07
+removeCondition trigger CoLB06
+removeCondition trigger CoLB05
+removeCondition trigger CoLB04
+removeCondition trigger CoLB03
+removeCondition trigger CoLB02
+removeCondition trigger CoLB01
+removeCondition trigger CoLB00
+#
+number temp toStore
+number toStore + stored toStore
+if > toStore 2147483647
+	number toStore 2147483647
+end if > toStore 1073741823
+	number toStore - toStore 1073741824
+	addCondition trigger CoLB30
+end if > toStore 536870911
+	number toStore - toStore 536870912
+	addCondition trigger CoLB29
+end if > toStore 268435455
+	number toStore - toStore 268435456
+	addCondition trigger CoLB28
+end if > toStore 134217727
+	number toStore - toStore 134217728
+	addCondition trigger CoLB27
+end if > toStore 67108863
+	number toStore - toStore 67108864
+	addCondition trigger CoLB26
+end if > toStore 33554431
+	number toStore - toStore 33554432
+	addCondition trigger CoLB25
+end if > toStore 16777215
+	number toStore - toStore 16777216
+	addCondition trigger CoLB24
+end if > toStore 8388607
+	number toStore - toStore 8388608
+	addCondition trigger CoLB23
+end if > toStore 4194303
+	number toStore - toStore 4194304
+	addCondition trigger CoLB22
+end if > toStore 2097151
+	number toStore - toStore 2097152
+	addCondition trigger CoLB21
+end if > toStore 1048575
+	number toStore - toStore 1048576
+	addCondition trigger CoLB20
+end if > toStore 524287
+	number toStore - toStore 524288
+	addCondition trigger CoLB19
+end if > toStore 262143
+	number toStore - toStore 262146
+	addCondition trigger CoLB18
+end if > toStore 131071
+	number toStore - toStore 131072
+	addCondition trigger CoLB17
+end if > toStore 65535
+	number toStore - toStore 65536
+	addCondition trigger CoLB16
+end if > toStore 32767
+	number toStore - toStore 32768
+	addCondition trigger CoLB15
+end if > toStore 16383
+	number toStore - toStore 16384
+	addCondition trigger CoLB14
+end if > toStore 8191
+	number toStore - toStore 8192
+	addCondition trigger CoLB13
+end if > toStore 4095
+	number toStore - toStore 4096
+	addCondition trigger CoLB12
+end if > toStore 2047
+	number toStore - toStore 2048
+	addCondition trigger CoLB11
+end if > toStore 1023
+	number toStore - toStore 1024
+	addCondition trigger CoLB10
+end if > toStore 511
+	number toStore - toStore 512
+	addCondition trigger CoLB09
+end if > toStore 255
+	number toStore - toStore 256
+	addCondition trigger CoLB08
+end if > toStore 127
+	number toStore - toStore 128
+	addCondition trigger CoLB07
+end if > toStore 63
+	number toStore - toStore 64
+	addCondition trigger CoLB06
+end if > toStore 31
+	number toStore - toStore 32
+	addCondition trigger CoLB05
+end if > toStore 15
+	number toStore - toStore 16
+	addCondition trigger CoLB04
+end if > toStore 7
+	number toStore - toStore 8
+	addCondition trigger CoLB03
+end if > toStore 3
+	number toStore - toStore 4
+	addCondition trigger CoLB02
+end if > toStore 1
+	number toStore - toStore 2
+	addCondition trigger CoLB01
+end if > toStore 0
+	number toStore - toStore 1
+	addCondition trigger CoLB00
+end
+chat trigger concat temp " gp have been deposited."
+removeCondition trigger BankTransaction
+endscript

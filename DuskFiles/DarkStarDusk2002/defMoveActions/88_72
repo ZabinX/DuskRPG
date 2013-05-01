@@ -1,0 +1,11 @@
+if hascondition trigger 1
+	inc trigger locy -1
+	removecondition trigger 1
+endscript
+end
+if hascondition trigger 2
+	inc trigger locy 1
+	chat trigger " Thank you for coming.. please come again, your money is welcome here."
+	removecondition trigger 2
+endscript
+end

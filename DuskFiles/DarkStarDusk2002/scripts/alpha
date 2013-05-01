@@ -1,0 +1,10 @@
+set trigger maxHp 5000
+set trigger maxMp 5000
+set trigger strength 100
+set trigger dexterity 100
+set trigger intelligence 45
+set trigger constitution 45
+set trigger wisdom 7
+removeitem trigger alpha
+chat trigger " Tylk.....your body has been returned somewhat to its original form...but there are still some more changes to be made......."
+endscript

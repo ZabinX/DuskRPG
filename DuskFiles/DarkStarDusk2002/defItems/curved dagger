@@ -1,0 +1,13 @@
+type
+weapon
+description
+a small dagger
+cost
+40
+mod
+120
+image
+8
+durability
+1300
+

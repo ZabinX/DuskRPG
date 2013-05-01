@@ -1,0 +1,5 @@
+inc trigger hp 20
+chat trigger " Your life is renewed 20 points"
+removeItem trigger "minor potion"
+endscript
+

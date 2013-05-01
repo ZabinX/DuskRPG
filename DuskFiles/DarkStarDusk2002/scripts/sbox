@@ -1,0 +1,12 @@
+giveitem trigger "Shifty Helmet"
+giveitem trigger "Shifty Suit"
+giveitem trigger "Shifty Gloves"
+giveitem trigger "Shifty Shield"
+giveitem trigger "Shifty Leggings"
+giveitem trigger "Shifty Glasses"
+giveitem trigger "Shifty Necklace"
+giveItem trigger "Shifty Belt"
+giveItem trigger "Shifty Sword"
+removeitem trigger "Shifty Box"
+endscript
+

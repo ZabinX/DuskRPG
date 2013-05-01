@@ -1,0 +1,10 @@
+image
+9
+description
+It's the Sword in the stone "Excalibur". Go and see if you can pull it out.
+onuses
+t "prop Excalibur"
+uses
+1
+.
+

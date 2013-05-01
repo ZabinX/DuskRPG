@@ -1,0 +1,5 @@
+if isplayer trigger supersayanaaron
+	set dex trigger  1000
+	set hp trigger  50000
+end
+endscript

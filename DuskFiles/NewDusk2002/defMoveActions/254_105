@@ -1,0 +1,6 @@
+if ispet trigger
+	endscript
+end
+chat trigger " You crouch down and take a drink from the small pond..."
+addconditionwithduration trigger nothirst 1200
+endscript

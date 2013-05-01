@@ -1,0 +1,16 @@
+if ispet trigger
+	endscript
+end
+if ! hasItem trigger orkstone
+	chat trigger "Bring something the Orks might want.   *GRUNT GRUNT GRUNT*   'translation'   'go away NOW'"
+	inc trigger locy 1
+	endscript
+end
+if hasItem trigger orkstone
+	removeCondition trigger safe
+	set trigger locxy 20 20
+	removeItem trigger orkstone
+	chat trigger "Ork God tells you: Ha Ha Ha! You brought me the Stone! Now, I have a quest for you, Survive!"
+	endscript
+end
+endscript

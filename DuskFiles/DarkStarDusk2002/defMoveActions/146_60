@@ -1,0 +1,6 @@
+if hasItem trigger masamune
+	set trigger locxy 1 1
+	chat trigger " Since you already have a  masamune the spirites banish you back to town 1"
+end
+endscript
+

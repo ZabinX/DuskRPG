@@ -1,0 +1,21 @@
+if ! hasItem trigger "bluestone"
+inc trigger locy -1
+chat trigger " You do not have all the Stones"
+endscript
+end
+if ! hasItem trigger "redstone"
+inc trigger locy -1
+chat trigger " You do not have all the Stones"
+endscript
+end
+if ! hasItem trigger "greenstone"
+inc trigger locy -1
+chat trigger " You do not have all the Stones"
+endscript
+end
+
+chat trigger " Beware....there is hunted stuff  up ahead
+endscript
+
+
+

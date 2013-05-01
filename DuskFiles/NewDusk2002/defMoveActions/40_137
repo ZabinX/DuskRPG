@@ -1,0 +1,6 @@
+if ispet trigger
+    endscript
+end
+chat trigger "Welcome to Firewall's Castle, enjoy your stay!"
+set trigger locxy 40 200
+endscript

@@ -1,0 +1,103 @@
+if ! ismob trigger
+    endscript
+end
+addcondition trigger "inside"
+if ! hascondition trigger "ogrefight"
+    addcondition trigger "ogrefight"
+    if ! hascondition trigger treasure1
+        addcondition trigger treasure1
+        createitem "Fire Dragon Scale" 142 238
+        createitem "Fire Dragon Scale" 143 238
+        endscript
+    end
+    if ! hascondition trigger treasure2
+        addcondition trigger treasure2
+        createitem "Ice Dragon Scale" 145 238
+        createitem "Ice Dragon Scale" 146 238
+        endscript
+    end
+    if ! hascondition trigger treasure3
+        addcondition trigger treasure3
+        createitem "Fire Dragon Tooth" 142 236
+        createitem "Fire Dragon Tooth" 143 236
+        endscript
+    end
+    if ! hascondition trigger treasure4
+        addcondition trigger treasure4
+        createitem "Ice Dragon Tooth" 145 236
+        createitem "Ice Dragon Tooth" 146 236
+        endscript
+    end
+    if ! hascondition trigger treasure5
+        addcondition trigger treasure5
+        createitem "Fire Dragon Blood" 142 234
+        createitem "Fire Dragon Blood" 143 234
+        endscript
+    end
+    if ! hascondition trigger treasure6
+        addcondition trigger treasure6
+        createitem "Ice Dragon Blood" 145 234
+        createitem "Ice Dragon Blood" 146 234
+        endscript
+    end
+    if ! hascondition trigger treasure7
+        addcondition trigger treasure7
+        createitem "Fire Dragon Tooth" 142 232
+        createitem "Fire Dragon Tooth" 143 232
+        endscript
+    end
+    if ! hascondition trigger treasure8
+        addcondition trigger treasure8
+        createitem "Ice Dragon Tooth" 145 232
+        createitem "Ice Dragon Tooth" 146 232
+        endscript
+    end
+    if ! hascondition trigger treasure9
+        addcondition trigger treasure9
+        createitem "Fire Dragon Blood" 144 238
+        endscript
+    end
+    if ! hascondition trigger treasure10
+        addcondition trigger treasure10
+        createitem "Ice Dragon Blood" 144 237
+        endscript
+    end
+    if ! hascondition trigger treasure11
+        addcondition trigger treasure11
+        createitem "Bag of Gold" 144 236
+        endscript
+    end
+    if ! hascondition trigger treasure12
+        addcondition trigger treasure12
+        createitem "Bag of Gems" 144 235
+        endscript
+    end
+    if ! hascondition trigger treasure13
+        addcondition trigger treasure13
+        createitem "Gem of Protection" 144 234
+        endscript
+    end
+    if ! hascondition trigger treasure14
+        addcondition trigger treasure14
+        createitem "Gem of Protection" 144 233
+        endscript
+    end
+    if ! hascondition trigger treasure15
+        addcondition trigger treasure15
+        createitem "Gem of Power" 144 232
+        endscript
+    end
+end
+#
+# Only show the path to the room when it is full
+#
+if hascondition trigger treasure15
+    changetile 144 226 20
+    changetile 144 227 20
+    changetile 144 228 20
+    changetile 144 229 20
+    changetile 144 230 20
+    changetile 144 231 20
+end
+endscript
+

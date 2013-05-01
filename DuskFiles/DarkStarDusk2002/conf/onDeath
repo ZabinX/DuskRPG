@@ -1,0 +1,47 @@
+number deathX 394
+number deathY 394
+if hasCondition trigger "darkcontinent"
+set trigger locxy 507 6
+set trigger hp 1
+chat trigger "The powers of evil on the continent prevent you from leaving into the spirit world"
+endscript
+end
+if hasCondition trigger "forest"
+set trigger locxy 831 116
+set trigger hp 500
+endscript
+end
+set trigger locxy deathX deathY
+set trigger hp 1
+addcondition trigger safe
+removecondition trigger invis
+removecondition trigger detect invis
+removecondition trigger armor
+removecondition trigger bless
+removecondition trigger hpregen
+removecondition trigger translater
+chat trigger " You end up in hell...The domain of Cyril....the god of Chaos!"
+endscript
+
+
+
+
+
+
+
+
+
+
+n of Cyril....the god of Chaos!"
+endscript
+
+
+
+
+
+
+
+
+
+
+

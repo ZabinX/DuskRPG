@@ -1,0 +1,8 @@
+if hascondition trigger fc
+chat trigger "Theres no need to get the Forest gem again"
+inc trigger locx -1
+endscript
+end
+set trigger locxy 888 163
+endscript
+

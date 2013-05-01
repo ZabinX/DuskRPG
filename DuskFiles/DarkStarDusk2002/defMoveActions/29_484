@@ -1,0 +1,14 @@
+if ! hasItem trigger "dark crystal"
+chat trigger "This teleporter is odd.....unlike any youve seen before. It wont activate. Maybe you need to kill the Sand Wurm first"
+endscript
+end
+set trigger locxy 507 6
+removeItem trigger "dark crystal"
+chat trigger " The world goes black! Everything swirls around you. You awaken to find yourself wet and covered in sand. Getting out of this place will be difficult. Welcome to the continent of Elsylum."
+addcondition trigger "darkcontinent"
+endscript
+
+
+
+
+

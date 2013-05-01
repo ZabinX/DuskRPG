@@ -1,0 +1,30 @@
+maxhp
+50000
+maxsp
+50000
+stre
+1200
+dext
+1200
+cons
+1000
+wisd
+800
+inte
+800
+image
+51
+giveitem
+knight
+1.0
+giveitem
+dragon sword
+1.0
+wield
+dragon sword
+wear
+torso
+dran armor
+.
+
+

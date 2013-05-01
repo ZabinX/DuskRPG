@@ -1,0 +1,27 @@
+# guy that tell information about enemyes
+if ! isPlayer trigger
+	endscript
+	end
+#
+if hasCondition trigger shenville_dq_0
+	chat trigger "The guy says: those dark creatures kick ass !"
+	endscript
+	end
+if hasCondition trigger shenville_mq_0
+	chat trigger "The guy says: to save Martin you have to find a black rose"
+	endscript
+	end
+if hasCondition trigger shenville_gfq_0
+	chat trigger "The guy says: I can't help you"
+	endscript
+	end
+#
+if hasCondition trigger shenville_pq_0
+	chat trigger "The guy says: pirates are tough but aren't very strong"
+	endscript
+	end
+#
+chat trigger "The guy says: hi"
+endscript
+
+

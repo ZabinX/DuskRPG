@@ -1,0 +1,5 @@
+set trigger skill "white magic group" 100
+set trigger skill "black magic group" 100
+set trigger skill "alchemy group" 100
+endscript
+

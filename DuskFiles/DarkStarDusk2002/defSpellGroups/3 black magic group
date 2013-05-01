@@ -1,0 +1,95 @@
+if hasCondition caster "ruins"
+		chat caster "Your magic 'drain' has been sealed off."
+		endscript
+	end
+if variableisstring param0 #If a target is specified
+	livingthing target local caster param0
+	if variableislivingthing target
+if < target HP 0
+chat caster " You have drained all theyre life"
+endscript
+end
+		if hascondition caster drainend
+			chat caster " In the process of draining others you have drained yourself and need to recharge."
+		endscript
+		end
+			inc target hp * - 0 3 + caster inte caster stre
+			inc caster hp * + caster inte caster stre 3
+			inc target mp * - 0 3 + caster inte caster stre
+			inc caster mp * + caster inte caster stre 10
+			chat target concat name caster " has drained some of your HP and MP."
+			chat caster concat concat " You drain some of " name target " 's HP and MP."
+			if < target hp 0
+				set target locxy 394 394
+				set target hp 5
+				addcondition target safe
+				removecondition target invis
+				removecondition target detect invis
+				removecondition target armor
+				removecondition target bless
+				removecondition target hpregen
+				removecondition target hero
+				chat target " You end up in hell...The domain of Cyril....the god of Chaos!"	
+			endscript
+			end
+			if hascondition caster drain1
+				removecondition caster drain1
+				addconditionwithduration caster drainend 20
+			endscript
+			end
+				addconditionwithduration caster drain1 10
+		endscript
+	
+	end
+if isinbattle caster
+if < target HP 0
+chat trigger " You have drained all theyre life"
+endscript
+end
+if isinbattle caster
+	if hascondition caster drainend
+			chat caster " In the process of draining others you have drained yourself and need to recharge."
+		endscript
+		end
+		inc target hp * - 0 3 + caster inte caster stre
+		inc caster hp * + caster inte caster stre 3
+		inc target mp * - 0 3 + caster inte caster stre
+		inc caster mp * + caster inte caster stre 3
+		chat target concat name caster " has drained some of your HP and MP."
+		chat caster concat concat " You drain some of " name target " 's HP and MP."
+		if hascondition caster drain1
+				removecondition caster drain1
+				addconditionwithduration caster drainend 20
+			endscript
+			end
+				addconditionwithduration caster drain1 10
+		endscript
+	if < target hp 0
+		set target locxy 394 394
+		set target hp 5
+		addcondition target safe
+		removecondition target invis
+		removecondition target detect invis
+		removecondition target armor
+		removecondition target bless
+		removecondition target hpregen
+		removecondition target hero
+		chat target " You end up in hell...The domain of Cyril....the god of Chaos!"	
+	endscript
+	end
+	end
+	endscript
+chat caster concat concat " '" target " ' is not a living creature."
+end
+chat caster " Drain who?"
+endscript
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+# After a month or so of putting it off i finished this punk of a quest :)
+if isPet trigger
+     endscript
+end
+if < trigger cp 3000
+     chat trigger "Mage says: You have made it far, but you are still to weak to join us."
+     inc trigger locy 1
+     endscript
+end
+if ! hascondition trigger technomage
+     chat trigger "Mage says: Welcome to our guild, wear this to enter our training halls."
+     addcondition trigger technomage
+     giveitem trigger "technomage insignia ring"
+     endscript
+end
+chat trigger "Mage says: Come back in a few weeks and the keymaker will be here, hes traveling to get supplies."
+endscript
+

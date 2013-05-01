@@ -1,0 +1,14 @@
+type
+item
+description
+a potion that remove the curse effect
+cost
+500
+image
+6
+onuse
+anticurse
+uses
+1
+.
+

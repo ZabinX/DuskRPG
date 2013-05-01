@@ -1,0 +1,12 @@
+type
+weapon
+description
+a crystal sword
+image
+9
+cost
+300
+mod
+200
+durability
+30000

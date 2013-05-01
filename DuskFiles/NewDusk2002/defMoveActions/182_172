@@ -1,0 +1,7 @@
+if ispet trigger
+    endscript
+end
+if hasitem trigger "housewildernkey"
+    order trigger "emote thinks 'What use could I possibly have for a key to a house with no door.'"
+end
+endscript

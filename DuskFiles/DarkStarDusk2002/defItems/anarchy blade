@@ -1,0 +1,16 @@
+type
+weapon
+description
+Aops clan blade
+cost
+4000
+mod
+650
+OnWear
+aoppower
+OnUnWear
+aoplose
+image
+9
+
+

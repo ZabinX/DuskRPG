@@ -1,0 +1,9 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger wraithfight
+    inc trigger locy -1
+    chat trigger "You cannot leave without slaying the Wraith God"
+    endscript
+end
+endscript

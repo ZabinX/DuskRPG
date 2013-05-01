@@ -1,0 +1,429 @@
+								Scripting Examples 101
+
+
+Im back writing again. Shwoing you how to create your own scripts and how they work. To contact me
+
+My email is Cellzero1@aol.com and AIM is Cellzero1. Toms Email is Captaint@home.com. 
+
+Once again...All credit goes to Tom Weingarten, The Project Founder, The Master God, and
+
+anything else I can Think of to suck up. :) Credit also goes to Randall Leeds and Andrew Meier.
+ 
+
+
+
+	
+
+
+
+
+                Section 1: Basic commands ( As best put in easy to understand words)
+
+Just so you know...only High and Master Gods can edit scripts and submit them. Normal Gods just make tiles.
+ 
+
+
+! - reverses the value of a condition (basically makes the script do opposite of what its supposed to do)
+not - same as ! (same as above)
+if - if following condition returns true, runs all script until end.(if things are as theyre supposed to be...it makes script keep going till it finishes)
+end - ends an if statement. (ends can be nested)
+playSound <Sound ID> <X location> <Y location> - plays the sound specified at that location. (Obvious)
+order <livingthing> <command> - orders a livingthing (player, mob, pet) to execute that command. Essentially the same as having the player type something into the command line or ordering a pet to do something.
+hasCondition <livingthing> <condition> - returns true if livingthing has specified condition.
+addCondition <livingthing> <condition> - adds the condition to a livingthing. (If the thing has this condition...it goes onto next part of script)
+addConditionWithDuraction <livingthing> <condition> <duration> - adds the condition for specifies duration.
+removeCondition <livingthing> <condition> - removes the condition from the livingthing.
+addflag <livingthing> <flag> - adds the specified flag to the livingthing. (A flag is the name that gets put on you. EX: <safe>Cyril )
+removeflag <livingthing> <flag> - removes a flag from a livingthing. 
+livingthing <name> <value> - declares a new livingthing variable with the specifies name and value. (Note: all variable names can only be one word)
+number <name> <value> - declares a number variable.
+string <name> <value> - declares a string variable.
+or <statement1> <statement2> - if either statement returns true, or returns true. (not short circuit)
+and <statement1> <statement2> - if both statements returns true, and returns true. (not short circuit)
+< <value1> <value2> - if value1 is less than value 2, returns true. (Dont worry about these for a while. Hardly used)
+< <value1> <value2> - if value1 is less than value 2, returns true. (Dont worry about these for a while. Hardly used)
+isInBattle <livingthing> - if the livingthing is in a battle, returns true. (Duh)
+isPlayer <livingthing> - if the livingthing is a player, returns true. (Duh)
+isPet <livingthing> - if the livingthing is a pet, returns true. (Duh)
+isMob <livingthing> - if the livingthing is a mobile, returns true. (Duh)
+isClan <livingthing> <string> - returns true if the livingthing's clan is equal to the string. (More complicated....explained Below)
+isRace <livingthing> <string> - returns true if the livingthing's race is equal to the string. (More complicated....explained Below)
+hasItem <livingthing> <itemname> - if livingthing has this item, returns true. (If the person or pet has the item...it goes on to finish script)
+giveItem <livingthing> <itemname> - gives the livingthing this item. (Gives Item)
+removeItem <livingthing> <itemname> - removes this item from the livingthing. (Removes this item from the person of pets inventory)
+isWearing <livingthing> <itemname> - returns true if the livingthing is wearing this item.
+unWear <livingthing> <itemname> - forces this livingthing to unwear the item. (Makes thing take off the item....or a script for what happens of they take off the item)
+variableIsNumber <variablename> - returns true if this variable is a number.
+variableIsLivingThing <variablename> - returns true if this variable is a livingthing.
+variableIsString <variablename> - returns true if this variable is a string.
+chat <livingthing> <string> - chats a message to a livingthing.
+endscript - ends the script.
+inc <livingthing> <value> <increment value> - increments the value by a specified increment.
+set <livingthing> <value> <set value> - sets the value to a specific number
+Below are listed values that can be incremented or set:
+hp
+maxHp
+hpBonus
+mp
+maxMp
+mpBonus
+damDone
+strength
+intelligence
+dexterity
+wisdom
+constitution
+strengthBonus
+intelligenceBonus
+dexterityBonus
+wisdomBonus
+constitutionBonus
+acBonus
+damModBonus
+locX
+locY
+exp
+cash
+
+***NOTE**** DO NOT USE SET FOR CERTAIN ITEMS OR THE PLAYERS WILL HATE YOU! YOU DONT WANT A GUYS MAX HP GOING
+
+FROM 1200 to 200 ON ACCOUNT OF A MISTAKE YOU MADE! SAME THING WITH INC. BE CAREFUL OF WHAT U MAKE
+
+ALWAYS TEST YOUR ITEMS ON A FAKE CHARACTER FIRST! 
+
+
+                       Section 2: Making your first script (oooo...so exciting eh?)
+
+
+If your script doesnt run all the way through...you screwed up on something.
+
+Ok...lets make ourselves an item. Name it.... God Exp. Type View item God Exp. A blank Window should
+
+come up. Fill the following in:
+
+type
+item
+description
+(write a description you get when you look at this item)
+cost
+(how much you want it to cost)
+image
+(what image number it uses....preferably 6 depending on what it is)
+onuse
+(only put onuse if your item is going to have a script. Some items dont...such as demon horns)
+uses
+(just put 1)
+.
+
+MAKE SURE YOU PUT A PERIOD ON THE LAST LINE! 
+
+Heres an example of the Ale File:
+
+type
+item
+description
+some ale.
+cost
+10
+image
+6
+onuse
+ale
+uses
+1
+.
+
+
+
+
+Not so hard to comprehend...is it? 
+
+Now...lets fill in those blanks. Make it look like this:
+
+type
+item
+description
+When used..it gives you 5000 EXP.
+cost
+0
+image
+6
+onuse
+t god exp (make sure you put the t)
+uses
+1
+.
+
+
+On the bottom of the window....click the Submit button. Then close this window.
+
+Now type view script god exp
+
+In the blank script window type this:
+
+inc trigger exp 5000 ( this will add 5000 exp for that person)
+chat trigger " You get 5000 exp" (make sure to put a space between the first quote and first letter)
+endscript (ends the script for good)
+
+****NOTE****** Where up above you see <Livingthing> its another name for a special command. Use trigger. 
+Its used 99% of time.
+
+Now....you wonder...ok...inc adds the number....how is set diffrent? ( ill show you)
+
+set trigger exp 5000 (makes ur exp 5000 no matter what it is)
+chat trigger " You have 5000 exp now"
+endscript
+
+
+If the person has 7000 exp with them...and they use this....will lose 2000 exp. Instead of 12000 they will have 5000.
+
+
+Now...make it back to inc trigger exp 5000 and submit it using the button on the bottom.
+
+Now close this window. Back in the dusk game type <God Exp
+
+An item should appear below you. It should look like a little golden bag or pot. Pick it up.
+
+Now type use "God Exp" (if an item you make has more than 1 word...you need quotes around it.)
+
+If it worked correctly...it should give you 5000 exp. IF you get an error saying:
+
+( " This has no use|.3588 or something like that.. Delete the t written before the name of your script in the item. Instead of t God Exp just try God Exp.)
+
+
+If it has worked...Excellent! You just made your first working script for an Item! (So invigorating isnt it? =P )
+
+Now...let me tell you about the chat trigger script command.
+
+
+				Section 3: The chat trigger command
+
+So far you've learned a bit about the set command and inc command. set changes the value to what you want it to be.
+
+inc command adds or subtracts ( Ill show you that later) values you want it to. Now lets learn
+
+the stupidly easy chat script.
+
+To chat something on an item or tile(Also explained later) type this:
+
+chat trigger " blah blah"  (dont forget the space between the first quote and letter.)
+endscript ( or something else you want script to do first)
+
+
+EXAMPLE:
+
+chat trigger " Im writing this help manual."
+endscript
+
+
+Simple no?
+
+
+                               Section 4: Flags ( ya know..<safe> is an example of a flag.)
+
+Making flags is as easy as the chat trigger. 
+
+addflag trigger <name of flag> (The flag must be surrounded by < > )
+endscript
+
+Example:
+
+addflag trigger <Moo>
+endscript
+
+****NOTE**** This doesnt put the person in a clan. Only clanleaders and gods can put peoples in clans.
+
+To remove a flag:
+
+removeflag trigger <flag name>
+endscript
+
+Example:
+
+removeflag trigger <Moo>
+endscript
+
+Thats it. :) Thats all you need to know about flags.
+
+
+
+                                 Section 5: Adding Bonuses
+
+Adding Bonuses is very easy.
+
+Adding a strength bonus:
+
+inc trigger strengthBonus (number)
+endscript
+
+Adding a Dexterity Bonus
+
+inc trigger dexterityBonus (number)
+
+They go on like that. Look to find which things can have bonuses.
+
+Examples: 
+
+Strength Bonus
+
+inc trigger strengthBonus 10   (will add 10 bonus points)
+endscript
+
+AC Bonus
+
+inc trigger acBonus 20  (will add + 20 to your AC)
+endscript
+
+Wisdom Bonus
+
+inc trigger wisdonBonus 6  (adds 6 bonus points to your wisdom.)
+endscript
+
+
+Thats basically it. Experiment with the other Bonuses to.
+
+
+
+               Section 6: Can Move scripts
+
+As you know. Some tiles are walkable and others arent. To make a tile walkable only if that person
+
+has an item this is how you do it:
+
+
+hasItem trigger (item name)
+
+If you want to make it so they CANT pass here if they have a certain item...type this:
+
+! hasItem trigger (item)
+
+
+
+			Section 7: Tile Scripts
+
+Theyre are basically 2 types. Can move and move action. To view the script for a certain tile..
+
+its name is its coordinates. In other words. 1_1 would be filled in with script you would want
+
+to happen when you step on 1/1. Can move is only for if they can move or not. Move action is what 
+
+happens when they step on the tile. It can be the tile gives items...heals..or teleports :)
+
+
+			Section 8: Subtracting Stats
+
+Just inc the thing with a negative.
+
+Example:
+
+inc trigger acBonus -12  ( take away 12 bonus points from AC)
+
+inc trigger hp -20     (makes hp go down 20 points)
+
+You get it right??
+
+
+			
+
+Its 3:00 AM....and im sooo sleepy....but i cant sleep. I have insomnia.  Go figure.
+
+
+			Section 9: Teleporter Tiles  ( Awesome huh?)
+
+You can actually design tiles that will teleport people to a certain location. To make things better
+
+its actually very easy to write. There are 2 diffrent ways to write this. Most of the time...
+
+its the first way. Heres the first way:
+
+set
+trigger
+locx
+(coord number on x- axis)
+set
+trigger
+locy
+(coord number on y- axis)
+endscript
+
+
+Example:
+
+set
+trigger
+locx
+12
+set
+trigger
+locy
+10
+endscript
+
+
+This will teleport you to 12/10 on the map.
+
+
+The Second way:
+
+set trigger locxy (locx number) (locy number)
+endscript
+
+
+***NOTE*** Always test your teleporter with a fake character first!
+
+
+	Thats basically it. Make sure you put this in a move action not a can move.
+
+
+			
+				Section 10:Complicated Stuff
+
+By now you should know how to put conditions on by learning from the other script commands.
+Lets show you some complicated stuff. Heres a example for someones house.
+
+
+if ispet trigger
+	endscript
+end
+if ! hasItem trigger house1key
+	chat trigger "This isn't your house!"
+	inc trigger locx -1
+end
+endscript
+
+
+Daunting huh? Well...let me show you what each part means
+
+if ispet trigger
+	endscript
+end
+
+This means that if a pet is going over this tile it should end the script. The end simply ends
+that if statement
+
+
+if ! hasItem trigger house1key
+	chat trigger "This isn't your house!"
+	inc trigger locx -1
+
+
+You remember if, !, and, hasItem. In english it means...if you dont have house1key...goto next line
+
+of the script. There is the chat trigger. See where it says:
+
+inc trigger locx -1
+
+This means when it gets to this point...it will move your character away.
+
+See...when explained in english its not hard.
+
+end
+endscript
+
+This ends the if statement and endscript stops it all.
+
+WOW....see...easy to understand. Now that you shoulve understood this...it will 
+
+inspire you to design others.
+
+***NOTE*** ispet can be changed to isclan or israce....but if u change it...u must specify a race...or clan.

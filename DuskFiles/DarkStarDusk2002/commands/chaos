@@ -1,0 +1,8 @@
+if hascondition trigger "darkcontinent"
+chat trigger "Evil powers prevent you from leaving,"
+endscript
+end
+
+
+
+

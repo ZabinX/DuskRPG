@@ -1,0 +1,3 @@
+chat trigger "Training Room"
+set trigger locxy 302 160
+endscript

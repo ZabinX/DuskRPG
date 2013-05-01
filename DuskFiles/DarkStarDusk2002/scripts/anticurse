@@ -1,0 +1,3 @@
+removecondition trigger "cursed"
+chat trigger " You are no longer cursed"
+endscript

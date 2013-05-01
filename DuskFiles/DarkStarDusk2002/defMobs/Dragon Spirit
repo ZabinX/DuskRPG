@@ -1,0 +1,38 @@
+maxhp
+30000
+maxsp
+10000
+stre
+600
+dext
+1500
+cons
+2000
+inte
+3000
+wisd
+1300
+image
+44
+faction
+dragon
+bravery
+9.99
+grouprelation
+.50
+skill
+Dodge
+50
+skill
+Double Attack
+100
+skill
+Triple Attack
+50
+skill
+Quadruple Attack
+25
+wield
+fire
+.
+

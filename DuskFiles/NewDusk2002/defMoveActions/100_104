@@ -1,0 +1,6 @@
+if ispet trigger
+    endscript
+end
+chat trigger concat "Welcome to New Dusk, " name trigger
+endscript
+

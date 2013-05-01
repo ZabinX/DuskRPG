@@ -1,0 +1,26 @@
+if isplayer trigger
+	chat trigger "Leaving arena"
+	removeCondition trigger "ctf"
+	if hasflag trigger "Red Team"
+		if hasflag trigger "Flag!"
+			removeflag trigger "Flag!"
+			removeitem trigger "Blue Flag"
+			createitem "Blue Flag" 985 904
+		end
+		removeflag trigger "Red Team"
+		global number redcp - global redcp trigger cp
+	end
+	if hasflag trigger "blue"
+		if hasflag trigger "Flag!"
+			removeflag trigger "Flag!"
+			removeitem trigger "Red Flag"
+			createitem "Red Flag" 955 870
+		end
+		removeflag trigger "Blue Team"
+		global number bluecp - global bluecp trigger cp
+	end
+	set trigger locxy 1 1
+end
+endscript
+
+

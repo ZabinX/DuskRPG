@@ -1,0 +1,5 @@
+inc trigger strengthBonus 15
+inc trigger acBonus 10
+inc trigger constitutionBonus 15
+chat trigger " The Demons power flows through your body"
+endscript

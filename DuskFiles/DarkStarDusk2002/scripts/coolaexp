@@ -1,0 +1,11 @@
+inc trigger exp 18600
+removeItem trigger coolaexp
+endscript
+end
+
+
+
+
+
+
+

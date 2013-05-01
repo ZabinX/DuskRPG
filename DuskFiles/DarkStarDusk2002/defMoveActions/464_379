@@ -1,0 +1,7 @@
+if hasItem trigger key
+	inc trigger locy 1
+	chat trigger " The door has locked and you need this key.....maybe theres another way out....."
+end
+endscript
+
+

@@ -1,0 +1,4 @@
+removeItem trigger Bluestone
+removeItem trigger Redstone
+removeItem trigger Greenstone
+endscript

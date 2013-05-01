@@ -1,0 +1,5 @@
+if < + * rand 100 7 trigger inte
+	order trigger "sleep"
+end
+endscript
+

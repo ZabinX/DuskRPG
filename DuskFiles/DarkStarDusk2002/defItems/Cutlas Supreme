@@ -1,0 +1,19 @@
+type
+weapon
+description
+a fine-edged sword... wielded by the strongest of fighters.
+cost
+10000
+mod
+775
+OnWear
+cutlason
+OnUnWear
+cutlasoff
+image
+9
+endscript
+
+
+
+

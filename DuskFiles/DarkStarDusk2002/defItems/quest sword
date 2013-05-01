@@ -1,0 +1,16 @@
+type
+weapon
+description
+A Sword With A Spirit
+cost
+1
+mod
+510
+image
+9
+onWear
+questwaer
+onUnwear
+questunwear
+.
+

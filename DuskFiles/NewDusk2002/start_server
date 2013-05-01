@@ -1,0 +1,2 @@
+cp log/newworld.log log/newworld.`date '+%m.%d.%H.%M'`.log
+/usr/bin/java DuskServer NEW_DUSK> log/newworld.log &

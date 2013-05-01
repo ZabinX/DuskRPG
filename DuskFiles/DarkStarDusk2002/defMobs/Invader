@@ -1,0 +1,43 @@
+maxhp
+10000
+maxsp
+5000
+stre
+1000
+dext
+5000
+inte
+300
+wisd
+400
+skill
+Dodge
+100
+skill
+Double AttacK
+100
+skill
+Triple Attack
+100
+skill
+Quadruple Attack
+100
+skill
+Qunituple Attack
+100
+bravery
+5.50
+grouprelation
+.01
+faction
+ghost
+image
+5
+torso
+Nova Armor
+giveitem
+Nova Armor
+.25
+
+
+

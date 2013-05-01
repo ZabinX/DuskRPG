@@ -1,0 +1,7 @@
+chat trigger "No turning back now"
+set trigger locxy 200 930
+removeitem trigger enterencekey
+endscript
+
+
+

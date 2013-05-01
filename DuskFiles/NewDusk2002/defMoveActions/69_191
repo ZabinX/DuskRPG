@@ -1,0 +1,6 @@
+if isPet trigger
+     endscript
+end
+chat trigger "Priest says: The only thing i hate about this shrine is when i roll off my bed an into the water."
+inc trigger locy 1
+endscript

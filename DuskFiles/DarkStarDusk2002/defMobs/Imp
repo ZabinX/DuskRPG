@@ -1,0 +1,41 @@
+maxhp
+650
+maxmp
+125
+stre
+115
+dext
+85
+inte
+75
+wisd
+55
+cons
+65
+image
+14
+bravery
+0.5
+group relation
+0.99
+faction
+demon
+skill
+Dodge
+50
+skill
+Double Attack
+75
+wield
+burn blade
+-1
+-1
+giveitem
+burn blade
+0.06
+condition
+demonSkin
+-1
+-1
+.
+

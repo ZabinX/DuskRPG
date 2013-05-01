@@ -1,0 +1,16 @@
+if hasItem trigger gem
+	removeitem trigger gem
+	if hasItem trigger gem
+		removeitem trigger gem
+		if hasItem trigger gem
+			removeitem trigger gem
+			set trigger locxy 200 332
+			endscript
+			end
+		giveitem trigger gem
+		end
+	giveitem trigger gem
+	end
+inc trigger locx 1
+chat trigger "You need 3 gems"
+endscript

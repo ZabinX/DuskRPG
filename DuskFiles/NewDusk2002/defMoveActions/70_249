@@ -1,0 +1,9 @@
+if ! isPlayer trigger
+	endscript
+	end
+if < trigger cp 1500
+	chat trigger "You need 1500 cp to access this area"
+	inc trigger locy -1
+	endscript
+	end
+endscript

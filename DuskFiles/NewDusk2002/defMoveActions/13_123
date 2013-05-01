@@ -1,0 +1,4 @@
+if isPlayer trigger
+  chat trigger "It is dark.  You are likely to be eaten by a grue."
+end
+endscript

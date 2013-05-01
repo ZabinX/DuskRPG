@@ -1,0 +1,14 @@
+type
+weapon
+description
+a sabre
+cost
+400
+mod
+260
+image
+9
+durability
+30000
+.
+

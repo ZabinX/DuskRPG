@@ -1,0 +1,13 @@
+type
+weapon
+description
+a massive dwarven claidhmore
+cost
+1000
+mod
+400
+image
+9
+durability
+50000
+

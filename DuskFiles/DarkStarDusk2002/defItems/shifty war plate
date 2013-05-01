@@ -1,0 +1,21 @@
+type
+armor
+kind
+torso
+description
+A Suit Crafted By Shifty, For the HAOD-AC armoury.
+cost
+5000
+mod
+250
+image
+7
+onWear
+shifty
+onUnWear
+shiftyend
+durability
+2000000
+.
+
+

@@ -1,0 +1,18 @@
+type
+weapon
+description
+A Blade That Always Brings Death To The Enemies
+cost
+0
+mod
+7500
+image
+9
+OnWear
+darkness
+OnUnWear
+undarkness
+.
+
+
+

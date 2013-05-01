@@ -1,0 +1,8 @@
+if ispet trigger
+	endscript
+end
+if hascondition trigger "Quest1"
+	chat trigger "One way door! Go out some other way!"
+	inc trigger locx -1
+end
+endscript

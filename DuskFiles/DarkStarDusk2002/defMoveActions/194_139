@@ -1,0 +1,3 @@
+addcondition trigger "gatotic"
+chat trigger "You get condition gatotic"
+endscript

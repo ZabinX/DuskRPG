@@ -1,0 +1,11 @@
+if ispet trigger
+    endscript
+end
+if ! hascondition trigger inbath
+    addcondition trigger inbath
+    addcondition trigger "ice bath"
+    chat trigger "You quickly sink into the frigid water."
+    chat trigger "Strangely, the cold seems to be healing your body and mind."
+    endscript
+end
+endscript

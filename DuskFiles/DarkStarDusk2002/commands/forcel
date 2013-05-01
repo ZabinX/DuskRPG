@@ -1,0 +1,40 @@
+#
+# Local version of force ... have to see target ... mobs, statue players, statue pets, etc...
+#
+# usage force <livingthing> "<order>"
+#
+# for master gods only
+#
+if < trigger privs 4
+	chat trigger "huh?"
+	endscript
+end
+#
+# do we have a target?
+#
+if ! variableisstring param0
+	chat trigger "You don't need to command yourself."
+	endscript
+end
+if or ! variableisstring param1 variableisstring param2
+	chat trigger "Bad command usage. Check the command definition."
+	endscript
+end
+livingthing target local trigger param0
+if ! or or isPlayer target isMob target isPet target
+	chat trigger "You do not see them."
+	endscript
+end
+#
+# do not command other master gods
+#
+if > target privs 4
+	chat trigger "You can't manipulate Master gods."
+	endscript
+end
+#
+# parameter 1 checked above ... just do what was ordered
+#
+string command param1
+order target command
+endscript

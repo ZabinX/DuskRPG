@@ -1,0 +1,8 @@
+if ! hasitem trigger questkey
+set trigger locy -1
+chat trigger "You need a key from the KeyMaster"
+endscript
+end
+if ispet trigger
+end
+endscript

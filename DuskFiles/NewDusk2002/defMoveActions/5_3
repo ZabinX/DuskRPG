@@ -1,0 +1,4 @@
+if isplayer trigger
+	chat trigger "This here is my couch.  Is it not nifty?  Worship the couch."
+end
+endscript

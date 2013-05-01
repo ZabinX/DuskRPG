@@ -1,0 +1,60 @@
+if isPet trigger
+    endscript
+end
+if isPlayer trigger
+    number a * rand 100
+    number chance 5
+    if > trigger cp 500
+        number chance / trigger cp 100
+    end
+    if hascondition trigger "foundwildernkey"
+            number chance - chance 5
+    end
+    if < chance 2
+        number chance 2
+    end
+    if < a chance
+        if hasitem trigger "housewildernkey"
+            chat trigger "You find several stones that would be a good  place to hide a spare key."
+            endscript
+        end
+        chat trigger "You trip over a lose stone on the ground."
+        chat trigger "When you stand back up, you notice a key sticking out from under the stone."
+        chat trigger "You seem to have found Wildern's spare house key."
+        if ! hascondition trigger "foundwildernkey"
+            addcondition trigger "foundwildernkey"
+            number a + 1 * rand 5
+            if = a 1
+                addcondition trigger "wilderndoor1"
+            end
+            if = a 2
+                addcondition trigger "wilderndoor2"
+            end
+            if = a 3
+                addcondition trigger "wilderndoor3"
+            end
+            if = a 4
+                addcondition trigger "wilderndoor4"
+            end
+            if = a 5
+                addcondition trigger "wilderndoor5"
+            end
+        end
+        giveitem trigger housewildernkey
+        endscript
+    end
+    number chance - chance 1
+    if > a chance
+        if hascondition trigger "foundwildernkey"
+            if hasitem trigger "housewildernkey"
+                chat trigger "You search through the bushes here and find nothing."
+                endscript
+            end
+            chat trigger "You are fairly certain this is where you found Wildern's key before."
+            chat trigger "You search under all the stones and find nothing."
+            chat trigger "You are beginning to regret losing the first one you found."
+            endscript
+        end
+        chat trigger "You search through the bushes here and find nothing."
+end
+endscript

@@ -1,0 +1,4 @@
+set trigger hp trigger maxHp
+set trigger mp trigger maxMp
+chat trigger " A nice...comfy bed...you take a rest on it."
+endscript

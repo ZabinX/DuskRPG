@@ -1,0 +1,8 @@
+if ! hasItem trigger Tylkhousekey
+	inc trigger locy -1
+	chat trigger "The door is locked."
+	endscript
+end
+endscript
+
+

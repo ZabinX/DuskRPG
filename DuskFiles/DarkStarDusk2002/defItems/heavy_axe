@@ -1,0 +1,12 @@
+type
+weapon
+description
+a heavy axe
+cost
+150
+mod
+175
+image
+10
+durability
+9000

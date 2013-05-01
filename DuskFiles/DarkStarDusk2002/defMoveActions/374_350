@@ -1,0 +1,4 @@
+chat trigger "Wares out of stock. Sorry, try again in a few days."
+w
+goto 373 350
+goto 373 350

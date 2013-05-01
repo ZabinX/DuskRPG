@@ -1,0 +1,22 @@
+type
+armor
+kind
+neck
+description
+Chaotic Amulet
+cost
+200
+mod
+60
+image
+7
+onWear
+chaotic
+onunWear
+chaotic2
+durability
+-1
+.
+
+
+

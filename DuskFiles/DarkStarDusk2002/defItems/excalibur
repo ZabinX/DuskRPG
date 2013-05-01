@@ -1,0 +1,15 @@
+type
+weapon
+description
+A very nicely crafted sword as sharp as a RazorBlade and contains magic power.
+mod
+300
+onWear
+ExcaliburWear
+onUnWear
+ExcaliburUnwear
+image
+9
+durability
+30000
+.

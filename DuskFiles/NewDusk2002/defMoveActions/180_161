@@ -1,0 +1,30 @@
+if ispet trigger
+    endscript
+end
+if > trigger privs 1
+    endscript
+end
+livingthing keeper local trigger "Strabo's Keeper"
+if ismob keeper
+    order keeper "say You do not belong in here!"
+    chat trigger "Strabo's Keeper throws you out of the castle"
+    inc trigger locx -4
+    endscript
+end
+if or hascondition trigger mob_attack
+        hascondition trigger mob2_attack
+    removecondition trigger mob_attack
+    removecondition trigger mob2_attack
+    chat trigger "The guards grab you and pull you back."
+    set trigger locxy 179 161
+    endscript
+end
+number playercp trigger cp
+if > playercp global strabo_maxcp
+    global number strabo_maxcp trigger cp
+    global string strabo_name_maxcp name trigger
+    chat trigger "You are the strongest warrior this castle has seen."
+    endscript
+end
+endscript
+

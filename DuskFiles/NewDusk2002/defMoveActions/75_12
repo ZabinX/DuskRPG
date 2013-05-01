@@ -1,0 +1,5 @@
+if ispet trigger
+    endscript
+end
+chat trigger concat concat "The guards say '" global baronclan " members only beyond this point.'"
+endscript

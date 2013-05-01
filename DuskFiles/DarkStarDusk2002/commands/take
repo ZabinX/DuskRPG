@@ -1,0 +1,19 @@
+#Take command (for the CoL City Item Storage)
+#usage: Take <item>
+if ! hasCondition trigger atCoLItems
+	chat trigger "huh?"
+	endscript
+end
+if ! variableisstring param0
+	chat trigger "Take what??"
+endscript
+end
+#
+if ! hascondition trigger param0
+	chat trigger concat concat " You do not have a " param0 " in storage"
+endscript
+end
+giveitem trigger param0
+chat trigger concat concat "You Take a " param0 " from your storage box."
+removecondition trigger param0
+endscript

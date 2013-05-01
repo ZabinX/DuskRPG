@@ -1,0 +1,39 @@
+livingthing m "gnome leader"
+if > m locX 0
+  if < m locX 5
+    if > m locY 102
+      if < m locY 111
+        if isPlayer trigger
+          chat trigger "The guards keep you back."
+          inc trigger locy 1
+          endscript
+        end
+      end
+    end
+  end
+end
+if isPlayer trigger
+  chat trigger "Given time to search, you notice arrow slits overlooking the bridge.  On the floor is a supply of "
+  chat trigger "rations, but you wisely elect not to taste them."
+  if ! hasCondition trigger umbra3
+    addConditionWithDuration trigger umbra3 5
+    number c * rand 100
+    if < c 60
+      chat trigger "You find nothing else."
+      endscript
+    end
+    if < c 95
+      chat trigger "A small spider was lurking on the ceiling.  It drops onto your neck, but you"
+      chat trigger "manage to wipe it before anything bad happens."
+      endscript
+    end
+    chat trigger "In a crack, you notice a small piece of parchment.  You can't quite decipher"
+    chat trigger "the exact language, but appears to describe a detailed plan in which gnomes"
+    chat trigger "are temporarily petrified and placing them in well manicured lawns.  Upon each"
+    chat trigger "double moon, the gnomes will embark on a carefully orchestrated campaign of"
+    chat trigger "chaos.  The surface must be informed!"
+    chat trigger "Unfortunately, the brittle parchments crumbles as you read it."
+    chat trigger "Will they believe you?"
+  end
+end
+endscript

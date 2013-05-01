@@ -1,0 +1,9 @@
+if ispet trigger
+endscript
+end
+if ! isclan trigger "HAOD-AC"
+	inc trigger locx 1
+	chat trigger " You are not in the HAOD-AC clan so you may not enter."
+endscript
+end
+chat trigger " Welcome to the HAOD-AC clan hall."

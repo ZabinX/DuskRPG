@@ -1,0 +1,13 @@
+type
+item
+description
+a green potion
+cost
+2000
+image
+6
+onuse
+greenpotion
+uses
+1
+.

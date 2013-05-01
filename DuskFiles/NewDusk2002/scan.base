@@ -1,0 +1,106 @@
+if < trigger privs 3
+    chat trigger "huh?"
+    endscript   
+end
+if variableisstring param0
+    livingthing target param0
+    if or or isplayer target ispet target ismob target
+        #
+        # variable declaration
+        #
+        number x target locx
+        number y target locy
+        number gp target cash
+        number exp target exp
+        number cp target cp
+        number hp target hp
+        number ac target ac
+        number dammod target dammod
+        number maxHp target maxHp
+        number mp target mp
+        number maxmp target maxMp
+        number str target stre
+        number int target inte
+        number dex target dext
+        number con target cons
+        number wis target wisd
+        number dodge target skill "Dodge"
+        number double target skill "Double Attack"
+        number triple target skill "Triple Attack"
+        number quadruple target skill "Quadruple Attack"
+        number disguise target skill "Disguise"
+        number clerical target skill "clerical group"
+        number druidic target skill "druidic group"
+        number enchantment target skill "enchantment group"
+        number telepathy target skill "telepathy group"
+        number summons target skill "summons group"
+        number warrior target skill "warrior group"
+        number black target skill "black magic group"
+        number white target skill "white magic group"
+        number alchemy target skill "alchemy group"
+        number fire target skill "elemental fire group"
+        number ice target skill "elemental ice group"
+        #
+        # notify caster/trigger of target's stats
+        #
+        chat trigger concat concat concat concat " Name: " name target " (" cp " cp)"
+        chat trigger concat concat concat concat concat concat concat "   HP: " hp "/" maxHp "  MP: " mp "/" maxMp
+        chat trigger concat concat concat "   Loc: " x "/" y
+        chat trigger concat concat "   Cash: " gp " gp"
+        chat trigger concat "   Exp: " exp
+        chat trigger "   Stats with all bonuses:"
+        chat trigger concat "   str: " str
+        chat trigger concat "   int: " int
+        chat trigger concat "   dex: " dex
+        chat trigger concat "   con: " con
+        chat trigger concat "   wis: " wis
+        chat trigger concat concat "   AC: " ac " (dex counted in)"
+        chat trigger concat "   DamMod: " dammod
+        if < 0 dodge
+            chat trigger concat "   Dodge: " dodge
+        end
+        if < 0 double
+            chat trigger concat "   Double Attack: " double
+        end
+        if < 0 triple
+            chat trigger concat "   Triple Attack: " triple
+        end
+        if < 0 quadruple
+            chat trigger concat "   Quadruple Attack: " quadruple
+        end
+        if < 0 disguise
+            chat trigger concat "   Disguise: " disguise
+        end
+        if < 0 clerical
+            chat trigger concat "   clerical group: " clerical
+        end
+        if < 0 druidic
+            chat trigger concat "   druidic group: " druidic
+        end
+        if < 0 enchantment
+            chat trigger concat "   enchantment group: " enchantment
+        end
+        if < 0 telepathy
+            chat trigger concat "   telepathy group: " telepathy
+        end
+        if < 0 black
+            chat trigger concat "   black magic group: " black
+        end
+        if < 0 white
+            chat trigger concat "   white magic group: " white
+        end
+        if < 0 alchemy
+            chat trigger concat "   alchemy group: " alchemy
+        end
+        if < 0 summons
+            chat trigger concat "   summons group: " summons
+        end
+        if < 0 warrior
+            chat trigger concat "   warrior group: " warrior
+        end
+        if < 0 fire
+            chat trigger concat "   elemental fire group: " fire
+        end
+        if < 0 ice
+            chat trigger concat "   elemental ice group: " ice
+        end

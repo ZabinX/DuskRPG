@@ -1,0 +1,15 @@
+#this script gives credit to Infinite_Darkness....since when it was seen he asked for credit since he made it on other worlds
+if < trigger privs 4
+chat trigger " huh?"
+	endscript
+end
+number exp param0
+if VariableIsNumber exp
+	inc trigger exp exp
+	chat trigger " Credit Goes To Infinite_Darkness-Please Thank Him For Your Power!"
+	chat trigger " And Shifty02 for making it a little bit better :-)"
+endscript
+end
+chat trigger " How much exp???"
+
+

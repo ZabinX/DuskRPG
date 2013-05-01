@@ -1,0 +1,133 @@
+removeCondition trigger raiseStr
+removeCondition trigger raiseInt
+removeCondition trigger raiseDex
+removeCondition trigger raiseCon
+removeCondition trigger raiseWis
+removeCondition trigger raiseHp
+removeCondition trigger raiseMp
+if ! hasCondition trigger atTrainingPlace endscript end
+if ! hasCondition trigger newChar endscript end
+#
+if ! variableisstring param0
+	chat trigger "wrong Parameter"
+	endsript
+end
+addCondition trigger concat raise param0
+number steepness 2
+number baseLevel 50
+number result 0
+if hasCondition trigger concat raise param0
+	if hasCondition trigger concat fastest param0
+		number baseLevel - baseLevel 20
+		number steepness - steepness 1
+	end
+	if hasCondition trigger concat faster param0
+		number baseLevel - baseLevel 20
+	end
+	if hasCondition trigger concat slower param0
+		number baseLevel + baseLevel 20
+	end
+	if hasCondition trigger concat slowest param0
+		number baseLevel + baseLevel 20
+		number steepness + steepness 1
+	end
+end
+if hasCondition trigger raiseStr
+	number result trigger stre
+end
+if hasCondition trigger raiseInt
+	number result trigger inte
+end
+if hasCondition trigger raiseDex
+	number result trigger dext
+end
+if hasCondition trigger raiseCon
+	number result trigger cons
+end
+if hasCondition trigger raiseWis
+	number result trigger wisd
+end
+if hasCondition trigger raiseHp
+	number result / trigger maxHp 10
+end
+if hasCondition trigger raiseMp
+	number result / trigger maxMp 10
+end
+#
+number level1 25
+number level2 50
+number level3 75
+number level4 82
+number level5 95
+number value1 20
+number value2 40
+number value3 60
+number value4 80
+number value5 100
+#
+number temp trigger inte
+number result + result 1
+number overshot 0
+if > result 100 
+	number result 100
+	number overshot 1
+end
+number difference 0
+number expNeeded + * steepness result baseLevel
+if > result level1 number expNeeded + expNeeded value1
+if > result level2 number expNeeded + expNeeded value2
+if > result level3 number expNeeded + expNeeded value3
+if > result level4 number expNeeded + expNeeded value4
+if > result level5 number expNeeded + expNeeded value5
+end end end end end
+number raised 0
+if ! < trigger exp expNeeded
+	number difference 1
+end
+#
+if ! = overshot 1
+	if hasCondition trigger raiseStr
+		inc trigger strength difference
+		number raised difference
+	end
+	if hasCondition trigger raiseInt
+		inc trigger intelligence difference
+		number raised difference
+	end
+	if hasCondition trigger raiseDex
+		inc trigger dexterity difference
+		number raised difference
+	end
+	if hasCondition trigger raiseCon
+		inc trigger constitution difference
+		number raised difference
+	end
+	if hasCondition trigger raiseWis
+		inc trigger wisdom difference
+		number raised difference
+	end
+end
+if hasCondition trigger raiseHp
+	inc trigger maxHp + * difference 10 / trigger cons 10
+	number raised difference
+end
+if hasCondition trigger raiseMp
+	inc trigger maxMp + * difference 10 / trigger wisd 10
+	number raised difference
+end
+if > raised 0
+	inc trigger exp - 0 expNeeded
+	chat trigger concat concat "This raise has cost you " expNeeded " exp."
+end
+removeCondition trigger concat raise param0
+if = difference 0
+	chat trigger "You dont have enough exp."
+	endscript
+end
+if = raised 0
+	chat trigger "You have reached your maximum."
+	end
+	endscript
+end
+endscript
+

@@ -1,0 +1,10 @@
+if isPlayer trigger
+	if ! hasItem trigger newspaper
+		giveItem trigger newspaper
+		chat trigger "You get the new issue of 'Dark Star News'."
+	end
+end
+endscript
+
+
+

@@ -1,0 +1,7 @@
+if isPet trigger
+     endscript
+end
+chat trigger "Mage says: The guild is the only group to actually master Lightning spells, and to empower our equipment with them."
+inc trigger locx 1
+endscript
+

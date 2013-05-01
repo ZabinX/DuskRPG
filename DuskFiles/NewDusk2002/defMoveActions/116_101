@@ -1,0 +1,9 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger intown
+    removecondition trigger intown
+    chat trigger "You are leaving New Sanctuary... be careful"
+    endscript
+end
+endscript

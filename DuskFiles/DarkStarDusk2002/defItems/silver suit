@@ -1,0 +1,15 @@
+type
+armor
+kind
+torso
+description
+a silver suit
+cost
+500
+mod
+50
+image
+7
+durability
+3000
+.

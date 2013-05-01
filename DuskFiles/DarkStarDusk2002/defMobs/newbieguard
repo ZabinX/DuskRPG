@@ -1,0 +1,63 @@
+race
+human
+maxhp
+250
+maxsp
+20
+stre
+70
+inte
+30
+dext
+45
+cons
+65
+wisd
+20
+bravery
+0.1
+group relation
+0.99
+faction
+cityguard
+skill
+Dodge
+30
+skill
+Double Attack
+40
+wield
+long sword
+-1
+-1
+arms
+steel sleeves
+-1
+-1
+legs
+steel leggings
+-1
+-1
+torso
+steel suit
+-1
+-1
+waist
+steel belt
+-1
+-1
+skull
+steel helmet
+-1
+-1
+hands
+steel gloves
+-1
+-1
+giveitem
+guardkey
+0.005
+image
+20
+.
+

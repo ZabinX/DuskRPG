@@ -1,0 +1,30 @@
+inc trigger exp 300400
+inc trigger cash 52000
+removeItem trigger godexp
+endscript
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

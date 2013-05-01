@@ -1,0 +1,14 @@
+if ! isPlayer trigger
+  endscript
+end
+number g trigger cash
+if < g 12500
+  chat trigger "You explain that you can't afford the price and try to bargain.  The vender just laughs."
+  chat trigger "'No suit for you!' he exclaims."
+  inc trigger locx -1
+  endscript
+end
+inc trigger cash -12500
+chat trigger "The vender hands you a strange outfit which should just fit your pet."
+giveItem trigger psuit
+endscript

@@ -1,0 +1,31 @@
+maxhp
+150
+maxsp
+150
+stre
+150
+inte
+150
+dext
+150
+cons
+150
+wisd
+150
+image
+34
+giveitem
+Expert Sword
+.25
+skill
+Dodge
+10
+skill
+Double Attack
+10
+faction
+undead
+bravery
+.25
+grouprelation
+.75

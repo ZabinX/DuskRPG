@@ -1,0 +1,13 @@
+#The 2nd race haven - firewall.
+if ! isRace trigger darkelf
+    chat trigger "Your not a darkelf, GET OUT"
+    inc trigger locy 1
+    endscript
+end
+if or hasitem trigger "strabo key"
+   hasitem trigger "baron key"
+    chat trigger  "Your not allowed in here with a castle key"
+    inc trigger locy 1
+    endscript
+end
+endscript

@@ -1,0 +1,22 @@
+if ! variableisstring param0
+	chat trigger " Allow whome??"
+endscript
+end
+if ! variableisstring param1
+	chat trigger " To access whose room??"
+endscript
+end
+livingthing target param0
+if ! hascondition trigger param1
+chat trigger " You dont have the authority to do that."
+endscript
+end
+if ! hascondition target param1
+	addcondition target param1
+	chat target concat concat " You now have access to " name trigger "'s house."
+	chat trigger " that player now has access to ur room type disallow <username< <yourname> to disallow them"
+endscript
+end
+chat trigger " that user already has access."
+
+

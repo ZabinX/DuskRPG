@@ -1,0 +1,13 @@
+type
+item
+description
+a Vial of demons blood.
+cost
+3000
+image
+6
+onUse
+dblood
+uses
+1
+.

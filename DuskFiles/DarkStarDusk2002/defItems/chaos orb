@@ -1,0 +1,13 @@
+type
+item
+description
+the Chaos orb
+cost
+10
+image
+6
+onuse
+corb
+uses
+1
+.

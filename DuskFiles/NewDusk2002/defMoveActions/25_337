@@ -1,0 +1,4 @@
+chat trigger "priest says: Its a joyous day, praise the Gods for the glory."
+chat trigger "You think to yourself that you should type worship now, or firewallisgreat."
+inc trigger locx 1
+endscrpit

@@ -1,0 +1,30 @@
+maxhp
+10000
+maxmp
+50
+stre
+300
+inte
+20
+dext
+45
+wisd
+10
+cons
+100
+bravery
+0.99
+grouprelation
+0.99
+wield
+curved dagger
+-1
+-1
+faction
+slime
+giveitem
+curved dagger
+0.10
+image
+33
+.

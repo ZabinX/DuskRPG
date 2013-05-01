@@ -1,0 +1,17 @@
+type
+item
+description
+some Potion.
+cost
+400
+image
+6
+onuse
+tpotion
+uses
+1
+.
+
+
+
+

@@ -1,0 +1,3 @@
+set trigger locxy 6 153
+chat trigger " Whoa! The floor fell through!"
+endscript

@@ -1,0 +1,24 @@
+maxhp
+100000
+maxsp
+100000
+stre
+30000
+dext
+10000
+wisd
+10000
+inte
+10000
+cons
+10000
+image
+45
+giveitem
+Divine Scale
+1.00
+condition
+taco
+-1
+-1
+.

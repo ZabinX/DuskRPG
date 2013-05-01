@@ -1,0 +1,22 @@
+type
+weapon
+description
+Devils Blade
+image
+9
+cost
+5000
+mod
+500
+onWear
+devils
+onUnWear
+devilsend
+
+.
+
+
+
+
+
+

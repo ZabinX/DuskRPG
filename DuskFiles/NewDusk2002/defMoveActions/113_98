@@ -1,0 +1,15 @@
+if ispet trigger
+    endscript
+end
+if ! hasitem trigger MPToken
+    giveitem trigger MPToken
+   chat trigger "The cost of MP restoration is 1 gp for every 2 MP restored.
+Do not enter the MP bath with an MPtoken if you do not wish to pay this fee.
+The same goes for your pet."
+    chat trigger "You got an MPToken."
+    endscript
+end
+chat trigger "You already have an MPToken."
+endscript
+
+

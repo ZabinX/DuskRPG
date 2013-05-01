@@ -1,0 +1,13 @@
+if hascondition trigger biohazard
+chat trigger "Welcome to your room biohazard"
+endscript
+end
+inc trigger locy 1
+chat trigger "Only biohazard is aloud in his room"
+end
+endscript
+if ispet trigger
+endscrpt
+end
+
+

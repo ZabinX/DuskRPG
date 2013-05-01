@@ -1,0 +1,3 @@
+set trigger locxy 407 408
+chat trigger " You appear before the Chaos Sanctuary"
+endscript

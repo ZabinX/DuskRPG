@@ -1,0 +1,14 @@
+if not variableisstring param0
+	chat trigger "You bow down."
+	endscript
+end
+livingthing target local trigger param0
+if not isplayer target
+	chat trigger "You do not see them here."
+	endscript
+end
+chat trigger concat concat "You bow politely to " name target "."
+chat target concat name trigger " bows politely to you."
+order trigger concat concat "emote bows to " name target " politely."
+endscript
+

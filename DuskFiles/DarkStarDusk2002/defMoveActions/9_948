@@ -1,0 +1,27 @@
+if ! hascondition "thief"
+	chat trigger " Get out of my house!"
+endscript
+	chat trigger " I can help you with your task all i need is: "
+	if ! hasitem triger "minor potion"
+		chat trigger "a minor potion"
+	end
+	if ! hasitem trigger "daemon horns"
+		chat trigger "a pair of daemons horns"
+	end
+	if ! hasitem trigger "Sleeping Weed"
+		chat trigger "a sleeping weed, found in the depths of the forgotten cave."
+	end
+end
+if hasitem trigger "minor potion"
+	if hasitem trigger "daemon horns"
+		if hasitem trigger "Sleeping Weed"
+			give item trigger "Sleeping Potion"
+			chat trigger "Old Lady gives you a sleeping potion"
+			removeitem trigger "minor potion"
+			removeitem trigger "daemon horns"
+			removeitem trigger "Sleeping Weed"
+		endscript
+		end
+	end
+end
+endscript

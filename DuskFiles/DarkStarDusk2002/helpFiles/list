@@ -1,0 +1,25 @@
+The list command
+
+usage: list <filetype>
+ex. "list items"
+
+You can list the following types:
+items
+conf
+mobs
+commands
+races
+pets
+factions
+conditions
+help
+scripts
+spell groups
+spells
+props
+move actions
+can move
+can see
+tile actions
+tile move
+tile see

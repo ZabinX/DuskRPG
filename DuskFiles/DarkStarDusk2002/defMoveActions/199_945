@@ -1,0 +1,13 @@
+if ! hasitem trigger questkey
+inc trigger locy -1
+chat trigger "You need a questkey from the KeyMaster, you may have to wait for him to re-spawn."
+endscript
+end
+removetem trigger questkey
+removetem trigger questkey
+
+chat trigger "You made it"
+end
+endscript
+
+

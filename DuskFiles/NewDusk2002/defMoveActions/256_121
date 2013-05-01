@@ -1,0 +1,11 @@
+if ispet trigger
+	endscript
+end
+if > trigger cash 9
+	inc trigger cash -10
+	addconditionwithduration trigger nothirst 1200
+	chat trigger "You pour yourself a small glass of ale, and drink it."
+	endscript
+end
+chat trigger "If you only had 10gp, you could sample the ale."
+endscript

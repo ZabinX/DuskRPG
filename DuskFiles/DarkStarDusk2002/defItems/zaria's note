@@ -1,0 +1,11 @@
+type
+item
+description
+a note for Zorog....its all crumpled up...
+onUse
+read"zaria's note"
+uses
+-1
+image
+1
+.

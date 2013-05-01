@@ -1,0 +1,41 @@
+if ispet trigger
+    endscript
+end
+if and > privs trigger 2
+  ! strequals name tirgger wildern
+    chat trigger "You do not belong here!!!!"
+    log trigger "is still nosing around."
+    set trigger locxy 100 100
+    endscript
+end
+if hascondition trigger foundtreasure
+    removecondition trigger foundtreasure
+    set trigger locxy 144 225
+    changetile 144 226 11
+    changetile 144 227 0
+    changetile 144 228 0
+    changetile 144 229 0
+    changetile 144 230 0
+    changetile 144 231 11
+    livingthing ow "Ogre Warrior"
+    if ismob ow
+        removecondition ow treasure1
+        removecondition ow treasure2
+        removecondition ow treasure3
+        removecondition ow treasure4
+        removecondition ow treasure5
+        removecondition ow treasure6
+        removecondition ow treasure7
+        removecondition ow treasure8
+        removecondition ow treasure9
+        removecondition ow treasure10
+        removecondition ow treasure11
+        removecondition ow treasure12
+        removecondition ow treasure13
+        removecondition ow treasure14
+        removecondition ow treasure15
+    end
+end
+endscript
+
+

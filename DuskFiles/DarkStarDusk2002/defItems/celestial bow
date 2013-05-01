@@ -1,0 +1,17 @@
+type
+weapon
+description
+a bow of mass destruction... (believed to have been sent from the stars.
+cost
+700000
+mod
+1300
+OnWear
+celestial
+OnUnWear
+celestialend
+range
+7
+.
+
+

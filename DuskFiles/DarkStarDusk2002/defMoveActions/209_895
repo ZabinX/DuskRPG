@@ -1,0 +1,8 @@
+if ! ismob trigger
+
+endscript
+end
+inc trigger locy -1
+end
+endscript
+

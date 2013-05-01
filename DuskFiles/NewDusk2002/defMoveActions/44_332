@@ -1,0 +1,14 @@
+# For Curious Priest Quest - FW
+if hascondition trigger shadowman
+     chat trigger "You hear him mumbling something, you can only make out Find Dark Ones."
+     chat trigger "What could he possibly mean?"
+     endscrpit
+end
+chat trigger "As you step closer you begin to quiver in fear."
+chat trigger "You know that you're stronger than him, but his brimstone eyes make you think twice about going near him."
+addcondition trigger shadowman
+inc trigger locx -2
+endscript
+
+
+

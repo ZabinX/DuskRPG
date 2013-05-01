@@ -1,0 +1,9 @@
+if ! hascondition trigger 1
+addcondition trigger 1
+endscript
+end
+removeconditon trigger 1
+removecondition trigger 2
+removecondition trigger playing
+removecondition trigger blackjack
+removecondition trigger slots

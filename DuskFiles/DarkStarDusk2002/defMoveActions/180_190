@@ -1,0 +1,23 @@
+if hasItem trigger ale
+	chat trigger " Sethiroth says:  Ahh let me have a drink of that ale, Please?!  *gulp gulp*"
+	removeItem trigger ale
+	endscript
+end
+if hasItem trigger "Clouds sword"
+	chat trigger " Sephiroth says:  Ohh baby..., That sword...., Thats Clouds sword.  I must have It, and heres a little something for you."
+	removeItem trigger "Clouds sword"
+	giveItem trigger masamune
+	endscript
+end
+if ! hasItem trigger ale
+	chat trigger " If you want to talk to me, gimme some ale!!  *puke*"
+	inc trigger locx +1
+end
+endscript
+
+
+
+
+
+
+

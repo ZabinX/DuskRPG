@@ -1,0 +1,17 @@
+type
+armor
+kind
+hands
+description
+Some Gloves Crafted By Shifty
+cost
+1
+mod
+200
+image
+7
+onWear
+glovesstart
+onUnWear
+glovesend
+.

@@ -1,0 +1,27 @@
+type
+armor
+kind
+torso
+description
+A Suit Crafted By Shifty
+cost
+1
+mod
+500
+image
+7
+onWear
+suitstart
+onUnWear
+suitend
+.
+
+
+
+
+
+
+
+
+
+

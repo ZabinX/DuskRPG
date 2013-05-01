@@ -1,0 +1,35 @@
+maxhp
+15000
+maxsp
+400
+stre
+500
+inte
+100
+dext
+150
+cons
+70
+wisd
+30
+bravery
+0.99
+group relation
+0.99
+faction
+Grinder
+skill
+dodge
+50
+skill
+double attack
+100
+skill
+triple attack
+100
+image
+31
+giveitem
+emerald
+1.0
+.

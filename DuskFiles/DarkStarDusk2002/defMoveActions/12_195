@@ -1,0 +1,6 @@
+if hasitem trigger "demon horns"
+	chat trigger "Welcome"
+endscript
+set trigger locxy 25 195
+chat trigger "you need demon horns to continue"
+end

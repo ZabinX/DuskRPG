@@ -1,0 +1,4 @@
+set trigger hp trigger maxhp
+set trigger mp trigger maxmp
+chat trigger "Damn that feels good"
+endscript

@@ -1,0 +1,12 @@
+type
+weapon
+description;Fire that Burns inside of the Dragon King
+mod
+1200
+cost
+10000
+image
+42
+durability
+99999
+

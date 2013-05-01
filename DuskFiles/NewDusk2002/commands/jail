@@ -1,0 +1,20 @@
+if < trigger privs 3
+    chat trigger "huh?"
+    endscript	
+end
+if variableisstring param0
+    livingthing target param0
+    if variableisstring param1
+        number jduration * 60 param1
+        number nchduration * 60 param1
+        set target locxy 123 168
+        addconditionwithduration target jailed jduration
+        string command concat concat concat "nochannel " name target " " nchduration
+        chat trigger command
+        order trigger command
+        chat trigger concat concat "Done.. they have been jailed and nochanneled for " param1 " minutes."
+        endscript
+    end
+end
+chat trigger "Usage is 'Jail player minutes'"
+endscript

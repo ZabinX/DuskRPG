@@ -1,0 +1,6 @@
+if ! hasitem trigger "StarterKey"
+chat trigger " You have to buy a StarterKey first"
+inc trigger locy -1
+endscript
+end
+

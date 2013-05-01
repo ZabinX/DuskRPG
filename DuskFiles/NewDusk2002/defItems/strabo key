@@ -1,0 +1,17 @@
+type
+item
+description
+the key for Castle Strabo
+cost
+1
+image
+27
+uses
+0
+onget
+getstrabokey
+ondrop
+dropstrabokey
+.
+
+

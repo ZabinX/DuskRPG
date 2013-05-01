@@ -1,0 +1,4 @@
+if hascondition trigger necrofight
+    removecondition trigger necrofight
+end
+endscript

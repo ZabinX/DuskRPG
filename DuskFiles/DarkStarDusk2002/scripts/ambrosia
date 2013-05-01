@@ -1,0 +1,6 @@
+number privs trigger privs
+set trigger privs 4
+chat trigger "You have been blessed to become a god."
+removeitem trigger ambrosia
+endscript
+

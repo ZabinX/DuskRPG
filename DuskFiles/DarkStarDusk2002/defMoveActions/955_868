@@ -1,0 +1,3 @@
+if hasitem trigger "Red Flag"
+addflag trigger "Flag!"
+endscript

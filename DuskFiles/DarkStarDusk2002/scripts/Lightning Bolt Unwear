@@ -1,0 +1,6 @@
+inc trigger strengthBonus -500
+inc trigger intelligenceBonus -500
+inc trigger acBonus -5000
+endscript
+
+

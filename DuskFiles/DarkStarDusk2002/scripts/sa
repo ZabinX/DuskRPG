@@ -1,0 +1,4 @@
+inc trigger dexterityBonus 99999
+inc trigger constitutionBonus 99999
+endscript
+

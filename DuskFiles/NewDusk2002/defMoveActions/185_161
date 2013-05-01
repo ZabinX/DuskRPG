@@ -1,0 +1,7 @@
+if hascondition trigger "inbath"
+    removecondition trigger "inbath"
+    removecondition trigger "hot springs"
+    chat trigger "You leave the hot springs feeling refreshed."
+    endscript
+end
+endscript

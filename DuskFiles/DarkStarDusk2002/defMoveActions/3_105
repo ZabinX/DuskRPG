@@ -1,0 +1,6 @@
+if ! isWearing trigger gasmask
+	chat trigger "These fumes are too strong! You are going to need some kind of gas mask in order to survive safely in the swamp."
+	inc trigger locx +1
+end
+endscript
+

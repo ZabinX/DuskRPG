@@ -1,0 +1,12 @@
+if isRace trigger "human"
+	set trigger hp 1
+	chat trigger " You hear the sounds of screams from other humans. The sound makes you frightened."
+	endscript
+end
+if isRace trigger "ice demon"
+	set trigger hp 1
+	chat trigger " You notice that you're melting."
+	endscript
+end
+endscript 
+

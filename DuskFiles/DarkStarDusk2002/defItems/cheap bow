@@ -1,0 +1,15 @@
+type
+ranged
+description
+a cheap bow
+cost
+600
+image
+8
+mod
+240
+durability
+1000000
+range
+25
+.

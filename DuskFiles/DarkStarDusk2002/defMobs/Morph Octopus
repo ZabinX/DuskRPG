@@ -1,0 +1,39 @@
+maxhp
+4300
+maxsp
+25
+stre
+300
+inte
+100
+dext
+280
+wisd
+9
+bravery
+0.75
+grouprelation
+0.05
+image
+30
+skill
+Double Attack
+100
+skill
+Dodge
+12
+skill
+Triple Attack
+100
+skill 
+Quadruple Attack
+80
+giveitem
+vial of ink
+1.0
+faction
+vampire
+.
+
+
+

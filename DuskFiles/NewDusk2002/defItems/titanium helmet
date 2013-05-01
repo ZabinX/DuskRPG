@@ -1,0 +1,19 @@
+type
+armor
+kind
+skull
+description
+a titanium helmet
+cost
+400
+mod
+80
+image
+7
+durability
+4800
+onWear
+wear_normal_armor
+.
+
+

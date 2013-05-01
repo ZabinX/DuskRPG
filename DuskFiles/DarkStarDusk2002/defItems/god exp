@@ -1,0 +1,14 @@
+type
+item
+description
+When used..it gives you 100000 EXP.
+cost
+0
+image
+6
+onuse
+god_exp
+uses
+1
+.
+

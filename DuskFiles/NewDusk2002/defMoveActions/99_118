@@ -1,0 +1,11 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger "inside"
+    removecondition trigger "inside"
+    chat trigger "You found a secret passage!"
+    endscript
+end
+set trigger locxy 95 119
+endscript
+

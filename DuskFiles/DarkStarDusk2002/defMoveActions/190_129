@@ -1,0 +1,11 @@
+if ! hasitem trigger briankey
+inc trigger locy 1
+chat trigger "Only Brian is alowed here."
+endscript
+end
+chat trigger "Home."
+endscript
+
+
+
+

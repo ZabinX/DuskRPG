@@ -1,0 +1,14 @@
+type
+item
+description
+some ale.
+cost
+10
+image
+6
+onuse
+celix
+uses
+1
+.
+

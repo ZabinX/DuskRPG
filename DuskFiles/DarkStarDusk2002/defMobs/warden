@@ -1,0 +1,42 @@
+maxhp
+1900
+maxsp
+15
+stre
+75
+inte
+2
+dext
+50
+wisd
+100
+cons
+100
+image
+4
+bravery
+0.9
+skill
+double attack
+50
+skill
+triple attack
+25
+skill
+dodge
+50
+skill
+quadruple attack
+25
+grouprelation
+0.25
+giveitem
+warden'skey
+.9
+faction
+gargoyle
+wield
+excalibur
+.
+
+

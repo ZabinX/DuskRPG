@@ -1,0 +1,5 @@
+if isPlayer trigger
+  chat trigger "The guards seem distracted by other matters.  You take the opportunity to retreat from the city."
+  inc trigger locy -2
+end
+endscript

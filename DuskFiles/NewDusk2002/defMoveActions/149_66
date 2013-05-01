@@ -1,0 +1,11 @@
+if ispet trigger
+    endscript
+end
+if and hasItem trigger "housewildernkey" hascondition trigger "wilderndoor4"
+    chat trigger "You touch the tree and the world shifts."
+    if hascondition trigger "inside"
+        removecondition trigger "inside"
+    end
+    set trigger locxy 183 176
+end
+endscript

@@ -1,0 +1,12 @@
+giveitem trigger "Crystal Helmet"
+giveitem trigger "Crystal Suit"
+giveitem trigger "Crystal Sleeves"
+giveitem trigger "Crystal Leggings"
+giveitem trigger "Crystal Necklace"
+giveitem trigger "Crystal Lens"
+giveitem trigger "Crystal Belt"
+giveitem trigger "Crystal Gloves"
+chat trigger " You open the box and find a whole set of crystal armor."
+removeitem trigger "Crystal Box"
+endscript
+

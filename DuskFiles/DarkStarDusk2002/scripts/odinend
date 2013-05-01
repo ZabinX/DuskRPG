@@ -1,0 +1,5 @@
+inc trigger dammodBonus -35
+inc trigger strengthBonus -50
+chat trigger "Odins Power leavs you."
+endscript
+

@@ -1,0 +1,10 @@
+if isclan trigger AOP
+	inc trigger acBonus 25
+	inc trigger strengthBonus 125
+	endscript
+end
+unwear trigger "Anarchy Blade"
+chat trigger " You're not in AOP. "
+endscript
+.
+

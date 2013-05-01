@@ -1,0 +1,9 @@
+if ispet trigger
+    endscript
+end
+if ! hascondition trigger intown
+    addcondition trigger intown
+    chat trigger "Welcome to New Sanctuary"
+    endscript
+end
+endscript

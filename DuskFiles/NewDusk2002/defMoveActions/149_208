@@ -1,0 +1,84 @@
+#
+# This is torch number four
+#
+if ispet trigger
+    endscript
+end
+#
+# They have not been to one of the first two torches to reset everything yet.
+# Or they have already pulled this torch.
+#
+if or hascondition trigger oq_switch4
+    ! hascondition trigger oq_switch1
+    chat trigger "This torch has already been pulled down."
+    endscript
+end
+#
+# They came through door one
+# They need to pull the torches in the order 1, 2, 5, 3, 4
+#
+if hascondition trigger oq_door1
+    if or ! hascondition trigger oq_switch2
+        or ! hascondition trigger oq_switch3
+        ! hascondition trigger oq_switch5
+        chat trigger "You pull on the torch.  Nothing happens."
+        endscript
+    end
+end
+#
+# They came through door two
+# They need to pull the torches in the order 1, 5, 4, 3, 2
+#
+if hascondition trigger oq_door2
+    if or hascondition trigger oq_switch2
+        or hascondition trigger oq_switch3
+        ! hascondition trigger oq_switch5
+        chat trigger "You pull on the torch.  Nothing happens."
+        endscript
+    end
+end
+#
+# They came through door three
+# They need to pull the torches in the order 1, 3, 4, 2, 5
+if hascondition trigger oq_door3
+    if or hascondition trigger oq_switch2
+        or ! hascondition trigger oq_switch3
+        hascondition trigger oq_switch5
+        chat trigger "You pull on the torch.  Nothing happens."
+        endscript
+    end
+end
+#
+# They came through door four
+# They need to pull the torches in the order 1, 4, 3, 5, 2
+#
+if hascondition trigger oq_door4
+    if or hascondition trigger oq_switch2
+        or hascondition trigger oq_switch3
+        hascondition trigger oq_switch5
+        chat trigger "You pull on the torch.  Nothing happens."
+        endscript
+    end
+end
+#
+# They came through door five
+# They need to pull the torches in the order 1, 5, 2, 4, 3
+#
+if hascondition trigger oq_door5
+    if or ! hascondition trigger oq_switch2
+        or hascondition trigger oq_switch3
+        ! hascondition trigger oq_switch5
+        chat trigger "You pull on the torch.  Nothing happens."
+        endscript
+    end
+end
+#
+# If the script is here, they have pulled the torches in the correct order so far
+#
+addcondition trigger oq_switch4
+chat trigger "You pull on the torch.  You hear gears turning in the distance."
+if hascondition trigger oq_door1
+    chat trigger "The floor beneath you disappears and you fall..."
+    set trigger locxy 144 217
+end
+endscript

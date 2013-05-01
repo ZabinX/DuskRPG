@@ -1,0 +1,11 @@
+number chance * rand 100
+if < chance 30
+set trigger locxy 257 338
+chat trigger "Congratulations!!"
+endscript
+end
+set trigger locxy 229 273
+chat trigger "You thought you had won?? HA, its just beginning!"
+endscript
+
+

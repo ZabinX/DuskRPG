@@ -1,0 +1,7 @@
+if isPlayer trigger
+  number a * rand 100
+  if < a 10
+    set trigger locxy 0 136
+  end
+end
+endscript

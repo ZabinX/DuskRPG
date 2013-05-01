@@ -1,0 +1,9 @@
+if ispet trigger
+    endscript
+end
+if ! strequals clan trigger global kilgoreclan
+    chat trigger concat global kilgoreclan " members only."
+    inc trigger locy -1
+    endscript
+end
+endscript

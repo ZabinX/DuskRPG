@@ -1,0 +1,3 @@
+chat trigger "Yum yum"
+addconditionwithduration trigger nohunger 600
+endscript

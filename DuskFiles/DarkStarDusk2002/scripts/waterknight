@@ -1,0 +1,7 @@
+chat trigger " :)"
+chat enemy trigger " peo"
+order enemy trigger "cast corrupt"
+order trigger "cast corrupt"
+chat trigger "?"
+chat enemy trigger "..."
+endscript

@@ -1,0 +1,7 @@
+if ispet trigger
+     endscript
+end
+chat trigger "As you sit on the couch, the walls change."
+changetile 180 4 24
+endscript
+

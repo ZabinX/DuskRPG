@@ -1,0 +1,3 @@
+removeItem trigger sgc
+addConditionWithDuration trigger killedsupergnoll 100
+endscript

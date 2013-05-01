@@ -1,0 +1,1 @@
+if isClan trigger "DD" set trigger locXY 945 55 chat trigger "DD Hall.." endscript

@@ -1,0 +1,29 @@
+if < trigger privs 3
+	chat trigger "huh?"
+	endscript
+end
+if variableisstring param0	
+	livingthing target param0
+	if ! isplayer target
+		chat trigger concat concat "'" param0 " ' is not a living creature."
+		endscript
+	end
+	set target locxy 394 394
+	set target hp 5
+	chat player shifty02 concat concat concat name target " ends up in hell, because of " name trigger " ."
+	order trigger concat concat "gecho " name target " has spontaneously combusted! "
+	addcondition target safe
+	removecondition target invis
+	removecondition target detect invis
+	removecondition target armor
+	removecondition target bless
+	removecondition target hpregen
+	removecondition target hero
+	chat target " You end up in hell...The domain of Cyril....the god of Chaos!"	
+end
+endscript
+
+
+
+
+

@@ -1,0 +1,10 @@
+if isPet trigger
+     endscript
+end
+chat trigger "Priest says: I have to guard here so the clumsy oaf of a priest dosnt go to sleep on the couch again."
+inc trigger locy 1
+endscript
+
+
+
+

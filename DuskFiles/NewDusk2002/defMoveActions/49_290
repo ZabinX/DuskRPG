@@ -1,0 +1,106 @@
+if ! isPlayer trigger
+	endscript
+	end
+#
+inc trigger locy 1
+#
+if hasCondition trigger shenville_dq_1
+	removeCondition trigger shenville_dq_1
+	addConditionWithDuration trigger shenville_end 15000
+	chat trigger "Shen says: you saved the world !!!"
+	chat trigger "Shen says: this is for you:"
+	number r * rand 3
+	if = r 0
+		giveItem trigger "exp sword"
+		chat trigger "You get an experience sword"
+		endscript
+		end
+	if = r 1
+		inc trigger cash 100000
+		chat trigger "You get 100K gp"
+		endscript
+		end
+	giveItem trigger gboots
+	chat trigger "You get some gold boots"
+	endscript
+	end
+if hasCondition trigger shenville_dq_0
+	chat trigger "Shen says: damn ! They will annihilate us"
+	endscript
+	end
+#
+if hasCondition trigger shenville_mq_1
+	chat trigger "Shen says: you saved my son !!!"
+	removeCondition trigger shenville_mq_1
+	addCondition trigger shenville_dq_0
+	chat trigger "Shen says: but I can't be happy, because our world is in danger..."
+	chat trigger "Shen says: a portal between this world and the dark world has just opened"
+	chat trigger "Shen says: I'm so afraid..."
+	chat trigger "You say: what is this stink ?"
+	chat trigger "Shen says: I'm sorry... dark creatures can come in our world"
+	endscript
+	end
+#
+if hasCondition trigger shenville_mq_0
+	chat trigger "Shen says: oh my son..."
+	endscript
+	end
+#
+if and and hasCondition trigger shenville_gfq_0 hasItem trigger black_tooth hasItem trigger white_tooth
+	removeItem trigger black_tooth
+	removeItem trigger white_tooth
+	chat trigger "You say: ShenVille's citizen has been revenged"
+	chat trigger "Shen says: great !!! But I got a new trouble"
+	chat trigger "Shen says: Martin, my son, is going to die..."
+	removeCondition trigger shenville_gfq_0
+	addCondition trigger shenville_mq_0
+	endscript
+	end
+#
+if hasCondition trigger shenville_gfq_0
+	chat trigger "Shen says: Another ShenVille's citizen has been killed"
+	chat trigger "Shen says: his corpse was tore by bites. Please, go investigate"
+	endscript
+	end
+#
+if and hasCondition trigger shenville_pq_0 hasItem trigger crown
+	removeItem trigger crown
+	chat trigger "Shen says: thank you very much !!!"
+	chat trigger "You, hiding your wounds, say: no problem"
+	chat trigger "Shen says: I'm so sad..."
+	removeCondition trigger shenville_pq_0
+	addCondition trigger shenville_gfq_0
+	endscript
+	end
+#
+if hasCondition trigger shenville_pq_0
+	chat trigger "Shen says: where is my crown ?"
+	endscript
+	end
+#
+if hasCondition trigger shenville_0	
+	chat trigger "Shen says: pirates stolen my crown again"
+	chat trigger "Shen says: can you bring it back to me ?"
+	removeCondition trigger shenville_0
+	addCondition trigger shenville_pq_0
+	endscript
+	end
+#
+if hasCondition trigger shenville_end
+	chat trigger "Shen says: tnx again"
+	endscript
+	end
+# first meeting
+chat trigger "Shen says: Hi, I'm the leader of this land"
+chat trigger "Shen says: you are the adventurer we were waiting for"
+chat trigger "Shen says: I got some work for you, remember to talk often with me"
+chat trigger "Shen says: and with the guys on the bar, they'll help you"
+addCondition trigger shenville_0
+endscript
+
+
+
+
+
+
+

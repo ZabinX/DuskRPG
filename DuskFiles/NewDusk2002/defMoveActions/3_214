@@ -1,0 +1,15 @@
+if ! isPlayer trigger
+  endscript
+end
+chat trigger "The entrance reads: Guild of Weavers, Tapestry Workers, and Myrridic Spinners."
+chat trigger "The doorman sees you approach and explains that only guild members may enter."
+if ! hasCondition trigger umbra3
+  inc trigger locy 1
+  endscript
+end
+order trigger "emote gives Gabriella's token to the doorman."
+chat trigger "The doorman responds: Oh, you have a one time pass.  Why didn't you say so?"
+order trigger "emote walks inside."
+removeCondition trigger umbra3
+removeCondition trigger umbra2
+endscript

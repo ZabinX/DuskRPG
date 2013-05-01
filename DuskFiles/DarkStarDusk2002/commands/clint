@@ -1,0 +1,27 @@
+if < trigger privs 3
+	chat trigger "huh?"
+	endscript
+end
+if variableisstring param0	
+	livingthing target param0
+	if ! isplayer target
+		chat trigger concat concat "'" param0 " ' is not a living creature."
+		endscript
+	end
+	set target locxy 394 394
+	set target hp 5
+	order trigger concat concat "gecho A giant anvil falls on  " name target " crushing every bone in his body killing him ."
+	addcondition target safe
+	removecondition target invis
+	removecondition target detect invis
+	removecondition target armor
+	removecondition target bless
+	removecondition target hpregen
+	removecondition target hero
+	chat target " You end up in hell...The domain of Cyril....the god of Chaos!"	
+end
+endscript
+
+
+
+

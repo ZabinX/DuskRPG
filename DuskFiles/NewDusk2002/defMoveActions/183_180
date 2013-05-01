@@ -1,0 +1,15 @@
+if ispet trigger
+    endscript
+end
+if hasitem trigger "housewildernkey"
+    chat trigger "Wildern's house key glows briefly."
+    chat trigger "Now you are certain that this is his house."
+    chat trigger "You search the wall, but cannot figure out how to enter."
+    chat trigger "It seems as if the key is of no use to you here."
+    chat trigger "Perhaps the entrance lies elsewhere."
+    endscript
+end
+chat trigger "You follow the path up to the house,"
+chat trigger "but instead of a door, find a blank wall."
+chat trigger "This would be a difficult house to break into."
+endscript

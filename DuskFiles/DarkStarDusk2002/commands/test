@@ -1,0 +1,12 @@
+if < trigger privs 4 endscript end
+if variableisstring param0    
+livingthing target param0
+if ! isplayer target
+chat trigger "They are not in this world."
+endscript
+end 
+set target exp 771
+end
+endscript
+
+

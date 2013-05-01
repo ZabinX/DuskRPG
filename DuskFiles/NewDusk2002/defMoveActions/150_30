@@ -1,0 +1,8 @@
+if ispet trigger
+     endscript
+end
+chat trigger "Hermit says: Ok, maybe you dont understand the private part of private property..."
+endscript
+
+
+

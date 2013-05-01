@@ -1,0 +1,7 @@
+if ! isPlayer trigger
+	endscript
+	end
+#
+chat trigger "darko says: I forgot to tell you that I'm the first one..."
+inc trigger locy 2
+endscript

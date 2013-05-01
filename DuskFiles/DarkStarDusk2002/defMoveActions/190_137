@@ -1,0 +1,13 @@
+if ! hascondition trigger "kamikaze"
+inc trigger locy -1
+chat trigger "Only Kamikaze is aloud here."
+endscript
+end
+chat trigger "Home."
+endscript
+
+
+
+
+
+

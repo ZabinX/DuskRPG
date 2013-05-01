@@ -1,0 +1,5 @@
+set trigger locxy 86 52
+chat trigger "Welcome back to Old Sanctuary"
+endscript
+
+

@@ -1,0 +1,6 @@
+inc trigger exp 20000
+removeitem trigger fixup
+endscript
+
+
+

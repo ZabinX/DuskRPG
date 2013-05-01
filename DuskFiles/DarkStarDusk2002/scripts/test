@@ -1,0 +1,5 @@
+if ! hasItem trigger flaming arrows
+order trigger "unwear hell crossbow"
+chat trigger "you must get some Flaming Arrows to shoot!"
+end
+endscript

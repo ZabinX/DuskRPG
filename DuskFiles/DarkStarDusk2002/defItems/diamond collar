@@ -1,0 +1,20 @@
+type
+armor
+kind
+neck
+description
+A collar made of Diamond
+mod
+150
+cost
+1200
+image
+7
+onWear
+diamondoff
+durability
+999999
+
+
+
+

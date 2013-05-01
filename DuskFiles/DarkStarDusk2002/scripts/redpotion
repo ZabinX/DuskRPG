@@ -1,0 +1,6 @@
+set trigger hp trigger maxhp
+chat trigger "Your wounds close up as you swallow the cherry flavored liquid."
+removeitem trigger "Red Potion"
+endscript
+
+

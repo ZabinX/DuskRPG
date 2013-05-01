@@ -1,0 +1,13 @@
+type
+weapon
+description
+a long sword
+cost
+100
+mod
+150
+image
+9
+durability
+6000
+.

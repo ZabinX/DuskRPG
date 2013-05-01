@@ -1,0 +1,54 @@
+maxhp
+3500
+maxsp
+20
+stre
+200
+inte
+100
+dext
+200
+wisd
+100
+cons
+200
+skill
+Dodge
+60
+skill
+Double Attack
+60
+skill
+Triple Attack
+80
+skill
+Quadruple Attack
+50
+wield
+expert sword
+arms
+titanium sleeves
+legs
+titanium leggings
+torso
+titanium suit
+waist
+titanium belt
+neck
+none
+skull
+titanium helmet
+eyes
+none
+hands
+titanium gauntlets
+image
+25
+bravery
+0.9
+giveitem
+cyprus staff
+1.0
+.
+
+

@@ -1,0 +1,8 @@
+livingthing s "Silencer"
+inc s maxhp 10000
+set s hp s maxhp
+inc s strengthbonus 100
+chat trigger "Silencer boosted."
+endscript
+
+

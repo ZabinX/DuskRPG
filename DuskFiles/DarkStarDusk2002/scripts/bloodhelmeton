@@ -1,0 +1,10 @@
+if < trigger stre 220
+order trigger "unwear blood helmet"
+chat trigger "You dont have enough Strength to wear this."
+endscript
+end
+if < trigger dext 170
+order trigger "unwear blood helmet"
+chat trigger "You dont have enough Stamina to wear this"
+endscript
+

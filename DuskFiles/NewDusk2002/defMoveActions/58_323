@@ -1,0 +1,34 @@
+# The dude that unlocks the key, lowest level reward for quest
+# Key is in the couch east of here
+if isPet trigger
+     endscript
+end
+if hascondition trigger fwkeyfind1
+     chat trigger "Priest says: Oh no i lost the key the high priest will kill me :("
+     addcondition trigger fwkeyfind2
+     removecondition trigger fwkeyfind1
+     inc trigger locy 1
+     endscript
+end
+if hasitem trigger basement_key
+     chat trigger "Priest says: Wow u found it thx alot man, u just saved my ass have this for a reward."
+     inc trigger exp 500
+     inc trigger cash 500
+     removeitem trigger basement_key
+     inc trigger locy 1
+     addcondition trigger fwquestfinal
+     endscript
+end
+chat trigger "Priest says: Im busy go away."
+inc trigger locy 1
+endscript
+
+
+
+
+
+
+
+
+
+

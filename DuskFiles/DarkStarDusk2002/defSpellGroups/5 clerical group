@@ -1,0 +1,10 @@
+#Create Food: Creates food in your hand for eating
+#
+#
+if > caster wisd * rand 100
+	chat caster "A sandwich appears in your hand."
+	giveitem caster "sandwich"
+	endscript
+end
+chat caster "You search your mind for the words to conjure food, but fail to find them."
+endscript

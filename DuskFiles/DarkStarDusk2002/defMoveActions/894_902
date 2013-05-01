@@ -1,0 +1,3 @@
+addcondition trigger "hunger"
+addcondition trigger "bless"
+endscript

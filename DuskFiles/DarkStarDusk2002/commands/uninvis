@@ -1,0 +1,11 @@
+#This is just an example command that repeats the first parameter passed by the player.
+if hascondition trigger invis
+	chat trigger "You are no longer invisible."
+	removecondition trigger "invis"
+	endscript
+end
+chat trigger "huh?"
+endscript
+
+
+

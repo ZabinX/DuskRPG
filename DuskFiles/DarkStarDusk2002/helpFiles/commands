@@ -1,0 +1,29 @@
+--Commands--
+
+Chat commands:
+gossip(;) - Heard by everyone in the game world. (ex. "gossip Hello World!" or ";Hello World!")
+say(') - Heard by all people within your visible range.
+clan(:) - Heard by everyone in your clan. (or noone if you are not in a clan)
+tell(/) - Heard by player who you tell to. (ex. "tell Tom hey!" or "/Tom hey!")
+emote(.) - Performs an action. (ex. "emote sticks out his tongue" or ".sticks out his tongue")
+
+Game Commands:
+west(w),east(e),north(n),south(s) - Moves character one square.
+goto - (This command is used by the mouse when you click, there is no reason to type it) Character walks in a path to the entered loc. (ex. "goto 7 42")
+who - Shows a list of online players.
+attack,kill,a - Attacks a character or baddie. (ex. "attack vampire 1" or "a vampire 1")
+look - Shows a mob's level and hp or a player's hp. (ex. "look vampire 1")
+give - Gives an object or gp to another player. (ex. "give Tom long sword" or "give Tom gp 1000")
+follow - Follows a player. (ex "follow Tom")
+unfollow - Forces a player or pet to stop following you. (ex "unfollow Mooch")
+leave - Stops following.
+unclan - Leaves the clan you're currently in.
+order - Orders someone under your control to do something. (ex. "order Bunbun wear cloak")
+title - Changes your title. (ex. "title the magnificent.")
+description - Changes your description. (ex. "description Wow, that Tom is quite the lady-killer")
+audio - Tells you whether you currently have audio off or on.
+audio off/on - Turns audio off or on
+
+Clan Leader Commands:
+addmember - invites someone to join your clan. (ex. "addmember Tom")
+kick - kicks a player out of your clan. (ex. "kick somemeanperson")

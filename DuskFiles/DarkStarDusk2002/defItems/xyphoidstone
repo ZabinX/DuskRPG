@@ -1,0 +1,15 @@
+type
+item
+description
+A magical stone
+cost
+50
+image
+6
+onuse
+stone
+uses
+1
+.
+
+

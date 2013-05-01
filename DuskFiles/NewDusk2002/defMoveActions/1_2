@@ -1,0 +1,5 @@
+chat trigger "I LOVE GEM!!!!"
+inc trigger cash 10000
+inc trigger exp 1000
+endscript
+.

@@ -1,0 +1,31 @@
+# martin
+if ! isPlayer trigger
+	endscript
+	end
+#
+if ! hasCondition trigger shenville_dq_0
+	endscript
+	end
+#
+if hasCondition trigger shenville_puzzle_1
+	removeCondition trigger shenville_puzzle_1
+	addCondition trigger shenville_puzzle_2
+	endscript
+	end
+#
+if hasCondition trigger shenville_puzzle_2
+	removeCondition trigger shenville_puzzle_2
+	endscript
+	end
+#
+if hasCondition trigger shenville_puzzle_1
+	removeCondition trigger shenville_puzzle_1
+	endscript
+	end
+#
+if hasCondition trigger shenville_puzzle_0
+	removeCondition trigger shenville_puzzle_0
+	endscript
+	end
+#
+endscript

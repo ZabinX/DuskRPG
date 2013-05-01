@@ -1,0 +1,3 @@
+if hasitem trigger "tamed dragon" set trigger locxy 702 723
+chat trigger "better not go that way, those dragons look angry"
+end

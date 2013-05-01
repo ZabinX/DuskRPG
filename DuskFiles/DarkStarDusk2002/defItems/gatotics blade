@@ -1,0 +1,21 @@
+type
+weapon
+description
+gatotics very scary blade!!! run!!!
+cost
+100000
+mod
+500
+image
+9
+onWear
+gat
+range
+500
+.
+
+
+
+
+
+

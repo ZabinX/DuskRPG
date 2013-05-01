@@ -1,0 +1,5 @@
+inc trigger strengthbonus -10
+inc trigger ACbonus -10
+inc trigger dexterity bonus -10
+removecondition trigger invis
+removecondition trigger "detect invis"

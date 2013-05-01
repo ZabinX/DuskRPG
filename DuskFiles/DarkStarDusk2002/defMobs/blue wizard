@@ -1,0 +1,27 @@
+maxhp
+4000
+maxsp
+500
+stre
+45
+inte
+50
+dext
+75
+cons
+10
+wisd
+30
+group relation
+0.99
+faction
+wizard
+skill
+Double Attack
+100
+image
+15
+giveitem
+Bluestone
+1.0
+.

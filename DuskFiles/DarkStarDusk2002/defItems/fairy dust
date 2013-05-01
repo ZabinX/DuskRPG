@@ -1,0 +1,16 @@
+type
+item
+description
+some magical dust made by fairies...
+cost
+1
+image
+6
+onuse
+fairy dust
+uses
+1
+.
+
+
+

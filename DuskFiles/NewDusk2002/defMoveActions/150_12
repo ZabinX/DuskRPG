@@ -1,0 +1,26 @@
+# flowris
+#
+# only players
+if not isPlayer trigger
+	endscript
+	end
+#
+# only clan leaders
+if < trigger privs 1
+	chat trigger "Only clan leaders can conquer the shrine"
+	inc trigger locx -1
+	endscript
+	end
+#
+# check clan
+if not isClan trigger global unredowner
+	if hasCondition trigger unredconquestattempt
+		chat trigger "You tried to conquer Unred's Shrine recently, try later"
+		inc trigger locx -1
+		endscript
+		end
+	chat trigger "Warning: if you enter, shrine's owners will be alerted"
+	end
+endscript
+
+

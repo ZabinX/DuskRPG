@@ -1,0 +1,6 @@
+giveItem trigger Excalibur
+set trigger locxy 104 30
+chat trigger " You pull on Excalibur stuck in the stone and it slides right out, hmm I guess anyone can do it...cool."
+endscript
+
+

@@ -1,0 +1,7 @@
+if ! hascondition trigger "inbath"
+    addcondition trigger "hot springs"
+    addcondition trigger "inbath"
+    chat trigger "As you step into the hot springs, you feel your mind and body begin to heal."
+    endscript
+end
+endscript

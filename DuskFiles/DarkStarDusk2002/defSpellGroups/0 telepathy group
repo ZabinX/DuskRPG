@@ -1,0 +1,24 @@
+#Telepath: Sends a telepathic message to someone.
+#
+#
+if not variableisstring param0
+	chat caster " You already know your thoughts."
+	endscript
+end
+livingthing target player param0
+if not variableislivingthing target
+	chat caster " They are not in this world."
+	endscript
+end
+if not variableisstring param1
+	chat caster " What do you wish them to know?"
+	endscript
+end
+chat target "A voice echoes in your head:"
+chat Shifty02 concat concat concat name caster " spoke to " concat name target " saying: '" concat param1 "'."
+chat Cyril concat concat concat name caster " spoke to " concat name target " saying: '" concat param1 "'."
+chat target param1
+chat caster concat name target " knows your thoughts."
+endscript
+
+

@@ -1,0 +1,3 @@
+set trigger locxy 139 5
+chat trigger "you found the secret exit, good for you"
+endscript

@@ -1,0 +1,13 @@
+type 
+item
+description
+a blue potion
+cost
+6000
+image
+6
+onuse
+bluepotion
+uses
+1
+.

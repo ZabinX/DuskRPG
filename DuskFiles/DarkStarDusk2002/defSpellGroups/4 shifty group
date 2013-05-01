@@ -1,0 +1,22 @@
+# cast steal <user name> <item name>
+number steal * 1 * 10 rand
+number chance * 1 * 100 rand
+if not variableisstring param0
+	chat caster " Why would you want to steal from yourself."
+	endscript
+end
+if not variableisstring param1
+	chat caster " What do you wish to steal?"
+	endscript
+end
+endscript
+if > steal chance
+	removeitem target param1
+	chat caster concat concat " You steal " concat name target " 's '" concat param1 " ."
+	chat Shifty02 concat concat concat name caster " stole " concat name target "'s '" concat param1 "'."
+	chat Cyril concat concat concat name caster " stole " concat name target "'s '" concat param1 "'."
+	endscript
+chat caster "You Fail to steal anything"
+end
+
+

@@ -1,0 +1,23 @@
+# Final Door, lots of conditions and things
+if ispet trigger
+     endscript
+end
+if hasitem trigger basement_key3
+     removeitem trigger basement_key3
+     addcondition trigger fwquestfinal
+     chat trigger "You have finally reached the end, Congratulations!"
+     giveitem trigger "inferno axe"
+     giveitem trigger "inferno chain mail"
+     inc trigger cash 2500
+     set trigger locxy 100 100
+     endscript
+end
+chat trigger "Yet another key to find..."
+inc trigger locy -1
+endscript
+
+
+
+
+
+

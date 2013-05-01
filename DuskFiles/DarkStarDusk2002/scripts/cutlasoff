@@ -1,0 +1,13 @@
+if > trigger cp 1500
+	inc trigger strengthbonus -50
+	inc trigger dexteritybonus -50
+	inc trigger acbonus -50
+chat trigger " You feel your body calm down. "
+endscript
+end
+if < trigger cp 1500
+	unwear trigger Cutlas Supreme
+	chat trigger " You are not strong enough to weild this weapon. "
+endscript
+
+

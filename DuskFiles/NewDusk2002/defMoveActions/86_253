@@ -1,0 +1,13 @@
+if not isPlayer trigger
+	endscript
+	end
+#
+if < trigger cp 2000
+	chat trigger "You need 2000 CP to enter."
+	chat trigger "You must experience more."
+	endscript
+end
+set trigger locxy 200 300
+endscript
+
+

@@ -1,0 +1,13 @@
+if isPlayer trigger
+  chat trigger "The subterranean pool flows gently from southeast to west.  Occasionally you see a small white fish swim by."
+end
+if isPet trigger
+  number chance * 100 rand
+  if < chance 80
+    chat trigger concat "Your pet leaps after a fish - and misses.  You are now being followed by a very wet " name trigger
+    endscript
+  end
+  chat trigger "Your pet leaps after a fish, and emerges with a flapping tail in its mouth."
+  chat trigger concat "You are now being followed by a very content " name trigger
+end
+endscript

@@ -1,0 +1,6 @@
+chat trigger "Gulp"
+removecondition trigger thirst
+addcondition trigger nothirst
+endscript
+
+

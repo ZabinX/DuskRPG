@@ -1,0 +1,130 @@
+# inspect command: usage - inspect [target]
+#
+# for gods only
+#
+if < trigger privs 3
+	chat trigger "huh?"
+	endscript
+end
+#
+# caster =  trigger, because of command usage (not spell)
+#
+livingthing caster trigger
+livingthing target caster
+number difT 0
+#
+# did the user specify a target?
+#
+if variableisstring param0	
+	livingthing target param0
+	if ! or or isplayer target ispet target ismob target
+		chat trigger concat concat "'" param0 " ' is not a living creature."
+		endscript
+	end
+	number difT 1
+end
+#
+# (you can't spy on ppl higer than you :)
+#
+if < caster privs target privs
+	chat trigger "You're not spying on your boss are you?"
+	endscript
+end
+#
+# variable declaration
+#
+number x target locX
+number y target locY
+number cp target cp
+number gp target cash
+number exp target exp
+number hp target hp
+number maxHp target maxHp
+number hpBonus target hpBonus
+number mp target mp
+number maxmp target maxMp
+number mpBonus target mpBonus
+number str target stre
+number int target inte
+number dex target dext
+number con target cons
+number wis target wisd
+number strB target streBonus
+number intB target inteBonus
+number dexB target dextBonus
+number conB target consBonus
+number wisB target wisdBonus
+number ac target ac
+number damMod target damMod
+number privs target privs
+number dodge target skill "Dodge"
+number double target skill "Double Attack"
+number tripple target skill "Triple Attack"
+number quadruple target skill "Quadruple Attack"
+number clerical target skill "clerical group"
+number druidic target skill "druidic group"
+number enchantment target skill "enchantment group"
+number telepathy target skill "telepathy group"
+number bahamut target skill "bahamut"
+number black target skill "black magic group"
+number god target skill "god group"
+number special target skill "special group"
+#
+# notify them of the change
+#
+chat caster concat concat concat concat "Name: " name target concat " (" cp " cp)" concat concat "  Loc:  " x concat "/" y
+chat caster concat "Security: " privs
+chat caster concat concat concat "Cash: " gp concat " gp + " exp " exp"
+chat caster concat concat concat concat "HP: " hp concat "/" maxHp concat concat "(+" hpBonus ")" concat concat concat "  MP: " mp concat "/" maxMp concat concat "(+" mpBonus ")"
+chat caster "Stats with all bonuses:"
+chat caster concat concat "str: " str concat " + " strB
+chat caster concat concat "int: " int concat " + " intB
+chat caster concat concat "dex: " dex concat " + " dexB
+chat caster concat concat "con: " con concat " + " conB
+chat caster concat concat "wis: " wis concat " + " wisB
+chat caster concat concat "AC: " ac " (dex counted in)"
+chat caster concat "DamMod: " damMod
+if < 0 dodge
+	chat caster concat "Dodge: " dodge
+end
+if < 0 double
+	chat caster concat "Double Attack: " double
+end
+if < 0 tripple
+	chat caster concat "Triple Attack: " tripple
+end
+if < 0 quadruple
+	chat caster concat "Quadruple Attack: " quadruple
+end
+if < 0 clerical
+	chat caster concat "clerical group: " clerical
+end
+if < 0 druidic
+	chat caster concat "druidic group: " druidic
+end
+if < 0 enchantment
+	chat caster concat "enchantment group: " enchantment
+end
+if < 0 telepathy
+	chat caster concat "telepathy group: " telepathy
+end
+if < 0 special
+	chat caster concat "special group: " special
+end
+if < 0 black
+	chat caster concat "black magic group: " black
+end
+if < 0 god
+	chat caster concat "god group: " god
+end
+if < 0 bahamut
+	chat caster concat "bahamut: " bahamut
+end
+#
+# (notifying the victim if he has the same security rank)
+#
+if and ! < target privs caster privs = difT 1
+	chat target concat name caster " has inspected your stats."
+end
+endscript
+

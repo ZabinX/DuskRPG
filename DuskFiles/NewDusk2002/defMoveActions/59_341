@@ -1,0 +1,17 @@
+if isPet trigger
+     endscript
+end
+if hascondition trigger fwquestfinal
+     chat trigger "High Priest yells: SPOOOOOON !"
+     inc trigger locy -1
+     endscript
+end
+if hascondition trigger fwkeyfind1
+     chat trigger "High Preist says: I hate this stupid uniform."
+     endscript
+end
+chat trigger "High Priest says: R u sure we can trust that acolyte with the key?"
+addcondition trigger fwkeyfind1
+inc trigger locy -1
+endscript
+

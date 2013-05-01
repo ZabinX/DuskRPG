@@ -1,0 +1,4 @@
+inc trigger strengthBonus 100
+inc trigger AcBonus 10
+endscript
+

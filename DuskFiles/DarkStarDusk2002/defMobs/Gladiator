@@ -1,0 +1,36 @@
+maxhp
+4000
+maxsp
+0
+stre
+75
+inte
+30
+dext
+100
+wisd
+15
+cons
+80
+bravery
+3.0
+grouprelation
+1.0
+wield
+Long Sword
+-1
+-1
+skill
+Dodge
+10
+skill
+Double attack
+35
+image
+39
+giveitem
+Long sword
+0.35
+faction
+Grinder
+.

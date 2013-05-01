@@ -1,0 +1,35 @@
+if hasItem trigger boat
+    removeItem trigger boat
+    set trigger locxy 100 100
+end
+if hascondition trigger "allowedboat"
+    removecondition trigger "allowedboat"
+end
+if hascondition trigger "inside"
+    removecondition trigger "inside"
+end
+if hascondition trigger "ogrefight"
+    removecondition trigger "ogrefight"
+end
+if hascondition trigger "guard_attack"
+    removecondition trigger "guard_attack"
+end
+if hascondition trigger "intown"
+    removecondition trigger "intown"
+end
+if hascondition trigger "searchedhere"
+    removecondition trigger "searchedhere"
+end
+if hascondition trigger "jailed"
+    set trigger locxy 123 168
+    chat trigger "No escape for you."
+end
+if hascondition trigger "necrofight"
+     removecondition trigger "necrofight"
+end
+if strequals clan trigger "arena_fight"
+    changeclan trigger "none"
+end
+endscript
+
+

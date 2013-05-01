@@ -1,0 +1,14 @@
+if isPet trigger
+     endscript
+end
+if iswearing trigger "technomage insignia ring"
+     chat trigger "The insignia ring glows and allows you to pass through."
+     endscript
+end
+chat trigger "Only guild members are allowed to pass."
+inc trigger locx -1
+endscript
+
+
+
+

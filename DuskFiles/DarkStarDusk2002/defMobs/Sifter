@@ -1,0 +1,60 @@
+maxhp
+6500
+maxsp
+200
+stre
+300
+inte
+500
+dext
+280
+wisd
+200
+bravery
+1.00
+grouprelation
+0.05
+image
+37
+skill
+Double Attack
+100
+skill
+Dodge
+100
+skill
+Triple Attack
+60
+skill 
+Quadruple Attack
+60
+skill
+black magic group
+100
+faction
+doomknight
+wield
+morph claw
+-1
+-1
+skull
+steel helmet
+-1
+-1
+torso
+steel suit
+-1
+-1
+arms
+steel sleeves
+-1
+-1
+legs
+steel leggings
+-1
+-1
+onBattle
+waterknight
+.
+
+

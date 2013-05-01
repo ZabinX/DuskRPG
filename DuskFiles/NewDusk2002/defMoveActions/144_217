@@ -1,0 +1,16 @@
+if ispet trigger
+    endscript
+end
+if ! hascondition trigger ogrefight
+    addcondition trigger ogrefight
+    chat trigger "Ogre Warrior says:  Hear me, surface dweller, the only way for you to leave this temple alive is to kill me."
+    livingthing ow "Ogre Warrior"
+    if ismob ow
+        if hascondition ow treasure15
+            chat trigger "Ogre Warrior says:  Our treasure will never be yours, for I must live for the door to open."
+        end
+    end
+    endscript
+end
+endscript
+

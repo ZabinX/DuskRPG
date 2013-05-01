@@ -1,0 +1,11 @@
+if ispet trigger
+    endscript
+end
+if ! hascondition trigger wraithfight
+    addcondition trigger wraithfight
+    chat trigger "You must slay the Wraith God, or die trying"
+    endscript
+end
+endscript
+
+

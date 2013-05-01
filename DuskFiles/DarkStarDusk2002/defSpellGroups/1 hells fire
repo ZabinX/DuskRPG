@@ -1,0 +1,15 @@
+if isinbattle caster
+	number damage * + .1000 * rand .9 + caster stre caster inte 
+	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " The Rage of Hell tears your body! Cyrils wrath will kills him! He gets " damage " damage."
+	chat enemy caster concat concat " The Rage of Hell tears your body! Cyrils wrath will kills him! He gets " damage " damage."
+	endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript
+
+
+
+
+

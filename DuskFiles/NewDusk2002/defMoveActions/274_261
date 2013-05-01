@@ -1,0 +1,3 @@
+set trigger locxy 142 86
+removeCondition trigger safe
+endscript

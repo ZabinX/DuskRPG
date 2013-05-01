@@ -1,0 +1,8 @@
+chat trigger "
+Item Storage of 'City of Light' - commands help
+--------------------------------------------------------------
+Items                   - Shows you your current account balance.
+Place <item name>    - Places item into your storage box.
+Take <item name>     - Takes item into your storage box.
+"
+endscript

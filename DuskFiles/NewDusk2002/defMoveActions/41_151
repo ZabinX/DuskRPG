@@ -1,0 +1,5 @@
+if ispet trigger
+     endscript
+end
+chat trigger "Mage says: I hope that bastard drowns, hes been acting like an idiot n00b all day."
+endscript

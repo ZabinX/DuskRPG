@@ -1,0 +1,45 @@
+if ispet trigger
+   endscript
+end
+# Josephine is quite hungry and a bit of a thief.  A few items disappear here as well.
+if isPlayer trigger
+  if hasitem trigger apple
+    removeItem trigger apple
+  end
+  if hasitem trigger sandwich
+    removeItem trigger sandwich
+  end
+  if hasitem trigger healpotion
+    removeItem trigger healpotion
+  end
+  if hasitem trigger "runed shortsword"
+    removeItem trigger "runed shortsword"
+  end
+  if hasItem trigger ale
+    chat trigger "Wild Jo politely thanks you for the watered-down ale and returns to her meal."
+    removeItem trigger ale
+  end
+  if hasItem trigger absinthe
+    chat trigger "Wild Jo looks up and smiles.  'Thanks for the pint,' she says."
+    removeItem trigger absinthe
+    if hasCondition trigger umbra0
+      if isWearing trigger dcloak
+         chat trigger "She looks you over slowly.  Suddenly she laughs and says, 'I see you've been to Darkunder.' "
+      end
+      chat trigger "Then Wild Jo shakes her head, and asks, 'What are you doing here?  There is a whole world to explore.' "
+    end
+    if ! hasCondition trigger umbra0
+      addCondition trigger umbra0
+      chat trigger "Then Wild Jo invites you to sit down for a moment as she quaffs the absinthe."
+      chat trigger "Wild Jo says: I haven't told many, and those who've heard the tale usually don't believe me..."
+      chat trigger "Wild Jo says: but there is an entire world underneath our feet."
+      order trigger "emote says: If so, I've never seen any signs."
+      chat trigger "Wild Jo nods."
+      order trigger "emote says: Look I've heard some stories...and most are pretty far fetched."
+      order trigger "emote says: But if you want my honest opinion, I think that drink is affecting you."
+      chat trigger "Wild Jo laughs: You may doubt me, but I think if you search hard enough in the mountains to the northeast, you'll see."
+  end
+end
+set trigger locxy 154 101
+endscript
+

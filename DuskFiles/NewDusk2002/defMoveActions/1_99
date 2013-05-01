@@ -1,0 +1,9 @@
+if ! isPlayer trigger
+  endscript
+end
+number save * 50 rand
+if < trigger dext save
+  chat trigger "For a moment, the darkness seems to close in.  Suddenly your feet give way and you fall."
+  addCondition trigger dead
+end
+endscript

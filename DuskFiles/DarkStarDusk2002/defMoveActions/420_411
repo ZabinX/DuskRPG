@@ -1,0 +1,3 @@
+set trigger locxy 413 418
+chat trigger " Leaving the Chaos Sanctuary....."
+endscript

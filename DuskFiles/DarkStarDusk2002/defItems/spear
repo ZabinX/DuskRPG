@@ -1,0 +1,14 @@
+type
+ranged
+description
+A long spear, u can attack people while your out of their reach with this
+range
+2
+mod
+200
+cost
+30000
+image
+9
+.
+

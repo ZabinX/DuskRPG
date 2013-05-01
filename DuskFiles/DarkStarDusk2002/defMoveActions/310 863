@@ -1,0 +1,3 @@
+set trigger locXY 310 856
+chat trigger "Some Ruby Dragons..."
+endscript

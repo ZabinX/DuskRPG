@@ -1,0 +1,8 @@
+if ispet trigger
+    endscript
+end
+livingthing clanmage local trigger "Clan Mage"
+string command concat "cast regenerate " name trigger
+order clanmage command
+endscript
+

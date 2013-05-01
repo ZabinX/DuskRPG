@@ -1,0 +1,13 @@
+if ! isPlayer trigger
+  endscript
+end
+number g trigger cash
+if < g 1500
+  chat trigger "You explain that you can't afford the price and try to bargain.  The vender just laughs and sends you away."
+  inc trigger locx -1
+  endscript
+end
+inc trigger cash -1500
+chat trigger "The vender hands you a very finely woven dcloak."
+giveItem trigger dcloak
+endscript

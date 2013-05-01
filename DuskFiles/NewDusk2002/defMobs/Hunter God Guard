@@ -1,0 +1,47 @@
+maxhp
+5000
+maxmp
+50
+stre
+350
+dext
+100
+inte
+6
+cons
+600
+wisd
+690
+image
+5
+bravery
+1.5
+grouprelation
+1.8
+giveitem
+longsword
+0.5
+giveitem
+broad axe
+0.9
+giveitem
+war axe
+1
+faction
+hunter
+condition
+detect invis
+-1
+-1
+skill
+double attack
+50
+skill
+triple attack
+50
+skill
+dodge
+40
+.
+
+

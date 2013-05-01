@@ -1,0 +1,17 @@
+if isPet trigger
+	endscript
+end
+if < trigger cp 300
+	inc trigger locy 1
+	chat trigger " Thunder cracks and you hear a voice in the clouds: YOU DO NOT HAVE ENOUGH CHARACTER POINTS TO PASS THROUGH THESE GATES"
+end
+
+
+
+! < trigger cp 300
+	inc trigger locy 0
+end
+endscript
+
+
+

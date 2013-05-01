@@ -1,0 +1,10 @@
+set trigger hp trigger maxHP
+set trigger mp trigger maxMP
+addcondition trigger hero
+chat trigger "Wow i feel like a bomb diggidy!-"
+endscript
+
+
+
+
+

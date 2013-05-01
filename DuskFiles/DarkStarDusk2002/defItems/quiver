@@ -1,0 +1,11 @@
+type
+item
+image
+7
+description
+a quiver of arrows 
+uses
+1
+onUse
+quiver
+.

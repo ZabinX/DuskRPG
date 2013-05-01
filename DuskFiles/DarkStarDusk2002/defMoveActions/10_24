@@ -1,0 +1,10 @@
+if ! isPlayer trigger endscript end
+chat trigger "CLAN RULES:
+1.There must be at least 3 ppl when founding a clan. (one of them must be a clanleader)
+2.A clan leader must have at least 400 cp. (min. 1200, 2500)
+3.Clan members can be any cp. (min. 600, 1500)
+4.Clan alignment must be chosen when creating a clan. (good/evil/neutral)
+5.Clan name can have up to 3(5,7) characters.
+6.Elder and Ancient clans are a promotion to an existing clan."
+endscript
+

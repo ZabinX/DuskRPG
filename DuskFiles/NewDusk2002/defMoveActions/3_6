@@ -1,0 +1,11 @@
+if ispet trigger
+	endscript
+end
+if ! isclan trigger Gods
+	chat trigger "Gods only in here!"
+	inc trigger locy 1
+	if isplayer trigger
+		order trigger "leave"
+	end
+end
+endscript

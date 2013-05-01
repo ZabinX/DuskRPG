@@ -1,0 +1,14 @@
+if ! hasitem trigger "Sleeping Potion"
+	Chat trigger "Guard shouts: oi, what do you think your doing!!"
+	chat trigger "Voices in your head tell you to visit an old lady north of town."
+endscript
+	if ! hasitm trigger "vaultkey2"
+		giveitem trigger "vaultkey2"
+		chat trigger " You use the potion on the guard and he falls into a deep sleep."
+		chat trigger " You take the vault key from his pocket"
+	endscript
+		chat trigger " The guard is already asleep and you have taken the vault key."
+		chat trigger " Get on with the task at hand!"
+	end
+end
+endscript

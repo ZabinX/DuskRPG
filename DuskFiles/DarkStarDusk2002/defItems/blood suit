@@ -1,0 +1,23 @@
+type
+armor
+kind
+torso
+description
+Blood Suit
+cost
+4000
+mod
+320
+OnWear
+bloodsuiton
+image
+7
+durability
+999999
+.
+
+
+
+
+
+

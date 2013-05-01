@@ -1,0 +1,20 @@
+if ! isPlayer trigger
+	endscript
+	end
+#
+if and hasCondition trigger shenville_mq_0 hasItem trigger blackrose
+	removeItem trigger blackrose
+	chat trigger "Martin says: I feel better now !!!"
+	chat trigger "Martin BURPS out louds"
+	removeCondition trigger shenville_mq_0
+	addCondition trigger shenville_mq_1
+	endscript
+	end
+#
+if hasCondition trigger shenville_mq_0
+	chat trigger "Martin says: please help me... I'm so weak..."
+	chat trigger "Martin burps softly"
+	end
+endscript
+
+

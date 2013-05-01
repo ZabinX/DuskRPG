@@ -1,0 +1,8 @@
+if ! isPlayer trigger
+  endscript
+end
+chat trigger "A collection of gourds and melons is offered here for sale.  The shapes and varieties look unlike anything"
+chat trigger "you've seen on the surface.  Some particularly large pale green fruit catch your eye.  The vender notices and"
+chat trigger "explains that these are from something called a bloodwart.  He saws one open exposing a dark interior."
+chat trigger "The juices run deep red.  He then offers you a piece.  It tastes like bad meat."
+endscript

@@ -1,0 +1,10 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger "onlake"
+    changetile 142 91 2
+    changetile 142 89 2
+    changetile 142 90 20
+    endscript
+end
+endscript

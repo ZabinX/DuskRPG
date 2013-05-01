@@ -1,0 +1,6 @@
+if isPet trigger
+     endscript
+end
+chat trigger "Mage says: You need permison of the Guild Master to enter the forest."
+inc trigger locx 1
+endscript

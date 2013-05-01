@@ -1,0 +1,3 @@
+chat trigger " You wake up in some kind of jail cell. The guards apparently beat you within an inch of your life. Maybe there's a way out of here..."
+set trigger hp 1
+endscript

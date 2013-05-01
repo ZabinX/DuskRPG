@@ -1,0 +1,9 @@
+livingthing target trigger
+if variableisstring param0
+	livingthing target param0
+end
+removecondition target "safe"
+removeflag target "safe"
+endscript
+
+

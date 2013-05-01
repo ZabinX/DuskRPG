@@ -1,0 +1,9 @@
+if ! hasitem trigger "ale"
+chat trigger "Hey you need a drink here ya go brother"
+giveitem trigger "ale"
+endscript
+end
+chat trigger "Man dont try to rip me off you didnt even use the one i gave you last time yet"
+end
+endscript
+

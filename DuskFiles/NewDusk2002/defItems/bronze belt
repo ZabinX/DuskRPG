@@ -1,0 +1,18 @@
+type
+armor
+kind
+waist
+description
+a bronze belt
+cost
+140
+mod
+40
+image
+7
+durability
+2400
+onWear
+wear_normal_armor
+.
+

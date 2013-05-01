@@ -1,0 +1,32 @@
+maxhp
+4000
+maxsp
+100
+stre
+75
+inte
+30
+dext
+50
+wisd
+10
+cons
+80
+skill
+dodge
+50
+skill
+double attack
+90
+skill
+triple attack
+30
+bravery
+2.0
+grouprelation
+1.0
+image
+38
+faction 
+wolf
+.

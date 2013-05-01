@@ -1,0 +1,13 @@
+type
+item
+description
+andy's packed lunch
+cost
+2000
+image
+6
+onuse
+lunch
+uses
+1
+.

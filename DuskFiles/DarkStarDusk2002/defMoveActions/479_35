@@ -1,0 +1,9 @@
+chat trigger " And so you train in the ways and skills of a thief...forgetting some things while learning the ways of the criminal..."
+chat trigger " You can now find things you wouldnt ordinarily find, and open many locks with just a pick..."
+chat trigger " As with all trades, however, there are some downsides.... like you will not be welcome in some places, and you also risk being under arrest..."
+chat trigger " Now that you're a full fledged thief, you must go to the temple of forgetfullness to remove the skills you have learned."
+chat trigger " Finally, you cannot learn any new trades unless you've forgotten this one..."
+chat trigger " Good luck"
+addCondition trigger "thief"
+endscript
+

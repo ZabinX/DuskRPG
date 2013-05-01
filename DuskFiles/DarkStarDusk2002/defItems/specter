@@ -1,0 +1,37 @@
+maxhp
+20000
+maxsp
+1000
+stre
+600
+inte
+400
+dext
+500
+cons
+750
+wisd
+450
+bravery
+0.99
+group relation
+0.99
+faction
+ghost
+skill
+Dodge
+75
+skill
+Double Attack
+100
+skill
+Triple Attack
+90
+skill
+Quadruple Attack
+80
+image
+26
+wield
+burn blade
+

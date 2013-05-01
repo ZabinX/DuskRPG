@@ -1,0 +1,6 @@
+if ispet trigger
+	endscript
+end
+chat trigger "Traveling Warrior says: I like to kill newbies."
+end
+endscript

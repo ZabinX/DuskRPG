@@ -1,0 +1,3 @@
+chat trigger "You are no longer safe."
+removeflag trigger "safe"
+endscript

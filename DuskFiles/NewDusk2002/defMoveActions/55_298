@@ -1,0 +1,29 @@
+# guy that tell funny information
+if ! isPlayer trigger
+	endscript
+	end
+#
+if hasCondition trigger shenville_dq_0
+	chat trigger "The guys says: I'm serious this time:"
+	chat trigger "THe guy says: to enter into the portal keep in mind previous quests..."
+	endscript
+	end
+#
+if hasCondition trigger shenville_mq_0
+	chat trigger "They guy says: Martin is a lovable kid... he burps often !"
+	endscript
+	end
+#
+if hasCondition trigger shenville_gfq_0
+	chat trigger "The guy says: poor man... he was so good... I got to console his wife :-)"
+	endscript
+	end
+#
+if hasCondition trigger shenville_pq_0
+	chat trigger "The guy says: lol... they always steal Shen's crown !"
+	endscript
+	end
+#
+chat trigger "The guy says: hi"
+endscript
+

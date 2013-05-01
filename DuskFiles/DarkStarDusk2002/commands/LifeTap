@@ -1,0 +1,263 @@
+#Life tap command for healers	
+number lifetap trigger skill "Life Tap"
+if > 0 lifetap
+chat trigger " You must be part of the Healers guild."
+endscript
+end
+if > 5 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -40
+inc target hp 40
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 10 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -80
+inc target hp 80
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 15 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -120
+inc target hp 120
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 20 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -160
+inc target hp 160
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 25 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -200
+inc target hp 200
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 30 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -240
+inc target hp 240
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 35 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -280
+inc target hp 280
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 40 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -320
+inc target hp 320
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 45 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -360
+inc target hp 360
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 50 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -400
+inc target hp 400
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 55 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -440
+inc target hp 440
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 60 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -480
+inc target hp 480
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 65 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -520
+inc target hp 520
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 70 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -560
+inc target hp 560
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 75 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -600
+inc target hp 600
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 80 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -640
+inc target hp 640
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 85 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -680
+inc target hp 680
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 90 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -720
+inc target hp 720
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 95 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -760
+inc target hp 760
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if > 100 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -800
+inc target hp 800
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+end
+if = 100 lifetap
+if variableisstring param0	
+	livingthing target param0
+inc trigger hp -820
+inc target hp 820
+chat target concat concat " Some of " name trigger " 's life was given up to heal you."
+chat trigger concat " You give up some of your life to heal " name target " ."
+endscript
+end
+chat trigger " Theres no need to give up some of your own life to heal yourself!"
+endscript
+
+		
+
+
+			
+

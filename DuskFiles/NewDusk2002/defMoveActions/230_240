@@ -1,0 +1,3 @@
+set trigger locxy 100 100
+chat trigger " Welcome back to this town"
+endscript

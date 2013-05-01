@@ -1,0 +1,7 @@
+if hasitem trigger "mega fire" set trigger locxy 600 650
+chat trigger "You have beaten then Super Dragon."
+end
+if ! hasitem trigger "mega fire"
+chat trigger "If you beat the Super Dragon you get something special."
+endscript
+

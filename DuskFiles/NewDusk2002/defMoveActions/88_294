@@ -1,0 +1,10 @@
+if ! isPlayer trigger
+	endscript
+	end
+if hasItem trigger zagokey
+	removeItem trigger zagokey
+	inc trigger locy 1
+	endscript
+	end
+inc trigger locy -1
+endscript

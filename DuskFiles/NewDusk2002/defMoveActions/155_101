@@ -1,0 +1,11 @@
+if isPlayer trigger
+  if hasCondition trigger umbra0
+    endscript
+  end
+  chat trigger "As you get closer, you suddenly realize the dark figure is a woman.  Then it hits you.  This is Wild Josephine,"
+  chat trigger "the almost mythic heroine for whom the bar is (mis)named.  You've heard crazy tales, but like any sensible"
+  chat trigger "person you'd rejected most of them.  However, as your eyes wander over here many scars, the doubts begin"
+  chat trigger "to fade."
+  chat trigger "Then it occurs to you, perhaps you should offer her a drink."
+ end
+endscript

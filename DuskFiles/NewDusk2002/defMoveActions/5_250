@@ -1,0 +1,6 @@
+if hasitem trigger "fraggy key"
+    set trigger locxy 100 100
+    endscript
+end
+chat trigger "You cannot leave without the key."
+endscript

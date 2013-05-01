@@ -1,0 +1,84 @@
+#To comment, use a pound symbol (#)
+#You cannot put comments in between a preference name and the value.
+#
+# NOTE: PREFS FILE DOES NOT SEEM TO LIKE BLANK LINES
+#              USE AN EMPTY COMMENT FOR SPACING
+#
+#What port will the server run on:
+port
+7474
+#
+#Where have you stored the game resources:
+#WARNING: Make sure this address is followed by a slash!!
+rcaddress
+http://66.134.60.66/wesowin/newdusk/newrc/
+#
+rcname
+newdusk
+#
+#How many connections will you allow to your server (0=infinite):
+maxconnections
+0
+#
+tracker off
+#
+trackerport
+7475
+#
+name
+New Dusk
+#
+site
+http://darkstardusk.net/wesowin/newdusk/client.html
+#
+#How much gp should a pet cost:
+petcost
+100
+#
+#Should the game check use line-of-sight
+lineofsight on
+#
+#Should the game use AI (Artificial Intelligence)
+ai on
+#
+#Only a player from a given IP address
+uniqueIPFilter on
+#
+#Should the game tell the client to use music:
+#NOTE:Java applets do not currently support midi, so this feature is useless
+music off
+#
+#What is the image number of merchants and signs?
+merchantimage
+0
+signimage
+1
+#
+#How much should it cost to train?
+traincost
+100
+#
+#How much exp should a player win by defeating someone of the exact same strength?
+expgainmod
+15
+#
+#How many seconds should it take for mobs to respawn?
+mobrespawnspeed
+300
+#
+#How far should a player be allowed to see?
+viewrange
+5
+#How large can player titles be?
+titlecap
+30
+#How large can player messages be?
+messagecap
+120
+#How fast are mobs allowed to move? (default is 1 second = 1000)
+mobticks
+1000
+#How fast are players allowed to move? (default is 1/4 second = 250)
+playerticks
+250
+.

@@ -1,0 +1,27 @@
+# flowris
+#
+if isplayer trigger
+	order trigger leave
+end
+if ispet trigger
+	endscript
+end
+if hasCondition trigger safe
+	removeCondition trigger safe
+	removeflag trigger safe
+end
+#
+number var * 3 rand
+if = var 0
+	set trigger locxy 195 312
+	endscript
+end
+if = var 1
+	set trigger locxy 200 312
+	endscript
+end
+if = var 2
+	set trigger locxy 205 312
+	endscript
+end
+endscript

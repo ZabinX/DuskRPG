@@ -1,0 +1,6 @@
+if isPlayer trigger
+  if ! hasCondition trigger umbra1
+    chat trigger "You emerge from the darkness."
+  end
+end
+endscript

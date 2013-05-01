@@ -1,0 +1,7 @@
+inc trigger hp -50
+if < trigger hp 0
+	set trigger locxy 394 394
+	chat trigger " You have died"
+	removeCondition trigger cursed
+end
+endscript

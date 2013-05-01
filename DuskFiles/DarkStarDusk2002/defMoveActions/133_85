@@ -1,0 +1,7 @@
+set trigger hp trigger maxHp
+chat trigger " You feel refreshed. After takeing that nice nap in your room."
+endscript
+
+
+
+

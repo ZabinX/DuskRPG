@@ -1,0 +1,21 @@
+type
+armor
+kind
+waist
+desription
+A belt made of Diamond
+mod
+200
+cost
+600
+image
+7
+onWear
+diamondoff
+durability
+999999
+
+
+
+
+

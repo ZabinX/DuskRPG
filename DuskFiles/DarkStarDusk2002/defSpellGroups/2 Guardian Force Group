@@ -1,0 +1,16 @@
+#Levithan: causes Minor damage to enemy.
+#
+#
+if isinbattle caster
+	number damage * 160 * 3 rand
+	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " You call upon a Guardian Force-Levithan-to attack " name enemy caster ", Leviathan explodes and forms a tidal wave doing " damage "  damage."
+	chat enemy caster concat concat " The tidal wave knocks you down and since your under water you drown doing " damage "  damage."
+	endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript
+
+
+

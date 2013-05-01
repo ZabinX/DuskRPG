@@ -1,0 +1,10 @@
+if ispet trigger
+    endscript
+end
+if not hasitem trigger "boat"
+    chat trigger "The Spirit of Tilgovi blesses you with a boat."
+    addcondition trigger "allowedboat"
+    giveitem trigger "boat"
+    endscript
+end
+endscript

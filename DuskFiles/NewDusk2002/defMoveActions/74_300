@@ -1,0 +1,41 @@
+if not isPlayer trigger
+     endscript
+end
+#
+livingThing b local trigger black
+livingThing w local trigger white
+#
+if ! hascondition trigger guard_attack
+    addcondition trigger guard_attack
+    if hasCondition trigger safe
+        removeCondition trigger safe
+    end
+#
+    if ismob b
+        order b wake
+#        number origbx b locx
+#        number origby b locy
+        order b concat "a " name trigger
+#
+    end
+    if ismob w
+        order w wake
+#        number origwx w locx
+#       number origwy w locy
+        order w concat "a " name trigger
+        set w locxy 75 300
+    end
+#
+if isMob b
+        set b locxy 73 300
+	end
+if isMob w
+        set w locxy 75 300
+	end
+end
+#
+endscript
+
+
+
+

@@ -1,0 +1,7 @@
+if isPlayer trigger
+  if hasCondition trigger umbra2
+    removeCondition trigger umbra2
+     chat trigger "The bridge ends on a platform.  Someone may have heard you coming."
+  end
+end
+endscript

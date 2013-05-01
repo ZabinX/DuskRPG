@@ -1,0 +1,8 @@
+if ispet trigger
+endscript
+end
+if ! hascondition trigger "goku"
+	chat trigger "This isnt your room!."
+	inc trigger locx -1
+endscript
+end

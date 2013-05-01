@@ -1,0 +1,7 @@
+if ! hasitem trigger "Key5"
+chat trigger " You have to kill the boss first"
+endscript
+set trigger locxy 37 993
+end
+
+

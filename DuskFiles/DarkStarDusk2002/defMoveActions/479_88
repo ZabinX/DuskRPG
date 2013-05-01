@@ -1,0 +1,67 @@
+chat trigger " Watts says: lemme see that ore you have and ill see what i can do."
+if ! hasItem trigger "bronze ore"
+	chat trigger " okay, no bronze ore, lets see what else you have"
+	endscript
+end
+if hasItem trigger "bronze ore"
+	chat trigger " okay, heres some bronze ore, lets make some bronze stuff."
+	if hasItem trigger "generic tunic"
+		removeitem trigger "generic tunic"
+		removeitem trigger "bronze ore"
+		giveitem trigger "bronze suit"
+		chat trigger " Here's a bronze suit!"
+		inc trigger cash -3000
+		if < trigger cash 3000
+			inc trigger locy 2
+			endscript
+		end
+		endscript
+	end
+	if ! hasItem trigger "generic tunic"
+		if hasItem trigger "generic helmet"
+			removeitem trigger "generic helmet"
+			removeitem trigger "bronze ore"
+			giveitem trigger "bronze helmet"
+			chat trigger " Here's a bronze helmet!"
+			inc trigger cash -3000
+			if < trigger cash 3000
+				inc trigger locy 2
+				endscript
+			end
+			endscript
+		end
+		if ! hasItem trigger "generic helmet"
+			if hasItem trigger "generic shield"
+				removeitem trigger "generic shield"
+				removeitem trigger "bronze ore"
+				giveitem trigger "bronze shield"
+				chat trigger " Here's a bronze shield!"
+				inc trigger cash -3000
+				if < trigger cash 3000
+					inc trigger locy 2
+					endscript
+				end
+				endscript
+			end
+			if ! hasItem trigger "generic shield"
+				if hasItem trigger "generic sword"
+					removeitem trigger "generic sword"
+					removeitem trigger "bronze ore"
+					giveitem trigger "bronze sword"
+					chat trigger " Here's a bronze sword!"
+					inc trigger cash -3000
+					if < trigger cash 3000
+						inc trigger locy 2
+						endscript
+					end
+					endscript
+				end
+end
+endscript
+	  
+
+
+
+
+
+

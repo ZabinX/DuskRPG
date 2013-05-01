@@ -1,0 +1,3 @@
+set trigger locxy 955 5
+chat trigger "Good Bye fellow anarchist"
+endscirpt

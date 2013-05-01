@@ -1,0 +1,13 @@
+if ispet trigger
+endscript
+end
+if ! hasitem trigger "MansionKey"
+	inc trigger locy 1
+	chat trigger "You are not allowed any further"
+	order trigger leave
+endscript
+end
+chat trigger concat concat " Welcome to the " name trigger " Mansion"
+endscript
+
+

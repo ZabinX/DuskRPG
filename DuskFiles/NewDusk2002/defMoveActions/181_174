@@ -1,0 +1,5 @@
+if hascondition trigger "searchedhere"
+    removecondition trigger "searchedhere"
+end
+set trigger locxy 22 226
+endscript

@@ -1,0 +1,97 @@
+removeitem trigger "rare spell component"
+number numcomponents 20
+number choice * rand numcomponents
+if = choice 0
+    giveitem trigger "Ice Dragon Scale"
+end
+if = choice 1
+    giveitem trigger "Ice Dragon Scale"
+end
+if = choice 2
+    giveitem trigger "Ice Dragon Tooth"
+end
+if = choice 3
+    giveitem trigger "Ice Dragon Tooth"
+end
+if = choice 4
+    giveitem trigger "Ice Dragon Blood"
+end
+if = choice 5
+    giveitem trigger "Ice Dragon Blood"
+end
+if = choice 6
+    giveitem trigger "Fire Dragon Tooth"
+end
+if = choice 7
+    giveitem trigger "Fire Dragon Tooth"
+end
+if = choice 8
+    giveitem trigger "Fire Dragon Blood"
+end
+if = choice 9
+    giveitem trigger "Fire Dragon Blood"
+end
+if = choice 10
+    giveitem trigger "Fire Dragon Scale"
+end
+if = choice 11
+    giveitem trigger "Fire Dragon Scale"
+end
+if = choice 12
+    giveitem trigger "Lightning Dragon Tooth"
+end
+if = choice 13
+    giveitem trigger "Lightning Dragon Tooth"
+end
+if = choice 14
+    giveitem trigger "Lightning Dragon Scale"
+end
+if = choice 15
+    giveitem trigger "Lightning Dragon Scale"
+end
+if = choice 16
+    giveitem trigger "Magic Hammer"
+end
+if = choice 17
+    giveitem trigger "Magic Hammer"
+end
+if = choice 18
+    giveitem trigger "Thors Blood"
+end
+if = choice 19
+    giveitem trigger "Thors Blood"
+end
+if hascondition trigger ogrefight
+    chat trigger "The body of the Ogre Warrior dissolves into a swirling vortex of light, and you are pulled in."
+    removecondition trigger ogrefight
+    set trigger locxy 100 100
+    livingthing ow "Ogre Warrior"
+    if ismob ow
+        if hascondition ow ogrefight
+            removecondition ow ogrefight
+        end
+        if hascondition ow treasure15
+            changetile 144 226 11
+            changetile 144 227 0
+            changetile 144 228 0
+            changetile 144 229 0
+            changetile 144 230 0
+            changetile 144 231 11
+            endscript
+        end
+    end
+    endscript
+end
+if hascondition trigger wraithfight
+    chat trigger "The body of the Wraith God dissolves into a swirling vortex of light, and you are pulled in."
+    removecondition trigger wraithfight
+    set trigger locxy 100 100
+end
+# firewalls part :P
+if hascondition trigger necrofight
+     chat trigger "The skin of the necromancer turns to dust, and the skeleton makes one last feeble attempt at killing you but falls to the ground."
+     chat trigger "A dark vortex opens and drags you in."
+     removecondition trigger necrofight
+     set trigger locxy 100 100
+end
+endscript

@@ -1,0 +1,36 @@
+if < trigger privs 3
+	chat trigger "huh?"
+	endscript
+end
+if variableisstring param0	
+	livingthing target param0
+	if ! isplayer target
+		chat trigger concat concat "'" param0 " ' is not a living creature."
+		endscript
+	end
+	set target locxy 394 394
+	set target hp 5
+	order trigger concat concat "gecho " name target " has spontaneously combusted! "
+	set target maxhp 2000
+	set target maxmp 2000
+	set target locxy 1 1
+	set trigger strength 250
+	set trigger intelligence 167
+	set trigger dexterity 109
+	set trigger wisdom 100
+	set trigger constitution 100
+            
+	endscript
+end
+
+
+
+
+
+
+
+
+
+
+
+

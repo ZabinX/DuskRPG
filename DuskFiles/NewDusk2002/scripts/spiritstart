@@ -1,0 +1,7 @@
+if < trigger cp 3500
+    chat trigger "You must experience more before you can wield this sword."
+    order trigger "unwear spirit mace"
+    endscript
+end
+inc trigger strengthbonus 60
+endscript

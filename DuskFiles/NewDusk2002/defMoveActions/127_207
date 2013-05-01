@@ -1,0 +1,3 @@
+set trigger locxy 143 198
+chat trigger "You found a secret passage!"
+endscript

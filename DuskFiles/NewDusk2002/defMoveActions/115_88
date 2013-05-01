@@ -1,0 +1,8 @@
+if ispet trigger
+     endscript
+end
+addConditionWithDuration trigger tired 300
+order trigger sleep
+chat trigger "You go to sleep."
+endscript
+

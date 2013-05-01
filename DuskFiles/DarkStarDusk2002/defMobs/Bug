@@ -1,0 +1,26 @@
+maxhp
+250
+maxmp
+20
+stre
+50
+inte
+1
+dext
+65
+wisd
+25
+cons
+50
+bravery
+2.00
+grouprelation
+0.05
+image
+29
+giveitem
+bug stinger
+0.5
+faction
+bug
+.

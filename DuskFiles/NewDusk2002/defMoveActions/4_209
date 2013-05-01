@@ -1,0 +1,6 @@
+if ! isPlayer trigger
+  endscript
+end
+chat trigger "A young man mans the information desk.  He sees you and says: For one-time pass holders such as yourself,"
+chat trigger "the cost is 1500 gp for dcloaks (northern vender) and 12500 gp (southern vender) for suits for your pet."
+endscript

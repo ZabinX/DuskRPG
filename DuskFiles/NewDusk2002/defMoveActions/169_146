@@ -1,0 +1,5 @@
+if ! isPet trigger
+	set trigger locxy 100 100
+	chat trigger "Deja-vu."
+end
+endscript

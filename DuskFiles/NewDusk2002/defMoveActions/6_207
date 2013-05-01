@@ -1,0 +1,36 @@
+if ! isPlayer trigger
+  endscript
+end
+chat trigger "After standing at the leather stall for a few minutes, you notice a young woman in the back.  You state,"
+chat trigger "timidly, that you have a large order to pick up and hope that she can hear you.  It seems to have worked."
+chat trigger "Gabriella says: Let me guess.  My father sent you.  He's often making mistakes.  But let me check anyway."
+chat trigger "Gabriella looks at you for a few seconds."
+chat trigger "Gabriella whispers: Now I understand.  You're from the surface.  He's always had a soft spot for his own people."
+chat trigger "Gabriella whispers: You know, they poked his eyes out...just for seeing the city gates."
+chat trigger "Gabriella says: No, I don't see an order here for you."
+chat trigger "Gabriella whispers: We'd like to help you, but it's very dangerous for us...unless you can help my father."
+chat trigger "Gabriella looks at you hopefully."
+number c trigger cash
+if < c 300
+  order trigger "emote whispers: I'd like to help you, but I don't have any spare cash."
+  chat trigger "Gabriella looks disappointed and angry."
+  chat trigger "Gabrielly says: Then go feed the bloodwart!"
+  set trigger locxy 5 206
+  endscript
+end
+if < c 601
+  set trigger cash 0
+  chat trigger concat concat "Grabriella smiles as you hand her your last " c " gp."
+end
+if > c 600
+  inc trigger cash -600
+  chat trigger "Grabriella smiles as you hand her 600 gp."
+end
+chat trigger "Gabriella whispers: Thanks.  You're very kind."
+chat trigger "Gabriella whispers: I can't do much in exchange, but take this token.  It will get you into the Weavers Guild."
+chat trigger "Gabriella gives you a strange metal trinket."
+chat trigger "Gabriella says: Why don't you come back tomorrow."
+chat trigger "Gabriella winks as you leave."
+addCondition trigger umbra3
+set trigger locxy 5 206
+endscript

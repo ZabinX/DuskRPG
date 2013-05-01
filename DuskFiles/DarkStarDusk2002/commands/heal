@@ -1,0 +1,11 @@
+if < trigger privs 3
+	endscript
+end
+set trigger hp trigger maxHp
+set trigger mp trigger maxMp
+end
+set target hp trigger maxhp
+endscript
+
+
+

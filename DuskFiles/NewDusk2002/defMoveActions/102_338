@@ -1,0 +1,12 @@
+if hasitem trigger basement_key2
+     chat trigger "You unlock the door and they key breaks off."
+     removeitem trigger basement_key2
+     set trigger locxy 102 339
+     endscript
+end
+chat trigger "The door is locked."
+inc trigger locy -1
+endscript
+
+
+

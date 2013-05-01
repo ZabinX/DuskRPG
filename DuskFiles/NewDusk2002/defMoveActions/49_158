@@ -1,0 +1,13 @@
+if ismob trigger
+     inc trigger locy +1
+     endscript
+end
+if isPet trigger
+     endscript
+end
+chat trigger "Hope you brought some healing potions. :)"
+chat trigger "Oh yeah this quest is real hard so be at least 4k cp or higher."
+endscript
+
+
+

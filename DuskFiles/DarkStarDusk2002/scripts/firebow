@@ -1,0 +1,5 @@
+if ! hasitem trigger "flaming arrows" order trigger "unwear hell crossbow"
+chat trigger "get some Flaming Arrows to shoot"
+end
+endscript
+

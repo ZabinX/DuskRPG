@@ -1,0 +1,3 @@
+number regen trigger skill "Regeneration"
+set trigger regen 0
+endscript

@@ -1,0 +1,11 @@
+if ! hasitem trigger "vortanian news"
+giveitem trigger "vortanian news"
+chat trigger "You get the latest votanian news"
+endscript
+end
+end
+endscript
+
+
+
+

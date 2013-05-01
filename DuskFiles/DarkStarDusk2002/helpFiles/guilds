@@ -1,0 +1,74 @@
+ GUILD INFORMATION!
+
+The guilds will be opening soon! Heres what to expect!
+
+
+				GUILDS
+
+Healers Guild
+Warriors Guild
+Mage Guild
+Thieves Guild
+
+
+				GUILD SKILLS AND COMMANDS
+
+The commands are linked to the guilds skills.
+
+Healers Guild Skills and Commands
+
+Skill Name	       Command		       Effect				Usage
+
+Life Tap	                LifeTap	  Gives up some of your HP to heal a person.    LifeTap <person>
+
+Advanced Herbology    MakePotion   Uses items you have to make potions. The    MakePotion
+				   higher the skill the stronger the potions.
+Virus Vaccinations     Vaccine	   Makes a Vaccine for certain viruses.	       Vaccine/Vaccine <person>
+
+Life Force	      LifeForce   Takes energy from nature and converts to HP.  LifeForce <person>
+
+
+Warrior Guild Skills and Commands
+
+Skill Name		Command			Effect				Usage
+	
+Armor Identification    ArmorIdentify	  Allows you to see even more effects          ArmorIdentify
+					of armor and adds AC.
+War Cry			WarCry		Scares opponent and lowers there AC.           WarCry <person>
+
+BlackSmithing	         Blacksmith	   Takes metals and old weapons to make         Blacksmith
+					new ones.
+Weapon Knowledge			Can give you special hidden effects            WeaponCheck	
+					certain weapons have that you have 
+					equiped.		
+
+
+Mage Guild Skills and Commands
+
+Skill Name		Command			Effect				Usage
+
+Mana Tap	       Mana Tap		Takes energy from planet and	            ManaTap
+					converts to MP.		
+Charge			Charge		Increases damage done by spells		    Charge
+					but takes some HP.
+Mana Regeneration	ManaRegen	You regenerate more MP faster	            ManaRegen
+
+Ancient Spells	     AncientSpells	     Randomly gives you old spells that      AncientSpells
+					cannot be trained anywhere.
+
+
+Thieves Guild Skills and Commands
+
+Skill Name		Command			Effect				Usage
+
+*Lock Picking		LockPick	Randomly lets you pick locks		LockPick
+					or mess up and goto jail.
+*Steal			Steal		Steals GP randomly from person		Steal <person>
+					or may not and goto jail.
+Blend			Blend		Blend in with surroundings, not		Blend
+				        even Detect Invis can find you.
+*Experience Steal	ExpSteal	Can steal experience randomly		ExpSteal <person>
+					or you may goto jail.
+
+*Note: The skills with stars have this effect. Effect may happen, nothing will happen, or you
+go to jail.

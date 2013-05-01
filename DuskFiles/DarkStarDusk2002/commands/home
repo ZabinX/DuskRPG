@@ -1,0 +1,4 @@
+if ! hascondition trigger shifty
+endscript
+end
+set trigger locxy 90 72

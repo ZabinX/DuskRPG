@@ -1,0 +1,11 @@
+type
+weapon
+description
+a very powerful flame.
+cost
+0
+mod
+1000
+image
+36
+.

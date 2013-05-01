@@ -1,0 +1,14 @@
+if ispet trigger
+    endscript
+end
+if and = trigger cp 39
+    < trigger exp 100
+    set trigger exp 100
+    chat trigger "You now have 100 experience points.  Go visit the merchant to spend it."
+    endscript
+end
+if and = trigger cp 39
+    > trigger exp 99
+    chat trigger "Go visit the merchant and buy some Strength training."
+end
+endscript

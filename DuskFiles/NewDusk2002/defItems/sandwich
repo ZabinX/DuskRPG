@@ -1,0 +1,14 @@
+type
+food
+description
+a sandwich
+cost
+10
+image
+6
+onuse
+sandwich
+uses
+1
+.
+

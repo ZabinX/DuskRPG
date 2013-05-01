@@ -1,0 +1,22 @@
+if ispet trigger
+endscript
+end
+if ! hascondition trigger "devil"
+	chat trigger "This isnt your room!."
+	inc trigger locy 1
+endscript
+end
+if hascondition trigger enter
+inc trigger locy -1
+removecondition trigger enter
+chat trigger " Welcome home"
+endscript
+end
+if hascondition trigger exit
+chat trigger "Good Bye"
+inc trigger locy 1
+removecondition trigger exit
+endscript
+end
+inc trigger locy -1
+chat trigger " Welcome home"

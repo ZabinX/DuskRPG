@@ -1,0 +1,20 @@
+type
+weapon
+description
+an ancient sword of the Orcish dynasty.
+cost
+99999
+mod
+300
+image
+9
+OnWear
+power
+OnUnWear
+powerend
+
+
+
+owerend
+
+

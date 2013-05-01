@@ -1,0 +1,10 @@
+if isclan trigger AOP
+	inc trigger acbonus -25
+	inc trigger strengthbonus -125
+	endscript
+end
+inc trigger acBonus 100
+inc trigger strengthBonus 1250
+endscript
+.
+

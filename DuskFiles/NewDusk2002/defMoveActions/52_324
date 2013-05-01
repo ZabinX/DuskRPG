@@ -1,0 +1,26 @@
+# The second best reward
+if isPet trigger
+     endscrpit
+end
+if hasitem trigger basement_key
+     chat trigger "High Priest says: OH MY GOD, U HAVE THE KEY GIVE IT TO ME."
+     removeitem trigger basement_key 
+     chat trigger "High Priest says: Oh im sorry here have this as a reward."
+     inc trigger exp 1000
+     inc trigger cash 1000
+     addcondition trigger fwquestfinal
+     endscript
+end
+if hascondition trigger fwquest
+     chat trigger "High Priest says: Spooky place aint it?"
+     endscript
+end
+chat trigger "High Priest says: I hear that strange things happen in the basement at night."
+chat trigger "High Priest says: I wonder what happens down there."
+endscript
+
+
+
+
+
+

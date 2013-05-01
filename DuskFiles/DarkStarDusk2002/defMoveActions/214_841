@@ -1,0 +1,15 @@
+if ispet trigger
+endscript
+end
+if hasitem trigger "master quest suit"
+chat trigger "You already got one wait till your's breaks or sell it and try again"
+set trigger locxy 200 900
+endscript
+end
+set trigger locxy 200 900
+chat trigger "A Master Quest Suit appers in your inventory"
+giveitem trigger "master quest suit"
+removeitem trigger questkey
+endscript
+
+

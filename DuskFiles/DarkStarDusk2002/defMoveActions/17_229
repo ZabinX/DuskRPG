@@ -1,0 +1,3 @@
+chat trigger " You enter a dark cave...."
+set trigger locxy 600 600
+endscript

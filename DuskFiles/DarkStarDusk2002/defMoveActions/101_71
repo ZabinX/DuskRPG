@@ -1,0 +1,12 @@
+if ispet trigger
+endscript
+end
+if ! hascondition trigger "kenny"
+	chat trigger "This isnt your room!."
+	inc trigger locy 1
+endscript
+end
+chat trigger " Welcome home Kenny."
+
+
+

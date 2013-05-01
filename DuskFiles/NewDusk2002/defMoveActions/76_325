@@ -1,0 +1,5 @@
+chat trigger "You step through the door, and go further into the basement."
+chat trigger "No turning back now."
+set trigger locxy 85 321
+endscript
+

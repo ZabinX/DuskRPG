@@ -1,0 +1,17 @@
+type
+armor
+kind
+skull
+description
+a metalic spiked helmet
+cost
+25000
+mod
+180
+image
+4
+durability
+9999999999
+.
+
+

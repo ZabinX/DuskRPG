@@ -1,0 +1,8 @@
+if hasitem trigger portalkey
+chat trigger "You quickly search around to see if you can find anything else, but with no avail."
+endscript
+end
+giveitem trigger portalkey
+chat trigger "Inside the keyhole, you find a weird-shaped key. Holding it, you wonder what it is for."
+endscript
+

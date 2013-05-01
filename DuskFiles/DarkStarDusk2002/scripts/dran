@@ -1,0 +1,23 @@
+if < trigger stre 200
+chat trigger "you need 200 strength to wield this weapon"
+order trigger "unwear dran sword"
+endscript
+end
+if < trigger dext 105
+chat trigger "you must have 200 stamina to wield this weapon"
+order trigger "unwear dran sword"
+end
+endscipt
+if < trigger cp 2000
+order trigger "unwear dran sword"
+chat trigger "you must have 1800 cp to wield this weapon"
+end
+endscript
+
+
+
+
+
+
+
+

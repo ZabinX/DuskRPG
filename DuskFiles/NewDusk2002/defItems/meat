@@ -1,0 +1,13 @@
+type
+food
+description
+some fresh meat, sure beats a sandwich
+cost
+10
+image
+6
+onuse
+meat
+uses
+1
+.

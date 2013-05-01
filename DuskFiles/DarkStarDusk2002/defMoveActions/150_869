@@ -1,0 +1,8 @@
+if hasitem trigger "reans key"
+chat trigger "Welcoem to your room"
+endscript
+end
+inc trigger locy 1
+chat trigger "This is Reans Room"
+end
+endscript

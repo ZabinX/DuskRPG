@@ -1,0 +1,34 @@
+if isinbattle caster
+	number damage * + .1 * rand .2 + caster stre caster inte 	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " Bones of the dead rise from the ground and explode into deadly sharp shards at " name enemy caster " and do " damage " damage."
+	chat enemy caster concat concat " Bone shards fly at you doing " damage " damage."
+if isinbattle caster
+	number damage * + .1 * rand .2 + caster stre caster inte 	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " Bones of the dead rise from the ground and explode into deadly sharp shards at " name enemy caster " and do " damage " damage."
+	chat enemy caster concat concat " Bone shards fly at you doing " damage " damage."
+if isinbattle caster
+	number damage * + .1 * rand .2 + caster stre caster inte 	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " Bones of the dead rise from the ground and explode into deadly sharp shards at " name enemy caster " and do " damage " damage."
+	chat enemy caster concat concat " Bone shards fly at you doing " damage " damage
+if isinbattle caster
+	number damage * + .1 * rand .2 + caster stre caster inte 	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " Bones of the dead rise from the ground and explode into deadly sharp shards at " name enemy caster " and do " damage " damage."
+	chat enemy caster concat concat " Bone shards fly at you doing " damage " damage."
+if isinbattle caster
+	number damage * + .1 * rand .2 + caster stre caster inte 	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " Bones of the dead rise from the ground and explode into deadly sharp shards at " name enemy caster " and do " damage " damage."
+	chat enemy caster concat concat " Bone shards fly at you doing " damage " damage."
+
+endscript
+end
+
+chat caster " You must be in battle to cast this"
+endscript
+
+
+

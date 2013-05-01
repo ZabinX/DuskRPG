@@ -1,0 +1,7 @@
+if ispet trigger
+    endscript
+end
+if ! strequals global strabo_name_maxcp "none"
+    chat trigger concat global strabo_name_maxcp " is the strongest warrior to visit this castle."
+end
+endscript

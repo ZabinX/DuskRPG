@@ -1,0 +1,6 @@
+if ispet trigger
+	endscript
+end
+chat trigger "Your body feels cold, and the cold water makes you fall asleep, you awake not sure wether you are alive or dead"
+set trigger locxy 100 100
+endscript

@@ -1,0 +1,21 @@
+if ! isPlayer trigger
+  endscript
+end
+if hasCondition trigger umbra2
+  chat trigger "The trader senses your approach and just shakes his head.  He mumbles under his breath, 'To many blows"
+  chat trigger " to the head, I guess.' "
+  endscript
+end
+chat trigger "A dazzling array of finely woven fabrics decorates the table.  The blind trader colorfully describes the wares"
+chat trigger "and encourages you to touch each piece as he describes the manufacturing process for obtaining the delicate"
+number b * rand 3
+if < b 2
+  chat trigger "weave.  You consider purchasing something, but decide not to spend the money."
+  endscript
+end
+chat trigger "weave.  You select a particularly nice headband and reach out to hand him the money.  But as soon as his"
+chat trigger "hand touches you, his narration to the other customers stops.  His fingers wander across your palm."
+chat trigger "He says: 'Go see my daughter across the square and let her know you have a large order to pick up.' "
+chat trigger "Unsure, you nod and take a few steps back."
+addCondition trigger umbra2
+endscript

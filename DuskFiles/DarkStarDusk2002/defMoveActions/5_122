@@ -1,0 +1,20 @@
+if isWearing trigger gasmask
+	chat trigger " The hermit says: At last, an item created to stop the effects of the swamp."
+	endscript
+end
+if hasItem trigger gasmask
+	chat trigger " The hermit says: At last, an item created to stop the effects of the swamp."
+	endscript
+end
+if hasItem trigger neonrose
+	chat trigger " Go! and find someone that can harness the powers of this flower!"
+	endscript
+end
+if ! hasItem trigger neonrose
+	chat trigger " The hermit says: *groan* I couldn't make it through the swamp...I managed to end up in this meadow...this flower is keeping the swamp fumes out...I'll be out of commission for a while, but I'll give you this neon flower. Go and find the person that can harness the power of this flower."
+	giveItem trigger neonrose
+	endscript
+end
+endscript 
+
+

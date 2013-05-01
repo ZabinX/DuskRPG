@@ -1,0 +1,13 @@
+if ! isPlayer trigger
+	endscript
+	end
+if hasItem trigger crown
+	chat trigger "Secret passage !!!"
+	set trigger locxy 29 284
+	if hasItem trigger pkey
+		removeItem trigger pkey
+		end
+	end
+endscript
+	
+

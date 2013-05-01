@@ -1,0 +1,35 @@
+maxhp
+900
+maxmp
+10
+stre
+160
+inte
+40
+dext
+100
+cons
+100
+wisd
+50
+image
+51
+giveitem
+platinum suit
+0.3
+skill
+Dodge
+20
+skill
+Double Attack
+70
+wield
+expert sword
+-1
+-1
+torso
+steel suit
+-1
+-1
+.
+

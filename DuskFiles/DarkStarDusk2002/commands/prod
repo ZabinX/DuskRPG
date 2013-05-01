@@ -1,0 +1,24 @@
+if not variableisstring param0
+	order trigger "emote prods himself nervously."
+	endscript
+end
+livingthing target local trigger param0
+if not isplayer target
+	chat trigger "You do not see them here."
+	endscript
+end
+if and < - trigger locx target locx 2 > - trigger locx target locx -2
+	if and < - trigger locy target locy 2 > - trigger locy target locy -2
+		chat trigger concat concat "You prod " name target " gently."
+		chat target concat name trigger " prods you gently."
+		order trigger concat concat "emote prods " name target " gently."
+		endscript
+	end
+	chat trigger "You are too far away."
+	endscript
+end
+chat trigger "You are too far away."
+endscript
+
+
+

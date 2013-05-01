@@ -1,0 +1,13 @@
+type
+item
+description
+none
+cost
+0
+image
+6
+onuse
+moos
+uses
+1
+.

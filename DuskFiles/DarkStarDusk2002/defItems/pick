@@ -1,0 +1,14 @@
+type
+weapon
+description
+pick, used as a weapon as well as for picking locks
+cost
+1
+mod
+175
+image
+9
+durability
+9000
+.
+

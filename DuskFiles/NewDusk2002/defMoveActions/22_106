@@ -1,0 +1,12 @@
+if ispet trigger
+	endscript
+end
+if hasItem trigger orkgodkey
+	addCondition trigger "orkq"
+	removeItem trigger orkgodkey
+	set trigger locxy 50 10
+	chat trigger "Walk on the noble merchant to receive the bounty on the Ork God!"
+	endscript
+end
+chat trigger "You cannot leave until you have slain the Ork God."
+endscript

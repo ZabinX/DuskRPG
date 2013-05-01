@@ -1,0 +1,33 @@
+maxhp
+8100
+maxsp
+1000
+stre
+340
+inte
+90
+dext
+90
+wisd
+100
+cons
+80
+skill
+Dodge
+90
+image
+15
+bravery
+4.0
+grouprelation
+0.25
+giveitem
+demon horns
+0.5
+faction
+demon
+wear
+torso
+crystal suit
+
+

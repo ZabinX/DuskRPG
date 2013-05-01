@@ -1,0 +1,4 @@
+set trigger hp trigger maxhp
+chat trigger "You devour the soul and your health is replenished"
+removeitem trigger "soul"
+endscript

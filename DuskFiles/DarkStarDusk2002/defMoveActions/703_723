@@ -1,0 +1,5 @@
+if ! hasitem trigger "tamed dragon" set trigger locxy 702 723
+chat trigger "maybe if you could tame a dragon you could fly over this"
+end
+if hasitem trigger "tamed dragon"  chat trigger "go south to leave Dark City, go East to continue"
+endscript

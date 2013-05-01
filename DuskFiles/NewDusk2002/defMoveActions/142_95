@@ -1,0 +1,12 @@
+if ispet trigger
+    endscript
+end
+changetile 142 94 2
+changetile 142 95 20
+if ! hascondition trigger "onlake"
+    chat trigger "As you step into the lake, stones rise up to meet your feet."
+    order trigger leave
+    addcondition trigger "onlake"
+    endscript
+end
+endscript

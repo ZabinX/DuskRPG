@@ -1,0 +1,5 @@
+if ispet trigger
+    endscript
+end
+chat trigger "To use a merchant, you need to be standing on top of them."
+endscript

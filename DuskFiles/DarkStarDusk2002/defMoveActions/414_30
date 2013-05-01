@@ -1,0 +1,10 @@
+if ispet trigger
+endscript
+end
+if ! isclan trigger MTH
+inc trigger locx 1
+chat trigger " This is the MTH clan hall. Since you arent a member you are not allowed in"
+endscript
+end
+chat trigger " Welcome to the MTH clan hall"
+endscript

@@ -1,0 +1,11 @@
+giveitem trigger "Nova Fists"
+giveitem trigger "Nova Armor"
+giveitem trigger "Air Boots"
+giveitem trigger "Gaia Skull"
+removeitem trigger "Nova Package"
+endscript
+
+
+
+
+

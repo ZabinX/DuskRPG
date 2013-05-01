@@ -1,0 +1,5 @@
+set trigger locxy 131 5
+chat trigger "Thank you for your visit to Tech Town. Please come again"
+endscript
+
+

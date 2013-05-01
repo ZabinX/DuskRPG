@@ -1,0 +1,73 @@
+#
+# Wildern uses this command to test scripts
+#
+if or < trigger privs 3
+     ! strequals name trigger "wildern"
+    chat trigger "huh?"
+    endscript
+end
+#
+# So I don't have to change caster to trigger and back again
+#
+livingthing caster trigger
+if variableisstring param0
+    livingthing target param0
+end
+#
+# Test script code to follow
+#
+#if hascondition target "hot springs"
+#    removecondition target "hot springs"
+#    chat trigger concat "hot springs removed from " name target
+#end
+#if hasitem target boat
+#    removeitem target boat
+#    chat trigger "got a boat"
+#    endscript
+#end
+#if hasitem target "Strabo Key"
+#    removeitem target "Strabo Key"
+#    chat trigger "got a Strabo Key"
+#    endscript
+#end
+#
+#chat trigger concat concat global strabo_name_maxcp " has the highest cp strabo has seen " global strabo_maxcp
+#chat trigger concat global straboclan " has the key to strabo"
+#
+#
+# For fixing access to my house
+#
+#addcondition target "foundwildernkey"
+#addcondition target "foundwildernhouse"
+#
+# They only get one of the following
+#
+#addcondition target "wilderndoor1"
+#addcondition target "wilderndoor2"
+#addcondition target "wilderndoor3"
+#addcondition target "wilderndoor4"
+#addcondition target "wilderndoor5"
+#
+#
+# For when I am not testing anything
+#
+#inc target exp 3000
+#set target hp 0
+#chat trigger concat name target "'s hp has been set to 0"
+#set target strengthbonus * -1 target stre
+#inc target strengthbonus 100
+#set target acbonus 100000
+#set target cash 0
+#set target exp 0
+#set target strengthbonus 0
+#set target dexteritybonus 0
+#set target dammodbonus 0
+#set target acbonus 0
+#
+#chat trigger "Nothing being tested at the moment."
+#
+# Always end the script
+#
+endscript
+
+

@@ -1,0 +1,16 @@
+type
+weapon
+description
+big sword
+mod
+2000
+cost
+999999
+image
+7
+onWear
+ss
+onUnWear
+ssend
+
+

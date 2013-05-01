@@ -1,0 +1,5 @@
+set trigger locxy 200 200
+chat trigger " The secret door led you out."
+endscript
+
+

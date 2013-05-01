@@ -1,0 +1,3 @@
+set trigger gp 0
+chat trigger "HAHA!"
+endscript

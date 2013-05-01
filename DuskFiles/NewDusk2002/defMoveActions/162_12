@@ -1,0 +1,26 @@
+if not isPlayer trigger
+	endscript
+	end
+#
+if isClan trigger global unredowner
+	endscript
+	end
+#
+global string unredowner clan trigger
+set trigger locxy 100 100
+#removeCondition trigger helpedbyunred
+removeCondition trigger unredconquestattempt
+chat trigger "You can now call Unred's help with 'unredhelp' command"
+chat trigger "You can defend the Shrine from intruders with 'defendunred' command"
+chat trigger "You can always check Unred's Shrine owner with 'unredowner' command"
+order trigger concat concat "gossip Unred's Shrine is now owned by " global unredowner " clan"
+endscript
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,7 @@
+# 2 in / 3 out.
+if isPlayer trigger
+  if ! hasCondition trigger umbra2
+    order trigger "emote thinks, \"Not the bridge again\""
+  end
+end
+endscript

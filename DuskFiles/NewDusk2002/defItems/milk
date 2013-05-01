@@ -1,0 +1,13 @@
+type
+drink
+description
+some good, wholesome milk
+cost
+5
+image
+6
+onUse
+milk
+uses
+1
+.

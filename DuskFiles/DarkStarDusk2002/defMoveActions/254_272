@@ -1,0 +1,3 @@
+set trigger locxy 263 278
+chat trigger " Brrr....its cold down here."
+endscript

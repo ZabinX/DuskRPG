@@ -1,0 +1,37 @@
+maxhp
+500
+maxsp
+250
+stre
+125
+dext
+125
+cons
+100
+wisd
+100
+inte
+40
+faction
+gargoyle
+bravery
+.99999
+grouprelation
+.0001
+skill
+Dodge
+25
+skill
+Quadruple Attack
+25
+skill
+Triple Attack
+35
+skill
+Double Attack
+45
+image
+4
+
+
+

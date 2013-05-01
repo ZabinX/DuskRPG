@@ -1,0 +1,6 @@
+if hasitem trigger mud
+	removeitem trigger mud
+	giveitem trigger "l mud"
+	chat trigger "The mud flows in your hands and forms something that may have a use..."
+end
+endscript

@@ -1,0 +1,13 @@
+type
+item
+description
+A oddish Bloody Book
+cost
+500000
+image
+6
+onuse
+bloodybook
+uses
+1
+.

@@ -1,0 +1,10 @@
+if < trigger cp 1500
+     inc trigger locx -1
+     chat trigger "Guard says: A pathetic weak person like you should not bother to step foot in here, go away."
+     endscript
+end
+chat trigger concat "Guard says: Welcome To Luminair, " name trigger
+endscript
+
+
+

@@ -1,0 +1,10 @@
+if hasItem trigger "Chaos Tome"
+endscript
+end
+chat trigger "A clearly visible red aura surrounds the sword. You see a book that might have some information on the sword and its history. It might be useful....."
+giveItem trigger "Chaos Tome"
+chat trigger "Chaos Tome was added to your inventory."
+endscript
+end
+end
+endscript

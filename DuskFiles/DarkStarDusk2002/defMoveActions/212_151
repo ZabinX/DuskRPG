@@ -1,0 +1,6 @@
+if iswearing trigger "bronze shovel"
+	chat trigger " You found some bronze ore!"
+	giveitem trigger "bronze ore"
+	endscript
+end
+endscript

@@ -1,0 +1,3 @@
+addconditionwithduration caster "reflect" 10
+chat trigger " Reflect shield"
+endscript

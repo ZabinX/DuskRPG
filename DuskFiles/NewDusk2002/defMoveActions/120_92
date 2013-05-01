@@ -1,0 +1,52 @@
+if ispet trigger
+    endscript
+end
+if hasItem trigger "housewildernkey"
+    if hascondition trigger "wilderndoor1"
+        chat trigger "The merchant, seeing the glowing key,"
+        chat trigger "pulls aside a curtain and says 'Right this way'"
+        if hascondition trigger "inside"
+            removecondition trigger "inside"
+        end
+        if hascondition trigger "intown"
+            removecondition trigger "intown"
+        end
+        set trigger locxy 183 176
+        endscript
+    end
+    if hascondition trigger "wilderndoor2"
+        endscript
+    end
+    if hascondition trigger "wilderndoor3"
+        endscript
+    end
+    if hascondition trigger "wilderndoor4"
+        endscript
+    end
+    if hascondition trigger "wilderndoor5"
+        endscript
+    end
+    chat trigger "The merchant tells you that Wildern frequently moves the entrance to his house."
+    chat trigger "It is not here any longer."
+    number a + 1 * rand 5
+    if = a 1
+        addcondition trigger "wilderndoor1"
+        endscript
+    end
+    if = a 2
+        addcondition trigger "wilderndoor2"
+        endscript
+    end
+    if = a 3
+        addcondition trigger "wilderndoor3"
+        endscript
+    end
+    if = a 4
+        addcondition trigger "wilderndoor4"
+        endscript
+    end
+    addcondition trigger "wilderndoor5"
+end
+endscript
+
+

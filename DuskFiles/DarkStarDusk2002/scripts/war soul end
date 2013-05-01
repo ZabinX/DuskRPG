@@ -1,0 +1,8 @@
+inc trigger strengthbonus -10
+inc trigger acBonus -10
+inc trigger wisdom 10
+inc trigger intelligence 10
+chat trigger " You feel your body calm down."
+endscript
+
+

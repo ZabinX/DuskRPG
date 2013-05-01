@@ -1,0 +1,19 @@
+type
+weapon
+description
+a sword won over by a truely skilled weilder.
+cost
+5000
+mod
+800
+image
+9
+durability
+1000000000
+.
+
+
+
+
+
+

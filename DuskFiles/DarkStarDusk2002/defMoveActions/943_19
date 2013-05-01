@@ -1,0 +1,5 @@
+addcondition trigger "elderchat"
+chat trigger "Hello. My name is Salharasha. I am the village elder. So you wish to venture out into the rest of our continent?
+Well the continent has somehow become strange once that odd Meteor landed in the mountains. I give you permission
+to explore with the promise that you will free us from the powers of this strange evil!"
+endscript

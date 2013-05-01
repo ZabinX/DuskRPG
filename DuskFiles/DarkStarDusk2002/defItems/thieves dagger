@@ -1,0 +1,17 @@
+type
+weapon
+description
+the Thieves Dagger
+cost
+3600
+mod
+500
+image
+9
+onWear
+thiefdagger
+onUnWear
+thiefdaggerend
+durability
+1000000
+.

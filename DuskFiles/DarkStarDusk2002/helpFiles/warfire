@@ -1,0 +1,50 @@
+Warfire's Help
+
+News:
+
+There is a new feature on the horizon.
+
+It is a typing system as usually seen in such wonders as Fantasy MUDs.
+
+It will provide "typed" mobs and weapons.  These weapons will give bonuses when used against certain Mobs.
+
+More details when the code is done.
+
+Commands:
+
+The new makegod command works such :
+
+makegod PlayerName Privs
+
+where Privs is an integer where:
+
+0 = normal player
+2 = Apprentice Diety
+3 = Diety
+4 = Elite Diety
+
+The new morph command works such:
+
+morph PlayerName Race
+
+where Race is one of the standard races:
+
+darkelf
+elf
+human
+demon
+ice demon
+lizard
+orc
+Wizard
+
+These are both Master God commands.
+
+The new script command log works such:
+
+log trigger "What was done"
+
+This then prints "Trigger was logged as: What was done" directly to the log.  But it in move actions where you believe people are abusing a tile.
+
+Message ends - Warfire the Code God
+

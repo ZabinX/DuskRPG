@@ -1,0 +1,11 @@
+if ! isclan trigger HAOD-AC
+order trigger unwear shifty war plate
+chat trigger " You are not of the HAOD-AC clan so you may not wear the HAOD armour"
+removeitem trigger shifty war plate
+endscript
+end
+inc trigger intelligenceBonus 50
+inc trigger wisdomBonus 50
+inc trigger dexterityBonus 50
+chat trigger "The Power of HAOD-AC Flows Through You"
+end

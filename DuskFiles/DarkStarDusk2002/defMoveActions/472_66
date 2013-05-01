@@ -1,0 +1,4 @@
+removeCondition trigger "thirst"
+chat trigger "You step in the clear water and take a big gulp. Your thirst seems to have dissappeared."
+endscript
+

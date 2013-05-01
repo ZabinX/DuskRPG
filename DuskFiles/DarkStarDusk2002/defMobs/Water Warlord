@@ -1,0 +1,64 @@
+maxhp
+5300
+maxsp
+200
+stre
+300
+inte
+100
+dext
+280
+wisd
+9
+bravery
+1.00
+grouprelation
+0.05
+image
+51
+skill
+Double Attack
+100
+skill
+Dodge
+40
+skill
+Triple Attack
+40
+skill 
+Quadruple Attack
+20
+skill
+black magic group
+100
+giveitem
+solar sword
+0.02
+faction
+doomknight
+wield
+solar sword
+-1
+-1
+skull
+titanium helmet
+-1
+-1
+torso
+titanium suit
+-1
+-1
+arms
+titanium sleeves
+-1
+-1
+legs
+steel leggings
+-1
+-1
+onBattle
+waterknight
+.
+
+
+

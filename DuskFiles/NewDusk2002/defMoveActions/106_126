@@ -1,0 +1,10 @@
+if ispet trigger
+    endscript
+end
+if = trigger cp 39
+    chat trigger "You need to spend your experience."
+    inc trigger locy -1
+    endscript
+end
+chat trigger "Strength is one of the most important stats."
+endscript

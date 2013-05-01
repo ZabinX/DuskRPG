@@ -1,0 +1,6 @@
+if isPlayer trigger
+  chat trigger "You enter a very odd cavern.  Large mushrooms, shaped like large crimini grow from the floor."
+  chat trigger "At your feet are many strange humanoids with a strong blue cast to their skin.  Their songs fill"
+  chat trigger "the air.  You have a sudden urge to kill them."
+end
+endscript

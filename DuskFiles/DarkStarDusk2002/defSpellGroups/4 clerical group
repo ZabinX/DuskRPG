@@ -1,0 +1,10 @@
+#Create Drink: Creates drink in your hand for eating
+#
+#
+if > caster wisd * rand 100
+	chat caster "Some ale appears in your hand."
+	giveitem caster "ale"
+	endscript
+end
+chat caster "You search your mind for the words to conjure drink, but fail to find them."
+endscript

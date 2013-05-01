@@ -1,0 +1,19 @@
+if < trigger privs 5 endscript end
+if variableisstring param0	
+	livingthing target param0
+	if ! isplayer target
+		chat trigger "They are not in this world."
+		endscript
+	end
+	set target maxHp 10000
+	set target hp target maxHp
+	set target maxMp 10000
+	set target mp target maxMp	
+	set target strength 100
+	set target intelligence 100
+	set target dexterity 100
+	set target wisdom 100
+	set target constitution 100
+	set target strength 100
+end
+endscript

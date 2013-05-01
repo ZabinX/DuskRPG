@@ -1,0 +1,19 @@
+if > trigger cp 2500
+inc trigger locy -1
+chat trigger "Your to strong for this quest"
+
+endscript
+end
+if ! hasitem trigger enterencekey
+chat trigger "Get an enterence key from a quest beholder"
+inc trigger locy -1
+end
+endscript
+removeitem trigger enterencekey
+endscript
+end
+if ispet trigger 
+endscript
+end
+
+

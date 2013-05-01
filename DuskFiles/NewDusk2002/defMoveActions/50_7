@@ -1,0 +1,8 @@
+if ispet trigger
+    endscript
+end
+if ! hasCondition trigger "orkq"
+    chat trigger "You have slain the Ork God, and received your reward, leave me."
+    inc trigger locy 1
+end
+endscript

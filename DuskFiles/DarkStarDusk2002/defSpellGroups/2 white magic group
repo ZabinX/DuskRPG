@@ -1,0 +1,10 @@
+removecondition caster cursed
+removecondition caster tired
+removecondition caster safe
+removecondition caster invis
+removecondition caster thirst
+removecondition caster hunger
+chat caster " You give prayer to the gods to remove all bad effects on your body"
+endscript
+
+

@@ -1,0 +1,4 @@
+set tile 40
+inc trigger locy 20
+endscript
+

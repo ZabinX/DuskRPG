@@ -1,0 +1,13 @@
+type
+weapon
+description
+a giant powerful axe
+cost
+550
+mod
+275
+image
+10
+durability
+13000
+

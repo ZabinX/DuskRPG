@@ -1,0 +1,5 @@
+set trigger locxy 9 374
+chat trigger " Entering the mysterious cave....."
+endscript
+
+

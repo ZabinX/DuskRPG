@@ -1,0 +1,7 @@
+if isPet trigger
+     endscript
+end
+chat trigger "Priest says: Welcome to Firewall's Shrine."
+chat trigger "Priest says: Firewall is the coolest god EVER!!"
+inc trigger locy -1
+endscript

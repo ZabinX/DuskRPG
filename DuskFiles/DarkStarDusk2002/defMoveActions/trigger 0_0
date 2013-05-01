@@ -1,0 +1,6 @@
+if hasitem trigger "lizard scale"
+removeitem trigger "lizard scale"
+set trigger locxy 0 0
+endscript
+end
+set trigger locxy 17 6

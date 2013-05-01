@@ -1,0 +1,5 @@
+if isPlayer trigger
+	chat trigger "You are now entering the Market of Light."
+end
+endscript
+

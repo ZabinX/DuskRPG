@@ -1,0 +1,7 @@
+if or isPet trigger isPlayer trigger
+	if hasItem trigger boat
+		removeItem trigger boat
+		set trigger locxy 199 58
+	end
+end
+endscript

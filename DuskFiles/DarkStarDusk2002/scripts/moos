@@ -1,0 +1,5 @@
+set trigger hp trigger maxhp
+set trigger mp maxmp
+removeitem trigger moo
+chat trigger "your healed"
+endscript

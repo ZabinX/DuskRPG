@@ -1,0 +1,2 @@
+set trigger locxy 67 806
+chat trigger "You leave the town and return into the forest"

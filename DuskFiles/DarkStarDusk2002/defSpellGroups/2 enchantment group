@@ -1,0 +1,20 @@
+#Regenerate: Causes the caster to automatically regenerate hit points.
+#
+#
+if variableisstring param0 #If a target is specified
+	livingthing target local caster param0
+	if variableislivingthing target
+		chat caster concat name target "'s health begins to regenerate."
+		chat target "Your health begins to regenerate."
+		addconditionwithduration caster "hpregen" * caster inte 3
+		endscript
+	end
+	chat caster "You do not see them here."
+	endscript
+end
+#Else no target is specified
+chat caster "You begin to regenerate your health."
+addconditionwithduration caster "hpregen" * caster inte 3
+endscript
+
+

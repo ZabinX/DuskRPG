@@ -1,0 +1,3 @@
+inc trigger locx 1
+chat trigger " Sorry we are closed for 2 weeks. Will open soon! ---Cyril"
+endscript

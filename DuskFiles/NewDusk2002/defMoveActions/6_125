@@ -1,0 +1,11 @@
+order trigger "emote says: \"Ouch! Ouch! Ouch!\""
+if isPlayer trigger
+  inc trigger hp -500
+  if < trigger hp 5
+    chat trigger "You die."
+    chat trigger "<remember to decrement exp & gp>"
+    set trigger hp 5
+    set trigger locxy 100 100
+  end
+end
+endscript

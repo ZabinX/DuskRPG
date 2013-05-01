@@ -1,0 +1,8 @@
+inc trigger strengthbonus 10
+inc trigger acBonus 10
+inc trigger wisdombonus -10
+inc trigger intelligencebonus -10
+chat trigger " You feel your body flare with power."
+endscript
+
+

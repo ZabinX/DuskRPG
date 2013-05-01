@@ -1,0 +1,4 @@
+chat trigger "Ha ha ha, you are now back at the start?? Ready to start over?"
+chat trigger "I DONT CARE!! YOU START OVER ANYWAY!"
+set trigger locxy 229 273
+endscript

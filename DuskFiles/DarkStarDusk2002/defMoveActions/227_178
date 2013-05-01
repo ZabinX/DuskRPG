@@ -1,0 +1,11 @@
+if isMob trigger
+endscript
+end
+set trigger locxy 224 185
+chat trigger " The wind blows and knocks you off the building, and you wake up here."
+endscript
+end
+end
+endscript
+
+

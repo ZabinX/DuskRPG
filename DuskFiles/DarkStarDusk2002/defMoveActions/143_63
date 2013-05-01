@@ -1,0 +1,5 @@
+if hasItem trigger "Clouds sword"
+	removeItem trigger "Clouds sword"
+	set trigger locxy 143 63
+end
+endscript

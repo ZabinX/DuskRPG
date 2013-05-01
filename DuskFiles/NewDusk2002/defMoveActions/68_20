@@ -1,0 +1,29 @@
+if ispet trigger
+    endscript
+end
+if > trigger privs 1
+    endscript
+end
+livingthing keeper local trigger "Baron's Keeper"
+if ismob keeper
+    order keeper "say You do not belong in here!"
+    chat trigger "Baron's Keeper throws you out of the castle"
+    inc trigger locy 4
+    endscript
+end
+if or hascondition trigger mob_attack
+        hascondition trigger mob2_attack
+    removecondition trigger mob_attack
+    removecondition trigger mob2_attack
+    chat trigger "The guards grab you and pull you back."
+    inc trigger locy 1
+    endscript
+end
+number playercp trigger cp
+if > playercp global baron_maxcp
+    global number baron_maxcp trigger cp
+    global string baron_name_maxcp name trigger
+    chat trigger "You are the strongest warrior this castle has seen."
+    endscript
+end
+endscript

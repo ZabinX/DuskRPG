@@ -1,0 +1,4 @@
+if hasitem trigger "DraN sword" set trigger locxy 710 704
+chat trigger "!!!! you are being held back, there must be another way out"
+endscript
+

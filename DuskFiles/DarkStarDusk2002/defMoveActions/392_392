@@ -1,0 +1,7 @@
+if < trigger cp 200
+	set trigger locXY 1 1
+	chat trigger " Weaklings can't get out of hell by themself. Thank the gods."
+end
+endscript
+
+

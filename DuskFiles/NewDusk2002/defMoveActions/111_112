@@ -1,0 +1,4 @@
+set trigger locxy 251 100
+addcondition trigger foundpinefar
+endscript
+

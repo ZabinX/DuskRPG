@@ -1,0 +1,5 @@
+set trigger locxy 229 273
+chat trigger "Prepare to die, foolish mortal."
+chat trigger "Off in the distance you hear an evil laugh."
+chat trigger "A cold shiver runs down your spine."
+endscript

@@ -1,0 +1,3 @@
+giveItem "1st crystal" if isPlayer supersayanaaron
+chat trigger " You got the 1st crystal"
+endscript

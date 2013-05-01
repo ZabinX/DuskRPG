@@ -1,0 +1,30 @@
+if isPet trigger
+     endscript
+end
+if hasitem trigger spoon
+     chat trigger "You pick the lock with the spoon handle."
+     set trigger locxy 76 321
+     removeitem trigger spoon
+     chat trigger "The spoon breaks."
+     endscript
+end
+if hascondition trigger fwquestfinal
+     chat trigger "You have already defeated this quest."
+     inc trigger locy 1
+     endscript
+end
+if hasItem trigger basement_key
+     chat trigger "You unlock the door and they key breaks off."
+     removeitem trigger basement_key
+     set trigger locxy 76 321
+     endscript
+end
+chat trigger "The door appears to be locked."
+inc trigger locy 1
+endscript
+ 
+
+
+
+
+

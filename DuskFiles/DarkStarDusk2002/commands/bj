@@ -1,0 +1,5 @@
+chat trigger " deal <coins> - enter the amount of coins up to a maximum of 1000
+ hit - the dealer deals you another card.
+ stand - stops the game to see who has one
+ exit - leaves the table and exits the room." 
+

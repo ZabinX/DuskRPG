@@ -1,0 +1,14 @@
+type
+weapon
+description
+a blade forged with a warrior's soul.
+cost
+3000
+mod
+325
+image
+9
+OnWear
+war soul
+OnUnWear
+war soul end

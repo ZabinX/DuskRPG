@@ -1,0 +1,9 @@
+if < trigger cp 2500
+    chat trigger "You must be more experienced to go on this quest."
+    inc trigger locx 1
+    endscript
+end
+endscript
+
+
+

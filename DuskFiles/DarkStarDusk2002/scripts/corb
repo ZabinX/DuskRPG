@@ -1,0 +1,11 @@
+giveitem trigger "Chaos Helmet"
+giveitem trigger "Chaos Chest Plate"
+giveitem trigger "Chaos Gloves"
+giveitem trigger "Chaos Sleeves"
+giveitem trigger "Chaos Leggings"
+giveitem trigger "Chaotic Lens"
+giveitem trigger "Chaotic Amulet"
+giveItem trigger "Chaos Belt"
+giveItem trigger "Chaos Sword"
+removeitem trigger "Chaos Orb"
+endscript

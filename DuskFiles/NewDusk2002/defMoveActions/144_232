@@ -1,0 +1,22 @@
+if ispet trigger
+    endscript
+end
+if and > privs trigger 2
+  ! strequals name tirgger wildern
+    chat trigger "You do not belong here!!!!"
+    log trigger "is still nosing around."
+    set trigger locxy 100 100
+    endscript
+end
+if ! hascondition trigger foundtreasure
+    addcondition trigger foundtreasure
+    livingthing ow "Ogre Warrior"
+    if ismob ow
+        set ow locxy 144 223
+    end
+    chat trigger "You found the secret treasure room of the Ogres!"
+    log trigger "found the secret treasure room of the Ogres!"
+end
+endscript
+
+

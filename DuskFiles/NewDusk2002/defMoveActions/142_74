@@ -1,0 +1,16 @@
+if ! hasitem trigger portalkey
+chat trigger "You try to pass through the door, but it seems as if it were a veil."
+chat trigger "You notice the door has a weird-shaped keyhole."
+endscript
+end
+chat trigger "You feel as if you were being torn between worlds."
+if < trigger cp 500
+chat trigger "Following the faint path that connects you from the portal and the other side, it suddenly starts to weaken, and the path goes faint."
+inc trigger locy -2
+endscript
+end
+set trigger locxy 197 12
+endscript
+
+
+

@@ -1,0 +1,42 @@
+if < trigger stre 200
+chat trigger " Your strength must be 200 to wear this!"
+order trigger "unwear diamond suit"
+order trigger "unwear diamond sleeves"
+order trigger "unwear diamond helmet"
+order trigger "unwear diamond belt"
+order trigger "unwear diamond leggings"
+order trigger "unwear diamond sword"
+order trigger "unwear diamond collar"
+order trigger "unwear diamond facemask"
+order trigger "unwear diamond gauntlets"
+endscript
+end
+if < trigger dext 105
+chat trigger " Your stamina needs to be105 for you to wear this!"
+order trigger "unwear diamond suit"
+order trigger "unwear diamond sleeves"
+order trigger "unwear diamond helmet"
+order trigger "unwear diamond belt"
+order trigger "unwear diamond leggings"
+order trigger "unwear diamond sword"
+order trigger "unwear diamond collar"
+order trigger "unwear diamond facemask"
+order trigger "unwear diamond gauntlets"
+endscript
+end
+if < trigger cp 1400
+chat trigger " Your CP is to low to wear this"
+order trigger "unwear diamond suit"
+order trigger "unwear diamond sleeves"
+order trigger "unwear diamond helmet"
+order trigger "unwear diamond belt"
+order trigger "unwear diamond leggings"
+order trigger "unwear diamond sword"
+order trigger "unwear diamond collar"
+order trigger "unwear diamond facemask"
+order trigger "unwear diamond gauntlets"
+endscript
+
+
+
+

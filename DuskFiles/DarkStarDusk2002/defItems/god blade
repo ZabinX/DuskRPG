@@ -1,0 +1,14 @@
+type
+weapon
+description
+a blade weilding the powers of heaven
+cost
+100000
+mod
+50000
+image
+9
+onWear
+holy
+durability
+999999

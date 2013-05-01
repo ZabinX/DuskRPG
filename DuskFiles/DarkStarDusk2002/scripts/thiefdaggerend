@@ -1,0 +1,4 @@
+inc trigger strengthBonus -100
+inc trigger acBonus -20
+chat trigger " Your thievery skills increase as you wield the MTH Thieves Dagger"
+endscript

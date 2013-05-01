@@ -1,0 +1,6 @@
+if isPet trigger
+     endscript
+end
+chat trigger "Mage says: Welcome to Eluria, home of the Technomages, traveler."
+inc trigger locy 1
+endscript

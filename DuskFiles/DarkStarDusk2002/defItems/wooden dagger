@@ -1,0 +1,14 @@
+type
+weapon
+description
+a cheap wooden dagger
+cost
+0
+mod
+103
+image
+8
+durability
+3000
+.
+

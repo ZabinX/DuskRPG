@@ -1,0 +1,8 @@
+inc trigger strengthBonus 1003
+inc trigger intelligenceBonus 981
+inc trigger dexterityBonus 1004
+inc trigger wisdomBonus 997
+inc trigger constitutionBonus 1001
+inc trigger hpBonus 199990
+endscript
+

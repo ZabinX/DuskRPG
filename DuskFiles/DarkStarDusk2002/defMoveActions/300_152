@@ -1,0 +1,7 @@
+set trigger locxy 294 152
+chat trigger "Dark Star Shop"
+chat trigger "Pet Shop in the back room"
+endscript
+
+
+

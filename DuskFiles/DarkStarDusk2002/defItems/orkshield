@@ -1,0 +1,17 @@
+type
+armor
+kind
+arms
+description
+Orkish Shield
+cost
+0
+mod
+2000
+image
+7
+onWear
+orkshieldW
+onUnWear
+orkshieldU
+.

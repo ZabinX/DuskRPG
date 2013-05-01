@@ -1,0 +1,6 @@
+if not hasItem trigger sdkey
+	inc trigger locy -1
+	endscript
+	end
+removeitem trigger sdkey
+endscript

@@ -1,0 +1,29 @@
+if ispet trigger
+endscript
+end
+if hascondition trigger "guest"
+	set trigger locxy 88 74
+	chat trigger " Welcome to Shifty01's casino - North for slots - south for nothing ... yet. "
+endscript
+end
+if ! hascondition trigger "shifty"
+	chat trigger "This isnt your room!."
+	inc trigger locy -1
+endscript
+end
+if hascondition trigger enter
+inc trigger locy 1
+removecondition trigger enter
+chat trigger concat concat " Welcome home " name trigger " ."
+endscript
+end
+if hascondition trigger exit
+chat trigger concat concat "Good Bye, " name trigger " ."
+inc trigger locy -1
+removecondition trigger exit
+endscript
+end
+inc trigger locy 1
+chat trigger concat concat " Welcome home " name trigger " ."
+
+

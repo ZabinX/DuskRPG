@@ -1,0 +1,19 @@
+type
+armor
+kind
+arms
+description
+Sleeves made of Diamond
+mod
+100
+cost
+1000
+image
+7
+onWear
+diamondoff
+durability
+999999
+
+
+

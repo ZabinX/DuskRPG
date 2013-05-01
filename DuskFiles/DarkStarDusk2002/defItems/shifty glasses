@@ -1,0 +1,18 @@
+type
+armor
+kind
+eyes
+description
+Some Glasses Crafted By Shifty
+cost
+1
+mod
+50
+image
+7
+onWear
+glassesstart
+onUnWear
+glassesend
+.
+

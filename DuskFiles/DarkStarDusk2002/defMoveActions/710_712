@@ -1,0 +1,4 @@
+set trigger locxy 803 809
+chat trigger "Visit the Prisoners, and hellp the executioner out by killing a few"
+end
+endscript

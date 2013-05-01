@@ -1,0 +1,13 @@
+type
+item
+description
+a crystal box. It has armor inside.
+cost
+250000
+image
+6
+onuse
+crystalbox
+uses
+1
+.

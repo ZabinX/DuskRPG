@@ -1,0 +1,16 @@
+if ispet trigger
+if hasItem trigger Excalibur
+inc trigger locx 1
+chat trigger you already have an excalibur"
+set trigger locxy 1 1
+endscript
+end
+end
+if hasItem trigger Excalibur
+	inc trigger locx 1
+	chat trigger " You already have an exaclibur sword"
+	set trigger locxy 1 1
+end
+endscript
+
+

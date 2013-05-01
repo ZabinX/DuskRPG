@@ -1,0 +1,60 @@
+maxhp
+100
+maxsp
+0
+stre
+60
+inte
+5
+dext
+35
+wisd
+0
+cons
+7
+bravery
+0.75
+grouprelation
+0.75
+image
+35
+giveitem
+minor potion
+0.1
+faction
+DD
+Dodge
+35
+skill
+Double Attack
+30
+wield
+long sword
+-1
+-1
+arms
+iron sleeves
+-1
+-1
+legs
+iron leggings
+-1
+-1
+torso
+iron suit
+-1
+-1
+waist
+iron belt
+-1
+-1
+skull
+iron helmet
+-1
+-1
+hands
+iron gloves
+-1
+-1
+.
+

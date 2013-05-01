@@ -1,0 +1,9 @@
+chat trigger "
+You are no longer the Keeper of the Oasis!
+==================================
+ - Let's hope your succesor will be as just as you were.
+"
+removeCondition trigger peaceful
+order trigger "title the former Keeper of the Oasis."
+endscript
+

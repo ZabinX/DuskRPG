@@ -1,0 +1,24 @@
+cp scan.base scan
+echo indent indent \# >> scan
+echo indent indent \# Condition Check >> scan
+echo indent indent \# >> scan
+echo indent indent chat trigger \"They are affected by the following conditions:\" >> scan
+find ./defConditions -exec echo indent indent if hasCondition target \" {} \" \; -exec echo indent indent indent chat trigger \"    \" \" {} \" \; -exec echo indent indent end \; >> scan
+echo indent indent \# >> scan
+echo indent indent \# Inventory Check >> scan
+echo indent indent \# >> scan
+echo indent indent chat trigger \"They have the following inventory:\" >> scan
+find ./defItems -exec echo indent indent if hasItem target \" {} \" \; -exec echo indent indent indent number total target count \" {} \" \; -exec echo indent indent indent chat trigger concat concat \"    \" total \" {} \" \; -exec echo indent indent end \; >> scan
+echo indent indent \# >> scan
+echo indent indent \# Notify target if he has same or higher security rank. >> scan
+echo indent indent \# >> scan
+echo indent indent if ! \< target privs trigger privs >> scan
+echo indent indent indent  chat target concat name trigger \" has scanned your stats.\" >> scan
+echo indent indent end >> scan
+echo indent indent endscript >> scan
+echo indent end >> scan
+echo indent chat trigger \"You do not see them.\" >> scan
+echo indent endscript >> scan
+echo end >> scan
+echo chat trigger \"Pick a target to scan.\" >> scan
+echo endscript >> scan

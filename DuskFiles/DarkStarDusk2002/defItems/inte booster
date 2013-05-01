@@ -1,0 +1,14 @@
+type
+armor
+kind
+waist
+description
+boosts intellegence
+mod
+9000
+cost
+99999
+onWear
+ib
+onUnWear
+ibend

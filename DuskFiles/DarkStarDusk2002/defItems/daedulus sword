@@ -1,0 +1,13 @@
+type
+weapon
+description
+A deadly Daedulus Sword
+cost
+4000
+mod
+600
+image
+8
+durability
+10000000
+.

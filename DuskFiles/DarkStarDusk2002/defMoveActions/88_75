@@ -1,0 +1,14 @@
+if ! hascondition trigger 2
+	addcondition trigger 2
+end
+chat trigger " Welcome to BlackJack."
+if ! hascondition trigger playing
+addcondition trigger playing
+end
+if ! hascondition trigger blackjack
+addcondition trigger blackjack
+end
+chat trigger " To view a list of command type BJ"
+endscript
+
+

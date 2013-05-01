@@ -1,0 +1,222 @@
+if ispet trigger
+    endscript
+end
+if isplayer trigger
+    addcondition trigger silencer_fight
+	livingthing s "Silencer"
+    removecondition s silencer_fight
+    if isplayer trigger
+        if strequals global silencer1 "none"
+            global string silencer1 name trigger
+        end
+        if strequals global silencer2 "none"
+            global string silencer2 name trigger
+        end
+        if strequals global silencer3 "none"
+            global string silencer3 name trigger
+        end
+        if strequals global silencer4 "none"
+            global string silencer4 name trigger
+        end
+        if strequals global silencer5 "none"
+            global string silencer5 name trigger
+        end
+        if strequals global silencer6 "none"
+            global string silencer6 name trigger
+        end
+        if strequals global silencer7 "none"
+            global string silencer7 name trigger
+        end
+        if strequals global silencer8 "none"
+            global string silencer8 name trigger
+        end
+        if strequals global silencer9 "none"
+            global string silencer9 name trigger
+        end
+        if strequals global silencer10 "none"
+            global string silencer10 name trigger
+        end
+        endscript
+    end
+    endscript
+end
+if ! ismob trigger
+    endscript
+end
+if hascondition trigger silencer_fight
+    endscript
+end
+addcondition trigger silencer_fight
+global number silencer_level + global silencer_level 1
+set trigger maxhp + 600000 * 10000 global silencer_level
+set trigger hp trigger maxhp
+set trigger strengthbonus * 200 global silencer_level
+if ! strequals global silencer1 "none"
+    string s global silencer1
+    global string silencer1 "none"
+    livingthing target s
+    if isplayer s
+        if hascondition target silencer_fight
+            removecondition target silencer_fight
+            chat target "No camping allowed!"
+            if hascondition trigger allowed_boat
+                removecondition trigger allowed_boat
+                removeitem trigger boat
+            end
+            set target locxy 121 41
+        end
+    end
+end
+if ! strequals global silencer2 "none"
+    string s global silencer2
+    global string silencer2 "none"
+    livingthing target s
+    if isplayer s
+        if hascondition target silencer_fight
+            removecondition target silencer_fight
+            chat target "No camping allowed!"
+            if hascondition trigger allowed_boat
+                removecondition trigger allowed_boat
+                removeitem trigger boat
+            end
+            set target locxy 121 41
+        end
+    end
+end
+if ! strequals global silencer3 "none"
+    string s global silencer3
+    global string silencer3 "none"
+    livingthing target s
+    if isplayer s
+        if hascondition target silencer_fight
+            removecondition target silencer_fight
+            chat target "No camping allowed!"
+            if hascondition trigger allowed_boat
+                removecondition trigger allowed_boat
+                removeitem trigger boat
+            end
+            set target locxy 121 41
+        end
+    end
+end
+if ! strequals global silencer4 "none"
+    string s global silencer4
+    global string silencer4 "none"
+    livingthing target s
+    if isplayer s
+        if hascondition target silencer_fight
+            removecondition target silencer_fight
+            chat target "No camping allowed!"
+            if hascondition trigger allowed_boat
+                removecondition trigger allowed_boat
+                removeitem trigger boat
+            end
+            set target locxy 121 41
+        end
+    end
+end
+if ! strequals global silencer5 "none"
+    string s global silencer5
+    global string silencer5 "none"
+    livingthing target s
+    if isplayer s
+        if hascondition target silencer_fight
+            removecondition target silencer_fight
+            chat target "No camping allowed!"
+            if hascondition trigger allowed_boat
+                removecondition trigger allowed_boat
+                removeitem trigger boat
+            end
+            set target locxy 121 41
+        end
+    end
+end
+if ! strequals global silencer6 "none"
+    string s global silencer6
+    global string silencer6 "none"
+    livingthing target s
+    if isplayer s
+        if hascondition target silencer_fight
+            removecondition target silencer_fight
+            chat target "No camping allowed!"
+            if hascondition trigger allowed_boat
+                removecondition trigger allowed_boat
+                removeitem trigger boat
+            end
+            set target locxy 121 41
+        end
+    end
+end
+if ! strequals global silencer7 "none"
+    string s global silencer7
+    global string silencer7 "none"
+    livingthing target s
+    if isplayer s
+        if hascondition target silencer_fight
+            removecondition target silencer_fight
+            chat target "No camping allowed!"
+            if hascondition trigger allowed_boat
+                removecondition trigger allowed_boat
+                removeitem trigger boat
+            end
+            set target locxy 121 41
+        end
+    end
+end
+if ! strequals global silencer8 "none"
+    string s global silencer8
+    global string silencer8 "none"
+    livingthing target s
+    if isplayer s
+        if hascondition target silencer_fight
+            removecondition target silencer_fight
+            chat target "No camping allowed!"
+            if hascondition trigger allowed_boat
+                removecondition trigger allowed_boat
+                removeitem trigger boat
+            end
+            set target locxy 121 41
+        end
+    end
+end
+if ! strequals global silencer9 "none"
+    string s global silencer9
+    global string silencer9 "none"
+    livingthing target s
+    if isplayer s
+        if hascondition target silencer_fight
+            removecondition target silencer_fight
+            chat target "No camping allowed!"
+            if hascondition trigger allowed_boat
+                removecondition trigger allowed_boat
+                removeitem trigger boat
+            end
+            set target locxy 121 41
+        end
+    end
+end
+if ! strequals global silencer10 "none"
+    string s global silencer10
+    global string silencer10 "none"
+    livingthing target s
+    if isplayer s
+        if hascondition target silencer_fight
+            removecondition target silencer_fight
+            chat target "No camping allowed!"
+            if hascondition trigger allowed_boat
+                removecondition trigger allowed_boat
+                removeitem trigger boat
+            end
+            set target locxy 121 41
+        end
+    end
+end
+createitem "forsaken blade" 117 35
+createitem "goblin edge" 115 35
+createitem "red axe" 114 34
+createitem "gem of power" 113 35
+createitem "gem of protection" 112 34
+createitem "forsaken blade" 116 34
+endscript
+
+

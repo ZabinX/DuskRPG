@@ -1,0 +1,7 @@
+chat trigger "   The historian starts telling you a tale about the keysmiths of the Old Sanctuary."
+chat trigger "He says that the keysmiths worked wonders in mastering unlocking doors to"
+chat trigger "other worlds. He then says that they had made a portal that was by the elf halls,"
+chat trigger "and if the traveler had the key to the door, he would be able to gain access to"
+chat trigger "another part of the world. Since the decline of Old Sanctuary, the keys have been"
+chat trigger "lost under the rubble, rendering the portal inaccessable."
+endscript

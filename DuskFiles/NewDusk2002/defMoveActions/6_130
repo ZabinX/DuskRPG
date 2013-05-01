@@ -1,0 +1,3 @@
+number b trigger maxhp
+set trigger hp b
+endscript

@@ -1,0 +1,8 @@
+if ! hascondition trigger blackjack
+	chat trigger " You have to be playing blackjack to do this."
+	endscript
+end
+if ! hascondition trigger playing
+	chat trigger " Your not playing BlackJack."
+	endscript
+end

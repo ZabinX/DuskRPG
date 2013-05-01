@@ -1,0 +1,3 @@
+chat trigger "The master of thieves heals his son"
+set trigger hp trigger maxHp
+endscript

@@ -1,0 +1,5 @@
+chat trigger "*Gulp Gulp*"
+addconditionwithduration trigger nothirst 12000
+removeitem trigger ale
+endscript
+

@@ -1,0 +1,13 @@
+if hasItem trigger "dark key" set trigger locxy 715 721
+        chat trigger "You have entered DarK City"
+	endscript
+end
+if ! hasitem trigger "dark key"
+	chat trigger "Get a DarK key to enter"
+	inc trigger locx 1
+end
+endscript
+.
+
+
+

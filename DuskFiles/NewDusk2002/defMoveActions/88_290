@@ -1,0 +1,11 @@
+if ! isPlayer trigger
+	endscript
+	end
+if hasItem trigger darkokey
+	removeItem trigger darkokey
+	inc trigger locy 1
+	endscript
+	end
+inc trigger locy -1
+endscript
+

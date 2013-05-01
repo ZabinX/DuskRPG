@@ -1,0 +1,13 @@
+if isPet trigger
+	endscript
+end
+if < trigger cp 400
+	inc trigger locx -1
+end
+if ! < trigger cp 400
+	inc trigger locy -1
+end
+endscript
+
+
+

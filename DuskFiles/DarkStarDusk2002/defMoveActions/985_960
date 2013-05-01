@@ -1,0 +1,19 @@
+if isPet trigger
+	endscript
+end
+if < trigger cash 150
+	chat trigger " Innkeeper says: Sorry, but you don't have enough money to stay here."
+	inc trigger locy 1
+	endscript
+end
+if ! < trigger cash 150
+	chat trigger " Innkeeper says: You wanna stay? That'll be 300 gp."
+	chat trigger " You give the Innkeeper 150 gp."
+	inc trigger cash -150
+	inc trigger locxy -1 -1
+	chat trigger " Innkeeper says: Sweet dreams!"
+	endscript
+end
+endscript
+
+

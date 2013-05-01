@@ -1,0 +1,3 @@
+set trigger locxy 197 865
+chat trigger "No turning back now!"
+endscript

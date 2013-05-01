@@ -1,0 +1,21 @@
+type
+armor
+kind
+torso
+description
+steel plate mail
+cost
+1000
+mod
+85
+image
+7
+durability
+7500
+onWear
+steelPMW
+onUnWear
+steelPMU
+.
+
+

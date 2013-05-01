@@ -1,0 +1,14 @@
+if ! hasItem trigger opal
+	chat trigger "Be careful, there are some nasty thieves out there."
+	endscript
+end
+if hasItem trigger opal
+	chat trigger "Your leaving? All right then"
+	chat trigger "Wait a second??? Isn't that my opal?"
+	chat trigger "AAAAHHHHH!! HELP! POLICE!"
+	removeItem trigger opal
+	set trigger locxy 420 82
+	endscript
+end
+endscript
+	

@@ -1,0 +1,10 @@
+if ispet trigger
+	endscript
+end
+if hascondition trigger "orkq"
+	chat trigger "Visit the merchant to the north to receive your reward."
+	inc trigger locy -1
+	endscript
+end
+chat trigger "Walk into the shallows to be teleported to 100 100."
+endscript

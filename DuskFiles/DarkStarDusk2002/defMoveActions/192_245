@@ -1,0 +1,17 @@
+if ! hasItem trigger "Wizard Rod"
+inc trigger locy -1
+chat trigger " You cannot pass without the Wizard Rod."
+endscript
+end
+set trigger locxy 192 260
+chat trigger " Up in this room you'll find the Red wizard."
+endscript
+end
+end 
+endscript
+
+
+
+
+
+

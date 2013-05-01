@@ -1,0 +1,17 @@
+if isMob trigger
+endscript
+end
+set trigger locxy 193 268
+chat trigger " No turning back."
+endscript
+end
+end
+endscript
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+if ! hasCondition trigger "thief"
+	chat trigger "The chest is locked, oh well"
+	inc trigger locy 1
+	endscript
+end
+if hasCondition trigger "thief"
+	if ! isWearing trigger "pick"
+		chat trigger "The chest is locked, even though you're a thief, you still need a regular pick"
+		inc trigger locy 1
+		endscript
+	end
+	if isWearing trigger "pick"
+		if ! hasitem trigger "opal"
+			chat trigger "You stick your pick in the hole of the chest and move it around"
+			chat trigger "You find an opal!"
+                          		giveItem trigger opal
+			set trigger locxy 469 56
+		endscript
+		chat trigger "You already have an opal"
+		end
+	end
+end
+endscript
+
+
+		
+
+

@@ -1,0 +1,14 @@
+if ispet trigger
+	endscript
+end
+if ! hasItem trigger Forestkey
+	chat trigger "The door is locked....The forest mage must be out."
+	inc trigger locy +1
+	endscript
+end
+if hasItem trigger Forestkey
+	chat trigger "You used the forest key, but when you tried to take the key out of the door, it turned into dust..."
+	removeItem trigger Forestkey
+end
+endscript
+

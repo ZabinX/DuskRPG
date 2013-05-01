@@ -1,0 +1,13 @@
+type
+weapon
+description
+Axe used to behead prisoners
+cost
+1000
+mod
+600
+image
+10
+durability
+9999
+

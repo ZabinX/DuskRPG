@@ -1,0 +1,8 @@
+if isPlayer trigger
+	string outText concat concat " Welcome " name trigger ". Happy shopping."
+	if hasCondition trigger isInTown1
+		string outText concat concat " Thank you. " name trigger ", come again."
+	end
+	chat trigger outText
+end
+endscript

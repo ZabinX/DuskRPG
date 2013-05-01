@@ -1,0 +1,7 @@
+if ispet trigger
+    endscript
+end
+addcondition trigger necrofight
+endscript
+
+

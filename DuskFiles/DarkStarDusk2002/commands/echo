@@ -1,0 +1,6 @@
+#This is just an example command that repeats the first parameter passed by the player.
+if variableisstring param0
+	chat trigger param0
+end
+endscript
+

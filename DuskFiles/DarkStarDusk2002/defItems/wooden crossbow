@@ -1,0 +1,15 @@
+type
+ranged
+description
+a wooden crossbow
+cost
+2000
+image
+8
+mod
+400
+durability
+10000000
+range
+25
+.

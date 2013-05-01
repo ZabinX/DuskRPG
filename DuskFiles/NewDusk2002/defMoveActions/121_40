@@ -1,0 +1,34 @@
+if hascondition trigger silencer_fight
+    removecondition trigger silencer_fight
+    if strequals global silencer1 name trigger
+        global string silencer1 "none"
+    end
+    if strequals global silencer2 name trigger
+        global string silencer2 "none"
+    end
+    if strequals global silencer3 name trigger
+        global string silencer3 "none"
+    end
+    if strequals global silencer4 name trigger
+        global string silencer4 "none"
+    end
+    if strequals global silencer5 name trigger
+        global string silencer5 "none"
+    end
+    if strequals global silencer6 name trigger
+        global string silencer6 "none"
+    end
+    if strequals global silencer7 name trigger
+        global string silencer7 "none"
+    end
+    if strequals global silencer8 name trigger
+        global string silencer8 "none"
+    end
+    if strequals global silencer9 name trigger
+        global string silencer9 "none"
+    end
+    if strequals global silencer10 name trigger
+        global string silencer10 "none"
+    end
+end
+endscript

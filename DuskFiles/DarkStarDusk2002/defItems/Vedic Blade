@@ -1,0 +1,17 @@
+type
+weapon
+description
+A blade with A Fire Inside (AFI)
+cost
+4000
+mod
+700
+OnWear
+aoppower
+OnUnWear
+aoplose
+image
+9
+
+
+

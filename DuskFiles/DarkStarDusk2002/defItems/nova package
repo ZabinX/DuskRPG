@@ -1,0 +1,14 @@
+type
+item
+description
+a full package of Nova Armor.
+cost
+310000
+image
+7
+OnUse
+Nova Package
+uses
+1
+
+

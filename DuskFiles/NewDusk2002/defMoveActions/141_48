@@ -1,0 +1,6 @@
+if not isplayer trigger
+	endscript
+end
+chat trigger "Tilgovi blesses you."
+addconditionwithduration trigger "bless" 20
+endscript

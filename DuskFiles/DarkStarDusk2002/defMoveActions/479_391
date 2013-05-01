@@ -1,0 +1,9 @@
+if ! hasItem trigger key
+inc trigger locx -1
+chat trigger " You need to kill Trinexx first...."
+endscript
+end
+removeItem trigger key
+endscript
+end
+endscript

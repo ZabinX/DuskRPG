@@ -1,0 +1,3 @@
+chat trigger "Gulp"
+addconditionwithduration trigger nothirst 600
+endscript

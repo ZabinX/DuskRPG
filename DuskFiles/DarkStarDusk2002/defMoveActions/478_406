@@ -1,0 +1,22 @@
+if ! hasItem trigger "silver staff"
+inc trigger locy -1
+chat trigger " You dont have all 3 staffs....you must kill all 3 wizards."
+endscript
+end
+if ! hasItem trigger "gold staff"
+inc trigger locy -1
+chat trigger " You dont have all 3 staffs....you must kill all 3 wizards."
+endscript
+end
+if ! hasItem trigger "cyprus staff"
+inc trigger locy -1
+chat trigger " You dont have all 3 staffs....you must kill all 3 wizards."
+endscript
+end
+removeItem trigger "cyprus staff"
+removeItem trigger "gold staff"
+removeItem trigger "silver staff"
+endscript
+end
+endscript
+

@@ -1,0 +1,7 @@
+if ! isPlayer trigger
+  endscript
+end
+chat trigger "Leather goods of all shapes and sizes litter the table.  And behind the table are additional crates.  You"
+chat trigger "hear a woman's voice in the distance, but otherwise, nothing worth buying.  In general, the quality looks"
+chat trigger "inferior to the leather dealers above ground.  You politely examine a few pieces anyway."
+endscript

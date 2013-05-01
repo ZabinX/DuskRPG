@@ -1,0 +1,12 @@
+type
+weapon
+description
+a mighty scimitar glowing a light blue
+image
+9
+cost
+100000
+mod
+1500
+durability
+999999

@@ -1,0 +1,7 @@
+if ispet trigger
+     endscript
+end
+addflag trigger "AFK"
+order trigger "gossip I am 'AFK'."
+endscript
+

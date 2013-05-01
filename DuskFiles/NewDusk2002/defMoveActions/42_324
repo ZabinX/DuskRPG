@@ -1,0 +1,3 @@
+chat trigger "priest says: Sorry All the rooms are taken come back later."
+inc trigger locy 1
+endscript

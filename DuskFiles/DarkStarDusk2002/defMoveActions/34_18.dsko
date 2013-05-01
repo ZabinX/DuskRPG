@@ -1,0 +1,10 @@
+*trigger "
+		fastest(er)	slowest(er)
+barbarian	str(con)		wis(int)
+human		-		-
+elf		int(wis)		con(str)
+dwarf		con(str)		(int,wis,dex)
+halfling		dex(int)		str(con)
+orc		(str,dex)		(int,wis)
+ogre		str,con		int(wis,dex)
+darkelf		int(dex)		(str,wis,con)"  

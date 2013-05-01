@@ -1,0 +1,28 @@
+The view command
+
+usage: view <filetype> <filename>
+ex. "view item ale"
+
+You can view the following types:
+item
+conf
+mob
+command
+race
+pet
+condition
+help
+script
+spell group
+spell
+prop
+move action
+can move
+can see
+tile action
+tile move
+tile see
+
+
+tile move
+tile see

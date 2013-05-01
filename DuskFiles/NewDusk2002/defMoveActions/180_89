@@ -1,0 +1,5 @@
+if ispet trigger
+    endscript
+end
+chat trigger "That door is locked."
+endscript

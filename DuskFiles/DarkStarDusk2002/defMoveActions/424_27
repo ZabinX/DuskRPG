@@ -1,0 +1,5 @@
+if hasCondition trigger "thief"
+	set trigger locxy 429 48
+	endscript
+end
+endscript

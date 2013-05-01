@@ -1,0 +1,79 @@
+if ! hasitem trigger "key10"
+set trigger locxy 25 985
+endscript
+end
+if ! hasflag trigger "Champion"
+	chat trigger "Reward Clerk: What are you doing in here?"
+	set trigger locxy 25 985
+endscript
+end
+if ! hasitem trigger "Sword1"
+	chat trigger "Reward Clerk gives you Sword1"
+	giveitem trigger "Sword1"
+	set trigger locxy 25 985
+	remove item trigger Key10
+endscript
+end
+if ! hasitem trigger "Sword2"
+	chat trigger "Reward Clerk gives you Sword2"
+	giveitem trigger "Sword2"
+	set trigger locxy 25 985
+	remove item trigger Key10
+endscript
+end
+if ! hasitem trigger "Sword3"
+	chat trigger "Reward Clerk gives you Sword3"
+	giveitem trigger "Sword3"
+	set trigger locxy 25 985
+	remove item trigger Key10
+endscript
+end
+if ! hasitem trigger "Sword4"
+	chat trigger "Reward Clerk gives you Sword4"
+	giveitem trigger "Sword4"
+	set trigger locxy 25 985
+	remove item trigger Key10
+endscript
+end
+if ! hasitem trigger "Sword5"
+	chat trigger "Reward Clerk gives you Sword5"
+	giveitem trigger "Sword5"
+	set trigger locxy 25 985
+	remove item trigger Key10
+endscript
+end
+if ! hasitem trigger "Sword6"
+	chat trigger "Reward Clerk gives you Sword6"
+	giveitem trigger "Sword6"
+	set trigger locxy 25 985
+	remove item trigger Key10
+endscript
+end
+if ! hasitem trigger "Sword7"
+	chat trigger "Reward Clerk gives you Sword7"
+	giveitem trigger "Sword7"
+	set trigger locxy 25 985
+	remove item trigger Key10
+endscript
+end
+if ! hasitem trigger "Sword8"
+	chat trigger "Reward Clerk gives you Sword8"
+	giveitem trigger "Sword8"
+	set trigger locxy 25 985
+	remove item trigger Key10
+endscript
+end
+if ! hasitem trigger "Sword9"
+	chat trigger "Reward Clerk gives you Sword9"
+	giveitem trigger "Sword9"
+	set trigger locxy 25 985
+	remove item trigger Key10
+endscript
+end
+if ! hasitem trigger "Sword10"
+	chat trigger "Reward Clerk gives you Sword10"
+	giveitem trigger "Sword10"
+	set trigger locxy 25 985
+	remove item trigger Key10
+endscript
+end

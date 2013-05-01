@@ -1,0 +1,15 @@
+type
+armor
+kind
+hands
+description
+scaled gloves from the ruby dragons
+cost
+5000
+mod
+200
+OnWear
+ruby1
+OnUnWear
+ruby1end
+.

@@ -1,0 +1,13 @@
+type
+ranged
+description
+A very strong spear wielded by Satan, It hurts anyone else who wields it
+mod
+800
+range
+2
+cost
+90000
+onWear
+sspear
+.

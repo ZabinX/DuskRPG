@@ -1,0 +1,29 @@
+if hascondition trigger "onlake"
+    number x trigger locx
+    number y trigger locy
+    if and = x 142
+        and < y 96
+        < y 86
+            changetile x y 2
+    end
+end
+if hascondition trigger "silencer_fight"
+    removecondition trigger "silencer_fight"
+    if hascondition trigger allowed_boat
+        removecondition trigger allowed_boat
+		removeitem trigger boat
+    end
+    set trigger locxy 121 41
+end
+if hasitem trigger "Strabo Key"
+    global string strabo_name_keyholder concat name trigger " now carries the key to Castle Strabo."
+end
+if hasitem trigger "Baron Key"
+    global string baron_name_keyholder concat name trigger " now carries the key to Castle Baron."
+end
+if hasitem trigger "Kilgore Key"
+    global string kilgore_name_keyholder concat name trigger " now carries the key to Castle Kilgore."
+end
+endscript
+
+

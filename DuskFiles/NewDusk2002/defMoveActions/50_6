@@ -1,0 +1,16 @@
+# Script changed by TwiddleDee.  Without the check for the condition, followers
+# of the player were each getting the reward.
+#
+if ispet trigger
+    inc trigger locy 2
+    endscript
+end
+if hasCondition trigger "orkq"
+    chat trigger "By the great god Orky! You killed the EVIL foul ork god!!! take this as a reward for killing it!"
+    removeItem trigger orkgodkey
+    giveItem trigger "Ork Bane"
+    giveItem trigger "ork kite"
+    removeCondition trigger "orkq"
+end
+inc trigger locy 2
+endscript

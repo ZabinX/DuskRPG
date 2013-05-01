@@ -1,0 +1,10 @@
+inc trigger strengthBonus -100
+inc trigger dexterityBonus -100
+inc trigger intelligenceBonus -100
+inc trigger constitutionBonus -100
+inc trigger wisdomBonus -100
+inc trigger hpBonus -10000
+inc trigger mpBonus -10000
+inc trigger dammodBonus -500
+endscript
+

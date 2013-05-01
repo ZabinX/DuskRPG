@@ -1,0 +1,22 @@
+# The key is in here, Unlocked by the priest west of here
+if isPet trigger
+     endscrpit
+end
+if hascondition trigger fwquestfinal
+     chat trigger "You sit in a comfortable chair."
+     endscript 
+end
+if hascondition trigger fwkeyfind2
+     removecondition trigger fwkeyfind2
+     addcondition trigger fwkeyfound
+     chat trigger "You appear to have found the basement key."
+     giveitem trigger basement_key
+     chat trigger "You have found the basement key."
+     endscript
+end
+endscript
+
+
+
+
+

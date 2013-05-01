@@ -1,0 +1,24 @@
+if not isPlayer trigger
+	endscript
+	end
+#
+if not isClan trigger global unredowner
+	chat trigger "Your clan doesn't own Unred's Shrine"
+	endscript
+	end
+#
+if isInBattle trigger
+	chat trigger "That's not what Unred calls fair play :-)"
+	endscript
+	end
+# 
+if hasCondition trigger helpedbyunred
+	chat trigger "You called Unred's help recently, try later"
+	endscript
+	end
+#
+inc trigger hp 1000000
+inc trigger mp 1000000
+chat trigger "Unred heals your body and your soul"
+addConditionWithDuration trigger helpedbyunred 1000
+endscript

@@ -1,0 +1,15 @@
+type
+armor
+kind
+skull
+description
+an ugly looking mask, but it helps protect you from toxic gasses
+cost
+0
+mod
+40
+image
+6
+durability
+100000
+.

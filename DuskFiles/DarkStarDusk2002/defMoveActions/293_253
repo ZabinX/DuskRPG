@@ -1,0 +1,11 @@
+if ! hasItem trigger BiFrostKey
+inc trigger locx -1
+chat trigger " This isnt your room"
+endscript
+end
+chat trigger " Ah...nice and warm...."
+endscript
+end
+end
+endscript
+

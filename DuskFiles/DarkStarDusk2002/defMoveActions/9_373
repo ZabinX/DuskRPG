@@ -1,0 +1,6 @@
+set trigger locxy 95 8
+chat trigger " Leaving the mysterious cave...."
+endscript
+
+
+

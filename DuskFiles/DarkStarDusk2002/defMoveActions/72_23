@@ -1,0 +1,3 @@
+if isMob trigger "Morph Octopus"
+inc trigger locx -1
+endscript

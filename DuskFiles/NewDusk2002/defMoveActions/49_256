@@ -1,0 +1,8 @@
+if ispet trigger
+     endscript
+end
+chat trigger "Congratulations you have made it to the end, here is your reward."
+giveitem trigger "hell blade"
+set trigger locxy 100 100
+endscript
+

@@ -1,0 +1,4 @@
+addCondition trigger peaceful
+order trigger "title the Keeper of the Oasis."
+endscript
+

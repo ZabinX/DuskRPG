@@ -1,0 +1,5 @@
+if hasCondition trigger safe
+  removeCondition trigger safe
+  removeflag trigger safe
+end
+endscript

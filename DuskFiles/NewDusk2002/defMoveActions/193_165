@@ -1,0 +1,15 @@
+if ispet trigger
+    endscript
+end
+if ! strequals clan trigger global straboclan
+    chat trigger concat global straboclan " members only."
+    inc trigger locy -1
+    endscript
+end
+if < trigger privs 1
+    chat trigger "clan leader's private meeting room."
+    inc trigger locy -1
+    endscript
+end
+endscript
+

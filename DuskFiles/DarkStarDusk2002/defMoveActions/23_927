@@ -1,0 +1,2 @@
+set trigger locxy 12 924
+chat trigger "You walk into the tree and come out in a field."

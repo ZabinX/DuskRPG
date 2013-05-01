@@ -1,0 +1,4 @@
+if not variableisstring param0
+	order trigger "emote snores."
+	endscript
+end

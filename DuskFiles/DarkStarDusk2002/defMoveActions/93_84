@@ -1,0 +1,6 @@
+if ! name trigger "Shifty01"
+	set trigger locxy 100 100
+	chat trigger " This aint you couch. get Lost"
+	endscript
+	chat trigger " Hows your day been today Shifty01. Hope all has gone well"
+end 

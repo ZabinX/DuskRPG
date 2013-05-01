@@ -1,0 +1,16 @@
+type
+item
+description
+some ale.
+cost
+50
+image
+6
+onuse
+tpotion
+uses
+1
+.
+
+
+

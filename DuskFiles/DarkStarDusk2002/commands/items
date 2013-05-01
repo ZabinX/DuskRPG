@@ -1,0 +1,811 @@
+#Items command (for the CoL City Item Storage)
+#usage: Items
+if ! hasCondition trigger atCoLItems
+	chat trigger "huh?"
+	endscript
+end
+if hascondition trigger "1st crystal"
+	chat trigger "You have a 1st crystal in storage."
+end
+if hascondition trigger "2nd Crystal"
+	chat trigger "You have a 2nd Crystal in storage."
+end
+if hascondition trigger "3rd Crystal"
+	chat trigger "You have a 3rd Crystal in storage."
+end
+if hascondition trigger "Admantine Sickle of the Titans"
+	chat trigger "You have an Admantine Sickle of the Titans in storage."
+end
+if hascondition trigger "Air Boots"
+	chat trigger "You have a pair of Air Boots in storage."
+end
+if hascondition trigger "ale"
+	chat trigger "You have an ale in storage."
+end
+if hascondition trigger Alligator Tooth
+	chat trigger "You have a Alligator Tooth in storage."
+end
+if hascondition trigger "aluminum gloves"
+	chat trigger "You have a aluminum gloves in storage."
+end
+if hascondition trigger "aluminum helmet"
+	chat trigger "You have a aluminum helmet in storage."
+end
+if hascondition trigger aluminum leggings
+	chat trigger "You have a aluminum leggings in storage."
+end
+if hascondition trigger "aluminum suit"
+	chat trigger "You have a aluminum suit in storage."
+end
+if hascondition trigger "Ambrosia"
+	chat trigger "You have a Ambrosia in storage."
+end
+if hascondition trigger amethyst
+	chat trigger "You have a amethyst in storage."
+end
+if hascondition trigger "Ancient Sword of Einhanzer"
+	chat trigger "You have a Ancient Sword of Einhanzer in storage."
+end
+if hascondition trigger "Anti-Curse potion"
+	chat trigger "You have a Anti-Curse potion in storage."
+end
+if hascondition trigger apple
+	chat trigger "You have a apple in storage."
+end
+if hascondition trigger "assassin blade"
+	chat trigger "You have a assassin blade in storage."
+end
+if hascondition trigger "azeala"
+	chat trigger "You have a azeala in storage."
+end
+if hascondition trigger Azgant
+	chat trigger "You have a Azgant in storage."
+end
+if hascondition trigger "ball of goo"
+	chat trigger "You have a ball of goo in storage."
+end
+if hascondition trigger "Bastard Sword"
+	chat trigger "You have a Bastard Sword in storage."
+end
+if hascondition trigger bed
+	chat trigger "You have a bed in storage."
+end
+if hascondition trigger "Belt of the Giants"
+	chat trigger "You have a Belt of the Giants in storage."
+end
+if hascondition trigger "Beta"
+	chat trigger "You have a Beta in storage."
+end
+if hascondition trigger BiFrostKey
+	chat trigger "You have a BiFrostKey in storage."
+end
+if hascondition trigger "blade of annihilation"
+	chat trigger "You have a blade of annihilation in storage."
+end
+if hascondition trigger "Blade of Light"
+	chat trigger "You have a Blade of Light in storage."
+end
+if hascondition trigger Blood Belt
+	chat trigger "You have a Blood Belt in storage."
+end
+if hascondition trigger "Blood Gloves"
+	chat trigger "You have a Blood Gloves in storage."
+end
+if hascondition trigger "Blood Helmet"
+	chat trigger "You have a Blood Helmet in storage."
+end
+if hascondition trigger Blood Leggings
+	chat trigger "You have a Blood Leggings in storage."
+end
+if hascondition trigger "Blood Sleeves"
+	chat trigger "You have a Blood Sleeves in storage."
+end
+if hascondition trigger "Blood Suit"
+	chat trigger "You have a Blood Suit in storage."
+end
+if hascondition trigger Bloody Book
+	chat trigger "You have a Bloody Book in storage."
+end
+if hascondition trigger "cloth shirt"
+	chat trigger "You have a cloth shirt in storage."
+end
+if hascondition trigger "Blue Potion"
+	chat trigger "You have a Blue Potion in storage."
+end
+if hascondition trigger bluestone
+	chat trigger "You have a bluestone in storage."
+end
+if hascondition trigger "boat"
+	chat trigger "You have a boat in storage."
+end
+if hascondition trigger "book of ramaden"
+	chat trigger "You have a book of ramaden in storage."
+end
+if hascondition trigger broad sword
+	chat trigger "You have a broad sword in storage."
+end
+if hascondition trigger "bronze breastplate"
+	chat trigger "You have a bronze breastplate in storage."
+end
+if hascondition trigger "broad axe"
+	chat trigger "You have a broad axe in storage."
+end
+if hascondition trigger bronze gloves
+	chat trigger "You have a bronze gloves in storage."
+end
+if hascondition trigger "bronze helmet"
+	chat trigger "You have a bronze helmet in storage."
+end
+if hascondition trigger "bronze leggings"
+	chat trigger "You have a bronze leggings in storage."
+end
+if hascondition trigger "bronze ore"
+	chat trigger "You have a bronze ore in storage."
+end
+if hascondition trigger "bronze shield"
+	chat trigger "You have a bronze shield in storage."
+end
+if hascondition trigger "bronze shovel"
+	chat trigger "You have a bronze shovel in storage."
+end
+if hascondition trigger "bronze suit"
+	chat trigger "You have a bronze suit in storage."
+end
+if hascondition trigger "bronze sword"
+	chat trigger "You have a bronze sword in storage."
+end
+if hascondition trigger "bug stinger"
+	chat trigger "You have a bug stinger in storage."
+end
+if hascondition trigger "burn blade"
+	chat trigger "You have a burn blade in storage."
+end
+if hascondition trigger "Chaos Belt"
+	chat trigger "You have a Chaos Belt in storage."
+end
+if hascondition trigger "Chaos Chest Plate"
+	chat trigger "You have a Chaos Chest Plate in storage."
+end
+if hascondition trigger "Chaos Gloves"
+	chat trigger "You have a Chaos Gloves in storage."
+end
+if hascondition trigger "Chaos Helmet"
+	chat trigger "You have a Chaos Helmet in storage."
+end
+if hascondition trigger "Chaos leggings"
+	chat trigger "You have a Chaos leggings in storage."
+end
+if hascondition trigger "Chaos Orb"
+	chat trigger "You have a Chaos Orb in storage."
+end
+if hascondition trigger "chaos sleeves"
+	chat trigger "You have a chaos sleeves in storage."
+end
+if hascondition trigger "Chaos Sword"
+	chat trigger "You have a Chaos Sword in storage."
+end
+if hascondition trigger "Chaos Tome"
+	chat trigger "You have a Chaos Tome in storage."
+end
+if hascondition trigger "Chaotic Amulet"
+	chat trigger "You have a Chaotic Amulet in storage."
+end
+if hascondition trigger "Chaotic Lens"
+	chat trigger "You have a Chaotic Lens in storage."
+end
+if hascondition trigger "cloak of the giants"
+	chat trigger "You have a bronze leggings in storage."
+end
+if hascondition trigger "cloak of the giants"
+	chat trigger "You have a bronze leggings in storage."
+end
+if hascondition trigger "cloth shirt"
+	chat trigger "You have a cloth shirt in storage."
+end
+if hascondition trigger "Clouds sword"
+	chat trigger "You have a Clouds sword in storage."
+end
+if hascondition trigger "collar"
+	chat trigger "You have a collar in storage."
+end
+if hascondition trigger "crisps"
+	chat trigger "You have a crisps in storage."
+end
+if hascondition trigger "crystal belt"
+	chat trigger "You have a crystal belt in storage."
+end
+if hascondition trigger "Crystal Box"
+	chat trigger "You have a Crystal Box in storage."
+end
+if hascondition trigger "Crystal Gloves"
+	chat trigger "You have a Crystal Gloves in storage."
+end
+if hascondition trigger "Crystal Helmet"
+	chat trigger "You have a Crystal Helmet in storage."
+end
+if hascondition trigger "crystal leggings"
+	chat trigger "You have a crystal leggings in storage."
+end
+if hascondition trigger "Crystal Lens"
+	chat trigger "You have a Crystal Lens in storage."
+end
+if hascondition trigger "Crystal Necklace"
+	chat trigger "You have a Crystal Necklace in storage."
+end
+if hascondition trigger "crystal sleeves"
+	chat trigger "You have a crystal sleeves in storage."
+end
+if hascondition trigger "crystal suit"
+	chat trigger "You have a crystal suit in storage."
+end
+if hascondition trigger "crystal sword"
+	chat trigger "You have a crystal sword in storage."
+end
+if hascondition trigger "cuffs of the giants"
+	chat trigger "You have a cuffs of the giants in storage."
+end
+if hascondition trigger "curved dagger"
+	chat trigger "You have a curved dagger in storage."
+end
+if hascondition trigger "Cutlas"
+	chat trigger "You have a Cutlas in storage."
+end
+if hascondition trigger "cyprus staff"
+	chat trigger "You have a cyprus staff in storage."
+end
+if hascondition trigger "cyrils elixer"
+	chat trigger "You have a cyrils elixer in storage."
+end
+if hascondition trigger "dagger"
+	chat trigger "You have a dagger in storage."
+end
+if hascondition trigger "dark crystal"
+	chat trigger "You have a dark crystal in storage."
+end
+if hascondition trigger "Demon Crest Plate"
+	chat trigger "You have a Demon Crest Plate in storage."
+end
+if hascondition trigger "demon horns"
+	chat trigger "You have a demon horns in storage."
+end
+if hascondition trigger "Demons Blood"
+	chat trigger "You have a Demons Blood in storage."
+end
+if hascondition trigger "Demons Cloak"
+	chat trigger "You have a Demons Cloak in storage."
+end
+if hascondition trigger "Demons Helmet"
+	chat trigger "You have a Demons Helmet in storage."
+end
+if hascondition trigger "devilsblade"
+	chat trigger "You have a devilsblade in storage."
+end
+if hascondition trigger "diamond"
+	chat trigger "You have a diamond in storage."
+end
+if hascondition trigger "emerald"
+	chat trigger "You have a emerald in storage."
+end
+if hascondition trigger "energy saber"
+	chat trigger "You have a energy saber in storage."
+end
+if hascondition trigger "excalibur"
+	chat trigger "You have a excalibur in storage."
+end
+if hascondition trigger "expert sword"
+	chat trigger "You have a expert sword in storage."
+end
+if hascondition trigger "Eye of the Dead"
+	chat trigger "You have a Eye of the Dead in storage."
+end
+if hascondition trigger "fairy dust"
+	chat trigger "You have a fairy dust in storage."
+end
+if hascondition trigger "fire blade"
+	chat trigger "You have a fire blade in storage."
+end
+if hascondition trigger "Fireball"
+	chat trigger "You have a Fireball in storage."
+end
+if hascondition trigger "flame robe"
+	chat trigger "You have a flame robe in storage."
+end
+if hascondition trigger "Force Field"
+	chat trigger "You have a Force Field in storage."
+end
+if hascondition trigger "forest gem"
+	chat trigger "You have a forest gem in storage."
+end
+if hascondition trigger "forestkey"
+	chat trigger "You have a forestkey in storage."
+end
+if hascondition trigger "Gaia Skull"
+	chat trigger "You have a Gaia Skull in storage."
+end
+if hascondition trigger "gasmask"
+	chat trigger "You have a gasmask in storage."
+end
+if hascondition trigger "GatoticHouseKey"
+	chat trigger "You have a GatoticHouseKey in storage."
+end
+if hascondition trigger "generic helmet"
+	chat trigger "You have a generic helmet in storage."
+end
+if hascondition trigger "generic shield"
+	chat trigger "You have a generic shield in storage."
+end
+if hascondition trigger "generic sword"
+	chat trigger "You have a generic sword in storage."
+end
+if hascondition trigger "generic tunic"
+	chat trigger "You have a generic tunic in storage."
+end
+if hascondition trigger "giant axe"
+	chat trigger "You have a giant axe in storage."
+end
+if hascondition trigger "god blade"
+	chat trigger "You have a god blade in storage."
+end
+if hascondition trigger "god exp"
+	chat trigger "You have a god exp in storage."
+end
+if hascondition trigger "god gold"
+	chat trigger "You have a god gold in storage."
+end
+if hascondition trigger "godexp"
+	chat trigger "You have a godexp in storage."
+end
+if hascondition trigger "goggles"
+	chat trigger "You have a goggles in storage."
+end
+if hascondition trigger "gold gloves"
+	chat trigger "You have a gold gloves in storage."
+end
+if hascondition trigger "gold helmet"
+	chat trigger "You have a gold helmet in storage."
+end
+if hascondition trigger "gold leggings"
+	chat trigger "You have a gold leggings in storage."
+end
+if hascondition trigger "gold staff"
+	chat trigger "You have a gold staff in storage."
+end
+if hascondition trigger "gold suit"
+	chat trigger "You have a gold suit in storage."
+end
+if hascondition trigger "Golden Cape"
+	chat trigger "You have a Golden Cape in storage."
+end
+if hascondition trigger "Golden Toga"
+	chat trigger "You have a Golden Toga in storage."
+end
+if hascondition trigger "good sword"
+	chat trigger "You have a good sword in storage."
+end
+if hascondition trigger "Green Potion"
+	chat trigger "You have a Green Potion in storage."
+end
+if hascondition trigger "greenstone"
+	chat trigger "You have a greenstone in storage."
+end
+if hascondition trigger "Grinder Claw"
+	chat trigger "You have a Grinder Claw in storage."
+end
+if hascondition trigger "grizzly bear claw"
+	chat trigger "You have a grizzly bear claw in storage."
+end
+if hascondition trigger "grizzly bear hide"
+	chat trigger "You have a grizzly bear hide in storage."
+end
+if hascondition trigger "guardkey"
+	chat trigger "You have a guardkey in storage."
+end
+if hascondition trigger "gun"
+	chat trigger "You have a gun in storage."
+end
+if hascondition trigger "HAOD-AC Key"
+	chat trigger "You have a HAOD-AC Key in storage."
+end
+if hascondition trigger "heavy axe"
+	chat trigger "You have a heavy axe in storage."
+end
+if hascondition trigger "Helmet of the Giants"
+	chat trigger "You have a Helmet of the Giants in storage."
+end
+if hascondition trigger "house1key"
+	chat trigger "You have a house1key in storage."
+end
+if hascondition trigger "ice blade"
+	chat trigger "You have a ice blade in storage."
+end
+if hascondition trigger "iron breastplate"
+	chat trigger "You have a iron breastplate in storage."
+end
+if hascondition trigger "iron gloves"
+	chat trigger "You have a iron gloves in storage."
+end
+if hascondition trigger "iron helmet"
+	chat trigger "You have a iron helmet in storage."
+end
+if hascondition trigger "iron leggings"
+	chat trigger "You have a iron leggings in storage."
+end
+if hascondition trigger "iron ore"
+	chat trigger "You have a iron ore in storage."
+end
+if hascondition trigger "iron shield"
+	chat trigger "You have a iron shield in storage."
+end
+if hascondition trigger "iron suit"
+	chat trigger "You have a iron suit in storage."
+end
+if hascondition trigger "Key"
+	chat trigger "You have a Key in storage."
+end
+if hascondition trigger "lavendar"
+	chat trigger "You have a lavendar in storage."
+end
+if hascondition trigger "leather gloves"
+	chat trigger "You have a leather gloves in storage."
+end
+if hascondition trigger "leather helmet"
+	chat trigger "You have a leather helmet in storage."
+end
+if hascondition trigger "leather pants"
+	chat trigger "You have a leather pants in storage."
+end
+if hascondition trigger "leather shield"
+	chat trigger "You have a leather shield in storage."
+end
+if hascondition trigger "leather vest"
+	chat trigger "You have a leather vest in storage."
+end
+if hascondition trigger "Lightning Bolt"
+	chat trigger "You have a Lightning Bolt in storage."
+end
+if hascondition trigger "Lightning Staff"
+	chat trigger "You have a Lightning Staff in storage."
+end
+if hascondition trigger "lizard scale"
+	chat trigger "You have a lizard scale in storage."
+end
+if hascondition trigger "long sword"
+	chat trigger "You have a long sword in storage."
+end
+if hascondition trigger "lumberjack axe"
+	chat trigger "You have a lumberjack axe in storage."
+end
+if hascondition trigger "maiden 1"
+	chat trigger "You have a maiden 1 in storage."
+end
+if hascondition trigger "Maiden 2"
+	chat trigger "You have a Maiden 2 in storage."
+end
+if hascondition trigger "Maiden 3"
+	chat trigger "You have a Maiden 3 in storage."
+end
+if hascondition trigger "Maiden 4"
+	chat trigger "You have a Maiden 4 in storage."
+end
+if hascondition trigger "Maiden 5"
+	chat trigger "You have a Maiden 5 in storage."
+end
+if hascondition trigger "maiden 6"
+	chat trigger "You have a Maiden 6 in storage."
+end
+if hascondition trigger "Maiden 7"
+	chat trigger "You have a Maiden 7 in storage."
+end
+if hascondition trigger "Maiden Spirit 1"
+	chat trigger "You have a Maiden Spirit 1 in storage."
+end
+if hascondition trigger "mandrake"
+	chat trigger "You have a mandrake in storage."
+end
+if hascondition trigger "masamune"
+	chat trigger "You have a masamune in storage."
+end
+if hascondition trigger "minor mana potion"
+	chat trigger "You have a minor mana potion in storage."
+end
+if hascondition trigger "minor potion"
+	chat trigger "You have a minor potion in storage."
+end
+if hascondition trigger "moo"
+	chat trigger "You have a moo in storage."
+end
+if hascondition trigger "mushroom"
+	chat trigger "You have a mushroom in storage."
+end
+if hascondition trigger "Necklace of the Dead"
+	chat trigger "You have a Necklace of the Dead in storage."
+end
+if hascondition trigger "neonrose"
+	chat trigger "You have a neonrose in storage."
+end
+if hascondition trigger "newbie sword"
+	chat trigger "You have a newbie sword in storage."
+end
+if hascondition trigger "newbie vest"
+	chat trigger "You have a newbie vest in storage."
+end
+if hascondition trigger "newspaper"
+	chat trigger "You have a newspaper in storage."
+end
+if hascondition trigger "Nova Armor"
+	chat trigger "You have a Nova Armor in storage."
+end
+if hascondition trigger "Nova Fists"
+	chat trigger "You have a Nova Fists in storage."
+end
+if hascondition trigger "Nova Package"
+	chat trigger "You have a Nova Package in storage."
+end
+if hascondition trigger "odins amulet"
+	chat trigger "You have a odins amulet in storage."
+end
+if hascondition trigger "onGet"
+	chat trigger "You have a onGet in storage."
+end
+if hascondition trigger "opal"
+	chat trigger "You have a opal in storage."
+end
+if hascondition trigger "orkshield"
+	chat trigger "You have a orkshield in storage."
+end
+if hascondition trigger "Packed Lunch"
+	chat trigger "You have a Packed Lunch in storage."
+end
+if hascondition trigger "pass"
+	chat trigger "You have a pass in storage."
+end
+if hascondition trigger "Pentagram Stone"
+	chat trigger "You have a Pentagram Stone in storage."
+end
+if hascondition trigger "pick"
+	chat trigger "You have a pick in storage."
+end
+if hascondition trigger "pickaxe"
+	chat trigger "You have a pickaxe in storage."
+end
+if hascondition trigger "platinum gloves"
+	chat trigger "You have a platinum gloves in storage."
+end
+if hascondition trigger "platinum helmet"
+	chat trigger "You have a platinum helmet in storage."
+end
+if hascondition trigger "platinum leggings"
+	chat trigger "You have a platinum leggings in storage."
+end
+if hascondition trigger "platinum suit"
+	chat trigger "You have a platinum suit in storage."
+end
+if hascondition trigger "Pyramid Studded Necklace"
+	chat trigger "You have a Pyramid Studded Necklace in storage."
+end
+if hascondition trigger "quarter staff"
+	chat trigger "You have a quarter staff in storage."
+end
+if hascondition trigger "quest sword"
+	chat trigger "You have a quest sword in storage."
+end
+if hascondition trigger "red flippers"
+	chat trigger "You have a red flippers in storage."
+end
+if hascondition trigger "Red Potion"
+	chat trigger "You have a Red Potion in storage."
+end
+if hascondition trigger "red rose"
+	chat trigger "You have a red rose in storage."
+end
+if hascondition trigger "red stone"
+	chat trigger "You have a red stone in storage."
+end
+if hascondition trigger "Redstone"
+	chat trigger "You have a Redstone in storage."
+end
+if hascondition trigger "Redwood Sword"
+	chat trigger "You have a Redwood Sword in storage."
+end
+if hascondition trigger "ruby"
+	chat trigger "You have a ruby in storage."
+end
+if hascondition trigger "Sand Stone"
+	chat trigger "You have a Sand Stone in storage."
+end
+if hascondition trigger "Sandals of the Giants"
+	chat trigger "You have a Sandals of the Giants in storage."
+end
+if hascondition trigger "sandwich"
+	chat trigger "You have a sandwich in storage."
+end
+if hascondition trigger "scaled gloves"
+	chat trigger "You have a scaled gloves in storage."
+end
+if hascondition trigger "Serpent Claw"
+	chat trigger "You have a Serpent Claw in storage."
+end
+if hascondition trigger "Serpent Scales"
+	chat trigger "You have a Serpent Scales in storage."
+end
+if hascondition trigger "Shifty Belt"
+	chat trigger "You have a Shifty Belt in storage."
+end
+if hascondition trigger "Shifty Glasses"
+	chat trigger "You have a Shifty Glasses in storage."
+end
+if hascondition trigger "Shifty Gloves"
+	chat trigger "You have a Shifty Gloves in storage."
+end
+if hascondition trigger "Shifty Helmet"
+	chat trigger "You have a Shifty Helmet in storage."
+end
+if hascondition trigger "Shifty Leggings"
+	chat trigger "You have a Shifty Leggings in storage."
+end
+if hascondition trigger "Shifty Necklace"
+	chat trigger "You have a Shifty Necklace in storage."
+end
+if hascondition trigger "Shifty Shield"
+	chat trigger "You have a Shifty Shield in storage."
+end
+if hascondition trigger "Shifty Suit"
+	chat trigger "You have a Shifty Suit in storage."
+end
+if hascondition trigger "shifty sword"
+	chat trigger "You have a shifty sword in storage."
+end
+if hascondition trigger "shoddy glasses"
+	chat trigger "You have a shoddy glasses in storage."
+end
+if hascondition trigger "short sword"
+	chat trigger "You have a short sword in storage."
+end
+if hascondition trigger "silver gloves"
+	chat trigger "You have a silver gloves in storage."
+end
+if hascondition trigger "silver helmet"
+	chat trigger "You have a silver helmet in storage."
+end
+if hascondition trigger "silver leggings"
+	chat trigger "You have a silver leggings in storage."
+end
+if hascondition trigger "silver staff"
+	chat trigger "You have a silver staff in storage."
+end
+if hascondition trigger "silver suit"
+	chat trigger "You have a silver suit in storage."
+end
+if hascondition trigger "silver tipped dagger"
+	chat trigger "You have a silver tipped dagger in storage."
+end
+if hascondition trigger "skeleton bones"
+	chat trigger "You have a skeleton bones in storage."
+end
+if hascondition trigger "skull"
+	chat trigger "You have a skull in storage."
+end
+if hascondition trigger "Soul Reaver"
+	chat trigger "You have a Soul Reaver in storage."
+end
+if hascondition trigger "specter"
+	chat trigger "You have a specter in storage."
+end
+if hascondition trigger "steel gloves"
+	chat trigger "You have a steel gloves in storage."
+end
+if hascondition trigger "steel helmet"
+	chat trigger "You have a steel helmet in storage."
+end
+if hascondition trigger "steel leggings"
+	chat trigger "You have a steel leggings in storage."
+end
+if hascondition trigger "steel plate helm"
+	chat trigger "You have a steel plate helm in storage."
+end
+if hascondition trigger "steel plate mail"
+	chat trigger "You have a steel plate mail in storage."
+end
+if hascondition trigger "steel plate mail sleeves"
+	chat trigger "You have a steel plate mail sleeves in storage."
+end
+if hascondition trigger "steel suit"
+	chat trigger "You have a steel suit in storage."
+end
+if hascondition trigger "stone fist"
+	chat trigger "You have a stone fist in storage."
+end
+if hascondition trigger "Summon Demon"
+	chat trigger "You have a Summon Demon in storage."
+end
+if hascondition trigger "Super Duper Pooper Ooper Armor"
+	chat trigger "You have a Super Duper Pooper Ooper Armor in storage."
+end
+if hascondition trigger "tesst"
+	chat trigger "You have a tesst in storage."
+end
+if hascondition trigger "Thieves Dagger"
+	chat trigger "You have a Thieves Dagger in storage."
+end
+if hascondition trigger "Thor's Hammer"
+	chat trigger "You have a Thor's Hammer in storage."
+end
+if hascondition trigger "tiny potion"
+	chat trigger "You have a tiny potion in storage."
+end
+if hascondition trigger "titanium gloves"
+	chat trigger "You have a titanium gloves in storage."
+end
+if hascondition trigger "titanium helmet"
+	chat trigger "You have a titanium helmet in storage."
+end
+if hascondition trigger "titanium leggings"
+	chat trigger "You have a titanium leggings in storage."
+end
+if hascondition trigger "titanium suit"
+	chat trigger "You have a titanium suit in storage."
+end
+if hascondition trigger "Tome"
+	chat trigger "You have a Tome in storage."
+end
+if hascondition trigger "Trankpass"
+	chat trigger "You have a Trankpass in storage."
+end
+if hascondition trigger "TylkHouseKey"
+	chat trigger "You have a TylkHouseKey in storage."
+end
+if hascondition trigger "vampire fangs"
+	chat trigger "You have a vampire fangs in storage."
+end
+if hascondition trigger "vial of ink"
+	chat trigger "You have a vial of ink in storage."
+end
+if hascondition trigger "war soul"
+	chat trigger "You have a war soul in storage."
+end
+if hascondition trigger "warden'skey"
+	chat trigger "You have a warden'skey in storage."
+end
+if hascondition trigger "warrior spirit"
+	chat trigger "You have a warrior spirit in storage."
+end
+if hascondition trigger "Wizard Rod"
+	chat trigger "You have a Wizard Rod in storage."
+end
+if hascondition trigger "Wizards Cloak"
+	chat trigger "You have a Wizards Cloak in storage."
+end
+if hascondition trigger "Wizards Gauntlets"
+	chat trigger "You have a Wizards Gauntlets in storage."
+end
+if hascondition trigger "wolfsbane"
+	chat trigger "You have a wolfsbane in storage."
+end
+if hascondition trigger "wooden dagger"
+	chat trigger "You have a wooden dagger in storage."
+end
+if hascondition trigger "X-Potion"
+	chat trigger "You have a X-Potion in storage."
+end
+if hascondition trigger "Xyphoidstone"
+	chat trigger "You have a Xyphoidstone in storage."
+end
+if hascondition trigger "Zacks sword"
+	chat trigger "You have a Zacks sword in storage."
+end
+if hascondition trigger "zaria's note"
+	chat trigger "You have a zaria's note in storage."
+end
+if hascondition trigger "Daedulus Sword"
+	chat trigger "You have a Daedulus Sword in storage."
+end
+if hascondition trigger "mansionkey"
+	chat trigger "You have a mansionkey in storage."
+end
+if hascondition trigger "Blue Flag"
+	chat trigger "You have a Blue Flag in storage."
+end
+if hascondition trigger "Red Flag"
+	chat trigger "You have a Red Flag in storage."
+end
+endscript

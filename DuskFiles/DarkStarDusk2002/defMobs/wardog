@@ -1,0 +1,26 @@
+maxhp
+400000
+maxsp
+400
+stre
+1
+inte
+1
+dext
+1
+wisd
+1
+cons
+1
+bravery
+0
+grouprelation
+0.05
+image
+2
+giveitem
+vampire fangs
+0.5
+faction
+vampire
+.

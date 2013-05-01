@@ -1,0 +1,14 @@
+if ! hasItem trigger warden'skey
+	inc trigger locy -1
+	chat trigger " This door is locked. The warden must have the key."
+	endscript
+end
+if isPet trigger
+	endscript
+end
+if hasItem trigger warden'skey
+	endscript
+end
+endscript
+
+

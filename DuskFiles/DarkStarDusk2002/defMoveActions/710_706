@@ -1,0 +1,7 @@
+if ! hasitem trigger "k d" set trigger locxy 710 707
+chat trigger "there is a evil power holding you back"
+end
+if hasitem trigger "k d"
+chat trigger " now that youve broken the forcefiled you may enter DraNs throne room"
+endscript
+

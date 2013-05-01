@@ -1,0 +1,11 @@
+if hasItem trigger warden'skey
+	removeitem trigger warden'skey
+	endscript
+end
+if ! hasItem trigger warden'skey
+	chat trigger "You need the Warden's key to open this door too."
+	chat trigger "A guard says: if you want to be in jail so badly, we'd be happy to help you."
+	set trigger locxy 420 82
+	endscript
+end
+endscript

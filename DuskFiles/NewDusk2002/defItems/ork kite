@@ -1,0 +1,21 @@
+type
+armor
+kind
+arms
+description
+A ork kite sheild.
+cost
+500
+mod
+400
+image
+7
+durability
+50000
+onWear
+wear_normal_armor
+.
+
+
+
+

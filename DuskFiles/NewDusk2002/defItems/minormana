@@ -1,0 +1,13 @@
+type
+food
+description
+A potion that will restore up to 1,000 MP.  It has one use.
+cost
+10000
+image
+6
+onuse
+minormana
+uses
+1
+.

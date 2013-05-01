@@ -1,0 +1,14 @@
+#The first race haven - firewall.
+if ! isRace trigger halfelf
+    chat trigger "Your not a halfelf, GET OUT"
+    inc trigger locy 1
+    endscript
+end
+if or hasitem trigger "strabo key"
+   hasitem trigger "baron key"
+    chat trigger  "Your not allowed in here with a castle key"
+    inc trigger locy 1
+    endscript
+end
+endscript
+

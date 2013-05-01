@@ -1,0 +1,26 @@
+#Place here by TwiddleDee.  If you are Unred, I apologize for modifying your area.  I have
+#been waiting several days but haven't seen you on the system.
+#
+if ! isPlayer trigger
+  endscript
+end
+if ! hasCondition trigger umbra0
+  chat trigger "You walk through the entrance to the cave, but after searching for a bit there seems"
+  chat trigger "to be nothing of interest here."
+  endscript
+end
+if hasCondition trigger umbra0
+  chat trigger "You search more carefully this time.  A strange breeze strikes your knee.  You stop and"
+  chat trigger "sniff the air.  There seems to be a passage you'd missed before."
+  set trigger locxy 2 92
+end
+if hasCondition trigger umbra1
+  removeCondition trigger umbra1
+end
+if hasCondition trigger umbra2
+  removeCondition trigger umbra2
+end
+if hasCondition trigger umbra3
+  removeCondition trigger umbra3
+end
+endscript

@@ -1,0 +1,15 @@
+type
+armor
+kind
+skull
+description
+an aluminum helmet
+cost
+50
+mod
+10
+image
+7
+durability
+600
+.

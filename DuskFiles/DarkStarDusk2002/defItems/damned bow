@@ -1,0 +1,11 @@
+type
+ranged
+description
+A bow
+mod
+200
+range
+6
+image
+8
+.

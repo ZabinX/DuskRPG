@@ -1,0 +1,6 @@
+if ismob trigger
+endscript 
+end
+set trigger locxy 100 100
+chat trigger "Hope You enjoyed your stay."
+endscript

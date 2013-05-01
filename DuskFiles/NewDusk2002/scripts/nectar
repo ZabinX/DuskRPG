@@ -1,0 +1,5 @@
+inc trigger hp 100000
+inc trigger mp 100000
+chat trigger "You feel like a god"
+removeitem trigger nectar
+endscript

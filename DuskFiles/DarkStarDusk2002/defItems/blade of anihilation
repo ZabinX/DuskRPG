@@ -1,0 +1,13 @@
+type
+weapon
+description
+a sharp, well made blade
+cost
+999999
+mod
+10000
+image
+8
+durability
+9999999
+

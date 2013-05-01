@@ -1,0 +1,7 @@
+if ispet trigger
+    endscript
+end
+if ! > trigger cp 300
+    chat trigger "You need a higher cp to enter here."
+end
+endscript

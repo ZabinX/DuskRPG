@@ -1,0 +1,6 @@
+if ispet trigger
+    endscript
+end
+order trigger "help spells"
+chat trigger "Help window on spells has been opened."
+endscript

@@ -1,0 +1,5 @@
+chat trigger "*Slurp*"
+addConditionWithDuration trigger nothirst 5000
+removeItem trigger milk
+chat trigger "You got a milk mustache."
+endscript

@@ -1,0 +1,19 @@
+type
+ranged
+kind
+Wielded
+description
+A crossbow from hell, it shoots flaming arrows.
+cost
+50000
+mod
+400
+range
+15
+OnWear
+firebow
+image
+8
+.
+
+

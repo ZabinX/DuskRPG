@@ -1,0 +1,12 @@
+type
+weapon
+description
+You see a finely widdled sword
+cost
+600
+mod
+225
+image
+10
+durability
+3750

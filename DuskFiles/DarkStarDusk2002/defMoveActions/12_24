@@ -1,0 +1,11 @@
+if ! isPlayer trigger endscript end
+chat trigger "
+House Rules:
+1.Houses will be made in towns only.
+2.One player may have only one house and just as big as his cp/20 in squares.
+3.Dismantling a house costs 1/5th of its building cost.
+4.House Tax = 1/50 of value weekly.
+"
+endscript
+
+

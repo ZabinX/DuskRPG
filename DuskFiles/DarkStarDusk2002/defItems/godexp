@@ -1,0 +1,15 @@
+type
+item
+description
+some ale.
+cost
+10
+image
+6
+onuse
+godexp
+uses
+1
+.
+
+

@@ -1,0 +1,11 @@
+# '2' in / '3' out.
+#
+if hasCondition trigger umbra2
+  order trigger "emote is glad to reach solid ground."
+  removeCondition trigger umbra2
+  endscript
+end
+if isPlayer trigger
+  chat trigger "A chasm opens across your path.  A rickety bridge sets off into the darkness.  Your heart beats a bit faster."
+end
+endscript

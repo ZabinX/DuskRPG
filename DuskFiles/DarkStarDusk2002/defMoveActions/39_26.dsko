@@ -1,0 +1,1 @@
+'trigger outText concat concat " Welcome to the town "name trigger ". Enjoy your visit." trigger isInTown1 outText concat concat " This is the end of town. "name trigger ", please be careful." *trigger outText  

@@ -1,0 +1,17 @@
+if hasItem trigger "DraN sword" set trigger locxy 138 5
+chat trigger "The spell is broken you may leave"
+end
+if ! hasitem trigger "DraN Sword"
+chat trigger "Kill DraN and break the spell he has put on me so i can teleport and I will get us both out of here"
+end
+removeitem trigger "tree climbing gear"
+removeitem trigger "k d"
+removeitem trigger "l mud"
+removeitem trigger "dragon key"
+removeitem trigger "knight"
+removeitem trigger "ladder"
+endscript 
+
+
+
+

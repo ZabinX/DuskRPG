@@ -1,0 +1,3 @@
+set trigger hp trigger maxhp
+set trigger mp trigger maxmp
+chat trigger " You go to sleep... and wake up recharged."

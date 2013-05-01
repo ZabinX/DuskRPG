@@ -1,0 +1,7 @@
+# I needed a script to make me feel a little more secure u can use it too if you want - Firewall
+addcondition trigger poweroverwhelming
+chat trigger "Power Over Whelming, COME GET SOME!!!!"
+endscript
+
+
+

@@ -1,0 +1,3 @@
+removeflag trigger "invis"
+removeflag trigger "nvis"
+endscript

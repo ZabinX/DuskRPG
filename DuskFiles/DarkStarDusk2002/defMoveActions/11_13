@@ -1,0 +1,3 @@
+set trigger locxy 650 650
+chat trigger "you may enter"
+endscript

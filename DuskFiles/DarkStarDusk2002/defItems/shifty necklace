@@ -1,0 +1,18 @@
+type
+armor
+kind
+neck
+description
+A Necklace Crafted By Shifty
+cost
+1
+mod
+50
+image
+7
+onWear
+necklacestart
+onUnWear
+necklaceend
+.
+

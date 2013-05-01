@@ -1,0 +1,11 @@
+if < trigger cp 600
+	inc trigger locy 1
+	chat trigger " They're too strong!"
+	endscript
+end
+if isMob trigger
+	inc trigger locx 1
+	endscript
+end
+endscript
+

@@ -1,0 +1,3 @@
+set trigger locXY 310 873
+chat trigger "You see a huge Dragon... he looks hungry.. "
+endscript

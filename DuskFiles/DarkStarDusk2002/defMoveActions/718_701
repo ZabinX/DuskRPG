@@ -1,0 +1,6 @@
+if ! hasitem trigger "dragon key" set trigger locxy 718 700
+chat trigger "You must kill the Dragon King to enter"
+end
+if hasitem trigger "dragon key"
+chat trigger "Now that you have killed the Dragon King you may enter"
+endscript

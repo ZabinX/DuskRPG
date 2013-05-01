@@ -1,0 +1,6 @@
+if not isPlayer trigger
+	endscript
+	end
+#
+chat trigger "Congratulations !"
+endscript

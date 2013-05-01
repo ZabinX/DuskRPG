@@ -1,0 +1,23 @@
+if hasItem trigger ale
+	chat trigger " Zorog says:  Thansh, sssshhhoooony!  *hiccup*"
+	removeItem trigger ale
+	endscript
+end
+if hasItem trigger "Zaria's note"
+	chat trigger " Zorog says:  Thansh for the messh..., the messh...., the note.  Here's sshomething for all your trouble."
+	removeItem trigger "Zaria's note"
+	giveItem trigger ruby
+	endscript
+end
+if ! hasItem trigger ale
+	chat trigger " If you want to talk to me, gimme some ale!!  *hiccup*"
+	inc trigger locy +1
+end
+endscript
+
+
+
+
+
+
+

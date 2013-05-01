@@ -1,0 +1,10 @@
+if hasitem trigger "Quest Sword"
+set trigger locxy 5 5
+chat trigger "Well Done"
+endscript
+end
+if ! hasitem trigger "Quest Sword"
+inc trigger locx 1
+chat trigger "Keep searching for the sword"
+endscript
+end

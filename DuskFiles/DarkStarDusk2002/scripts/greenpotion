@@ -1,0 +1,6 @@
+set trigger mp trigger maxmp
+chat trigger "Your magic power returns as you drink the apple flavored liquid."
+removeitem trigger "Green Potion"
+endscript
+
+

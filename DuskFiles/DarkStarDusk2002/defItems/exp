@@ -1,0 +1,12 @@
+type
+item
+description
+when used...it gives you 5000 exp
+cost
+0
+image
+6
+onuse
+t god exp
+1
+.

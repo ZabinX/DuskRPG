@@ -1,0 +1,16 @@
+if ! hasitem trigger "Fire Orb"
+	if ! hascondition trigger thief
+		chat trigger "If you return my fire orb from the vault i'll pay you with amazing riches."
+		addcondition trigger thief
+	endscript
+		chat trigger "Haven't you gotten my fire orb from the vault yet?"
+		chat trigger "Get a move on!"
+	end
+	removeitem trigger "Fire Orb"
+	if ! hasitem trigger "Reward Note"
+		giveitem trigger "Reward Note
+	endscript
+		chat trigger "You have already returnedmy Fire Orb for me!!"
+	end
+endscript
+end

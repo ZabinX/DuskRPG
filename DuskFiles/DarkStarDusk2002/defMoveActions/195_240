@@ -1,0 +1,13 @@
+if isMob trigger
+endscript
+end
+set trigger locxy 196 229
+end
+endscript
+
+
+
+
+
+
+

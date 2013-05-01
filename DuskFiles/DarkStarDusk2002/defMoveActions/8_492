@@ -1,0 +1,6 @@
+if < trigger privs 5
+	set trigger locXY 1 1
+	chat trigger "VAX's personal merchant!!"
+end
+endscript
+

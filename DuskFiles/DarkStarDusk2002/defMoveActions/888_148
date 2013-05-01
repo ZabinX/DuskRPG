@@ -1,0 +1,5 @@
+if hasITem trigger "Forest Gem"
+set trigger locxy 618 153
+addcondition trigger fc
+chat trigger " Better head into Whirlpool Lake ruins now....."
+endscript

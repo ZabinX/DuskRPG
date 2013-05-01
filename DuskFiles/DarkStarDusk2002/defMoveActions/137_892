@@ -1,0 +1,11 @@
+if ! isclan trigger MTH
+inc trigger locx -1
+chat trigger "Only the Master Tresure Hunters are aloud here"
+endscript
+end
+chat trigger "Welcome to you clan hall fellow MTH"
+end
+endscript
+if ispet trigger
+endscript
+end

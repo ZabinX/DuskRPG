@@ -1,0 +1,49 @@
+maxhp
+99999
+maxsp
+99999
+stre
+100
+inte
+100
+dext
+100
+wisd
+100
+cons
+100
+image
+4
+bravery
+1.0
+grouprelation
+1.0
+giveitem
+stone fist
+0.15
+faction
+demon
+skill
+dodge
+100
+skill
+double attack
+100
+skill
+triple attack
+100
+skill
+quadruple attack
+100
+wield
+chaos sword
+wield
+bronze suit
+wield
+titanium helmet
+wield
+titanium leggings
+wield
+bronze shield
+.
+

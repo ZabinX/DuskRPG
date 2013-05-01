@@ -1,0 +1,6 @@
+if not isPlayer trigger
+	endscript
+	end
+#
+chat trigger "WARNING: If you go any further, you may not turn back."
+endscript

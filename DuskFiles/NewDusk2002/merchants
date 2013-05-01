@@ -1,0 +1,590 @@
+98
+89
+train:Dodge
+end
+100
+74
+train:Strength
+train:Constitution
+end
+100
+78
+train:HP
+train:MP
+end
+106
+75
+train:Double Attack
+train:Triple Attack
+train:Quadruple Attack
+end
+120
+92
+ale
+sandwich
+end
+113
+77
+aluminum suit
+aluminum helmet
+aluminum sleeves
+aluminum leggings
+aluminum belt
+aluminum gloves
+steel suit
+steel helmet
+steel sleeves
+steel leggings
+steel belt
+steel gloves
+bronze suit
+bronze helmet
+bronze sleeves
+bronze leggings
+bronze belt
+bronze gloves
+end
+115
+79
+broad sword
+lumberjack axe
+broad axe
+heavy axe
+long sword
+expert sword
+end
+141
+123
+ale
+sandwich
+end
+127
+48
+train:enchantment group
+train:druidic group
+powerblade
+end
+94
+75
+train:Intelligence
+train:Wisdom
+end
+159
+154
+titanium suit
+titanium helmet
+titanium sleeves
+titanium leggings
+titanium belt
+titanium gloves
+end
+124
+105
+pet
+end
+115
+77
+gilded necklace
+shaded glasses
+end
+123
+68
+train:enchantment group
+train:telepathy group
+train:druidic group
+end
+1
+1
+pet
+train:clerical group
+train:druidic group
+train:telepathy group
+train:enchantment group
+train:warrior group
+train:elemental fire group
+train:elemental ice group
+train:white magic group
+end
+50
+6
+end
+253
+132
+end
+91
+43
+train:telepathy group
+end
+202
+230
+train:Enchantment Group
+train:Enchantment Group
+end
+6
+199
+train:Disguise
+end
+183
+174
+Thinking Cap
+end
+89
+60
+wolfsbane
+lavendar
+water bottle
+mushroom
+blood stone
+mandrake
+end
+89
+62
+train:white magic group
+end
+216
+246
+end
+181
+176
+train:warrior group
+end
+118
+85
+Purple Pills
+Recall
+Dispell
+MendPotion
+Energy Crystal
+HealPotion
+Invis
+Xpresso
+Detect
+MinorMana
+ManaPotion
+end
+219
+252
+train:HP
+train:MP
+train:Constitution
+end
+217
+252
+train:Dexterity
+train:Strength
+train:Wisdom
+end
+85
+7
+crystal suit
+end
+188
+303
+train:fire resistance
+end
+62
+296
+food
+water
+end
+61
+309
+scale mail
+horned helmet
+gauntlets
+end
+55
+309
+sabre
+katana
+end
+98
+92
+train:Dexterity
+end
+216
+14
+boom box
+end
+212
+14
+rope & grapnel
+end
+212
+8
+ale
+sandwich
+apple
+microwave dinner
+water
+bearclaw
+rejuvenation
+golden apple
+end
+207
+8
+train:Strength
+train:Intelligence
+train:Dexterity
+train:Constitution
+train:Wisdom
+train:HP
+train:MP
+end
+212
+12
+end
+251
+118
+ale
+sandwich
+apple
+cookie
+end
+291
+101
+pillow
+end
+300
+118
+Crystal Suit
+recall
+cold blade
+powerblade
+expert sword
+questsword
+end
+301
+127
+ale
+sandwich
+pillow
+end
+108
+61
+ale
+sandwich
+end
+218
+1
+end
+106
+124
+train:Strength
+end
+70
+81
+Dagger
+Short Sword
+Long Sword
+Wooden Dagger
+end
+68
+83
+Iron Suit
+Iron Helmet
+Iron Belt
+Iron Gloves
+Iron Sleeves
+Iron Leggings
+Cloth Shirt
+end
+75
+81
+train:Strength
+train:HP
+end
+81
+81
+MinorMend
+end
+111
+229
+ale
+sandwich
+end
+104
+117
+Wooden Dagger
+Cloth Shirt
+end
+331
+183
+ale
+end
+333
+183
+sandwich
+cookie
+end
+335
+174
+pillow
+end
+45
+143
+Recall
+Dispell
+MendPotion
+Energy Crystal
+HealPotion
+Invis
+Detect
+Xpresso
+Purple Pills
+end
+34
+147
+ale
+ale2
+sandwich
+cookie
+Water Bottle
+beer
+end
+37
+155
+Wolfsbane
+Lavendar
+Mushroom
+Blood Stone
+Mandrake
+end
+123
+249
+ranger gauntlets
+end
+11
+250
+goblin straps
+end
+136
+75
+ale
+ale2
+cookie
+Recall
+Invis
+Detect
+end
+183
+152
+Wine
+Cheese
+Mead
+Meat
+Milk
+Cookie
+end
+185
+152
+Strabo
+Baron
+Kilgore
+Recall
+end
+187
+152
+train:elemental fire group
+train:elemental ice group
+end
+37
+156
+train:clerical group
+train:druidic group
+end
+313
+314
+end
+139
+65
+ale
+ale2
+end
+286
+320
+mendpotion
+healpotion
+end
+287
+344
+dark mail
+end
+42
+334
+powerblade
+gatecrasher
+inferno eyes
+inferno necklace
+inferno sleeves
+inferno boots
+inferno helm
+inferno belt
+inferno gloves
+end
+42
+344
+Recall
+Invis
+Detect
+HealPotion
+energy crystal
+MegaHeal
+end
+304
+286
+end
+17
+232
+crystal suit
+end
+216
+16
+pet
+end
+72
+20
+Mead
+Meat
+Milk
+Cookie
+Baron
+Strabo
+end
+72
+14
+train:elemental fire group
+end
+282
+286
+chaos leggings
+chaos helm
+chaos shield
+end
+263
+120
+gold suit
+gold helmet
+gold leggings
+gold sleeves
+gold belt
+gold gloves
+end
+36
+119
+Milk
+Cookie
+Kilgore
+Baron
+end
+50
+119
+train:elemental ice group
+end
+109
+112
+train:clerical group
+expert sword
+end
+214
+12
+train:thief group
+end
+83
+229
+end
+75
+183
+lightning scale mail
+lightning shield
+lightning fists
+lightning scale boots
+lightning belt
+helm of thought
+thermal goggles
+energy amulet
+thunder blade
+lightning helmet
+lightning goggles
+lightning amulet
+end
+75
+179
+train:elemental lightning group
+end
+74
+174
+wine
+ale2
+ale
+end
+149
+164
+chaos suit
+chaos helm
+chaos shield
+chaos leggings
+end
+151
+164
+dragon amulet
+amulet of defense
+justice amulet
+shadow amulet
+end
+154
+159
+end
+309
+253
+ale
+sandwich
+end
+43
+122
+PowerBlade
+QuestSword
+end
+276
+102
+train:Strength
+train:Constitution
+train:Hp
+train:Mp
+end
+281
+110
+train:Dexterity
+end
+270
+113
+train:Wisdom
+train:Intellgence
+end
+281
+132
+pinefar
+end
+220
+216
+crystal belt
+end
+66
+152
+dragonite war helm
+dragonite sleeves
+dragonite leggings
+dragonite choker
+dragonite sunglasses
+dragonite belt
+dragonite guantlets
+end
+115
+164
+end
+142
+58
+end
+139
+55
+end

@@ -1,0 +1,15 @@
+type
+ranged
+description
+a Chaos Crossbow
+cost
+70000
+image
+8
+mod
+1400
+durability
+100000000000
+range
+25
+.

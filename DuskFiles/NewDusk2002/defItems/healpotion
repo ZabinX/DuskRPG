@@ -1,0 +1,14 @@
+type
+food
+description
+A fancy glass bottle full of a strange liquid.
+cost
+10000
+image
+6
+onuse
+healp
+uses
+20
+.
+

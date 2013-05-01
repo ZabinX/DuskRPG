@@ -1,0 +1,13 @@
+type
+item
+description
+A book inscribed with  a Pentagram of hell on the cover. It contains information regarding Cyril and the Chaos Sword."
+cost
+0
+image 
+5
+onuse
+chaos tome
+uses
+-1
+.

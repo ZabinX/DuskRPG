@@ -1,0 +1,38 @@
+number nogod 0
+if > trigger privs 3
+	global string boltaim name trigger
+	number nogod 1
+end
+if variableisstring global boltaim
+	livingthing target global boltaim
+		number dmg + 500 * rand 1500
+		if = nogod 0
+			order trigger concat concat "gecho A bolt of lightning streaks from the heavens striking " name target "."
+		end
+		chat target concat concat "The lightning bolt did " dmg " to you."
+		inc target hp - 0 dmg
+		if < target hp 1
+		if = nogod 0
+			order trigger concat concat "gecho " name target " has been killed." 
+		end
+			set target locxy 394 394
+			set target hp 1
+			addcondition target safe
+			removecondition target invis
+			removecondition target detect invis
+			removecondition target armor
+			removecondition target bless
+			removecondition target hpregen
+			removecondition target hero
+			chat target " You end up in hell...The domain of Cyril....the god of Chaos!"
+	end
+end
+if > trigger privs 3
+	removeItem trigger "Lightning Bolt"
+end
+endscript
+
+
+
+
+

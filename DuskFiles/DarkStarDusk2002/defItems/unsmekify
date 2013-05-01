@@ -1,0 +1,10 @@
+type
+weapon
+description
+unsmekifier
+cost
+1
+mod
+1
+onWear
+unsmekify

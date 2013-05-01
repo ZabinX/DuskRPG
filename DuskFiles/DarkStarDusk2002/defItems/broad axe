@@ -1,0 +1,12 @@
+type
+weapon
+description
+a broad axe
+cost
+80
+mod
+140
+image
+10
+durability
+4800

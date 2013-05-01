@@ -1,0 +1,28 @@
+if ! hasCondition trigger "thief"
+	chat trigger "Trank says: Im suprised to see you beat my henchmen, you deserve to be a thief as well, Heres a pass to go into my secret thief training room. Just give this to the bouncer."
+	chat trigger "you got the Trankpass!"
+	giveItem trigger Trankpass
+	chat trigger "Trank says: Go there only if you want to be a thief"
+	addCondition trigger "trank"
+	set trigger locxy 429 48
+	endscript
+end
+if hasCondition trigger "thief"
+	if ! hasItem trigger pick
+		if ! isWearing trigger pick
+			chat trigger "Hello there, whats the problem?"
+			chat trigger "You don't have a pick? Well thats easily fixed, here you go"
+			giveItem trigger pick
+			endscript
+		end
+		if isWearing trigger pick
+			chat trigger "Trank says: How's everything going?"
+			endscript
+		end
+	end
+	if hasItem trigger pick
+		chat trigger "Trank says: How's everything going?"
+		endscript
+	end
+end
+endscript

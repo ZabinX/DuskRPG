@@ -1,0 +1,21 @@
+number manatap trigger skill "Mana Tap"
+if < 0 manatap
+chat trigger " You are already part of a diffrent guild and may not train a skill of a diffrent guild."
+inc trigger locy 1
+end
+number armorident trigger skill "Armor Identification"
+if < 0 armorident
+chat trigger " You are already part of a diffrent guild and may not train a skill of a diffrent guild."
+inc trigger locy 1
+end
+number lifetap trigger skill "Life Tap"
+if < 0 lifetap
+chat trigger " You are already part of a diffrent guild and may not train a skill of a diffrent guild."
+inc trigger locy -1
+end
+number lockpicking trigger skill "Lock Picking"
+if < 0 lockpicking
+chat trigger " You are already part of a diffrent guild and may not train a skill of a diffrent guild."
+inc trigger locy 1
+end
+endscript

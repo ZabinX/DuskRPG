@@ -1,0 +1,8 @@
+if ! hasitem trigger "l mud" set trigger locxy 702 726
+chat trigger "there is a hole, maybe if you get some mud you can fill it"
+end
+if hasitem trigger "l mud"
+chat trigger "You use the mud to fill the hole"
+endscript
+
+

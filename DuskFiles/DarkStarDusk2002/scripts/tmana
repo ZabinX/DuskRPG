@@ -1,0 +1,4 @@
+inc trigger mp 20
+chat trigger " 20 mana points are restored"
+removeItem trigger "minor mana potion"
+endscript

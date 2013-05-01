@@ -1,0 +1,4 @@
+inc trigger intelligencebonus -50
+inc trigger wisdombonus -50
+inc trigger strengthbonus 5
+endscript

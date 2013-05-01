@@ -1,0 +1,8 @@
+if isPlayer trigger
+	chat trigger concat concat " Up ahead is the Green Wizard which gives the Greenstone. " name trigger ", Kill him and save up for the other two stones."
+set trigger locxy 226 180
+end
+endscript
+
+
+

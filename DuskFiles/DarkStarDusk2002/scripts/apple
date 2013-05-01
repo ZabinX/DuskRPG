@@ -1,0 +1,4 @@
+chat trigger "*Crunch Crunch*"
+addconditionwithduration trigger nohunger 600
+removeitem trigger apple
+endscript

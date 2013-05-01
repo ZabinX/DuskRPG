@@ -1,0 +1,11 @@
+if ! isPlayer trigger endscript end
+chat trigger "
+House Costs:(City of Light)
+item		cost/square	item		cost/square
+-walls				-ground
+  white stone  ...... 1.000		  sandy  .................... 200
+  red brick  ............. 750		  stones  ................... 350
+  brown brick  ........ 500		  gray plate  .............. 500
+				  turquoise plate ....... 800
+				  sand ceramics  ...... 650"
+endscript

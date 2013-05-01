@@ -1,0 +1,61 @@
+#Killer : Attacks the enemy around there body.
+#
+#
+if ! isinbattle caster
+	chat caster " You must be in battle to cast this"
+	endscript
+end
+number damage * 1 * 200 rand
+if < damage 15
+	chat caster " You miss the enemy!"
+	endscript
+end
+if < damage 60
+	number damage7 * 20 * 100
+	chat caster concat concat concat concat " You punch " name enemy caster "in the leg, for" damage7 "damage."
+	inc enemy caster hp * -1 damage
+	inc caster damdone damage7
+	endscript
+end
+if < damage 70
+	number damage8 * 20 * 200
+	chat caster concat concat concat concat " You punch " name enemy caster "in the arm, for" damage8 "damage."
+	inc enemy caster hp * -1 damage
+	inc caster damdone damage8
+	endscript
+end
+if < damage 80
+	number damage9 * 20 * 300
+	chat caster concat concat concat concat " You punch " name enemy caster "in the stomache, for" damage9 "damage."
+	inc enemy caster hp * -1 damage
+	inc caster damdone damage9
+	endscript
+end
+if < damage 100
+	number damage10 * 20 * 400
+	chat caster concat concat concat concat " You punch " name enemy caster "in the chest, for" damage10 "damage."
+	inc enemy caster hp * -1 damage
+	inc caster damdone damage10		
+endscript
+end
+if < damage 150
+	number damage11 * 20 * 500
+	chat caster concat concat concat concat " You punch " name enemy caster "in the face, for" damage11 "damage."
+	inc enemy caster hp * -1 damage
+	inc caster damdone damage11
+	endscript
+end
+if > damage 150
+	number damage12 * 20 * 7500
+	chat caster concat concat concat concat " You punch " name enemy caster "in the face, for" damage12 "damage."
+	inc enemy caster hp * -1 damage12
+	inc caster damdone damage12
+	endscript
+end
+
+
+
+
+
+
+

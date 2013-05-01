@@ -1,0 +1,8 @@
+if not isPlayer trigger
+	endscript
+	end
+set trigger locxy 348 166
+endscript
+
+
+

@@ -1,0 +1,9 @@
+if < trigger strength 220
+order trigger "unwear blood leggings"
+chat trigger "You dont have enough Strength to wear this."
+endscript
+end
+if < trigger dexterity 170
+order trigger "unwear blood leggings"
+chat trigger "You dont have enough Stamina to wear this"
+endscript

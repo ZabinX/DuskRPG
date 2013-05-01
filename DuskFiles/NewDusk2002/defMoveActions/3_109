@@ -1,0 +1,14 @@
+livingthing m "gnome leader"
+if > m locX 0
+  if < m locX 5
+    if > m locY 102
+      if < m locY 111
+        if isPlayer trigger
+          chat trigger "The guard leader orders his men to block the door."
+        end
+        inc trigger locy -1
+      end
+    end
+  end
+end
+endscript

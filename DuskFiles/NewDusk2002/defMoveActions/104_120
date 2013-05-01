@@ -1,0 +1,25 @@
+if ispet trigger
+    endscript
+end
+if and ! hasitem trigger "cloth shirt"
+    and ! iswearing trigger "cloth shirt"
+    and ! iswearing trigger "Cloth Shirt"
+    ! > trigger ac 0
+    chat trigger "You need to get the cloth shirt from the merchant"
+    inc trigger locy -1
+    endscript
+end
+if and ! hasitem trigger "wooden dagger"
+    and ! iswearing trigger "wooden dagger"
+    and ! iswearing trigger "Wooden Dagger"
+    ! > trigger dammod 100
+    chat trigger "You need to get the wooden dagger from the merchant"
+    inc trigger locy -1
+    endscript
+end
+if or ! iswearing trigger "wooden dagger"
+    ! iswearing trigger "cloth shirt"
+    chat trigger "Now you need to wear what you bought, click your Equipment button."
+end
+endscript
+

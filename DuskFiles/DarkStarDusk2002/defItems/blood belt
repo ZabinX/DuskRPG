@@ -1,0 +1,17 @@
+type
+armor
+kind
+waist
+description
+Blood Belt
+cost
+3000
+mod
+120
+OnWear
+bbon
+image
+7
+durability
+-1
+.

@@ -1,0 +1,4 @@
+inc trigger strengthBonus -10
+inc trigger dexterityBonus -10
+endscript
+

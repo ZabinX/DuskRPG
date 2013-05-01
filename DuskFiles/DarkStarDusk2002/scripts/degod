@@ -1,0 +1,5 @@
+inc trigger acbonus -500
+inc trigger dammodbonus- 500
+inc trigger strengthbonus -500
+inc trigger dexteritybonus -500
+endscript

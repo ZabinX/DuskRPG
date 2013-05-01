@@ -1,0 +1,11 @@
+if ispet trigger
+    endscript
+end
+if and hasItem trigger "housewildernkey" hascondition trigger "wilderndoor5"
+    chat trigger "The statue takes you by the hand pulls you into the ground."
+    if hascondition trigger "inside"
+        removecondition trigger "inside"
+    end
+    set trigger locxy 183 176
+end
+endscript

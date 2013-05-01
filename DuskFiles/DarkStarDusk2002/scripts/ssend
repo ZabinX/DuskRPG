@@ -1,0 +1,4 @@
+inc trigger strengthBonus -200
+inc trigger maxhp -200
+endscript
+

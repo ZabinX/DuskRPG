@@ -1,0 +1,9 @@
+if isPlayer trigger
+	string outText concat concat " " name trigger ". walked up the stairs."
+	if hasCondition trigger isInTown1
+		string outText concat concat " " name trigger ", entered Watt's smithy."
+	end
+	chat trigger outText
+end
+endscript
+

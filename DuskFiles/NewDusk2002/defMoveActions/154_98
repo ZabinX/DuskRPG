@@ -1,0 +1,21 @@
+if isPlayer trigger
+  if < trigger cash 150
+    chat trigger "The bartender suggests you come back later.  You're purse is too light to be worth serving."
+    inc trigger locx -4
+    endscript
+  end
+  if hasItem trigger absinthe
+    chat trigger "The barkeep says: If you really want another..."
+  end
+  if ! hasItem trigger absinthe
+    chat trigger "The barkeep looks you in the eye and asks, 'What'll it be?'"
+    order trigger "emote says: You ever heard of a pan galactic gargleblaster?"
+    chat trigger "The barkeep now REALLY looks at you strangly, but he pulls out a dusty vial from under the counter."
+    chat trigger "The barkeep says: I don't got no idea what you're talking about, but I guarentee this will knock your wits about."
+  end
+  chat trigger "The barkeep hands you an odd green liquid."
+  inc trigger cash -150
+  giveItem trigger absinthe
+  inc trigger locx -1
+end
+endscript

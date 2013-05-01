@@ -1,0 +1,20 @@
+if ! isPLayer trigger
+	endscript
+	end
+#
+if ! hasCondition trigger shenville_dq_0
+	inc trigger locx -1
+	endscript
+	end
+#
+if hasCondition trigger shenville_puzzle_3
+	inc trigger locx 1
+	changeTile 72 284 12
+	removeCondition trigger shenville_puzzle_3
+	endscript
+	end
+#
+inc trigger locx -1
+endscript
+
+

@@ -1,0 +1,13 @@
+type
+item
+description
+Gods Ambrosia
+cost
+20
+image
+6
+onuse
+ambrosia
+uses
+1
+.

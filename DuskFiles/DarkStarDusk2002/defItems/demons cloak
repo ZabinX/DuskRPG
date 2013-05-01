@@ -1,0 +1,22 @@
+type
+armor
+kind
+torso
+description
+A Demons cloak
+cost
+3000
+mod
+250
+image
+7
+onWear
+dcloak
+onunWear
+dcloakend
+durability
+40000
+.
+
+
+

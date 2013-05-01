@@ -1,0 +1,51 @@
+maxhp
+50000
+maxsp
+5000
+stre
+2000
+dext
+1000
+cons
+200
+wisd
+400
+inte
+400
+giveitem
+expert sword
+.50
+giveitem
+faction
+lizard
+bravery
+.80
+image
+31
+skill
+Double Attack
+100
+skill
+Triple Attack
+100
+skill
+quadruple attack
+30
+skill
+dodge
+80
+weilded
+mega fire
+.
+
+
+
+
+
+
+
+
+
+
+
+

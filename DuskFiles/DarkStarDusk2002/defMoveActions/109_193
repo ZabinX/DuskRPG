@@ -1,0 +1,9 @@
+if ! isClan trigger "of the Dead"
+	inc trigger locx -1
+	chat trigger "The door is locked."
+	endscript
+end
+endscript
+
+
+

@@ -1,0 +1,5 @@
+inc trigger strengthBonus 20
+inc trigger intelligenceBonus 20
+inc trigger acBonus 10
+endscript
+

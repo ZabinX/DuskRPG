@@ -1,0 +1,13 @@
+if ismob trigger
+	endscript
+end
+if isplayer trigger
+	if ! has item trigger "Divine Scale"
+	chat trigger "You need the Divine Scale to leave."
+	endscript
+end
+if isplayer trigger
+	if hasitem "Divine Scale"
+	set trigger locXY 300 810
+	chat trigger "You have won the respect of the Dragon lords. Choose your prize!"
+endscript

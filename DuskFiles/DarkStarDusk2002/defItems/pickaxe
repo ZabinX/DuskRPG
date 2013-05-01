@@ -1,0 +1,13 @@
+type
+weapon
+description
+a little axe used for mining
+cost
+1000
+mod
+115
+image
+10
+durability
+1200
+

@@ -1,0 +1,20 @@
+#brought here by -=Orky=-
+if < trigger privs 3
+	chat trigger "huh?"
+	endscript	
+end
+if ! variableisstring param1
+	chat trigger " GetOverThere Where?"
+	endscript
+end
+if ! variableisstring param2
+	chat trigger " GetOverThere Where?"
+	endscript
+end
+if variableisstring param0
+	livingthing target param0
+	set target locxy param1 param2
+	endscript
+end
+chat trigger " GetOverThere Who?"
+endscript

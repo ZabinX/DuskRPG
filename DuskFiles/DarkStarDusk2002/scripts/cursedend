@@ -1,0 +1,7 @@
+inc trigger strengthBonus 20
+inc trigger dexterityBonus 20
+inc trigger intelligenceBonus 20
+inc trigger constitutionBonus 20
+inc trigger wisdomBonus 20
+inc trigger acBonus 5
+endscript

@@ -1,0 +1,15 @@
+inc trigger hp -1000
+end
+if < trigger hp 10
+set
+trigger
+locx
+394
+set
+trigger
+locy
+394
+chat trigger "You were killed in the quick sand"
+addcondition trigger safe
+end
+endscript

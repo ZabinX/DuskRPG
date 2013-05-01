@@ -1,0 +1,20 @@
+type
+armor
+kind
+skull
+description
+a hat resembling the thinking cap, except for the raw energy dripping from it.
+cost
+30000
+mod
+0
+image
+7
+durability
+1000000
+onWear
+helmofthoughtstart
+onUnWear
+helmofthoughtend
+.
+

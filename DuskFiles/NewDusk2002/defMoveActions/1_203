@@ -1,0 +1,7 @@
+if ! isPlayer trigger
+  endscript
+end
+chat trigger "And elderly woman wearing a black, somewhat conical hat and long cloak is selling apples.  You start to"
+chat trigger "pick one up as she explains that they'll help you sleep.  You think about it for a minute and then decide not"
+chat trigger "to test your luck."
+endscript

@@ -1,0 +1,9 @@
+if not isPlayer trigger
+	endscript
+	end
+#
+if isClan trigger global unredowner
+	set trigger locxy 146 12
+	end
+endscript
+	

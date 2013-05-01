@@ -1,0 +1,11 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger intown
+    removecondition trigger intown
+    chat trigger "You are now leaving Tilsen."
+    endscript
+end
+endscript
+
+

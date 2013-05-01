@@ -1,0 +1,211 @@
+if ! hascondition trigger slots
+	chat trigger " You have to be playing slots to do this."
+	endscript
+end
+if ! hascondition trigger playing
+	chat trigger " Your not playing slots."
+	endscript
+end
+if ! variableisstring param0
+	chat trigger " How many coins do you wish to enter??"
+endscript
+end
+number money param0
+if ! variableisnumber money
+	chat trigger " Parameter is not a number. "
+endscript
+end
+if > money 1000
+	chat trigger " The maximum bet is 1000. "
+endscript
+end
+if < money 5
+	chat trigger " The minimum bet is 5. "
+endscript
+end
+if < trigger cash money
+	chat trigger " You havent got that much money. "
+endscript
+end
+number reel1 * 1 * 6 rand
+number reel2 * 1 * 6 rand
+number reel3 * 1 * 6 rand
+number reel4 * 1 * 6 rand
+number reel5 * 1 * 6 rand
+chat trigger concat concat concat concat concat concat concat concat concat  concat concat " - " reel1 " - " reel2 " - " reel3 " - " reel4 " - " reel5 " - "
+if = reel1 0
+	if = reel2 0
+		if = reel3 0
+			if = reel4 0
+				if = reel5 0
+					number winnings * 10 * 5 + param0 rand
+					inc trigger cash winnings
+					chat trigger concat concat " 5 0's in a row, you win " winnings " gp. "
+				endscript
+				end
+				number winnings * 10 * 3 + param0 rand
+				inc trigger cash winnings
+				chat trigger concat concat " 4 0's in a row, you win " winnings " gp. "
+			endscript
+			end
+			number winnings * 5 * 2 + param0 rand
+			inc trigger cash winnings
+			chat trigger concat concat " 3 0's in a row, you win " winnings " gp. "
+		endscript
+		end
+		number winnings * 1 * 1 + param0 rand
+		inc trigger cash winnings
+		chat trigger concat concat " 2 0's in a row, you win " winnings " gp. "
+	endscript
+	end
+end
+if = reel1 1
+	if = reel2 1
+		if = reel3 1
+			if = reel4 1
+				if = reel5 1
+					number winnings * 10 * 5 + param0 rand
+					inc trigger cash winnings
+					chat trigger concat concat " 5 1's in a row, you win " winnings " gp. "
+				endscript
+				end
+				number winnings * 10 * 3 + param0 rand
+				inc trigger cash winnings
+				chat trigger concat concat " 4 1's in a row, you win " winnings " gp. "
+			endscript
+			end
+			number winnings * 5 * 2 + param0 rand
+			inc trigger cash winnings
+			chat trigger concat concat " 3 1's in a row, you win " winnings " gp. "
+		endscript
+		end
+		number winnings * 1 * 1 + param0 rand
+		inc trigger cash winnings
+		chat trigger concat concat " 2 1's in a row, you win " winnings " gp. "
+	endscript
+	end
+end
+if = reel1 2
+	if = reel2 2
+		if = reel3 2
+			if = reel4 2
+				if = reel5 2
+					number winnings * 10 * 5 + param0 rand
+					inc trigger cash winnings
+					chat trigger concat concat " 5 2's in a row, you win " winnings " gp. "
+				endscript
+				end
+				number winnings * 10 * 3 + param0 rand
+				inc trigger cash winnings
+				chat trigger concat concat " 4 2's in a row, you win " winnings " gp. "
+			endscript
+			end
+			number winnings * 5 * 2 + param0 rand
+			inc trigger cash winnings
+			chat trigger concat concat " 3 2's in a row, you win " winnings " gp. "
+		endscript
+		end
+		number winnings * 1 * 1 + param0 rand
+		inc trigger cash winnings
+		chat trigger concat concat " 2 2's in a row, you win " winnings " gp. "
+	endscript
+	end
+end
+if = reel1 3
+	if = reel2 3
+		if = reel3 3
+			if = reel4 3
+				if = reel5 3
+					number winnings * 10 * 5 + param0 rand
+					inc trigger cash winnings
+					chat trigger concat concat " 5 3's in a row, you win " winnings " gp. "
+				endscript
+				end
+				number winnings * 10 * 3 + param0 rand
+				inc trigger cash winnings
+				chat trigger concat concat " 4 3's in a row, you win " winnings " gp. "
+			endscript
+			end
+			number winnings * 5 * 2 + param0 rand
+			inc trigger cash winnings
+			chat trigger concat concat " 3 3's in a row, you win " winnings " gp. "
+		endscript
+		end
+		number winnings * 1 * 1 + param0 rand
+		inc trigger cash winnings
+		chat trigger concat concat " 2 3's in a row, you win " winnings " gp. "
+	endscript
+	end
+end
+if = reel1 4
+	if = reel2 4
+		if = reel3 4
+			if = reel4 4
+				if = reel5 4
+					number winnings * 10 * 5 + param0 rand
+					inc trigger cash winnings
+					chat trigger concat concat " 5 4's in a row, you win " winnings " gp. "
+				endscript
+				end
+				number winnings * 10 * 3 + param0 rand
+				inc trigger cash winnings
+				chat trigger concat concat " 4 4's in a row, you win " winnings " gp. "
+			endscript
+			end
+			number winnings * 5 * 2 + param0 rand
+			inc trigger cash winnings
+			chat trigger concat concat " 3 4's in a row, you win " winnings " gp. "
+		endscript
+		end
+		number winnings * 1 * 1 + param0 rand
+		inc trigger cash winnings
+		chat trigger concat concat " 2 4's in a row, you win " winnings " gp. "
+	endscript
+	end
+end
+if = reel1 5
+	if = reel2 5
+		if = reel3 5
+			if = reel4 5
+				if = reel5 5
+					number winnings * 10 * 5 + param0 rand
+					inc trigger cash winnings
+					chat trigger concat concat " 5 5's in a row, you win " winnings " gp. "
+				endscript
+				end
+				number winnings * 10 * 3 + param0 rand
+				inc trigger cash winnings
+				chat trigger concat concat " 4 5's in a row, you win " winnings " gp. "
+			endscript
+			end
+			number winnings * 5 * 2 + param0 rand
+			inc trigger cash winnings
+			chat trigger concat concat " 3 5's in a row, you win " winnings " gp. "
+		endscript
+		end
+		number winnings * 1 * 1 + param0 rand
+		inc trigger cash winnings
+		chat trigger concat concat " 2 5's in a row, you win " winnings " gp. "
+	endscript
+	end
+end
+if = reel1 1
+if = reel2 2
+if = reel3 3
+if = reel4 4
+if = reel5 5
+number winnings * 100 * 1 param0 rand
+inc trigger cash winnings
+chat trigger concat concat " WOW!!! a straight you win " winnings " gp."
+endscript
+end
+end
+end
+end
+end		
+chat trigger " You lose."
+inc trigger cash - 0 money
+
+
+
+

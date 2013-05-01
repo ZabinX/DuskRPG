@@ -1,0 +1,23 @@
+type
+weapon
+description
+Scythe of Death
+cost
+1000
+mod
+800
+image
+9
+durability
+600000
+onWear
+doomsickle
+onUnWear
+doomsickleend
+.
+
+
+
+
+
+

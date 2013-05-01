@@ -1,0 +1,14 @@
+type
+item
+description
+Enchanted gemstone
+cost
+0
+image
+6
+onuse
+enchantedgem
+uses
+1
+.
+

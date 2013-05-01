@@ -1,0 +1,4 @@
+chat trigger "priest says:   wanna get high?"
+inc trigger locx 1
+endscrpit
+

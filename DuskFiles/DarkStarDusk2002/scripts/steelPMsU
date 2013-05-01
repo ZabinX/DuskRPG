@@ -1,0 +1,11 @@
+addCondition trigger removingMailSleeves
+removeItem trigger "steel plate mail sleeves"
+if and
+! hasCondition trigger removingMail
+isWearing trigger "steel plate mail"
+	order trigger "unwear steel plate mail"
+end
+removeCondition trigger removingMailSleeves
+endscript
+removeCondition trigger removingMailSleeves
+endscript

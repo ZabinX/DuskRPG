@@ -1,0 +1,10 @@
+if ispet trigger
+endscript
+end
+if ! isclan trigger TFAWC
+chat trigger " You are not of the TFAWC clan"
+inc trigger locx -1
+endscript
+end
+chat trigger "Welcome TFAWC member!"
+endscript

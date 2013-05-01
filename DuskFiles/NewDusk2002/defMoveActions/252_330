@@ -1,0 +1,4 @@
+chat trigger "You thought you had won??  Its just beginning."
+set trigger locxy 229 273
+endscript
+

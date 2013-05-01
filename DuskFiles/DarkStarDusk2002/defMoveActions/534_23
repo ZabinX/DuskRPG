@@ -1,0 +1,6 @@
+set trigger hp trigger maxhp
+set trigger mp trigger maxmp
+chat trigger " You decide to take a rest."
+
+
+

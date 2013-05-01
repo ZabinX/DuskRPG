@@ -1,0 +1,6 @@
+chat trigger " You enter this ancient building... You wonder why it was made and who built it..
+
+
+You enter... "
+addcondition trigger "ruins"
+set trigger locXY 300 900 endscript

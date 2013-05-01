@@ -1,0 +1,12 @@
+if hasitem trigger "Red Flag"
+	chat trigger "You captured the enemy flag!"
+	removeitem trigger "Red Flag"
+	createitem "Red Flag" 985 904
+	removeflag trigger "Flag!"
+	if > global redcp 0 
+		inc trigger gp 50
+		endscript
+	end
+	chat trigger "But you're not playing against anyone..."
+end
+endscript

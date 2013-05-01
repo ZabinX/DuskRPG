@@ -1,0 +1,6 @@
+if ispet trigger
+     endscript
+end
+chat trigger "Up up and away, boy this rhyme is really gay."
+set trigger locxy 100 100
+endscript

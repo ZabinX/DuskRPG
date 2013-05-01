@@ -1,0 +1,8 @@
+if ispet trigger
+	endscript
+end
+if ! hasItem trigger raffle5ticket
+	chat trigger "You attempt to move closer towards the item, but some unseen force holds you back."
+	inc trigger locy -1
+end
+endscript

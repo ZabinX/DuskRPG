@@ -1,0 +1,14 @@
+type
+weapon
+description
+a bronze, tempered sword
+cost
+200
+mod
+250
+image
+9
+durability
+9000
+.
+

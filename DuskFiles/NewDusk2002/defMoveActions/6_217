@@ -1,0 +1,5 @@
+if isPlayer trigger
+  chat trigger "The construction worker points you to a sign which reads: 'This area currently closed.  Come back soon.  - TwiddleDee"
+  inc trigger locy -1
+end
+endscript

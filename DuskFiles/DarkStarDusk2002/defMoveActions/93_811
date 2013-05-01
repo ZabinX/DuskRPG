@@ -1,0 +1,2 @@
+set trigger locxy 70 915
+chat trigger "You leave the forest and end up on an island"

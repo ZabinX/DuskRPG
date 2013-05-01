@@ -1,0 +1,14 @@
+if ! hasitem trigger questkey
+inc trigger locy 1 
+chat trigger "You need a quest key"
+endscript
+end
+removeitem trigger questkey
+endscript
+end
+if isplayer trigger
+end
+endscript
+
+
+

@@ -1,0 +1,14 @@
+type
+armor
+kind
+hands
+description
+armor that boosts MP
+mod
+500
+cost
+999
+onWear
+mpb
+onUnWear
+mpbend

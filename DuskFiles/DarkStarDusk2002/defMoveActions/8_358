@@ -1,0 +1,3 @@
+set trigger locxy 97 22
+chat trigger " Leaving Bug Burrow...."
+endscript

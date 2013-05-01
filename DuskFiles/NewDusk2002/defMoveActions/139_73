@@ -1,0 +1,6 @@
+if isPet trigger
+  endscript
+end
+addCondition trigger safe
+endscript
+

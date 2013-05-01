@@ -1,0 +1,5 @@
+if isPet trigger
+     endscript
+end
+chat trigger "Merchant says: Welcome to the Brimstone Tavern."
+endscript

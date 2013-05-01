@@ -1,0 +1,15 @@
+if > trigger cp 1500
+	inc trigger StrengthBonus 50
+	inc trigger DexterityBonus 50
+	inc trigger ACBonus 50
+	chat trigger " You feel your body exceed it's usual limits. "
+	endscript
+end
+if < trigger cp 1500
+	unwear trigger "Cutlas Supreme"
+	chat trigger " You are not strong enough to weild this weapon. "
+endscript
+
+
+
+

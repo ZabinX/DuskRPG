@@ -1,0 +1,7 @@
+if ! hasitem trigger "Key10"
+	inc trigger locy 1
+	chat trigger "You do not have the key to open this door"
+endscript
+	chat trigger " Welcome to the village vault, where you can claim rewards and prizes"
+end
+endscript

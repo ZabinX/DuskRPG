@@ -1,0 +1,30 @@
+if ispet trigger
+    endscript
+end
+if ! hascondition trigger "searchedhere"
+    addcondition trigger "searchedhere"
+    number a * rand 100
+    if and < a 38 > a 34
+        chat trigger "You rifle through the cushions on Wildern's couch and find and Energy Crystal."
+        giveitem trigger "Energy Crystal"
+        endscript
+    end
+    if and < a 35 > a 29
+        chat trigger "You rifle through the cushions on Wildern's couch and find some cheese."
+        giveitem trigger "Cheese"
+        endscript
+    end
+    if and < a 30 > a 24
+        chat trigger "You rifle through the cushions on Wildern's couch and find some wine."
+        giveitem trigger "Wine"
+        endscript
+    end
+    if < a 25
+        chat trigger "You rifle through the cushions on Wildern's couch and find a cookie."
+        giveitem trigger "cookie"
+        endscript
+    end
+    chat trigger "You rifle through the cushions on Wildern's couch, but find nothing of interest."
+    endscript
+end
+endscript

@@ -1,0 +1,9 @@
+if ispet trigger
+    endsccript
+end
+if ! hasitem trigger "ale"
+    giveitem trigger "ale"
+    chat trigger "Some items can be used... here is an ale.  Type 'use ale' or 'drink ale" to use it."
+end
+endscript
+

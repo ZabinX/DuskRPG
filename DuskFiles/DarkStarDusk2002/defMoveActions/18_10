@@ -1,0 +1,5 @@
+if < trigger cp 300
+	inc trigger locx -1
+	chat trigger " Don't waste your time. The monsters are too skilled for you. Go train some more."
+end
+endscript

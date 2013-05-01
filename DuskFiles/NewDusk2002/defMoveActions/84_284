@@ -1,0 +1,7 @@
+if ! isPlayer trigger
+	endscript
+	end
+#
+chat trigger "darko says: hi, there are three warriors to defeat here, can you handle them ?"
+endscript
+

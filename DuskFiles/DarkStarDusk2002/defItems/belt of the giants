@@ -1,0 +1,16 @@
+type
+armor
+kind
+waist
+description
+a very durable belt with a strange power to yeild some attacks to a minimum damage
+cost
+0
+mod
+200
+OnWear
+armor
+OnUnWear
+armorend
+image
+7

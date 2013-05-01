@@ -1,0 +1,8 @@
+if hasItem trigger "basement key" set trigger locxy 718 703
+chat trigger "you have unlocked the door you may leave"
+end
+if ! hasitem trigger "basement key"
+chat trigger "the door is locked"
+endscript
+
+

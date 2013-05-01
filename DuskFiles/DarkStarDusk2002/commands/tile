@@ -1,0 +1,217 @@
+number x 0
+number y 0
+if = param1 1
+	number y -1
+end
+if = param1 2
+	number x 1
+end
+if = param1 3
+	number y 1
+end
+if = param1 4
+	number x -1
+end
+string command concat ">" param0
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+order trigger command
+inc trigger locxy x y
+endscript
+

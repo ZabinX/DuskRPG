@@ -1,0 +1,24 @@
+if isinbattle caster
+if hasitem caster "aquamarine"
+	number damage * + 1.8 * rand 2.0 + caster stre caster inte 	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " The Aquamarine increase Levaithans attack power. He attacks " name enemy caster " and does" damage " damage."
+	chat enemy caster concat concat " The giant serpent Leviathan attacks you doing " damage " damage."
+endscript
+end
+if isinbattle caster
+	number damage * + 1.8 * rand 1.6 + caster stre caster inte 	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " You summon the great sea serpent Leviathan.  He attacks " name enemy caster " and does" damage " damage."
+	chat enemy caster concat concat " The sea serpent Leviathan attacks you doing " damage " damage."
+endscript
+end
+end
+chat caster " You must be in battle to summon this creature"
+endscript
+end
+end
+endscript
+
+
+

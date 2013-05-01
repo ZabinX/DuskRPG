@@ -1,0 +1,5 @@
+# fwmove
+chat trigger "You see a dark room but think nothing about it."
+chat trigger "You hear someone moving around in thier..."
+endscript
+

@@ -1,0 +1,457 @@
+401
+380
+train:Strength
+train:HP
+end
+35
+35
+pet
+end
+252
+262
+platinum helmet
+platinum suit
+end
+250
+262
+end
+263
+269
+train:HP
+train:MP
+train:Dodge
+train:Double Attack
+train:Triple Attack
+train:Quadruple Attack
+end
+263
+271
+train:Strength
+train:Spell Power
+train:Stamina
+train:Regeneration
+train:Mana Regen
+end
+260
+269
+end
+29
+40
+ale
+sandwich
+end
+202
+62
+boat
+end
+107
+150
+ale
+sandwich
+end
+110
+141
+ale
+sandwich
+end
+80
+135
+end
+82
+135
+end
+82
+137
+end
+12
+41
+dagger
+long sword
+crystal sword
+Burn Blade
+end
+21
+25
+wooden dagger
+cloth shirt
+end
+373
+350
+train:HP
+burn blade
+end
+427
+409
+Demons Blood
+end
+83
+23
+ale
+end
+433
+87
+ale
+end
+458
+75
+train:Triple Attack
+end
+458
+73
+train:Quadruple Attack
+end
+462
+75
+train:Dodge
+end
+462
+73
+train:Double Attack
+end
+440
+71
+pickaxe
+bronze shovel
+end
+472
+83
+cloth shirt
+wooden dagger
+newbie sword
+newbie vest
+end
+473
+95
+generic sword
+generic helmet
+generic tunic
+generic shield
+end
+433
+209
+Blade of Light
+end
+64
+48
+train:hells fire
+end
+44
+218
+end
+18
+43
+leather helmet
+leather shield
+leather gloves
+leather vest
+leather pants
+end
+313
+151
+Blade of Light
+Cutlas
+end
+6
+43
+steel helmet
+steel suit
+steel gloves
+steel leggings
+steel plate mail sleeves
+end
+27
+42
+train:clerical group
+train:enchantment group
+end
+198
+256
+train:Spell Power
+end
+31
+19
+train:HP
+train:MP
+train:Strength
+train:Spell Power
+train:Stamina
+train:Regeneration
+train:Mana Regen
+end
+313
+153
+Force Field
+end
+291
+153
+ale
+end
+291
+151
+sandwich
+end
+284
+152
+pet
+end
+301
+163
+train:HP
+train:Strength
+train:Spell Power
+train:Stamina
+train:Regeneration
+train:Mana Regen
+end
+124
+70
+train:black magic group
+end
+310
+160
+train:Spell Power
+train:Regeneration
+train:Mana Regen
+train:enchantment group
+train:clerical group
+train:druidic group
+end
+133
+138
+train:Dodge
+train:Double Attack
+train:Triple Attack
+end
+133
+142
+train:druidic group
+end
+303
+163
+train:Dodge
+train:Double Attack
+train:Triple Attack
+train:Quadruple Attack
+end
+18
+36
+train:druidic group
+train:telepathy group
+end
+88
+888
+train:Dodge
+train:Double Attack
+train:Triple Attack
+train:Quadruple Attack
+end
+88
+800
+train:Double Attack
+train:Triple Attack
+train:Quadruple Attack
+train:Strength
+end
+90
+801
+end
+526
+5
+Red Potion
+Green Potion
+Blue Potion
+end
+521
+7
+Daedulus Sword
+end
+519
+7
+Crystal Box
+Bloody Book
+Nova Package
+end
+514
+7
+train:summons group
+train:alchemy group
+train:black magic group
+train:white magic group
+end
+693
+136
+train:m group
+end
+523
+15
+train:HP
+train:MP
+end
+520
+15
+end
+593
+606
+end
+148
+13
+Soul Reaver
+end
+458
+501
+end
+407
+31
+Thieves Dagger
+end
+106
+36
+Nova Package
+Cutlas
+end
+984
+974
+train:Mana Tap
+end
+987
+974
+train:Armor Identification
+end
+990
+974
+train:Lock Picking
+end
+977
+974
+train:HP
+end
+989
+980
+train:Life Tap
+end
+994
+958
+end
+993
+938
+end
+518
+8
+Crystal Suit
+Crystal Sleeves
+Crystal Helmet
+Crystal Leggings
+Crystal Necklace
+Crystal Belt
+Crystal Lens
+Crystal Gloves
+end
+189
+127
+Anarchy Blade
+end
+192
+140
+Anarchy Blade
+end
+38
+938
+train:archery
+end
+713
+726
+diamond suit
+diamond helmet
+diamond leggings
+diamond gauntlets
+diamond belt
+diamond sleeves
+diamond collar
+diamond facemask
+diamond sword
+end
+995
+28
+train:Regeneration
+train:Mana Regen
+train:Stamina
+train:Spell Power
+train:HP
+train:MP
+end
+998
+981
+train:Spell Power
+train:Stamina
+train:Mana Regen
+train:Regeneration
+end
+486
+483
+train:druidic group
+end
+1
+701
+train:white magic group
+end
+93
+82
+devilsblade
+end
+93
+84
+shifty war plate
+end
+159
+902
+Vortanic Blade
+end
+197
+906
+train:enchantment group
+train:clerical group
+train:black magic group
+train:alchemy group
+end
+188
+897
+train:Dodge
+train:Double Attack
+train:Triple Attack
+train:Quadruple Attack
+end
+189
+898
+train:Strength
+train:Spell Power
+train:Stamina
+train:Regeneration
+train:Mana Regen
+end
+187
+898
+train:HP
+train:HP
+train:MP
+end
+157
+902
+Vortan Suit
+Vortan Helmet
+end
+131
+882
+Thieves Dagger
+end
+707
+726
+train:strength
+train:spell power
+train:stamina
+train:regeneration
+train:mana regen
+train:dodge
+train:double attack
+train:triple attack
+train:quadruple attack
+end

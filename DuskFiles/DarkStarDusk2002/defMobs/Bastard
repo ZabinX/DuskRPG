@@ -1,0 +1,36 @@
+maxhp
+1200
+maxmp
+1200
+inte
+100
+stre
+200
+dext
+175
+cons
+225
+wisd
+150
+grouprelation
+.01
+bravery
+.01
+giveitem
+Bastard Sword
+.10
+image
+14
+faction
+demon
+skill
+Double Attack
+100
+skill
+Tripple Attack
+75
+wield
+long sword
+-1
+-1
+.

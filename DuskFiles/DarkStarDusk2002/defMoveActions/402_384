@@ -1,0 +1,28 @@
+if isRace trigger human
+	inc trigger locy 1
+	chat trigger " Those who are the spawn of Hell may come in and have tea. If not the spawn of Hell, GO!"
+	endscript
+end
+if isRace trigger lizard
+	inc trigger locy 1
+	chat trigger " Those who are the spawn of Hell may come in and have tea! If not the spawn of Hell, GO!"
+	endscript
+end
+if isRace trigger elf
+	inc trigger locy 1
+	chat trigger " Those who are the spawn of Hell may come in and have tea. If not the spawn of Hell, GO!!"
+	endscript
+end
+if isRace trigger darkelf
+	inc trigger locy 1
+	chat trigger " Those who are the spawn of Hell may come in and have tea. If not the spawn of Hell, GO!"
+	endscript
+end
+if isRace trigger wizard
+	inc trigger locy 1
+	chat trigger " Those who are the spawn of Hell may come in and have tea. If not the spawn of Hell, GO!!"
+	endscript
+end
+endscript
+
+

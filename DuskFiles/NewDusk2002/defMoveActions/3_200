@@ -1,0 +1,13 @@
+if ! isPlayer trigger
+  endscript
+end
+number d trigger skill "Disguise"
+number chance * 20 rand
+if < d chance
+  chat trigger "As you attempt to escape from the city, the guards pull you aside.  Those weapons look quite sharp."
+  set trigger locxy 1 199
+  endscript
+end
+chat trigger "The guards are again fooled by your disguise."
+inc trigger locy -3
+endscript

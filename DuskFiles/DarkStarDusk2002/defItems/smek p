@@ -1,0 +1,14 @@
+type
+item
+description
+some stuff.
+cost
+9999
+image
+6
+onuse
+sp
+uses
+1
+.
+

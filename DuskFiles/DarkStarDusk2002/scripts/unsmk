@@ -1,0 +1,3 @@
+set trigger maxhp 20000
+set trigger maxmp 20000
+endscript

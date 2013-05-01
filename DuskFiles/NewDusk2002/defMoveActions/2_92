@@ -1,0 +1,10 @@
+if isPlayer trigger
+  chat trigger "Your eyes take a moment to adjust."
+end
+if hasCondition trigger umbra2
+  removeCondition trigger umbra2
+end
+if hasCondition trigger umbra3
+  removeCondition trigger umbra3
+end
+endscript

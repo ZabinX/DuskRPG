@@ -1,0 +1,8 @@
+if ! hascondition trigger "translater"
+chat trigger " You cant read this ancient writing."
+endscript
+end
+chat trigger " Wazza!"
+removeitem trigger "book of ramaden"
+endscript
+

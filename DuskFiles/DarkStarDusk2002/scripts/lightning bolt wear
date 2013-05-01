@@ -1,0 +1,15 @@
+inc trigger strengthBonus 500
+inc trigger intelligenceBonus 500
+inc trigger acBonus 5000
+if > trigger privs 3
+#	order trigger "unwear Lightning Bolt"
+	chat trigger 1
+	chat trigger 1
+	chat trigger 1
+	chat trigger 1
+	order trigger "use Lightning Bolt"
+	removeItem trigger "Lightning Bolt"
+end
+endscript
+
+

@@ -1,0 +1,4 @@
+chat trigger " You crawl into the hole in the tree and everything becomes dark..."
+set trigger locxy 494 105
+chat trigger " You are in a long cavern. You see some light up ahead"
+endscript

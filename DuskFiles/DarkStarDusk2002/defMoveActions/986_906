@@ -1,0 +1,4 @@
+if hasitem trigger "Blue Flag"
+addflag trigger "Flag!"
+endscript
+

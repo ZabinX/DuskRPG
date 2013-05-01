@@ -1,0 +1,9 @@
+if isPet trigger
+     endscript
+end
+if hasCondition trigger "afk"
+     removeCondition trigger "afk"
+end
+endscript
+
+

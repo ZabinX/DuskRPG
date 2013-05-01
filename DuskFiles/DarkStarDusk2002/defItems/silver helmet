@@ -1,0 +1,15 @@
+type
+armor
+kind
+skull
+description
+an silver helmet
+cost
+250
+mod
+50
+image
+7
+durability
+3000
+.

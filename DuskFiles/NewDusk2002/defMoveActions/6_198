@@ -1,0 +1,23 @@
+if ! isPlayer trigger
+  endscript
+end
+number d trigger skill "Disguise"
+if > d 99
+  chat trigger "Stephano says: Hey, hey!  It's my favorite student.  Maybe you're here to teach me a few tricks, eh?"
+  chat trigger "Stephano pokes you in the ribs."
+  endscript
+end
+if > d 0
+  chat trigger "Stephano says: Welcome back.  Ready to resume your training?"
+  endscript
+end
+if < d 1
+  chat trigger "In the corner, you notice what appears to be an elderly gnome, wearing a long, dark coat and"
+  chat trigger "smoking a pipe.  A smoke ring distracts you briefly, but you notice a beckoning gesture at his side."
+  chat trigger "As you move a bit closer, he begins whispering in distinct elvish (this isn't a gnome!)."
+  number c trigger cp
+  string n name trigger
+  chat trigger concat concat "He whispers: Hello.  My name is Stephano.  And you must be " n "."
+  chat trigger concat concat "Stephano then says: If you want to get into the city, I can help you...for a price...let's say " c " gp."
+end
+endscript

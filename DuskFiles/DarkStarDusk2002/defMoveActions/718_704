@@ -1,0 +1,8 @@
+set trigger locxy 750 747
+chat trigger "!!!the door has locked behind you, looks like you need a basement key"
+endscript
+
+
+
+
+

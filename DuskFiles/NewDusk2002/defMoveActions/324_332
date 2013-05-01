@@ -1,0 +1,11 @@
+if ispet trigger
+    endscript
+end
+if < trigger cp 2000
+    chat trigger "You must be 5000 Cp to enter"
+    inc trigger locx -1
+    endscript
+end
+order trigger "leave"
+endscript
+

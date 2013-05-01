@@ -1,0 +1,5 @@
+if ispet trigger
+    endscript
+end
+chat trigger "To see what a merchant is selling, look at them."
+endscript

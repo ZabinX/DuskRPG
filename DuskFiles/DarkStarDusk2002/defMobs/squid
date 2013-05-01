@@ -1,0 +1,39 @@
+maxhp
+2000
+maxsp
+400
+stre
+250
+dext
+150
+cons
+200
+wisd
+400
+inte
+400
+giveitem
+long sword
+.25
+giveitem
+expertsword
+.09
+faction
+lizard
+bravery
+5.00
+image
+30
+skill
+Double Attack
+100
+skill
+Triple Attack
+70
+wield
+burn blade
+-1
+-1
+.
+
+

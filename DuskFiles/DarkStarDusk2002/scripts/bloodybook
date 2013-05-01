@@ -1,0 +1,11 @@
+giveitem trigger "Blood Helmet"
+giveitem trigger "Blood Suit"
+giveitem trigger "Blood Sleeves"
+giveitem trigger "Blood Leggings"
+giveitem trigger "Necklace of the Dead"
+giveitem trigger "Eye of the Dead"
+giveitem trigger "Blood Belt"
+giveitem trigger "Blood Gloves"
+chat trigger " You read an inscription in this book and get the armor of dead warriors"
+removeitem trigger "Bloody Book"
+endscript

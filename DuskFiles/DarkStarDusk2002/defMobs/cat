@@ -1,0 +1,28 @@
+maxhp
+40
+maxmp
+0
+stre
+15
+inte
+1
+dext
+40
+cons
+15
+wisd
+0
+image
+12
+skill
+dodge
+5
+skill
+Double attack
+10
+faction
+cat
+giveitem
+curved dagger
+0.3
+.

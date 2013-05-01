@@ -1,0 +1,4 @@
+chat trigger " You get in the old tree trunk, and suddenly the darkness fades into day..."
+set trigger locxy 64 90
+chat trigger " You are back in front of the castle."
+endscript

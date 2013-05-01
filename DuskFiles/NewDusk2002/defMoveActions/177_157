@@ -1,0 +1,17 @@
+if ispet trigger
+    endscript
+end
+livingthing clanmage local trigger "Clan Mage"
+string command concat "cast endurance " name trigger
+order clanmage command
+order clanmage command
+order clanmage command
+order clanmage command
+order clanmage command
+order clanmage command
+order clanmage command
+order clanmage command
+order clanmage command
+order clanmage command
+endscript
+

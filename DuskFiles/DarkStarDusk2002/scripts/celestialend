@@ -1,0 +1,5 @@
+if hasItem trigger "celestial arrow"
+	inc trigger strengthbonus -50
+	inc trigger dexteritybonus -50
+	inc trigger wisdombonus -50
+endscript

@@ -1,0 +1,26 @@
+maxhp
+40
+maxsp
+100
+stre
+7
+inte
+10
+dext
+10
+wisd
+10
+cons
+30
+bravery
+0.75
+grouprelation
+0.05
+image
+35
+giveitem
+minor potion
+0.1
+faction
+demon
+.

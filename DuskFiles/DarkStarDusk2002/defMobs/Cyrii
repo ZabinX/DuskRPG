@@ -1,0 +1,45 @@
+maxhp
+5000
+maxmp
+5000
+stre
+300
+inte
+100
+dext
+200
+wisd
+100
+cons
+300
+bravery
+0.75
+grouprelation
+0.05
+image
+29
+skill
+Dodge
+80
+skill
+Double Attack
+100
+skill
+Triple Attack
+90
+skill
+Quadruple Attack
+70
+giveitem
+wonder elixer
+0.5
+giveitem
+Chaos Sword
+0.005
+wield
+Chaos Sword
+-1
+-1
+faction
+vampire
+.

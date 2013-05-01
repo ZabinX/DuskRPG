@@ -1,0 +1,9 @@
+if ispet trigger
+	endscript
+end
+if ! hasCondition trigger jailed
+	chat trigger "Warden says: You may leave now."
+	set trigger locxy 100 100
+end
+endscript
+

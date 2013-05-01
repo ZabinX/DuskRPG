@@ -1,0 +1,14 @@
+type
+weapon
+description
+a strange gem said to be the weapon of the Great God Mars... It is told that it can summon demons, hence the name Summon Demon
+mod
+1000000
+onWear
+Summon DemonWear
+onUnWear
+Summon DemonUnwear
+image
+14
+durability
+999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999

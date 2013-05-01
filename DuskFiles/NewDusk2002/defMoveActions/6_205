@@ -1,0 +1,18 @@
+if ! isPlayer trigger
+  endscript
+end
+chat trigger "The smell of fresh baked goods draws you to this table.  Complex twisted loaves and speckled scones"
+number c trigger cash
+if < c 20
+  chat trigger "are the subject of much attention.  Your stomach grumbles but your purse is empty and you must turn"
+  chat trigger "away."
+  endscript
+end
+inc trigger cash -20
+chat trigger "are the subject of much attention.  You purchase one of the mandrake muffins.  With a happy stomach,"
+chat trigger "you feel ready to continue your explorations."
+inc trigger hp 20
+if > trigger hp trigger maxhp
+  set trigger hp trigger maxhp
+end
+endscript

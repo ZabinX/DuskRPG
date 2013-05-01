@@ -1,0 +1,4 @@
+set trigger hp trigger maxhp
+set trigger mp trigger maxmp
+chat trigger " The mysterious blue light heals you"
+endscript

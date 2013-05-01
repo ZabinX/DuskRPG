@@ -1,0 +1,48 @@
+maxhp
+34000
+maxsp
+2000
+stre
+350
+inte
+30
+dext
+280
+cons
+10000
+wisd
+30
+bravery
+100000.00
+group relation
+0.99
+faction
+Grinder
+skill
+Dodge
+65
+skill
+Double Attack
+100
+skill
+Triple Attack
+60
+skill
+Quadruple Attack
+50
+wield
+serpent claw
+-1
+-1
+torso
+Serpent Scales
+-1
+-1
+giveitem
+Water Gem
+1.0
+image
+31
+.
+
+

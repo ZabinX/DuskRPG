@@ -1,0 +1,6 @@
+set trigger locxy 8 340
+chat trigger "You enter the dark passage and feel as if it continues on forever"
+chat trigger "Finally u emerge from the dark into a forest surrounded by water"
+endscript
+
+

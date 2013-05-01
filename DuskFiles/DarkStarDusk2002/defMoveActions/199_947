@@ -1,0 +1,10 @@
+if ispet trigger
+endscript
+end
+if isplayer trigger
+giveitem trigger "quest blade"
+set trigger locxy 200 900
+chat trigger "You find a power that you never had before to make a quest sword"
+end
+endscript
+

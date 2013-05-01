@@ -1,0 +1,17 @@
+type
+armor
+kind
+skull
+description
+Blood Helmet
+cost
+3000
+mod
+205
+OnWear
+bloodhelmeton
+image
+7
+durability
+-1
+.

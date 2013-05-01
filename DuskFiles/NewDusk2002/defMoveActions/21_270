@@ -1,0 +1,6 @@
+set trigger locxy 21 262
+if isPlayer trigger
+	chat trigger "Heh, I'll be you thought you were done.  But alas, the worst is yet to come..."
+	end 
+endscript
+

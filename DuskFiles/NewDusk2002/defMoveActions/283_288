@@ -1,0 +1,8 @@
+if ispet trigger
+    endscript
+end
+    chat trigger "The line ends here,  good job with this temple, here is the exit.."
+    endscript
+end
+endscript
+

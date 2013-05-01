@@ -1,0 +1,10 @@
+if ispet trigger
+    endscript
+end
+if or ! hasItem trigger housebeezerkey
+    ! isclan trigger "FWP"
+    chat trigger "This isn't your house!"
+    inc trigger locy 1
+end
+endscript
+

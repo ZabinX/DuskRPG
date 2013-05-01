@@ -1,0 +1,8 @@
+if ! isWearing trigger gasmask
+	chat trigger "You feel dizzy from all these toxic fumes."
+	inc trigger hp -10
+end
+endscript
+
+
+

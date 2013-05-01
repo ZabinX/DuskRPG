@@ -1,0 +1,11 @@
+if isPet trigger
+	endscript
+end
+if < trigger cash 3000
+	inc trigger locx -1
+	chat trigger " Watts says: Come back when you have enough money!"
+end
+endscript
+
+
+

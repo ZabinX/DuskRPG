@@ -1,0 +1,20 @@
+type
+armor
+kind
+skull
+description
+a helmet made of Diamond
+mod
+250
+cost
+3000
+image
+7
+onWear
+diamondoff
+durability
+999999
+
+
+
+

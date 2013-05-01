@@ -1,0 +1,9 @@
+if ispet trigger
+	endscript
+end
+if ! hasItem trigger housecyrilkey
+	chat trigger "This isn't your house!"
+	inc trigger locy -1
+	end
+end
+endscript

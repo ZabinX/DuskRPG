@@ -1,0 +1,4 @@
+if ! hascondition trigger hunger
+    addcondition trigger hunger
+end
+endscript

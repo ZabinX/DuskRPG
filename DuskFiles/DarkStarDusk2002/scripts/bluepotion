@@ -1,0 +1,6 @@
+set trigger hp trigger maxhp
+set trigger mp trigger maxmp
+chat trigger " As you drink the glowing blue liquid you feel yourself get much better and your magic powers return."
+removeitem trigger "Blue Potion"
+endscript
+

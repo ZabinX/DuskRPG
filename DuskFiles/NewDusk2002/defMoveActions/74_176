@@ -1,0 +1,7 @@
+if isPet trigger
+     endscript
+end
+chat trigger "Mage says: We are expecting to get a shipment of rare wines soon."
+inc trigger locy -1
+endscript
+

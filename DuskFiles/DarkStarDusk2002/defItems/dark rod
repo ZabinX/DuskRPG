@@ -1,0 +1,12 @@
+type
+weapon
+description A magical rod from the Dark Wizard
+mod
+750
+image
+8
+onWear
+darkrod
+onUnWear
+drend
+

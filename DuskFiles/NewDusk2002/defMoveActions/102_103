@@ -1,0 +1,11 @@
+if isPet trigger
+    endscript
+end
+if > trigger cp 75
+    chat trigger "You are not a newbie"
+    inc trigger locy -1
+    endscript
+end
+endscript
+
+

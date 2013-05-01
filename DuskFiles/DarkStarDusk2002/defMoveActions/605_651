@@ -1,0 +1,6 @@
+if hasitem trigger "k d"
+chat trigger "now that you have broken the force field surrounding DraN you may enter his Throne Room"
+end
+if ! hasitem trigger "k d"
+chat trigger "If you kill the Dark Wizard the forcefield surrounding DraN will be broken"
+endscript

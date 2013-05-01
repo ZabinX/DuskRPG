@@ -1,0 +1,22 @@
+if or isRace trigger demon isRace trigger "ice demon"
+	inc trigger hp - 0 / trigger hp 2
+	inc trigger mp - 0 / trigger mp 2
+	chat trigger " The Gods powers hurt your very essence."
+	if < trigger hp 1
+		set trigger locxy 394 394
+		set trigger hp 5
+		addcondition trigger safe
+		removecondition trigger invis
+		removecondition trigger detect invis
+		removecondition trigger armor
+		removecondition trigger bless
+		removecondition trigger hpregen
+		removecondition trigger hero
+		chat trigger " You end up in hell...The domain of Cyril....the god of Chaos!"
+	end
+	endscript
+end
+inc trigger hp + trigger maxHp trigger hpBonus
+inc trigger mp + trigger maxMp trigger mpBonus
+chat trigger " The Gods powers clean your body and soul."
+endscript

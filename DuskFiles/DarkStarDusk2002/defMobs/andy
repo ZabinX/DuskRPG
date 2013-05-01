@@ -1,0 +1,46 @@
+maxhp
+50000
+maxmp
+0
+stre
+500
+inte
+400
+dext
+500
+cons
+300
+wisd
+400
+image
+20
+bravery
+0.45
+grouprelation
+0.75
+giveitem
+Packed Lunch
+1
+faction
+andy
+skill
+Dodge
+100
+skill
+Double Attack
+100
+skill
+Triple Attack
+100
+skill
+Quadruple Attack
+100
+wield
+Shifty Sword
+.
+
+
+
+
+
+

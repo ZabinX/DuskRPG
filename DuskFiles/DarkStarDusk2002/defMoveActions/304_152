@@ -1,0 +1,5 @@
+set trigger locxy 310 152
+chat trigger "Weapons and Armor Room"
+endscript
+
+

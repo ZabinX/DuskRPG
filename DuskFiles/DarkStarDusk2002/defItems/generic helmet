@@ -1,0 +1,14 @@
+type
+armor
+kind
+skull
+description
+a generic helmet
+cost
+200
+mod
+1
+image
+7
+durability
+1

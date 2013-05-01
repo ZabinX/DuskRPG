@@ -1,0 +1,9 @@
+if ! isPlayer trigger
+	endscript
+	end
+#
+if and hasCondition trigger shenville_mq_0 ! hasItem trigger blackrose
+	giveItem trigger blackrose
+	chat trigger "You get a black rose"
+	end
+endscript

@@ -1,0 +1,9 @@
+if ! hasitem trigger enterencekey
+inc trigger locy 1
+chat trigger "You need the enterencekey from the quest beholder"
+endscript
+end
+removeitem trigger enterencekey
+end
+endscript
+

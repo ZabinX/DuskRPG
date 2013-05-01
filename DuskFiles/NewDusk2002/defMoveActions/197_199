@@ -1,0 +1,5 @@
+if ! isPet trigger
+	chat trigger concat concat "it seems that " global lastmoved " was the last person to step here."
+	global string lastmoved name trigger
+	end
+endscript

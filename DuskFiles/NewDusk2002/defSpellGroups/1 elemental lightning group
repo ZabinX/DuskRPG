@@ -1,0 +1,25 @@
+#Ball Lightning
+#
+# Does damage from 5 times caster int+wis
+#
+#
+if ! hasitem caster "Lightning Dragon Scale"
+    chat caster "You cannot cast this spell without a Lightning Dragon Scale."
+    endscript
+end
+removeitem caster "Lightning Dragon Scale"
+number baseDamage * 5 + caster inte caster wisd
+number addDamage * 5 + caster inte caster wisd
+number damage + baseDamage * addDamage rand
+if isinbattle caster
+    livingthing target enemy caster
+    inc target hp * -1 damage
+    inc caster damdone damage
+    chat target concat concat concat name caster " throws a lightning ball at you for " damage " damage."
+    chat caster concat concat concat concat "You throw a lighning ball at " name target " for " damage " damage."
+    endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript
+
+

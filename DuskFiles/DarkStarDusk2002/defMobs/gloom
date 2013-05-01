@@ -1,0 +1,37 @@
+maxhp
+25000
+maxsp
+10000
+stre
+435
+dext
+340
+cons
+200
+wisd
+300
+int
+400
+image
+4
+bravery
+1
+grouprealtion
+0.9
+giveitem
+vortanic blade
+0.01
+Weilded
+vortanic blade
+skill
+double attck
+100
+skill
+triple attack
+100
+
+faction
+gloom
+.
+
+

@@ -1,0 +1,8 @@
+chat trigger "
+Bank of 'City of Light' - commands help
+--------------------------------------------------------------
+balance                   - Shows you your current account balance.
+deposit <amount>    - Deposits gp to your account.
+withdraw <amount> - Withdraws gp fom your account.
+"
+endscript

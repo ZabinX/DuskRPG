@@ -1,0 +1,26 @@
+if ispet trigger
+	endscript
+end
+if hascondition trigger "inside"
+	if hasitem trigger "orkgodkey"
+		chat trigger "Walk onto the tree to leave."
+	end
+	if ! hasitem trigger "orkgodkey"
+		chat trigger "Can't turn back now!"
+	end
+	inc trigger locy -1
+	endscript
+end
+livingthing orkgod "Ork God"
+if isMob orkgod
+	if > orkgod locx 0
+		addcondition trigger "inside"
+		chat trigger "You must slay the Ork God, or die trying."
+		inc trigger locy -1
+		endscript
+	end
+end
+chat trigger "The Ork God is not there, you must wait for his return."
+inc trigger locy 1
+endscript
+

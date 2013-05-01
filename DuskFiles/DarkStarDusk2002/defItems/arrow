@@ -1,0 +1,12 @@
+type
+item
+image
+7
+description
+an arrow
+uses
+10
+onUse
+arrow
+.
+

@@ -1,0 +1,7 @@
+set trigger locxy 703 701
+chat trigger "You have left Super Dragons Lair"
+endscript
+
+
+
+

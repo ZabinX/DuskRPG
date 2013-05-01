@@ -1,0 +1,5 @@
+if ! hasitem trigger "kill dran" set trigger locxy 728 699
+chat trigger "Please kill DraN to release the spell he cast on me that limits my power so I cant warp, If you do I will be able to get us both out of this awfull place"
+end
+giveitem trigger "kill dran"
+endscript

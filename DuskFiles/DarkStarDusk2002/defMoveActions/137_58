@@ -1,0 +1,7 @@
+if ! hasItem trigger "minor potion"
+	giveItem trigger "Minor Potion"
+	chat trigger " The sad man gives you a potion that he made."
+end
+endscript
+
+

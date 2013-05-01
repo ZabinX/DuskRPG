@@ -1,0 +1,10 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger inbath
+    removecondition trigger inbath
+    removecondition trigger "ice bath"
+    chat trigger "You leave the icey water feeling refreshed in body and mind."
+    endscript
+end
+endscript

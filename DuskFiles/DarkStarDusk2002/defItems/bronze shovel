@@ -1,0 +1,13 @@
+type
+weapon
+description
+a shovel strong enough to pick up ore as heavy as bronze
+cost
+2000
+mod
+115
+image
+10
+durability
+1200
+

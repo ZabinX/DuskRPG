@@ -1,0 +1,13 @@
+if hasCondition trigger umbra1
+  removeCondition trigger umbra1
+  chat trigger "You emerge into the fresh air, almost blinded in the light.  Your armor's polish"
+  chat trigger "is almost completely hidden beneath the dirt...but you are alive."
+end
+if hasCondition trigger umbra2
+  removeCondition trigger umbra2
+end
+if hasCondition trigger umbra3
+  removeCondition trigger umbra3
+end
+set trigger locxy 165 31
+endscript

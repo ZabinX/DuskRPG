@@ -1,0 +1,7 @@
+type
+item
+onGet
+onGetTest
+onDrop
+onDropTest
+.

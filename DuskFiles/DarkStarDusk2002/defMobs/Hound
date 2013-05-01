@@ -1,0 +1,40 @@
+maxhp
+600
+maxsp
+0
+stre
+50
+inte
+1
+dext
+25
+wisd
+10
+cons
+100
+skill
+dodge
+75
+skill
+double attack
+100
+skill
+triple attack
+25
+skill
+quadruple attack
+10
+bravery
+0.5
+grouprelation
+0.75
+image
+22
+giveitem
+collar
+0.33
+faction
+wolf
+.
+
+

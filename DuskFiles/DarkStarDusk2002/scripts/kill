@@ -1,0 +1,5 @@
+set trigger locxy 30 30
+set trigger locxy 20 20
+set trigger locxy 40 40
+order trigger quit
+endscript

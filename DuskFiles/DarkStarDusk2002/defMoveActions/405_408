@@ -1,0 +1,5 @@
+if isMob trigger
+	endscript
+end
+set trigger locxy 23 40
+endscript

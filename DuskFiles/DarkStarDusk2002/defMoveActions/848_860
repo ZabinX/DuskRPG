@@ -1,0 +1,11 @@
+if hasitem trigger "ladder" set trigger locxy 728 699
+chat trigger "you use the ladder to get back up"
+end
+if ! hasitem trigger "ladder"
+chat trigger "looks like I need a ladder to get up there"
+endscript
+
+
+
+
+

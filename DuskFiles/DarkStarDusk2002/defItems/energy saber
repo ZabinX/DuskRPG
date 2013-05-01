@@ -1,0 +1,15 @@
+type
+weapon
+description
+a blade that enhances your power.
+cost
+1000
+mod
+250
+image
+9
+OnWear
+power
+OnUnWear
+powerend
+

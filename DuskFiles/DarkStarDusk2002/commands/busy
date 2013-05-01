@@ -1,0 +1,9 @@
+if < trigger privs 3
+	chat trigger "huh?"
+	endscript
+end
+order trigger concat concat " gecho " trigger name " is busy
+order trigger "leave him alone or :"
+order trigger "gecho 1st offence. kill you"
+order trigger "gecho 2nd offence. delete you"
+order trigger "gecho 3rd offence. log you serial number and i.p and block you forever."

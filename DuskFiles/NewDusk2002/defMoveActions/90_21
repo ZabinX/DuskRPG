@@ -1,0 +1,15 @@
+if not isPlayer trigger
+	endscript
+	end
+if hasItem trigger hgkey
+	removeItem trigger hgkey
+		set trigger locxy 100 100
+		endscript
+		end
+	chat trigger "You have to kill the god to go ahead"
+endscript
+
+
+
+
+

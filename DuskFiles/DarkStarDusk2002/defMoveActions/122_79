@@ -1,0 +1,9 @@
+if ispet trigger
+	endscript
+end
+if ! hasItem trigger house1key
+	chat trigger "This is Tylks house!"
+	inc trigger locx -1
+end
+endscript
+

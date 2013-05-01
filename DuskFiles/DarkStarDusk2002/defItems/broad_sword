@@ -1,0 +1,12 @@
+type
+weapon
+description
+a broad sword
+cost
+80
+mod
+140
+image
+9
+durability
+4800

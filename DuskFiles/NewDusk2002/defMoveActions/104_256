@@ -1,0 +1,20 @@
+if ! isPlayer trigger
+	endscript
+	end
+if ! hasCondition trigger killedsupergnoll
+	chat trigger "You have to kill a supergnoll to get the reward"
+	endscript
+	end
+removeCondition trigger killedsupergnoll
+set trigger locxy 100 100
+chat trigger "Congratulations !!!"
+if < trigger cp 1000
+	giveItem trigger "gnoll belt"
+	chat trigger "You get a gnoll belt"
+	end
+addConditionWithDuration trigger newbiequestcompleted 10000
+endscript
+
+
+
+

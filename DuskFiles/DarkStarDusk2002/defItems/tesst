@@ -1,0 +1,13 @@
+type
+item
+description
+moo
+cost
+20
+image
+6
+onuse
+test001
+uses
+1
+.

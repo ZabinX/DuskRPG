@@ -1,0 +1,23 @@
+#
+# exited the room to the west
+#
+if hascondition trigger maze4
+    removecondition trigger maze4
+end
+if hascondition trigger maze3
+    removecondition trigger maze3
+end
+if hascondition trigger maze2
+    removecondition trigger maze2
+    addcondition trigger maze3
+    set trigger locxy 125 199
+    endscript
+end
+if hascondition trigger maze1
+    removecondition trigger maze1
+    set trigger locxy 125 199
+    endscript
+end
+addcondition trigger maze1
+set trigger locxy 125 199
+endscript

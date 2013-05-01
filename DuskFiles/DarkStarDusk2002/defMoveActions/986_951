@@ -1,0 +1,10 @@
+set trigger hp trigger maxhp
+chat trigger " You fall asleep, your body is relaxed. "
+chat trigger " Innkeeper says: Thank you for coming."
+set trigger locxy 180 95
+endscript
+
+
+
+
+

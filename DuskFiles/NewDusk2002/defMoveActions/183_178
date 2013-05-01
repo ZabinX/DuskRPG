@@ -1,0 +1,5 @@
+if hascondition trigger "searchedhere"
+    removecondition trigger "searchedhere"
+end
+inc trigger locy 3
+endscript

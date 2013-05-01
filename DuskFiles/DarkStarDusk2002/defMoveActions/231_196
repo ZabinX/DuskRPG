@@ -1,0 +1,8 @@
+if isPlayer trigger
+	chat trigger concat concat " Up ahead is the Blue Wizard which gives the Bluestone. " name trigger ", Kill him and save up for the other two stones."
+end
+endscript
+
+
+
+

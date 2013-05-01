@@ -1,0 +1,11 @@
+if ispet trigger
+    endscript
+end
+if > trigger cp 150
+    chat trigger "You cannot get out here anymore, keep going."
+    inc trigger locy 1
+    endscript
+end
+endscript
+
+

@@ -1,0 +1,9 @@
+if ! hasitem trigger "Fire Orb"
+	giveitem trigger "Fire Orb"
+	chat trigger " You find the Fire Orb and pick it up."
+	inc trigger locy 2
+endscript
+	chat trigger "You already have a Fire Orb"
+	set trigger locxy 25 985
+endscript
+end

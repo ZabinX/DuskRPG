@@ -1,0 +1,17 @@
+if ! isPlayer trigger
+	endscript
+	end
+if > trigger cp 500
+	inc trigger locy -1
+	chat trigger "You're too strong to enter here"
+	endscript
+	end
+if hasCondition trigger newbiequestcompleted
+	inc trigger locy -1
+	chat trigger "You have completed the quest recently. Try later"
+	endscript
+	end
+inc trigger locx 1
+endscript
+
+

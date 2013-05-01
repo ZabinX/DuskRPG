@@ -1,0 +1,5 @@
+inc trigger locy 4
+addCondition trigger inCoL
+chat trigger "Be Welcome in the City of Light."
+endscript
+

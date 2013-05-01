@@ -1,0 +1,9 @@
+if not isplayer trigger
+	endscript
+end
+if not hasitem trigger tilgovihousekey
+	chat trigger "Welcome to Tilgovi's Divine Shack."
+	endscript
+end
+chat trigger "Welcome home, Tilgovi."
+endscript

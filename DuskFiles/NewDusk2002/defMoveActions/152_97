@@ -1,0 +1,6 @@
+if isPlayer trigger
+  chat trigger "This presumably leads down to the cellar.  Unfortunately, the door is locked."
+  chat trigger "You consider picking the lock, but the barkeep's watchful eyes suggest otherwise."
+  inc trigger locy 1
+end
+endscript

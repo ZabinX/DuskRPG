@@ -1,0 +1,5 @@
+if isPlayer trigger
+	chat trigger "Look around a bit theres lots to be bought here."
+end
+endscript
+

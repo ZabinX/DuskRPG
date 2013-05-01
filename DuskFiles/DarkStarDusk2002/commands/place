@@ -1,0 +1,31 @@
+#Place command (for the CoL City Item Storage)
+#usage: Place <item>
+if ! hasCondition trigger atCoLItems
+	chat trigger "huh?"
+	endscript
+end
+#
+if ! variableisstring param0
+	chat trigger "Place what??"
+endscript
+end
+#
+if ! hasitem trigger param0
+	chat trigger concat concat " You do not have a " param0 " !"
+endscript
+end
+if hascondition trigger param0
+	chat trigger concat concat " You already have a " param0 "in storage, one is the limit."
+endscript
+end
+addcondition trigger param0
+if ! hascondition trigger param0
+	chat trigger " You cannot put that in your item storage.... Sorry."
+endscript
+end
+removeitem trigger param0
+chat trigger concat concat "You Placed a " param0 " in your storage box."
+endscript
+
+
+

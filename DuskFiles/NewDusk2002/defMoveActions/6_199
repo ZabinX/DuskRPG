@@ -1,0 +1,28 @@
+if ! isPlayer trigger
+  endscript
+end
+number d trigger skill "Disguise"
+if > d 0
+  endscript
+end
+number c trigger cp
+number g trigger cash
+if > c g
+  chat trigger "Stephano grabs you and tosses you back toward the guards."
+  chat trigger concat concat "Stephano says: " name trigger ", you don't understand.  Money talks and you have nothing to say."
+  inc trigger locy -2
+  endscript
+end
+number price * c -1
+inc trigger cash price
+chat trigger concat concat "Stephano takes your " c " gp and suggests you learn something or he'll charge you again."
+chat trigger "Stephano says: Here's your first lesson - pets don't need disguises."
+#
+# This guarentees that the recipient can buy one point.  This will only happen if the user has no
+# disguise skill.  Newbies could conceptually abuse this as it's a way of exchanging gp for exp.
+# But its a long trip for a maximum of 100 exp.  There are much easier ways to get exp.
+#
+if < trigger exp 100
+  set trigger exp 100
+end
+endscript

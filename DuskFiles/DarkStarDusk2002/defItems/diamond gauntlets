@@ -1,0 +1,22 @@
+type
+armor
+kind
+hands
+description
+Gauntlets made Diamond
+mod
+110
+cost
+1000
+image
+7
+onWear
+diamondoff
+durability
+999999
+
+
+
+
+
+

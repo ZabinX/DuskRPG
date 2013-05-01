@@ -1,0 +1,7 @@
+set trigger hp trigger maxHp
+chat trigger " You feel refreshed. but kind of depressed because you slept in a hermit's bed, especially without permission."
+endscript
+
+
+
+

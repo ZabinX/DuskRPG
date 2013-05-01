@@ -1,0 +1,297 @@
+if ispet trigger
+    endscript
+end
+#
+# Check to see if they have been told of the quest
+#
+if ! hascondition trigger "jeweler_quest"
+    addcondition trigger "jeweler_quest"
+    chat trigger "Jeweler says:  I am afraid that I am a bit low on inventory"
+    chat trigger "Jeweler says:  The stupid Dwarves have moved into the mountains to the west
+               and taken over my source of raw materials"
+    chat trigger "Jeweler says:  I could make you something if you could get me the materials"
+    chat trigger "Jeweler says:  I would be very happy if you could just get rid of the little dirt rats"
+    endscript
+end
+#
+# They have been told about the quest, let's check and see if they have done anything
+#
+number iron trigger count "iron ingot"
+number silver trigger count "silver ingot"
+number gold trigger count "gold ingot"
+number crown trigger count "dwarf king crown"
+chat trigger "Jeweler says:  Hmmm... Let's see..."
+number foundsomething 0
+if > iron 0
+    if = iron 1
+        chat trigger concat concat "               " iron " iron ingot...."
+    end
+    if > iron 1
+        chat trigger concat concat "               " iron " iron ingots...."
+    end
+    number foundsomething 1
+end
+if > silver 0
+    if = silver 1
+        chat trigger concat concat "               " silver " silver ingot...."
+    end
+    if > silver 1
+        chat trigger concat concat "               " silver " silver ingots...."
+    end
+    number foundsomething 1
+end
+if > gold 0
+    if = gold 1
+        chat trigger concat concat "               " gold " gold ingot...."
+    end
+    if > gold 1
+        chat trigger concat concat "               " gold " gold ingots...."
+    end
+    number foundsomething 1
+end
+if > crown 0
+    if = crown 1
+        chat trigger concat concat "               " crown " dwarf king crown...."
+    end
+    if > crown 1
+        chat trigger concat concat "               " crown " dwarf king crowns...."
+    end
+    number foundsomething 1
+end
+if = foundsomething 0
+    chat trigger "Jeweler says:  Have you made any progress on getting rid of those Dwarves?"
+    endscript
+end
+#
+# Would not be here if they have not brought something back... figure out what to give them
+#
+if < iron 5
+    chat trigger "Jeweler says:  Maybe if you had more iron, I could make you something."
+    endscript
+end
+if < silver 5
+    chat trigger "Jeweler says:  Maybe if you had more silver, I could make you something."
+    endscript
+end
+if < gold 5
+    chat trigger "Jeweler says:  Maybe if you had more gold, I could make you something."
+    endscript
+end
+if = crown 0
+    chat trigger "Jeweler says:  If you had only killed their King, I would have rewarded you for teaching those Dwarves a lesson."
+    endscript
+end
+#
+# If they are wearing a previous necklace, need to make them unwear it here
+# before their bonuses change, otherwise it may lower their stats
+#
+number waswearing 0
+if iswearing trigger "Jeweled Necklace"
+    order trigger "unwear Jeweled Necklace"
+    number waswearing 1
+end
+giveitem trigger "Jeweled Necklace"
+addcondition trigger finished_jeweler_quest
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron1
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron2
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron3
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron4
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron5
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron6
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron7
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron8
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron9
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    addcondition trigger iron10
+    removeitem trigger "5.iron ingot"
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver1
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver2
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver3
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver4
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver5
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver6
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver7
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver8
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver9
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    addcondition trigger silver10
+    removeitem trigger "5.silver ingot"
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold1
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold2
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold3
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold4
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold5
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold6
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold7
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold8
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold9
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    addcondition trigger gold10
+    removeitem trigger "5.gold ingot"
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown1
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown2
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown3
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown4
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown5
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown6
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown7
+end
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown8
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "5.dwarf king crown"
+    addcondition trigger crown9
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    addcondition trigger crown10
+    removeitem trigger "dwarf king crown"
+end
+chat trigger "Jeweler gives you a Jeweled Necklace"
+if = waswearing 1
+    order trigger "wear Jeweled Necklace"
+end
+endscript

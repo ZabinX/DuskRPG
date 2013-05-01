@@ -1,0 +1,9 @@
+if ! hascondition trigger 2
+	addcondition trigger 2
+end
+chat trigger " Welcome to Slots."
+addcondition trigger playing
+addcondition trigger slots
+chat trigger " To view a list of command type slots"
+endscript
+

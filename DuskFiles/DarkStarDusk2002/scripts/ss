@@ -1,0 +1,8 @@
+inc trigger StrengthBonus 200
+inc trigger maxhp 200
+if ! trigger isplayer smek unwear trigger "smeks sword" 
+chat trigger "this is for super people only"
+endscript
+
+
+

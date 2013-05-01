@@ -1,0 +1,5 @@
+if ! isPet trigger
+	chat trigger "you feel the breeze flow through your hair as you leave the city.  You sense danger ahead."
+	set trigger locxy 164 156
+end
+endscript

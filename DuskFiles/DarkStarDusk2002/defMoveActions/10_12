@@ -1,0 +1,12 @@
+if ! isclan trigger "Aop"
+inc trigger locx -1
+endscript
+end
+set trigger locxy 170 130
+endscript
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+if ispet trigger
+    endscript
+end
+chat trigger "Farewell, I hope you come again!    -=Firewall=-"
+set trigger locxy 40 138
+endscript

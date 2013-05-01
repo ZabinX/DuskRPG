@@ -1,0 +1,10 @@
+if ispet trigger
+     endsript
+end
+if < trigger cp 3000
+    set trigger locxy 100 100
+    chat trigger "Your not strong enough, go back home and come again later."
+    endscript
+end
+endscript
+ 

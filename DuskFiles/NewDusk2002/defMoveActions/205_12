@@ -1,0 +1,10 @@
+if ispet trigger
+    endscript
+end
+if ! hascondition trigger intown
+    addcondition trigger intown
+chat trigger "Entering  the north Bazzaar."
+    endscript
+end
+endscript
+

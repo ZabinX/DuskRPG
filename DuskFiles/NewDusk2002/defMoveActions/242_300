@@ -1,0 +1,6 @@
+if ispet trigger
+    endscript
+end
+chat trigger "Do you want to exit?? Find another way out!"
+inc trigger locy 1
+endscript

@@ -1,0 +1,10 @@
+removeitem trigger "tamed dragon"
+end
+if ! hasitem trigger "tamed dragon"
+set trigger locxy 706 723
+chat trigger "you cant climb this, what are you thinking"
+endscript
+
+
+
+

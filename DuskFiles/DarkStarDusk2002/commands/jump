@@ -1,0 +1,24 @@
+if < trigger privs 3
+	endscript
+end
+if ! variableisstring param0
+	set trigger locXY * 500 rand * 500 rand
+	endscript
+end
+livingthing target param0
+if variableislivingthing target
+	number x * 500 rand
+	number y * 500 rand
+	if and variableisstring param1 variableisstring param2
+		number p1 param1
+		number p2 param2
+		if and variableisnumber p1 variableisnumber p2
+			number x p1
+			number y p2
+		end
+	end
+	set target locXY x y
+	endscript
+end
+endscript
+

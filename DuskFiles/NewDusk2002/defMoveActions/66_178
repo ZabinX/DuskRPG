@@ -1,0 +1,13 @@
+if isPet trigger
+     endscript
+end
+if < trigger cp 3000
+     chat trigger "Guild Master says: You are to weak to enter the forest, come back later and i will remove the wards."
+     endscript
+end
+if ! hascondition trigger wardremoval
+     addcondition trigger wardremoval
+     chat trigger "Guild Master says: It is now safe to enter the forest, but its not safe to be in it be careful."
+     endscript
+end
+endscript

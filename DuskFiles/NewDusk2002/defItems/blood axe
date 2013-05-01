@@ -1,0 +1,13 @@
+type
+weapon
+description
+a letal axe
+cost
+2500
+mod
+400
+image
+10
+durability
+2000
+.

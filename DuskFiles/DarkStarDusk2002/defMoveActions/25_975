@@ -1,0 +1,18 @@
+if ! hasitem trigger "Fire Orb"
+	if ! hasitem trigger "safekey1"
+		chat trigger " The vault is locked."
+		inc trigger locy 1
+	endscript
+	end
+	if ! hasitem trigger "safekey2"
+		chat trigger " The vault is locked."
+		inc trigger locy 1
+	endscript
+	end
+chat trigger " You open the vault and step inside"
+inc trigger locy -1
+endscript
+removeitem trigger "safekey1"
+removeitem trigger "safekey2"
+inc trigger locy 1
+endscript

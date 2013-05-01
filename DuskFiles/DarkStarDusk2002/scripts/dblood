@@ -1,0 +1,4 @@
+addConditionwithDuration trigger "Demonic" 20
+removeItem trigger "Demons Blood"
+endscript
+

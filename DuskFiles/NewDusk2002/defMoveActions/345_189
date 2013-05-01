@@ -1,0 +1,6 @@
+inc trigger locy 1
+if isPlayer trigger
+	chat trigger "Slay the great God Fragdaddy, or die trying."
+	end
+endscript
+

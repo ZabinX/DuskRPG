@@ -1,0 +1,11 @@
+type
+weapon
+description
+a common iron short sword
+mod
+120
+image
+9
+durability
+6000
+.

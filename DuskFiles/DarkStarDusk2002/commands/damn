@@ -1,0 +1,20 @@
+if < trigger privs 5
+	chat trigger "huh?"
+	endscript	
+end
+if variableisstring param0
+	livingthing target param0
+	set target locxy 394 394
+chat target " You have been sent to hell!"
+          endscript
+end
+chat trigger "SendToTheStart who? :) ?"
+endscript
+
+
+
+
+
+
+
+

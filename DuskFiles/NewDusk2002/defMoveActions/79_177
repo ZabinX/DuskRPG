@@ -1,0 +1,6 @@
+if isPet trigger
+     endscript
+end
+chat trigger "Mage says: Standing here makes me feel calm and relaxed."
+inc trigger locx -1
+endscript

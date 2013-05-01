@@ -1,0 +1,13 @@
+if isPet trigger
+     chat trigger "Pets do no have a keyboard to go away from."
+     endscript
+end
+if hasCondition trigger "afk"
+     chat trigger "You are already 'AFK'."
+     endscript
+end
+addCondition trigger "afk"
+endscript
+
+
+

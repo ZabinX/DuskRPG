@@ -1,0 +1,11 @@
+if hasCondition trigger nothirst
+	addconditionwithduration trigger drunk 4
+	order trigger "emote sobs"
+	end
+addconditionwithduration trigger nothirst 1500
+removeitem trigger ale2
+endscript
+
+
+
+

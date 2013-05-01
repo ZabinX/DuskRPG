@@ -1,0 +1,13 @@
+type
+item
+description
+a scroll of invisibility
+cost
+500
+image
+6
+onuse
+invis
+uses
+1
+.

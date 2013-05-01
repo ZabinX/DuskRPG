@@ -1,0 +1,21 @@
+if ! hasCondition trigger "thief"
+	chat trigger " Hello traveler. You wouldnt happen to have any spare change, would you?"
+	inc trigger cash -1
+	chat trigger " you give the thief 1 gp"
+	chat trigger " the thief hugs you"
+	if hasItem trigger ruby
+		removeItem trigger ruby
+		chat trigger " your load seems a bit lighter...hmmm"
+		endscript
+	end
+	if ! hasItem trigger ruby
+		endscript
+	end
+end
+if hasCondition trigger "thief"
+	chat trigger "Thief says: hey fellow thief, if you're looking for your first pick, go ask the thief boss, over at his office"
+	endscript
+end
+endscript
+
+

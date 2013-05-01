@@ -1,0 +1,4 @@
+if ! hasItem trigger "Pentagram Stone"
+inc trigger locy 1
+chat trigger " You need the Pentagram Stone to pass!"
+endscript

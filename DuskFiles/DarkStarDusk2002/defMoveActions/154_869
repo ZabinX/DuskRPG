@@ -1,0 +1,11 @@
+if ! hasitem trigger jerlekey
+inc trigger locy 1
+chat trigger "This is jerle's room"
+endscript
+end
+chat trigger "Welcome to your room jerle"
+end
+endscript
+if ispet trigger
+endscript
+end

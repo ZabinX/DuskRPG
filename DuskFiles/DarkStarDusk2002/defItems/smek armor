@@ -1,0 +1,17 @@
+type
+armor
+kind
+skull
+description
+helmet
+mod
+999999
+cost
+9999
+image
+7
+onWear
+sa
+onUnWear
+saend
+

@@ -1,0 +1,47 @@
+#balance command (for the CoL City Bank)
+#usage: balance
+if ! hasCondition trigger atCoLBank
+	chat trigger "huh?"
+	endscript
+end
+if hasCondition trigger BankTransaction
+	chat trigger "Transaction going on. Try again in a while."
+	endscript
+end
+addCondition trigger BankTransaction
+number result 0
+    if hasCondition trigger CoLB30 number result + result 1073741824
+end if hasCondition trigger CoLB29 number result + result 536870912
+end if hasCondition trigger CoLB28 number result + result 268435456
+end if hasCondition trigger CoLB27 number result + result 134217728
+end if hasCondition trigger CoLB26 number result + result 67108864
+end if hasCondition trigger CoLB25 number result + result 33554432
+end if hasCondition trigger CoLB24 number result + result 16777216
+end if hasCondition trigger CoLB23 number result + result 8388608
+end if hasCondition trigger CoLB22 number result + result 4194304
+end if hasCondition trigger CoLB21 number result + result 2097152
+end if hasCondition trigger CoLB20 number result + result 1048576
+end if hasCondition trigger CoLB19 number result + result 524288
+end if hasCondition trigger CoLB18 number result + result 262146
+end if hasCondition trigger CoLB17 number result + result 131072
+end if hasCondition trigger CoLB16 number result + result 65536
+end if hasCondition trigger CoLB15 number result + result 32768
+end if hasCondition trigger CoLB14 number result + result 16384
+end if hasCondition trigger CoLB13 number result + result 8192
+end if hasCondition trigger CoLB12 number result + result 4096
+end if hasCondition trigger CoLB11 number result + result 2048
+end if hasCondition trigger CoLB10 number result + result 1024
+end if hasCondition trigger CoLB09 number result + result 512
+end if hasCondition trigger CoLB08 number result + result 256
+end if hasCondition trigger CoLB07 number result + result 128
+end if hasCondition trigger CoLB06 number result + result 64
+end if hasCondition trigger CoLB05 number result + result 32
+end if hasCondition trigger CoLB04 number result + result 16
+end if hasCondition trigger CoLB03 number result + result 8
+end if hasCondition trigger CoLB02 number result + result 4
+end if hasCondition trigger CoLB01 number result + result 2
+end if hasCondition trigger CoLB00 number result + result 1
+end
+chat trigger concat concat "You have " result " gp stored at the CoL Bank."
+removeCondition trigger BankTransaction
+endscript

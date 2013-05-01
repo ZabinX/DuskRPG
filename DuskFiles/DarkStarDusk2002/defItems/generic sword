@@ -1,0 +1,14 @@
+type
+weapon
+description
+generic sword
+cost
+200
+mod
+103
+image
+8
+durability
+3000
+.
+

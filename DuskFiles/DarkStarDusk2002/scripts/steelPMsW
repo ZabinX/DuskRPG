@@ -1,0 +1,7 @@
+if ! isWearing trigger "steel plate mail"
+	order trigger "wear steel plate mail"
+end
+endscript
+
+
+

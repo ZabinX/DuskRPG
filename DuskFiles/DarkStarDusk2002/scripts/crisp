@@ -1,0 +1,4 @@
+chat trigger "You eat some crisps."
+addconditionwithduration trigger nohunger 12000
+removeitem trigger crisps
+endscript

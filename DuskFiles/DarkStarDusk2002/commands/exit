@@ -1,0 +1,9 @@
+if hascondition trigger playing
+	set trigger locxy 88 73
+	chat trigger " Thank you for coming.. please come again, your money is welcome here."
+	removecondition trigger blackjack
+	removecondition trigger slots
+	removecondition trigger playing
+endscript
+end
+chat trigger " huh?"

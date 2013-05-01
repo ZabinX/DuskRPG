@@ -1,0 +1,24 @@
+#
+# This is torch number one
+# There are two torches that can be used as torch number one
+#
+if ispet trigger
+    endscript
+end
+addcondition trigger "oq_switch1"
+if hascondition trigger "oq_switch2"
+    removecondition trigger "oq_switch2"
+end
+if hascondition trigger "oq_switch3"
+    removecondition trigger "oq_switch3"
+end
+if hascondition trigger "oq_switch4"
+    removecondition trigger "oq_switch4"
+end
+if hascondition trigger "oq_switch5"
+    removecondition trigger "oq_switch5"
+end
+chat trigger "As you pull on the torch, you hear gears resetting in the distance."
+endscript
+
+

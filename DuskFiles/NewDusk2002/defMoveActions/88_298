@@ -1,0 +1,10 @@
+if ! isPlayer trigger
+	endscript
+	end
+if hasItem trigger nedalkey
+	removeItem trigger nedalkey
+	inc trigger locy 1
+	endscript
+	end
+inc trigger locy -1
+endscript

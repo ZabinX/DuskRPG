@@ -1,0 +1,11 @@
+if isinbattle caster
+	LivingThing target enemy caster
+	number damage * + .7 * rand .7 + caster stre caster inte 
+	inc target hp * -5 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat A dark bolt flings towards " name enemy caster ". He gets " damage " damage."
+	chat enemy caster concat concat " A dark bolt zaps you doing " damage " damage."
+	endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript

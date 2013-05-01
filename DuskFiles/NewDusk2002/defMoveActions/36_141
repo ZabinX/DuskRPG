@@ -1,0 +1,8 @@
+#fw moveaction ties into dark temple quests in future
+if ispet trigger
+	endscript
+end
+chat trigger "Dark One chants: We are many we are one."
+end
+endscript
+

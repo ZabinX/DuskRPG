@@ -1,0 +1,19 @@
+#Armor: Increases a targets armor class
+#
+#
+if variableisstring param0 #If a target is specified
+	livingthing target local caster param0
+	if variableislivingthing target
+		chat caster concat concat "You create a magic shield to surround " name target "."
+		chat target concat name caster "'s magical shield surrounds you."
+		addconditionwithduration target "armor" caster inte
+		endscript
+	end
+	chat caster "You do not see them here."
+	endscript
+end
+#
+#Else no target is specified
+chat caster "Your surround yourself in a magical shield"
+addconditionwithduration caster "armor" caster inte
+endscript

@@ -1,0 +1,10 @@
+if < trigger privs 3
+	endscript
+end
+livingthing target trigger
+if variableisstring param0
+	livingthing target param0
+end
+addcondition target "detect_invis"
+endscript
+

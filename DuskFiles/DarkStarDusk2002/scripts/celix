@@ -1,0 +1,4 @@
+set trigger maxMp 10000
+set trigger mp trigger maxMp
+removeItem trigger "cyrils elixer"
+endscript

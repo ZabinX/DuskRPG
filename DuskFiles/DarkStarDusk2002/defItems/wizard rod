@@ -1,0 +1,17 @@
+type
+weapon
+description
+a weapon won from the evil wizard of the Tower.
+cost
+1000
+mod
+300
+image
+8
+OnWear
+wizard
+OnUnWear
+wizardend
+
+
+

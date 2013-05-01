@@ -1,0 +1,9 @@
+if ! hasItem trigger key
+inc trigger locx -1
+chat trigger " Its locked...you need a key....maybe one of the Rock Beasts has one...."
+endscript
+end
+removeItem trigger key
+endscript
+end
+endscript

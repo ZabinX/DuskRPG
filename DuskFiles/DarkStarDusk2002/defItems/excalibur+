@@ -1,0 +1,16 @@
+type
+weapon
+description
+an updated excalibur.
+mod
+650
+onWear
+ExcaliburWear
+onUnWear
+ExcaliburUnwear
+image
+9
+durability
+9999999
+.
+

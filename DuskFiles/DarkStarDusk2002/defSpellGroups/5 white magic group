@@ -1,0 +1,20 @@
+if isinbattle caster
+	if hasCondition enemy caster "taco"
+	chat caster "The spell deflects!"
+	endscript
+	end
+if isinbattle caster
+	number damage * + 2.6 * rand 1.9 + caster stre caster inte 
+	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " Holy damage is inflicted upon " name enemy caster " . He gets " damage " damage."
+	chat enemy caster concat concat " Holy damage is inflicted upon you. You get " damage " damage."
+	endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript
+
+
+
+
+

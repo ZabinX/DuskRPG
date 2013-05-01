@@ -1,0 +1,5 @@
+or
+or
+! isPlayer trigger
+hasCondition trigger shenville_mq_0
+hasCondition trigger shenville_mq_1

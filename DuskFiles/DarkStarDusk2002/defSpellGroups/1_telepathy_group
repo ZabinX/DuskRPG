@@ -1,0 +1,16 @@
+#Tire: For the duration of the casters intelligence, cause a foe to randomly fall asleep
+#
+#
+if not variableistring param0
+	chat caster "If you wish to sleep you may do so on your own will."
+	endscript
+end
+livingthing target local caster param0
+if not variableislivingthing target
+	chat caster "That person is not here."
+	endscript
+end
+chat caster concat concat "You convince the mind of " name target " that it is tired."
+addconditionwithduration target "tired" caster inte
+endscript
+

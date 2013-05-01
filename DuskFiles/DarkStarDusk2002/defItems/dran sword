@@ -1,0 +1,17 @@
+type
+weapon
+description
+Blade Wielded by DraN
+mod
+1100
+cost
+20000
+image
+42
+onWear
+dran
+onUnWear
+dranend
+
+
+

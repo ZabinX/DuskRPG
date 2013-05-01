@@ -1,0 +1,11 @@
+type
+weapon
+description
+a mighty big hammer
+mod
+250
+duration
+65000
+image
+10
+.

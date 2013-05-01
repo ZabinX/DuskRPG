@@ -1,0 +1,38 @@
+#condition <target> <condition> [<time>]
+# time > 0 => adds the target a condition with duration
+# time = 0 => removes this condition from the target
+# time = -1 => adds the target a timeless condition (duration -1)
+# no time specified => checks wheter the target has the specified condition
+#
+if < trigger privs 4
+	chat triger "huh?"
+	endscript
+end
+if and variableisstring param0 variableisstring param1
+	livingthing target param0
+	string cond param1
+	if ! variableisnumber param2
+		number dur -2
+	end
+	if > param2 -2
+		number dur param2
+	end
+	if or isPlayer target isMob target
+		if = dur 0
+			removeCondition target cond
+			endscript
+		end
+		if = dur -2
+			string verb "doesn't have"
+			if hasCondition target cond
+				string verb "has"
+			end
+			chat trigger concat concat concat " '" name target concat "' " verb concat concat " the '" cond "' condition."
+			endscript
+		end
+		addConditionWithDuration target param1 dur
+		endscript
+	end
+end
+chat trigger "Bad command usage or target not in game."
+endscript

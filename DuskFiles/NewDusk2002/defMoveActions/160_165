@@ -1,0 +1,7 @@
+if ispet trigger
+    endscript
+end
+inc trigger locy 1
+chat trigger "Hmm...you can't seem to get in, there must be another way..."
+endscript
+

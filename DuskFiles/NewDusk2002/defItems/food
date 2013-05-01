@@ -1,0 +1,13 @@
+type
+food
+description
+food
+cost
+15
+image
+6
+onUse
+rand_eat_food
+uses
+1
+.

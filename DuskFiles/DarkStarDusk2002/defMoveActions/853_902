@@ -1,0 +1,3 @@
+removecondition trigger "sin 5"
+end
+endscript

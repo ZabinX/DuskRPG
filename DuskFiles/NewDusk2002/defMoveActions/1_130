@@ -1,0 +1,20 @@
+number c trigger skill "clerical group"
+if > c 0
+    chat trigger concat "You have a clerical score of " c
+end
+#
+number d trigger skill "druidic group"
+if > d 0
+    chat trigger concat "You have a druidic score of " d
+end
+#
+number e trigger skill "enchantment group"
+if > e 0
+    chat trigger concat "You have a enchantment score of " e
+end
+#
+number t trigger skill "telepathy group"
+if > t 0
+    chat trigger concat "You have a telepathy score of " t
+end
+endscript

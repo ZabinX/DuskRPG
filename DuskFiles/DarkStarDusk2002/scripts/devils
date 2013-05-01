@@ -1,0 +1,16 @@
+if ! isclan trigger HAOD-AC
+order trigger unwear devilsblade
+chat trigger " You are not of the HAOD-AC clan so you may not wield the HAOD sword"
+removeitem trigger devilsblade
+endscript
+end
+inc trigger strengthBonus 200
+inc trigger AcBonus 50
+inc trigger dexterityBonus 50
+chat trigger "The Power of HAOD-AC Flows Through You"
+end
+
+
+
+
+

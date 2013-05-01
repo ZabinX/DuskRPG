@@ -1,0 +1,4 @@
+set trigger locxy 8 359
+chat trigger " Entering Bug Burrow...."
+endscript
+

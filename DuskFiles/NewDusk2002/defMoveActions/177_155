@@ -1,0 +1,35 @@
+if ispet trigger
+    endscript
+end
+number cp trigger cp
+livingthing clanmage local trigger "Clan Mage"
+string command concat "cast harden " name trigger
+order clanmage command
+if > cp 499
+    order clanmage command
+end
+if > cp 999
+    order clanmage command
+end
+if > cp 1499
+    order clanmage command
+end
+if > cp 1999
+    order clanmage command
+end
+if > cp 2499
+    order clanmage command
+end
+if > cp 2999
+    order clanmage command
+end
+if > cp 3499
+    order clanmage command
+end
+if > cp 3999
+    order clanmage command
+end
+if > cp 3499
+    order clanmage command
+end
+endscript

@@ -1,0 +1,12 @@
+if ! hasitem trigger roomkey
+inc trigger locy 1
+chat trigger "This isnt your room"
+endscript
+end
+chat trigger "Welcome to your room"
+end
+endscript
+if ispet trigger
+endscript
+end
+

@@ -1,0 +1,19 @@
+type
+weapon
+description
+a thin but deadly sharp blade.
+cost
+450
+mod
+275
+image
+9
+durability
+65555
+onWear
+pb_start
+onUnwear
+pb_end
+
+
+

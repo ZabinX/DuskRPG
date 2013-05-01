@@ -1,0 +1,7 @@
+if ! hascondition trigger pred1
+set trigger locxy 9 1
+addcondition trigger pred1
+endscript
+end
+set trigger locxy 100 100
+endscript

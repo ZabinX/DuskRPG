@@ -1,0 +1,64 @@
+maxhp
+3500
+maxsp
+20
+stre
+102
+inte
+90
+dext
+100
+wisd
+100
+cons
+90
+skill
+Dodge
+30
+skill
+Double Attack
+60
+skill
+Triple Attack
+40
+skill
+Quadruple Attack
+30
+wield
+Excalibur
+-1
+-1
+skull 
+gold helmet
+-1
+-1
+torso
+gold suit
+-1
+-1
+arms
+gold leggings
+-1
+-1
+legs
+gold leggings
+-1
+-1
+hands
+gold belt
+-1
+-1
+image
+25
+bravery
+0.9
+giveitem
+2nd Crystal
+1.0
+.
+
+
+
+
+
+

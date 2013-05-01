@@ -1,0 +1,41 @@
+maxhp
+40000
+maxsp
+20000
+stre
+2000
+dext
+10000
+inte
+750
+wisd
+750
+cons
+2000
+image
+44
+skill
+Dodge
+75
+skill
+Double Attack
+100
+skill
+Triple Attack
+75
+skill
+Quadruple Attack
+50
+torso
+dragon skin
+faction
+dragon
+giveitem
+dragon wings
+2.00
+bravery
+9.99
+grouprelation
+0.00
+.
+

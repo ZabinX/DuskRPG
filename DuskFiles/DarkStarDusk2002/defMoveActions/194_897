@@ -1,0 +1,5 @@
+set trigger locxy 90 18
+chat trigger "Wow you lived but got kinda banged up"
+inc trigger hp -25
+inc trigger mp -60
+set target

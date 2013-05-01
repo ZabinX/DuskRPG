@@ -1,0 +1,33 @@
+maxhp
+3000
+maxsp
+3000
+stre
+200
+inte
+100
+dext
+200
+wisd
+200
+cons
+100
+image
+32
+bravery
+0.9
+grouprelation
+0.25
+giveitem
+demon horns
+0.5
+faction
+demon
+skills
+double attack
+100
+.
+
+
+
+

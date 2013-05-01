@@ -1,0 +1,38 @@
+cd /home/wildern/newdusk
+#echo Backing up game files
+tar -cvf newdusk_`date '+%m_%d_20%y.tar'` *.class commands conf def* factions help helpFiles users/default pets/default merchants mobs props scripts shortmap signs globals start_server tar_up_the_game scan.base make_scan java > /dev/null
+tar -cvf source_`date '+%m_%d_20%y.tar'` sourceFiles > /dev/null
+#echo Compressing game files
+gzip -9 newdusk_`date '+%m_%d_20%y.tar'`
+gzip -9 source_`date '+%m_%d_20%y.tar'`
+#echo Finished game files
+#echo Purging character files that have not been used in the last 180 days
+touch users/default
+touch users/tom
+find users -mtime +180 -exec rm {} \;
+find users -size -197c -mtime +30 -exec rm {} \;
+#echo Finished purging character files
+#echo Backing up player files
+tar -cvf users_`date '+%m_%d_20%y.tar'` users > /dev/null
+#echo Compressing player files
+gzip -9 users_`date '+%m_%d_20%y.tar'`
+#echo Finished player files
+#echo Purging pet files that have not been used in the last 180 days
+touch pets/default
+find pets -mtime +180 -exec rm {} \;
+#echo Finished purging pet files
+#echo Backing up pet files
+tar -cvf pets_`date '+%m_%d_20%y.tar'` pets > /dev/null
+#echo Compressing pet files
+gzip -9 pets_`date '+%m_%d_20%y.tar'`
+#echo Finished pet files
+mv *.gz .backups
+#echo Purging backups of player files that are older than 90 days
+find .backups -name "user*" -mtime +90 -exec rm {} \;
+#echo Finished purging old backups of player files
+#echo Purging backups of pets files that are older than 90 days
+find .backups -name "pet*" -mtime +90 -exec rm {} \;
+#echo Finished purging old backups of pet files
+#echo Purging auto backup from in-game load/save erorrs
+find backup -mtime +30 -exec rm {} \;
+#echo Finished purging auto backup from in-game load/save erorrs

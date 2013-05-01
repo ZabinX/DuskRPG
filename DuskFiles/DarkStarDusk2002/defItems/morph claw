@@ -1,0 +1,14 @@
+type
+weapon
+description
+a claw
+cost
+10
+image
+6
+mod
+630
+durability
+-1
+.
+

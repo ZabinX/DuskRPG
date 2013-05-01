@@ -1,0 +1,13 @@
+type
+food
+description
+a freshly baked cookie
+cost
+10
+image
+6
+onuse
+cookie
+uses
+1
+.

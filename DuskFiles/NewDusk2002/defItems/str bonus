@@ -1,0 +1,14 @@
+type
+item
+description
+A liquid that makes you strong.
+cost
+1000
+image
+6
+onuse
+usestrbonus
+uses
+1
+.
+

@@ -1,0 +1,14 @@
+type
+armor
+kind
+torso
+mod
+700
+cost
+99999
+image
+7
+onWear
+da
+onUnWear
+daend

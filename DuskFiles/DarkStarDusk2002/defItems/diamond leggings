@@ -1,0 +1,20 @@
+type
+armor
+kind
+legs
+description
+Diamond Plated Leggings
+cost
+1000
+mod
+100
+image
+7
+onWear
+diamondoff
+durability
+999999
+.
+
+
+
