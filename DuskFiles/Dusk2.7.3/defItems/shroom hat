@@ -1,0 +1,21 @@
+type
+armor
+kind
+skull
+description
+psycilocibe for ones head
+cost
+400
+mod
+52
+image
+242
+durability
+3000
+onWear
+start_shroom_hat
+onUnWear
+end_shroom_hat
+.
+
+

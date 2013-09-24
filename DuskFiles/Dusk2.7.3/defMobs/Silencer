@@ -21,8 +21,10 @@ image
 giveitem
 Questsword
 0.1
+giveitem
 green eye
 0.1
+giveitem
 silence suit
 .01
 condition

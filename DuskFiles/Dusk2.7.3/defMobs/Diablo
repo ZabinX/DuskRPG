@@ -26,8 +26,10 @@ demon
 skill
 double attack
 100
+skill
 triple attack
 50
+skill
 dodge
 75
 condition

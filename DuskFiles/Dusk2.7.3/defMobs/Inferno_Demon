@@ -21,6 +21,7 @@ grouprelation
 giveitem
 questsword
 .3
+giveitem
 powerblade
 1
 faction
@@ -28,8 +29,10 @@ demon
 skill
 double attack
 100
+skill
 triple attack
 100
+skill
 quadruple attack
 75
 .

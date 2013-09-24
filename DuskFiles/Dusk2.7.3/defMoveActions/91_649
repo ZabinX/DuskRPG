@@ -58,7 +58,7 @@ if hasCondition trigger bhquest3
 #
 if and hasCondition trigger bhquest2 hasItem trigger HelmetStarFishCorpse
 	removeItem trigger HelmetStarFishCorpse
-	if hasItem HelmetStarFishCorpse
+	if hasItem trigger HelmetStarFishCorpse
 		removeItem trigger HelmetStarFishCorpse
 			if hasItem trigger HelmetSharkCorpse
 				removeItem trigger HelmetSharkCorpse
@@ -116,6 +116,9 @@ if hasCondition trigger bhquestEnd
 	addCondition trigger bhquest1
 	endscript
 	end
+
+
+
 
 
 

@@ -19,6 +19,7 @@ grouprelation
 giveitem
 sabre
 0.4
+giveitem
 goblin edge
 .01
 faction
@@ -26,10 +27,13 @@ hunter
 skill
 double attack
 100
+skill
 triple attack
 50
+skill
 quadruple attack
 30
+skill
 dodge
 30
 .

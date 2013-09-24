@@ -1,0 +1,16 @@
+Commands to run Dusk as an applet:
+
+cd /home/ed/dusk5
+java -cp . DuskServer
+
+Commands to run Dusk as an application:
+
+ed@ed-laptop:~$ cd /home/ed/dusk5
+ed@ed-laptop:~/dusk5$ ~/jre/jre1.7.0_17/bin/java -jar /home/ed/Dusk-test/DuskServer.jar
+Loading...
+Ready for connections.
+
+
+ed@ed-laptop:~$ cd /home/ed/dusk5/www
+ed@ed-laptop:~/dusk5/www$ ~/jre/jre1.7.0_17/bin/java -jar /home/ed/Dusk-test/DuskX.jar 
+logging in!

@@ -1,13 +1,13 @@
 maxhp
-200
+400
 maxmp
-200
+400
 stre
 47
 inte
 47
 dext
-47
+100
 wisd
 47
 cons
@@ -20,5 +20,8 @@ grouprelation
 1
 givegp
 47
+faction
+bandit
 .
+
 

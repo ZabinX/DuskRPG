@@ -23,11 +23,13 @@ demon
 skill
 double attack
 100
+skill
 triple attack
 100
+skill
 quadruple attack
 100
-conditions
+condition
 detect invis
 .
 

@@ -10,7 +10,6 @@ dext
 1000
 bravery
 3.0
-1
 image
 21
 giveitem
@@ -22,6 +21,6 @@ condition
 detect invis
 0
 -1
-skills
+skill
 double attack
 100

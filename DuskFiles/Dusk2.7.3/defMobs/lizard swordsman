@@ -21,6 +21,7 @@ grouprelation
 giveitem
 lizard scale
 1
+giveitem
 wave pike
 .09
 faction
@@ -28,6 +29,7 @@ lizard
 skill
 double attack
 75
+skill
 triple attack
 35
 .

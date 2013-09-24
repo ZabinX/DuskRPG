@@ -1,3 +1,5 @@
-inc trigger damModBonus -100
+inc trigger damModBonus -50
 endscript
+
+
 

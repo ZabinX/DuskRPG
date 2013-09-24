@@ -1,0 +1,1263 @@
+Lots of Dusk scripts I picked out of previous Dusk world's which I plan to use/edit for my Dusk demo.  Having a existing working script helps to prevent me from writing bad scripts.  Unfortunately I am not a programmer but I do understand enough of 'Dusk script' that I should be able to make a fun demo game showcasing all of Dusk's features.  I've always been an artist and working on my Dusk demo got me into pixel art, which lead me to submitting the art to OpenGameArt.org and using that website to bring some attention to Dusk.  I wrote a Dusk blog about my Dusk demo and the art I've created/organized, in the hopes to revive this old project.  Luckily a couple Java developers found interest in this old graphical mud and it's been hosted online by Andy Weaver 'WeaveMN' and the Dusk engine has been forked by Michael Zucchi 'NotZed'.  March-April was a eventful time for Dusk, it was the first time my Dusk demo was hosted online and I saw Andy in-game and we talked about the neat things NotZed was implementing in his fork.  Andy had a question about how the scripts are placed into the game and if he should just git clone my Dusk files everytime I added to my github.  I explained to him that since I'm the only one working on my Dusk demo it's easier for me if he just cloned my files when I pushed in new stuff.  Back in the old Dusk days all game creation content was done in-game which consists of mapping, scripting quests, ect.  Now I'm using Wildern's map editor so if there was more people working on mapping/scripting we would have to take turns mapping because the whole world in on 1 map.  That's where NotZed's adding multiple maps is a huge plus+ in his fork of the DuskServer.  Scripting is done in-game as a HighGod or MasterGod (there's 3 lvl's of privledges for Gods), a regular God can only map and place monsters/merchants.  HighGods/MasterGods have access to all of the game files with a simple command (ex. view nameoffolder nameoffile) and edit it in-game and submit it by clicking the 'submit' button.  Whenever a god makes a change they need to type 'save' otherwise it isn't permently saved in the game files.
+
+
+***(arena fight)-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ispet trigger
+    endscript
+end
+if isclan trigger "none"
+    chat trigger "While you are in the arena, other players can attack you."
+    changeclan trigger "arena_fight"
+end
+endscript
+
+
+
+if ispet trigger
+    endscript
+end
+if strequals clan trigger "arena_fight"
+    chat trigger "You are no longer in a clan, and other players cannot attack you."
+    changeclan trigger "none"
+end
+endscript
+
+
+
+***((Bath House) you see a place to restore HP and MP-------------------------------------------------------------------------------------------------------------------------------------------
+
+if ispet trigger
+    endscript
+end
+if ! hasitem trigger HPToken
+    giveitem trigger HPToken
+    chat trigger "The cost of HP restoration is 1 gp for every 2 HP restored.
+Do not enter the HP bath with an HPtoken if you do not wish to pay this fee.
+The same goes for your pet."
+    chat trigger "You got an HPToken."
+    endscript
+end
+chat trigger "You already have an HPToken."
+endscript
+
+
+if ispet trigger
+    endscript
+end
+if ! hasitem trigger MPToken
+    giveitem trigger MPToken
+   chat trigger "The cost of MP restoration is 1 gp for every 2 MP restored.
+Do not enter the MP bath with an MPtoken if you do not wish to pay this fee.
+The same goes for your pet."
+    chat trigger "You got an MPToken."
+    endscript
+end
+chat trigger "You already have an MPToken."
+endscript
+
+
+if hasitem trigger hptoken
+    if or = trigger hp trigger maxhp > trigger hp trigger maxhp
+        chat trigger "You are not in need of the HP pool."
+        endscript
+    end
+    number hpdiff - trigger maxhp trigger hp
+    number cost / hpdiff 2
+    if > trigger cash cost
+        inc trigger cash * -1 cost
+        set trigger hp trigger maxhp
+        chat trigger "As you step into the bath, your HP is restored to full."
+        removeitem trigger hptoken
+        endscript
+    end
+    number hpafford * trigger cash 2
+    set trigger cash 0
+    inc trigger hp hpafford
+    chat trigger concat concat "You could only afford " hpafford " HP."
+    removeitem trigger hptoken
+    endscript
+end
+endscript
+
+
+if hasitem trigger mptoken
+    if or = trigger mp trigger maxmp > trigger mp trigger maxmp
+        chat trigger "You are not in need of the MP pool."
+        endscript
+    end
+    number mpdiff - trigger maxmp trigger mp
+    number cost / mpdiff 2
+    if > trigger cash cost
+        inc trigger cash * -1 cost
+        set trigger mp trigger maxmp
+        chat trigger "As you step into the bath, your MP is restored to full."
+        removeitem trigger mptoken
+        endscript
+    end
+    number mpafford * trigger cash 2
+    set trigger cash 0
+    inc trigger mp mpafford
+    chat trigger concat concat "You could only afford " mpafford " MP."
+    removeitem trigger mptoken
+    endscript
+end
+endscript
+
+
+
+
+***(weird quest)-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ispet trigger
+    endscript
+end
+#
+# Check to see if they have been told of the quest
+#
+if ! hascondition trigger "jeweler_quest"
+    addcondition trigger "jeweler_quest"
+    chat trigger "Jeweler says:  I am afraid that I am a bit low on inventory"
+    chat trigger "Jeweler says:  The stupid Dwarves have moved into the mountains to the west
+               and taken over my source of raw materials"
+    chat trigger "Jeweler says:  I could make you something if you could get me the materials"
+    chat trigger "Jeweler says:  I would be very happy if you could just get rid of the little dirt rats"
+    endscript
+end
+#
+# They have been told about the quest, let's check and see if they have done anything
+#
+number iron trigger count "iron ingot"
+number silver trigger count "silver ingot"
+number gold trigger count "gold ingot"
+number crown trigger count "dwarf king crown"
+chat trigger "Jeweler says:  Hmmm... Let's see..."
+number foundsomething 0
+if > iron 0
+    if = iron 1
+        chat trigger concat concat "               " iron " iron ingot...."
+    end
+    if > iron 1
+        chat trigger concat concat "               " iron " iron ingots...."
+    end
+    number foundsomething 1
+end
+if > silver 0
+    if = silver 1
+        chat trigger concat concat "               " silver " silver ingot...."
+    end
+    if > silver 1
+        chat trigger concat concat "               " silver " silver ingots...."
+    end
+    number foundsomething 1
+end
+if > gold 0
+    if = gold 1
+        chat trigger concat concat "               " gold " gold ingot...."
+    end
+    if > gold 1
+        chat trigger concat concat "               " gold " gold ingots...."
+    end
+    number foundsomething 1
+end
+if > crown 0
+    if = crown 1
+        chat trigger concat concat "               " crown " dwarf king crown...."
+    end
+    if > crown 1
+        chat trigger concat concat "               " crown " dwarf king crowns...."
+    end
+    number foundsomething 1
+end
+if = foundsomething 0
+    chat trigger "Jeweler says:  Have you made any progress on getting rid of those Dwarves?"
+    endscript
+end
+#
+# Would not be here if they have not brought something back... figure out what to give them
+#
+if < iron 5
+    chat trigger "Jeweler says:  Maybe if you had more iron, I could make you something."
+    endscript
+end
+if < silver 5
+    chat trigger "Jeweler says:  Maybe if you had more silver, I could make you something."
+    endscript
+end
+if < gold 5
+    chat trigger "Jeweler says:  Maybe if you had more gold, I could make you something."
+    endscript
+end
+if = crown 0
+    chat trigger "Jeweler says:  If you had only killed their King, I would have rewarded you for teaching those Dwarves a lesson."
+    endscript
+end
+#
+# If they are wearing a previous necklace, need to make them unwear it here
+# before their bonuses change, otherwise it may lower their stats
+#
+number waswearing 0
+if iswearing trigger "Jeweled Necklace"
+    order trigger "unwear Jeweled Necklace"
+    number waswearing 1
+end
+giveitem trigger "Jeweled Necklace"
+addcondition trigger finished_jeweler_quest
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron1
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron2
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron3
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron4
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron5
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron6
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron7
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron8
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    removeitem trigger "5.iron ingot"
+    addcondition trigger iron9
+end
+number iron trigger count "iron ingot"
+if > iron 4
+    addcondition trigger iron10
+    removeitem trigger "5.iron ingot"
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver1
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver2
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver3
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver4
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver5
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver6
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver7
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver8
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    removeitem trigger "5.silver ingot"
+    addcondition trigger silver9
+end
+number silver trigger count "silver ingot"
+if > silver 4
+    addcondition trigger silver10
+    removeitem trigger "5.silver ingot"
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold1
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold2
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold3
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold4
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold5
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold6
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold7
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold8
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    removeitem trigger "5.gold ingot"
+    addcondition trigger gold9
+end
+number gold trigger count "gold ingot"
+if > gold 4
+    addcondition trigger gold10
+    removeitem trigger "5.gold ingot"
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown1
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown2
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown3
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown4
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown5
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown6
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown7
+end
+if > crown 0
+    removeitem trigger "dwarf king crown"
+    addcondition trigger crown8
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    removeitem trigger "5.dwarf king crown"
+    addcondition trigger crown9
+end
+number crown trigger count "dwarf king crown"
+if > crown 0
+    addcondition trigger crown10
+    removeitem trigger "dwarf king crown"
+end
+chat trigger "Jeweler gives you a Jeweled Necklace"
+if = waswearing 1
+    order trigger "wear Jeweled Necklace"
+end
+endscript
+
+
+*****((How to use the Bank)------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ispet trigger
+    endscript
+end
+chat trigger "Heres how to use the bank:
+
+1. Make sure you have a bank card.
+2. Step into the middle of the bank.
+3. Type deposit <amount of gp> to deposit money.  (example: deposit 345)
+4. Type withdraw <amount of gp> to withdraw money. (example: withdraw 120)
+5. Type balance to check your amount of GP you have saved.
+6. Only balance command will work outside of the bank."
+endscript
+
+addcondition trigger atdmbank
+endscript
+
+
+
+(COOOOOOl quest)-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ! isPlayer trigger
+	endscript
+	end
+#
+inc trigger locy 1
+#
+if hasCondition trigger shenville_dq_1
+	removeCondition trigger shenville_dq_1
+	addConditionWithDuration trigger shenville_end 15000
+	chat trigger "Shen says: you saved the world !!!"
+	chat trigger "Shen says: this is for you:"
+	number r * rand 3
+	if = r 0
+		giveItem trigger "exp sword"
+		chat trigger "You get an experience sword"
+		endscript
+		end
+	if = r 1
+		inc trigger cash 100000
+		chat trigger "You get 100K gp"
+		endscript
+		end
+	giveItem trigger gboots
+	chat trigger "You get some gold boots"
+	endscript
+	end
+if hasCondition trigger shenville_dq_0
+	chat trigger "Shen says: damn ! They will annihilate us"
+	endscript
+	end
+#
+if hasCondition trigger shenville_mq_1
+	chat trigger "Shen says: you saved my son !!!"
+	removeCondition trigger shenville_mq_1
+	addCondition trigger shenville_dq_0
+	chat trigger "Shen says: but I can't be happy, because our world is in danger..."
+	chat trigger "Shen says: a portal between this world and the dark world has just opened"
+	chat trigger "Shen says: I'm so afraid..."
+	chat trigger "You say: what is this stink ?"
+	chat trigger "Shen says: I'm sorry... dark creatures can come in our world"
+	endscript
+	end
+#
+if hasCondition trigger shenville_mq_0
+	chat trigger "Shen says: oh my son..."
+	endscript
+	end
+#
+if and and hasCondition trigger shenville_gfq_0 hasItem trigger black_tooth hasItem trigger white_tooth
+	removeItem trigger black_tooth
+	removeItem trigger white_tooth
+	chat trigger "You say: ShenVille's citizen has been revenged"
+	chat trigger "Shen says: great !!! But I got a new trouble"
+	chat trigger "Shen says: Martin, my son, is going to die..."
+	removeCondition trigger shenville_gfq_0
+	addCondition trigger shenville_mq_0
+	endscript
+	end
+#
+if hasCondition trigger shenville_gfq_0
+	chat trigger "Shen says: Another ShenVille's citizen has been killed"
+	chat trigger "Shen says: his corpse was tore by bites. Please, go investigate"
+	endscript
+	end
+#
+if and hasCondition trigger shenville_pq_0 hasItem trigger crown
+	removeItem trigger crown
+	chat trigger "Shen says: thank you very much !!!"
+	chat trigger "You, hiding your wounds, say: no problem"
+	chat trigger "Shen says: I'm so sad..."
+	removeCondition trigger shenville_pq_0
+	addCondition trigger shenville_gfq_0
+	endscript
+	end
+#
+if hasCondition trigger shenville_pq_0
+	chat trigger "Shen says: where is my crown ?"
+	endscript
+	end
+#
+if hasCondition trigger shenville_0	
+	chat trigger "Shen says: pirates stolen my crown again"
+	chat trigger "Shen says: can you bring it back to me ?"
+	removeCondition trigger shenville_0
+	addCondition trigger shenville_pq_0
+	endscript
+	end
+#
+if hasCondition trigger shenville_end
+	chat trigger "Shen says: tnx again"
+	endscript
+	end
+# first meeting
+chat trigger "Shen says: Hi, I'm the leader of this land"
+chat trigger "Shen says: you are the adventurer we were waiting for"
+chat trigger "Shen says: I got some work for you, remember to talk often with me"
+chat trigger "Shen says: and with the guys on the bar, they'll help you"
+addCondition trigger shenville_0
+endscript
+
+
+
+*******(Pirate quest with hook and blackbeard)-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+# guy that tell funny information
+if ! isPlayer trigger
+	endscript
+	end
+#
+if hasCondition trigger shenville_dq_0
+	chat trigger "The guys says: I'm serious this time:"
+	chat trigger "THe guy says: to enter into the portal keep in mind previous quests..."
+	endscript
+	end
+#
+if hasCondition trigger shenville_mq_0
+	chat trigger "They guy says: Martin is a lovable kid... he burps often !"
+	endscript
+	end
+#
+if hasCondition trigger shenville_gfq_0
+	chat trigger "The guy says: poor man... he was so good... I got to console his wife :-)"
+	endscript
+	end
+#
+if hasCondition trigger shenville_pq_0
+	chat trigger "The guy says: lol... they always steal Shen's crown !"
+	endscript
+	end
+#
+chat trigger "The guy says: hi"
+endscript
+
+
+
+# guy that tell information about location
+if ! isPlayer trigger
+	endscript
+	end
+#
+if hasCondition trigger shenville_dq_0
+	chat trigger "The guys says: please destroy dark creatures"
+	endscript
+	end
+#
+if hasCondition trigger shenville_mq_0
+	chat trigger "The guy says: Martin lives west of here in a big house"
+	endscript
+	end
+#
+if hasCondition trigger shenville_gfq_0
+	chat trigger "The guy says: I know that in the gold forest live dangerous felines"
+	chat trigger "The guy says: there are secret entrances to enter into the forest"
+	endscript
+	end
+#
+if hasCondition trigger shenville_pq_0
+	chat trigger "The guy says: pirates... mmm... seek near the port"
+	endscript
+	end
+#
+chat trigger "The guy says: hi"
+endscript
+
+
+
+# guy that tell information about enemyes
+if ! isPlayer trigger
+	endscript
+	end
+#
+if hasCondition trigger shenville_dq_0
+	chat trigger "The guy says: those dark creatures kick ass !"
+	endscript
+	end
+if hasCondition trigger shenville_mq_0
+	chat trigger "The guy says: to save Martin you have to find a black rose"
+	endscript
+	end
+if hasCondition trigger shenville_gfq_0
+	chat trigger "The guy says: I can't help you"
+	endscript
+	end
+#
+if hasCondition trigger shenville_pq_0
+	chat trigger "The guy says: pirates are tough but aren't very strong"
+	endscript
+	end
+#
+chat trigger "The guy says: hi"
+endscript
+
+
+
+if ! isPlayer trigger
+	endscript
+	end
+if hasItem trigger crown
+	chat trigger "Secret passage !!!"
+	set trigger locxy 29 284
+	if hasItem trigger pkey
+		removeItem trigger pkey
+		end
+	end
+endscript
+if ispet trigger
+     endscript
+end
+chat trigger "Congratulations you have made it to the end, here is your reward."
+giveitem trigger "hell blade"
+set trigger locxy 100 100
+endscript
+
+
+if ! isPlayer trigger
+	endscript
+	end
+#
+if and hasCondition trigger shenville_mq_0 hasItem trigger blackrose
+	removeItem trigger blackrose
+	chat trigger "Martin says: I feel better now !!!"
+	chat trigger "Martin BURPS out louds"
+	removeCondition trigger shenville_mq_0
+	addCondition trigger shenville_mq_1
+	endscript
+	end
+#
+if hasCondition trigger shenville_mq_0
+	chat trigger "Martin says: please help me... I'm so weak..."
+	chat trigger "Martin burps softly"
+	end
+endscript
+
+
+
+****(Ork quest)-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ispet trigger
+	endscript
+end
+if ! hasItem trigger orkstone
+	chat trigger "Bring something the Orks might want.   *GRUNT GRUNT GRUNT*   'translation'   'go away NOW'"
+	inc trigger locy 1
+	endscript
+end
+if hasItem trigger orkstone
+	removeCondition trigger safe
+	set trigger locxy 20 20
+	removeItem trigger orkstone
+	chat trigger "Ork God tells you: Ha Ha Ha! You brought me the Stone! Now, I have a quest for you, Survive!"
+	endscript
+end
+endscript
+
+
+
+
+if ispet trigger
+	endscript
+end
+if hasItem trigger orkgodkey
+	addCondition trigger "orkq"
+	removeItem trigger orkgodkey
+	set trigger locxy 50 10
+	chat trigger "Walk on the noble merchant to receive the bounty on the Ork God!"
+	endscript
+end
+chat trigger "You cannot leave until you have slain the Ork God."
+endscript
+
+
+
+# Script changed by TwiddleDee.  Without the check for the condition, followers
+# of the player were each getting the reward.
+#
+if ispet trigger
+    inc trigger locy 2
+    endscript
+end
+if hasCondition trigger "orkq"
+    chat trigger "By the great god Orky! You killed the EVIL foul ork god!!! take this as a reward for killing it!"
+    removeItem trigger orkgodkey
+    giveItem trigger "Ork Bane"
+    giveItem trigger "ork kite"
+    removeCondition trigger "orkq"
+end
+inc trigger locy 2
+endscript
+
+
+
+if ispet trigger
+    endscript
+end
+if ! hasCondition trigger "orkq"
+    chat trigger "You have slain the Ork God, and received your reward, leave me."
+    inc trigger locy 1
+end
+endscript
+
+
+
+*******(CP block)-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if isPet trigger
+     endscript
+end
+if < trigger cp 3000
+     chat trigger "Guild Master says: You are to weak to enter the forest, come back later and i will remove the wards."
+     endscript
+end
+if ! hascondition trigger wardremoval
+     addcondition trigger wardremoval
+     chat trigger "Guild Master says: It is now safe to enter the forest, but its not safe to be in it be careful."
+     endscript
+end
+endscript
+
+
+# wards go to guild master to remove them
+if ! hascondition trigger wardremoval
+     inc trigger locx -1
+     chat trigger "The powerful magical wards throw you back."
+     endscript
+end
+endscript
+
+
+# After a month or so of putting it off i finished this punk of a quest :)
+if isPet trigger
+     endscript
+end
+if < trigger cp 3000
+     chat trigger "Mage says: You have made it far, but you are still to weak to join us."
+     inc trigger locy 1
+     endscript
+end
+if ! hascondition trigger technomage
+     chat trigger "Mage says: Welcome to our guild, wear this to enter our training halls."
+     addcondition trigger technomage
+     giveitem trigger "technomage insignia ring"
+     endscript
+end
+chat trigger "Mage says: Come back in a few weeks and the keymaker will be here, hes traveling to get supplies."
+endscript
+
+
+
+
+******(Hermit helps you)----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ispet trigger
+    endscript
+end
+chat trigger "Hermit says:  Long has it been since I have had a visitor."
+chat trigger "Hermit says:  Perhaps I can be of some assistance.  I was once a powerful Mage."
+chat trigger "The air around you begins to swirl with magical energy."
+addconditionwithduration trigger strength 800
+addconditionwithduration trigger armor 800
+chat trigger "You feel stronger."
+endscript
+
+
+
+if ispet trigger
+    endscript
+end
+if ! hascondition trigger "inside"
+    addcondition trigger "inside"
+    set trigger locxy 98 126
+    endscript
+end
+endscript
+
+
+if ispet trigger
+    endscript
+end
+if hascondition trigger "inside"
+    removecondition trigger "inside"
+end
+endscript
+
+
+if ispet trigger
+    endscript
+end
+if hascondition trigger "inside"
+    removecondition trigger "inside"
+    chat trigger "You found a secret passage!"
+    endscript
+end
+set trigger locxy 95 119
+endscript
+
+
+
+****(Paymoney for stuff)----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ispet trigger
+	endscript
+end
+if > trigger cash 9
+	inc trigger cash -10
+	addconditionwithduration trigger nothirst 1200
+	chat trigger "You pour yourself a small glass of ale, and drink it."
+	endscript
+end
+chat trigger "If you only had 10gp, you could sample the ale."
+endscript
+
+
+
+*******(Mob guards door)---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+livingthing m "gnome leader"
+if > m locX 0
+  if < m locX 5
+    if > m locY 102
+      if < m locY 111
+        if isPlayer trigger
+          chat trigger "The guard leader orders his men to block the door."
+        end
+        inc trigger locy -1
+      end
+    end
+  end
+end
+endscript
+
+
+
+******(Key to quest)--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# The key is in here, Unlocked by the priest west of here
+if isPet trigger
+     endscrpit
+end
+if hascondition trigger fwquestfinal
+     chat trigger "You sit in a comfortable chair."
+     endscript 
+end
+if hascondition trigger fwkeyfind2
+     removecondition trigger fwkeyfind2
+     addcondition trigger fwkeyfound
+     chat trigger "You appear to have found the basement key."
+     giveitem trigger basement_key
+     chat trigger "You have found the basement key."
+     endscript
+end
+endscript
+
+
+
+******(Castle script)-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ispet trigger
+    endscript
+end
+if ismob trigger
+    endscript
+end
+if strequals clan trigger global baronclan
+    livingthing guard1 local trigger "Castle Guard"
+    if hascondition trigger inside
+        order guard1 concat "say Safe journey, " name trigger
+        removecondition trigger inside
+        inc trigger locy 1
+        endscript
+    end
+    addcondition trigger inside
+    order guard1 concat "say Welcome to Castle Baron, " name trigger
+    inc trigger locy -1
+    endscript
+end
+if strequals clan trigger global baronclanally
+    livingthing guard1 local trigger "Castle Guard"
+    if hascondition trigger inside
+        order guard1 concat "say Safe journey, " name trigger
+        removecondition trigger inside
+        inc trigger locy 1
+        endscript
+    end
+    addcondition trigger inside
+    order guard1 concat "say Welcome to Castle Baron, " name trigger
+    inc trigger locy -1
+    endscript
+end
+if ! hascondition trigger mob_attack
+    addcondition trigger mob_attack
+    if hascondition trigger safe
+        removecondition trigger safe
+    end
+    chat trigger concat concat "You are not in clan " global baronclan "!"
+    livingthing guard1 local trigger "Castle Guard"
+    if ismob guard1
+        order guard1 "wake"
+        order guard1 concat "a " name trigger
+        set guard1 locxy 67 21
+    end
+    endscript
+end
+if ! hascondition trigger mob2_attack
+    addcondition trigger mob2_attack
+    livingthing guard2 local trigger "1.Castle Guard"
+    if ismob guard2
+        order guard2 "wake"
+        order guard2 concat "a " name trigger
+        set guard2 locxy 69 21
+    end
+    endscript
+end
+endscript
+
+
+
+
+
+Zabins demon quest--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ispet trigger
+    endscript
+end
+if hascondition trigger "excaliburquest"
+	chat trigger "Ball says:  I TOLD YOU NOT TO!!!  YOU DIE NOW MORTAL!"
+    	livingthing ismob local trigger "Flameling"
+    	string command concat "a " name trigger
+    	order Baal command
+	end
+if hasitem trigger Excalibur
+    	livingthing ismob local trigger "Flameling"
+    	string command concat "a " name trigger
+    	order Baal command
+    	endscript
+end
+endscript
+
+
+
+***(welcome)----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if isPlayer trigger
+	string outText concat concat " Welcome to the town " name trigger ". Enjoy your visit."
+	if hasCondition trigger isInTown1
+		string outText concat concat " This is the end of town. " name trigger ", please be careful."
+	end
+	chat trigger outText
+end
+endscript
+
+
+
+
+***(Housekey)---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ispet trigger
+	endscript
+end
+if ! hasItem trigger Forestkey
+	chat trigger "The door is locked....The forest mage must be out."
+	inc trigger locy +1
+	endscript
+end
+if hasItem trigger Forestkey
+	chat trigger "You used the forest key, but when you tried to take the key out of the door, it turned into dust..."
+	removeItem trigger Forestkey
+end
+endscript
+
+
+***(clan)-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ! isClan trigger "Aop"
+inc trigger locx -1
+chat trigger "Only Aop members are aloud in here"
+endscript
+end
+chat trigger "Welcome to the Aop clan hall"
+end
+endscpirt
+
+
+
+***(Itemgive)---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+if ! hasitem trigger "ale"
+chat trigger "Hey you need a drink here ya go brother"
+giveitem trigger "ale"
+endscript
+end
+chat trigger "Man dont try to rip me off you didnt even use the one i gave you last time yet"
+end
+endscript
+
+
+***(Hero)-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+set trigger hp trigger maxHP
+set trigger mp trigger maxMP
+addcondition trigger hero
+chat trigger "Wow i feel like a bomb diggidy!-"
+endscript
+
+
+
+***(cp block)---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if < trigger cp 600
+	inc trigger locy 1
+	chat trigger " They're too strong!"
+	endscript
+end
+if isMob trigger
+	inc trigger locx 1
+	endscript
+end
+endscript
+
+
+
+***(Quest)------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if > trigger cp 2500
+inc trigger locy -1
+chat trigger "Your to strong for this quest"
+
+endscript
+end
+if ! hasitem trigger enterencekey
+chat trigger "Get an enterence key from a quest beholder"
+inc trigger locy -1
+end
+endscript
+removeitem trigger enterencekey
+endscript
+end
+if ispet trigger 
+endscript
+end
+
+
+***(mining ore)-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if iswearing trigger "bronze shovel"
+	chat trigger " You found some bronze ore!"
+	giveitem trigger "bronze ore"
+	endscript
+end
+endscript
+
+
+***(finished quest)---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ispet trigger
+endscript
+end
+if hasitem trigger "master quest suit"
+chat trigger "You already got one wait till your's breaks or sell it and try again"
+set trigger locxy 200 900
+endscript
+end
+set trigger locxy 200 900
+chat trigger "A Master Quest Suit appers in your inventory"
+giveitem trigger "master quest suit"
+removeitem trigger questkey
+endscript
+
+
+***(Bed)--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+set trigger hp trigger maxHp
+set trigger mp trigger maxMp
+chat trigger " A nice...comfy bed...you take a rest on it."
+endscript
+
+
+***(random chat)------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+chat trigger " You see an old, rotting tree in the clearing.....seems like its the only tree in this forest that gets no light....only darkness...I wonder what would happen if i walked into it..."
+endscript
+
+chat trigger " You crawl into the hole in the tree and everything becomes dark..."
+set trigger locxy 494 105
+chat trigger " You are in a long cavern. You see some light up ahead"
+endscript
+
+chat trigger " You get in the old tree trunk, and suddenly the darkness fades into day..."
+set trigger locxy 64 90
+chat trigger " You are back in front of the castle."
+endscript
+
+
+***(Blacksmith)-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if isPlayer trigger
+	string outText concat concat " " name trigger ". walked up the stairs."
+	if hasCondition trigger isInTown1
+		string outText concat concat " " name trigger ", entered Watt's smithy."
+	end
+	chat trigger outText
+end
+endscript
+
+
+chat trigger " YEEEEOOOUUUUCHHHHH!!!!!!! That's hot!"
+inc trigger locy 1
+endscript
+
+chat trigger " Watts is very particular about what he makes. when you go in, only bring with you what you want to be forged."
+chat trigger " he makes tunics before helmets, helmets before shields, & shields before swords"
+chat trigger " also, watch your money, because he charges 3000gp for every item he makes. 	HEED THESE WARNINGS....."
+chat trigger " because the gods will not help you, because they gave you this warning through me."
+
+
+chat trigger " Demon says: I wonder if Watts will forge my scythe...then i would be the strongest mob in the land."
+endscript
+
+
+chat trigger " Demon says: these armors are good, but I hear that there are blacksmiths in the world that can make steel, scale, or even diamond armor!"
+chat trigger " Demon says: I wish I knew where those blacksmiths were located....it may just be a myth."
+endscript
+
+
+if isPet trigger
+	endscript
+end
+if < trigger cash 3000
+	inc trigger locx -1
+	chat trigger " Watts says: Come back when you have enough money!"
+end
+endscript
+
+
+
+chat trigger " Watts says: lemme see that ore you have and ill see what i can do."
+if ! hasItem trigger "bronze ore"
+	chat trigger " okay, no bronze ore, lets see what else you have"
+	endscript
+end
+if hasItem trigger "bronze ore"
+	chat trigger " okay, heres some bronze ore, lets make some bronze stuff."
+	if hasItem trigger "generic tunic"
+		removeitem trigger "generic tunic"
+		removeitem trigger "bronze ore"
+		giveitem trigger "bronze suit"
+		chat trigger " Here's a bronze suit!"
+		inc trigger cash -3000
+		if < trigger cash 3000
+			inc trigger locy 2
+			endscript
+		end
+		endscript
+	end
+	if ! hasItem trigger "generic tunic"
+		if hasItem trigger "generic helmet"
+			removeitem trigger "generic helmet"
+			removeitem trigger "bronze ore"
+			giveitem trigger "bronze helmet"
+			chat trigger " Here's a bronze helmet!"
+			inc trigger cash -3000
+			if < trigger cash 3000
+				inc trigger locy 2
+				endscript
+			end
+			endscript
+		end
+		if ! hasItem trigger "generic helmet"
+			if hasItem trigger "generic shield"
+				removeitem trigger "generic shield"
+				removeitem trigger "bronze ore"
+				giveitem trigger "bronze shield"
+				chat trigger " Here's a bronze shield!"
+				inc trigger cash -3000
+				if < trigger cash 3000
+					inc trigger locy 2
+					endscript
+				end
+				endscript
+			end
+			if ! hasItem trigger "generic shield"
+				if hasItem trigger "generic sword"
+					removeitem trigger "generic sword"
+					removeitem trigger "bronze ore"
+					giveitem trigger "bronze sword"
+					chat trigger " Here's a bronze sword!"
+					inc trigger cash -3000
+					if < trigger cash 3000
+						inc trigger locy 2
+						endscript
+					end
+					endscript
+				end
+end
+endscript
+	  
+
+
+***(Thieves guild)----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ! hasItem trigger Trankpass
+	chat trigger "bouncer says: You're not welcome here, get out!"
+	inc trigger locy 1
+	endscript
+end
+if hasItem trigger Trankpass
+	if hasCondition trigger "trank"
+		chat trigger "bouncer says: Welcome to the thief training center. If you see Trank, tell him I said hi."
+		inc trigger locy -5
+		endscript
+	end
+	if ! hasCondition trigger "trank"
+		chat trigger "bouncer says: YOU DIDN'T GET THIS PASS FROM TRANK, DID YOU, YOU ARE GONNA HAVE TO GO AND TALK TO HIM LIKE ALL OF THE OTHER THIEVES DID. AND IM GONNA HAVE TO TAKE THAT USED PASS..."
+		removeItem trigger Trankpass
+		chat trigger "bouncer says: You're not welcome here, get out!"
+		inc trigger locy 1
+		endscript
+	end
+end
+endscript
+
+
+****(Chat)------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if ! hasCondition trigger "elderchat"
+chat trigger " Guard: Sorry. I cant let you pass until youve gotten permission from Salharasha our towns elder. He lives in a cave somewhere on the beach."
+inc trigger locx -1
+endscript
+end
+chat trigger "Guard: Well Salharasha says you may leave so do so if you wish. Please be careful"
+endscript
+
+
