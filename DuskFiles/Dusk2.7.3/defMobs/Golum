@@ -21,10 +21,15 @@ grouprelation
 giveitem
 thunder orb
 0.1
+<<<<<<< HEAD
 giveitem
 royal sabre
 0.01
 giveitem
+=======
+royal sabre
+0.01
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 sabre
 .3
 faction

@@ -58,7 +58,11 @@ if hasCondition trigger bhquest3
 #
 if and hasCondition trigger bhquest2 hasItem trigger HelmetStarFishCorpse
 	removeItem trigger HelmetStarFishCorpse
+<<<<<<< HEAD
 	if hasItem trigger HelmetStarFishCorpse
+=======
+	if hasItem HelmetStarFishCorpse
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 		removeItem trigger HelmetStarFishCorpse
 			if hasItem trigger HelmetSharkCorpse
 				removeItem trigger HelmetSharkCorpse
@@ -123,6 +127,9 @@ if hasCondition trigger bhquestEnd
 
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c

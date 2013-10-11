@@ -16,12 +16,19 @@ image
 11
 bravery
 2.2
+<<<<<<< HEAD
 grouprelation
+=======
+grouprealtion
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 1.1
 giveitem
 mardi gras beads
 0.12
+<<<<<<< HEAD
 giveitem
+=======
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 enchantedgem
 0.03
 faction

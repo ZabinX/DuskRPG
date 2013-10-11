@@ -21,10 +21,15 @@ image
 giveitem
 Questsword
 0.1
+<<<<<<< HEAD
 giveitem
 green eye
 0.1
 giveitem
+=======
+green eye
+0.1
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 silence suit
 .01
 condition

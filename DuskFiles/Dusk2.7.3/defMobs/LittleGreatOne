@@ -10,6 +10,10 @@ dext
 1000
 bravery
 3.0
+<<<<<<< HEAD
+=======
+1
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 image
 21
 giveitem
@@ -21,6 +25,10 @@ condition
 detect invis
 0
 -1
+<<<<<<< HEAD
 skill
+=======
+skills
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 double attack
 100

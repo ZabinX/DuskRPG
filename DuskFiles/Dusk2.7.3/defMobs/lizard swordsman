@@ -21,7 +21,10 @@ grouprelation
 giveitem
 lizard scale
 1
+<<<<<<< HEAD
 giveitem
+=======
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 wave pike
 .09
 faction
@@ -29,7 +32,10 @@ lizard
 skill
 double attack
 75
+<<<<<<< HEAD
 skill
+=======
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 triple attack
 35
 .

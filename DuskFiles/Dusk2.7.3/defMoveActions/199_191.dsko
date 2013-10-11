@@ -1,1 +1,5 @@
+<<<<<<< HEAD
  trigger "excaliburquest" ,trigger 1 trigger cp 200 ,trigger 1 *trigger "Baal says:  Looks like your still too weak.  Lucky for you I don't have to kill you." trigger cp 200 ,trigger 1 *trigger "Baal says:  I TOLD YOU NOT TO!!!  YOU DIE NOW MORTAL!" *trigger "*Baal orders his pet flameling to attack*" *trigger "Obtained:  Excalibur" ;trigger "Excalibur" .199 191 81 trigger "excaliburquest"  
+=======
+ trigger "excaliburquest" ,trigger 1 trigger cp 200 ,trigger 1 *trigger "Baal says:  Looks like your still too weak.  Lucky for you I don't have to kill you." trigger cp 200 ,trigger 1 *trigger "Ball says:  I TOLD YOU NOT TO!!!  YOU DIE NOW MORTAL!" *trigger "*Baal orders his pet flameling to attack*" *trigger "Obtained:  Excalibur" ;trigger "Excalibur" .199 191 81 trigger "excaliburquest"  
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c

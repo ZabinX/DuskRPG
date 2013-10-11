@@ -19,9 +19,16 @@ bravery
 grouprelation
 1
 giveitem
+<<<<<<< HEAD
 HelmetEelCorpse
 1
 .
 
 
 
+=======
+EelCorpse
+0.5
+.
+
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c

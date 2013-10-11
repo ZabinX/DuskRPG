@@ -9,7 +9,11 @@ if < trigger cp 200
 end
 if > trigger cp 200
 	inc trigger locx 1
+<<<<<<< HEAD
 	chat trigger "Baal says:  I TOLD YOU NOT TO!!!  YOU DIE NOW MORTAL!"
+=======
+	chat trigger "Ball says:  I TOLD YOU NOT TO!!!  YOU DIE NOW MORTAL!"
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 	chat trigger "*Baal orders his pet flameling to attack*"
 	chat trigger "Obtained:  Excalibur"
 	giveitem trigger "Excalibur"
@@ -34,4 +38,7 @@ end
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c

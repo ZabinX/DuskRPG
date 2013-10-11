@@ -21,7 +21,10 @@ grouprelation
 giveitem
 questsword
 .3
+<<<<<<< HEAD
 giveitem
+=======
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 powerblade
 1
 faction
@@ -29,10 +32,15 @@ demon
 skill
 double attack
 100
+<<<<<<< HEAD
 skill
 triple attack
 100
 skill
+=======
+triple attack
+100
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 quadruple attack
 75
 .

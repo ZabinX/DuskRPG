@@ -73,7 +73,11 @@ if hasCondition trigger drherbiequest
 	endscript
 	end
 # first meeting
+<<<<<<< HEAD
 chat trigger "Dr Light says: Can you help me?  I am having trouble collecting a few key ingredients I need to finish the potion. A villager was petrified yesterday around dusk"
+=======
+chat trigger "Dr Light says: Can you help me?  I am having trouble collecting a few key ingredients I need to finish the potion. A villager was petrified yesterday around Dusk"
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 chat trigger "Dr Light says: His neighbor brought his stoned body to the hospital wing soon after."
 chat trigger "Dr Light says: He said he heard some commotion then saw a flash of light out his window in the direction of his neighbor's house."
 chat trigger "Dr Light says: So to unpetrify this guy, the first ingredient I need you to find me is a mandrake root."
@@ -81,5 +85,8 @@ addCondition trigger drherbiequest
 endscript 
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c

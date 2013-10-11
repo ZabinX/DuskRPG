@@ -10,6 +10,7 @@ scrag
 relation
 red
 -0.4038463134850342
+<<<<<<< HEAD
 relation
 zabin
 -0.9941882492462508
@@ -19,4 +20,6 @@ ezak
 relation
 arena_fight
 -0.9997879159204449
+=======
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 .

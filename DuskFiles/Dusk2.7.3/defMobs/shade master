@@ -1,7 +1,13 @@
 maxhp
+<<<<<<< HEAD
 2000
 maxmp
 2000
+=======
+600
+maxmp
+600
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 stre
 70
 inte
@@ -13,7 +19,11 @@ cons
 wisd
 50
 image
+<<<<<<< HEAD
 22
+=======
+37
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 bravery
 1.5
 grouprelation

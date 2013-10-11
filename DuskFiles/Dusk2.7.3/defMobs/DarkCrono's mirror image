@@ -23,6 +23,7 @@ demon
 skill
 double attack
 100
+<<<<<<< HEAD
 skill
 triple attack
 100
@@ -30,6 +31,13 @@ skill
 quadruple attack
 100
 condition
+=======
+triple attack
+100
+quadruple attack
+100
+conditions
+>>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 detect invis
 .
 
