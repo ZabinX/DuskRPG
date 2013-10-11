@@ -1,16 +1,34 @@
-Commands to run Dusk as an applet:
+To play Dusk (online) go to Andy Weaver's site dusk.weavercrazytown.com:8080  All you need is Java installed.
+To run/play Dusk locally (offline) follow these instructions.
 
-cd /home/ed/dusk5
+1. Install Java 6 or 7 on your Linux OS.
+
+The instructions to run Dusk as a application are complete.------------------------------------------------------------------------------------------------------------------------------------------
+
+Run these commands in 2 different terminals:
+	
+	First run the server:
+
+	1. cd /home/Zabin/DuskRPG/DuskFiles/Dusk2.7.3
+	2. java -cp . DuskServer
+	Loading...
+	Ready for connections.
+
+	Then run the client:
+
+	3. cd /home/Zabin/DuskRPG/DuskFiles/Dusk2.7.3/www
+	4. java -cp duskclient.jar Dusk
+
+	The GUI should come up and prompt you to click connect.  Make sure the port is "7474" and the address is 127.0.0.1  Click connect and you'll see "Please enter your character name.."
+
+	I'm on Ubuntu linux 10.04, obviously you'll have to change "Zabin" to whatever your Linux system is called.
+
+The Instructions to run Dusk as an applet are incomplete.---------------------------------------------------------------------------------------------------------------------------------------------
+
+cd /home/Zabin/dusk5
 java -cp . DuskServer
 
-Commands to run Dusk as an application:
+The instructions to run Wildern's DuskMapEditor:------------------------------------------------------------------------------------------------------------------------------------------------------
 
-ed@ed-laptop:~$ cd /home/ed/dusk5
-ed@ed-laptop:~/dusk5$ ~/jre/jre1.7.0_17/bin/java -jar /home/ed/Dusk-test/DuskServer.jar
-Loading...
-Ready for connections.
-
-
-ed@ed-laptop:~$ cd /home/ed/dusk5/www
-ed@ed-laptop:~/dusk5/www$ ~/jre/jre1.7.0_17/bin/java -jar /home/ed/Dusk-test/DuskX.jar 
-logging in!
+	1. cd /home/Zabin/DuskRPG/DuskFiles/DuskMapEditor
+	2. java -cp ./DuskMapEditor.jar DuskMapEditor

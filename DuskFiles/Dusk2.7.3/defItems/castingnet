@@ -1,0 +1,12 @@
+type
+food
+a net used to catch small fish.
+cost
+100
+image
+67
+onuse
+bugfood
+uses
+1
+.

@@ -1,0 +1,38 @@
+if ! isPlayer trigger
+	endscript
+	end
+#
+#
+if and hasCondition trigger monsterhunting hasCondition trigger flanrapoint
+	removeCondition trigger flanrapoint
+	chat trigger "You tell the scribe about flanras' special skills during combat."
+	number r * rand 3
+	if = r 0
+		giveItem trigger "Bassbaby"
+		chat trigger "Scribe gives you a  Bassbaby"
+		endscript
+		end
+	if = r 1
+		giveItem trigger "hide"
+		chat trigger "Scribe gives you a  piece of hide"
+		endscript
+		end
+	giveItem trigger "crystal"
+	chat trigger "Scribe gives you a crystal"
+	endscript
+	end
+#
+if hasCondition trigger monsterhunting
+	chat trigger "Scribe says: Have you seen any monsters with special attacks yet?"
+	endscript
+	end
+# first meeting
+chat trigger "Scribe says: I'm trying to collect information about certain monsters."
+chat trigger "Scribe says: Some monsters have special attacks and skills during combat."
+chat trigger "Scribe says: If you ever come across one of these monsters."
+chat trigger "Scribe says: I'll reward you for the information about the monster you incountered.."
+addCondition trigger monsterhunting
+endscript 
+
+
+

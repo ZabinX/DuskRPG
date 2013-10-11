@@ -1,0 +1,158 @@
+#Zabin's "Moon Shoes" quest
+if and hasCondition trigger kristaquest2shoes hasItem trigger ExtraShoes
+	removeItem trigger ExtraShoes
+	chat trigger "Krista says: Oh Thank you so much for doing me this favor!!!"
+	chat trigger "Krista says: Here's a minormend potion to show my appreciation."
+	giveItem trigger "minormend"
+		chat trigger "You got a minormend"
+	chat trigger "krista says: Since you were such a champ doing me that last favor..  I was wondering if you can help me with something else? "
+	removeCondition trigger kristaquest2shoes
+	addCondition trigger kristaquest3
+	endscript
+	end
+# Count the fish
+if and hasCondition trigger kristaquest3 hasItem trigger Bassbaby
+	removeItem trigger Bassbaby
+	if hasItem trigger Bassbaby
+		removeItem trigger Bassbaby
+		if hasItem trigger Bassbaby
+			removeItem trigger Bassbaby
+			if hasItem trigger Bassbaby
+				removeItem trigger Bassbaby
+				if hasItem trigger Bassbaby
+					removeItem trigger Bassbaby
+					if hasItem trigger Bassbaby
+						removeItem trigger Bassbaby
+						if hasItem trigger Bassbaby
+							removeItem trigger Bassbaby
+							if hasItem trigger Bassbaby
+								removeItem trigger Bassbaby
+								if hasItem trigger Bassbaby
+									removeItem trigger Bassbaby
+									if hasItem trigger Bassbaby
+										removeItem trigger Bassbaby
+										if hasItem trigger Bassbaby
+											removeItem trigger Bassbaby
+											if hasItem trigger Bassbaby
+												removeItem trigger Bassbaby
+												if hasItem trigger Bassbaby
+													removeItem trigger Bassbaby
+													if hasItem trigger Bassbaby
+														removeItem trigger Bassbaby
+														if hasItem trigger Bassbaby
+															removeItem trigger Bassbaby
+															if hasItem trigger Bassbaby
+																removeItem trigger Bassbaby
+																if hasItem trigger Bassbaby
+																	removeItem trigger Bassbaby
+																	if hasItem trigger Bassbaby
+																		removeItem trigger Bassbaby
+																		if hasItem trigger Bassbaby
+																			removeItem trigger Bassbaby
+																			if hasItem trigger Bassbaby
+																				removeItem trigger Bassbaby
+																				giveItem trigger "Moon Shoes"
+																				chat trigger "Krista says: Sweet!  Thanks for all these baby fish.  This will help bring back some very fond memories I have fishing with my dad here."
+																				chat trigger "Krista says: You can have my father's extra pair of moon shoes.  I only need 1 pair to bring back memories, and besides you just brought back to life our favorite fishing spot."
+																					chat trigger "You got a pair of Moon Shoes"
+																				removeCondition trigger kristaquest3
+																				addCondition trigger kristaquestend
+																				endscript
+																				end
+																			giveItem trigger Bassbaby
+																			end
+																		giveItem trigger Bassbaby
+																		end
+																	giveItem trigger Bassbaby
+																	end
+																giveItem trigger Bassbaby
+																end
+															giveItem trigger Bassbaby
+															end
+														giveItem trigger Bassbaby
+														end
+													giveItem trigger Bassbaby
+													end
+												giveItem trigger Bassbaby
+												end
+											giveItem trigger Bassbaby
+											end
+										giveItem trigger Bassbaby
+										end
+									giveItem trigger Bassbaby
+									end
+								giveItem trigger Bassbaby
+								end
+							giveItem trigger Bassbaby
+							end
+						giveItem trigger Bassbaby
+						end
+					giveItem trigger Bassbaby
+					end
+				giveItem trigger Bassbaby
+				end
+			giveItem trigger Bassbaby
+			end
+		giveItem trigger Bassbaby
+		end
+	giveItem trigger Bassbaby	
+	end
+#
+if and hasCondition trigger kristaquest3 hasItem trigger Bassbaby
+	chat trigger "Krista says: I can smell fish on you but it doesn't look like you have 20 yet.  I need 20 otherwise I may eat them all up again before they have time to reproduce."
+	inc trigger cash 30
+	endscript
+	end
+#
+if hasCondition trigger kristaquest3
+	chat trigger "Krista says: This pond used to have fish but unfortunately I think I caught them all and ate em'.."
+	chat trigger "Krista says: I love fishing here because it brings back fond memories fishing here with my dad..."
+	chat trigger "Krista says: *sigh* my dad is gone now because of those darn shades everywhere.  I feel safe here, I think those shades don't like water."
+	chat trigger "Krista says: I would like to stock up the pond with a bunch of fresh water Bass babies but the closest place is by the waterfall next to the Death Mountain mines."
+	chat trigger "Krista says: The road up there is too dangerous for me with all the Orks, Bandits, and posionous mushrooms running around everywhere."
+	chat trigger "Krista says: I think about 20 Bass babies should do.  You'll need a casting net to catch em'.  There should be a merchant at the harbor who sells em'."
+	endscript
+	end
+#
+if and hasCondition trigger kristaquest2shoes hasItem trigger ExtraShoes
+	removeItem trigger ExtraShoes
+	chat trigger "Krista says: Oh Thank you so much for doing me this favor!!!"
+	chat trigger "Krista says: Here's a minormend potion to show my appreciation."
+	giveItem trigger "minormend"
+		chat trigger "You got a minormend"
+	chat trigger "krista says: Since you were such a champ doing me that last favor..  I was wondering if you can help me with something else? "
+	removeCondition trigger kristaquest2shoes
+	addCondition trigger kristaquest3
+	endscript
+	end
+#
+if hasCondition trigger kristaquest2
+	chat trigger "Krista says: Ohh...I'm getting tired of being stuck here and it's depressing looking at this empty pond..."
+	endscript
+	end
+#
+if hasCondition trigger kristaquest	
+	chat trigger "Krista says: There are prickily thistle's all around this pond and they are horrible to step on. "
+	chat trigger "Krista says: In my house I have an extra pair of shoes in a dresser.  It's right outside the gate there *points-*----------->"
+	chat trigger "Krista says: There's a backdoor by the flower garden."
+	removeCondition trigger kristaquest
+	addCondition trigger kristaquest2
+	endscript
+	end
+#
+if hasCondition trigger kristaquestend
+	chat trigger "Krista says: Thanks again for bringing me fish to re-populate my favorite fishing spot."
+	endscript
+	end
+# first meeting
+chat trigger "Kriats says: Hey!!!."
+chat trigger "Krista says: I seriously need some help."
+chat trigger "Krista says: I went for a swim in the pond here and when I came out my dog had almost finished eating one of my shoes."
+addCondition trigger kristaquest
+endscript
+
+
+
+
+
+

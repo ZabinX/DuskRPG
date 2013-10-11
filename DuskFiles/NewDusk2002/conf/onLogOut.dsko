@@ -1,3 +1,3 @@
 trigger "onlake" x trigger locx y trigger locy x 142 y 96 y 86 .x y 2 trigger "silencer_fight" 
 trigger "silencer_fight" trigger allowed_boat 
-trigger allowed_boat !trigger boat -trigger 121 41 trigger "Strabo Key" strabo_name_keyholder concat name trigger " now carries the key to Castle Strabo." trigger "Baron Key" baron_name_keyholder concat name trigger " now carries the key to Castle Baron." trigger "Kilgore Key" kilgore_name_keyholder concat name trigger " now carries the key to Castle Kilgore."   
+trigger allowed_boat !trigger boat -trigger 121 41 trigger "Strabo Key" strabo_name_keyholder concat name trigger " now carries the key to Castle Strabo." trigger "Baron Key" baron_name_keyholder concat name trigger " now carries the key to Castle Baron." trigger "Kilgore Key" kilgore_name_keyholder concat name trigger " now carries the key to Castle Kilgore."  

@@ -1,21 +1,21 @@
 maxhp
-350
+1500
 maxmp
-350
+2000
 stre
-50
+55
 inte
-30
+50
 dext
 70
 cons
-30
+50
 wisd
-30
+50
 image
-55
+22
 bravery
-1.5
+1
 grouprelation
 1
 wield
@@ -23,10 +23,8 @@ dagger
 -1
 -1
 giveitem
-dagger
-0.8
-faction
-shade
+crystal
+0.5
 .
 
 

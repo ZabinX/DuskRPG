@@ -3,7 +3,7 @@ armor
 kind
 skull
 description
-psycilocibe for ones head
+psycilocibe
 cost
 400
 mod
@@ -17,5 +17,6 @@ start_shroom_hat
 onUnWear
 end_shroom_hat
 .
+
 
 

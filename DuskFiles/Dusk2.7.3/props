@@ -37,7 +37,7 @@ newspaper
 King Eduardo
 97
 679
-Talk
+gossip
 97
 680
 Hint
@@ -55,7 +55,7 @@ Info
 Farmer
 182
 201
-Talk
+gossip
 182
 202
 Sword In Stone
@@ -154,19 +154,19 @@ Bank Teller
 Crush
 40
 680
-Talk
+gossip
 40
 681
 MerlinX
 50
 688
-Talk
+gossip
 50
 689
 Nick
 41
 687
-Talk
+gossip
 42
 687
 warp
@@ -175,7 +175,7 @@ warp
 Redshrike
 43
 680
-Talk
+gossip
 43
 681
 Argon
@@ -184,7 +184,7 @@ Argon
 FlameSword
 394
 464
-Talk
+gossip
 33
 666
 Bounty Hunter Office
@@ -193,7 +193,7 @@ Bounty Hunter Office
 Sara
 45
 687
-Talk
+gossip
 46
 687
 Petrified Villager
@@ -205,19 +205,16 @@ Hospital
 Courtney
 17
 648
-Talk
+gossip
 16
 648
-Talk
+gossip
 91
 649
 Cheif Bounty Hunter
 91
 646
-Baal
-199
-189
-Talk
+gossip
 199
 190
 Lars
@@ -229,3 +226,30 @@ PJ
 Krista
 228
 188
+Baal
+199
+189
+gossip
+228
+189
+Dr Light
+33
+665
+Ssmee
+257
+180
+fish
+167
+114
+fish
+169
+114
+gossip
+183
+176
+Scribe
+183
+175
+Buddy
+182
+179

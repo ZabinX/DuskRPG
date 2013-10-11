@@ -1,4 +1,4 @@
-#
+#Zabin script testing
 if < 1 * 10 rand
 	endscript
 	end
@@ -12,6 +12,8 @@ if = c 0
 number damage 50
 livingthing target enemy trigger
 inc target hp * -1 damage
-chat enemy trigger "flameling throws lava at you causing 50 damage."
+livingthing target enemy trigger
+addCondition target flamelingpoint
+chat enemy trigger "flameling throws lava at you causing 50 damage!, You also earned a monsterpoint!."
 endscript
 

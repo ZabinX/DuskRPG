@@ -9,7 +9,7 @@ if < trigger cp 200
 end
 if > trigger cp 200
 	inc trigger locx 1
-	chat trigger "Ball says:  I TOLD YOU NOT TO!!!  YOU DIE NOW MORTAL!"
+	chat trigger "Baal says:  I TOLD YOU NOT TO!!!  YOU DIE NOW MORTAL!"
 	chat trigger "*Baal orders his pet flameling to attack*"
 	chat trigger "Obtained:  Excalibur"
 	giveitem trigger "Excalibur"
@@ -17,6 +17,7 @@ if > trigger cp 200
 	addcondition trigger "excaliburquest"
 	endscript
 end
+
 
 
 
