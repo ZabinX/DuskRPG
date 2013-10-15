@@ -1,0 +1,5 @@
+if hasCondition trigger checktreasure
+	removeCondition trigger checktreasure
+	endscript
+	end
+

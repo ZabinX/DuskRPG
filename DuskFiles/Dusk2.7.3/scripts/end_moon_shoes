@@ -1,4 +1,4 @@
-inc trigger dexterityBonus -90
+inc trigger dexterityBonus -50
 endscript
 
 

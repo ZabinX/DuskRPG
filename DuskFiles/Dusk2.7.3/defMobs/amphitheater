@@ -26,15 +26,10 @@ smurf
 skill
 double attack
 60
-<<<<<<< HEAD
 skill
 triple attack
 60
 skill
-=======
-triple attack
-60
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 quadruple attack
 10
 .

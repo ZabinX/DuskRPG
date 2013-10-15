@@ -1,23 +1,13 @@
 maxhp
-<<<<<<< HEAD
 400
 maxmp
 400
-=======
-200
-maxmp
-200
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 stre
 47
 inte
 47
 dext
-<<<<<<< HEAD
 100
-=======
-47
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 wisd
 47
 cons
@@ -30,13 +20,8 @@ grouprelation
 1
 givegp
 47
-<<<<<<< HEAD
 faction
 bandit
 .
 
 
-=======
-.
-
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c

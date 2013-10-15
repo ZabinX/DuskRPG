@@ -1,5 +1,4 @@
 maxhp
-<<<<<<< HEAD
 600
 maxmp
 600
@@ -15,38 +14,14 @@ wisd
 60
 image
 22
-=======
-20
-maxmp
-15
-stre
-3
-inte
-3
-dext
-5
-cons
-4
-wisd
-3
-image
-3
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 bravery
 0.45
 grouprelation
 0.75
 giveitem
 dagger
-<<<<<<< HEAD
 0.5
 giveitem
 assassin blade
 0.2
-=======
-0.1
-giveitem
-assassin blade
-0.01
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 .

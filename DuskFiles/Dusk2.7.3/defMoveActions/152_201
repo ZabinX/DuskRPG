@@ -1,0 +1,13 @@
+if hasCondition trigger checktreasure
+	chat trigger "The treasure chest is still empty."
+	inc trigger locx 1
+	endscript
+end
+#
+inc trigger cash 1000
+addcondition trigger checktreasure
+chat trigger "Sweet!  You found 1kgp!."
+endscript
+end
+
+

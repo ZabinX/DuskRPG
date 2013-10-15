@@ -1,0 +1,22 @@
+if and hasCondition trigger ticketguy hasCondition trigger teleportticket
+	chat trigger "TicketGuy says:  You already have a ticket.  Use that one and come back for another if your interested."
+	endscript
+	end
+if hasCondition trigger ticketguy
+	if > trigger cash 300
+	inc trigger cash -300
+	addcondition trigger teleportticket
+	chat trigger "TicketGuy says:  Thanks, here's your ticket.  Enjoy the ride."
+	endscript
+	end
+chat trigger "The TicketGuy says:  The price is 300gp.  It doesn't look like you have enough $$"
+endscript
+chat trigger "TicketGuy says:  Hey!  I'm selling tickets to use that ancient teleporter over there."
+chat trigger "TicketGuy says:  The teleporter teleports to 6 random places."
+chat trigger "TicketGuy says:  I've seen people come back through the teleporter as happy as hell."
+chat trigger "TicketGuy says:  Sometimes, rarely, I see someone come back burnt to a crisp and mad as hell."
+chat trigger "TicketGuy says:  Ocassionally people go into it and never come back through it."
+addCondition trigger ticketguy
+endscript 
+
+

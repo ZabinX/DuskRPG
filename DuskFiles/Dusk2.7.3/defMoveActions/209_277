@@ -1,0 +1,43 @@
+#
+if ! hasCondition trigger teleportticket
+	chat trigger "You need to buy a ticket to use this teleport!!"
+	inc trigger locy -1
+	endscript
+end
+#
+number var * 6 rand
+if = var 0
+	set trigger locxy 128 135
+	removeCondition trigger teleportticket
+	endscript
+	end
+if = var 1
+	set trigger locxy 167 123
+	removeCondition trigger teleportticket
+	endscript
+	end
+if = var 2
+	set trigger locxy 157 202
+	removeCondition trigger teleportticket
+	endscript
+	end
+if = var 3
+	set trigger locxy 223 154
+	removeCondition trigger teleportticket
+	endscript
+	end
+if = var 4
+	set trigger locxy 409 487
+	removeCondition trigger teleportticket
+	endscript
+	end
+if = var 5
+	set trigger locxy 200 200
+	removeCondition trigger teleportticket
+	endscript
+	end
+endscript
+
+
+
+

@@ -62,7 +62,6 @@ end
 train:enchantment group
 train:clerical group
 end
-<<<<<<< HEAD
 669
 651
 end
@@ -83,5 +82,3 @@ Detect
 MinorMana
 ManaPotion
 end
-=======
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c

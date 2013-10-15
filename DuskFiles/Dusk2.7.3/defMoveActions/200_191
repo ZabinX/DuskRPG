@@ -1,3 +1,6 @@
+if ismob trigger
+    endscript
+end
 if ispet trigger
     endscript
 end
@@ -27,6 +30,7 @@ if hascondition trigger "excaliburquest"
 	end
 	endscript
 end
+
 
 
 

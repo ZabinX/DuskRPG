@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 #Zabin script testing
-=======
-#
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 if < 1 * 10 rand
 	endscript
 	end
@@ -16,12 +12,8 @@ if = c 0
 number damage 25
 livingthing target enemy trigger
 inc target hp * -1 damage
-<<<<<<< HEAD
 livingthing target enemy trigger
 addCondition target flanrapoint
 chat enemy trigger "flanra spits fire at you for 25 damage!, You earn a monsterpoint!"
-=======
-chat enemy trigger "flanra spits fire at you for 25 damage"
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 endscript
 

@@ -19,10 +19,7 @@ grouprelation
 giveitem
 sabre
 0.4
-<<<<<<< HEAD
 giveitem
-=======
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 goblin edge
 .01
 faction
@@ -30,7 +27,6 @@ hunter
 skill
 double attack
 100
-<<<<<<< HEAD
 skill
 triple attack
 50
@@ -38,12 +34,6 @@ skill
 quadruple attack
 30
 skill
-=======
-triple attack
-50
-quadruple attack
-30
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 dodge
 30
 .

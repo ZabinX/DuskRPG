@@ -100,7 +100,6 @@ if and hasCondition trigger kristaquest3 hasItem trigger Bassbaby
 #
 if and hasCondition trigger kristaquest3 hasItem trigger Bassbaby
 	chat trigger "Krista says: I can smell fish on you but it doesn't look like you have 20 yet.  I need 20 otherwise I may eat them all up again before they have time to reproduce."
-	inc trigger cash 30
 	endscript
 	end
 #
@@ -150,6 +149,7 @@ chat trigger "Krista says: I seriously need some help."
 chat trigger "Krista says: I went for a swim in the pond here and when I came out my dog had almost finished eating one of my shoes."
 addCondition trigger kristaquest
 endscript
+
 
 
 

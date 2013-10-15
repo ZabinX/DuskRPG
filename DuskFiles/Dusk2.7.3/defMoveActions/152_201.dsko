@@ -1,0 +1,1 @@
+trigger checktreasure *trigger "The treasure chest is still empty." ,trigger 1 ,trigger 1000 trigger checktreasure *trigger "Sweet!  You found 1kgp!."  

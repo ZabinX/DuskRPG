@@ -1,5 +1,4 @@
 maxhp
-<<<<<<< HEAD
 1500
 maxmp
 2000
@@ -17,25 +16,6 @@ image
 22
 bravery
 1
-=======
-350
-maxmp
-350
-stre
-50
-inte
-30
-dext
-70
-cons
-30
-wisd
-30
-image
-55
-bravery
-1.5
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 grouprelation
 1
 wield
@@ -43,15 +23,8 @@ dagger
 -1
 -1
 giveitem
-<<<<<<< HEAD
 crystal
 0.5
-=======
-dagger
-0.8
-faction
-shade
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 .
 
 

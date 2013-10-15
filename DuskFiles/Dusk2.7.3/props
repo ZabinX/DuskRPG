@@ -37,11 +37,7 @@ newspaper
 King Eduardo
 97
 679
-<<<<<<< HEAD
 gossip
-=======
-Talk
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 97
 680
 Hint
@@ -59,11 +55,7 @@ Info
 Farmer
 182
 201
-<<<<<<< HEAD
 gossip
-=======
-Talk
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 182
 202
 Sword In Stone
@@ -162,31 +154,19 @@ Bank Teller
 Crush
 40
 680
-<<<<<<< HEAD
 gossip
-=======
-Talk
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 40
 681
 MerlinX
 50
 688
-<<<<<<< HEAD
 gossip
-=======
-Talk
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 50
 689
 Nick
 41
 687
-<<<<<<< HEAD
 gossip
-=======
-Talk
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 42
 687
 warp
@@ -195,11 +175,7 @@ warp
 Redshrike
 43
 680
-<<<<<<< HEAD
 gossip
-=======
-Talk
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 43
 681
 Argon
@@ -208,11 +184,7 @@ Argon
 FlameSword
 394
 464
-<<<<<<< HEAD
 gossip
-=======
-Talk
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 33
 666
 Bounty Hunter Office
@@ -221,11 +193,7 @@ Bounty Hunter Office
 Sara
 45
 687
-<<<<<<< HEAD
 gossip
-=======
-Talk
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 46
 687
 Petrified Villager
@@ -237,23 +205,15 @@ Hospital
 Courtney
 17
 648
-<<<<<<< HEAD
 gossip
 16
 648
 gossip
-=======
-Talk
-16
-648
-Talk
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 91
 649
 Cheif Bounty Hunter
 91
 646
-<<<<<<< HEAD
 gossip
 199
 190
@@ -293,11 +253,9 @@ Scribe
 Buddy
 182
 179
-=======
-Baal
-199
-189
-Talk
-199
-190
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
+TicketGuy
+186
+276
+gossip
+186
+277

@@ -1,13 +1,13 @@
 maxhp
-300
+1000
 maxmp
 300
 stre
-30
+50
 inte
 40
 dext
-30
+60
 wisd
 50
 cons
@@ -24,6 +24,8 @@ bravery
 grouprelation
 1
 .
+
+
 
 
 

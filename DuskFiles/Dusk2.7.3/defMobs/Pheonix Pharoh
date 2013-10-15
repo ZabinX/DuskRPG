@@ -16,7 +16,6 @@ bravery
 3
 grouprelation
 1
-<<<<<<< HEAD
 giveitem
 pheonix mail
 1.0
@@ -30,21 +29,6 @@ giveitem
 pheonix gloves
 1.0
 giveitem
-=======
-give item
-pheonix mail
-1.0
-give item
-pheonix helm
-1.0
-give item
-pheonix pads
-1.0
-give item
-pheonix gloves
-1.0
-give item
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 pheonix belt
 1.0
 image

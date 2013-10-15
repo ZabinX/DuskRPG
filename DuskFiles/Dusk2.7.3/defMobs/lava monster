@@ -26,7 +26,6 @@ demon
 skill
 double attack
 100
-<<<<<<< HEAD
 skill
 triple attack
 75
@@ -34,12 +33,6 @@ skill
 quadruple attack
 50
 skill
-=======
-triple attack
-75
-quadruple attack
-50
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 dodge
 10
 .

@@ -1,3 +1,9 @@
+if ismob trigger
+    endscript
+end
+if ispet trigger
+    endscript
+end
 if  hascondition trigger "excaliburquest"
 	inc trigger locx 1
 	endscript
@@ -8,17 +14,22 @@ if < trigger cp 200
 	endscript
 end
 if > trigger cp 200
-	inc trigger locx 1
-<<<<<<< HEAD
 	chat trigger "Baal says:  I TOLD YOU NOT TO!!!  YOU DIE NOW MORTAL!"
-=======
-	chat trigger "Ball says:  I TOLD YOU NOT TO!!!  YOU DIE NOW MORTAL!"
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 	chat trigger "*Baal orders his pet flameling to attack*"
 	chat trigger "Obtained:  Excalibur"
 	giveitem trigger "Excalibur"
 	changetile 199 191 81
 	addcondition trigger "excaliburquest"
+	livingthing guard1 local trigger "flameling"
+		if = guard1 locX 200
+			if = guard1 locY 190
+			endscript
+			end
+		end
+	createoneusemob "flameling" 200 190
+	chat trigger "*Ball conjurs a backup flameling*"
+	chat trigger "Your friend killed my pet well here's another just for you!"
+	inc trigger locx 1
 	endscript
 end
 
@@ -38,7 +49,8 @@ end
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
+
+
+
+

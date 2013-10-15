@@ -5,7 +5,7 @@ if ! isPlayer trigger
 #
 if and hasCondition trigger monsterhunting hasCondition trigger flanrapoint
 	removeCondition trigger flanrapoint
-	chat trigger "You tell the scribe about flanras' special skills during combat."
+	chat trigger "You tell the scribe about flanras' special 'fire spitting' skill during combat."
 	number r * rand 3
 	if = r 0
 		giveItem trigger "Bassbaby"
@@ -22,6 +22,24 @@ if and hasCondition trigger monsterhunting hasCondition trigger flanrapoint
 	endscript
 	end
 #
+if and hasCondition trigger monsterhunting hasCondition trigger flanpoint
+	removeCondition trigger flanpoint
+	chat trigger "You tell the scribe about how you ate one of the flans in the forest to satisfy your hunger."
+	number r * rand 3
+	if = r 0
+		giveItem trigger "stinger"
+		chat trigger "Scribe gives you a  stinger"
+		endscript
+		end
+	if = r 1
+		giveItem trigger "ale"
+		chat trigger "Scribe gives you a  ale"
+		endscript
+		end
+	giveItem trigger "crystal"
+	chat trigger "Scribe gives you a crystal"
+	endscript
+	end
 if hasCondition trigger monsterhunting
 	chat trigger "Scribe says: Have you seen any monsters with special attacks yet?"
 	endscript
@@ -33,6 +51,8 @@ chat trigger "Scribe says: If you ever come across one of these monsters."
 chat trigger "Scribe says: I'll reward you for the information about the monster you incountered.."
 addCondition trigger monsterhunting
 endscript 
+
+
 
 
 

@@ -20,8 +20,16 @@ image
 9
 giveitem
 crystal
-0.3
+0.2
+onBattle
+flan_brain
 faction
 flan
 .
+
+
+
+
+
+
 

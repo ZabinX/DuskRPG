@@ -1,5 +1,14 @@
+if ismob trigger
+    endscript
+end
 if ispet trigger
     endscript
+end
+if  hascondition trigger "excaliburquest"
+	chat trigger "*There's a magic barrier preventing you from coming closer.*"
+	inc trigger locx -1
+	changetile 199 191 56
+	endscript
 end
 if ! hascondition trigger "ballswarning"
 	addcondition trigger "ballswarning"
@@ -9,10 +18,17 @@ if ! hascondition trigger "ballswarning"
 	addcondition trigger "ballswarning"
 	endscript
 end
-if hascondition trigger "ballswarning"
+if hasCondition trigger "ballswarning"
+	livingthing guard1 local trigger "flameling"
+		if = guard1 locX 200
+			if = guard1 locY 190
+			endscript
+			end
+		end
+	createoneusemob "flameling" 200 190
+	chat trigger "*Ball conjurs up another flameling*"
 	chat trigger "Ball says:  Go ahead and give it a pull... I DARE YOU!!"
 	endscript
 end
-
 
 

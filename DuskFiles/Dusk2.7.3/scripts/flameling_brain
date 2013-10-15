@@ -1,27 +1,20 @@
-<<<<<<< HEAD
 #Zabin script testing
-=======
-#
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 if < 1 * 10 rand
 	endscript
 	end
 #
 number c * rand 3
 if = c 0
-	inc trigger hp 100
+	inc trigger hp 300
 	chat enemy trigger "flameling healed itself"
 	endscript
 	end
 number damage 50
 livingthing target enemy trigger
 inc target hp * -1 damage
-<<<<<<< HEAD
 livingthing target enemy trigger
 addCondition target flamelingpoint
 chat enemy trigger "flameling throws lava at you causing 50 damage!, You also earned a monsterpoint!."
-=======
-chat enemy trigger "flameling throws lava at you causing 50 damage."
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 endscript
+
 

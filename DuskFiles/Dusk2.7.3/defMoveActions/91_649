@@ -14,7 +14,7 @@ if hasCondition trigger orkgoddefeat
 	end
 if hasCondition trigger bhquest5
 	chat trigger "Cheif Bounty Hunter says: Be careful when you pass through the valley."
-	chat trigger "Cheif Bounty Hunter says: Here's what you need to do- find and slay their Ork God-  that should shut them up, and we should have access to the mines again."
+	chat trigger "Cheif Bounty Hunter says: Here's what you need to do:  Find and slay their Ork God-  that should shut them up, and we should have access to the mines again."
 	endscript
 	end
 #
@@ -58,11 +58,7 @@ if hasCondition trigger bhquest3
 #
 if and hasCondition trigger bhquest2 hasItem trigger HelmetStarFishCorpse
 	removeItem trigger HelmetStarFishCorpse
-<<<<<<< HEAD
 	if hasItem trigger HelmetStarFishCorpse
-=======
-	if hasItem HelmetStarFishCorpse
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 		removeItem trigger HelmetStarFishCorpse
 			if hasItem trigger HelmetSharkCorpse
 				removeItem trigger HelmetSharkCorpse
@@ -127,9 +123,7 @@ if hasCondition trigger bhquestEnd
 
 
 
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
+

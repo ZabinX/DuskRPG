@@ -3,11 +3,7 @@ if ispet trigger
 end
 chat trigger "Heres how to use the bank:
 
-<<<<<<< HEAD
 1. No bank card nessary, it's totally free to use the bank.
-=======
-1. Make sure you have a bank card.
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 2. Go up to one of the desks.  Stand in front of a Bank Teller.
 3. Type deposit <amount of gp> to deposit money.  (example: deposit 345)
 4. Type withdraw <amount of gp> to withdraw money. (example: withdraw 120)
@@ -15,7 +11,4 @@ chat trigger "Heres how to use the bank:
 6. Only balance command will work outside of the bank."
 endscript
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c

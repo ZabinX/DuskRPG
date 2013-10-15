@@ -1,13 +1,7 @@
 maxhp
-<<<<<<< HEAD
 1000
 maxmp
 1000
-=======
-350
-maxmp
-350
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 stre
 50
 inte
@@ -19,15 +13,9 @@ cons
 wisd
 30
 image
-<<<<<<< HEAD
 22
 bravery
 1
-=======
-36
-bravery
-1.5
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 grouprelation
 1
 wield
@@ -35,15 +23,8 @@ dagger
 -1
 -1
 giveitem
-<<<<<<< HEAD
 crystal
 0.3
-=======
-dagger
-0.8
-faction
-shade
->>>>>>> 73721cc4c2079a47c79456456f751f0f188b919c
 .
 
 
