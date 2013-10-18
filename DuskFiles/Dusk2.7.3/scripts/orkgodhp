@@ -4,6 +4,6 @@ if isInBattle trigger
 	chat trigger "Ork God says:  I can't believe it...  I'm a man of my word, here's your reward...*Ork God teleports you* "
 	set trigger locxy 200 200
 	end
-#
+end
 endscript
 

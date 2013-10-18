@@ -1,8 +1,9 @@
-if < trigger cp 50
+if < trigger cp 200
      chat trigger "It's too dangerous..."
      inc trigger locy +4
      endscript
 end
+
 
 
 

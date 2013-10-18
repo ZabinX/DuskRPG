@@ -1,0 +1,17 @@
+if isInBattle trigger
+	livingthing target enemy trigger
+	if < target hp 1
+		if hasCondition trigger killedpirateassassin
+			chat trigger "Pirate Guard says: Sorry boss, I couldn't stop em'.   *Pirate Assassin pushes you into his boss 'BlackBeard.*"
+			set trigger locxy 64 627
+			endscript
+		end
+	livingthing target enemy trigger
+	if < target hp 1
+		chat trigger "*Pirate Guard says: Watch out boss this guy is tuff.  *falls over and dies*."
+		addCondition killedpirateassassin
+	end
+end
+endscript
+
+

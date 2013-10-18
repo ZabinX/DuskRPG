@@ -3,7 +3,7 @@ armor
 kind
 legs
 description
-a pair of moon shoes.  Protects the feet nicely as well as
+a pair of moon shoes.  Protects the feet nicely as well
 cost
 2000
 mod
@@ -17,4 +17,6 @@ start_moon_shoes
 onUnWear
 end_moon_shoes
 .
+
+
 

@@ -1,0 +1,36 @@
+maxhp
+1000
+maxmp
+1000
+stre
+65
+inte
+100
+dext
+100
+wisd
+100
+cons
+100
+image
+102
+bravery
+1
+grouprelation
+1
+description
+the pirates' boss
+skill
+dodge
+1
+skill
+double attack
+80
+skill
+triple attack
+30
+onBattle
+blackbeard_brain
+.
+
+

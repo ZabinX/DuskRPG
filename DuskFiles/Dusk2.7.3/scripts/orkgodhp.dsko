@@ -1,1 +1,1 @@
-trigger target enemy trigger target hp 1 *trigger "Ork God says:  I can't believe it...  I'm a man of my word, here's your reward...*Ork God teleports you* " -trigger 200 200  
+trigger target enemy trigger target hp 1 *trigger "Ork God says:  I can't believe it...  I'm a man of my word, here's your reward...*Ork God teleports you* " -trigger 200 200  

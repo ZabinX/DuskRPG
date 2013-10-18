@@ -1,9 +1,34 @@
+if hasCondition trigger inforest3
+	livingthing guard1 local trigger "Mutant Scorpion"
+		if = guard1 locX 230
+			if = guard1 locY 158
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Mutant Scorpion"
+		if = guard2 locX 231
+			if = guard2 locY 159
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "Mutant Scorpion"
+		if = guard3 locX 230
+			if = guard3 locY 160
+			set guard3 locxy 1 1
+			end
+		end
+	chat trigger "you think *Dang! Those mutant scorpions are though.*"
+	removeCondition trigger inforest3
+	set trigger locxy 209 278
+	endscript
+end
 if ! hasCondition trigger checktreasure
 	chat trigger "Maybe I should check that threasure chest first."
-	inc trigger locx 1
+	inc trigger locx -1
 	endscript
 end
 #
 set trigger locxy 209 278
 endscript
 end
+

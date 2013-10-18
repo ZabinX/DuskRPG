@@ -1,0 +1,10 @@
+if hasCondition trigger blackbeardquest
+	chat trigger "*You look in the room and feel bad about all the blood splatters everywhere, and decide not to enter."
+	inc trigger locx 1
+	endscript
+end
+if hasCondition trigger shenville_0
+	chat trigger "Your looking for Ed's crown right?, well my boss has it and you'll have to fight your way through here if you want to get it."
+	endscript
+end
+

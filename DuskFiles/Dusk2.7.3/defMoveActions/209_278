@@ -1,5 +1,9 @@
 if hasCondition trigger checktreasure
 	removeCondition trigger checktreasure
-	endscript
+	if ! hasCondition trigger inforest
+	addcondition trigger inforest
 	end
+	endscript
+end
+endscript
 

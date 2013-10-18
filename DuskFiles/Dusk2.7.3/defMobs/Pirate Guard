@@ -1,0 +1,31 @@
+maxhp
+500
+maxmp
+500
+stre
+50
+inte
+60
+dext
+50
+wisd
+50
+cons
+50
+image
+101
+bravery
+1
+grouprelation
+1
+skill
+double attack
+50
+skill
+triple attack
+20
+onBattle
+pirateguard_brain
+.
+
+

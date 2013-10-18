@@ -1,0 +1,19 @@
+if isInBattle trigger
+	livingthing target enemy trigger
+	if < target hp 1
+		if hasCondition trigger killedpirateguard
+			chat trigger "*When the pirate guard dies he uses his last bit of energy to push you further in the room."
+			removecondition trigger pirateguardbattle1
+			removecondition trigger pirateguardbattle
+			addconditionwithduration trigger nohunger 500
+			addCondition trigger flanpoint
+			set trigger locxy 68 627
+		end
+	addCondition killedpirateguard
+	chat trigger "*Pirate Guard says: This guy is tuff.  *falls over and dies*."
+	end
+end
+endscript
+
+
+

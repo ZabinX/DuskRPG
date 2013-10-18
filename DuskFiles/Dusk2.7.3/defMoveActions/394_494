@@ -1,5 +1,35 @@
-if  hascondition trigger "excaliburquest"
-	changetile 199 191 56
+if  hascondition trigger shenville_0
+	addCondition trigger shenville_pq_0
+	removeCondition trigger shenville_0
+	set trigger locxy 72 623
 	endscript
 end
+if  hascondition trigger killedpirate
+	addCondition trigger shenville_pq_0
+	removeCondition trigger killedpirate
+	set trigger locxy 72 623
+	endscript
+end
+if  hascondition trigger killedpirateguard
+	addCondition trigger shenville_pq_0
+	removeCondition trigger killedpirateguard
+	set trigger locxy 72 623
+	endscript
+end
+if  hascondition trigger killedpirateassassin
+	addCondition trigger shenville_pq_0
+	removeCondition trigger killedpirateassassin
+	set trigger locxy 72 623
+	endscript
+end
+if  hascondition trigger excaliburquest
+	changetile 199 191 56
+	removeCondition trigger excaliburquest
+	addCondition trigger excaliburquest1
+	endscript
+end
+endscript
+
+
+
 

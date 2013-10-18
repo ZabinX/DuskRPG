@@ -4,6 +4,11 @@ end
 if ispet trigger
     endscript
 end
+if  hascondition trigger "excaliburquest1"
+	chat trigger "*There's a magic barrier preventing you from coming closer.*"
+	inc trigger locy 1
+	endscript
+end
 if  hascondition trigger "excaliburquest"
 	chat trigger "*There's a magic barrier preventing you from coming closer.*"
 	inc trigger locx 1
@@ -30,5 +35,6 @@ if hasCondition trigger "ballswarning"
 	chat trigger "Ball says:  Go ahead and give it a pull... I DARE YOU!!"
 	endscript
 end
+
 
 

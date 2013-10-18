@@ -4,6 +4,19 @@ end
 if ispet trigger
     endscript
 end
+if hascondition trigger "excaliburquest1"
+	livingthing guard1 local trigger "flameling"
+		if = guard1 locX 200
+			if = guard1 locY 190
+			endscript
+			end
+		end
+	createoneusemob "flameling" 200 190
+	chat trigger "Ball says:  You must like getting your face pounded.  Which reminds me, looking forward to seeing you in hell!!"
+	chat trigger "*Ball conjurs up another flameling*"
+	inc trigger locy 1
+	endscript
+end
 if hascondition trigger "excaliburquest"
 	livingthing guard1 local trigger "flameling"
 		if = guard1 locX 200
@@ -14,7 +27,7 @@ if hascondition trigger "excaliburquest"
 	createoneusemob "flameling" 200 190
 	chat trigger "Ball says:  You must like getting your face pounded.  Which reminds me, looking forward to seeing you in hell!!"
 	chat trigger "*Ball conjurs up another flameling*"
-	chat trigger "Ball says:  Go ahead and give it a pull... I DARE YOU!!"
+	inc trigger locy 1
 	endscript
 end
 if < trigger cp 200
@@ -22,6 +35,7 @@ if < trigger cp 200
     	endscript
 end
 endscript
+
 
 
 

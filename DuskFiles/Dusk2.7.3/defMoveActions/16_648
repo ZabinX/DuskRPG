@@ -6,7 +6,9 @@ if < trigger cp 100
 	endscript
 end
 if > trigger cp 100
-	chat trigger "chat trigger "Courtney says:  I'm sorry but I don't have enough MP to be able to heal you for free anymore."
+	chat trigger "Courtney says:  I'm sorry but I don't have enough MP to be able to heal you anymore."
+	chat trigger "Courtney says:  On the north east side of town on the little hill is the bath house.  In there you can get healed for some gp."
 	endscript
 end
+
 

@@ -1,0 +1,1 @@
+trigger target enemy trigger target hp 1 trigger killedpirateassassin *trigger "Pirate Guard says: Sorry boss, I couldn't stop em'.   *Pirate Assassin pushes you into his boss 'BlackBeard.*" -trigger 64 627 target enemy trigger target hp 1 *trigger "*Pirate Guard says: Watch out boss this guy is tuff.  *falls over and dies*." killedpirateassassin end  

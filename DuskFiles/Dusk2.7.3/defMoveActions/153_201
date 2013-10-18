@@ -1,0 +1,18 @@
+if hasCondition trigger inforest2
+	livingthing guard1 local trigger "Mutant Scorpion"
+	if ismob guard1
+	order guard1 "wake"
+        	order guard1 concat "a " name trigger
+	end
+	livingthing guard1 local trigger "1.Mutant Scorpion"
+	if ismob guard1
+	order guard1 "wake"
+        	order guard1 concat "a " name trigger
+	end
+	livingthing guard1 local trigger "2.Mutant Scorpion"
+	if ismob guard1
+	order guard1 "wake"
+        	order guard1 concat "a " name trigger
+	end
+	endscript
+end
