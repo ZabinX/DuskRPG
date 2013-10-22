@@ -28,9 +28,6 @@ Armor Merchant
 Skill Trainer
 218
 218
-House of Knowledge
-212
-231
 newspaper
 197
 178
@@ -286,3 +283,48 @@ gossip
 Moon Jacket
 54
 645
+House of Knowledge
+212
+231
+Newbie
+42
+590
+Commands
+42
+588
+War
+45
+588
+Clans
+45
+590
+exp
+50
+588
+Stats
+53
+588
+Skills
+50
+590
+Spells
+53
+590
+Social
+50
+592
+Story
+53
+592
+MPToken
+59
+607
+HPToken
+53
+607
+Xyphoid
+16
+581
+gossip
+15
+582

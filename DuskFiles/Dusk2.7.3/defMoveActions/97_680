@@ -62,7 +62,7 @@ if hasCondition trigger shenville_gfq_0
 	endscript
 	end
 #
-if and hasCondition trigger recievedcrown hasItem trigger crown
+if and hasCondition trigger blackbeardquest hasItem trigger crown
 	removeItem trigger crown
 	chat trigger "Eduardo says: Thank you very much for finding my crown !!!"
 	chat trigger "Eduardo says: Here is a generous reward for retrieving my crown."
@@ -120,6 +120,7 @@ chat trigger "Eduardo says: I got some work for you, remember to talk to me ofte
 chat trigger "Eduardo says: and with the guys at the bar, they'll help you"
 addCondition trigger shenville_0
 endscript
+
 
 
 

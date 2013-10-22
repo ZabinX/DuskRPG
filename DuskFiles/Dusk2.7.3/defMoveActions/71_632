@@ -1,9 +1,10 @@
+if hasCondition trigger blackbeardquest
+	endscript
+	end
 if hasCondition trigger shenville_pq_0
 	createoneusemob "Pirate" 78 627
-	createoneusemob "Pirate Guard" 74 627
 	createoneusemob "Pirate Guard" 73 626
 	createoneusemob "Pirate Assassin" 67 627
-	createoneusemob "Pirate Assassin" 68 626
 	createoneusemob "BlackBeard" 63 627
 	removeCondition trigger shenville_pq_0
 	addCondition trigger shenville_0
@@ -175,3 +176,8 @@ if hasCondition trigger killedpirateassassin
 	chat trigger "It appears you were chicken and ran away rather then fighting all of the pirates.  You have to talk with the king to reset the quest now and you can finish it later when your not chicken!  BbbaaaakKK BbaaK!"  
 	endscript
 end
+
+
+
+
+

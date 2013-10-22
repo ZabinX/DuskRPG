@@ -1,3 +1,6 @@
+if hasCondition trigger blackbeardquest
+	endscript
+	end
 if hasCondition trigger shenville_0
 	livingthing guard1 local trigger "Pirate"
 		if = guard1 locX 78
@@ -162,3 +165,4 @@ if hasCondition trigger killedpirateassassin
 	chat trigger "It appears you were chicken and ran away rather then fighting all of the pirates.  You have to talk with the king to reset the quest now and you can finish it later when your not chicken!  BbbaaaakKK BbaaK!"  
 	endscript
 end
+

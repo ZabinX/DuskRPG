@@ -1,3 +1,1 @@
-trigger target enemy trigger target hp 1 trigger killedpirateguard *trigger "*When the pirate guard dies he uses his last bit of energy to push you further in the room." 
-trigger pirateguardbattle1 
-trigger pirateguardbattle 	trigger nohunger 500 trigger flanpoint -trigger 68 627 killedpirateguard chat trigger "*Pirate Guard says: This guy is tuff.  *falls over dies*."  
+trigger target enemy trigger target hp 1 *trigger "*When the pirate guard dies he uses his last bit of energy to push you further into the room.*" -trigger 68 627  

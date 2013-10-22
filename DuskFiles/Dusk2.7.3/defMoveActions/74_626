@@ -9,6 +9,14 @@ if hasCondition trigger shenville_0
 	order guard1 "wake"
         	order guard1 concat "a " name trigger
 	end
-	endscript
 end
+addCondition killedpirate
+removeCondition shenville_0
+removeCondition piratebattle
+endscript
+
+
+
+
+
 

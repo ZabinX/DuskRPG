@@ -28,7 +28,16 @@ if  hascondition trigger excaliburquest
 	addCondition trigger excaliburquest1
 	endscript
 end
+removeCondition trigger piratebattle
+removeCondition trigger piratebattle1
+removeCondition trigger pirateguardbattle
+removeCondition trigger pirateguardbattle1
+removeCondition trigger pirateassassinbattle
+removeCondition trigger pirateassassinbattle1
+removeCondition trigger blackbeardbattle
+removeCondition trigger blackbeardbattle1
 endscript
+
 
 
 

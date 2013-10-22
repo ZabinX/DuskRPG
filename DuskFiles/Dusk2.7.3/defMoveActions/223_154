@@ -24,11 +24,12 @@ if hasCondition trigger inforest3
 end
 if ! hasCondition trigger checktreasure
 	chat trigger "Maybe I should check that threasure chest first."
-	inc trigger locx -1
+	inc trigger locx 1
 	endscript
 end
 #
 set trigger locxy 209 278
 endscript
 end
+
 

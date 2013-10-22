@@ -1,0 +1,6 @@
+if ispet trigger
+    endscript
+end
+order trigger "help clans"
+chat trigger "Help window for clans has been opened."
+endscript

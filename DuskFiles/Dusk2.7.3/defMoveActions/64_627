@@ -4,6 +4,5 @@ if hasCondition trigger shenville_0
 	order guard1 "wake"
         	order guard1 concat "a " name trigger
 	end
-	endscript
 end
-
+endscript
