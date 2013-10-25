@@ -1,115 +1,34 @@
-#Zabin's "Moon Shoes" quest
-if and hasCondition trigger kristaquest2shoes hasItem trigger ExtraShoes
-	removeItem trigger ExtraShoes
-	chat trigger "Krista says: Oh Thank you so much for doing me this favor!!!"
-	chat trigger "Krista says: Here's a minormend potion to show my appreciation."
-	giveItem trigger "minormend"
-		chat trigger "You got a minormend"
-	chat trigger "krista says: Since you were such a champ doing me that last favor..  I was wondering if you can help me with something else? "
-	removeCondition trigger kristaquest2shoes
-	addCondition trigger kristaquest3
+#Zabin's "Xyphoid's flan quest"
+if and hasCondition trigger xyphoidquest5 hasCondition trigger killedflanaga
+	chat trigger "Xyphoid says: You killed that beast!  Wow I'm impressed!  How did you make it through its special water-wave attack!?!."
+	chat trigger "Xyphoid says: Anyways, good job.  Here, take these rare Moon Gloves as your reward.  Moon material is known to enhance the area of the body where it's worn.  These gloves will make you stronger."
+	giveItem trigger "Moon Gloves"
+		chat trigger "You got a pair of moon gloves."
+	removeCondition trigger xyphoidquest5
+	addCondition trigger xyphoidquestend
 	endscript
 	end
-# Count the fish
-if and hasCondition trigger kristaquest3 hasItem trigger Bassbaby
-	removeItem trigger Bassbaby
-	if hasItem trigger Bassbaby
-		removeItem trigger Bassbaby
-		if hasItem trigger Bassbaby
-			removeItem trigger Bassbaby
-			if hasItem trigger Bassbaby
-				removeItem trigger Bassbaby
-				if hasItem trigger Bassbaby
-					removeItem trigger Bassbaby
-					if hasItem trigger Bassbaby
-						removeItem trigger Bassbaby
-						if hasItem trigger Bassbaby
-							removeItem trigger Bassbaby
-							if hasItem trigger Bassbaby
-								removeItem trigger Bassbaby
-								if hasItem trigger Bassbaby
-									removeItem trigger Bassbaby
-									if hasItem trigger Bassbaby
-										removeItem trigger Bassbaby
-										if hasItem trigger Bassbaby
-											removeItem trigger Bassbaby
-											if hasItem trigger Bassbaby
-												removeItem trigger Bassbaby
-												if hasItem trigger Bassbaby
-													removeItem trigger Bassbaby
-													if hasItem trigger Bassbaby
-														removeItem trigger Bassbaby
-														if hasItem trigger Bassbaby
-															removeItem trigger Bassbaby
-															if hasItem trigger Bassbaby
-																removeItem trigger Bassbaby
-																if hasItem trigger Bassbaby
-																	removeItem trigger Bassbaby
-																	if hasItem trigger Bassbaby
-																		removeItem trigger Bassbaby
-																		if hasItem trigger Bassbaby
-																			removeItem trigger Bassbaby
-																			if hasItem trigger Bassbaby
-																				removeItem trigger Bassbaby
-																				giveItem trigger "Moon Shoes"
-																				chat trigger "Krista says: Sweet!  Thanks for all these baby fish.  This will help bring back some very fond memories I have fishing with my dad here."
-																				chat trigger "Krista says: You can have my father's extra pair of moon shoes.  I only need 1 pair to bring back memories, and besides you just brought back to life our favorite fishing spot."
-																					chat trigger "You got a pair of Moon Shoes"
-																				removeCondition trigger kristaquest3
-																				addCondition trigger kristaquestend
-																				endscript
-																				end
-																			giveItem trigger Bassbaby
-																			end
-																		giveItem trigger Bassbaby
-																		end
-																	giveItem trigger Bassbaby
-																	end
-																giveItem trigger Bassbaby
-																end
-															giveItem trigger Bassbaby
-															end
-														giveItem trigger Bassbaby
-														end
-													giveItem trigger Bassbaby
-													end
-												giveItem trigger Bassbaby
-												end
-											giveItem trigger Bassbaby
-											end
-										giveItem trigger Bassbaby
-										end
-									giveItem trigger Bassbaby
-									end
-								giveItem trigger Bassbaby
-								end
-							giveItem trigger Bassbaby
-							end
-						giveItem trigger Bassbaby
-						end
-					giveItem trigger Bassbaby
-					end
-				giveItem trigger Bassbaby
-				end
-			giveItem trigger Bassbaby
-			end
-		giveItem trigger Bassbaby
-		end
-	giveItem trigger Bassbaby	
+if hasCondition trigger xyphoidquest5
+	chat trigger "Xyphoid says: I almost died that day..."
+	chat trigger "Xyphoid says: Now those flans charge and attack me everytime I step outside.  It's getting difficult for me to take care of myself."
+	chat trigger "Xyphoid says: The flanaga is the queen of them all and if you can get rid of her, my problem with these flans will be no more and I'll reward you something great!"
+	endscript
 	end
 #
-if hasCondition trigger Xyphoidquest4
+if hasCondition trigger xyphoidquest4
 	chat trigger "Xyphoid says: After I quenched my thirst I looked up and sitting next to me was a giant flan.  Probably quadruple times bigger then a regular flan."
 	chat trigger "Xyphoid says: It charged to attack, so I defended myself and as I'm battling the flanaga it starts using magic!  I've never seen magic come out of something you can eat!"
 	chat trigger "Xyphoid says: I remember when the flanaga cast a tidalwave spell which washed me down the tubes of the cave."
 	chat trigger "Xyphoid says: I was in a under-water water-slide with the current taking me for a ride of my life I will never forget."
 	chat trigger "Xyphoid says: Right when I couldn't hold my breath anymore I saw a small circular light in the distance."
 	chat trigger "Xyphoid says: It was a relief knowing the light was an exit and it was coming up fast.  I swam towards the light ."
-	chat trigger "Xyphoid says: Once I poped out of the small under-water-cave-slide, I managed to pull myself up the river bank while coughing up water that got in my lungs. "
+	chat trigger "Xyphoid says: I poped out the small under-water-cave-slide, managed to pull myself up the river bank while coughing up water that got in my lungs. "
+	removeCondition trigger xyphoidquest4
+	addCondition trigger xyphoidquest5
 	endscript
 	end
 #
-if hasCondition trigger Xyphoidquest3
+if hasCondition trigger xyphoidquest3
 	chat trigger "Xyphoid says: Those flans outside used to be peaceful creatures that I use to feed grain to."
 	chat trigger "Xyphoid says: A couple weeks ago (after getting quite intoxicated at the pub)..."
 	chat trigger "Xyphoid says: I was staggering through the forest drunk when I tripped and fell through a bush..."
@@ -117,12 +36,12 @@ if hasCondition trigger Xyphoidquest3
 	chat trigger "Xyphoid says: I couldn't find a way back through the bushes so I checked the surrounding area and there was a small cave enterence behind the mountain."
 	chat trigger "Xyphoid says: Inside the cave there where dozens of flans.  All of em' rushed to attack me and some of them would even spit fire.  Boy were they mad at me for killing their kin."
 	chat trigger "Xyphoid says: I fought my way though the fire and lava...then I herd water up ahead.  I was so thirsty, I bolted straight to the source and took a drink."
-	removeCondition trigger Xyphoidquest3
-	addCondition trigger Xyphoidquest4
+	removeCondition trigger xyphoidquest3
+	addCondition trigger xyphoidquest4
 	endscript
 	end
 #
-if and hasCondition trigger Xyphoidquest2 hasItem trigger CanBeefStew
+if and hasCondition trigger xyphoidquest2 hasItem trigger CanBeefStew
 	removeItem trigger CanBeefStew
 	if hasItem trigger CanBeefStew
 		removeItem trigger CanBeefStew
@@ -147,8 +66,8 @@ if and hasCondition trigger Xyphoidquest2 hasItem trigger CanBeefStew
 										inc trigger cash 1000
 										chat trigger "You get 1K gp"
 										chat trigger "Xyphoid says: Could you do another favor for me?"
-										removeCondition trigger Xyphoidquest2
-										addCondition trigger Xyphoidquest3
+										removeCondition trigger xyphoidquest2
+										addCondition trigger xyphoidquest3
 										endscript
 										end
 									giveItem trigger CanBeefStew
@@ -171,30 +90,34 @@ if and hasCondition trigger Xyphoidquest2 hasItem trigger CanBeefStew
 	end
 end
 #
-if hasCondition trigger Xyphoidquest2
+if hasCondition trigger xyphoidquest2
 	chat trigger "Xyphoid says: Please get me 10 cans of Beef Stew from the market place.  I'll pay you back what they go for and a little bonus for the favor."
 	endscript
 	end
 #
-if hasCondition trigger Xyphoidquest	
+if hasCondition trigger xyphoidquest	
 	chat trigger "Xyphoid says: I haven't been able to get out of the house and go shopping in the market place for weeks"
 	chat trigger "Xyphoid says: You look young and fast.  Can you run up to the market place and get some food for a poor old guy?"
 	chat trigger "Xyphoid says: 10 cans of Beef Stew would be great!"
-	removeCondition trigger Xyphoidquest
-	addCondition trigger Xyphoidquest2
+	removeCondition trigger xyphoidquest
+	addCondition trigger xyphoidquest2
 	endscript
 	end
 #
-if hasCondition trigger Xyphoidquestend
-	chat trigger "Krista says: Thanks again for bringing me fish to re-populate my favorite fishing spot."
+if hasCondition trigger xyphoidquestend
+	chat trigger "Xyphoid says: Hey, thanks again.  I've had no problem getting out the house to do my shopping now, thanks to you."
 	endscript
 	end
 # first meeting
 chat trigger "Xyphoid says: Oh am I glad to see you."
 chat trigger "Xyphoid says: Those flanra's outside have been aggressive lately and every time I try to leave the house I get attacked by those little buggers."
 chat trigger "Xyphoid says: They spit fire at me and as I'm getting older and slower I'm more varnerable.  I'm scared to leave the house anymore."
-addCondition trigger Xyphoidquest
+addCondition trigger xyphoidquest
 endscript
+
+
+
+
 
 
 

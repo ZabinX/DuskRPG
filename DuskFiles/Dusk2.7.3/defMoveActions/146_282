@@ -1,0 +1,76 @@
+#Zabins' fishing script
+if ispet trigger
+	endscript
+	end
+#
+if ! hasitem trigger FishingPole
+	inc trigger locx 1
+	chat trigger "You see fish in the water here but you need a fishing pole to catch them."
+	endscript
+	end
+if ! hasitem trigger bait
+	inc trigger locx 1
+	chat trigger "You need bait to catch the fish here."
+	endscript
+	end
+if hasCondition trigger fishsalt3
+	inc trigger locx 1
+	chat trigger "The fish need more time to come back to this spot."
+	endscript
+	end
+if and hasitem trigger FishingPole hasitem trigger bait
+	inc trigger locx 1
+number var * 6 rand
+if = var 0
+	chat trigger "You cast the line, unfortunately the hook snagged the bottom- lost your bait and caught nothing!  Scared off the fish unfortunately too!."
+	removeItem trigger "bait"
+	inc trigger exp 1
+	chat trigger "You get 1 exp"
+	addConditionWithDuration trigger fishsalt3 300
+	endscript
+	end
+if = var 1
+	chat trigger "You cast the line and caught a grunt.  The fish are gone now but should be back momentarily."
+	removeItem trigger "bait"
+	inc trigger exp 5
+	chat trigger "You get 5 exp"	
+	giveItem trigger "grunt"
+	addConditionWithDuration trigger fishsalt3 300
+	endscript
+	end
+if = var 2
+	chat trigger "You cast the line and caught a snapper.  The fish are gone now but should be back momentarily."
+	removeItem trigger "bait"
+	inc trigger exp 10
+	chat trigger "You get 10 exp"
+	giveItem trigger "snapper"
+	addConditionWithDuration trigger fishsalt3 300
+	endscript
+	end
+if = var 3
+	chat trigger "You cast the line and caught a sandshark.  The fish are gone now but should be back momentarily."
+	removeItem trigger "bait"
+	inc trigger exp 20
+	chat trigger "You get 20 exp"	
+	giveItem trigger "sandshark"
+	addConditionWithDuration trigger fishsalt3 300
+	endscript
+	end
+if = var 4
+	chat trigger "You cast the line and caught a grouper.  The fish are gone now but should be back momentarily."
+	removeItem trigger "bait"
+	inc trigger exp 30
+	chat trigger "You get 30 exp"	
+	giveItem trigger "grouper"
+	addConditionWithDuration trigger fishsalt3 300
+	endscript
+	end
+if = var 5
+	chat trigger "You cast the line and caught a marlin.  The fish are gone now but should be back momentarily."
+	removeItem trigger "bait"
+	inc trigger exp 40
+	chat trigger "You get 40 exp"	
+	giveItem trigger "marlin"
+	addConditionWithDuration trigger fishsalt3 300
+	endscript
+	end

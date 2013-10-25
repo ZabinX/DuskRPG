@@ -1,8 +1,3 @@
-48
-684
-ale
-sandwich
-end
 210
 218
 cloth shirt
@@ -65,9 +60,6 @@ end
 669
 651
 end
-257
-178
-end
 182
 180
 Purple Pills
@@ -81,4 +73,24 @@ Xpresso
 Detect
 MinorMana
 ManaPotion
+end
+257
+178
+CastingNet
+FishingPole
+bait
+end
+48
+684
+ale
+ale2
+sandwich
+end
+187
+179
+CanBeefStew
+sandwich
+bean
+bearclaw
+cookie
 end

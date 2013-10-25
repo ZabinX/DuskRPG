@@ -17,3 +17,4 @@ addCondition target flanrapoint
 chat enemy trigger "flanra spits fire at you for 25 damage!, You earn a monsterpoint!"
 endscript
 
+

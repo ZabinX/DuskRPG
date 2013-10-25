@@ -1,3 +1,4 @@
+addCondition trigger ticket
 if hasCondition trigger checktreasure
 	removeCondition trigger checktreasure
 	if ! hasCondition trigger inforest
@@ -6,4 +7,5 @@ if hasCondition trigger checktreasure
 	endscript
 end
 endscript
+
 
