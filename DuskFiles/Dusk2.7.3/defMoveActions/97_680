@@ -2,6 +2,10 @@ if ! isPlayer trigger
 	endscript
 	end
 #
+if ! hasCondition trigger savedhusbandend
+	chat trigger "Eduardo says: I've never seen you before but if you could prove yourself (to the local townspeople) to be a good person, I may just have some work for you... "
+	endscript
+end
 #
 if hasCondition trigger shenville_dq_1
 	removeCondition trigger shenville_dq_1
@@ -120,6 +124,7 @@ chat trigger "Eduardo says: I got some work for you, remember to talk to me ofte
 chat trigger "Eduardo says: and with the guys at the bar, they'll help you"
 addCondition trigger shenville_0
 endscript
+
 
 
 

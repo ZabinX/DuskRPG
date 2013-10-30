@@ -1,4 +1,7 @@
-#
+if ! hasCondition trigger kristaquestend
+	chat trigger "**Kristina snores**  Krista's mom appears to be sleeping."
+	endscript
+end
 if and hasCondition trigger killedshademaster hasCondition trigger savedhusband
 	chat trigger "Kristina says: I can't believe it!  My husband is back home!"
 	chat trigger "Kristina says: Thank you so much for saving my husband!!"
@@ -39,4 +42,5 @@ chat trigger "Kristina says: Oh thanks.  I've been quite depressed and bed ridde
 chat trigger "Kristina says: You look like the adventerous type, can you do me a favor?"
 addCondition trigger kristinaquest
 endscript
+
 
