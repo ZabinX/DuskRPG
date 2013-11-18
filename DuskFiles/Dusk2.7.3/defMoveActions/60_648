@@ -38,9 +38,10 @@ if hasCondition trigger savedhusbandend
 # first meeting
 chat trigger "Kristina says: Hey have you seen my daughter Krista anywhere?."
 chat trigger "You say: Yes, I saw her right inside the castle wall swimming at the little pond there."
-chat trigger "Kristina says: Oh thanks.  I've been quite depressed and bed ridden ever since a couple weeks ago when my husband was killed by those awful shades."
+chat trigger "Kristina says: Oh thanks.  I've been quite depressed and bed ridden ever since a couple weeks ago when my husband 'Chris' was killed by those awful shades."
 chat trigger "Kristina says: You look like the adventerous type, can you do me a favor?"
 addCondition trigger kristinaquest
 endscript
+
 
 

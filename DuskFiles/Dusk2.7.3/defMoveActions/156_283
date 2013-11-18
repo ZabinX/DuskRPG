@@ -22,7 +22,7 @@ if and hasitem trigger FishingPole hasitem trigger bait
 	inc trigger locy 1
 number var * 6 rand
 if = var 0
-	chat trigger "You cast the line, unfortunately the hook snagged the bottom- lost your bait and caught nothing!  Scared off the fish unfortunately too!."
+	chat trigger "You cast the line, unfortunately the hook snagged the bottom- lost your bait and caught nothing!  Scared off the fish unfortunately too!"
 	removeItem trigger "bait"
 	inc trigger exp 1
 	chat trigger "You get 1 exp"
@@ -30,12 +30,11 @@ if = var 0
 	endscript
 	end
 if = var 1
-	chat trigger "You cast the line and caught a grunt.  The fish are gone now but should be back momentarily."
+	chat trigger "You cast the line and caught a grunt."
 	removeItem trigger "bait"
 	inc trigger exp 5
 	chat trigger "You get 5 exp"	
 	giveItem trigger "grunt"
-	addConditionWithDuration trigger fishsalt2 300
 	endscript
 	end
 if = var 2
@@ -74,3 +73,4 @@ if = var 5
 	addConditionWithDuration trigger fishsalt2 300
 	endscript
 	end
+
