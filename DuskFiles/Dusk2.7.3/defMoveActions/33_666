@@ -26,13 +26,14 @@ if and hasCondition trigger DrHerbieQuest2 hasItem trigger "eye of newt"
 										giveItem trigger "mendpotion"
 										giveItem trigger "minormana"
 										giveItem trigger "mandrake juice"
+										addCondition trigger drherbiequestend
 										chat trigger "Dr Light says: Great, you found 10 eyes of newts! I'll toss those into this potion really quick..."
 										chat trigger "Dr Light says: Sweet, I got some extra mandrake juice for you and I managed to brew up a mendpotion and minormana for you also. Thanks for your help."
 										endscript
 										end
 									giveItem trigger "eye of newt"
 									end
-								giveItem trigger "eye of newt"t
+								giveItem trigger "eye of newt"
 								end
 							giveItem trigger "eye of newt"
 							end
@@ -48,6 +49,7 @@ if and hasCondition trigger DrHerbieQuest2 hasItem trigger "eye of newt"
 		end
 	giveItem trigger "eye of newt"	
 	end
+end
 #
 if and hasCondition trigger drherbiequest2 hasItem trigger "eye of newt"
 	chat trigger "Dr Light says: Good, looks like you found some eyes of newts but it doesn't look like you have 10 yet."
@@ -72,6 +74,11 @@ if hasCondition trigger drherbiequest
 	chat trigger "Dr Light says: Mandrake's are hard to find in the woods because they're invisible and they've been over hunted for their magical ability's"
 	endscript
 	end
+#
+if hasCondition trigger drherbiequestend
+	chat trigger "Dr Light says: tnx again"
+	endscript
+	end
 # first meeting
 chat trigger "Dr Light says: Can you help me?  I am having trouble collecting a few key ingredients I need to finish the potion. A villager was petrified yesterday around dusk"
 chat trigger "Dr Light says: His neighbor brought his stoned body to the hospital wing soon after."
@@ -79,6 +86,7 @@ chat trigger "Dr Light says: He said he heard some commotion then saw a flash of
 chat trigger "Dr Light says: So to unpetrify this guy, the first ingredient I need you to find me is a mandrake root."
 addCondition trigger drherbiequest
 endscript 
+
 
 
 

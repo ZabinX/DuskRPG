@@ -13,9 +13,7 @@ DarkStarDusk2002:  Dusk world from 2000-2002 (not sure about the date, I may hav
 
 NewDusk2002:  Quote from Wildern, "I made the backup on 9/23/2002 just a few days before the machine hosting new dusk disappeared."  I remember Tom having OldDusk and NewDusk but because I was a god on OldDusk I don't remember much of this Dusk.  I'll email Wildern and see if I can get a version of OldDusk.
 
-Dusk2.7.3:  Last offical update ~2003.  This is the Dusk world I've been building and haven't named yet.  These have Wildern's latest .class files.
-
-Dusk2.7.3:  The binary Java files (where the magic happens) contains a client(WWW folder) and all the server data files needed to run/host Dusk.  To get Dusk's server running on Ubuntu- all that is needed is Sun Java 6 installed, apache to point the server to localhost(127.0.0.1), and then you just put the client files into apache (/var/www) with this command "sudo cp -r client.html duskclient.jar rc /var/www/dusk"  Then you startup Dusk with this command run in Terminal in the main directory "java -cp . DuskServer".  These instructions run Dusk locally as an applet and I still plan to explain this better.
+Dusk2.7.3:  Last offical update ~2003.  This is the Dusk world I've been building and haven't named yet.  These have Wildern's latest .class files.  The binary Java files (where the magic happens) contains a client(WWW folder) and all the server data files needed to run/host Dusk.  To get Dusk's server running on Ubuntu- all that is needed is Sun Java 6 installed, apache to point the server to localhost(127.0.0.1), and then you just put the client files into apache (/var/www) with this command "sudo cp -r client.html duskclient.jar rc /var/www/dusk"  Then you startup Dusk with this command run in Terminal in the main directory "java -cp . DuskServer".  These instructions run Dusk locally as an applet and I still plan to explain this better.
 
 *Update:  Notzed showed me how to run Dusk as an application.  Here's the instructions copied from my Dusk blog.  http://duskrpg.blogspot.com/2013/03/exciting-dusk-developments.html
 
@@ -43,4 +41,4 @@ Dusk3.0.1:  I just found these files at "http://www.ohloh.net/p/duskrpg" it look
 
 Creator of Dusk:  Tom Weingarten <tom.weingarten@gmail.com>
 
-Old Dusk god:  Zabin(xyphoidzabin@gmail.com)
+Content development:  Zabin(xyphoidzabin@gmail.com)

@@ -1361,3 +1361,93 @@ if hascondition trigger "ballswarning"
 	endscript
 end
 
+
+
+
+
+
+
+
+
+	livingthing guard1 local trigger "Pirate"
+		if = guard1 locX 1
+			if = guard1 locY 1
+			order guard1 "wake"
+        			order guard1 "a " GarbageMan
+			end
+		end
+	livingthing guard2 local trigger "Pirate Guard"
+		if = guard2 locX 1
+			if = guard2 locY 1
+			order guard2 "wake"
+        			order guard2 "a " GarbageMan
+			end
+		end
+	livingthing guard3 local trigger "Pirate Guard"
+		if = guard3 locX 1
+			if = guard3 locY 1
+			order guard3 "wake"
+        			order guard3 "a " GarbageMan
+			end
+		end
+	livingthing guard1 local trigger "Pirate Assassin"
+		if = guard1 locX 1
+			if = guard1 locY 1
+			order guard1 "wake"
+        			order guard1 "a " GarbageMan
+			end
+		end
+	livingthing guard2 local trigger "Pirate Assassin"
+		if = guard2 locX 1
+			if = guard2 locY 1
+			order guard2 "wake"
+        			order guard2 "a " GarbageMan
+			end
+		end
+	livingthing guard3 local trigger "BlackBeard"
+		if = guard3 locX 1
+			if = guard3 locY 1
+			order guard3 "wake"
+        			order guard3 "a " GarbageMan
+			end
+		end
+	livingthing guard1 local trigger "Mutant Scorpion"
+		if = guard1 locX 1
+			if = guard1 locY 1
+			order guard1 "wake"
+        			order guard1 "a " GarbageMan
+			end
+		end
+	livingthing guard2 local trigger "Mutant Scorpion"
+		if = guard2 locX 1
+			if = guard2 locY 1
+			order guard2 "wake"
+        			order guard2 "a " GarbageMan
+			end
+		end
+	livingthing guard3 local trigger "Mutant Scorpion"
+		if = guard3 locX 1
+			if = guard3 locY 1
+			order guard3 "wake"
+        			order guard3 "a " GarbageMan
+			end
+		end
+end
+endscript
+
+
+
+
+if ismob trigger
+	livingthing guard2 local trigger "rocks"
+	if ismob guard2
+	order guard2 "wake"
+        	order guard2 concat "a " name trigger
+	end
+end
+endscript
+
+
+	at LivingThing.changeLocBypass(LivingThing.java:1717)
+	at Script.parseScript(Script.java:1875)
+	at Script.runScript(Script.java:222)

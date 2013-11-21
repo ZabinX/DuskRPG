@@ -1,8 +1,63 @@
-if ispet trigger
-    endscript
+if ismob trigger
+	livingthing guard1 local trigger "rocks"
+		if = guard1 locX 1
+			if = guard1 locY 1
+			set guard1 locxy 215 190
+			end
+		end
+	livingthing guard1 local trigger "Pirate"
+		if = guard1 locX 1
+			if = guard1 locY 1
+			set guard1 locxy 215 190
+			end
+		end
+	livingthing guard2 local trigger "Pirate Guard"
+		if = guard2 locX 1
+			if = guard2 locY 1
+			set guard2 locxy 215 190
+			end
+		end
+	livingthing guard3 local trigger "Pirate Guard"
+		if = guard3 locX 1
+			if = guard3 locY 1
+			set guard3 locxy 215 190
+			end
+		end
+	livingthing guard1 local trigger "Pirate Assassin"
+		if = guard1 locX 1
+			if = guard1 locY 1
+			set guard1 locxy 215 190
+			end
+		end
+	livingthing guard2 local trigger "Pirate Assassin"
+		if = guard2 locX 1
+			if = guard2 locY 1
+			set guard2 locxy 215 190
+			end
+		end
+	livingthing guard3 local trigger "BlackBeard"
+		if = guard3 locX 1
+			if = guard3 locY 1
+			set guard3 locxy 215 190
+			end
+		end
+	livingthing guard1 local trigger "Mutant Scorpion"
+		if = guard1 locX 1
+			if = guard1 locY 1
+			set guard3 locxy 215 190
+			end
+		end
+	livingthing guard2 local trigger "Mutant Scorpion"
+		if = guard1 locX 1
+			if = guard1 locY 1
+			set guard3 locxy 215 190
+			end
+		end
+	livingthing guard3 local trigger "Mutant Scorpion"
+		if = guard1 locX 1
+			if = guard1 locY 1
+			set guard3 locxy 215 190
+			end
+		end
 end
-if hascondition trigger "walk"
-    removecondition trigger "walk"
-    set trigger locxy 1 1
-    endscript
-end
+endscript

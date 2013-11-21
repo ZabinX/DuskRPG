@@ -1,0 +1,26 @@
+if variableisstring param0 #If a target is specified
+	livingthing target local caster param0
+	if variableislivingthing target
+		if hascondition target "reflect"
+			chat caster concat name target "  has reflect."
+			chat caster " You become cursed."
+			addconditionwithduration caster "cursed" * caster inte 0.2
+		endscript
+		end
+	chat caster concat name target "  is now cursed."
+	chat target " You become cursed."
+	addconditionwithduration target "cursed" * caster inte 0.2
+	endscript
+	end
+	chat caster "You do not see them here."
+end
+endscript
+
+
+
+
+
+
+
+
+

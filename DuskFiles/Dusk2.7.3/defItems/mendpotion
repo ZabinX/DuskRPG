@@ -3,12 +3,13 @@ food
 description
 A not so fancy glass bottle full of a strange liquid.
 cost
-1000
+100
 image
 58
 onuse
 mendp
 uses
-10
+1
 .
+
 
