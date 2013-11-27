@@ -1,6 +1,10 @@
 if ispet trigger
     endscript
 end
+if > trigger cp 100
+     chat trigger "Hermit says:  You look strong enough to take care of yourself now.  Train your magic in warrior and clerical groups and you'll learn the armor and strength spells I was casting on you."
+     endscript
+end
 chat trigger "Hermit says:  Long has it been since I have had a visitor."
 chat trigger "Hermit says:  Perhaps I can be of some assistance.  I was once a powerful Mage."
 chat trigger "The air around you begins to swirl with magical energy."
@@ -8,4 +12,3 @@ addconditionwithduration trigger strength 400
 addconditionwithduration trigger armor 400
 chat trigger "You feel stronger."
 endscript
-

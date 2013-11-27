@@ -1,0 +1,5 @@
+addCondition trigger south6
+removeCondition trigger south5
+removeCondition trigger west7
+endscript
+

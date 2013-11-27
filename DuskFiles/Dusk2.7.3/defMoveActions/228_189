@@ -1,4 +1,9 @@
 #Zabin's "Moon Shoes" quest
+if hasCondition trigger kristaquestend
+	chat trigger "Krista says: Thanks again for bringing me fish to re-populate my favorite fishing spot."
+	endscript
+	end
+#
 if and hasCondition trigger kristaquest2shoes hasItem trigger ExtraShoes
 	removeItem trigger ExtraShoes
 	chat trigger "Krista says: Oh Thank you so much for doing me this favor!!!"
@@ -11,7 +16,7 @@ if and hasCondition trigger kristaquest2shoes hasItem trigger ExtraShoes
 	endscript
 	end
 # Count the fish
-if and hasCondition trigger kristaquest3 hasItem trigger Bassbaby
+if and hasCondition trigger kristaquest4 hasItem trigger Bassbaby
 	removeItem trigger Bassbaby
 	if hasItem trigger Bassbaby
 		removeItem trigger Bassbaby
@@ -55,7 +60,7 @@ if and hasCondition trigger kristaquest3 hasItem trigger Bassbaby
 																				chat trigger "Krista says: Sweet!  Thanks for all these baby fish.  This will help bring back some very fond memories I have fishing with my dad here."
 																				chat trigger "Krista says: You can have my father's extra pair of moon shoes.  I only need 1 pair to bring back memories, and besides you just brought back to life our favorite fishing spot."
 																					chat trigger "You got a pair of Moon Shoes"
-																				removeCondition trigger kristaquest3
+																				removeCondition trigger kristaquest4
 																				addCondition trigger kristaquestend
 																				endscript
 																				end
@@ -97,9 +102,15 @@ if and hasCondition trigger kristaquest3 hasItem trigger Bassbaby
 		end
 	giveItem trigger Bassbaby	
 	end
+end
 #
-if and hasCondition trigger kristaquest3 hasItem trigger Bassbaby
+if and hasCondition trigger kristaquest4 hasItem trigger Bassbaby
 	chat trigger "Krista says: I can smell fish on you but it doesn't look like you have 20 yet.  I need 20 otherwise I may eat them all up again before they have time to reproduce."
+	endscript
+	end
+#
+if hasCondition trigger kristaquest4
+	chat trigger "Krista says: I think about 20 Bass babies should do.  You'll need a casting net to catch em'.  There should be a merchant at the harbor who sells em'."
 	endscript
 	end
 #
@@ -110,6 +121,8 @@ if hasCondition trigger kristaquest3
 	chat trigger "Krista says: I would like to stock up the pond with a bunch of fresh water Bass babies but the closest place is by the waterfall next to the Death Mountain mines."
 	chat trigger "Krista says: The road up there is too dangerous for me with all the Orks, Bandits, and posionous mushrooms running around everywhere."
 	chat trigger "Krista says: I think about 20 Bass babies should do.  You'll need a casting net to catch em'.  There should be a merchant at the harbor who sells em'."
+	addCondition trigger kristaquest4
+	removeCondition trigger kristaquest3
 	endscript
 	end
 #
@@ -149,6 +162,8 @@ chat trigger "Krista says: I seriously need some help."
 chat trigger "Krista says: I went for a swim in the pond here and when I came out my dog had almost finished eating one of my shoes."
 addCondition trigger kristaquest
 endscript
+
+
 
 
 

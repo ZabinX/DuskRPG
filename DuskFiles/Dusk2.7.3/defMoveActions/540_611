@@ -1,0 +1,4 @@
+addCondition trigger west5
+removeCondition trigger west4
+endscript
+

@@ -1,0 +1,3 @@
+addCondition trigger east6
+removeCondition trigger east5
+endscript

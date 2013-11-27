@@ -1,0 +1,268 @@
+#Zabins' puzzle ball script
+if isInBattle trigger
+	if hasCondition trigger ballnorth
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 531
+				if = guard1 locY 614
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 531 616
+				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into a rock.**"
+				removecondition trigger ballnorth
+				order trigger reset
+				changetile 531 614 394
+				changetile 531 616 629
+				endscript
+				end
+			end
+	end
+	if hasCondition trigger ballsouth
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 531
+				if = guard1 locY 614
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 1 1
+				chat trigger "**You kick the heavy ball north.  The ball falls into the water and disappears.  You have to reset the puzzle now.**"
+				removecondition trigger ballsouth
+				order trigger reset
+				changetile 531 614 394
+				endscript
+				end
+			end
+	end
+	if hasCondition trigger balleast
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 531
+				if = guard1 locY 614
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 528 614
+				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into the wall.**"
+				removecondition trigger balleast
+				order trigger reset
+				changetile 531 614 394
+				changetile 528 614 629
+				endscript
+				end
+			end
+	end
+	if hasCondition trigger ballwest
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 531
+				if = guard1 locY 614
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 543 614
+				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a rock.**"
+				removecondition trigger ballwest
+				order trigger reset
+				changetile 531 614 394
+				changetile 543 614 629
+				endscript
+				end
+			end
+	end
+	if hasCondition trigger ballnorth2
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 528
+				if = guard1 locY 614
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 1 1
+				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into the wall.  It's stuck in the corner now.**"
+				removecondition trigger ballnorth2
+				order trigger reset
+				changetile 528 614 394
+				changetile 528 619 629
+				endscript
+				end
+			end
+	end
+	if hasCondition trigger ballsouth2
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 528
+				if = guard1 locY 614
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 1 1
+				chat trigger "**You kick the heavy ball north.  The ball rolls past Chris and falls into the water and disappears.  You have to reset the puzzle now.**"
+				chat trigger "**Chris says,'Hey!, why are you trying to hit me with that heavy ball!!??'*"
+				removecondition trigger ballsouth2
+				order trigger reset
+				changetile 528 614 394
+				endscript
+				end
+			end
+	end
+	if hasCondition trigger balleast2
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 528
+				if = guard1 locY 614
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 528 614
+				chat trigger "**The ball can't move that way anymore.**"
+				removecondition trigger balleast2
+				order trigger flee
+				order trigger reset
+				endscript
+				end
+			end
+	end
+	if hasCondition trigger ballnorth3
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 531
+				if = guard1 locY 616
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 531 616
+				chat trigger "**The ball can't move that way anymore.**"
+				removecondition trigger ballnorth3
+				order trigger flee
+				order trigger reset
+				endscript
+				end
+			end
+	end
+	if hasCondition trigger balleast3
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 531
+				if = guard1 locY 616
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 530 616
+				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a rock.  It's stuck in the corner now.**"
+				removecondition trigger balleast3
+				order trigger reset
+				changetile 531 616 394
+				changetile 530 616 629
+				endscript
+				end
+			end
+	end
+	if and hasCondition trigger ballwest3 hasCondition trigger mushroomwest2
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 531
+				if = guard1 locY 616
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 536 616
+				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a dead giant mushroom.**"
+				removecondition trigger ballwest3
+				order trigger reset
+				changetile 531 616 394
+				changetile 536 616 629
+				endscript
+				end
+			end
+	end
+	if  and hasCondition trigger ballwest3 hasCondition trigger mushroomeast2
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 531
+				if = guard1 locY 616
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 534 616
+				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a dead giant mushroom.  It's stuck in the corner now.**"
+				removecondition trigger ballwest3
+				order trigger reset
+				changetile 531 616 394
+				changetile 534 616 629
+				endscript
+				end
+			end
+	end
+	if and hasCondition trigger ballwest3 hasCondition trigger mushroomeast3
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 531
+				if = guard1 locY 616
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 537 616
+				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a rock.  It's stuck in the corner now.**"
+				removecondition trigger ballwest3
+				order trigger reset
+				changetile 531 616 394
+				changetile 537 616 629
+				endscript
+				end
+			end
+	end
+	if and hasCondition trigger ballwest3 hasCondition trigger mushroomwest3
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 531
+				if = guard1 locY 616
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 539 616
+				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a dead giant mushroom*"
+				removecondition trigger ballwest3
+				order trigger reset
+				changetile 531 616 394
+				changetile 539 616 629
+				endscript
+				end
+			end
+	end
+	if hasCondition trigger ballwest3
+		livingthing guard1 local trigger "Giant Mushroom2"
+			if = guard1 locX 536
+				if = guard1 locY 616
+					livingthing guard2 local trigger "ball"
+						if = guard2 locX 531
+							if = guard2 locY 616
+							order guard2 flee
+							order guard2 reset
+							set guard2 locxy 535 616
+							chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a giant mushroom*"
+							removecondition trigger ballwest3
+							order trigger reset
+							changetile 531 616 394
+							changetile 535 616 629
+							endscript
+							end
+						end
+				end
+			end
+	end
+	if hasCondition trigger ballwest3
+		livingthing guard1 local trigger "Giant Mushroom3"
+			if = guard1 locX 539
+				if = guard1 locY 616
+					livingthing guard2 local trigger "ball"
+						if = guard2 locX 531
+							if = guard2 locY 616
+							order guard2 flee
+							order guard2 reset
+							set guard2 locxy 538 616
+							chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a giant mushroom*"
+							removecondition trigger ballwest3
+							order trigger reset
+							changetile 531 616 394
+							changetile 538 616 629
+							endscript
+							end
+						end
+				end
+			end
+	end
+	if hasCondition trigger ballwest3
+		livingthing guard1 local trigger "ball"
+			if = guard1 locX 531
+				if = guard1 locY 616
+				order guard1 flee
+				order guard1 reset
+				set guard1 locxy 545 616
+				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into the wall.  It's stuck now.**"
+				removecondition trigger balleast3
+				order trigger reset
+				changetile 531 616 394
+				changetile 545 616 629
+				endscript
+				end
+			end
+	end
+end
+endscript
+

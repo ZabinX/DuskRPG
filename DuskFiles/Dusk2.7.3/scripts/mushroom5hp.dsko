@@ -1,0 +1,5 @@
+trigger target enemy trigger target hp 1 trigger north5 *trigger "**The giant mushroom dies, it's dead body falls to the south.**" 
+trigger north5 .541 612 642 trigger mushroomnorth5 trigger south5 *trigger "**The giant mushroom dies, it's dead body falls to the north.**" 
+trigger south5 .541 610 642 trigger mushroomsouth5 trigger east5 *trigger "**The giant mushroom dies, it's dead body falls to the west.**" 
+trigger east5 .540 611 642 trigger mushroomeast5 trigger west5 *trigger "**The giant mushroom dies, it's dead body falls to the east.**" 
+trigger west5 .542 611 642 trigger mushroomwest5  

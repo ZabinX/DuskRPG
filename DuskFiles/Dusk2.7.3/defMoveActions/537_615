@@ -1,0 +1,3 @@
+removeCondition trigger north2
+removeCondition trigger east2
+endscript

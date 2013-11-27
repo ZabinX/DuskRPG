@@ -44,20 +44,21 @@ if ismob trigger
 	livingthing guard1 local trigger "Mutant Scorpion"
 		if = guard1 locX 1
 			if = guard1 locY 1
-			set guard3 locxy 215 190
+			set guard1locxy 215 190
 			end
 		end
 	livingthing guard2 local trigger "Mutant Scorpion"
-		if = guard1 locX 1
-			if = guard1 locY 1
-			set guard3 locxy 215 190
+		if = guard2 locX 1
+			if = guard2 locY 1
+			set guard2 locxy 215 190
 			end
 		end
 	livingthing guard3 local trigger "Mutant Scorpion"
-		if = guard1 locX 1
-			if = guard1 locY 1
+		if = guard3 locX 1
+			if = guard3 locY 1
 			set guard3 locxy 215 190
 			end
 		end
 end
 endscript
+

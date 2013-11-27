@@ -772,10 +772,6 @@ flan
 250
 mob2.3
 flan
-188
-245
-mob2.3
-flan
 183
 250
 mob2.3
@@ -1811,14 +1807,6 @@ Alligator
 239
 242
 mob2.3
-Hungry Ogre
-198
-238
-mob2.3
-Flan
-190
-239
-mob2.3
 Flan
 193
 238
@@ -1878,3 +1866,11 @@ mob2.3
 Newt
 157
 117
+mob2.3
+Hungry Ogre
+192
+241
+mob2.3
+ball
+531
+614

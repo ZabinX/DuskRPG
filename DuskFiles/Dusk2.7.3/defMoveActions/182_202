@@ -4,6 +4,10 @@ if ! isPlayer trigger
 #
 inc trigger locy 1
 #
+if hasCondition trigger farmerquestend
+	chat trigger "farmer says: Thanks to you my crops produced enough to pay the taxes this year."
+	endscript
+	end
 # Count the corpses
 if and hasCondition trigger farmerquest hasItem trigger BugCorpse
 	removeItem trigger BugCorpse
@@ -45,6 +49,8 @@ if and hasCondition trigger farmerquest hasItem trigger BugCorpse
 																			removeItem trigger BugCorpse
 																			if hasItem trigger BugCorpse
 																				removeItem trigger BugCorpse
+																				removeCondition trigger farmerquest
+																				addCondition trigger farmerquestend
 																				giveItem trigger "Kaizer Blade"
 																				chat trigger "Farmer says: Thats 20 corpses now, here take my Kaizer Blade for helping me."
 																				endscript
@@ -87,6 +93,7 @@ if and hasCondition trigger farmerquest hasItem trigger BugCorpse
 		end
 	giveItem trigger BugCorpse	
 	end
+end
 #
 if and hasCondition trigger farmerquest hasItem trigger BugCorpse
 	removeItem trigger BugCorpse
@@ -106,6 +113,7 @@ chat trigger "Farmer says: I have a job for you, if you could kill those bugs an
 chat trigger "Farmer says: If you bring me 20 corpse's at once and I'll give you something special."
 addCondition trigger farmerquest
 endscript 
+
 
 
 

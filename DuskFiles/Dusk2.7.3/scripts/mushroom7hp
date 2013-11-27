@@ -1,0 +1,30 @@
+if isInBattle trigger
+	livingthing target enemy trigger
+	if < target hp 1
+		if hasCondition trigger north7
+			chat trigger "**The giant mushroom dies, it's dead body falls to the south.**"
+			removecondition trigger north7
+			changetile 543 614 642
+			addcondition trigger mushroomnorth7
+		end
+		if hasCondition trigger south7
+			chat trigger "**The giant mushroom dies, it's dead body falls down.**"
+			removecondition trigger south7
+			changetile 543 613 642
+			addcondition trigger mushroomsouth7
+		end
+		if hasCondition trigger east7
+			chat trigger "**The giant mushroom dies, it's dead body falls to the west.**"
+			removecondition trigger east7
+			changetile 542 613 642
+			addcondition trigger mushroomeast7
+		end
+		if hasCondition trigger west7
+			chat trigger "**The giant mushroom dies, it's dead body falls to the east.**"
+			removecondition trigger west7
+			changetile 544 613 642
+			addcondition trigger mushroomwest7
+		end
+	end
+end
+endscript

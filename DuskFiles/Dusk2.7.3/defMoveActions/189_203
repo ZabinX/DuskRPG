@@ -9,5 +9,6 @@ end
 if hasItem trigger FarmHouseKey
 	chat trigger "You used the FarmHouseKey, but when you tried to take the key out of the door, it turned into dust..."
 	removeItem trigger FarmHouseKey
-end
 endscript
+end
+

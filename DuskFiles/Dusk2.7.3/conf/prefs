@@ -46,10 +46,10 @@ SignImage=216
 TrainCost=100
 #
 #How much exp should a player win by defeating someone of the exact same strength?
-ExpGainMod=18
+ExpGainMod=15
 #
 #How many seconds should it take for mobs to respawn?
-MobReSpawnSpeed=300
+MobReSpawnSpeed=200
 #
 #How far should a player be allowed to see?
 ViewRange=7
@@ -58,7 +58,7 @@ TitleCap=100
 #How large can player messages be?
 MessageCap=300
 #How fast are mobs allowed to move? (default is 1 second = 1000)
-MobTicks=250
+MobTicks=200
 #How fast are players allowed to move? (default is 1/4 second = 250)
 PlayerTicks=125
 #Log file name.  Comment out the line to have messages go to standard out.

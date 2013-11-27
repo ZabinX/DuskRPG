@@ -12,7 +12,7 @@ Scripting is done in-game as a HighGod or MasterGod (there's 3 lvl's of privledg
 -------------------------------------------------------------------------------------------------
 Duskmoon plot ideas
 
-My Dusk demo was pretty much a skeleton of a game for a long time, though just recently it's been growing some meat as I've been adding more side quests.  As I'm scripting these side quests I started thinking about the main quest and who's going to be the main antagonist/bad guy.  The first bad guys in my Dusk demo were Shades and I placed them around inside the city.  I was thinking about the name of the game "Dusk" and a dark creature like a "Shade", the time of day 'dusk'- wich would be the oppertune time of the day for shades to do their hunting.  So the main quest is to exterminate the shades, but how?  
+My Dusk demo was pretty much a skeleton of a game for a long time, though just recently it's been growing some meat as I've been adding more side quests.  As I'm scripting these side quests I started thinking about the main quest and who's going to be the main antagonist/bad guy.  The first bad guys in my Dusk demo were Shades and I placed them around inside the city.  I was thinking about the name of the game "Dusk" and a dark creature like a "Shade", the time of day 'dusk'- which would be the oppertune time of the day for shades to do their hunting.  So the main quest is to exterminate the shades, but how?  
 
 Then I was trying to think of a name for my Dusk demo and I figured the planet that's being taken over by shades is 'planet Dusk' and the shades are coming from a moon that orbits the planet.  So "Duskmoon" is what I'm calling my Dusk demo world as of now.  The planet is called Dusk because the only habitable part of the planet is where it's always dusk.  It's always dusk because the planet doesn't rotate and sits idle in space.  Kinda like how we see the same face of the moon that orbits our planet Earth every 28 days.  The sun never moves in the sky of planet Dusk.  Where the sun is always shining it's too hot for life and in the dark it's freezing cold.  The planet orbits it's sun with the same side always facing the sun.  The way people on this planet measure days is by the orbit of the moon around Dusk.  The moon makes a complete orbit around Dusk every 47 hours.  
 
@@ -1365,7 +1365,7 @@ end
 
 
 
-
+Some of these scripts are crap like these last ones.
 
 
 
@@ -1435,6 +1435,15 @@ end
 end
 endscript
 
+
+b local trigger "ball"
+	if = b locX 531
+		if = b locY 614
+		set b locxy 543 614
+		chat trigger "You kicked the ball."
+		end
+	end
+endscript
 
 
 

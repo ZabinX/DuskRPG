@@ -1,0 +1,14 @@
+if ispet trigger
+	endscript
+end
+if ! hasItem trigger HouseKey
+	chat trigger "This isn't your house!"
+	inc trigger locy +1
+	endscript
+end
+if hasItem trigger HouseKey
+	chat trigger "You used the HouseKey, but when you tried to take the key out of the door, it turned into dust..."
+	removeItem trigger HouseKey
+endscript
+end
+

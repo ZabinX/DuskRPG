@@ -1,0 +1,5 @@
+removeCondition trigger east4
+removeCondition trigger north4
+removeCondition trigger north6
+endscript
+

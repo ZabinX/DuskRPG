@@ -27,7 +27,3 @@ if isInBattle trigger
 	end
 end
 endscript
-
-
-
-

@@ -10,7 +10,9 @@ X6. I only want mendpotions to be 1 use and once used get removed and a empty bo
 X8. Finish Dr Herbie's quests.
  9. Make at least 2 clan territories and 1 castle for the clans to fight over ownership of.
 X10. Garbage Man mob who kills all the mobs/oneusemobs.  (There isn't a kill mob script-that I am aware of- so the only way to get rid of a mob is by killing it.)
- 11. (Woah, this has become quite a list.  Once completed I'll call it episode 1 of Duskmoon!)
+X11. Krista's quest needs another condition so it doesn't skip dialog if you already caught some fish.
+X12. The hermit should quit helping you and just give you advice on magic when you reach 100cp.
+(Woah, this has become quite a list.  Once completed I'll call it episode 1 of Duskmoon!)
 
 Things to do for episode 2:
 
@@ -29,6 +31,23 @@ Known Glitches:  (These things need to be fixed in the Java programming, which I
 Java(TM) SE Runtime Environment (build 1.7.0_45-b18)
 Java HotSpot(TM) Server VM (build 24.45-b08, mixed mode)
 This version of java won't run the DuskMapEditor on Ubuntu 10.04.  I haven't come across a version of java the won't run Dusk as an application offline.  The main problem is newer versions of java / OS's are getting -1 images loaded from a applet online.  
+6. Very rarely while fighting a lot of mobs at once (5+) the mobs HP gets stuck and the only thing you can do is flee to restart the battle.
+
+Mushroom quest info:
+Ball 629.
+Ball on trigger 630.
+Cave floor 394.
+Trigger 626.
+Trigger activated 625.
+Cave floor with fire 610.
+Magma wall 504.
+Water rock 306.
+ball mob and Giant Mushroom 2-7.
+
+ballnorth 531 616
+
+
+
 
 
 
