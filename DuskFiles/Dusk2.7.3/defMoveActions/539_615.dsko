@@ -1,1 +1,6 @@
-trigger north3  
+trigger north3 trigger ballnorth6 
+trigger ballsouth7 
+trigger ballwest16 
+trigger ballnorth16 
+trigger ballnorth18 
+trigger balleast18  

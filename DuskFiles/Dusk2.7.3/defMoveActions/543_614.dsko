@@ -1,1 +1,5 @@
-trigger south7  
+trigger south7 
+trigger ballnorth4 
+trigger ballsouth4 
+trigger ballwest4 
+trigger ballnorth5  

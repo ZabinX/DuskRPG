@@ -1,1 +1,7 @@
-trigger north2  
+trigger north2 trigger ballnorth8 trigger balleast13 
+trigger ballwest14 
+trigger balleast15 
+trigger ballnorth15 
+trigger ballsouth9 
+trigger ballnorth17 
+trigger ballwest17  

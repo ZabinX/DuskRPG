@@ -1,4 +1,28 @@
+if ismob trigger
+	if hasCondition trigger mobwest
+	inc trigger locx -1
+	endscript
+	end
+end
+if ismob trigger
+	inc trigger locx 1
+	endscript
+end
 removeCondition trigger east2
 addCondition trigger west3
+removeCondition trigger balleast8
+addCondition trigger ballsouth14
+removeCondition trigger ballwest16
+removeCondition trigger ballnorth18
+removeCondition trigger ballwest18
+removeCondition trigger balleast18
+addCondition trigger balleast17
 endscript
+
+
+
+
+
+
+
 

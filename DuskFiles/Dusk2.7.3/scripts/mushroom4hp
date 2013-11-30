@@ -2,6 +2,18 @@ if isInBattle trigger
 	livingthing target enemy trigger
 	if < target hp 1
 		if hasCondition trigger north4
+			livingthing guard1 local trigger "Giant Mushroom5"
+				if = guard1 locX 541
+					if = guard1 locY 611
+					chat trigger "**The giant mushroom dies, it's dead body falls down.**"
+					removecondition trigger north4
+					changetile 541 610 642
+					addcondition trigger mushroomnorth4d
+					endscript
+					end
+				end
+		end
+		if hasCondition trigger north4
 			chat trigger "**The giant mushroom dies, it's dead body falls to the south.**"
 			removecondition trigger north4
 			changetile 541 611 642
@@ -28,4 +40,5 @@ if isInBattle trigger
 	end
 end
 endscript
+
 

@@ -1,2 +1,4 @@
 removeCondition trigger balleast
+removeCondition trigger ballsouth10
 endscript
+

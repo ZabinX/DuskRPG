@@ -1,3 +1,8 @@
-
+)trigger ,trigger 1 
 trigger north2 
-trigger east2  
+trigger east2 
+trigger balleast8 
+trigger ballnorth8 
+trigger balleast13 trigger ballwest14 trigger ballnorth17 
+trigger ballnorth18 
+trigger ballwest18  

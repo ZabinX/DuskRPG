@@ -1,0 +1,6 @@
+removeCondition trigger ballsouth4
+removeCondition trigger balleast5
+removeCondition trigger ballnorth5
+endscript
+
+

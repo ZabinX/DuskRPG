@@ -1,2 +1,4 @@
 removeCondition trigger south2
+removeCondition trigger ballsouth8
 endscript
+
