@@ -2,3 +2,8 @@ if ismob trigger
 	inc trigger locy -1
 	endscript
 end
+addCondition trigger ballsouth19
+removeCondition trigger ballwest21
+endscript
+
+

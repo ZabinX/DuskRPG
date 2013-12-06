@@ -1,3 +1,9 @@
 trigger west4 
 trigger west5 
-trigger north5  
+trigger north5 
+trigger ballnorth20 
+trigger ballsouth20 
+trigger balleast20 
+trigger ballwest20 trigger ballnorth21 trigger ballwest22 
+trigger ballnorth23 
+trigger ballwest23  

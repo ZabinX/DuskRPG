@@ -1,4 +1,7 @@
 
 trigger east4 
 trigger east6 
-trigger north6  
+trigger north6 
+trigger ballnorth24 trigger ballwest25 
+trigger ballnorth26 
+trigger ballwest26  

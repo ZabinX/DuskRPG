@@ -1,3 +1,10 @@
 addCondition trigger east6
 removeCondition trigger east5
+removeCondition trigger balleast23
+removeCondition trigger ballwest25
+removeCondition trigger ballsouth25
+addCondition trigger ballwest26
 endscript
+
+
+

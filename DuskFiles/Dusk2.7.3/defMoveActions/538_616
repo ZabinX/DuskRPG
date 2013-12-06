@@ -1,4 +1,9 @@
 if ismob trigger
+	if hasCondition trigger mobeast
+	endscript
+	end
+end
+if ismob trigger
 	if hasCondition trigger mobwest
 	inc trigger locx -1
 	endscript
@@ -18,6 +23,7 @@ removeCondition trigger ballwest18
 removeCondition trigger balleast18
 addCondition trigger balleast17
 endscript
+
 
 
 

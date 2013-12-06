@@ -1,0 +1,766 @@
+#Zabin's 'reset' button- cleaning up the crap
+if ! hasCondition trigger puzzle
+	chat trigger "You just flashed some memory and then it was gone as if it never happened ..."
+	livingthing guard2 local trigger "Giant Mushroom2"
+		if = guard2 locX 536
+			if = guard2 locY 616
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "Giant Mushroom3"
+		if = guard3 locX 539
+			if = guard3 locY 616
+			set guard3 locxy 1 1
+			end
+		end
+	livingthing guard4 local trigger "Giant Mushroom4"
+		if = guard4 locX 541
+			if = guard4 locY 610
+			set guard4 locxy 1 1
+			end
+		end
+	livingthing guard5 local trigger "Giant Mushroom5"
+		if = guard5 locX 541
+			if = guard5 locY 611
+			set guard5 locxy 1 1
+			end
+		end
+	livingthing guard6 local trigger "Giant Mushroom6"
+		if = guard6 locX 542
+			if = guard6 locY 611
+			set guard6 locxy 1 1
+			end
+		end
+	livingthing guard7 local trigger "Giant Mushroom7"
+		if = guard7 locX 543
+			if = guard7 locY 613
+			set guard7 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 531
+			if = guard1 locY 614
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 531
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 528
+			if = guard1 locY 614
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 536
+			if = guard1 locY 617
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 543
+			if = guard1 locY 614
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 528
+			if = guard1 locY 614
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 531
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 536
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 539
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 535
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 538
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 543
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 543
+			if = guard1 locY 614
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 543
+			if = guard1 locY 614
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 543
+			if = guard1 locY 614
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 543
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 539
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 536
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 540
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 537
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 539
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 539
+			if = guard1 locY 613
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 534
+			if = guard1 locY 613
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 539
+			if = guard1 locY 613
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 536
+			if = guard1 locY 613
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 536
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 536
+			if = guard1 locY 613
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 534
+			if = guard1 locY 613
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 534
+			if = guard1 locY 613
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 534
+			if = guard1 locY 612
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 535
+			if = guard1 locY 612
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 535
+			if = guard1 locY 615
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 535
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 536
+			if = guard1 locY 617
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 538
+			if = guard1 locY 615
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 538
+			if = guard1 locY 610
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 536
+			if = guard1 locY 617
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 535
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 537
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 536
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 539
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 538
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 540
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 536
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 537
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 538
+			if = guard1 locY 616
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 538
+			if = guard1 locY 610
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 540
+			if = guard1 locY 610
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 541
+			if = guard1 locY 610
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 544
+			if = guard1 locY 610
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 540
+			if = guard1 locY 610
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 540
+			if = guard1 locY 611
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 541
+			if = guard1 locY 611
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 542
+			if = guard1 locY 611
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 546
+			if = guard1 locY 611
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 541
+			if = guard1 locY 611
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 546
+			if = guard1 locY 611
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 543
+			if = guard1 locY 611
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 542
+			if = guard1 locY 611
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 544
+			if = guard1 locY 610
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 544
+			if = guard1 locY 611
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 544
+			if = guard1 locY 609
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 544
+			if = guard1 locY 611
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 546
+			if = guard1 locY 611
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 546
+			if = guard1 locY 611
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 546
+			if = guard1 locY 613
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "ball"
+		if = guard1 locX 546
+			if = guard1 locY 609
+			set guard1 locxy 1 1
+			end
+		end
+	changetile 513 629 306
+	changetile 528 660 394
+	changetile 527 659 394
+	changetile 528 658 394
+	changetile 529 659 394
+	changetile 531 659 610
+	changetile 531 658 479
+	changetile 531 614 629
+	changetile 531 616 394
+	changetile 528 614 394
+	changetile 543 614 394
+	changetile 528 619 394
+	changetile 528 614 394
+	changetile 530 616 394
+	changetile 536 616 394
+	changetile 534 616 394
+	changetile 537 616 394
+	changetile 539 616 394
+	changetile 535 616 394
+	changetile 538 616 394
+	changetile 545 616 394
+	changetile 543 616 394
+	changetile 543 613 394
+	changetile 545 616 394
+	changetile 541 616 394
+	changetile 539 616 394
+	changetile 538 616 394
+	changetile 536 616 394
+	changetile 540 616 394
+	changetile 537 616 394
+	changetile 530 616 394
+	changetile 539 618 394
+	changetile 539 613 394
+	changetile 540 613 394
+	changetile 534 613 394
+	changetile 536 619 394
+	changetile 536 613 394
+	changetile 534 613 394
+	changetile 540 613 394
+	changetile 534 616 394
+	changetile 534 612 394
+	changetile 528 611 394
+	changetile 535 612 394
+	changetile 535 611 394
+	changetile 535 615 394
+	changetile 535 616 394
+	changetile 534 615 394
+	changetile 538 615 394
+	changetile 544 615 394
+	changetile 528 616 394
+	changetile 538 610 394
+	changetile 530 616 394
+	changetile 536 616 394
+	changetile 537 616 394
+	changetile 539 616 394
+	changetile 538 616 394
+	changetile 545 616 394
+	changetile 545 616 394
+	changetile 536 616 394
+	changetile 538 616 394
+	changetile 537 616 394
+	changetile 530 616 394
+	changetile 545 616 394
+	changetile 530 616 394
+	changetile 545 616 394
+	changetile 530 616 394
+	changetile 536 610 394
+	changetile 540 610 394
+	changetile 540 610 394
+	changetile 539 610 394
+	changetile 541 610 394
+	changetile 540 610 394
+	changetile 541 610 394
+	changetile 544 610 394
+	changetile 541 610 394
+	changetile 544 610 394
+	changetile 540 611 394
+	changetile 542 609 394
+	changetile 536 610 394
+	changetile 535 611 394
+	changetile 541 611 394
+	changetile 541 611 394
+	changetile 542 611 394
+	changetile 546 611 394
+	changetile 541 609 394
+	changetile 541 611 394
+	changetile 541 612 394
+	changetile 541 612 394
+	changetile 535 611 394
+	changetile 541 610 394
+	changetile 541 609 394
+	changetile 542 611 394
+	changetile 546 611 394
+	changetile 542 612 394
+	changetile 543 616 394
+	changetile 542 609 394
+	changetile 544 611 394
+	changetile 544 609 394
+	changetile 546 611 394
+	changetile 546 613 394
+	changetile 546 609 628
+	changetile 544 615 626
+	changetile 544 607 451
+	changetile 544 608 451
+	changetile 536 618 394
+	changetile 536 616 394
+	changetile 538 618 394
+	changetile 539 616 394
+	changetile 539 617 394
+	changetile 536 617 394
+	changetile 543 613 394
+	changetile 542 613 394
+	changetile 544 613 394
+	changetile 543 611 394
+	changetile 542 610 394
+	changetile 542 611 394
+	changetile 542 612 394
+	changetile 541 612 394
+	changetile 541 611 394
+	changetile 540 611 394
+	changetile 540 610 394
+	changetile 542 610 394
+	changetile 546 611 394
+	changetile 539 615 394
+	changetile 540 616 394
+	changetile 538 616 394
+	changetile 537 616 394
+	changetile 535 616 394
+	changetile 536 615 394
+	changetile 539 617 394
+	changetile 536 617 394
+	removecondition trigger mushroomnorth
+	removecondition trigger mushroomsouth
+	removecondition trigger mushroomeast
+	removecondition trigger mushroomwest
+	removecondition trigger mushroomnorth2
+	removecondition trigger mushroomsouth2
+	removecondition trigger mushroomeast2
+	removecondition trigger mushroomwest2
+	removecondition trigger mushroomnorth3
+	removecondition trigger mushroomsouth3
+	removecondition trigger mushroomeast3
+	removecondition trigger mushroomwest3
+	removecondition trigger mushroomnorth4
+	removecondition trigger mushroomsouth4
+	removecondition trigger mushroomeast4
+	removecondition trigger mushroomwest4
+	removecondition trigger mushroomnorth5
+	removecondition trigger mushroomsouth5
+	removecondition trigger mushroomeast5
+	removecondition trigger mushroomwest5
+	removecondition trigger mushroomnorth6
+	removecondition trigger mushroomsouth6
+	removecondition trigger mushroomeast6
+	removecondition trigger mushroomwest6
+	removecondition trigger mushroomnorth7
+	removecondition trigger mushroomsouth7
+	removecondition trigger mushroomeast7
+	removecondition trigger mushroomwest7
+	removecondition trigger mushroomeast2d
+	removecondition trigger mushroomeast3d
+	removecondition trigger mushroomeast4d
+	removecondition trigger mushroomsouth5d
+	removecondition trigger mushroomeast6d
+	removecondition trigger ballnorth
+	removecondition trigger ballsouth
+	removecondition trigger balleast
+	removecondition trigger ballwest
+	removecondition trigger ballnorth2
+	removecondition trigger ballsouth2
+	removecondition trigger balleast2
+	removecondition trigger ballwest2
+	removecondition trigger ballnorth3
+	removecondition trigger ballsouth3
+	removecondition trigger balleast3
+	removecondition trigger ballwest3
+	removecondition trigger ballnorth4
+	removecondition trigger ballsouth4
+	removecondition trigger balleast4
+	removecondition trigger ballwest4
+	removecondition trigger ballnorth5
+	removecondition trigger ballsouth5
+	removecondition trigger balleast5
+	removecondition trigger ballwest5
+	removecondition trigger ballnorth6
+	removecondition trigger ballsouth6
+	removecondition trigger balleast6
+	removecondition trigger ballwest6
+	removecondition trigger ballnorth7
+	removecondition trigger ballsouth7
+	removecondition trigger balleast7
+	removecondition trigger ballwest7
+	removecondition trigger ballnorth8
+	removecondition trigger ballsouth8
+	removecondition trigger balleast8
+	removecondition trigger ballwest8
+	removecondition trigger ballnorth9
+	removecondition trigger ballsouth9
+	removecondition trigger balleast9
+	removecondition trigger ballwest9
+	removecondition trigger ballnorth10
+	removecondition trigger ballsouth10
+	removecondition trigger balleast10
+	removecondition trigger ballwest10
+	removecondition trigger ballnorth11
+	removecondition trigger ballsouth11
+	removecondition trigger balleast11
+	removecondition trigger ballwest11
+	removecondition trigger ballnorth12
+	removecondition trigger ballsouth12
+	removecondition trigger balleast12
+	removecondition trigger ballwest12
+	removecondition trigger ballnorth13
+	removecondition trigger ballsouth13
+	removecondition trigger balleast13
+	removecondition trigger ballwest13
+	removecondition trigger ballnorth14
+	removecondition trigger ballsouth14
+	removecondition trigger balleast14
+	removecondition trigger ballwest14
+	removecondition trigger ballnorth15
+	removecondition trigger ballsouth15
+	removecondition trigger balleast15
+	removecondition trigger ballwest15
+	removecondition trigger ballnorth16
+	removecondition trigger ballsouth16
+	removecondition trigger balleast16
+	removecondition trigger ballwest16
+	removecondition trigger ballnorth17
+	removecondition trigger ballsouth17
+	removecondition trigger balleast17
+	removecondition trigger ballwest17
+	removecondition trigger ballnorth18
+	removecondition trigger ballsouth18
+	removecondition trigger balleast18
+	removecondition trigger ballwest18
+	removecondition trigger ballnorth19
+	removecondition trigger ballsouth19
+	removecondition trigger balleast19
+	removecondition trigger ballwest19
+	removecondition trigger ballnorth20
+	removecondition trigger ballsouth20
+	removecondition trigger balleast20
+	removecondition trigger ballwest20
+	removecondition trigger ballnorth21
+	removecondition trigger ballsouth21
+	removecondition trigger balleast21
+	removecondition trigger ballwest21
+	removecondition trigger ballnorth22
+	removecondition trigger ballsouth22
+	removecondition trigger balleast22
+	removecondition trigger ballwest22
+	removecondition trigger ballnorth23
+	removecondition trigger ballsouth23
+	removecondition trigger balleast23
+	removecondition trigger ballwest23
+	removecondition trigger ballnorth24
+	removecondition trigger ballsouth24
+	removecondition trigger balleast24
+	removecondition trigger ballwest24
+	removecondition trigger ballnorth25
+	removecondition trigger ballsouth25
+	removecondition trigger balleast25
+	removecondition trigger ballwest25
+	removecondition trigger ballnorth26
+	removecondition trigger ballsouth26
+	removecondition trigger balleast26
+	removecondition trigger ballwest26
+	removecondition trigger ballnorth27
+	removecondition trigger ballsouth27
+	removecondition trigger balleast27
+	removecondition trigger ballwest27
+	removecondition trigger mushroom
+	removecondition trigger mushroomb
+	removecondition trigger mushroom2
+	removecondition trigger mushroomb2
+	removecondition trigger mushroom3
+	removecondition trigger mushroomb3
+	removecondition trigger mushroom4
+	removecondition trigger mushroomb4
+	removecondition trigger mushroom5
+	removecondition trigger mushroomb5
+	removecondition trigger mushroom6
+	removecondition trigger mushroomb6
+	removecondition trigger mushroom7
+	removecondition trigger mushroomb7
+	removecondition trigger mushroomhole
+	removecondition trigger mushroomhole2
+	removecondition trigger mushroomhole3
+	removecondition trigger north
+	removecondition trigger south
+	removecondition trigger east
+	removecondition trigger west
+	removecondition trigger north2
+	removecondition trigger south2
+	removecondition trigger east2
+	removecondition trigger west2
+	removecondition trigger north3
+	removecondition trigger south3
+	removecondition trigger east3
+	removecondition trigger west3
+	removecondition trigger north4
+	removecondition trigger south4
+	removecondition trigger east4
+	removecondition trigger west4
+	removecondition trigger north5
+	removecondition trigger south5
+	removecondition trigger east5
+	removecondition trigger west5
+	removecondition trigger north6
+	removecondition trigger south6
+	removecondition trigger east6
+	removecondition trigger west6
+	removecondition trigger north7
+	removecondition trigger south7
+	removecondition trigger east7
+	removecondition trigger west7
+	set trigger locxy 533 613
+	endscript
+end
+
+
+
+
+

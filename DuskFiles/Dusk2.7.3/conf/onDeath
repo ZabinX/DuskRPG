@@ -1,3 +1,23 @@
+if hasCondition trigger mushroomhole
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger mushroomhole2
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger mushroomhole3
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger puzzle
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger puzzlefinished
+	set trigger locxy 543 632
+	endscript
+end
 if hasCondition trigger shenville_0
 	livingthing guard1 local trigger "Pirate"
 		if = guard1 locX 78

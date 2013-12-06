@@ -4,4 +4,18 @@ removeCondition trigger south4
 removeCondition trigger east4
 removeCondition trigger west4
 addCondition trigger north5
+addCondition trigger balleast20
+removeCondition trigger ballnorth21
+removeCondition trigger balleast21
+removeCondition trigger ballwest22
+removeCondition trigger ballnorth22
+removeCondition trigger ballsouth22
+addCondition trigger ballnorth23
+removeCondition trigger ballnorth24
+removeCondition trigger ballwest24
 endscript
+
+
+
+
+

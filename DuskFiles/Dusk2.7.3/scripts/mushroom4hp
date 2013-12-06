@@ -8,10 +8,17 @@ if isInBattle trigger
 					chat trigger "**The giant mushroom dies, it's dead body falls down.**"
 					removecondition trigger north4
 					changetile 541 610 642
-					addcondition trigger mushroomnorth4d
+					addcondition trigger mushroomeast4d
 					endscript
 					end
 				end
+		end
+		if and hasCondition trigger north4 hasCondition trigger mushroomsouth5d
+			chat trigger "**The giant mushroom dies, it's dead body falls down.**"
+			removecondition trigger north4
+			changetile 541 610 642
+			addcondition trigger mushroomeast4d
+			endscript
 		end
 		if hasCondition trigger north4
 			chat trigger "**The giant mushroom dies, it's dead body falls to the south.**"
@@ -26,10 +33,29 @@ if isInBattle trigger
 			addcondition trigger mushroomsouth4
 		end
 		if hasCondition trigger east4
+			livingthing guard1 local trigger "ball"
+				if = guard1 locX 540
+					if = guard1 locY 610
+					chat trigger "**The giant mushroom dies, it's dead body falls down.**"
+					removecondition trigger east4
+					changetile 541 610 642
+					addcondition trigger mushroomeast4d
+					endscript
+					end
+				end
+		end
+		if hasCondition trigger east4
 			chat trigger "**The giant mushroom dies, it's dead body falls to the west.**"
 			removecondition trigger east4
 			changetile 540 610 642
 			addcondition trigger mushroomeast4
+		end
+		if and hasCondition trigger west4 hasCondition trigger mushroomsouth6
+			chat trigger "**The giant mushroom dies, it's dead body falls down.**"
+			removecondition trigger west4
+			changetile 541 610 642
+			addcondition trigger mushroomeast4d
+			endscript
 		end
 		if hasCondition trigger west4
 			chat trigger "**The giant mushroom dies, it's dead body falls to the east.**"
@@ -40,5 +66,8 @@ if isInBattle trigger
 	end
 end
 endscript
+
+
+
 
 

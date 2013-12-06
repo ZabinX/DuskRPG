@@ -2,7 +2,7 @@ Things to do:  (Things I can do in the Dusk scripting.) X means it's done.
 
  1. Fix mend spell so it works in battle.  (I've tested spells inBattle and they don't seem to work.  I probably can't fix this.)
 X2. Make ore mob that you can only kill when you have a pickaxe.
- 3. Finish the mushroom puzzle quest.
+X3. Finish the mushroom puzzle quest.
  4. Make scripts that check if someone is currently doing the puzzle or the pirate quest.
 X5. Fix TileSee scripts so the player could look over desks, bushes or whatever you could see over.  Doors, stairs, or whatever else you can walk on but shouldn't see through. (I had line of sight turned off but I decided I wanted to use it.)(Done, but still may need some touch ups.)
 X6. I only want mendpotions to be 1 use and once used get removed and a empty bottle is replaced.
@@ -24,16 +24,17 @@ Things to do for episode 2:
 Known Glitches:  (These things need to be fixed in the Java programming, which I can't do)
 
 1. Walking animation has a flicker and doesn't alternate between frames.
-2. Wrongly threaded AWT sometimes flickers between the main frame and battle frame.  Sometimes all the text in the dialog box disappears.
+2. Wrongly threaded AWT sometimes flickers between the main frame and battle frame.  rarely all the text in the dialog box disappears.
 3. Logging into the game online from a applet sometimes has -1 images loaded. (probably because we're running an ancient java applet on new technology.)
 4. Fix magic so it works in battle.  (I see a lot of existing magic spells which were scripted for battle but they don't seem to work.)
 5. java version "1.7.0_45"
 Java(TM) SE Runtime Environment (build 1.7.0_45-b18)
 Java HotSpot(TM) Server VM (build 24.45-b08, mixed mode)
-This version of java won't run the DuskMapEditor on Ubuntu 10.04.  I haven't come across a version of java the won't run Dusk as an application offline.  The main problem is newer versions of java / OS's are getting -1 images loaded from a applet online.  
+This version of java won't run the DuskMapEditor on Ubuntu 10.04.  I haven't come across a version of java that won't run Dusk as an application offline.  The main problem is newer versions of java / OS's are getting -1 images loaded from a applet online.  
 6. Very rarely while fighting a lot of mobs at once (5+) the mobs HP gets stuck and the only thing you can do is flee to restart the battle.
 
 Mushroom quest info:
+
 Ball 629.
 Ball on trigger 630.
 Cave floor 394.
@@ -44,10 +45,33 @@ Magma wall 504.
 Water rock 306.
 ball mob and Giant Mushroom 2-7.
 
-ballnorth 531 616
+Chris' locxy's
+544 679
+544 675
+538 673
+533 674
+528 668
+528 667
+528 666
+523 659
+522 659
+513 659
+513 660
+513 661
+513 662
+513 663
+513 664
+513 665
+513 666
+513 667
+507 673
+506 673
+498 673
+497 673
 
+The very last reset cleanup script that sends the player where they should go-504 670 
+This script still needs the specific's about where to send the player. (finished, needs testing)
 
-
-
+onDeath and onLogout scripts need to check for 'mushroomhole-2&3','puzzle', and even 'puzzlefinished' conditions so the player is sent to the reset button- 543_632(finished, needs testing)
 
 

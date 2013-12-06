@@ -1,4 +1,6 @@
 removeCondition trigger ballsouth19
 removeCondition trigger balleast19
 removeCondition trigger ballwest19
+removeCondition trigger ballwest20
 endscript
+

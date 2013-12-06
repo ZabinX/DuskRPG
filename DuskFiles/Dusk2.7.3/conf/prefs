@@ -52,7 +52,7 @@ ExpGainMod=15
 MobReSpawnSpeed=200
 #
 #How far should a player be allowed to see?
-ViewRange=7
+ViewRange=8
 #How large can player titles be?
 TitleCap=100
 #How large can player messages be?

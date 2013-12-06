@@ -49,3 +49,12 @@ Tickets for sale to ride the random teleporter.  300gp a ride
 :  Road is closed to anyone under 200cp
 185
 117
+Warning:  Up ahead is a tricky puzzle so you may need to revert back in time to try it again if you fail.  These magical mushrooms will transport you back in time.  Kick the mushrooms and everything will be back to normal.
+544
+631
+:Zabin's puzzle inspired by Bertram's puzzle in 'Valyria Tear'.  You kick the ball by attacking it.  There is (very rarely) a bug where you have to attack the ball 2 times for it move
+529
+615
+info: Mushrooms block the ball and eachother.  I've scripted every possibility except for 2 and one of them is scripted but in the form of a punishment to the player for kicking the ball the wrong way
+536
+612

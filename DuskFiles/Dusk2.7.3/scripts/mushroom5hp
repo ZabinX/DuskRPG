@@ -14,16 +14,35 @@ if isInBattle trigger
 					chat trigger "**The giant mushroom dies, it's dead body falls down.**"
 					removecondition trigger south5
 					changetile 541 611 642
-					addcondition trigger mushroomsouth4d
+					addcondition trigger mushroomsouth5d
 					endscript
 					end
 				end
+		end
+		if and hasCondition trigger south5 hasCondition trigger mushroomeast4d
+			chat trigger "**The giant mushroom dies, it's dead body falls down.**"
+			removecondition trigger south5
+			changetile 541 611 642
+			addcondition trigger mushroomsouth5d
+			endscript
 		end
 		if hasCondition trigger south5
 			chat trigger "**The giant mushroom dies, it's dead body falls to the north.**"
 			removecondition trigger south5
 			changetile 541 610 642
 			addcondition trigger mushroomsouth5
+		end
+		if hasCondition trigger east5
+			livingthing guard1 local trigger "ball"
+				if = guard1 locX 540
+					if = guard1 locY 611
+					chat trigger "**The giant mushroom dies, it's dead body falls down.**"
+					removecondition trigger east5
+					changetile 541 611 642
+					addcondition trigger mushroomsouth5d
+					endscript
+					end
+				end
 		end
 		if hasCondition trigger east5
 			chat trigger "**The giant mushroom dies, it's dead body falls to the west.**"
@@ -38,10 +57,17 @@ if isInBattle trigger
 					chat trigger "**The giant mushroom dies, it's dead body falls down.**"
 					removecondition trigger west5
 					changetile 541 611 642
-					addcondition trigger mushroomsouth4d
+					addcondition trigger mushroomsouth5d
 					endscript
 					end
 				end
+		end
+		if and hasCondition trigger west5 hasCondition trigger mushroomeast6d
+			chat trigger "**The giant mushroom dies, it's dead body falls down.**"
+			removecondition trigger west5
+			changetile 541 611 642
+			addcondition trigger mushroomsouth5d
+			endscript
 		end
 		if hasCondition trigger west5
 			chat trigger "**The giant mushroom dies, it's dead body falls to the east.**"
@@ -52,5 +78,7 @@ if isInBattle trigger
 	end
 end
 endscript
+
+
 
 

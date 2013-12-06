@@ -7,6 +7,13 @@ if isInBattle trigger
 			changetile 542 612 642
 			addcondition trigger mushroomnorth6
 		end
+		if and hasCondition trigger south6 hasCondition trigger mushroomwest4
+			chat trigger "**The giant mushroom dies, it's dead body falls down.**"
+			removecondition trigger south6
+			changetile 542 611 642
+			addcondition trigger mushroomeast6d
+			endscript
+		end
 		if hasCondition trigger south6
 			chat trigger "**The giant mushroom dies, it's dead body falls to the north.**"
 			removecondition trigger south6
@@ -25,6 +32,13 @@ if isInBattle trigger
 					end
 				end
 		end
+		if and hasCondition trigger east6 hasCondition trigger mushroomsouth5d
+			chat trigger "**The giant mushroom dies, it's dead body falls down.**"
+			removecondition trigger east6
+			changetile 542 611 642
+			addcondition trigger mushroomeast6d
+			endscript
+		end
 		if hasCondition trigger east6
 			chat trigger "**The giant mushroom dies, it's dead body falls to the west.**"
 			removecondition trigger east6
@@ -40,4 +54,7 @@ if isInBattle trigger
 	end
 end
 endscript
+
+
+
 

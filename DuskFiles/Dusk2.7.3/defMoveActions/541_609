@@ -1,2 +1,9 @@
 addCondition trigger north4
+removeCondition trigger ballnorth20
+removeCondition trigger balleast20
+addCondition trigger ballnorth22
+removeCondition trigger ballnorth23
 endscript
+
+
+
