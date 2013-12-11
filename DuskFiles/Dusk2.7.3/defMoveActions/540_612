@@ -725,9 +725,6 @@ if ! hasCondition trigger puzzle
 	removecondition trigger mushroomb6
 	removecondition trigger mushroom7
 	removecondition trigger mushroomb7
-	removecondition trigger mushroomhole
-	removecondition trigger mushroomhole2
-	removecondition trigger mushroomhole3
 	removecondition trigger north
 	removecondition trigger south
 	removecondition trigger east
@@ -759,6 +756,7 @@ if ! hasCondition trigger puzzle
 	set trigger locxy 533 613
 	endscript
 end
+
 
 
 

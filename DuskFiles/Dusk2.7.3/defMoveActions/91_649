@@ -11,12 +11,12 @@ if hasCondition trigger orkgoddefeat
 	inc trigger cash 25000
 	chat trigger "You get 25K gp"
 	endscript
-	end
+end
 if hasCondition trigger bhquest5
 	chat trigger "Cheif Bounty Hunter says: Be careful when you pass through the valley."
 	chat trigger "Cheif Bounty Hunter says: Here's what you need to do:  Find and slay their Ork God-  that should shut them up, and we should have access to the mines again."
 	endscript
-	end
+end
 #
 if hasCondition trigger bhquest4	
 	string outText concat concat "Cheif Bounty Hunter says: Hey " name trigger "I have another job for you."
@@ -26,7 +26,7 @@ if hasCondition trigger bhquest4
 	removeCondition trigger bhquest4
 	addCondition trigger bhquest5
 	endscript
-	end
+end
 #
 if and hasCondition trigger bhquest3 hasItem trigger BanditLeaderScalp1
 	removeItem trigger BanditLeaderScalp1
@@ -40,11 +40,11 @@ if and hasCondition trigger bhquest3 hasItem trigger BanditLeaderScalp1
 				removeCondition trigger bhquest3
 				addCondition trigger bhquest4
 				endscript
-				end
 		giveItem trigger BanditLeaderScalp2
 		end
 	giveItem trigger BanditLeaderScalp1
 	end
+end
 #
 if hasCondition trigger bhquest3
 	string outText concat concat "Cheif Bounty Hunter says: Ready for your next job " name trigger "?????"
@@ -52,7 +52,7 @@ if hasCondition trigger bhquest3
 	chat trigger "Cheif Bounty Hunter says: There's 3 groups of bandits camping in caves near the village."
 	chat trigger "Cheif Bounty Hunter says: You need to kill all 3 Bandit leaders, make the employer happy and bring back their scalps as evidence of a job well done."
 	endscript
-	end
+end
 #
 if and hasCondition trigger bhquest2 hasItem trigger StarFishCorpse
 	removeItem trigger StarFishCorpse
@@ -72,7 +72,6 @@ if and hasCondition trigger bhquest2 hasItem trigger StarFishCorpse
 						removeCondition trigger bhquest2
 						addCondition trigger bhquest3
 						endscript
-						end
 					giveItem trigger HelmetEelCorpse
 					end
 				giveItem trigger HelmetEelCorpse
@@ -83,11 +82,12 @@ if and hasCondition trigger bhquest2 hasItem trigger StarFishCorpse
 		end
 	giveItem trigger HelmetStarFishCorpse
 	end
+end
 #
 if hasCondition trigger bhquest2
 	chat trigger "Cheif Bounty Hunter says: The employer wants 2 corpses of each Marine animal to prove the jobs done."
 	endscript
-	end
+end
 #
 if hasCondition trigger bhquest1 	
 	string outText concat concat "Cheif Bounty Hunter says: So? " name trigger "The first bounty I need you to take care of is really improtant to the village."
@@ -97,12 +97,12 @@ if hasCondition trigger bhquest1
 	removeCondition trigger bhquest1
 	addCondition trigger bhquest2
 	endscript
-	end
+end
 #
 if hasCondition trigger bhquestEnd
 	chat trigger "Cheif Bounty Hunter says: Thanks for all your help."
 	endscript
-	end
+end
 # first meeting
 	string outText concat concat "Cheif Bounty Hunter says: I saw you kill that scorpion outside the village wall, " name trigger ", That was pretty impressive..."
 	chat trigger outText
@@ -111,7 +111,8 @@ if hasCondition trigger bhquestEnd
 	chat trigger "Cheif Bounty Hunter says: People keep posting up these bounty's but I can't do anything about it since I broke my leg falling off Death Mountain."
 	addCondition trigger bhquest1
 	endscript
-	end
+end
+
 
 
 

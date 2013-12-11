@@ -134,39 +134,37 @@ if ! hasCondition trigger puzzle
 		end
 end
 if hasCondition trigger puzzlefinished
+	createoneusemob "Chris" 156 94
 	set trigger locxy 157 94
 	endscript
 end
 if hasCondition trigger ballidiot
 	order trigger "emote kicked the ball like a fool, thus (MasterGod) Zabin decided to let the GarbageMan do his job ..."
-	createoneusemob "GarbageMan" 215 189
-	set trigger locxy 214 189
+	createoneusemob "GarbageMan" 216 190
+	set trigger locxy 215 190
 	endscript
 end
 if hasCondition trigger mushroomtimewarp
-	set trigger locxy 544 632
+	removecondition trigger mushroomtimewarp
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger mushroomhole3
+	set trigger locxy 133 255
+	removecondition trigger mushroomhole3
+end
+if hasCondition trigger mushroomhole2
+	set trigger locxy 133 255
+	removecondition trigger mushroomhole2
+end
+if hasCondition trigger mushroomhole
+	removecondition trigger mushroomhole
+	set trigger locxy 133 255
 	endscript
 end
 set trigger locxy 133 255
 endscript
-if hasCondition trigger mushroomhole3
-	set trigger locxy 133 255
 end
-if hasCondition trigger mushroomhole2
-	set trigger locxy 133 255
-end
-if hasCondition trigger mushroomhole
-	set trigger locxy 133 255
-if hasCondition trigger puzzle
-	set trigger locxy 133 255
-end
-if ! hasCondition trigger puzzle
-	set trigger locxy 133 255
-end
-endscript
-
-
-
 
 
 

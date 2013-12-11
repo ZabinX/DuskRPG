@@ -74,4 +74,6 @@ This script still needs the specific's about where to send the player. (finished
 
 onDeath and onLogout scripts need to check for 'mushroomhole-2&3','puzzle', and even 'puzzlefinished' conditions so the player is sent to the reset button- 543_632(finished, needs testing)
 
+544 688 rabbit-hole-puzzle start
+
 

@@ -1,19 +1,25 @@
+description
+A heavy ball.
 maxhp
-900000
+90
 maxmp
-700
+70
 stre
 0
 inte
 10
 dext
-900000
+90
 wisd
 10
 cons
 20
 image
 1
+wield
+rockprotection
+-1
+-1
 bravery
 1
 grouprelation
@@ -21,6 +27,8 @@ grouprelation
 onBattle
 ball_brain
 .
+
+
 
 
 

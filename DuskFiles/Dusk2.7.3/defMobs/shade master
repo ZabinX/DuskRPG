@@ -27,6 +27,8 @@ shade cap
 1
 faction
 shade
+onBattle
+shade_brain
 .
 
 

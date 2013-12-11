@@ -1577,6 +1577,7 @@ if isInBattle trigger
 				endscript
 				end
 			end
+	end
 	if hasCondition trigger ballwest20
 		livingthing guard1 local trigger "ball"
 			if = guard1 locX 540
@@ -2332,6 +2333,8 @@ if isInBattle trigger
 	end
 end
 endscript
+
+
 
 
 

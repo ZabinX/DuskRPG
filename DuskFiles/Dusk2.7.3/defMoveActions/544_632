@@ -1,3 +1,5 @@
-addCondition trigger mushroomtimewarp
-endscript
+if ! hasCondition trigger mushroomtimewarp
+	addcondition trigger mushroomtimewarp
+	endscript
+end
 

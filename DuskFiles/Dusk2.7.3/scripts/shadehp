@@ -1,0 +1,12 @@
+if isInBattle trigger
+	livingthing target enemy trigger
+	if < target hp 1
+		if hasCondition trigger kristinaquest2
+			chat trigger "Shade Master says:  I can't believe it... You're going to regret this! *Shade Master shoves you into a rabbit hole.*"
+			addCondition trigger killedshademaster
+			set trigger locxy 544 688
+		end
+	end
+end
+endscript
+

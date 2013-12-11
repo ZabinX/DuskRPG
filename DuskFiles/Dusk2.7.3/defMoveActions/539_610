@@ -1,3 +1,7 @@
+if ismob trigger
+	inc trigger locx 1
+	endscript
+end
 removeCondition trigger west4
 removeCondition trigger balleast19
 addCondition trigger ballwest20
@@ -5,6 +9,7 @@ removeCondition trigger ballwest21
 removeCondition trigger ballnorth21
 removeCondition trigger ballwest22
 endscript
+
 
 
 

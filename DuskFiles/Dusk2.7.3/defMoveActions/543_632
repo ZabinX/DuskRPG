@@ -4,6 +4,10 @@ if hasCondition trigger puzzle
 	set trigger locxy 540 612
 	endscript
 end
+if hasCondition trigger puzzlefinished
+	set trigger locxy 540 612
+	endscript
+end
 if hasCondition trigger mushroomhole3
 	chat trigger "There's no reason for you to go on a trip!  So you decide to save the shrooms for later."
 	endscript
@@ -13,3 +17,9 @@ if hasCondition trigger mushroomtimewarp
 	set trigger locxy 540 612
 	endscript
 end
+if ! hasCondition trigger mushroomtimewarp
+	addCondition trigger mushroomtimewarp
+	endscript
+end
+
+
