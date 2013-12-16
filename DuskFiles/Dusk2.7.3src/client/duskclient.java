@@ -1,4 +1,6 @@
+package client;
 /*
+
 All code copyright Tom Weingarten (captaint@home.com) 2000
 Tom Weingarten makes no assurances as to the reliability or
 functionality of this code. Use at your own risk.
