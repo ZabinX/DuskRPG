@@ -1,4 +1,6 @@
+package client; 
 /*
+
 All code copyright Tom Weingarten (captaint@home.com) 2000
 Tom Weingarten makes no assurances as to the reliability or
 functionality of this code. Use at your own risk.
@@ -18,6 +20,7 @@ Float/Unfloat
 Joe Alloway for shadowed text and the !set command
 */
 
+
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -34,7 +37,7 @@ import javax.swing.JScrollBar;
 
 public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListener, ActionListener, ImageObserver
 {
-	static String strVersion="2.7.1.W3";
+	static String strVersion="2.7.4 (WeaveMN)";
 	
 	int numSpriteImages,
 	    numPlayerImages,
@@ -60,7 +63,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     			audMusic[][];
     AudioClip audMusicPlaying;
     Applet appShell;
+    
     String strRCAddress;
+    String strWebAssetPath = "";
+    
     Vector vctMerchantItems,
     		vctSell,
     		vctChoiceDropItems,
@@ -102,8 +108,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	Graphics gD;
 	GraphicsThread thrGraphics;
 	
-	String address = "dusk.wesowin.org";
-	int port = 7423;
+	String address = "weavercrazytown.com";
+	int port = 7474;
     
     public Dusk(Applet parent)
     {
@@ -190,6 +196,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			{
 		   		address = appShell.getParameter("address");
 		   		port = Integer.parseInt(appShell.getParameter("port"));
+		   		strWebAssetPath = appShell.getParameter("webAssetPath");
 		   		connect();
 		    }else
 			{
@@ -203,7 +210,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	}
 
 	// Main entry point
-	static public void main(String[] args) 
+	public static void main(String[] args) 
 	{
 		new Dusk();
 	}

@@ -7,7 +7,7 @@ You are free to edit or redistribute this code or any portion
 at your wish, under the condition that you do not edit or
 remove this license, and accompany it with all redistributions.
 */
-
+package client;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.StringTokenizer;
@@ -137,7 +137,7 @@ public class MainFrame extends Frame implements ItemListener
 		pnlGraphics.setSize(new java.awt.Dimension(330, 330));
 		pnlGraphics.setBackground(background);
 
-		txtInput.setText("Enter text here");
+		txtInput.setText("");
 		txtInput.setLocation(new java.awt.Point(0, 330));
 		txtInput.setVisible(true);
 		txtInput.setSize(new java.awt.Dimension(640, 25));
