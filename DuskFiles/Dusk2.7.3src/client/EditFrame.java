@@ -7,7 +7,7 @@ You are free to edit or redistribute this code or any portion
 at your wish, under the condition that you do not edit or
 remove this license, and accompany it with all redistributions.
 */
-
+package client;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
