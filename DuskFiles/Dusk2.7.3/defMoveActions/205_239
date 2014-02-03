@@ -1,2 +1,16 @@
-chat trigger "I could squeeze through the dead branches"
+if ! isWearing trigger sawgrassproofjacket
+	if > trigger hp 6
+	chat trigger " The sawgrass cuts you causing 5 damage. "
+	inc trigger hp -5
+	endscript
+	end
+	if < trigger hp 5
+	chat trigger "You died!"
+	set trigger hp 1
+	set trigger locxy 394 494
+	endscript
+	end
+chat trigger "You pass through the sawgrass unharmed."
 endscript
+end
+

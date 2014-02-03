@@ -4,48 +4,24 @@ Welcome to Duskmoon!	 A new world created using the old open source GMUD 'Dusk' 
 			 First release:
 			 Episode 1:  Showcases old Dusk's features using scripts and magic groups recycled from old Dusk worlds.  
 			 New features have been created by me in the form of Dusk script hacking.  There's a lot of neat script's out there in Duskmoon!
-			 So go on and eat some flan's when your hungry, solve puzzles, help the local townspeople, find treasures, and side quests then save the world!
+			 So go on and eat some flan's when your hungry, solve puzzles, help the local townspeople, find treasures, side quests, and then save the world!
 
   	Credits...
-	Andy Weaver-	 If your playing online, many thanks to him hosting Dusk online :D!
 	Tom Weingarten-	 Creator, Java programming lead (tom.weingarten@gmail.com) ~2000.
-	Zabin (me)-	 Duskmoon content, graphic artist (XyphoidZabin@gmail.com ) 2008-2013.
-	Wildern-	 	 Java programming contributions, Dusk script content 2000-2002, and hooking me up with this Dusk version ~2008.
-	Everybody-	 	 Everybody who contributed to Dusk 2000-2003.
+	Andy Weaver-	 If your playing online, many thanks to him hosting Dusk online :D!  Also fixed the images loading online problem.
+	Zabin (me)-	 Duskmoon content, graphic artist (xyphoidzabin@gmail.com ) 2008-2014.
+	Wildern-	 	 Java programming contributions, Dusk script content 2000-2003, and hooking me up with this Dusk version ~2008.
 	Jetrel-		 Graphic artist.
 	Hyptosis-		 Graphic artist.
 	Redshrike-		 Graphic artist.
 	BartK-		 Graphic artist.
 	more-		 See /DuskFiles/LICENSES for more graphical artists credits.
+	Everybody-	 	 Everybody who contributed to Dusk 2000-2003.
+Best for last-
+	Michael Zucchi (NotZed) and his fork of Dusk(DuskZ)-	He pointed out a few typo's in the tilescripts and mobs in my Dusk demo world (notzed@gmail.com) 2013.
 
-	Inspirations...
-DuskZ-(2013)		 Michael Zucchi aka (NotZed)'s fork of the old Dusk engine.  The old Dusk engine has recently seen some new life.  NotZed's work on DuskZ-
-			 completely rewritten the client/server with new Java/JavaFX for the client.  Almost every feature I had on my wish list for Dusk
-			 he's implemented in his DuskZ.  Animated tiles, animated damage bubbles, layers, sprites not getting resized, and better walking animation.
-			 Those are some awesome new features in DuskZ but there's hardly any game content left as he's changed the scripting language from the old Dusk
-			 script to Javascript.  He started converting a few game scripts while testing his new Javascript system and he says he may still change it.
-			 There's no point in converting the existing scripts until he has solidified his new scripting system.  He put together a runable version of
-			 his latest code (it's currently on googlecode) so I could check out the cool new features.  I thought his new version felt slick, new, and was
-			 obviously using new Java technology which was nice to see from such an ancient game!  I enjoyed seeing his upgrades though his new game is very
-			 incomplete and still needing more work, and polish till it's at a playable version.  Dusk is a big project and it's a lot of work.
-			 I remember him saying that he isn't promising anything (so he might not finish a compatable/complete version of his Dusk).  But if he does it
-			 will be excellent!  If he doesn't oh well that's why I love open source, somebody else could learn from his work and possibly continue it.
-
-The Mana World-		 Great open source MMORPG. I mapped the starting village in Duskmoon to resemble TMW Hurnscald, which I believe was mapped in TMW by Crush.
-			 The farmer quest to kill the pinky's and rewarded the farmer's kaiser blade (in TMW)- inspired the bug hunting quest in Duskmoon.
-			 Monster points idea (TMW) inspired me to do the same in Duskmoon.
-
-Valyria Tear-		 Bertram's excellent JRPG.  Watching him revive Hero of Allacrost (HOA) with his fork of the game (by himself) inspired me to revive Dusk.
-			 Ball, triggers, and giant mushrooms blocking (Bertram's puzzle idea) inspired my own version of the puzzle in Duskmoon.
-
-Battle for Wesnoth-		Huge excellent open source game with tons of excellent art all licensed under a open license (GPL) some of which is used in Duskmoon.
-
-Wyvern GMUD-		 I was searching the internet looking for a game that resembled Dusk and I found this gmud.  It's not open source and I haven't played it yet
-			 because the guy who made it is currently not hosting it online (hasn't openly licensed it either).  So no one could revive it besides him.
-			 I was reading through their forums and noticed everybody there were old players who miss the game and are anxiously waiting to play the game again.
-			 Which is how I feel about Dusk.  I love open source games because I can make a game with it and redistribute it keeping the project alive!
-
-	Conclusion...
-			 Enjoy the Duskmoon demo game!
+New version of the DuskServer called 'DuskZ' WIP!	 A modernized and upgraded fork of Tom's old DuskServer you are currently playing:
+	 
+NotZed is working on an upgrade/fork of this DuskServer that's running my demo game here.  I hope the work I do on Dusk will be enjoyable for old/new players of this ancient game but also I hope some Java developers will see potential and hopefully improve upon this old game engine.  So watching his work is exciting and I'm happy this demo inspired him to improve upon this old game.  I can't improve Dusk myself -as I'm not fluent in Java- although I am good at Dusk scripting and pixel art which has consumed most of my spare time.  His fork 'DuskZ' has been completely upgraded using modern Java technology.  He's using JavaFX and has implemented new animated damage bubbles, animated tiles, multiple maps, maps compatable with Tiled output, layers, pathfinding, sprites that are displayed correctly, walking animation that alternates correctly between 2 frames, nicer GUIs's, and much more improvements.  He started working on changing the Dusk scripting system to use a modern scripting language like JavaScript and he's also looking into modernizing the database.  Which means his test version is only about halfway complete and there's no garantee that he'll ever complete it as he has different hobbies to keep himself busy.  That sums up his upgrades on DuskZ and what he has started working on.  I've become pretty decent at pixel art/graphic's development recently because I'd like to provide some quality art/animations for NotZed's DuskZ.  He's done some quality work on Dusk and I want to offer some talent to the team- so I became a decent graphics guy(after a year of practise I can now pixel anything I would like to see), now I could give him some quality animations to test his new animation implemention in DuskZ.  Maybe the cool animations and graphic's that I'm organizing together will inspire him(or some other Java developers looking for a hobby) to work on DuskZ more ;)  We are like a small team working on this- he's doing all the Java programming(he doesn't know how far he'll take it though) and I'm playing with graphic's(I enjoy creating this kind of art so I'll keep making it anyway).
 -----------------------------------------"
 endscript
