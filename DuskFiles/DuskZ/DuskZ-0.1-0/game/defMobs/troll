@@ -1,0 +1,12 @@
+name=troll
+maxhp=5000
+maxmp=0
+str=400
+int=400
+dex=0
+wis=0
+con=600
+bravery=.5
+grouprelation=.5
+image=5
+faction=troll

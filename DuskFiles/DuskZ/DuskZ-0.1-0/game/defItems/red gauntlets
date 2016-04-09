@@ -1,0 +1,12 @@
+type.Armour=red gauntlets
+name=red gauntlets
+description=some red gauntlets
+image=7
+cost=600
+weight=0
+volume=0
+mod=100
+durability=2000000
+onWear=wear_normal_armor
+worn=hands
+=end

@@ -1,0 +1,10 @@
+type.Item=detect
+name=detect
+description=a scroll of detect invisibility
+image=6
+cost=500
+weight=0
+volume=0
+uses=1
+onUse=detectinvis
+=end

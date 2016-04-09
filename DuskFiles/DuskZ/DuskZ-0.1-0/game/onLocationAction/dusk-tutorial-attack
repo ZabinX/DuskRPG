@@ -1,0 +1,5 @@
+
+if (trigger.isPlayer()) {
+   trigger.chat("You notice a weak scorpion.  Attack yt by typing `a scorpion' or using the attack menu.");
+   trigger.chat("Monsters can also attack you without provocation so keep an eye on your HP to avoid dying.");
+}

@@ -1,0 +1,10 @@
+type.Weapon=wooden dagger
+name=wooden dagger
+description=a cheap wooden dagger
+image=192
+cost=0
+weight=0
+volume=0
+mod=103
+durability=3000
+=end

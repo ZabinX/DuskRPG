@@ -1,0 +1,10 @@
+type.Weapon=long sword
+name=long sword
+description=a long sword
+image=204
+cost=100
+weight=0
+volume=0
+mod=150
+durability=6000
+=end

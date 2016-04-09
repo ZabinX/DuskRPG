@@ -1,0 +1,12 @@
+type.Armour=dwarven gloves
+name=dwarven gloves
+description=a pair of dwarven gloves
+image=7
+cost=400
+weight=0
+volume=0
+mod=90
+durability=7000
+onWear=wear_normal_armor
+worn=hands
+=end

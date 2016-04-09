@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# launch the duskz server
+
+# usage: duskz-server [ game-root ]
+#  game-root may be alternatively defined using DUSKZ_GAME
+
+# Find where the code is relative to this script
+HOME=`readlink -f "${0}"`
+HOME=${HOME%/*/*}
+HOME=${DUSKZ_HOME:-$HOME}
+
+# Find where the game is
+DUSKZ_GAME=${DUSKZ_GAME:-$1}
+if [ -z "$DUSKZ_GAME" ] ; then
+   echo "No game defined, set DUSKZ_GAME or supply as first argument"
+   exit 1
+fi
+DUSKZ_GAME=`readlink -f "${DUSKZ_GAME}"`
+
+# execute
+exec java -cp "${HOME}/share/java/DuskServer.jar:${HOME}/share/java/lib/DuskCommon.jar" duskz.server.entityz.GameServer "${DUSKZ_GAME}"

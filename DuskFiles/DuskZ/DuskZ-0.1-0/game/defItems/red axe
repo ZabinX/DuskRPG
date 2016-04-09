@@ -1,0 +1,12 @@
+type.Weapon=red axe
+name=red axe
+description=A axe made of a red stone found in the fiend forest
+image=9
+cost=800
+weight=0
+volume=0
+mod=645
+durability=150000
+onWear=qs_start
+onUnwear=qs_end
+=end

@@ -1,0 +1,12 @@
+type.Armour=lightning amulet
+name=lightning amulet
+description=An amulet imbued with the power of lightning.
+image=7
+cost=10000
+weight=0
+volume=0
+mod=2500
+durability=2000000
+onWear=wearlightningamulet
+worn=neck
+=end

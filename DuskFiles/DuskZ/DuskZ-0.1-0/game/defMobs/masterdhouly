@@ -1,0 +1,13 @@
+name=masterdhouly
+maxhp=600
+maxmp=555
+str=40
+dex=15
+con=60
+wis=60
+int=60
+image=11
+bravery=0.6
+grouprelation=0.9
+giveitem=quarter staff,0.01
+faction=dhouly

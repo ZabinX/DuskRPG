@@ -1,0 +1,16 @@
+name=amphitheater
+maxhp=9999
+maxmp=10
+str=400
+int=5
+dex=200
+wis=5
+con=5000
+image=4
+bravery=1.3
+grouprelation=1
+giveitem=powerblade,0.6
+faction=smurf
+skill=double attack,60
+skill=triple attack,60
+skill=quadruple attack,10

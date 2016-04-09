@@ -1,0 +1,10 @@
+type.Food=minormend
+name=minormend
+description=a small glass bottle full of a strange liquid
+image=55
+cost=100
+weight=0
+volume=0
+uses=10
+onUse=minormend
+=end

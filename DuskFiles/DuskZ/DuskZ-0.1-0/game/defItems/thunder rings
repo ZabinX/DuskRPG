@@ -1,0 +1,11 @@
+type.Armour=thunder rings
+name=thunder rings
+description=the thunder rings
+image=7
+cost=1
+weight=0
+volume=0
+mod=120
+durability=100000
+worn=hands
+=end

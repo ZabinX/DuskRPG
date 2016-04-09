@@ -1,0 +1,10 @@
+type.Weapon=hookw
+name=hookw
+description=a pirate's hook
+image=9
+cost=50
+weight=0
+volume=0
+mod=177
+durability=30000
+=end

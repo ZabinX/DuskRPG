@@ -1,0 +1,12 @@
+type.Armour=dragonite war helm
+name=dragonite war helm
+description=a helmet constructed of the legendary metal dragonite
+image=7
+cost=35000
+weight=0
+volume=0
+mod=5000
+durability=3000000
+onWear=wear_normal_armor
+worn=skull
+=end

@@ -1,0 +1,11 @@
+name=level7 zombie
+maxhp=44000
+maxmp=0
+str=2000
+dex=100
+int=100
+con=500
+wis=350
+image=20
+bravery=0.75
+giveitem=zombie death blade,0.1

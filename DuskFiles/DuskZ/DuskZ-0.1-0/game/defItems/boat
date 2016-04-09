@@ -1,0 +1,10 @@
+type.Item=boat
+name=boat
+description=A small wooden boat.
+image=17
+cost=0
+weight=0
+volume=0
+onGet=getboat
+uses=0
+=end

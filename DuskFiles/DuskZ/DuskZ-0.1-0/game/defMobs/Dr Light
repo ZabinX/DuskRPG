@@ -1,0 +1,17 @@
+name=Dr Light
+description=the doctor, he appears to be a nice guy
+maxhp=150
+maxmp=150
+str=40
+int=50
+dex=20
+wis=50
+con=45
+bravery=-1
+grouprelation=1
+image=2
+wield=scalpel,-1,-1
+giveitem=scalpel,1
+condition=armor,0,-1
+skill=Double Attack,60
+skill=Dodge,10

@@ -1,0 +1,13 @@
+name=dwarf king
+maxhp=5000
+maxmp=0
+str=200
+int=50
+dex=75
+wis=50
+con=200
+bravery=.5
+grouprelation=.5
+image=5
+giveitem=dwarf king crown,1
+faction=dwarf

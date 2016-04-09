@@ -1,0 +1,14 @@
+name=hunter
+maxhp=2500
+maxmp=50
+str=250
+dex=100
+int=3
+con=300
+wis=345
+image=5
+bravery=0.75
+grouprelation=0.9
+giveitem=longsword,0.1
+giveitem=broad axe,0.2
+faction=hunter

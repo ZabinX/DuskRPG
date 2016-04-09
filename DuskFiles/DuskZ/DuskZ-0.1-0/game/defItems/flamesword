@@ -1,0 +1,12 @@
+type.Weapon=flamesword
+name=flamesword
+description=a sword forged by the devil's brother himself.  Adds 100 DamMod points for burning bamage.
+image=80
+cost=5000
+weight=0
+volume=0
+mod=300
+durability=500000
+onWear=start_flame_sword
+onUnwear=end_flame_sword
+=end

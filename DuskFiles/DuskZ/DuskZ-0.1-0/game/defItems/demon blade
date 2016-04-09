@@ -1,0 +1,10 @@
+type.Weapon=demon blade
+name=demon blade
+description=sword warn by the lord of shadow Dabora
+image=9
+cost=1600
+weight=0
+volume=0
+mod=450
+durability=155000
+=end

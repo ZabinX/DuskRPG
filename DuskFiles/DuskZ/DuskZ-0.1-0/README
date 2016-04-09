@@ -1,0 +1,48 @@
+
+DuskZ alpha
+-----------
+
+This is a test version of DuskZ - a 'new' version of Dusk.
+
+A game exists in game/
+Client files are in client/
+Binaries are in share/java
+Launch scripts are in bin/
+
+Prerequisites
+-------------
+
+A javafx capable version of java must be installed and in the path.
+Currently this must be obtained from Oracle and the openjdk supplied
+with most GNU/Linux distrubtions will not suffice.
+
+Start server
+------------
+
+Run the duskz-server script.
+
+bin/duskz-server path-to-game
+
+To launch the demo game assuming you are in the root of the
+distribution.
+
+$ bin/duskz-server game
+
+Start client
+------------
+
+Run the duskz-client script.
+
+bin/duskz-client [ path-to-resources ]
+
+By default it will use the resources in client/
+
+So to launch the client for the demo game:
+
+bin/duskz-client
+
+Use the bookmarked server (127.0.0.1:7480), and login with username
+and password of 'z'.
+
+Creating a new user should also work - just enter in a new username
+with no password.

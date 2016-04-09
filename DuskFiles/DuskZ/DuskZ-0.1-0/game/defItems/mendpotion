@@ -1,0 +1,10 @@
+type.Food=mendpotion
+name=mendpotion
+description=A not so fancy glass bottle full of a strange liquid.
+image=58
+cost=1000
+weight=0
+volume=0
+uses=10
+onUse=mendp
+=end

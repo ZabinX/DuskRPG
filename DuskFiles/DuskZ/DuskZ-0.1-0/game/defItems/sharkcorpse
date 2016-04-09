@@ -1,0 +1,10 @@
+type.Food=sharkcorpse
+name=sharkcorpse
+description=The remains of a badly beaten shark.
+image=67
+cost=70
+weight=0
+volume=0
+uses=1
+onUse=corpsefood
+=end

@@ -1,0 +1,8 @@
+type.Item=swampdragon head
+name=swampdragon head
+description=the head of a horrifying SwampDragon
+image=6
+cost=3000
+weight=0
+volume=0
+=end

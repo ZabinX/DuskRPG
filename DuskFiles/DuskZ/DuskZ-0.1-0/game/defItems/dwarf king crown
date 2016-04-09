@@ -1,0 +1,8 @@
+type.Item=dwarf king crown
+name=dwarf king crown
+description=a tiny gold crown
+image=6
+cost=400
+weight=0
+volume=0
+=end

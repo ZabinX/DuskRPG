@@ -1,0 +1,13 @@
+name=horror
+maxhp=7000
+maxmp=50
+str=750
+dex=300
+int=10
+con=2000
+wis=400
+image=3
+bravery=2
+grouprelation=1.5
+giveitem=sabre,.2
+faction=ghost

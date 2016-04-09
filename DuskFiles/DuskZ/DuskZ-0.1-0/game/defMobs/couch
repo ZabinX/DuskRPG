@@ -1,0 +1,15 @@
+name=couch
+maxhp=1500
+maxmp=2000
+str=160
+int=120
+dex=70
+con=500
+wis=300
+image=16
+bravery=0.75
+grouprelation=0.9
+wield=pillow,-1,-1
+giveitem=cookie,0.5
+giveitem=pillow,0.01
+faction=demon

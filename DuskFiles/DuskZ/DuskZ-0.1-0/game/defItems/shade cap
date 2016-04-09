@@ -1,0 +1,12 @@
+type.Armour=shade cap
+name=shade cap
+description=the delicate cap the shade master wears on his head
+image=7
+cost=400
+weight=0
+volume=0
+mod=52
+durability=3000
+onWear=wear_normal_armor
+worn=skull
+=end

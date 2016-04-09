@@ -1,0 +1,8 @@
+type.Item=fire dragon tooth
+name=fire dragon tooth
+description=a fire dragon's tooth
+image=6
+cost=1000
+weight=0
+volume=0
+=end

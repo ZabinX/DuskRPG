@@ -1,0 +1,12 @@
+type.Weapon=war axe
+name=war axe
+description=A blade of an unknown make.
+image=9
+cost=450
+weight=0
+volume=0
+mod=275
+durability=65555
+onWear=wastart
+onUnwear=waend
+=end

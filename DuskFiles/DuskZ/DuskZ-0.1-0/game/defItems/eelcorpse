@@ -1,0 +1,10 @@
+type.Food=eelcorpse
+name=eelcorpse
+description=The remains of a badly rotting eel.
+image=66
+cost=60
+weight=0
+volume=0
+uses=1
+onUse=corpsefood
+=end

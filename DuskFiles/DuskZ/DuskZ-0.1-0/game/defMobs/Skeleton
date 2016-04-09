@@ -1,0 +1,14 @@
+name=Skeleton
+maxhp=200
+maxmp=400
+str=20
+int=20
+dex=100
+con=20
+wis=20
+image=29
+bravery=1
+grouprelation=1
+wield=long sword,-1,-1
+giveitem=long sword,1
+faction=skeleton

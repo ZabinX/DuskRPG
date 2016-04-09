@@ -1,0 +1,10 @@
+
+if (trigger.getInteger("newbie-tutorial") == 0) {
+    trigger.chat("You need to do the tutorial first");
+    // TODO: get direction from current location to tutorial
+    // Send them there
+    false;
+} else {
+    true;
+}
+

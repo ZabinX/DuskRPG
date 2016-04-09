@@ -1,0 +1,12 @@
+type.Weapon=hell blade
+name=hell blade
+description=Blade forged in the depths of hell
+image=9
+cost=1000
+weight=0
+volume=0
+mod=900
+durability=5000000
+onWear=doomsickle
+onUnwear=doomsickleend
+=end

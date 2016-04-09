@@ -1,0 +1,13 @@
+name=Demon
+maxhp=1000
+maxmp=800
+str=200
+int=120
+dex=120
+con=120
+wis=80
+image=14
+bravery=0.9
+grouprelation=0.25
+giveitem=demon horns,0.5
+faction=Demon

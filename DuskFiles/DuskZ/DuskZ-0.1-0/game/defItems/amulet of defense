@@ -1,0 +1,11 @@
+type.Armour=amulet of defense
+name=amulet of defense
+description=Amulet created by the god DarkCrono
+image=7
+cost=1000
+weight=0
+volume=0
+mod=200
+durability=7000
+worn=neck
+=end

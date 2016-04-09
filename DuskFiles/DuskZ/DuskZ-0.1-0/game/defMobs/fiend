@@ -1,0 +1,15 @@
+name=fiend
+maxhp=400
+maxmp=150
+str=50
+int=95
+dex=70
+con=65
+wis=55
+image=14
+bravery=1
+grouprelation=3
+giveitem=broken gem,.5
+giveitem=red axe,.01
+faction=demon
+skill=double attack,10

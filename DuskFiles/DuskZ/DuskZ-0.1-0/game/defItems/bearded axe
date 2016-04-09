@@ -1,0 +1,10 @@
+type.Weapon=bearded axe
+name=bearded axe
+description=a bearded axe of gnomish design.  It looks useful for chopping off toes
+image=9
+cost=100
+weight=0
+volume=0
+mod=180
+durability=3000
+=end

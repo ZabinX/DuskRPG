@@ -1,0 +1,7 @@
+type.Training=dexterity
+name=Dexterity
+description=Train dexterity
+image=211
+cost=100
+skill=dex
+=end

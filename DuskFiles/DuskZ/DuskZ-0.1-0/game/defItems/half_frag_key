@@ -1,0 +1,8 @@
+type.Item=half_frag_key
+name=half_frag_key
+description=an half of the Fragdaddy's room key
+image=6
+cost=0
+weight=0
+volume=0
+=end

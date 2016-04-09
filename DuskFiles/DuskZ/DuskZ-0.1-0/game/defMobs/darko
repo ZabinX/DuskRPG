@@ -1,0 +1,15 @@
+name=darko
+maxhp=50000
+maxmp=0
+str=7000
+int=0
+dex=7000
+wis=0
+con=7000
+image=3
+bravery=5.3
+grouprelation=1.1
+giveitem=darkokey,1
+faction=dark
+onBattle=darko_brain
+condition=detect invis,0,-1

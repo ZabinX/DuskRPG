@@ -1,0 +1,13 @@
+name=Shambler
+maxhp=10000
+maxmp=0
+str=4500
+int=0
+dex=750
+wis=0
+con=1000
+bravery=1.5
+grouprelation=1
+image=20
+giveitem=ale,1
+faction=ork

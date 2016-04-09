@@ -1,0 +1,11 @@
+type.Armour=technomage insignia ring
+name=technomage insignia ring
+description=a ring with the crest of the Technomages.
+image=7
+cost=0
+weight=0
+volume=0
+mod=50
+durability=500000000
+worn=hands
+=end

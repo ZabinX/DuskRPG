@@ -1,0 +1,12 @@
+type.Armour=gold leggings
+name=gold leggings
+description=some gold leggings
+image=7
+cost=90
+weight=0
+volume=0
+mod=60
+durability=3600
+onWear=wear_normal_armor
+worn=legs
+=end

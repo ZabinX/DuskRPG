@@ -1,0 +1,13 @@
+type.Armour=helm of thought
+name=helm of thought
+description=a hat resembling the thinking cap, except for the raw energy dripping from it.
+image=7
+cost=30000
+weight=0
+volume=0
+mod=0
+durability=1000000
+onWear=helmofthoughtstart
+onUnwear=helmofthoughtend
+worn=skull
+=end

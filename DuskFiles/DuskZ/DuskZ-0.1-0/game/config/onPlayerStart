@@ -1,0 +1,11 @@
+
+player.chat("Welcome to the DuskZ test game.");
+player.chat("Copyright(c) 2013.. etc etc fixme.");
+
+count = player.getInt('logincount');
+if (count == 0) {
+   player.chat('Welcome newbie!');
+   player.setInt('logincount', count+1);
+}
+
+true;

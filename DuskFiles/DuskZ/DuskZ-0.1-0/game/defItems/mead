@@ -1,0 +1,10 @@
+type.Drink=mead
+name=mead
+description=a better drink than ale.
+image=6
+cost=15
+weight=0
+volume=0
+uses=1
+onUse=mead
+=end

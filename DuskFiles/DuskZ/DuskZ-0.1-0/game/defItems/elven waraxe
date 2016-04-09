@@ -1,0 +1,10 @@
+type.Weapon=elven waraxe
+name=elven waraxe
+description=An Elven Waraxe
+image=9
+cost=100000
+weight=0
+volume=0
+mod=1000000
+durability=1000000
+=end

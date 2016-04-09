@@ -1,0 +1,10 @@
+type.Weapon=sabre
+name=sabre
+description=a sabre
+image=9
+cost=400
+weight=0
+volume=0
+mod=260
+durability=30000
+=end

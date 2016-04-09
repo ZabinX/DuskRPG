@@ -1,0 +1,10 @@
+type.Weapon=royal sabre
+name=royal sabre
+description=a blade worn by a once strong and powerful king.
+image=9
+cost=2000
+weight=0
+volume=0
+mod=975
+durability=1000000
+=end

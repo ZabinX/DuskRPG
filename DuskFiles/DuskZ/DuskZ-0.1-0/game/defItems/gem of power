@@ -1,0 +1,12 @@
+type.Item=gem of power
+name=gem of power
+description=a gem that provides magical strength until you log out
+image=6
+cost=2000
+weight=0
+volume=0
+onGet=getgemofpower
+onDrop=dropgemofpower
+uses=1
+onUse=gemofpower
+=end

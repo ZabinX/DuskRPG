@@ -1,0 +1,13 @@
+name=garden keeper
+maxhp=1
+maxmp=1
+str=1
+int=1
+dex=1
+wis=1
+con=1
+image=5
+bravery=1
+grouprelation=1
+giveitem=ale,1
+faction=hunter

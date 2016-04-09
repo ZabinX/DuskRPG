@@ -1,0 +1,14 @@
+name=demon_chef
+maxhp=15110
+maxmp=10
+str=500
+int=5
+dex=200
+wis=5
+con=5000
+image=14
+bravery=1.3
+grouprelation=0.25
+giveitem=spoon,0.015
+faction=demon
+skill=double attack,100

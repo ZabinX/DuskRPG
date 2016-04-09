@@ -1,0 +1,8 @@
+type.Item=white_tooth
+name=white_tooth
+description=a white's souvenir
+image=27
+cost=1
+weight=0
+volume=0
+=end

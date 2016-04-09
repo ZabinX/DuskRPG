@@ -1,0 +1,12 @@
+type.Weapon=scythe
+name=scythe
+description=A large scythe, good for reaping wheat or souls
+image=9
+cost=800
+weight=0
+volume=0
+mod=325
+durability=135000
+onWear=qs_start
+onUnwear=qs_end
+=end

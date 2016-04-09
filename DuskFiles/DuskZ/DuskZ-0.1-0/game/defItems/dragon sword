@@ -1,0 +1,10 @@
+type.Weapon=dragon sword
+name=dragon sword
+description=an ancient magic sword with the power of fire
+image=9
+cost=2000
+weight=0
+volume=0
+mod=350
+durability=300000
+=end

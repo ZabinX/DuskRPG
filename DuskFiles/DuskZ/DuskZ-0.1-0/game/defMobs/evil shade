@@ -1,0 +1,14 @@
+name=evil shade
+maxhp=200
+maxmp=20
+str=56
+int=20
+dex=80
+con=15
+wis=10
+image=3
+bravery=1
+grouprelation=1
+wield=dagger,-1,-1
+giveitem=dagger,0.35
+faction=shade

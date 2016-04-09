@@ -1,0 +1,6 @@
+
+if (trigger.isPlayer() && trigger.getInteger("dusk-tutorial") == 0) {
+    trigger.chat("That's the end of the newbie tutorial " + trigger.name + ".");
+    trigger.chat("To learn more, read the scrolls in the house of knowledge.");
+    trigger.setInteger("dusk-tutorial", 1);
+}

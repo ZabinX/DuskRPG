@@ -1,0 +1,17 @@
+name=Goblin
+maxhp=10000
+maxmp=15
+str=500
+dex=700
+wis=15
+con=4000
+image=5
+bravery=1
+grouprelation=2
+giveitem=sabre,0.4
+giveitem=goblin edge,.01
+faction=hunter
+skill=double attack,100
+skill=triple attack,50
+skill=quadruple attack,30
+skill=dodge,30

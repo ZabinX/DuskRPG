@@ -1,0 +1,9 @@
+type.Item=houseunredkey
+name=houseunredkey
+description=Key for Unred's House
+image=27
+cost=0
+weight=0
+volume=0
+uses=0
+=end

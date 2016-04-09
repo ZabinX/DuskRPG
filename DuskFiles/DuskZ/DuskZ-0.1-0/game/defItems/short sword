@@ -1,0 +1,10 @@
+type.Weapon=short sword
+name=short sword
+description=a short sword
+image=201
+cost=50
+weight=0
+volume=0
+mod=125
+durability=3000
+=end

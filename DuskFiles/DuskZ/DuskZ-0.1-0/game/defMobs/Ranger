@@ -1,0 +1,13 @@
+name=Ranger
+maxhp=1550
+maxmp=350
+str=400
+dex=150
+int=25
+con=550
+wis=450
+image=5
+bravery=0.75
+grouprelation=0.9
+giveitem=short sword,.1
+faction=hunter

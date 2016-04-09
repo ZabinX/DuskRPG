@@ -1,0 +1,13 @@
+name=grimlin officer
+maxhp=30000
+maxmp=1000
+str=2500
+dex=1300
+int=10
+con=5000
+wis=800
+image=26
+bravery=5
+grouprelation=1
+giveitem=crystal orb,.5
+faction=ghost

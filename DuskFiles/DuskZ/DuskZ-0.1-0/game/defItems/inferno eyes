@@ -1,0 +1,12 @@
+type.Armour=inferno eyes
+name=inferno eyes
+description=a pair of glasses with the crest of the Inferno God
+image=7
+cost=1500
+weight=0
+volume=0
+mod=750
+durability=80000
+onWear=wear_normal_armor
+worn=eyes
+=end

@@ -1,0 +1,15 @@
+name=white
+maxhp=20000
+maxmp=100
+str=2000
+int=100
+dex=2000
+wis=100
+con=3000
+bravery=1.5
+grouprelation=1.5
+image=23
+faction=dog
+condition=detect invis,-1,-1
+onBattle=black_white_brain
+giveitem=white_tooth,1

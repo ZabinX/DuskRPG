@@ -1,0 +1,11 @@
+/*
+// took me a while to work out this next 2 lines: it simply removes the item from the game
+order trigger "get absinthe"
+removeItem trigger absinthe
+chat trigger "You pour the absinthe out and stare in disbelief as it eats a hole in the ground."
+endscript*/
+
+owner.chat("You pour the absinthe out and stare in disbelief as it eats a hole in the ground.");
+
+/* remove from game */
+owner.removeItem(item);

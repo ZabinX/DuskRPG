@@ -1,0 +1,12 @@
+type.Weapon=darkblade
+name=darkblade
+description=a jet black blade.
+image=9
+cost=2000
+weight=0
+volume=0
+mod=700
+durability=5000000
+onWear=darkblade_start
+onUnwear=darkblade_end
+=end

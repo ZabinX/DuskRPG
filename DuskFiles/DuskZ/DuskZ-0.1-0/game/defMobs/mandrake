@@ -1,0 +1,16 @@
+name=mandrake
+maxhp=300
+maxmp=5000
+str=30
+int=50
+dex=50
+wis=100
+con=50
+image=71
+bravery=1.3
+grouprelation=0.25
+giveitem=mandrake root,0.5
+faction=mandrake
+onBattle=mandrake_brain
+condition=detect invis,0,-1
+condition=invis,0,-1

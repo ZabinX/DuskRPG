@@ -1,0 +1,12 @@
+type.Armour=bronze suit
+name=bronze suit
+description=a suit made from bronze
+image=147
+cost=400
+weight=0
+volume=0
+mod=40
+durability=2400
+onWear=wear_normal_armor
+worn=torso
+=end

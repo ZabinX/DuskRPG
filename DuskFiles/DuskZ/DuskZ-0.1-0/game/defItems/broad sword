@@ -1,0 +1,10 @@
+type.Weapon=broad sword
+name=broad sword
+description=a broad sword
+image=9
+cost=80
+weight=0
+volume=0
+mod=140
+durability=4800
+=end

@@ -1,0 +1,12 @@
+type.Armour=dwarven chainmail
+name=dwarven chainmail
+description=a set of dwarven chainmail
+image=7
+cost=1500
+weight=0
+volume=0
+mod=110
+durability=7000
+onWear=wear_normal_armor
+worn=torso
+=end

@@ -1,0 +1,13 @@
+name=dwarf captain
+maxhp=1000
+maxmp=0
+str=125
+int=0
+dex=40
+wis=0
+con=75
+bravery=.5
+grouprelation=.5
+image=5
+giveitem=silver ingot,.4
+faction=dwarf

@@ -1,0 +1,10 @@
+type.Item=eye of newt
+name=eye of newt
+description=the eye of a newt. It may restore some MP if eaten.
+image=80
+cost=500
+weight=0
+volume=0
+uses=1
+onUse=useeyeofnewt
+=end

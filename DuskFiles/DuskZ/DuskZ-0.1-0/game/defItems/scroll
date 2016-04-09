@@ -1,0 +1,7 @@
+type.Item=scroll
+name=scroll
+image=0
+cost=0
+weight=0
+volume=0
+=end

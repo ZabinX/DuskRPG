@@ -1,0 +1,12 @@
+type.Armour=gnoll belt
+name=gnoll belt
+description=a gnoll belt
+image=7
+cost=100
+weight=0
+volume=0
+mod=60
+durability=10000
+onWear=wear_normal_armor
+worn=waist
+=end

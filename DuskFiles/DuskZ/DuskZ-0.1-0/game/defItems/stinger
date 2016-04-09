@@ -1,0 +1,8 @@
+type.Item=stinger
+name=stinger
+description=a poisonous stinger maybe the venom could be used in potions
+image=99
+cost=70
+weight=0
+volume=0
+=end

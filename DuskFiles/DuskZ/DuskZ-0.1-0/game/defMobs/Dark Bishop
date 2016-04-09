@@ -1,0 +1,16 @@
+name=Dark Bishop
+maxhp=17500
+maxmp=0
+str=4000
+int=100
+dex=900
+wis=100
+con=500
+bravery=3
+grouprelation=1.5
+image=25
+giveitem=basement_key3,1
+giveitem=spoon,.5
+faction=priest
+condition=detect invis,0,-1
+skill=double attack,100

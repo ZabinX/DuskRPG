@@ -1,0 +1,12 @@
+type.Armour=steel sleeves
+name=steel sleeves
+description=some steel sleeves
+image=7
+cost=45
+weight=0
+volume=0
+mod=30
+durability=1800
+onWear=wear_normal_armor
+worn=arms
+=end

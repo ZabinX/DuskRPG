@@ -1,0 +1,12 @@
+type.Weapon=runed shortsword
+name=runed shortsword
+description=a gnome version of the short sword (that is short even for a gnome).  Strangely, this one is covered with odd runes.
+image=6
+cost=0
+weight=0
+volume=0
+uses=4
+onUse=shortswordGuide
+mod=175
+durability=500
+=end

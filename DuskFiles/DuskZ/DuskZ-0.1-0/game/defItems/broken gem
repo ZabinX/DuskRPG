@@ -1,0 +1,8 @@
+type.Item=broken gem
+name=broken gem
+description=a precious gem broken in two, perhaps its worth a little gp
+image=6
+cost=50
+weight=0
+volume=0
+=end

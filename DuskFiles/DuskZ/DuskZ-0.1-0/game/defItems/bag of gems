@@ -1,0 +1,8 @@
+type.Item=bag of gems
+name=bag of gems
+description=a small sack of prescious gems
+image=6
+cost=6000
+weight=0
+volume=0
+=end

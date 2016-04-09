@@ -1,0 +1,9 @@
+type.Item=house3key
+name=house3key
+description=Key for House 3
+image=27
+cost=0
+weight=0
+volume=0
+uses=0
+=end

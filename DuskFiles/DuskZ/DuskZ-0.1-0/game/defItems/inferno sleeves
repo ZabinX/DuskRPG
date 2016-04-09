@@ -1,0 +1,12 @@
+type.Armour=inferno sleeves
+name=inferno sleeves
+description=some sleeves with crest of the Inferno God
+image=7
+cost=1000
+weight=0
+volume=0
+mod=750
+durability=15000
+onWear=wear_normal_armor
+worn=arms
+=end

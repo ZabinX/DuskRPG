@@ -1,0 +1,7 @@
+type.Training=strength
+name=Strength
+description=Train Strength
+image=211
+cost=100
+skill=str
+=end

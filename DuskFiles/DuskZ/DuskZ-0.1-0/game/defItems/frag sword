@@ -1,0 +1,12 @@
+type.Weapon=frag sword
+name=frag sword
+description=Fragdaddy's personal sword
+image=9
+cost=2000
+weight=0
+volume=0
+mod=800
+durability=7000000
+onWear=fragsword
+onUnwear=fragswordend
+=end

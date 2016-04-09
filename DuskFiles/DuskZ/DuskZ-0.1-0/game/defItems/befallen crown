@@ -1,0 +1,12 @@
+type.Armour=befallen crown
+name=befallen crown
+description=the crown of the befallen king, it has dark gems in it that glow and evil red.
+image=7
+cost=4000
+weight=0
+volume=0
+mod=3000
+durability=3000000
+onWear=wear_normal_armor
+worn=skull
+=end

@@ -1,0 +1,12 @@
+type.Armour=gold belt
+name=gold belt
+description=a gold belt
+image=7
+cost=210
+weight=0
+volume=0
+mod=60
+durability=3600
+onWear=wear_normal_armor
+worn=waist
+=end

@@ -1,0 +1,11 @@
+type.Drink=absinthe
+name=absinthe
+description=a mug of a green liqueur flavored with wormwood
+image=6
+cost=1
+weight=0
+volume=0
+onDrop=absintheDrop
+uses=1
+onUse=absinthe
+=end

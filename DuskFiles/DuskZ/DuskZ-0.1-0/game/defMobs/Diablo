@@ -1,0 +1,17 @@
+name=Diablo
+maxhp=50000
+maxmp=5000
+str=4000
+int=100
+dex=1000
+wis=100
+con=2000
+image=14
+bravery=6
+grouprelation=1
+giveitem=blood bane,1
+faction=demon
+skill=double attack,100
+skill=triple attack,50
+skill=dodge,75
+condition=detect invis,1,-1

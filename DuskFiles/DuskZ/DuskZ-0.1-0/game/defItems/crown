@@ -1,0 +1,11 @@
+type.Armour=crown
+name=crown
+description=Shen's crown
+image=7
+cost=20
+weight=0
+volume=0
+mod=0
+durability=50
+worn=skull
+=end

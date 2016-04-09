@@ -1,0 +1,4 @@
+
+if (trigger.isPlayer()) {
+   trigger.chat("Welcome to the newbie tutorial " + trigger.name + ".");
+}

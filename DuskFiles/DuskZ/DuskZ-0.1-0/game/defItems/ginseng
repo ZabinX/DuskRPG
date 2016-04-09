@@ -1,0 +1,10 @@
+type.Item=ginseng
+name=ginseng
+description=A little pill packed with a poweder, it is suppose to help your thinking.
+image=6
+cost=1000
+weight=0
+volume=0
+uses=1
+onUse=useginseng
+=end

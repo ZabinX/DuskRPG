@@ -1,0 +1,10 @@
+type.Food=bugcorpse
+name=bugcorpse
+description=A bugs corpse, some people eat these nasty things
+image=46
+cost=40
+weight=0
+volume=0
+uses=1
+onUse=bugfood
+=end

@@ -1,0 +1,8 @@
+type.Item=tooth
+name=tooth
+description=a tooth from an alligator.
+image=99
+cost=60
+weight=0
+volume=0
+=end

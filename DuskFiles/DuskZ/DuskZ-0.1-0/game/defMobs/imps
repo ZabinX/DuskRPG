@@ -1,0 +1,13 @@
+name=imps
+maxhp=50
+maxmp=100
+str=15
+int=15
+dex=15
+wis=15
+con=15
+bravery=1.5
+grouprelation=10.0
+image=44
+giveitem=ruby's,0.2
+faction=imps

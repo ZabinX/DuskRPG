@@ -1,0 +1,10 @@
+type.Food=apple
+name=apple
+description=an apple
+image=6
+cost=10
+weight=0
+volume=0
+uses=1
+onUse=apple
+=end

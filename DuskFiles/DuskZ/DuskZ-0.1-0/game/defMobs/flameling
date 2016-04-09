@@ -1,0 +1,13 @@
+name=flameling
+maxhp=300
+maxmp=300
+str=30
+int=40
+dex=30
+wis=50
+con=40
+image=40
+giveitem=demonite,0.1
+onBattle=flameling_brain
+bravery=1
+grouprelation=1

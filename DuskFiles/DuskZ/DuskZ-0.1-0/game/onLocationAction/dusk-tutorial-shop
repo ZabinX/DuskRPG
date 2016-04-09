@@ -1,0 +1,7 @@
+
+if (trigger.isPlayer()) {
+   trigger.chat("As you play the game you will come across shops from which you can");
+   trigger.chat("buy useful items.  To use a shop stand on the shop square (*) and");
+   trigger.chat("then click on the Shop button.");
+   trigger.chat("Go get a free cloth shirt and wooden dagger from the training ground shop.");
+}

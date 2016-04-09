@@ -1,0 +1,4 @@
+/*chat trigger "Your mind returns to its normal conciousness."
+endscript*/
+
+owner.chat("Your normal level of conciousness returns.");

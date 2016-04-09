@@ -1,0 +1,13 @@
+type.Armour=pheonix belt
+name=pheonix belt
+description=belt worn by the pheonix pharoh
+image=7
+cost=2000
+weight=0
+volume=0
+mod=120
+durability=200000
+onWear=pheonix4
+onUnwear=pheonix4end
+worn=waist
+=end

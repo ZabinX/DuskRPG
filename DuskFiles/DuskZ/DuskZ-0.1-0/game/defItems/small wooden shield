@@ -1,0 +1,11 @@
+type.Armour=small wooden shield
+name=small wooden shield
+description=a small wooden shield
+image=7
+cost=100
+weight=0
+volume=0
+mod=20
+durability=3000
+worn=hands
+=end

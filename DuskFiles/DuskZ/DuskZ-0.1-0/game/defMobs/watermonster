@@ -1,0 +1,16 @@
+name=watermonster
+maxhp=1555
+maxmp=1205
+str=160
+dex=10
+con=500
+wis=59
+wield=expert sword,-1,-1
+int=59
+skill=dodge,35
+item=boat
+image=26
+bravery=0.5
+grouprelation=0.1
+giveitem=trident,0.5
+faction=mermaid

@@ -1,0 +1,7 @@
+type.Training=mp
+name=MP
+description=Train MP
+image=211
+cost=100
+skill=mp
+=end

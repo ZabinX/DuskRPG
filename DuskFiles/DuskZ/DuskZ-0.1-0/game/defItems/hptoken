@@ -1,0 +1,8 @@
+type.Item=hptoken
+name=hptoken
+description=a token to get you into the HP restoration pool
+image=6
+cost=0
+weight=0
+volume=0
+=end

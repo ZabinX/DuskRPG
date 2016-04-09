@@ -1,0 +1,12 @@
+type.Armour=inferno boots
+name=inferno boots
+description=a pair of boots bearing the crest of the Inferno God
+image=7
+cost=1000
+weight=0
+volume=0
+mod=750
+durability=15000
+onWear=wear_normal_armor
+worn=legs
+=end

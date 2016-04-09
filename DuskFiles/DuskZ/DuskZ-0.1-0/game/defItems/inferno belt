@@ -1,0 +1,12 @@
+type.Armour=inferno belt
+name=inferno belt
+description=a belt with the crest of the Inferno God as a buckle
+image=7
+cost=1200
+weight=0
+volume=0
+mod=750
+durability=15000
+onWear=wear_normal_armor
+worn=waist
+=end

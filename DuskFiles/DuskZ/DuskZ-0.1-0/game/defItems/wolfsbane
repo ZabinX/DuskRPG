@@ -1,0 +1,10 @@
+type.Item=wolfsbane
+name=wolfsbane
+description=a grape colored herb that heals ur MP
+image=6
+cost=200
+weight=0
+volume=0
+uses=1
+onUse=wolfsbane
+=end

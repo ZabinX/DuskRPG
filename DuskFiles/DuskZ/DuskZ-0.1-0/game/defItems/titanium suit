@@ -1,0 +1,12 @@
+type.Armour=titanium suit
+name=titanium suit
+description=a titanium suit
+image=7
+cost=800
+weight=0
+volume=0
+mod=80
+durability=4800
+onWear=wear_normal_armor
+worn=torso
+=end

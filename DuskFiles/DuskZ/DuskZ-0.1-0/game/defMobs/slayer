@@ -1,0 +1,17 @@
+name=slayer
+maxhp=40000
+maxmp=5000
+str=1600
+int=4000
+dex=1100
+wis=6000
+con=6000
+bravery=2.1
+grouprelation=1
+image=20
+giveitem=questsword,.2
+faction=Ork
+skill=double attack,100
+skill=triple attack,75
+skill=quadruple attack,50
+skill=dodge,50

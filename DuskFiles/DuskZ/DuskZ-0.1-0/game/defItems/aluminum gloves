@@ -1,0 +1,12 @@
+type.Armour=aluminum gloves
+name=aluminum gloves
+description=some aluminum gloves
+image=7
+cost=15
+weight=0
+volume=0
+mod=15
+durability=600
+onWear=wear_normal_armor
+worn=hands
+=end

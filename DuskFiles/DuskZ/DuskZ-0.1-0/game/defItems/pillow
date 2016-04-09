@@ -1,0 +1,10 @@
+type.Weapon=pillow
+name=pillow
+description=a rather lumpy pillow
+image=6
+cost=350
+weight=0
+volume=0
+mod=250
+durability=20000
+=end

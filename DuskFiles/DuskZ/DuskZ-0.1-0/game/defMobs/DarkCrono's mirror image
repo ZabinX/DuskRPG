@@ -1,0 +1,16 @@
+name=DarkCrono's mirror image
+maxhp=100000000
+maxmp=100000000
+str=100000000
+int=3000
+dex=100000000
+wis=2000
+con=100000
+image=14
+bravery=0.9
+grouprelation=0.25
+faction=demon
+skill=double attack,100
+skill=triple attack,100
+skill=quadruple attack,100
+condition=detect invis,.,

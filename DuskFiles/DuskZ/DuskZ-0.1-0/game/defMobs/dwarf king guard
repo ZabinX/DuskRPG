@@ -1,0 +1,13 @@
+name=dwarf king guard
+maxhp=1500
+maxmp=0
+str=150
+int=0
+dex=50
+wis=0
+con=150
+bravery=.5
+grouprelation=.5
+image=5
+giveitem=gold ingot,.3
+faction=dwarf

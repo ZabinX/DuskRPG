@@ -1,0 +1,10 @@
+type.Item=blood stone
+name=blood stone
+description=a blood red stone believed to heal people
+image=6
+cost=400
+weight=0
+volume=0
+uses=1
+onUse=bloodstone
+=end

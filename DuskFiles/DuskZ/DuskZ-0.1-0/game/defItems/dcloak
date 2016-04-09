@@ -1,0 +1,13 @@
+type.Armour=dcloak
+name=dcloak
+description=a dark cloak
+image=6
+cost=600
+weight=0
+volume=0
+mod=60
+durability=1000
+onWear=dcloakStart
+onUnwear=dcloakEnd
+worn=neck
+=end

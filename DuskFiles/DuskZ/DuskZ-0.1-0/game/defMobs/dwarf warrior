@@ -1,0 +1,13 @@
+name=dwarf warrior
+maxhp=400
+maxmp=0
+str=75
+int=0
+dex=30
+wis=0
+con=50
+bravery=.5
+grouprelation=.5
+image=5
+giveitem=iron ingot,.6
+faction=dwarf

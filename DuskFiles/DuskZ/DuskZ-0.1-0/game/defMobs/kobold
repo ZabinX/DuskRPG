@@ -1,0 +1,13 @@
+name=kobold
+maxhp=25
+maxmp=20
+str=5
+int=3
+dex=3
+wis=2
+con=3
+image=15
+bravery=0.9
+grouprelation=0.25
+giveitem=demon horns,0.5
+faction=demon

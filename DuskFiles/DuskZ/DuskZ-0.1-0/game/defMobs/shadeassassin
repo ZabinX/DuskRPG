@@ -1,0 +1,13 @@
+name=shadeassassin
+maxhp=20
+maxmp=15
+str=3
+int=3
+dex=5
+con=4
+wis=3
+image=3
+bravery=0.45
+grouprelation=0.75
+giveitem=dagger,0.1
+giveitem=assassin blade,0.01

@@ -1,0 +1,8 @@
+type.Item=demon horns
+name=demon horns
+description=two large demon horns
+image=6
+cost=60
+weight=0
+volume=0
+=end

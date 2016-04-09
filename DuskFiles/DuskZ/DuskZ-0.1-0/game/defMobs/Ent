@@ -1,0 +1,11 @@
+name=Ent
+maxhp=40
+maxmp=75
+str=10
+int=10
+dex=15
+wis=10
+con=20
+image=39
+bravery=1
+grouprelation=1

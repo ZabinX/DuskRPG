@@ -1,0 +1,17 @@
+name=Dungeon Wraith
+maxhp=20000
+maxmp=0
+str=4000
+int=1300
+dex=3000
+wis=1000
+con=3000
+bravery=3
+grouprelation=2
+image=3
+giveitem=powerblade,0.30
+giveitem=questsword,0.05
+faction=wraith
+condition=detect invis,1,-1
+skill=double attack,100
+skill=triple attack,25

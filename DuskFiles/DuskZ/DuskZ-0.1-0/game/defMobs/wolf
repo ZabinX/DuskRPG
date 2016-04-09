@@ -1,0 +1,13 @@
+name=wolf
+maxhp=6000
+maxmp=100
+str=2500
+int=100
+dex=700
+wis=100
+con=100
+bravery=1.5
+grouprelation=0.9
+image=21
+faction=dogs
+skill=double attack,100

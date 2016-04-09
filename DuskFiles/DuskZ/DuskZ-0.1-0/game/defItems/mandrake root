@@ -1,0 +1,10 @@
+type.Item=mandrake root
+name=mandrake root
+description=an herb that restores lots of Magic Points
+image=80
+cost=450
+weight=0
+volume=0
+uses=1
+onUse=mandrakeroot
+=end

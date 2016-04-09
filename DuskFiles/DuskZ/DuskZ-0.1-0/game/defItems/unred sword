@@ -1,0 +1,11 @@
+type.Weapon=unred sword
+name=unred sword
+description=a sword of unred.
+image=9
+cost=350
+weight=0
+volume=0
+mod=250
+durability=30000
+onWear=unredsword
+=end

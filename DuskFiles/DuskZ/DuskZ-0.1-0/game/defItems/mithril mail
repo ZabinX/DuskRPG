@@ -1,0 +1,12 @@
+type.Armour=mithril mail
+name=mithril mail
+description=a mithril mail
+image=7
+cost=100000
+weight=0
+volume=0
+mod=100
+durability=1000000
+onWear=wear_normal_armor
+worn=torso
+=end

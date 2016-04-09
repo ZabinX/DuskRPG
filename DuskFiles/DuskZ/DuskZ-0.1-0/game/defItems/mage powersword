@@ -1,0 +1,10 @@
+type.Weapon=mage powersword
+name=mage powersword
+description=a weapon constructed purely of energy.
+image=9
+cost=1500
+weight=0
+volume=0
+mod=1000
+durability=2000
+=end

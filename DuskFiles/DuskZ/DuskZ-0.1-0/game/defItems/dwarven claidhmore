@@ -1,0 +1,10 @@
+type.Weapon=dwarven claidhmore
+name=dwarven claidhmore
+description=a massive dwarven claidhmore
+image=9
+cost=1000
+weight=0
+volume=0
+mod=400
+durability=50000
+=end

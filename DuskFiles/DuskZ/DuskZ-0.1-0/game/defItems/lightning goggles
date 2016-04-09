@@ -1,0 +1,12 @@
+type.Armour=lightning goggles
+name=lightning goggles
+description=a pair of goggles that has an electric aura surronding them.
+image=7
+cost=10000
+weight=0
+volume=0
+mod=2500
+durability=2000000
+onWear=wearlightninggoggles
+worn=eyes
+=end

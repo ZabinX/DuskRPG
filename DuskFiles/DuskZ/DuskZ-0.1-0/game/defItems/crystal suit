@@ -1,0 +1,12 @@
+type.Armour=crystal suit
+name=crystal suit
+description=a crystal suit
+image=7
+cost=5000
+weight=0
+volume=0
+mod=84
+durability=100000
+onWear=wear_normal_armor
+worn=torso
+=end

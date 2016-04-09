@@ -1,0 +1,12 @@
+type.Weapon=exp sword
+name=exp sword
+description=the experience's sword
+image=9
+cost=10
+weight=0
+volume=0
+mod=100
+durability=500000
+onWear=start_exp_sword
+onUnwear=end_exp_sword
+=end

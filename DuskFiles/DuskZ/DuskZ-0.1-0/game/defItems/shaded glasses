@@ -1,0 +1,12 @@
+type.Armour=shaded glasses
+name=shaded glasses
+description=Shaded Glasses
+image=7
+cost=125
+weight=0
+volume=0
+mod=60
+durability=2400
+onWear=wear_normal_armor
+worn=eyes
+=end

@@ -1,0 +1,15 @@
+name=Maze Grizzly
+maxhp=3000
+maxmp=25
+str=300
+dex=50
+int=33
+con=66
+wis=31
+image=12
+bravery=0.75
+grouprelation=0.8
+giveitem=bearclaw,0.35
+giveitem=powerblade,.5
+faction=ursa
+wield=powerblade,-1,-1

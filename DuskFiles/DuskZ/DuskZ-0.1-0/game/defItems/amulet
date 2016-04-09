@@ -1,0 +1,13 @@
+type.Armour=amulet
+name=amulet
+description=a magic amulet
+image=7
+cost=2
+weight=0
+volume=0
+mod=0
+durability=50
+onWear=startsafe
+onUnwear=endsafe
+worn=neck
+=end

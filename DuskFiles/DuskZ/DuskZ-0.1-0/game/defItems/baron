@@ -1,0 +1,10 @@
+type.Item=baron
+name=baron
+description=a scroll that returns you to Castle Baron
+image=6
+cost=500
+weight=0
+volume=0
+uses=1
+onUse=baron
+=end

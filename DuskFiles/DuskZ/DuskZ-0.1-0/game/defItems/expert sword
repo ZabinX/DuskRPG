@@ -1,0 +1,10 @@
+type.Weapon=expert sword
+name=expert sword
+description=a finely crafted sword
+image=9
+cost=350
+weight=0
+volume=0
+mod=250
+durability=30000
+=end

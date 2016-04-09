@@ -1,0 +1,12 @@
+name=water_sprite
+maxhp=80
+maxmp=30
+str=30
+int=10
+dex=30
+wis=5
+con=35
+image=11
+bravery=1
+grouprelation=1
+faction=fairy

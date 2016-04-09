@@ -1,0 +1,12 @@
+type.Armour=bronze belt
+name=bronze belt
+description=a bronze belt
+image=137
+cost=140
+weight=0
+volume=0
+mod=40
+durability=2400
+onWear=wear_normal_armor
+worn=waist
+=end

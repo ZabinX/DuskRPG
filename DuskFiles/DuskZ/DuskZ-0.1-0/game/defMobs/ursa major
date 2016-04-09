@@ -1,0 +1,15 @@
+name=ursa major
+maxhp=1500
+maxmp=25
+str=100
+dex=50
+int=33
+con=66
+wis=31
+image=12
+bravery=0.75
+grouprelation=0.8
+giveitem=bearclaw,0.35
+giveitem=powerblade,0.10
+faction=ursa
+wield=long sword,-1,-1

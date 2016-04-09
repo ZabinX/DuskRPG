@@ -1,0 +1,8 @@
+type.Item=lightning dragon scale
+name=lightning dragon scale
+description=a lightning dragon's scale
+image=6
+cost=1000
+weight=0
+volume=0
+=end

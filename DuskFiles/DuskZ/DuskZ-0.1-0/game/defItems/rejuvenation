@@ -1,0 +1,10 @@
+type.Drink=rejuvenation
+name=rejuvenation
+description=a liquid with an unappetising blue glow, and a smell of sweat
+image=6
+cost=100
+weight=0
+volume=0
+uses=1
+onUse=water_restore
+=end

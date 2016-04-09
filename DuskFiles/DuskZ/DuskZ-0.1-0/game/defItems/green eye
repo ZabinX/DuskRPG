@@ -1,0 +1,8 @@
+type.Item=green eye
+name=green eye
+description=a gem full of dark powers once used by the silencers
+image=6
+cost=5000
+weight=0
+volume=0
+=end

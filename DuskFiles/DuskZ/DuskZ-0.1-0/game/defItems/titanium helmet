@@ -1,0 +1,12 @@
+type.Armour=titanium helmet
+name=titanium helmet
+description=a titanium helmet
+image=7
+cost=400
+weight=0
+volume=0
+mod=80
+durability=4800
+onWear=wear_normal_armor
+worn=skull
+=end

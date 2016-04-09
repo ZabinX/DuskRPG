@@ -1,0 +1,17 @@
+name=Death Wraith
+maxhp=25000
+maxmp=0
+str=4400
+int=1000
+dex=5000
+wis=3000
+con=7000
+bravery=3
+grouprelation=3
+image=3
+giveitem=powerblade,0.50
+faction=wraith
+condition=invis,1,-1
+condition=detect invis,1,-1
+skill=double attack,100
+skill=triple attack,55

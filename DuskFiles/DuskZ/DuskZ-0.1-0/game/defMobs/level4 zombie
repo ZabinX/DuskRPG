@@ -1,0 +1,11 @@
+name=level4 zombie
+maxhp=24000
+maxmp=0
+str=850
+dex=100
+int=100
+con=400
+wis=350
+image=20
+bravery=0.75
+giveitem=zombie sword,0.5

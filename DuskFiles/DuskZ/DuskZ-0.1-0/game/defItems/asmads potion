@@ -1,0 +1,10 @@
+type.Item=asmads potion
+name=asmads potion
+description=a yellowish glowing potion that heals some Magic and Hit points
+image=6
+cost=420
+weight=0
+volume=0
+uses=1
+onUse=asmadspotion
+=end

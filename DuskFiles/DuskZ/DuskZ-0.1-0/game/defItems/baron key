@@ -1,0 +1,11 @@
+type.Item=baron key
+name=baron key
+description=the key for Castle Baron
+image=27
+cost=1
+weight=0
+volume=0
+onGet=getbaronkey
+onDrop=dropbaronkey
+uses=0
+=end

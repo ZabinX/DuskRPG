@@ -1,0 +1,9 @@
+type.Item=orkstone
+name=orkstone
+description=A lovely glowing Orkish stone!
+image=6
+cost=200
+weight=0
+volume=0
+uses=0
+=end

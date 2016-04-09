@@ -1,0 +1,6 @@
+
+if (trigger.isPlayer() && trigger.getCP() == 39) {
+    trigger.chat("You need to spend your Exp first (train).");
+    false;
+} else
+    true;

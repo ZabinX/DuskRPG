@@ -1,0 +1,15 @@
+name=vampire
+maxhp=1555
+maxmp=1205
+str=160
+dex=1
+con=59
+wis=59
+wield=expert sword,-1,-1
+int=59
+skill=dodge,35
+image=2
+bravery=0.5
+grouprelation=0.1
+giveitem=vampire fangs,0.5
+faction=vampire

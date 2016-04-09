@@ -1,0 +1,9 @@
+type.Item=hunter god key
+name=hunter god key
+description=A key from the hunter god himself!
+image=6
+cost=0
+weight=0
+volume=0
+uses=0
+=end

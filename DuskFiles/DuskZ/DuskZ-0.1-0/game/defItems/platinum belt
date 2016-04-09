@@ -1,0 +1,12 @@
+type.Armour=platinum belt
+name=platinum belt
+description=a platinum belt
+image=7
+cost=245
+weight=0
+volume=0
+mod=70
+durability=4200
+onWear=wear_normal_armor
+worn=waist
+=end

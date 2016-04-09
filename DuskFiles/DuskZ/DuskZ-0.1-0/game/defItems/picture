@@ -1,0 +1,8 @@
+type.Item=picture
+name=picture
+description=a picture of Firewall.
+image=6
+cost=0
+weight=0
+volume=0
+=end

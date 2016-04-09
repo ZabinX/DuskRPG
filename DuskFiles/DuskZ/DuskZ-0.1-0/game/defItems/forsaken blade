@@ -1,0 +1,12 @@
+type.Weapon=forsaken blade
+name=forsaken blade
+description=sword showing true power and mastery
+image=9
+cost=3000
+weight=0
+volume=0
+mod=1700
+durability=90000000
+onWear=forsakenblade
+onUnwear=forsakenend
+=end

@@ -1,0 +1,13 @@
+name=aqua
+maxhp=150
+maxmp=50
+str=80
+int=30
+dex=60
+wis=30
+con=80
+image=26
+bravery=3
+grouprelation=1
+giveitem=expert sword,1
+faction=waterlord

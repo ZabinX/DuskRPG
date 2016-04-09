@@ -1,0 +1,9 @@
+type.Item=red flag
+name=red flag
+description=a red flag.
+image=18
+cost=1
+weight=0
+volume=0
+onGet=gotredflag
+=end

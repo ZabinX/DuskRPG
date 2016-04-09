@@ -1,0 +1,8 @@
+type.Item=vampire fangs
+name=vampire fangs
+description=two sharp vampire fangs
+image=6
+cost=30
+weight=0
+volume=0
+=end

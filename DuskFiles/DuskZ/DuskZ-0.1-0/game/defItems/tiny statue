@@ -1,0 +1,9 @@
+type.Item=tiny statue
+name=tiny statue
+description=a statue lying on the ground that looks like you, perhaps you should take it
+image=25
+cost=0
+weight=0
+volume=0
+onGet=make_mimic
+=end

@@ -1,0 +1,12 @@
+name=LittleGreatOne
+maxhp=30000
+maxmp=0
+str=8000
+int=100
+dex=1000
+bravery=3.0
+image=21
+giveitem=darkblade,1
+faction=dog
+condition=detect invis,0,-1
+skill=double attack,100

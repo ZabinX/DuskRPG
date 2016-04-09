@@ -1,0 +1,8 @@
+type.Item=blackrose
+name=blackrose
+description=a black rose
+image=27
+cost=1
+weight=0
+volume=0
+=end

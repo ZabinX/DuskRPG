@@ -1,0 +1,16 @@
+name=sky dragon
+maxhp=50000
+maxmp=1000
+str=2000
+int=5
+dex=500
+wis=5
+con=10000
+image=26
+bravery=1.3
+grouprelation=1.1
+giveitem=sdkey,1
+faction=dragon
+onBattle=skydragon_brain
+condition=detect invis,0,-1
+condition=invis,0,-1

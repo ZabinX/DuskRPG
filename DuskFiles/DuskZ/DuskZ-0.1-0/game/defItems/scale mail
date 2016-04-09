@@ -1,0 +1,12 @@
+type.Armour=scale mail
+name=scale mail
+description=a scale mail
+image=7
+cost=1000
+weight=0
+volume=0
+mod=70
+durability=20000
+onWear=wear_normal_armor
+worn=torso
+=end

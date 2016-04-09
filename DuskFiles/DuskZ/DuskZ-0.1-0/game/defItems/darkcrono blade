@@ -1,0 +1,10 @@
+type.Weapon=darkcrono blade
+name=darkcrono blade
+description=DarkCrono's Great Sword
+image=9
+cost=0
+weight=0
+volume=0
+mod=2500
+durability=-1
+=end

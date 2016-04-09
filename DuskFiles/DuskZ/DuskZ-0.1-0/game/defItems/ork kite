@@ -1,0 +1,12 @@
+type.Armour=ork kite
+name=ork kite
+description=A ork kite sheild.
+image=7
+cost=500
+weight=0
+volume=0
+mod=400
+durability=50000
+onWear=wear_normal_armor
+worn=arms
+=end

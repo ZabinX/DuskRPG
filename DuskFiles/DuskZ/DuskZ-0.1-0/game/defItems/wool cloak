@@ -1,0 +1,11 @@
+type.Armour=wool cloak
+name=wool cloak
+description=a formal wool cloak.
+image=7
+cost=55
+weight=0
+volume=0
+mod=20
+durability=8000
+worn=torso
+=end

@@ -1,0 +1,11 @@
+type.Armour=cloth shirt
+name=cloth shirt
+description=a cheap cloth shirt
+image=7
+cost=0
+weight=0
+volume=0
+mod=10
+durability=3000
+worn=torso
+=end

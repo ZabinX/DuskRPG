@@ -1,0 +1,12 @@
+name=newbie_dhouly
+maxhp=40
+maxmp=30
+str=15
+dex=5
+con=10
+wis=10
+int=10
+image=15
+bravery=1.0
+grouprelation=10.0
+giveitem=medallion,0.8

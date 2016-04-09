@@ -1,0 +1,8 @@
+type.Item=crystal
+name=crystal
+description=a beautiful crystal
+image=91
+cost=250
+weight=0
+volume=0
+=end

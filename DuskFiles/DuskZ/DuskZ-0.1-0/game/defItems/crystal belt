@@ -1,0 +1,12 @@
+type.Armour=crystal belt
+name=crystal belt
+description=a crystal belt
+image=7
+cost=1000
+weight=0
+volume=0
+mod=120
+durability=7500
+onWear=wear_normal_armor
+worn=waist
+=end

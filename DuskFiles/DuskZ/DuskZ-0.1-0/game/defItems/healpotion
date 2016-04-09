@@ -1,0 +1,10 @@
+type.Food=healpotion
+name=healpotion
+description=A fancy glass bottle full of a strange liquid.
+image=56
+cost=10000
+weight=0
+volume=0
+uses=20
+onUse=healp
+=end

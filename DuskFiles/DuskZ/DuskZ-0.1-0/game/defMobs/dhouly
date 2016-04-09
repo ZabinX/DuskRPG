@@ -1,0 +1,13 @@
+name=dhouly
+maxhp=500
+maxmp=505
+str=32
+dex=10
+con=50
+wis=50
+int=50
+image=11
+bravery=0.6
+grouprelation=0.9
+giveitem=quarter staff,0.01
+faction=dhouly

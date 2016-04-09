@@ -1,0 +1,12 @@
+type.Armour=gold sleeves
+name=gold sleeves
+description=some gold sleeves
+image=7
+cost=90
+weight=0
+volume=0
+mod=60
+durability=3600
+onWear=wear_normal_armor
+worn=arms
+=end

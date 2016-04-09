@@ -1,0 +1,9 @@
+type.Item=sales list
+name=sales list
+description=a sales list for Ivy's herb and magic store
+image=6
+cost=0
+weight=0
+volume=0
+onUse=saleslist
+=end

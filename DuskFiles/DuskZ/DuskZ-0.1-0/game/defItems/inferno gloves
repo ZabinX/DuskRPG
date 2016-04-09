@@ -1,0 +1,12 @@
+type.Armour=inferno gloves
+name=inferno gloves
+description=a pair of gloves with spikes
+image=7
+cost=1500
+weight=0
+volume=0
+mod=750
+durability=15000
+onWear=wear_normal_armor
+worn=hands
+=end

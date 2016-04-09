@@ -1,0 +1,12 @@
+type.Armour=chelm
+name=chelm
+description=a cobalt helm
+image=7
+cost=900
+weight=0
+volume=0
+mod=100
+durability=50000
+onWear=wear_normal_armor
+worn=skull
+=end

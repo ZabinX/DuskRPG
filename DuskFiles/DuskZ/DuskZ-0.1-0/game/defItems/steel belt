@@ -1,0 +1,12 @@
+type.Armour=steel belt
+name=steel belt
+description=a steel belt
+image=7
+cost=105
+weight=0
+volume=0
+mod=30
+durability=1800
+onWear=wear_normal_armor
+worn=waist
+=end

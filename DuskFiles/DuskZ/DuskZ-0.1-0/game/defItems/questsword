@@ -1,0 +1,12 @@
+type.Weapon=questsword
+name=questsword
+description=A nicely sharpened sword, truly a masterpiece.
+image=9
+cost=800
+weight=0
+volume=0
+mod=325
+durability=135000
+onWear=qs_start
+onUnwear=qs_end
+=end

@@ -1,0 +1,8 @@
+type.Item=ork5house
+name=ork5house
+description=Ork town's house #5 key.
+image=27
+cost=0
+weight=0
+volume=0
+=end

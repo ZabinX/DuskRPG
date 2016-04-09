@@ -1,0 +1,10 @@
+type.Item=lavendar
+name=lavendar
+description=a cherry flavored herb that heals Hit Points
+image=6
+cost=150
+weight=0
+volume=0
+uses=1
+onUse=lavendar
+=end

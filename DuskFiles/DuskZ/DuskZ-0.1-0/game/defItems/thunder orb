@@ -1,0 +1,8 @@
+type.Item=thunder orb
+name=thunder orb
+description=a orb of thunder.
+image=6
+cost=2000
+weight=0
+volume=0
+=end

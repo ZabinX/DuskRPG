@@ -1,0 +1,12 @@
+type.Weapon=forest scythe
+name=forest scythe
+description=The Scythe of the Hunter God himself.
+image=9
+cost=800
+weight=0
+volume=0
+mod=450
+durability=85555
+onWear=fsstart
+onUnwear=fsend
+=end

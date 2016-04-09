@@ -1,0 +1,53 @@
+# main square
+200.200.alias=dusk-square
+# newbie barriers
+168.194.able=dusk-newbie
+168.195.able=dusk-newbie
+168.196.able=dusk-newbie
+192.206.able=dusk-newbie
+192.207.able=dusk-newbie
+193.187.able=dusk-newbie
+194.187.able=dusk-newbie
+194.224.able=dusk-newbie
+195.187.able=dusk-newbie
+195.224.able=dusk-newbie
+196.187.able=dusk-newbie
+196.224.able=dusk-newbie
+241.193.able=dusk-newbie
+241.194.able=dusk-newbie
+# The tutorial trail
+199.222.able=dusk-tutorial-completed
+200.222.action=dusk-tutorial-start
+203.222.action=dusk-tutorial-look
+204.221.action=dusk-tutorial-attack
+209.220.action=dusk-tutorial-shop
+211.220.able=dusk-tutorial-shop
+217.220.action=dusk-tutorial-finish
+218.220.able=dusk-tutorial-completed
+219.220.able=dusk-tutorial-train
+220.220.action=dusk-tutorial-done
+219.221.action=dusk-tutorial-done
+#
+# Door-ways are quite common, it probably makes sense to
+# provide a door-way type for this functionality without requiring
+# a script.
+#
+# e.g.
+# 204.205.goto=kos-entrance
+# 13.618.goto=kos-porch
+#
+# ko's martial arts
+13.617.alias=kos-entrance
+204.206.goto=kos-entrance
+13.618.goto=kos-porch
+204.207.alias=kos-porch
+# food place
+218.203.goto=witches-brew-entrance
+218.204.alias=witches-brew-porch
+50.636.alias=witches-brew-entrance
+50.637.goto=witches-brew-porch
+# magic place
+232.206.goto=magic-shop-entrance
+232.207.alias=magic-shop-porch
+20.638.alias=magic-shop-entrance
+20.639.goto=magic-shop-porch

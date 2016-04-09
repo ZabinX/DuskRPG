@@ -1,0 +1,12 @@
+type.Weapon=orksword
+name=orksword
+description=2 Red Crabs
+image=6
+cost=0
+weight=0
+volume=0
+mod=20000
+durability=0
+onWear=2 crabs
+onUnwear=2 crabsend
+=end

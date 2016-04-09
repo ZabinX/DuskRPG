@@ -1,0 +1,11 @@
+type.Armour=chaos leggings
+name=chaos leggings
+description=the ultimate leggings of chaos
+image=7
+cost=5900
+weight=0
+volume=0
+mod=160
+durability=5000
+worn=legs
+=end

@@ -1,0 +1,12 @@
+name=Bug
+maxhp=100
+maxmp=10
+str=25
+int=20
+dex=20
+wis=20
+con=15
+image=46
+bravery=1
+grouprelation=1
+giveitem=bugcorpse,1

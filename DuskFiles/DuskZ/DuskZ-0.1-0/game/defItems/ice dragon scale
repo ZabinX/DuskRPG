@@ -1,0 +1,8 @@
+type.Item=ice dragon scale
+name=ice dragon scale
+description=an ice dragon's scale
+image=6
+cost=1000
+weight=0
+volume=0
+=end

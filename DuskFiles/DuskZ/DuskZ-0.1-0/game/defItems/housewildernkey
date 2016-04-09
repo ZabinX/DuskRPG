@@ -1,0 +1,11 @@
+type.Item=housewildernkey
+name=housewildernkey
+description=Key for Wildern's House
+image=27
+cost=0
+weight=0
+volume=0
+onGet=getwildernkey
+uses=10
+onUse=usewildernkey
+=end

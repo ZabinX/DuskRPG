@@ -1,0 +1,11 @@
+name=newbie_mob
+maxhp=15
+maxmp=10
+str=4
+int=10
+dex=3
+wis=10
+con=10
+image=26
+bravery=1
+grouprelation=1

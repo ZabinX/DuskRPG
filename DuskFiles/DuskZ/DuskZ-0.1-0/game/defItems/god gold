@@ -1,0 +1,8 @@
+type.Item=god gold
+name=god gold
+description=god's gold
+image=13
+cost=10000
+weight=0
+volume=0
+=end

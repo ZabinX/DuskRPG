@@ -1,0 +1,12 @@
+type.Armour=dwarven leg-greeves
+name=dwarven leg-greeves
+description=a set of dwarven leg-greeves
+image=7
+cost=150
+weight=0
+volume=0
+mod=90
+durability=5000
+onWear=wear_normal_armor
+worn=legs
+=end

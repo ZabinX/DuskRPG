@@ -1,0 +1,12 @@
+type.Armour=dwarven helm
+name=dwarven helm
+description=a dwarven helm
+image=7
+cost=500
+weight=0
+volume=0
+mod=100
+durability=7000
+onWear=wear_normal_armor
+worn=skull
+=end

@@ -1,0 +1,13 @@
+type.Armour=pheonix helm
+name=pheonix helm
+description=a helmet worn by the pheonix pharoh.
+image=7
+cost=2000
+weight=0
+volume=0
+mod=120
+durability=200000
+onWear=pheonix1
+onUnwear=pheonix1end
+worn=skull
+=end

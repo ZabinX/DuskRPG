@@ -1,0 +1,12 @@
+type.Armour=titanium belt
+name=titanium belt
+description=a titanium belt
+image=7
+cost=280
+weight=0
+volume=0
+mod=80
+durability=4800
+onWear=wear_normal_armor
+worn=waist
+=end

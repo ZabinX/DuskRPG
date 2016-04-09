@@ -1,0 +1,10 @@
+type.Weapon=quarter staff
+name=quarter staff
+description=a long quarter staff
+image=8
+cost=20
+weight=0
+volume=0
+mod=120
+durability=1500
+=end

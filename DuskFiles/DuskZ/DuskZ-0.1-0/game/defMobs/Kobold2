@@ -1,0 +1,13 @@
+name=Kobold2
+maxhp=2000
+maxmp=20
+str=80
+int=4
+dex=5
+wis=4
+con=5
+image=15
+bravery=0.0
+grouprelation=0.0
+giveitem=mine_pick,0.5
+faction=demon

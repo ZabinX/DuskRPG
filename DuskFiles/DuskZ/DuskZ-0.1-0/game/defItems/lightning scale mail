@@ -1,0 +1,12 @@
+type.Armour=lightning scale mail
+name=lightning scale mail
+description=a very powerful and durable armor
+image=7
+cost=50000
+weight=0
+volume=0
+mod=2500
+durability=9000000
+onWear=wearlightningarmor
+worn=torso
+=end

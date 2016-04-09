@@ -1,0 +1,10 @@
+type.Food=red-blood potion
+name=red-blood potion
+description=A small vial of red-colored liquid.
+image=6
+cost=1000
+weight=0
+volume=0
+uses=5
+onUse=strength
+=end

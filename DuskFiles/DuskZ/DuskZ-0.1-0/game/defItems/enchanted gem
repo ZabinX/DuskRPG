@@ -1,0 +1,10 @@
+type.Item=enchanted gem
+name=enchanted gem
+description=Enchanted gemstone
+image=6
+cost=0
+weight=0
+volume=0
+uses=1
+onUse=enchanted gem
+=end

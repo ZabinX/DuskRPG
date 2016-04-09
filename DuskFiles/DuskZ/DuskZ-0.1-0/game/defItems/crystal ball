@@ -1,0 +1,8 @@
+type.Item=crystal ball
+name=crystal ball
+description=a precious gem made of priceless crystal.
+image=6
+cost=500
+weight=0
+volume=0
+=end

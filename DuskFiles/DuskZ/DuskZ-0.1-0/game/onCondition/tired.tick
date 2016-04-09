@@ -1,0 +1,22 @@
+/*number tiredint * rand 150
+number tiredint + tiredint 50
+#
+# You need an int of at least 50 to reduce the effect of tired
+# and an int of 200 or more to be immune
+#
+if > tiredint trigger inte
+    order trigger "sleep"
+end
+endscript*/
+
+/*
+* You need an int of at least 50 to reduce the effect of tired
+* and an int of 200 or more to be immune
+*/
+
+var test = Math.random() * 150 + 50;
+
+if (owner.getINT() < test) {
+   owner.sleep();
+}
+

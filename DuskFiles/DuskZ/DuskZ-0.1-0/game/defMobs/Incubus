@@ -1,0 +1,17 @@
+name=Incubus
+maxhp=100000
+maxmp=0
+str=10000
+int=2700
+dex=2300
+wis=5000
+con=6000
+bravery=3
+grouprelation=2
+image=4
+giveitem=spirit mace,1
+giveitem=incubus key,1
+faction=undead
+condition=detect invis,1,-1
+skill=double attack,100
+skill=triple attack,100

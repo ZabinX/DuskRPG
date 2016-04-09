@@ -1,0 +1,11 @@
+type.Armour=chaos helm
+name=chaos helm
+description=The ultimate helm of darkness
+image=7
+cost=6000
+weight=0
+volume=0
+mod=160
+durability=45000
+worn=skull
+=end

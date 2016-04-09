@@ -1,0 +1,14 @@
+name=marauder
+maxhp=2800
+maxmp=400
+str=300
+dex=200
+con=250
+wis=194
+int=100
+image=11
+bravery=2.2
+grouprelation=1.1
+giveitem=mardi gras beads,0.12
+giveitem=enchantedgem,0.03
+faction=dhouly

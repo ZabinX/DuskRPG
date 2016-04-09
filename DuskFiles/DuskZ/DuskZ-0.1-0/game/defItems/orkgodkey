@@ -1,0 +1,9 @@
+type.Item=orkgodkey
+name=orkgodkey
+description=Key to get prizes for killing ork god!
+image=27
+cost=0
+weight=0
+volume=0
+uses=0
+=end

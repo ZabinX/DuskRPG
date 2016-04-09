@@ -1,0 +1,9 @@
+type.Item=frag_pass
+name=frag_pass
+description=a frag pass
+image=6
+cost=0
+weight=0
+volume=0
+onGet=frag_pass
+=end

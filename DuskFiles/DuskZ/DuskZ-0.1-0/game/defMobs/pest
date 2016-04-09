@@ -1,0 +1,13 @@
+name=pest
+maxhp=5
+maxmp=0
+str=0
+int=150
+dex=0
+wis=0
+con=0
+bravery=-9999
+grouprelation=0
+image=5
+giveitem=free trip to start,1
+faction=shade

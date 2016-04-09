@@ -1,0 +1,10 @@
+type.Item=manastone
+name=manastone
+description=a dark mana stone
+image=6
+cost=375
+weight=0
+volume=0
+uses=1
+onUse=t manaheal
+=end

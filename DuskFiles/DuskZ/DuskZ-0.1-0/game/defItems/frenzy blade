@@ -1,0 +1,12 @@
+type.Weapon=frenzy blade
+name=frenzy blade
+description=A blade made that focuses on the user's rage.
+image=9
+cost=800
+weight=0
+volume=0
+mod=650
+durability=200000
+onWear=qs_start
+onUnwear=qs_end
+=end

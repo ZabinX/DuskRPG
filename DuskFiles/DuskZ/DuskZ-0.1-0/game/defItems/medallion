@@ -1,0 +1,8 @@
+type.Item=medallion
+name=medallion
+description=a medallion
+image=80
+cost=40
+weight=0
+volume=0
+=end

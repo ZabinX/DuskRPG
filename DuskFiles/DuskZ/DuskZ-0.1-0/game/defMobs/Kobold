@@ -1,0 +1,15 @@
+name=Kobold
+maxhp=2000
+maxmp=12222
+str=100
+int=45
+dex=1
+wis=4
+con=200
+image=15
+bravery=0.9
+grouprelation=0.4
+giveitem=mine_pick,0.5
+faction=demon
+wield=ork bane,-1,-1
+condition=invis,0,-1

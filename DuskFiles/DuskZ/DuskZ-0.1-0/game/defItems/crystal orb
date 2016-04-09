@@ -1,0 +1,8 @@
+type.Item=crystal orb
+name=crystal orb
+description=the fierce crystal orb.
+image=6
+cost=2000
+weight=0
+volume=0
+=end

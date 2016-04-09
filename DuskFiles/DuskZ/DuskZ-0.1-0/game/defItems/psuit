@@ -1,0 +1,13 @@
+type.Armour=psuit
+name=psuit
+description=a small grey suit
+image=6
+cost=2000
+weight=0
+volume=0
+mod=60
+durability=1000
+onWear=psuitStart
+onUnwear=psuitEnd
+worn=torso
+=end

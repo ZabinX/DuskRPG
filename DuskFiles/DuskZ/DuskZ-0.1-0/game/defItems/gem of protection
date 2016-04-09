@@ -1,0 +1,12 @@
+type.Item=gem of protection
+name=gem of protection
+description=a gem that provides magical armor until you log out
+image=6
+cost=2000
+weight=0
+volume=0
+onGet=getgemofprotection
+onDrop=dropgemofprotection
+uses=1
+onUse=gemofprotection
+=end

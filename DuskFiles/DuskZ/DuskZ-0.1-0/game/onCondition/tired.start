@@ -1,0 +1,5 @@
+/*chat trigger "You suddenly feel very tired."
+endscript*/
+
+owner.chat("You suddenly feel very tired.");
+

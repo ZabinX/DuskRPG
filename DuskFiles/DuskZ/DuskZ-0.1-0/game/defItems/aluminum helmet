@@ -1,0 +1,12 @@
+type.Armour=aluminum helmet
+name=aluminum helmet
+description=an aluminum helmet
+image=7
+cost=50
+weight=0
+volume=0
+mod=15
+durability=600
+onWear=wear_normal_armor
+worn=skull
+=end

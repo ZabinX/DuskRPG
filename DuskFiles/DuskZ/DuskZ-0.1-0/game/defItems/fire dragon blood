@@ -1,0 +1,8 @@
+type.Item=fire dragon blood
+name=fire dragon blood
+description=the blood of a fire dragon
+image=6
+cost=1000
+weight=0
+volume=0
+=end

@@ -1,0 +1,10 @@
+type.Weapon=excalibur
+name=excalibur
+description=a small dagger
+image=199
+cost=20
+weight=0
+volume=0
+mod=110
+durability=1200
+=end

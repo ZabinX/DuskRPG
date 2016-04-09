@@ -1,0 +1,12 @@
+name=HelmetShark
+maxhp=200
+maxmp=100
+str=30
+int=50
+dex=55
+wis=100
+con=50
+image=67
+bravery=1
+grouprelation=1
+giveitem=sharkcorpse,0.5

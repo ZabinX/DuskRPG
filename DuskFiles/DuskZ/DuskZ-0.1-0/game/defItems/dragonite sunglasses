@@ -1,0 +1,12 @@
+type.Armour=dragonite sunglasses
+name=dragonite sunglasses
+description=a bad ass pair of sunglasses constructed of the legendary metal dragonite
+image=7
+cost=20000
+weight=0
+volume=0
+mod=5000
+durability=2900000
+onWear=wear_normal_armor
+worn=eyes
+=end

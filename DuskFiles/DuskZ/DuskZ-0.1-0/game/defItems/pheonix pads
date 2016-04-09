@@ -1,0 +1,13 @@
+type.Armour=pheonix pads
+name=pheonix pads
+description=a pair of paded shoes worn by the pheonix pharoh.
+image=7
+cost=2000
+weight=0
+volume=0
+mod=120
+durability=200000
+onWear=pheonix2
+onUnwear=pheonix2end
+worn=legs
+=end

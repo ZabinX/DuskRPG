@@ -1,0 +1,12 @@
+name=guardian elf
+maxhp=800
+maxmp=0
+str=800
+int=0
+dex=0
+wis=0
+con=10
+bravery=1
+grouprelation=.5
+image=5
+faction=western elf

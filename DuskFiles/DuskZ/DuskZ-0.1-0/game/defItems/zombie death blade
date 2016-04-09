@@ -1,0 +1,10 @@
+type.Weapon=zombie death blade
+name=zombie death blade
+description=a sword with a disturbing aura and a glow of black
+image=9
+cost=0
+weight=0
+volume=0
+mod=500
+durability=200000
+=end

@@ -1,0 +1,8 @@
+type.Item=mine_pick
+name=mine_pick
+description=a medium sized miner's pick
+image=6
+cost=50
+weight=0
+volume=0
+=end

@@ -1,0 +1,8 @@
+type.Item=iron ingot
+name=iron ingot
+description=a block of iron
+image=6
+cost=100
+weight=0
+volume=0
+=end

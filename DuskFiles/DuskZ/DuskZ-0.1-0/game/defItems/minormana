@@ -1,0 +1,10 @@
+type.Food=minormana
+name=minormana
+description=A potion that will restore up to 1,000 MP.  It has one use.
+image=57
+cost=10000
+weight=0
+volume=0
+uses=1
+onUse=minormana
+=end

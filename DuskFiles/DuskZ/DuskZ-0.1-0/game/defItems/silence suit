@@ -1,0 +1,11 @@
+type.Armour=silence suit
+name=silence suit
+description=A rare suit worn by the silencers
+image=7
+cost=6500
+weight=0
+volume=0
+mod=150
+durability=95000
+worn=torso
+=end

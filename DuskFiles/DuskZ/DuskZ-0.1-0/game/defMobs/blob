@@ -1,0 +1,14 @@
+name=blob
+maxhp=30000
+maxmp=0
+str=5000
+int=0
+dex=1000
+wis=0
+con=1000
+bravery=0.9
+grouprelation=0.9
+image=3
+faction=blob
+condition=detect invis,1,-1
+onBattle=blob_brain

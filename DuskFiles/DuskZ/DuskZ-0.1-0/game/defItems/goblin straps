@@ -1,0 +1,12 @@
+type.Armour=goblin straps
+name=goblin straps
+description=sturdy leggings straps created by the horrific goblins.
+image=7
+cost=400
+weight=0
+volume=0
+mod=100
+durability=5300
+onWear=wear_normal_armor
+worn=legs
+=end

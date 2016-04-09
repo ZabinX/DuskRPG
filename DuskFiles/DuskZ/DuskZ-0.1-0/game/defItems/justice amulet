@@ -1,0 +1,13 @@
+type.Armour=justice amulet
+name=justice amulet
+description=Amulet created by the god DarkCrono
+image=7
+cost=3000
+weight=0
+volume=0
+mod=0
+durability=8000
+onWear=justiceamulet
+onUnwear=justiceamuletunwear
+worn=neck
+=end

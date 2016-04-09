@@ -1,0 +1,7 @@
+type.Training=intelligence
+name=Intelligence
+description=Train Intelligence
+image=211
+cost=100
+skill=int
+=end

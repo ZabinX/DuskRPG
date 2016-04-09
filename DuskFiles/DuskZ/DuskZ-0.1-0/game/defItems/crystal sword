@@ -1,0 +1,12 @@
+type.Weapon=crystal sword
+name=crystal sword
+description=A blade made of crystal.
+image=9
+cost=800
+weight=0
+volume=0
+mod=500
+durability=150000
+onWear=qs_start
+onUnwear=qs_end
+=end

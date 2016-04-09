@@ -1,0 +1,12 @@
+type.Armour=bronze helmet
+name=bronze helmet
+description=a bronze helmet
+image=112
+cost=200
+weight=0
+volume=0
+mod=40
+durability=2400
+onWear=wear_normal_armor
+worn=skull
+=end

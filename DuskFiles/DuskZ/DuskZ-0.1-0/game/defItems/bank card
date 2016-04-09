@@ -1,0 +1,8 @@
+type.Item=bank card
+name=bank card
+description=a bank card.
+image=6
+cost=250
+weight=0
+volume=0
+=end

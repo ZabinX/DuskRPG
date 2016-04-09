@@ -1,0 +1,12 @@
+type.Armour=mardi gras beads
+name=mardi gras beads
+description=A string of Mardi Gras beads
+image=7
+cost=80
+weight=0
+volume=0
+mod=20
+durability=1800
+onWear=wear_normal_armor
+worn=neck
+=end

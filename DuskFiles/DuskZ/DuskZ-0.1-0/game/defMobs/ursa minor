@@ -1,0 +1,14 @@
+name=ursa minor
+maxhp=1200
+maxmp=25
+str=80
+dex=45
+int=22
+con=33
+wis=31
+image=12
+bravery=0.75
+grouprelation=0.4
+giveitem=longsword,0.8
+giveitem=bearclaw,0.2
+faction=ursa
