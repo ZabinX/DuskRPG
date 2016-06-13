@@ -1,0 +1,24 @@
+*trigger "-----------------------------------------
+
+Welcome to Duskmoon!	 A new world created using the old open source GMUD 'Dusk' client/engine created ~2000.
+			 First release:
+			 Episode 1:  Showcases old Dusk's features using scripts and magic groups recycled from old Dusk worlds.  
+			 New features have been created by me in the form of Dusk script hacking.  There's a lot of neat script's out there in Duskmoon!
+			 So go on and eat some flan's when your hungry, solve puzzles, help the local townspeople, find treasures, side quests, and then save the world!
+
+  	Credits...
+	Tom Weingarten-	 Creator, Java programming lead (tom.weingarten@gmail.com) ~2000.
+	Andy Weaver-	 If your playing online, many thanks to him hosting Dusk online :D!  Also fixed the images loading online problem.
+	Zabin (me)-	 Duskmoon content, graphic artist (xyphoidzabin@gmail.com ) 2008-2014.
+	Wildern-	 	 Java programming contributions, Dusk script content 2000-2003, and hooking me up with this Dusk version ~2008.
+	Jetrel-		 Graphic artist.
+	Hyptosis-		 Graphic artist.
+	Redshrike-		 Graphic artist.
+	BartK-		 Graphic artist.
+	more-		 See /DuskFiles/LICENSES for more graphical artists credits.
+	Everybody-	 	 Everybody who contributed to Dusk 2000-2003.
+	Michael Zucchi (NotZed) and his fork of Dusk(DuskZ)-	He pointed out a few typo's in the tilescripts and mobs in my Dusk demo world (notzed@gmail.com) 2013.
+	His new version/fork of this DuskServer is called 'DuskZ'.  It's a modernized and upgraded fork of Tom's old DuskServer that you are currently playing:
+	Check out his work on DuskZ at his developmental blog here----  
+	I've wrote up some decent information about his upgraded version here----
+-----------------------------------------"  
