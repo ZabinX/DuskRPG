@@ -1,2 +1,6 @@
-noDisplay
+onstart
+shadehp
+onend
+shadehp
+nodisplay
 .

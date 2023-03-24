@@ -1,4 +1,4 @@
-if < trigger cp 100
+if < trigger cp 200
 	chat trigger "Courtney says:  You again?  I see you in here way more then any other villager."
 	chat trigger "**Courtney casts heal on you and are totally rejuvinated**."
 	set trigger hp trigger maxHP
@@ -10,5 +10,6 @@ if > trigger cp 100
 	chat trigger "Courtney says:  On the north east side of town on the little hill is the bath house.  In there you can get healed for some gp."
 	endscript
 end
+
 
 

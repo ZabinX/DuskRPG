@@ -1,5 +1,5 @@
 maxhp
-4000
+200
 maxmp
 7000
 stre
@@ -18,4 +18,7 @@ bravery
 1
 grouprelation
 1
+onBattle
+mushroom_brain
+
 .

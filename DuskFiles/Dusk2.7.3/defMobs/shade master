@@ -1,9 +1,9 @@
 maxhp
-2000
+200
 maxmp
 2000
 stre
-70
+20
 inte
 50
 dext
@@ -15,7 +15,7 @@ wisd
 image
 22
 bravery
-1.5
+1
 grouprelation
 1
 wield
@@ -25,8 +25,6 @@ dagger
 giveitem
 shade cap
 1
-faction
-shade
 onBattle
 shade_brain
 .
