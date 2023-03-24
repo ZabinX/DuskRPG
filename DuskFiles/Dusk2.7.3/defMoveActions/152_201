@@ -21,7 +21,7 @@ inc trigger cash 1000
 addcondition trigger checktreasure
 chat trigger "Sweet!  You found 1kgp!."
 endscript
-end
+
 
 
 

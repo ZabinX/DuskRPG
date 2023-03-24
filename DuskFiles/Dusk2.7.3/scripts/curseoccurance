@@ -1,4 +1,5 @@
 inc trigger hp -20
 if < trigger hp 0
-removeCondition trigger "cursed"
-endscript
+   removeCondition trigger "cursed"
+end
+

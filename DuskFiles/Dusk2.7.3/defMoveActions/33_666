@@ -49,7 +49,7 @@ if and hasCondition trigger DrHerbieQuest2 hasItem trigger "eye of newt"
 		end
 	giveItem trigger "eye of newt"	
 	end
-end
+
 #
 if and hasCondition trigger drherbiequest2 hasItem trigger "eye of newt"
 	chat trigger "Dr Light says: Good, looks like you found some eyes of newts but it doesn't look like you have 10 yet."

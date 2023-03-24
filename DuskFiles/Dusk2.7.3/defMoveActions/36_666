@@ -3,6 +3,6 @@ if ispet trigger
 end
 	addCondition trigger "intro"
 	endscript
-end
+
 
 

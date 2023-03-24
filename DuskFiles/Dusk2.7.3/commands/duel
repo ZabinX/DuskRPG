@@ -1,5 +1,3 @@
-is isplayer trigger
-endscript
 if not isPlayer trigger
 	endscript
 end
@@ -105,7 +103,7 @@ if or or = die 1 = die 3 = die 5
 		inc trigger cash win
 		endscript
 	end
-	chat trigger concat concat "Your opponent strikes you down, and on a plea of mercy, lets you go painlessly... you lose"
+	chat trigger "Your opponent strikes you down, and on a plea of mercy, lets you go painlessly... you lose"
 set trigger hp 5
 set trigger locxy 118 89
 	endscript

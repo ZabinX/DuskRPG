@@ -1,4 +1,4 @@
-end
+endscript
 chat trigger "You read the scroll and the area around you fills up with smoke."
 order trigger "emote vanishes in a puff of smoke."
 set trigger locxy 115 172

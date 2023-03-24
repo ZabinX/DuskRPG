@@ -14,4 +14,4 @@ end
 livingthing target enemy trigger
 addCondition target pirateassassinbattle1
 chat enemy trigger "Pirate Assassin says: He just killed 2 more of aarR guys boss.  Don't worry though, I'll kill em'."
-endscrip
+endscript

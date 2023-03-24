@@ -62,7 +62,7 @@ end if hasCondition trigger dmb00 number stored + stored 1
 end 
 #
 number diff - maxStore stored
-if toStore > diff
+if > toStore diff
 	number toStore diff
 	chat trigger concat concat "You can deposit only " toStore " gp."
 end

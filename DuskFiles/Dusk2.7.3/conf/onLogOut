@@ -196,7 +196,6 @@ if hasCondition trigger inforest2
 end
 if hascondition trigger "excaliburquest"
 	changetile 199 191 56
-	end
 end
 if hascondition trigger "silencer_fight"
     removecondition trigger "silencer_fight"

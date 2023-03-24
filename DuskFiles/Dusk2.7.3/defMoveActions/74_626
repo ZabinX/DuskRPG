@@ -10,9 +10,9 @@ if hasCondition trigger shenville_0
         	order guard1 concat "a " name trigger
 	end
 end
-addCondition killedpirate
-removeCondition shenville_0
-removeCondition piratebattle
+addCondition trigger killedpirate
+removeCondition trigger shenville_0
+removeCondition trigger piratebattle
 endscript
 
 

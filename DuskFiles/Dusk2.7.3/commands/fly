@@ -9,7 +9,7 @@ if not variableIsLivingThing target
 	livingThing target trigger
 	end
 #
-addConditionWithDuration target wings * 0.2 trigger int
+addConditionWithDuration target wings * 0.2 trigger inte
 chat target "You feel like you can fly"
 endscript
 

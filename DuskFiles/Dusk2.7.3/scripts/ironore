@@ -15,7 +15,7 @@ if = var 0
 		set target locxy 1 1
 		order trigger reset
 		chat trigger "You use the pickaxe and mine some iron ore!"
-		giveitem trigger iron ore
+		giveitem trigger "iron ore"
 		endscript
 		end
 if = var 1
@@ -23,7 +23,7 @@ if = var 1
 		set target locxy 1 1
 		order trigger reset
 		chat trigger "You use the pickaxe and mine some iron ore!"
-		giveitem trigger iron ore
+		giveitem trigger "iron ore"
 		endscript
 		end
 if = var 2
@@ -31,7 +31,7 @@ if = var 2
 		set target locxy 1 1
 		order trigger reset
 		chat trigger "You use the pickaxe and mine some iron ore!"
-		giveitem trigger iron ore
+		giveitem trigger "iron ore"
 		endscript
 		end
 if = var 3
@@ -39,7 +39,7 @@ if = var 3
 		set target locxy 1 1
 		order trigger reset
 		chat trigger "You use the pickaxe and mine some iron ore, you also found a emerald!"
-		giveitem trigger iron ore
+		giveitem trigger "iron ore"
 		giveitem trigger emerald
 		endscript
 		end
@@ -48,7 +48,7 @@ if = var 4
 		set target locxy 1 1
 		order trigger reset
 		chat trigger "You use the pickaxe and mine some iron ore, you also found a ruby!"
-		giveitem trigger iron ore
+		giveitem trigger "iron ore"
 		giveitem trigger ruby
 		endscript
 		end
@@ -57,7 +57,7 @@ if = var 5
 		set target locxy 1 1
 		order trigger reset
 		chat trigger "You use the pickaxe and mine some iron ore, you also found a diamond!"
-		giveitem trigger iron ore
+		giveitem trigger "iron ore"
 		giveitem trigger diamond
 		endscript
 		end

@@ -10,5 +10,6 @@ if ! isWearing trigger fireproofjacket
 	set trigger locxy 394 494
 	endscript
 	end
+end
 chat trigger "You pass through the fire unharmed"
 endscript

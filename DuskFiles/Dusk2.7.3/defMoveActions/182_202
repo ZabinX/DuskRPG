@@ -93,7 +93,7 @@ if and hasCondition trigger farmerquest hasItem trigger BugCorpse
 		end
 	giveItem trigger BugCorpse	
 	end
-end
+
 #
 if and hasCondition trigger farmerquest hasItem trigger BugCorpse
 	removeItem trigger BugCorpse

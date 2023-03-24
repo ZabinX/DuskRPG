@@ -4,7 +4,7 @@ if ! isPlayer trigger
 #
 #
 if hasCondition trigger orkgoddefeat
-	removeCondition orkgoddefeat
+	removeCondition trigger orkgoddefeat
 	addCondition trigger bhquestEnd
 	string outText concat concat "Cheif Bounty Hunter says: I'm very impressed " name trigger "I was battling the Ork God, blinked my eyes for a fraction of a second and when they opened I noticed I was flying backwards."
 	chat trigger "Cheif Bounty Hunter says: Thats when I fell off Death Mountain and broke my leg. I am truly greatful you took care of that piece of ****.  Here's a little bonus from me ;)"
@@ -30,7 +30,7 @@ end
 #
 if and hasCondition trigger bhquest3 hasItem trigger BanditLeaderScalp1
 	removeItem trigger BanditLeaderScalp1
-	if hasItem BanditLeaderScalp2
+	if hasItem trigger BanditLeaderScalp2
 		removeItem trigger BanditLeaderScalp2
 		if hasItem trigger BanditLeaderScalp3
 				removeItem trigger BanditLeaderScalp3
@@ -111,7 +111,6 @@ end
 	chat trigger "Cheif Bounty Hunter says: People keep posting up these bounty's but I can't do anything about it since I broke my leg falling off Death Mountain."
 	addCondition trigger bhquest1
 	endscript
-end
 
 
 

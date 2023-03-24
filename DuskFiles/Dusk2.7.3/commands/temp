@@ -1,6 +1,6 @@
 # flowris
 #
-if trigger privs < 3
+if < trigger privs 3
 	chat trigger "huh?"
 	endscript
 	end

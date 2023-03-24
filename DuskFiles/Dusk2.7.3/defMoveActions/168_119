@@ -40,3 +40,4 @@ if = var 2
 	addConditionWithDuration trigger fish4 300
 	endscript
 	end
+end

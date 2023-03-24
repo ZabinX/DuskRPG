@@ -4,7 +4,7 @@ if < trigger privs 3
 	endscript
 	end
 #
-LivingThing target local trigger param0
+livingThing target local trigger param0
 addConditionWithDuration target "killer instinct" 60
 chat trigger "ok"
 chat target "You start thinking that to kill is a wonderful thing"

@@ -164,7 +164,7 @@ if hasCondition trigger mushroomhole
 end
 set trigger locxy 133 255
 endscript
-end
+
 
 
 

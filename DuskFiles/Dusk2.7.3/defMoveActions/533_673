@@ -2,7 +2,7 @@ livingthing guard1 local trigger "Chris"
 	if = guard1 locX 528
 		if = guard1 locY 667
 		set guard1 locxy 528 666
-		chat trigger "*You hear foot steps in the distance.**
+		chat trigger "*You hear foot steps in the distance.*"
 		end
 	end
 endscript

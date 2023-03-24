@@ -1,4 +1,4 @@
-if ! trigger hascondition reward
+if ! hascondition trigger reward
     chat trigger "You cannot get your reward."
     endscript
 end

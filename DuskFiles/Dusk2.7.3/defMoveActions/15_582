@@ -88,7 +88,7 @@ if and hasCondition trigger xyphoidquest2 hasItem trigger CanBeefStew
 		end
 	giveItem trigger CanBeefStew	
 	end
-end
+
 #
 if hasCondition trigger xyphoidquest2
 	chat trigger "Xyphoid says: Please get me 10 cans of Beef Stew from the market place.  I'll pay you back what they go for and a little bonus for the favor."

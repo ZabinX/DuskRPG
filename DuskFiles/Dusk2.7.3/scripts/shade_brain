@@ -1,4 +1,5 @@
 #Zabin script testing
+chat enemy trigger "Shade Master brain"
 livingthing target enemy trigger
 if and hasCondition target shadequest hasCondition target shadequest1
 removeCondition target shadequest
@@ -15,5 +16,3 @@ livingthing target enemy trigger
 addCondition target shadequest1
 chat enemy trigger "Shade Master says: What's the point in killing me?  I'll just come right back.  If you do this you will regret it!"
 endscript
-
-

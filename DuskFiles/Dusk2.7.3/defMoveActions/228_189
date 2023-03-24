@@ -102,7 +102,7 @@ if and hasCondition trigger kristaquest4 hasItem trigger Bassbaby
 		end
 	giveItem trigger Bassbaby	
 	end
-end
+
 #
 if and hasCondition trigger kristaquest4 hasItem trigger Bassbaby
 	chat trigger "Krista says: I can smell fish on you but it doesn't look like you have 20 yet.  I need 20 otherwise I may eat them all up again before they have time to reproduce."

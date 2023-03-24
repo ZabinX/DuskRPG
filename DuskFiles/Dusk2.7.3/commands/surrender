@@ -84,7 +84,7 @@ if ! strequals global war4clan1 "none"
         endscript
     end
 end
-char trigger "You cannot surrender to them as their clan is not at war with you."
+chat trigger "You cannot surrender to them as their clan is not at war with you."
 endscript
 
 

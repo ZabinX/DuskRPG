@@ -4,7 +4,7 @@ if isInBattle trigger
 	number damage * + .01 * rand .02 + target hp target mp
 	inc target hp * -1 damage
 	inc trigger damdone damage
-	chat trigger concat concat concat concat " Many spiders swarm and attacks " name enemy trigger ". He gets " damage " damage."
+chat trigger concat concat concat concat " Many spiders swarm and attacks " name enemy trigger ". He gets " damage " damage."
 	chat enemy trigger concat concat " **Spider bit you with its venomous teeth** You get poisoned causing " damage " damage."
 	end
 end

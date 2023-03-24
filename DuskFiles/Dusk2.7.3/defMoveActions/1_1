@@ -44,7 +44,7 @@ if ismob trigger
 	livingthing guard1 local trigger "Mutant Scorpion"
 		if = guard1 locX 1
 			if = guard1 locY 1
-			set guard1locxy 215 190
+			set guard1 locxy 215 190
 			end
 		end
 	livingthing guard2 local trigger "Mutant Scorpion"
@@ -62,7 +62,7 @@ if ismob trigger
 	livingthing guard1 local trigger "Giant Mushroom"
 		if = guard1 locX 1
 			if = guard1 locY 1
-			set guard1locxy 215 190
+			set guard1 locxy 215 190
 			end
 		end
 	livingthing guard2 local trigger "Giant Mushroom2"
@@ -80,7 +80,7 @@ if ismob trigger
 	livingthing guard1 local trigger "Giant Mushroom4"
 		if = guard1 locX 1
 			if = guard1 locY 1
-			set guard1locxy 215 190
+			set guard1 locxy 215 190
 			end
 		end
 	livingthing guard2 local trigger "Giant Mushroom5"

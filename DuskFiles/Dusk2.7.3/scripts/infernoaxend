@@ -3,5 +3,5 @@ if < trigger cp 2000
 end
 inc trigger strengthbonus -50
 inc trigger wisdombonus -30
-enscript
+endscript
 

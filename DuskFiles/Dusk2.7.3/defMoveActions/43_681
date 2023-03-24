@@ -5,7 +5,6 @@ chat trigger "Obtained: ale"
 endscript
 end
 chat trigger "Redshrike says: Man dont try to rip me off you didn't even use the one I gave you last time yet"
-end
 endscript
 
 

@@ -9,7 +9,7 @@ end
 if variableisstring param0
     livingthing target param0
 end
-order target unwear all
+order target "unwear all"
 set target exp 0
-set target gp 0
+set target cash 0
 endscript

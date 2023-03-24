@@ -8,30 +8,30 @@ if variableisstring param0
         #
         # variable declaration
         #
-        number x target locx
-        number y target locy
-        number gp target cash
-        number exp target exp
-        number cp target cp
-        number hp target hp
-        number ac target ac
-        number dammod target dammod
-        number maxHp target maxHp
-        number mp target mp
-        number maxmp target maxMp
-        number str target stre
-        number int target inte
-        number dex target dext
-        number con target cons
-        number wis target wisd
+        number nx target locx
+        number ny target locy
+        number ngp target cash
+        number nexp target exp
+        number ncp target cp
+        number nhp target hp
+        number nac target ac
+        number ndammod target dammod
+        number nmaxHP target maxHP
+        number nmp target mp
+        number nmaxMP target maxMP
+        number nstr target stre
+        number nint target inte
+        number ndex target dext
+        number ncon target cons
+        number nwis target wisd
         #
         # notify caster/trigger of target's stats
         #
-        chat trigger concat concat concat concat "   Name: " name target " (" cp " cp)"
-        chat trigger concat concat concat concat concat concat concat "     HP: " hp "/" maxHp "  MP: " mp "/" maxMp
-        chat trigger concat concat concat "     Loc: " x "/" y
-        chat trigger concat concat "     Cash: " gp " gp"
-        chat trigger concat "     Exp: " exp
+        chat trigger concat concat concat concat "   Name: " name target " (" ncp " cp)"
+        chat trigger concat concat concat concat concat concat concat "     HP: " nhp "/" nmaxHP "  MP: " nmp "/" nmaxMP
+        chat trigger concat concat concat "     Loc: " nx "/" ny
+        chat trigger concat concat "     Cash: " ngp " gp"
+        chat trigger concat "     Exp: " nexp
     end
 end
 endscript

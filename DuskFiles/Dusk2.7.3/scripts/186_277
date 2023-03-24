@@ -14,6 +14,7 @@ if hasCondition trigger ticketguy
 	chat trigger "TicketGuy says:  Thanks, here's your ticket.  Enjoy the ride."
 	endscript
 	end
+end
 chat trigger "The TicketGuy says:  The price is 300gp.  It doesn't look like you have enough $$"
 endscript
 #

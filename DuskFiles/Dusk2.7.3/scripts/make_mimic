@@ -170,7 +170,7 @@ if ispet their_pet
 end
 # This extra end is needed, not sure why... something not happening
 # correctly for parseValue() to skip over body of if when it is false
-end
+#end
 string command concat "a "  name trigger
 order m command
 endscript
