@@ -19,7 +19,7 @@ if ! variableisstring param0
     chat trigger "You must name a person in the clan you are at war with, and they must be in the world."
     endscript
 end
-livingthing target global param0
+livingthing target param0
 if ! isplayer target
     chat trigger "You must name a person in the clan you are at war with, and they must be in the world."
     endscript

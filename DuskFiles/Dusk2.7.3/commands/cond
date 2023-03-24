@@ -5,7 +5,7 @@ end
 if variableisstring param0
     livingthing target local trigger param0
     if and ! isplayer target and ! ispet target ! ismob target
-        livingthing target global param0
+        livingthing target param0
         if and ! isplayer target and ! ispet target ! ismob target
             chat trigger "Usage cond <Livingthing> <add/remove> <condition> [duration]"
             endscript

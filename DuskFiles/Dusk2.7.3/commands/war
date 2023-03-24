@@ -16,46 +16,46 @@ if ! variableisstring param0
         chat trigger concat concat concat concat "The " global war1clan1 " clan is at war with the " global war1clan2 " clan."
         chat trigger concat concat concat concat concat concat "The " global war1clan1 " has killed " global war1clan1killed "cp of clan " war1clan2 "."
         chat trigger concat concat concat concat concat concat "The " global war1clan2 " has killed " global war1clan2killed "cp of clan " war1clan1 "."
-        if > global war1clan1killed war1clan2killed
+        if > global war1clan1killed global war1clan2killed
              chat trigger concat concat "The " global war1clan1 " clan is winning this war."
         end
-        if > global war1clan2killed war1clan1killed
+        if > global war1clan2killed global war1clan1killed
              chat trigger concat concat "The " global war1clan2 " clan is winning this war."
         end
         number war1 1
     end
     if ! strequals global war2clan1 "none"
         chat trigger concat concat concat concat "The " global war2clan1 " clan is at war with the " global war2clan2 " clan."
-        chat trigger concat concat concat concat concat concat "The " global war2clan1 " has killed " global war2clan1killed "cp of clan " war2clan2 "."
-        chat trigger concat concat concat concat concat concat "The " global war2clan2 " has killed " global war2clan2killed "cp of clan " war2clan1 "."
-        if > global war2clan1killed war2clan2killed
+        chat trigger concat concat concat concat concat concat "The " global war2clan1 " has killed " global war2clan1killed "cp of clan " global war2clan2 "."
+        chat trigger concat concat concat concat concat concat "The " global war2clan2 " has killed " global war2clan2killed "cp of clan " global war2clan1 "."
+        if > global war2clan1killed global war2clan2killed
              chat trigger concat concat "The " global war2clan1 " clan is winning this war."
         end
-        if > global war2clan2killed war2clan1killed
+        if > global war2clan2killed global war2clan1killed
              chat trigger concat concat "The " global war2clan2 " clan is winning this war."
         end
         number war2 1
     end
     if ! strequals global war3clan1 "none"
         chat trigger concat concat concat concat "The " global war3clan1 " clan is at war with the " global war3clan2 " clan."
-        chat trigger concat concat concat concat concat concat "The " global war3clan1 " has killed " global war3clan1killed "cp of clan " war3clan2 "."
-        chat trigger concat concat concat concat concat concat "The " global war3clan2 " has killed " global war3clan2killed "cp of clan " war3clan1 "."
-        if > global war3clan1killed war3clan2killed
+        chat trigger concat concat concat concat concat concat "The " global war3clan1 " has killed " global war3clan1killed "cp of clan " global war3clan2 "."
+        chat trigger concat concat concat concat concat concat "The " global war3clan2 " has killed " global war3clan2killed "cp of clan " global war3clan1 "."
+        if > global war3clan1killed global war3clan2killed
              chat trigger concat concat "The " global war3clan1 " clan is winning this war."
         end
-        if > global war3clan2killed war3clan1killed
+        if > global war3clan2killed global war3clan1killed
              chat trigger concat concat "The " global war3clan2 " clan is winning this war."
         end
         number war3 1
     end
     if ! strequals global war4clan1 "none"
         chat trigger concat concat concat concat "The " global war4clan1 " clan is at war with the " global war4clan2 " clan."
-        chat trigger concat concat concat concat concat concat "The " global war4clan1 " has killed " global war4clan1killed "cp of clan " war4clan2 "."
-        chat trigger concat concat concat concat concat concat "The " global war4clan2 " has killed " global war4clan2killed "cp of clan " war4clan1 "."
-        if > global war4clan1killed war4clan2killed
+        chat trigger concat concat concat concat concat concat "The " global war4clan1 " has killed " global war4clan1killed "cp of clan " global war4clan2 "."
+        chat trigger concat concat concat concat concat concat "The " global war4clan2 " has killed " global war4clan2killed "cp of clan " global war4clan1 "."
+        if > global war4clan1killed global war4clan2killed
              chat trigger concat concat "The " global war4clan1 " clan is winning this war."
         end
-        if > global war4clan2killed war4clan1killed
+        if > global war4clan2killed global war4clan1killed
              chat trigger concat concat "The " global war4clan2 " clan is winning this war."
         end
         number war4 1
@@ -72,7 +72,7 @@ if < trigger privs 1
     chat trigger "Only clan leaders can declare or join a war."
     endscript
 end
-livingthing target global param0
+livingthing target param0
 if ! isplayer target
     chat trigger "You must name a person in the clan you wish to declare war with, and they must be in the world."
     endscript

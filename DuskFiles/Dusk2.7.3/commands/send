@@ -8,7 +8,7 @@ if ! variableisstring param0
 end
 livingthing target local trigger param0
 if and and ! isplayer target ! ispet target ! ismob target
-    livingthing target global param0
+    livingthing target param0
     if and ! isplayer target and ! ispet target ! ismob target
         chat trigger "They are not in this world."
     endscript

@@ -1,2 +1,2 @@
 chat trigger "You feel the full effect of the healthstone."
-set trigger hp maxHp
+set trigger hp trigger maxHP
