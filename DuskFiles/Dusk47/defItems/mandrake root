@@ -1,0 +1,13 @@
+type
+item
+description
+an herb that restores lots of Magic Points
+cost
+450
+image
+80
+onuse
+mandrakeroot
+uses
+1
+.

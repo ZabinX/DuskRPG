@@ -1,0 +1,3 @@
+if < trigger cp 1000
+    endscript
+end

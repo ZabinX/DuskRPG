@@ -1,0 +1,21 @@
+type
+weapon
+description
+Glimmering magic sword!
+cost
+1000
+mod
+600
+image
+9
+durability
+600000
+onWear
+orkbane
+onUnWear
+orkbaneend
+
+
+
+
+

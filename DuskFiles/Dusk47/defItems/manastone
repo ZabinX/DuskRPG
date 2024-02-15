@@ -1,0 +1,14 @@
+type
+item
+description
+a dark mana stone
+cost
+375
+image
+6
+onuse
+t manaheal
+uses
+1
+.
+

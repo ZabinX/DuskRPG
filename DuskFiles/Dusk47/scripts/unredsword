@@ -1,0 +1,8 @@
+if ! isWearing trigger "unreds gloves"
+	chat trigger "When you grasp the handle of the sword, it glows hot and you drop it in a fraction of a second."
+	chat trigger "You think to yourself, special gloves are needed to hold this.. but where on Earth could they be?"
+	order trigger "unwear unred sword"
+	endscript
+end
+chat trigger "The sword glows red as you handle it with expert skill."
+endscript

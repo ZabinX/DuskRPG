@@ -1,0 +1,46 @@
+maxhp
+10000
+maxmp
+500
+stre
+2000
+inte
+1000
+dext
+2000
+wisd
+1000
+cons
+1000
+bravery
+3
+grouprelation
+1
+image
+4
+giveitem
+powerblade
+1
+faction
+elf
+condition
+detect invis
+1
+1
+wield
+dagger
+1
+-1
+skill
+double attack
+100
+skill
+triple attack
+25
+skill
+quadruple attack
+10
+skill
+dodge
+10
+.

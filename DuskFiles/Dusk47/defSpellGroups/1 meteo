@@ -1,0 +1,17 @@
+#comet: causes varying damage to enemy.
+#
+#
+if isinbattle caster
+	number extradamage 15
+	number predamage * 50 * 7 rand
+	number damage predamage * 15
+	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " You summon the heavenly comets to bombard " name enemy caster " with a shower of rocks for " damage "  damage."
+	chat enemy caster concat concat " The enemy casts comet and as you dodge some rocks, most hit you for " damage "  damage."
+	endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript
+
+

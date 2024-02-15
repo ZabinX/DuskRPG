@@ -1,0 +1,9 @@
+removeCondition trigger east3
+removeCondition trigger ballwest5
+removeCondition trigger balleast6
+addCondition trigger balleast16
+endscript
+
+
+
+

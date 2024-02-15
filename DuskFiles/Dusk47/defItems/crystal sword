@@ -1,0 +1,17 @@
+type
+weapon
+description
+A blade made of crystal.
+cost
+800
+mod
+500
+image
+9
+durability
+150000
+onWear
+qs_start
+onUnwear
+qs_end
+.

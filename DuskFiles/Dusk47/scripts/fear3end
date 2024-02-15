@@ -1,0 +1,7 @@
+if > trigger maxhp 750
+    inc trigger hpbonus 750
+    if < trigger hp trigger maxhp
+        inc trigger hp 750
+    end
+end
+endscript

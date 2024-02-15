@@ -1,0 +1,9 @@
+inc trigger strengthbonus -999
+inc trigger intelligencebonus -999
+inc trigger dexteritybonus -999
+inc trigger constitutionbonus -999
+inc trigger wisdombonus -999
+inc trigger acbonus -1000
+noDisplay
+.
+

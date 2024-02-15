@@ -1,0 +1,162 @@
+#blacksmith script
+if isPet trigger
+	endscript
+end
+if and hasCondition trigger blacksmith if < trigger cash 3000
+	inc trigger locy 1
+	chat trigger " Scraggly says: Come back when you have enough money!"
+	endscript
+end
+# Craft
+if and hasItem trigger "generic tunic" hasItem trigger "iron ingot"
+	removeItem trigger "generic tunic"
+	removeItem trigger "iron ingot"
+	if hasItem trigger "iron ingot"
+		removeItem trigger "iron ingot"
+		if hasItem trigger "iron ingot"
+			removeItem trigger "iron ingot"
+			if hasItem trigger "iron ingot"
+				removeItem trigger "iron ingot"
+				if hasItem trigger "iron ingot"
+					removeItem trigger "iron ingot"
+					giveitem trigger "iron suit"
+					chat trigger " Here's a iron suit!"
+					inc trigger cash -3000
+					endscript
+					end
+				giveItem trigger "iron ingot"
+				end
+			giveItem trigger "iron ingot"
+			end
+		giveItem trigger "iron ingot"
+		end
+	giveItem trigger "iron ingot"
+	giveItem trigger "generic tunic"
+	end
+end
+if and hasItem trigger "generic helmet" hasItem trigger "iron ingot"
+	removeItem trigger "generic helmet"
+	removeItem trigger "iron ingot"
+	if hasItem trigger "iron ingot"
+		removeItem trigger "iron ingot"
+		if hasItem trigger "iron ingot"
+			removeItem trigger "iron ingot"
+			if hasItem trigger "iron ingot"
+				removeItem trigger "iron ingot"
+				if hasItem trigger "iron ingot"
+					removeItem trigger "iron ingot"
+					giveitem trigger "iron helmet"
+					chat trigger " Here's a iron helmet!"
+					inc trigger cash -3000
+					endscript
+					end
+				giveItem trigger "iron ingot"
+				end
+			giveItem trigger "iron ingot"
+			end
+		giveItem trigger "iron ingot"
+		end
+	giveItem trigger "iron ingot"
+	giveItem trigger "generic helmet"
+	end
+end
+if and hasItem trigger "generic shield" hasItem trigger "iron ingot"
+	removeItem trigger "generic shield"
+	removeItem trigger "iron ingot"
+	if hasItem trigger "iron ingot"
+		removeItem trigger "iron ingot"
+		if hasItem trigger "iron ingot"
+			removeItem trigger "iron ingot"
+			if hasItem trigger "iron ingot"
+				removeItem trigger "iron ingot"
+				if hasItem trigger "iron ingot"
+					removeItem trigger "iron ingot"
+					giveitem trigger "iron sheild"
+					chat trigger " Here's a iron shield!"
+					inc trigger cash -3000
+					endscript
+					end
+				giveItem trigger "iron ingot"
+				end
+			giveItem trigger "iron ingot"
+			end
+		giveItem trigger "iron ingot"
+		end
+	giveItem trigger "iron ingot"
+	giveItem trigger "generic shield"
+	end
+end
+if and hasItem trigger "generic goggles" hasItem trigger "iron ingot"
+	removeItem trigger "generic goggles"
+	removeItem trigger "iron ingot"
+	if and hasItem trigger "diamond" hasItem trigger "iron ingot"
+		removeItem trigger "diamond"
+		removeItem trigger "iron ingot"
+		if hasItem trigger "iron ingot"
+			removeItem trigger "iron ingot"
+			if hasItem trigger "iron ingot"
+				removeItem trigger "iron ingot"
+				if hasItem trigger "iron ingot"
+					removeItem trigger "iron ingot"
+					giveitem trigger "diamond goggles"
+					chat trigger " Here's diamond goggles!"
+					inc trigger cash -3000
+					endscript
+					end
+				giveItem trigger "iron ingot"
+				end
+			giveItem trigger "iron ingot"
+			end
+		giveItem trigger "iron ingot"
+		giveItem trigger "diamond"
+		end
+	giveItem trigger "iron ingot"
+	giveItem trigger "generic goggles"
+	end
+end
+if and hasItem trigger "generic necklace" hasItem trigger "iron ingot"
+	removeItem trigger "generic necklace"
+	removeItem trigger "iron ingot"
+	if and hasItem trigger "ruby" hasItem trigger "iron ingot"
+		removeItem trigger "ruby"
+		removeItem trigger "iron ingot"
+		if hasItem trigger "iron ingot"
+			removeItem trigger "iron ingot"
+			if hasItem trigger "iron ingot"
+				removeItem trigger "iron ingot"
+				if hasItem trigger "iron ingot"
+					removeItem trigger "iron ingot"
+					giveitem trigger "ruby necklace"
+					chat trigger " Here's a ruby necklace!"
+					inc trigger cash -3000
+					endscript
+					end
+				giveItem trigger "iron ingot"
+				end
+			giveItem trigger "iron ingot"
+			end
+		giveItem trigger "iron ingot"
+		giveItem trigger "ruby"
+		end
+	giveItem trigger "iron ingot"
+	giveItem trigger "generic necklace"
+	end
+end
+#
+if and hasCondition trigger blacksmith hasItem trigger "iron ingot"
+	chat trigger "Scraggly says: Bring me 5 iron ingots and a template. If you want Diamond goggles you'll need a diamond. Rarely you can find one while mining."
+	endscript
+	end
+#
+if hasCondition trigger blacksmith
+	chat trigger "Scraggly says: Have you smelted 5 iron ingots yet?"
+	endscript
+	end
+# first meeting
+chat trigger "Scraggly says: Hey there, nice to meet you!"
+chat trigger "Scraggly says: I run a blacksmith shop here."
+chat trigger "Scraggly says: I have mined this cave empty... and I don't need my pickaxe anymore.. It's up for sale. You might be lucky on your adventures and find some iron ore deposits."
+chat trigger "Scraggly says: Feel free to use my furnace to smelt iron ore. I need 5 iron ingots and a template on the table of the item you want. I'll craft any item for you, 3k gp a peice."
+addCondition trigger blacksmith
+endscript 
+

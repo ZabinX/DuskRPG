@@ -1,0 +1,6 @@
+if ispet trigger
+    endscript
+end
+order trigger "help story"
+chat trigger "Help window for story has been opened."
+endscript

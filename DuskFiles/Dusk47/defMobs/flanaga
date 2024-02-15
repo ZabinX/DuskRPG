@@ -1,0 +1,63 @@
+maxhp
+2999
+maxmp
+1999
+stre
+99
+inte
+99
+dext
+99
+wisd
+99
+cons
+99
+bravery
+10
+grouprelation
+10.0
+image
+231
+giveitem
+emerald
+0.2
+skill
+double attack
+33
+skill
+triple attack
+33
+skill
+quadruple attack
+33
+skill
+warrior group
+100
+skill
+clerical group
+100
+skill
+enchantment group
+100
+skill
+druidic group
+100
+skill
+white magic group
+100
+condition
+armor
+0
+-1
+condition
+strength
+0
+-1
+condition
+detect invis
+0
+-1
+onBattle
+flanraga_brain
+.
+

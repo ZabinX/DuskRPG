@@ -1,0 +1,6 @@
+chat trigger "Yay free food! **Yum Yum**"
+removecondition trigger hunger
+addconditionwithduration trigger nohunger 500
+endscript
+
+

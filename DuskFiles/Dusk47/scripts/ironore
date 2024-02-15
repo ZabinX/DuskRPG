@@ -1,0 +1,30 @@
+#Zabins' ore mining script
+if isInBattle trigger
+	if ! hasItem trigger pickaxe
+		order trigger flee
+		order trigger reset
+		inc trigger hp -10
+		chat trigger "You hit the rock and struck some flint.  Sparks go flying into your eyes, causing 10 damage.  *You think: maybe I should use a pickaxe.*"
+		removecondition trigger ironore1
+		endscript
+	end
+end
+if isInBattle trigger
+	if hasItem trigger pickaxe
+		livingthing target enemy trigger
+		if < target hp 1
+		order target "wear rockprotection"
+		chat trigger "You strike the rock with a pickaxe."
+		endscript
+	end
+end
+if isInBattle trigger
+	if hasItem trigger pickaxe
+		livingthing target enemy trigger
+		order target "unwear rockprotection"
+		chat trigger "You strike the rock with a pickaxe."
+		endscript
+	end
+end
+
+

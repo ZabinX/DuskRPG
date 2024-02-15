@@ -1,0 +1,20 @@
+type
+armor
+kind
+hands
+description
+a pair of leather gloves with bronze protection
+cost
+60
+mod
+40
+image
+164
+durability
+2400
+onWear
+wear_normal_armor
+.
+
+
+

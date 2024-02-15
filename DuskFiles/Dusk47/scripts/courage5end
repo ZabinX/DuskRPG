@@ -1,0 +1,3 @@
+inc trigger hpbonus -2500
+inc trigger hp -2500
+endscript

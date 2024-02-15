@@ -1,0 +1,6 @@
+inc trigger strengthBonus -20
+inc trigger constitutionbonus -10
+inc trigger acbonus -10
+endscript
+
+

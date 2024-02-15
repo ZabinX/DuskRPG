@@ -1,0 +1,19 @@
+type
+armor
+kind
+hands
+description
+a pair of guantlets constructed of the legendary metal dragonite
+cost
+30000
+mod
+5000
+image
+7
+durability
+3000000
+onWear
+wear_normal_armor
+.
+
+

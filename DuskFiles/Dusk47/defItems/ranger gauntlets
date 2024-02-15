@@ -1,0 +1,19 @@
+type
+armor
+kind
+hands
+description
+tough leather gauntlets, obviously made by the rangers
+cost
+300
+mod
+100
+image
+7
+durability
+5000
+onWear
+wear_normal_armor
+.
+
+

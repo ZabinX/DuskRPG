@@ -1,0 +1,33 @@
+#Mend: Heals someone by caster's intelligence.
+#
+if isinbattle caster
+	chat caster "You focus energy into mending your wounds."
+	inc target hp * caster wisd + 1.5 * rand 1.5
+	endscript
+end
+#
+if variableisstring param0 #If a target is specified
+	livingthing target local caster param0
+	if or or ispet target isplayer target ismob target
+		chat caster concat concat "You focus on mending " name target "'s wounds."
+		chat target "You feel slightly less wounded."
+		inc target hp * caster wisd + 1.5 * rand 1.5
+		endscript
+	end
+	chat caster "You do not see them here."
+end
+#
+#Else no target is specified
+if isinbattle caster
+	inc caster hp * caster wisd + 1.5 * rand 1.5
+	chat caster "You focus energy into mending your wounds."
+	endscript
+end
+if isinbattle trigger
+	inc trigger hp * caster wisd + 1.5 * rand 1.5
+	chat trigger "You focus energy into mending your wounds."
+	endscript
+end
+chat caster "You focus energy into mending your wounds."
+inc caster hp * caster wisd + 1.5 * rand 1.5
+endscript

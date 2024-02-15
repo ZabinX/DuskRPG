@@ -1,0 +1,18 @@
+type
+armor
+kind
+arms
+description
+A Godly Sheild
+cost
+0
+mod
+2500
+image
+7
+onWear
+orksheild
+onUnWear
+orksheildend
+.
+

@@ -1,0 +1,39 @@
+if ismob trigger
+    endscript
+end
+if ispet trigger
+    endscript
+end
+if ! hascondition trigger "ballswarning"
+	addcondition trigger "ballswarning"
+	chat trigger "Ball says:  Don't even think about pulling that sword form the stone..  If you do trust me you will regret it."
+	chat trigger "*Ball conjurs up a flameling*"
+	createoneusemob "flameling" 200 190
+	addcondition trigger "ballswarning"
+	endscript
+end
+if > trigger cp 200
+	chat trigger "flameling says:  Sorry about this but I have to throw lava at you now..."
+    	livingthing guard1 local trigger "flameling"
+	if ismob guard1
+	order guard1 "wake"
+        	order guard1 concat "a " name trigger
+	end
+	endscript
+end
+if hascondition trigger "excaliburquest"
+	chat trigger "Ball says:  I TOLD YOU NOT TO!!!  YOU DIE NOW MORTAL!"
+   	livingthing guard1 local trigger "flameling"
+	if ismob guard1
+	order guard1 "wake"
+        	order guard1 concat "a " name trigger
+	end
+	endscript
+end
+
+
+
+
+
+
+

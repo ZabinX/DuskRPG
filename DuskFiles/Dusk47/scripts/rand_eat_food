@@ -1,0 +1,15 @@
+number r * 3 rand
+if = r 0
+	chat trigger "That food tasted good"
+	end
+if = r 1
+	chat trigger "*burp*"
+	end
+if = r 2
+	chat trigger "Ahhhh... I feel full now"
+	end
+addConditionWithDuration trigger nohunger 20000
+removeItem trigger food
+endscript
+
+

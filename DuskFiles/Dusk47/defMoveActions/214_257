@@ -1,0 +1,28 @@
+#
+if isplayer trigger
+	order trigger leave
+	end
+if ispet trigger
+	endscript
+	end
+if hasCondition trigger safe
+	removeCondition trigger safe
+	removeflag trigger safe
+	end
+#
+number var * 3 rand
+if = var 0
+	set trigger locxy 128 135
+	endscript
+	end
+if = var 1
+	set trigger locxy 167 123
+	endscript
+	end
+if = var 2
+	set trigger locxy 200 200
+	endscript
+	end
+endscript
+
+

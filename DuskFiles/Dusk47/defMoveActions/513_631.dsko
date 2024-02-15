@@ -1,0 +1,2 @@
+trigger mushroomwest "Giant Mushroom"528 659 .529 659 394 .513 631 625 .513 629 426 .531 659 453 .531 658 306 
+trigger mushroomwest trigger north *trigger "You step on the switch and hear a loud *click!*" *trigger "**The water had stopped flowing here.**"  

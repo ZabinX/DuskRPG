@@ -1,0 +1,9 @@
+if ispet trigger
+    endscript
+end
+if ! hascondition trigger "inside"
+    addcondition trigger "inside"
+    set trigger locxy 208 234
+    endscript
+end
+endscript

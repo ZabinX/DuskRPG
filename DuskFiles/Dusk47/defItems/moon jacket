@@ -1,0 +1,19 @@
+type
+armor
+kind
+torso
+description
+a Moon Jacket, Your eyes squink up from the bright light reflecting in a billion tiny glittery spots covering the jacket
+cost
+2000
+mod
+0
+image
+206
+durability
+50000
+onWear
+start_moon_jacket
+onUnWear
+end_moon_jacket
+.

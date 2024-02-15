@@ -1,0 +1,2 @@
+trigger mushroomsouth "Giant Mushroom"528 659 .528 658 394 
+trigger mushroomsouth trigger west *trigger "**You kicked the mushroom and spores fly everywhere.**" *trigger "**You hear foot steps down the tunnel where you just came from.**" *trigger "**You think: Woah, that's trippy**"  

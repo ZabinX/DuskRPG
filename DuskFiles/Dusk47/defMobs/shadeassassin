@@ -1,0 +1,27 @@
+maxhp
+600
+maxmp
+600
+stre
+60
+inte
+60
+dext
+60
+cons
+60
+wisd
+60
+image
+22
+bravery
+0.45
+grouprelation
+0.75
+giveitem
+dagger
+0.5
+giveitem
+assassin blade
+0.2
+.

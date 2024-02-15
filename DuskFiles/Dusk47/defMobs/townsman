@@ -1,0 +1,52 @@
+description
+a busy-looking resident hurrily trying to navigate the crowds
+maxhp
+150
+maxmp
+0
+stre
+100
+inte
+10
+dext
+50
+wisd
+10
+cons
+50
+bravery
+0
+grouprelation
+0
+image
+5
+wield
+bearded axe
+-1
+-1
+torso
+steel suit
+-1
+-1
+giveitem
+steel suit
+0.1
+giveitem
+bearded axe
+0.1
+giveitem
+sandwich
+0.1
+faction
+smurf
+condition
+armor
+0
+-1
+skill
+Double Attack
+50
+skill
+Dodge
+30
+.

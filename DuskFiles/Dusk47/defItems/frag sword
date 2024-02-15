@@ -1,0 +1,18 @@
+type
+weapon
+description
+Fragdaddy's personal sword
+cost 
+2000
+mod
+800
+image
+9
+onWear
+fragsword
+onUnWear
+fragswordend
+durability
+7000000
+.
+

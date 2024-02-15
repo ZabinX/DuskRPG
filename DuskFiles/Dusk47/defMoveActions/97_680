@@ -1,0 +1,134 @@
+if ! isPlayer trigger
+	endscript
+	end
+#
+if ! hasCondition trigger savedhusbandend
+	chat trigger "Eduardo says: I've never seen you before but if you could prove yourself (to the local townspeople) to be a good person, I may just have some work for you... "
+	endscript
+end
+#
+if hasCondition trigger shenville_dq_1
+	removeCondition trigger shenville_dq_1
+	addConditionWithDuration trigger shenville_end 15000
+	chat trigger "Eduardo says: you saved the world !!!"
+	chat trigger "Eduardo says: this is for you:"
+	number r * rand 3
+	if = r 0
+		giveItem trigger "exp sword"
+		chat trigger "You get an experience sword"
+		endscript
+		end
+	if = r 1
+		inc trigger cash 100000
+		chat trigger "You get 100K gp"
+		endscript
+		end
+	giveItem trigger gboots
+	chat trigger "You get some gold boots"
+	endscript
+	end
+if hasCondition trigger shenville_dq_0
+	chat trigger "Eduardo says: damn ! They will annihilate us"
+	endscript
+	end
+#
+if hasCondition trigger shenville_mq_1
+	chat trigger "Eduardo says: you saved my son !!!"
+	removeCondition trigger shenville_mq_1
+	addCondition trigger shenville_dq_0
+	chat trigger "Eduardo says: but I can't be happy, because our world is in danger..."
+	chat trigger "Eduardo says: a portal between this world and the dark world has just opened"
+	chat trigger "Eduardo says: I'm so afraid..."
+	chat trigger "You say: what is this stink ?"
+	chat trigger "Eduardo says: I'm sorry... dark creatures can come in our world"
+	endscript
+	end
+#
+if hasCondition trigger shenville_mq_0
+	chat trigger "Eduardo says: oh my son..."
+	endscript
+	end
+#
+if and and hasCondition trigger shenville_gfq_0 hasItem trigger black_tooth hasItem trigger white_tooth
+	removeItem trigger black_tooth
+	removeItem trigger whitetooth
+	chat trigger "You say: Newbie citizen has been revenged"
+	chat trigger "Eduardo says: great !!! But I got a new trouble"
+	chat trigger "Eduardo says: Eli, my son, is going to die..."
+	removeCondition trigger shenville_gfq_0
+	addCondition trigger shenville_mq_0
+	endscript
+	end
+#
+if hasCondition trigger shenville_gfq_0
+	chat trigger "Eduardo says: Another citizen has been killed by shades"
+	chat trigger "Eduardo says: his corpse was barely recognizable, Please, go investigate"
+	endscript
+	end
+#
+if and hasCondition trigger blackbeardquest hasItem trigger crown
+	removeItem trigger crown
+	chat trigger "Eduardo says: Thank you very much for finding my crown !!!"
+	chat trigger "Eduardo says: Here is a generous reward for retrieving my crown."
+	inc trigger cash 10000
+		chat trigger "You get 10K gp"
+	chat trigger "You, hiding your wounds, say: it was my pleasure"
+	chat trigger "Eduardo says: I'm so sad..."
+	removeCondition trigger recievedcrown
+	addCondition trigger shenville_gfq_0
+	endscript
+	end
+#
+if hasCondition trigger shenville_pq_0
+	chat trigger "Eduardo says: have you killed the pirate's boss and retrieved my crown yet?"
+	endscript
+	end
+#
+if hasCondition trigger shenville_0	
+	chat trigger "Eduardo says: pirates at the harbor east of the village stole my Royal Crown"
+	chat trigger "Eduardo says: can you bring it back to me?"
+	removeCondition trigger shenville_0
+	addCondition trigger shenville_pq_0
+	endscript
+	end
+if hasCondition trigger killedpirate	
+	chat trigger "Eduardo says: pirates at the harbor east of the village stole my Royal Crown"
+	chat trigger "Eduardo says: can you bring it back to me?"
+	removeCondition trigger killedpirate
+	addCondition trigger shenville_pq_0
+	endscript
+	end
+if hasCondition trigger killedpirateguard	
+	chat trigger "Eduardo says: pirates at the harbor east of the village stole my Royal Crown"
+	chat trigger "Eduardo says: can you bring it back to me?"
+	removeCondition trigger killedpirateguard
+	addCondition trigger shenville_pq_0
+	endscript
+	end
+if hasCondition trigger killedpirateassassin	
+	chat trigger "Eduardo says: pirates at the harbor east of the village stole my Royal Crown"
+	chat trigger "Eduardo says: can you bring it back to me?"
+	removeCondition trigger killedpirateassassin
+	addCondition trigger shenville_pq_0
+	endscript
+	end
+#
+if hasCondition trigger shenville_end
+	chat trigger "Eduardo says: tnx again"
+	endscript
+	end
+# first meeting
+chat trigger "Eduardo says: Hi, I'm the king around here."
+chat trigger "Eduardo says: are you the adventurer we've been waiting for"
+chat trigger "Eduardo says: I got some work for you, remember to talk to me often"
+chat trigger "Eduardo says: and with the guys at the bar, they'll help you"
+addCondition trigger shenville_0
+endscript
+
+
+
+
+
+
+
+

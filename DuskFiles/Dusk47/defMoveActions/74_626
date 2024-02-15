@@ -1,0 +1,22 @@
+if hasCondition trigger shenville_0
+	livingthing guard1 local trigger "Pirate Guard"
+	if ismob guard1
+	order guard1 "wake"
+        	order guard1 concat "a " name trigger
+	end
+	livingthing guard1 local trigger "1.Pirate Guard"
+	if ismob guard1
+	order guard1 "wake"
+        	order guard1 concat "a " name trigger
+	end
+end
+addCondition killedpirate
+removeCondition shenville_0
+removeCondition piratebattle
+endscript
+
+
+
+
+
+

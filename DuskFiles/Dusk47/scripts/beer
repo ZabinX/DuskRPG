@@ -1,0 +1,8 @@
+if hasCondition trigger nothirst
+	addconditionwithduration trigger drunk 4
+	order trigger "emote Burps"
+	end
+addconditionwithduration trigger nothirst 1500
+removeitem trigger beer
+endscript
+

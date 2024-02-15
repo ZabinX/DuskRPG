@@ -1,0 +1,10 @@
+if hasCondition trigger mushroomsouth
+	createoneusemob "Giant Mushroom" 528 659
+	changetile 528 658 394
+	removecondition trigger mushroomsouth
+	addCondition trigger west
+	chat trigger "**You kicked the mushroom and spores fly everywhere.**"
+	chat trigger "**You hear foot steps down the tunnel where you just came from.**"
+	chat trigger "**You think: Woah, that's trippy**"
+	endscript
+end

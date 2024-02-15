@@ -1,0 +1,20 @@
+type
+armor
+kind
+arms
+description
+an iron shield
+cost
+3000
+mod
+60
+image
+7
+durability
+30000
+onWear
+iron_shield
+onUnWear
+iron_shield_unwear
+.
+

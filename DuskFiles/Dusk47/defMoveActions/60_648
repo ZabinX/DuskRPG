@@ -1,0 +1,48 @@
+if ! hasCondition trigger kristaquestend
+	chat trigger "**Kristina snores**  Krista's mom appears to be sleeping."
+	endscript
+end
+if and hasCondition trigger killedshademaster hasCondition trigger savedhusband
+	chat trigger "Kristina says: I can't believe it!  My husband is back home!"
+	chat trigger "Kristina says: Thank you so much for saving my husband!!"
+	giveItem trigger "Moon Jacket"
+	chat trigger "Kristina says: Here take his extra Moon Jacket."
+	removeCondition trigger kristinaquest2
+	removeCondition trigger killedshademaster
+	removeCondition trigger savedhusband
+	addCondition trigger savedhusbandend
+	endscript
+	end
+#
+if hasCondition trigger kristinaquest2
+	chat trigger "Kristina says: Follow the path outside to the south-west- on the other side of the small bridge crossing the river- you'll find the dense forest where the shades seem to be coming from."
+	chat trigger "Kristina says: Kill that Shade Master for me and find out what they did to my husband!"
+	endscript
+	end
+#
+if hasCondition trigger kristinaquest	
+	chat trigger "Kristina says: I've been wanting revenge for the death of my husband."
+	chat trigger "Kristina says: The shades are even starting to infest the town and people are being attacked."
+	chat trigger "Kristina says: My husband learned the shades were coming out of a thick forest to the south-west." 
+	chat trigger "Kristina says: He tought he was strong enough to take on the Shade Master with all of his moon armor equipped." 
+	chat trigger "Kristina says: But I haven't seen him since then and that was 2 weeks ago.  I fear that he has been killed."
+	removeCondition trigger kristinaquest
+	addCondition trigger kristinaquest2
+	endscript
+	end
+#
+if hasCondition trigger savedhusbandend
+	chat trigger "Krista says: Thanks again for saving my husband."
+	endscript
+	end
+# first meeting
+chat trigger "Kristina says: Hey have you seen my daughter Krista anywhere?."
+chat trigger "You say: Yes, I saw her right inside the castle wall swimming at the little pond there."
+chat trigger "Kristina says: Oh thanks.  I've been quite depressed and bed ridden ever since a couple weeks ago when my husband 'Chris' was killed by those awful shades."
+chat trigger "Kristina says: You look like the adventerous type, can you do me a favor?"
+addCondition trigger kristinaquest
+endscript
+
+
+
+

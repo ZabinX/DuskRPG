@@ -1,0 +1,98 @@
+#Den: Used to locate thief dens
+####You could put a check here to change the location of the den
+####based on cp, race, how trained they are in thief group, etc
+####once denX and denY are set, nothing else has to change.
+number denX 214
+number denY 7
+number x caster locx
+number y caster locy
+if < x denX
+    number deltaX - denX x
+    if < y denY
+        number deltaY - denY y
+        if and < deltaY 10 < deltaX 10
+            # They are close and they need to go southeast
+            chat caster "You are close now, but you still need to head southeast."
+            endscript
+        end
+         # They need to go southeast
+       chat caster "You need to head southeast."
+       endscript
+    end
+    if > y denY
+        number deltaY - y denY
+        if and < deltaY 10 < deltaX 10
+            # They are close and they need to go northeast
+            chat caster "You are close now, but you still need to head northeast."
+        end
+        # They need to go northeast
+       chat caster "You need to head northeast."
+        endscript
+    end
+    if < deltaX 10
+        # They are close and they need to head due east
+        chat caster "You are close now, but you still need to head east."
+    end
+    # They need to head due east
+    chat caster "You need to head east."
+    endscript
+end
+if > x denX
+    number deltaX - x denX
+    if < y denY
+        number deltaY - denY y
+        if and < deltaY 10 < deltaX 10
+            # They are close and they need to go southwest
+            chat caster "You are close now, but you still need to head southwest."
+            endscript
+        end
+         # They need to go southwest
+       chat caster "You need to head southwest."
+       endscript
+    end
+    if > y denY
+        number deltaY - y denY
+        if and < deltaY 10 < deltaX 10
+            # They are close and they need to go northwest
+            chat caster "You are close now, but you still need to head northwest."
+        end
+        # They need to go northwest
+       chat caster "You need to head northwest."
+        endscript
+    end
+    if < deltaX 10
+        # They are close and they need to head due west
+        chat caster "You are close now, but you still need to head west."
+    end
+    # They need to head due west
+    chat caster "You need to head west."
+    endscript
+end
+if = x denX
+    if < y denY
+        number deltaY - denY y
+        if < deltaY 10
+            # They are close and they need to go south
+            chat caster "You are close now, but you still need to head south."
+            endscript
+        end
+         # They need to go south
+       chat caster "You need to head south."
+       endscript
+    end
+    if > y denY
+        number deltaY - y denY
+        if < deltaY 10
+            # They are close and they need to go north
+            chat caster "You are close now, but you still need to head north."
+            endscript
+        end
+        # They need to go north
+       chat caster "You need to head north."
+        endscript
+    end
+    # They found denX, denY
+    chat caster "You found the den!"
+    endscript
+end
+endscript

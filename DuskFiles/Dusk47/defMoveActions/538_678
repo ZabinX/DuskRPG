@@ -1,0 +1,138 @@
+#Zabin's 'reset' button- cleaning up the crap
+if ! hasCondition trigger puzzle
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 544
+			if = guard2 locY 679
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 544
+			if = guard2 locY 675
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 538
+			if = guard2 locY 673
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 533
+			if = guard2 locY 674
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 528
+			if = guard2 locY 668
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 528
+			if = guard2 locY 667
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 528
+			if = guard2 locY 666
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 523
+			if = guard2 locY 659
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 522
+			if = guard2 locY 659
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 513
+			if = guard2 locY 659
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 513
+			if = guard2 locY 660
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 513
+			if = guard2 locY 661
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 513
+			if = guard2 locY 662
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 513
+			if = guard2 locY 663
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 513
+			if = guard2 locY 664
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 513
+			if = guard2 locY 665
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 513
+			if = guard2 locY 666
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 513
+			if = guard2 locY 667
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 507
+			if = guard2 locY 673
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 506
+			if = guard2 locY 673
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 498
+			if = guard2 locY 673
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Chris"
+		if = guard2 locX 497
+			if = guard2 locY 673
+			set guard2 locxy 1 1
+			end
+		end
+set trigger locxy 526 666
+endscript
+end
+

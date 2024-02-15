@@ -1,0 +1,12 @@
+type
+food
+A bugs corpse, some people eat these nasty things
+cost
+40
+image
+46
+onuse
+bugfood
+uses
+1
+.

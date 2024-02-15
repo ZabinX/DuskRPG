@@ -1,0 +1,30 @@
+# guy that tell information about location
+if ! isPlayer trigger
+	endscript
+	end
+#
+if hasCondition trigger shenville_dq_0
+	chat trigger "MerlinX says: please destroy dark creatures"
+	endscript
+	end
+#
+if hasCondition trigger shenville_mq_0
+	chat trigger "MerlinX says: Eli lives west of here in a big house"
+	endscript
+	end
+#
+if hasCondition trigger shenville_gfq_0
+	chat trigger "MerlinXsays: I know that in the gold forest live dangerous felines"
+	chat trigger "MerlinX says: there are secret entrances to enter into the forest"
+	endscript
+	end
+#
+if hasCondition trigger shenville_pq_0
+	chat trigger "MerlinX says: pirates... mmm... seek in the port east of the village"
+	endscript
+	end
+#
+chat trigger "The guy says: hi"
+endscript
+
+

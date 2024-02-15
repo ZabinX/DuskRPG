@@ -1,0 +1,220 @@
+if hasCondition trigger mushroomhole
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger mushroomhole2
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger mushroomhole3
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger puzzle
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger puzzlefinished
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger shenville_0
+	livingthing guard1 local trigger "Pirate"
+		if = guard1 locX 78
+			if = guard1 locY 627
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Pirate Guard"
+		if = guard2 locX 73
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "Pirate Guard"
+		if = guard3 locX 74
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "Pirate Assassin"
+		if = guard1 locX 67
+			if = guard1 locY 627
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Pirate Assassin"
+		if = guard2 locX 68
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "BlackBeard"
+		if = guard3 locX 63 
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+	set trigger locxy 394 494
+	endscript
+end
+if hasCondition trigger killedpirateassassin
+	livingthing guard1 local trigger "Pirate Assassin"
+		if = guard1 locX 67
+			if = guard1 locY 627
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Pirate Assassin"
+		if = guard2 locX 68
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "BlackBeard"
+		if = guard3 locX 63 
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+	set trigger locxy 394 494
+	endscript
+end
+if hasCondition trigger killedpirateguard
+	livingthing guard2 local trigger "Pirate Guard"
+		if = guard2 locX 73
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "Pirate Guard"
+		if = guard3 locX 74
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "Pirate Assassin"
+		if = guard1 locX 67
+			if = guard1 locY 627
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Pirate Assassin"
+		if = guard2 locX 68
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "BlackBeard"
+		if = guard3 locX 63 
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+	set trigger locxy 394 494
+	endscript
+end
+if hasCondition trigger killedpirate
+	livingthing guard1 local trigger "Pirate"
+		if = guard1 locX 78
+			if = guard1 locY 627
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Pirate Guard"
+		if = guard2 locX 73
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "Pirate Guard"
+		if = guard3 locX 74
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "Pirate Assassin"
+		if = guard1 locX 67
+			if = guard1 locY 627
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Pirate Assassin"
+		if = guard2 locX 68
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "BlackBeard"
+		if = guard3 locX 63 
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+	set trigger locxy 394 494
+	endscript
+end
+if hasCondition trigger inforest3
+	livingthing guard1 local trigger "Mutant Scorpion"
+		if = guard1 locX 230
+			if = guard1 locY 158
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Mutant Scorpion"
+		if = guard2 locX 231
+			if = guard2 locY 159
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "Mutant Scorpion"
+		if = guard3 locX 230
+			if = guard3 locY 160
+			set guard3 locxy 1 1
+			end
+		end
+end
+if hasCondition trigger inforest2
+	livingthing guard1 local trigger "Mutant Scorpion"
+		if = guard1 locX 153
+			if = guard1 locY 200
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Mutant Scorpion"
+		if = guard2 locX 153
+			if = guard2 locY 202
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "Mutant Scorpion"
+		if = guard3 locX 154
+			if = guard3 locY 201
+			set guard3 locxy 1 1
+			end
+		end
+end
+if hascondition trigger "excaliburquest"
+	changetile 199 191 56
+	end
+end
+if hascondition trigger "silencer_fight"
+    removecondition trigger "silencer_fight"
+    if hascondition trigger allowed_boat
+        removecondition trigger allowed_boat
+		removeitem trigger boat
+    end
+    set trigger locxy 121 41
+end
+if hasitem trigger "Strabo Key"
+    global string strabo_name_keyholder concat name trigger " now carries the key to Castle Strabo."
+end
+if hasitem trigger "Baron Key"
+    global string baron_name_keyholder concat name trigger " now carries the key to Castle Baron."
+end
+if hasitem trigger "Kilgore Key"
+    global string kilgore_name_keyholder concat name trigger " now carries the key to Castle Kilgore."
+end
+endscript
+
+

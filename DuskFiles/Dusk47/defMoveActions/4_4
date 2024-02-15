@@ -1,0 +1,58 @@
+if ispet trigger
+    endscript
+end
+if ismob trigger
+    endscript
+end
+if strequals clan trigger global baronclan
+    livingthing guard1 local trigger "Castle Guard"
+    if hascondition trigger inside
+        order guard1 concat "say Safe journey, " name trigger
+        removecondition trigger inside
+        inc trigger locy 1
+        endscript
+    end
+    addcondition trigger inside
+    order guard1 concat "say Welcome to Castle Baron, " name trigger
+    inc trigger locy -1
+    endscript
+end
+if strequals clan trigger global baronclanally
+    livingthing guard1 local trigger "Castle Guard"
+    if hascondition trigger inside
+        order guard1 concat "say Safe journey, " name trigger
+        removecondition trigger inside
+        inc trigger locy 1
+        endscript
+    end
+    addcondition trigger inside
+    order guard1 concat "say Welcome to Castle Baron, " name trigger
+    inc trigger locy -1
+    endscript
+end
+if ! hascondition trigger mob_attack
+    addcondition trigger mob_attack
+    if hascondition trigger safe
+        removecondition trigger safe
+    end
+    chat trigger concat concat "You are not in clan " global baronclan "!"
+    livingthing guard1 local trigger "Castle Guard"
+    if ismob guard1
+        order guard1 "wake"
+        order guard1 concat "a " name trigger
+        set guard1 locxy 4 5 
+    end
+    endscript
+end
+if ! hascondition trigger mob2_attack
+    addcondition trigger mob2_attack
+    livingthing guard2 local trigger "1.Castle Guard"
+    if ismob guard2
+        order guard2 "wake"
+        order guard2 concat "a " name trigger
+        set guard2 locxy 4 5
+    end
+    endscript
+end
+endscript
+

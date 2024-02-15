@@ -1,0 +1,132 @@
+Ok this is a little booklet of some scripts. I am going
+to make this mainly for my own references but also
+to help any of you other gods :) Please Look at help
+scripting2 for better and much more examples.
+-------------------------------------------------
+# The almighty pet script, i always forget to add this on move actions
+-------------------------------------------------
+if ispet trigger
+     endscript
+end
+-------------------------------------------------
+# A pretty basic cplock on a weapon
+-------------------------------------------------
+if < trigger cp 2000
+    chat trigger "You must experience more before you can wield this sword."
+    string command concat "unwear " itemname
+    order trigger command
+    endscript
+end
+-------------------------------------------------
+# Can Move
+-------------------------------------------------
+! if isMob trigger
+     endscript
+end
+-------------------------------------------------
+# Lock so mortals cant get our precious stuff
+-------------------------------------------------
+if < trigger privs 3
+        chat trigger "huh?"
+        endscript
+    end
+-------------------------------------------------
+# Name Specific Lock
+-------------------------------------------------
+if ! strequals name trigger "<yourname>"
+        chat trigger "huh?"
+        endscript
+end
+-------------------------------------------------
+Things to change locx locy tile# (Unred Sanc. Lake)
+-------------------------------------------------
+changetile 142 94 2
+changetile 142 95 20
+if ! hascondition trigger "onlake"
+    chat trigger "As you step into the lake, stones rise up to meet your feet."
+    order trigger leave
+    addcondition trigger "onlake"
+    endscript
+end
+-------------------------------------------------
+Make an item appear (itemname locx locy)
+-------------------------------------------------
+createitem "Fire Dragon Scale" 191 153
+-------------------------------------------------
+Basic Stuff
+-------------------------------------------------
+isInBattle <livingthing> - Used as a condition with an if statement.
+    When the livingthing is in a battle, isInBattle returns true.
+
+isPlayer <livingthing> - Used as a condition with an if statement.
+    When the livingthing is a player, isPlayer returns true.
+
+isPet <livingthing> - Used as a condition with an if statement.
+    When the livingthing is a pet, isPet returns true.
+
+isMob <livingthing> - Used as a condition with an if statement.
+    When the livingthing is a mob, isMob returns true.
+
+isClan <livingthing> <string> - Used as a condition with an if statement.
+    When the liviningthing's clan matches the string, isClan returns true.
+
+isRace <livingthing> <string> - Used as a condition with an if statement.
+    When the liviningthing's race matches the string, isRace returns true.
+
+hasItem <livingthing> <itemname> - Used as a condition with an if statement.
+    When the livingthing has the named item, hasItem returns true.
+
+giveItem <livingthing> <itemname> - Gives the livingthing this item.
+
+removeItem <livingthing> <itemname> - Removes this item from the livingthing
+    so it will no longer be in their inventory.
+
+isWearing <livingthing> <itemname> - Used as a condition with an if statement.
+    When the livingthing is wearing the named item, isWearing returns true.
+
+unWear <livingthing> <itemname> - Forces this livingthing to unwear the item.
+    Any scripts that happen onUnwear will run as well.
+    Itemname can be "all" to force the livingthing to stop wearing all armor
+    and thier weapon.
+
+variableIsNumber <variablename> - Used as a condition with an if statement.
+    Will return true when the named variable is a number.
+
+addFlag <livingthing> <flag> - Adds the specified flag to the livingthing.
+    A flag is the name that gets put on you.  In this example,
+    "<invis>bozo_the_newbie", invis is the flag.
+
+order <livingthing> <command> - Orders a livingthing (player, mob, pet) to
+    execute that command.  Essentially the same as having the player type
+    something into the command line or ordering a pet to do something.
+
+hasCondition <livingthing> <condition> - Returns true when the livingthing has
+    the specified condition.
+
+addCondition <livingthing> <condition> - Adds the condition to a livingthing.
+    Adding the condition again if the living thing already has it does no harm.
+    In some cases, you will want to check to see if the livingthing already has
+    the condition and only add it if they do not.
+
+addConditionWithDuration <livingthing> <condition> <duration> - Adds the
+    condition for specified duration (in seconds).  This behaves exactly as
+    addCondition except that the condition will be removed automatically after
+    the specified duration.
+
+removeCondition <livingthing> <condition> - Removes the condition from the
+    livingthing. While removing a condition that a livingthing does not have
+    will not hurt anything, it is a good practice to make sure that the
+    livingthing has the condition before removing it.
+
+-------------------------------------------------------------
+addcondition to a mob s can be changed
+-------------------------------------------------------------
+livingthing s "Mob Name here"
+addconditionwithduration s "condition name"
+--------------------------------------------------------------
+> = Greater Than
+< = Less Than
+
+
+
+

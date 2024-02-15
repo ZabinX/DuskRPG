@@ -1,0 +1,12 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger "walk"
+    removecondition trigger "walk"
+    set trigger locxy 171 195
+    endscript
+end
+addCondition trigger intown
+endscript
+
+

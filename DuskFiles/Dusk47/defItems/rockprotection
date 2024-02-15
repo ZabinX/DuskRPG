@@ -1,0 +1,17 @@
+type
+weapon
+description
+rock hard protection
+cost
+10
+mod
+125
+image
+206
+durability
+900000
+onWear
+rockprotectionstart
+onUnWear
+rockprotectionend
+.

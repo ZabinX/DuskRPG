@@ -1,0 +1,25 @@
+#This checks to see whether the caster has the necessary equiptment to summon the creature 
+#
+if ! hasitem caster "amethyst"
+	chat caster " You need an amethyst to summon this creature"
+end
+if ! hasitem caster "diamond"
+	chat caster " You need a diamond to summon this creature"
+end
+if ! > caster exp 100
+	chat caster " You need 100exp to summon this creature"
+end
+chat trigger "Ok u have all the items"
+if isInBattle trigger
+	number damage * 7.5 * rand 7.8 * caster stre * caster inte 
+	set caster damdone damage
+	chat caster concat concat concat concat " The great Ultima Bahamut is summoned. He attacks " name enemy caster "  with Terra Flare and does" damage " damage."
+	chat enemy caster concat concat " Ultima Bahamut attacks you with Terra Flare doing " damage " damage."
+	removeItem caster "amethyst"
+	removeitem caster "diamond"
+	inc caster exp -100
+	inc enemy caster hp * -1 damage
+endscript
+chat caster "You must be in battle to summon this creature"
+end
+endscript

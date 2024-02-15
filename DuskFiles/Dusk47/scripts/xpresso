@@ -1,0 +1,7 @@
+if hascondition trigger "tired"
+    chat trigger "You sip on the dark potion and begin to feel less tired."
+    removecondition trigger "tired"
+    endscript
+end
+chat trigger "You sip on the dark potion and begin to feel a little hyper."
+endscript

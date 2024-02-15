@@ -1,0 +1,11 @@
+if isPlayer trigger
+  chat trigger "  The world shimmers briefly."
+  addCondition trigger invis
+end
+if isPet trigger
+  chat trigger " You cannot wear this item."
+  order trigger "unwear neck"
+end
+endscript
+
+

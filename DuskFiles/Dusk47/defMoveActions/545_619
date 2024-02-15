@@ -1,0 +1,30 @@
+if hasCondition trigger mushroomhole3
+	createoneusemob "Giant Mushroom2" 536 616
+	createoneusemob "Giant Mushroom3" 539 616
+	createoneusemob "Giant Mushroom4" 541 610
+	createoneusemob "Giant Mushroom5" 541 611
+	createoneusemob "Giant Mushroom6" 542 611
+	createoneusemob "Giant Mushroom7" 543 613
+	createoneusemob "ball" 531 614
+	removeCondition trigger mushroomhole3
+	addCondition trigger puzzle
+	endscript
+end
+if hasCondition trigger mushroomtimewarp
+	createoneusemob "Giant Mushroom2" 536 616
+	createoneusemob "Giant Mushroom3" 539 616
+	createoneusemob "Giant Mushroom4" 541 610
+	createoneusemob "Giant Mushroom5" 541 611
+	createoneusemob "Giant Mushroom6" 542 611
+	createoneusemob "Giant Mushroom7" 543 613
+	createoneusemob "ball" 531 614
+	removeCondition trigger mushroomtimewarp
+	addCondition trigger puzzle
+	endscript
+end
+
+
+
+
+
+

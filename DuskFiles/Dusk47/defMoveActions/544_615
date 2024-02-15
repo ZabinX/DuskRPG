@@ -1,0 +1,15 @@
+if hasCondition trigger checkpuzzlecomplete
+	set trigger locxy 544 614
+	endscript
+end
+chat trigger "**You step on the switch and nothing happens.**"
+removeCondition trigger ballsouth4
+removeCondition trigger balleast5
+removeCondition trigger ballnorth5
+endscript
+
+
+
+
+
+

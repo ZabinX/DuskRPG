@@ -1,0 +1,12 @@
+type
+item
+description
+an item to be given only by slaying a mob
+cost
+0
+image
+27
+onget
+getspellcomponent
+.
+

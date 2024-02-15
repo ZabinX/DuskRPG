@@ -1,0 +1,14 @@
+type
+item
+description
+a scroll that returns you to Edwardo village
+cost
+100
+image
+6
+onuse
+recall
+uses
+1
+.
+

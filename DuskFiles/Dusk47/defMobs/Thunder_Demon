@@ -1,0 +1,46 @@
+maxhp
+25000
+maxmp
+4000
+stre
+1600
+inte
+4000
+dext
+1100
+wisd
+4900
+cons
+5400
+bravery
+1.8
+grouprelation
+1
+image
+15
+faction
+demon
+giveitem
+thunder blade
+0.02
+wield
+ork bane
+-1
+-1
+condition
+detect invis
+1
+-1
+skill
+double attack
+100
+skill
+triple attack
+100
+.
+
+
+
+
+
+

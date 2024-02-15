@@ -1,0 +1,17 @@
+type
+armor
+kind
+skull
+description
+a cobalt helm
+cost
+900
+mod
+100
+image
+7
+durability
+50000
+onWear
+wear_normal_armor
+.

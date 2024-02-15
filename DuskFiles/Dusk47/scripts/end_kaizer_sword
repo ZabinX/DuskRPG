@@ -1,0 +1,8 @@
+inc trigger strengthbonus -100
+inc trigger dexteritybonus -200
+inc trigger damModBonus -100
+endscript
+
+
+
+

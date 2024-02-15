@@ -1,0 +1,13 @@
+type
+food
+description
+a fine wine
+cost
+50
+image
+6
+onuse
+wine
+uses
+1
+.

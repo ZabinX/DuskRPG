@@ -1,0 +1,19 @@
+type
+armor
+kind
+arms
+description
+a sleeves constructed of the legendary metal dragonite
+cost
+30000
+mod
+5000
+image
+7
+durability
+2500000
+onWear
+wear_normal_armor
+.
+
+

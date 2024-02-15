@@ -1,0 +1,46 @@
+maxhp
+60
+maxmp
+10
+stre
+30
+inte
+10
+dext
+50
+wisd
+10
+cons
+60
+bravery
+1
+grouprelation
+10
+image
+3
+giveitem
+wooden dagger
+0.5
+faction
+evil
+condition
+detect invis
+-1
+-1
+wield
+dagger
+1
+1
+skill
+dodge
+1
+skill
+double attack
+5
+skill
+triple attack
+5
+skill
+quadruple attack
+5
+.

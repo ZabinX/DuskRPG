@@ -1,0 +1,104 @@
+if < trigger mp 55
+    endscript
+end
+number dodge / trigger skill "Dodge" 100
+number double / trigger skill "Double Attack" 100
+number triple / trigger skill "Triple Attack" 100
+number quad / trigger skill "Quadruple Attack" 100
+number damage_per_hit - * / trigger stre 2 / trigger dammod 100 trigger ac
+number total_damage + * double damage_per_hit + * triple damage_per_hit + * quad damage_per_hit damage_per_hit
+number likely_damage * total_damage * dodge / 3 4
+livingthing mpet pet trigger
+if ispet mpet
+    number double / mpet skill "Double Attack" 100
+    number triple / mpet skill "Triple Attack" 100
+    number quad / mpet skill "Quadruple Attack" 100
+    number mpet_damage_per_hit - * / mpet stre 2 / mpet dammod 100 mpet ac
+    number mpet_total_damage + * double mpet_damage_per_hit + * triple mpet_damage_per_hit + * quad mpet_damage_per_hit mpet_damage_per_hit
+    number likely_damage + likely_damage * mpet_total_damage * dodge / 3 4
+end
+number mimic_hp trigger hp
+number clerical trigger skill "clerical group"
+number druidic trigger skill "druidic group"
+number warrior trigger skill "warrior group"
+number white trigger skill "white magic group"
+number fire trigger skill "elemental fire group"
+number ice trigger skill "elemental ice group"
+if or < mimic_hp * likely_damage 2
+    < mimic_hp / trigger maxhp 2
+    if > clerical 0
+        if = clerical 100
+chat enemy trigger "mimic casts heal"
+            order trigger "cast heal"
+            endscript
+        end
+chat enemy trigger "mimic casts mend"
+        order trigger "cast mend"
+        endscript
+    end
+    if > white 59
+chat enemy trigger "mimic casts meditation"
+        order trigger "cast meditation"
+        endscript
+    end
+end
+if = fire 100
+    if and hasitem trigger "fire dragon blood"
+            hasitem trigger "fire dragon tooth"
+chat enemy trigger "mimic casts fire ball"
+        order trigger "cast \"fire ball\""
+        endscript
+    end
+end
+if > fire 65
+    if hasitem trigger "fire dragon blood"
+chat enemy trigger "mimic casts fire bolt"
+        order trigger "cast \"fire bolt\""
+        endscript
+    end
+end
+if > fire 32
+    if hasitem trigger "fire dragon tooth"
+chat enemy trigger "mimic casts burn"
+        order trigger "cast burn"
+        endscript
+    end
+end
+if = ice 100
+    if and hasitem trigger "ice dragon blood"
+            hasitem trigger "ice dragon tooth"
+chat enemy trigger "mimic casts ice ball"
+        order trigger "cast \"ice ball\""
+        endscript
+    end
+end
+if > ice 65
+    if hasitem trigger "ice dragon blood"
+chat enemy trigger "mimic casts ice bolt"
+        order trigger "cast \"ice bolt\""
+        endscript
+    end
+end
+if > ice 32
+    if hasitem trigger "ice dragon tooth"
+chat enemy trigger "mimic casts freeze"
+        order trigger "cast freeze"
+        endscript
+    end
+end
+if = white 100
+chat enemy trigger "mimic casts holy"
+    order trigger "cast holy"
+    endscript
+end
+if > druidic 49
+chat enemy trigger "mimic casts thorns"
+    order trigger "cast thorns"
+    endscript
+end
+if > white 19
+chat enemy trigger "mimic casts angel strike"
+    order trigger "cast \"angel strike\""
+    endscript
+end
+endscript

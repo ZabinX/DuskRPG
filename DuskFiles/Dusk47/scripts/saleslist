@@ -1,0 +1,17 @@
+chat trigger " Heres our sales list:
+--------------------------------------------------------------------------------------------------------
+ITEM		COST			DESCRIPTION
+
+lavendar	150			Heals 100 HP
+
+wolfsbane	200			Heals 100 MP
+
+mushroom	350			Unknown. Can be mixed with Water
+
+water bottle	20			Needed to mix some herbs into potions
+
+blood stone	400			Heals 350 HP
+
+mandrake	450			Heals 300MP
+----------------------------------------------------------------------------------------------------------"
+endscript

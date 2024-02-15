@@ -1,0 +1,13 @@
+type
+item
+description
+a crystal, swirling with blue and green energy
+cost
+1000
+image
+6
+onuse
+energycrystal
+uses
+1
+.

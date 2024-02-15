@@ -1,0 +1,19 @@
+type
+armor
+kind
+legs
+description
+some titanium leggings
+cost
+120
+mod
+80
+image
+7
+durability
+4800
+onWear
+wear_normal_armor
+.
+
+

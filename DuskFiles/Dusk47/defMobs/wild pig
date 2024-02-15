@@ -1,0 +1,39 @@
+maxhp
+9000
+maxmp
+3000
+stre
+700
+inte
+100
+dext
+300
+wisd
+100
+cons
+400
+bravery
+1
+grouprelation
+1
+image
+12
+condition
+detect invis
+0
+-1
+faction
+smurf
+skill
+Double Attack
+100
+skill
+Triple Attack
+90
+skill
+Quadruple Attack
+80
+skill
+Dodge
+35
+.

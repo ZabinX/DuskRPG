@@ -1,0 +1,49 @@
+maxhp
+50000
+maxmp
+7000
+stre
+1900
+inte
+2600
+dext
+1200
+wisd
+3200
+cons
+6000
+bravery
+2
+grouprelation
+.5
+image
+20
+giveitem
+befallen claws
+1
+giveitem
+befallen crown
+1
+giveitem
+free trip to start
+1
+faction
+zombie
+condition
+detect invis
+0
+-1
+wield
+Questsword
+-1
+-1
+skill
+double attack
+100
+skill
+triple attack
+100
+.
+
+
+

@@ -1,0 +1,13 @@
+# flowris (SHenVille)
+#
+if < 1 * 15 rand
+	endscript
+	end
+#
+number damage 9000
+livingthing target enemy trigger
+inc target hp * -1 damage
+chat enemy trigger "zago stings you for 9000 damage"
+endscript
+
+

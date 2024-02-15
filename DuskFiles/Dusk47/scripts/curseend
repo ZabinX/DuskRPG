@@ -1,0 +1,9 @@
+removeCondition trigger cursed
+inc trigger strengthbonus 20
+inc trigger acbonus 20
+chat trigger "You no longer feel cursed."
+endscript
+
+
+
+

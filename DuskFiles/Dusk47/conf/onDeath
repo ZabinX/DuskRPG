@@ -1,0 +1,278 @@
+if hasCondition trigger mushroomhole
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger mushroomhole2
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger mushroomhole3
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger puzzle
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger puzzlefinished
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger shenville_0
+	livingthing guard1 local trigger "Pirate"
+		if = guard1 locX 78
+			if = guard1 locY 627
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Pirate Guard"
+		if = guard2 locX 73
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "Pirate Guard"
+		if = guard3 locX 74
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "Pirate Assassin"
+		if = guard1 locX 67
+			if = guard1 locY 627
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Pirate Assassin"
+		if = guard2 locX 68
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "BlackBeard"
+		if = guard3 locX 63 
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+end
+if hasCondition trigger killedpirateassassin
+	livingthing guard1 local trigger "Pirate Assassin"
+		if = guard1 locX 67
+			if = guard1 locY 627
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Pirate Assassin"
+		if = guard2 locX 68
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "BlackBeard"
+		if = guard3 locX 63 
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+end
+if hasCondition trigger killedpirateguard
+	livingthing guard2 local trigger "Pirate Guard"
+		if = guard2 locX 73
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "Pirate Guard"
+		if = guard3 locX 74
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "Pirate Assassin"
+		if = guard1 locX 67
+			if = guard1 locY 627
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Pirate Assassin"
+		if = guard2 locX 68
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "BlackBeard"
+		if = guard3 locX 63 
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+end
+if hasCondition trigger killedpirate
+	livingthing guard1 local trigger "Pirate"
+		if = guard1 locX 78
+			if = guard1 locY 627
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Pirate Guard"
+		if = guard2 locX 73
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "Pirate Guard"
+		if = guard3 locX 74
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+	livingthing guard1 local trigger "Pirate Assassin"
+		if = guard1 locX 67
+			if = guard1 locY 627
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Pirate Assassin"
+		if = guard2 locX 68
+			if = guard2 locY 626
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "BlackBeard"
+		if = guard3 locX 63 
+			if = guard3 locY 627
+			set guard3 locxy 1 1
+			end
+		end
+end
+if hasCondition trigger inforest3
+	livingthing guard1 local trigger "Mutant Scorpion"
+		if = guard1 locX 230
+			if = guard1 locY 158
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Mutant Scorpion"
+		if = guard2 locX 230
+			if = guard2 locY 160
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "Mutant Scorpion"
+		if = guard3 locX 231
+			if = guard3 locY 159
+			set guard3 locxy 1 1
+			end
+		end
+end
+if hasCondition trigger inforest2
+	livingthing guard1 local trigger "Mutant Scorpion"
+		if = guard1 locX 153
+			if = guard1 locY 200
+			set guard1 locxy 1 1
+			end
+		end
+	livingthing guard2 local trigger "Mutant Scorpion"
+		if = guard2 locX 153
+			if = guard2 locY 202
+			set guard2 locxy 1 1
+			end
+		end
+	livingthing guard3 local trigger "Mutant Scorpion"
+		if = guard3 locX 154
+			if = guard3 locY 201
+			set guard3 locxy 1 1
+			end
+		end
+end
+if hasitem trigger "Strabo Key"
+    number oldx trigger locx
+    number oldy trigger locy
+    removeitem trigger "strabo key"
+    set trigger locxy 394 494
+    createitem "Strabo Key" oldx oldy
+    global string strabo_name_keyholder concat concat concat "Strabo Key has been dropped at " oldx "," oldy
+end
+if hasitem trigger "baron key"
+    number oldx trigger locx
+    number oldy trigger locy
+    removeitem trigger "baron key"
+    set trigger locxy 394 494
+    createitem "Baron Key" oldx oldy
+    global string baron_name_keyholder concat concat concat "Baron Key has been dropped at " oldx "," oldy
+end
+if hasitem trigger "kilgore key"
+    number oldx trigger locx
+    number oldy trigger locy
+    removeitem trigger "kilgore key"
+    set trigger locxy 394 494
+    createitem "Kilgore Key" oldx oldy
+    global string kilgore_name_keyholder concat concat concat "Kilgore Key has been dropped at " oldx "," oldy
+end
+set trigger locxy 394 494
+if hasCondition trigger "dude"
+    removeCondition trigger "dude"
+end
+if hasCondition trigger "mob_attack"
+    removeCondition trigger "mob_attack"
+end
+if hasCondition trigger "mob2_attack"
+    removeCondition trigger "mob2_attack"
+end
+# 
+# start flowris block
+#
+if hasCondition trigger "guard_attack"
+    removeCondition trigger "guard_attack"
+end
+#
+# end flowris block
+#
+set trigger hp 5
+addcondition trigger safe
+if isplayer killer
+    if and strequals clan trigger global war1clan1
+            strequals clan killer global war1clan2
+        global number war1clan2killed + global war1clan2killed trigger cp
+        endscript
+    end
+    if and strequals clan trigger global war1clan2
+            strequals clan killer global war1clan1
+        global number war1clan1killed + global war1clan1killed trigger cp
+        endscript
+    end
+    if and strequals clan trigger global war2clan1
+            strequals clan killer global war2clan2
+        global number war2clan2killed + global war2clan2killed trigger cp
+        endscript
+    end
+    if and strequals clan trigger global war2clan2
+            strequals clan killer global war2clan1
+        global number war2clan1killed + global war2clan1killed trigger cp
+        endscript
+    end
+    if and strequals clan trigger global war3clan1
+            strequals clan killer global war3clan2
+        global number war3clan2killed + global war3clan2killed trigger cp
+        endscript
+    end
+    if and strequals clan trigger global war3clan2
+            strequals clan killer global war3clan1
+        global number war3clan1killed + global war3clan1killed trigger cp
+        endscript
+    end
+    if and strequals clan trigger global war4clan1
+            strequals clan killer global war4clan2
+        global number war4clan2killed + global war4clan2killed trigger cp
+        endscript
+    end
+    if and strequals clan trigger global war4clan2
+            strequals clan killer global war4clan1
+        global number war4clan1killed + global war4clan1killed trigger cp
+        endscript
+    end
+end
+endscript
+
+

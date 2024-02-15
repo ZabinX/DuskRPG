@@ -1,0 +1,15 @@
+if ispet trigger
+    endscript
+end
+if  hascondition trigger "dude"
+    chat trigger "Dude says;  I wouldn't stand there if I were you Dude."
+    endscript
+end
+if ! hascondition trigger "dude"
+    addcondition trigger "dude"
+    chat trigger "Dude says;  Hey Dude!  You just teleported out of that ancient tile your standing on.  I can't believe my eyes! o.O  I thought only gods could do that."
+    endscript
+end
+endscript
+
+

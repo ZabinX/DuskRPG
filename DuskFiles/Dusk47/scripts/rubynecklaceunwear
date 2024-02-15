@@ -1,0 +1,5 @@
+inc trigger hpbonus -500
+inc trigger acbonus -10
+endscript
+
+

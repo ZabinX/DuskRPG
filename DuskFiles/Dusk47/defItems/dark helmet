@@ -1,0 +1,18 @@
+type
+armor
+kind
+skull
+description
+helmet worn by zombies
+cost
+250
+mod
+65
+image
+7
+durability
+4500
+onWear
+wear_normal_armor
+.
+

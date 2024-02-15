@@ -1,0 +1,1 @@
+%param0 target local caster param0 &target target "reflect" *caster concat name target "  has reflect." *caster " You become cursed." 	caster "cursed"* caster inte 0.2 *caster concat name target "  is now cursed." *target " You become cursed." 	target "cursed"* caster inte 0.2 *caster "You do not see them here."  

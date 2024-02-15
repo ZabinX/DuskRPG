@@ -1,0 +1,6 @@
+if < trigger cp 3000
+	order trigger "unwear lightning scale boots"
+	chat trigger "Well crap wrong shoe size, maybe you should wait till your a size 3k."
+	endscript
+	end
+endscript

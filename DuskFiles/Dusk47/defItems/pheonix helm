@@ -1,0 +1,22 @@
+type
+armor
+kind
+Skull
+description
+a helmet worn by the pheonix pharoh.
+cost
+2000
+mod
+120
+image
+7
+durability
+200000
+onWear
+pheonix1
+onUnWear
+pheonix1end
+.
+
+
+

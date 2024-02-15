@@ -1,0 +1,25 @@
+#Thors Hammer
+#
+# Does damage from 7 times caster int+wis
+#
+#
+if ! hasitem caster "Magic Hammer"
+    chat caster "You cannot cast this spell without a Magic Hammer."
+    endscript
+end
+removeitem caster "Magic Hammer"
+number baseDamage * 7 + caster inte caster wisd
+number addDamage * 7 + caster inte caster wisd
+number damage + baseDamage * addDamage rand
+if isinbattle caster
+    livingthing target enemy caster
+    inc target hp * -1 damage
+    inc caster damdone damage
+    chat target concat concat concat name caster "summons the thunder God Thor to strike you for " damage " damage."
+    chat caster concat concat concat concat "You summon the thunder God Thor to strike" name target " for " damage " damage."
+    endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript
+
+

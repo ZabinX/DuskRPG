@@ -1,0 +1,15 @@
+type
+food
+description
+A gods favorite drink
+cost
+0
+image
+6
+onuse
+firebrew
+uses
+1
+.
+
+

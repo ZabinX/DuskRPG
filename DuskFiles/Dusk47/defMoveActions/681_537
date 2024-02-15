@@ -1,0 +1,8 @@
+if < trigger cp 100
+inc trigger locy 1
+chat trigger "It seems as if your not strong enough to enter."
+endscript
+end
+set trigger locxy 681 526
+endscript
+

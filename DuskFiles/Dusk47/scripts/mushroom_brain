@@ -1,0 +1,19 @@
+#Zabin script testing
+livingthing target enemy trigger
+if and hasCondition target mushroom hasCondition target mushroomb
+removeCondition target mushroom
+endscript
+end
+#
+livingthing target enemy trigger
+if hasCondition target mushroomb
+addCondition target mushroom
+endscript
+end
+#
+livingthing target enemy trigger
+addCondition target mushroomb
+chat enemy trigger "You think **Wow, that is a giant mushroom!!**"
+endscript
+
+

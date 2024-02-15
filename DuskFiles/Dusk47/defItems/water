@@ -1,0 +1,13 @@
+type
+drink
+description
+some nice, fresh water
+cost
+5
+image
+6
+onUse
+rand_drink_water
+uses
+1
+.

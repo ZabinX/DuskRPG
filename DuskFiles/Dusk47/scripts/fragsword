@@ -1,0 +1,13 @@
+end
+if < trigger cp 2000
+    chat trigger "You must experience more before you can wield this sword."
+    order trigger "unwear Frag Sword"
+    order trigger "drop Frag Sword"
+    endscript
+end
+inc trigger strengthbonus 50
+endscript
+
+
+
+

@@ -1,0 +1,1 @@
+trigger ClimbersRope guard1 local trigger "Chris" guard1 locX 156 guard1 locY 94 -guard1 1 1 *trigger "The rope breaks." !trigger ClimbersRope trigger reset ,trigger 2  

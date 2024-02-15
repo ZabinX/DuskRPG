@@ -1,0 +1,1 @@
+trigger target enemy trigger target hp 1 *trigger "*Blackbeard grabs you, pulls you along as he flees out the door.*" *trigger "Blackbeard says: Here's Ed's crown back!  I'll find anotherrR line of busniess, I sware. *Blackbeard speeds out of the tavern!*" ;trigger "crown" *trigger "You recieve Ed's crown!" -trigger 80 627  

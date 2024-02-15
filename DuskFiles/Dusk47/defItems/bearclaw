@@ -1,0 +1,13 @@
+type
+food
+description
+a tasty bear claw pastery
+cost
+20
+image
+6
+onuse
+bearclaw
+uses
+1
+.

@@ -1,0 +1,5 @@
+inc trigger mp 100
+chat trigger "100 Magic Points have been restored"
+removeitem trigger "wolfsbane"
+endscript
+
