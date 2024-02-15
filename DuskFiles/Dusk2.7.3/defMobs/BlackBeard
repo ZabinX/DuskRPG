@@ -1,36 +1,39 @@
 maxhp
-1000
+25000
 maxmp
 1000
 stre
-65
+1500
 inte
 100
 dext
-100
+1000
 wisd
-100
+0
 cons
-100
+500
 image
-102
+5
 bravery
-1
+1.0
 grouprelation
+1.0
+giveitem
+crown
 1
+faction
+pirates
 description
 the pirates' boss
 skill
-dodge
-1
-skill
 double attack
-80
+60
 skill
 triple attack
-30
-onBattle
-blackbeard_brain
+20
 .
+
+
+
 
 

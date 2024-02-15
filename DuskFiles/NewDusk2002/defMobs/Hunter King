@@ -1,9 +1,9 @@
 maxhp
-10000
+2500
 maxmp
 50
 stre
-500
+300
 dext
 100
 inte
@@ -20,13 +20,10 @@ grouprelation
 1.8
 giveitem
 longsword
-0.5
+0.2
 giveitem
 broad axe
-0.9
-giveitem
-hgkey
-1
+0.4
 faction
 hunter
 condition
@@ -35,11 +32,12 @@ detect invis
 -1
 skill
 double attack
-65
+50
 skill
 triple attack
-65
+50
 skill
 dodge
 50
 .
+

@@ -1,17 +1,17 @@
 maxhp
-1000
+25
 maxmp
-800
+20
 stre
-200
+5
 inte
-120
+3
 dext
-120
-cons
-120
+3
 wisd
-80
+2
+cons
+3
 image
 14
 bravery
@@ -19,9 +19,8 @@ bravery
 grouprelation
 0.25
 giveitem
-Demon Horns
+demon horns
 0.5
 faction
-Demon
+demon
 .
-
