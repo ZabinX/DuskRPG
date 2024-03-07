@@ -1,0 +1,6 @@
+To build the Dusk client as an application:
+Compile all the files, except duskclient.java, then create a directory called "images" and put all the files from the images directory in the downloadable application client in it.
+
+To build as an applet:
+Compile all the files, then jar all the files, including the files from the images directory in the downloadable application client.
+

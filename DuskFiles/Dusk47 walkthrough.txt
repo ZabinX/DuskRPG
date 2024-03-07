@@ -1,0 +1,31 @@
+Dusk47 walkthrough:
+
+1. Get Krista her shoes.
+
+2. Visit Xyphoid south of Edwardo vilage. Find treasure box northwest of his house. Use that money to buy him 10 cans of beefstew. Now yor rich!
+
+3. Buy casting net at harbor.
+Deposit 900 gp at bank.
+Visit hermit in hidden place above house of knowledge.
+
+3. **Obtain kaizer blade from farmers quest. Wear kaizer blade.
+Use Exp get ~100HP. If you don't like the popup battle window turn it off like this "popup off".
+
+4. Catch 20 bass babies by the falls. Maybe wear cloth shirt bronze belt and gloves.
+**Obtain moon shoes from Krista.
+
+5. Train enchantment group 1. Train 60mp. Cast "detect invis" below krista's house and find mandrakes and obtain a mandrake root. Collect 10 eyeofnewts. Obtain ***mandrakejuice heals 300hp+300mp has 100 uses.
+
+Use Exp ~350HP and 25 strength (I had 4000exp). Hermit stops helping you at 100cp. Obtain 99cp now.
+
+6. Visit Xyphoid, kill the flanaga boss in the cave northwest. Gain acess to the cave. Get all beers from the pub, find where xyphoid tipped over a bush. Wear best gear and hermits bonus. Unlucky, the flanaga uses tidlewave and washes you away, hurry back and try kill again. Flanaga won't regain max hp in little time.
+
+7. Visit bounty hunters office and clear the docks of marine animals.
+
+8. Ride the random teleporter or the free teleporter by the sand worms to find the hidden cave. Obtain a pickaxe from the blacksmith merchant in the cave.
+
+9. Bounty hunters second quest- you need to explore the caves to find all 3 bandit leaders. Kill them all and scalp em. Mine the rocks in the caves. Don't try and mine the rocks without a pickaxe in your inventory. You'll just get hurt amd loose exp and your pet will stop following. Just order your pet to follow like this "order Bigfoot follow Zach" if that happens. I'm 
+
+10. Blacksmith some new gear with ores and rare diamonds.
+
+11. To be continued...... if you get over 200cp you'll be stuck in hell. I'll finish my demo soon. I just (2024) hacked bigger sprites, fluid walking animation in the client, and also fixed the bug with pets in the battle.class. I'm a graphics guy and I like to see the pixels at the correct size.

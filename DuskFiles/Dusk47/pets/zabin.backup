@@ -7,7 +7,7 @@ zabin
 exp
 10
 hp
--54
+-16
 maxhp
 20
 mp
@@ -28,11 +28,15 @@ wisd
 7
 condition
 thirst
-105
+17
 -1
 condition
 hunger
-39
+101
+-1
+condition
+intown
+1
 -1
 condition
 inforest
