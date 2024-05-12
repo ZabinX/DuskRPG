@@ -1,0 +1,60 @@
+maxhp
+5999
+maxmp
+1999
+stre
+200
+inte
+200
+dext
+200
+wisd
+200
+cons
+200
+bravery
+10
+grouprelation
+10.0
+image
+150
+giveitem
+healpotion
+0.05
+skill
+double attack
+33
+skill
+triple attack
+33
+skill
+quadruple attack
+33
+skill
+warrior group
+100
+skill
+clerical group
+100
+skill
+enchantment group
+100
+skill
+druidic group
+100
+skill
+white magic group
+100
+condition
+armor
+0
+-1
+condition
+strength
+0
+-1
+condition
+detect invis
+0
+-1
+.

@@ -6,9 +6,9 @@ the newbie.
 clan
 none
 x
-197
+227
 y
-201
+193
 audiooff
 race
 indian
@@ -103,13 +103,13 @@ inforest
 1
 -1
 condition
-nothirst
-1
-437
-condition
 nohunger
 1
-438
+24
+condition
+nothirst
+1
+449
 wield2
 wooden dagger
 2305

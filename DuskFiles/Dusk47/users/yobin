@@ -6,16 +6,16 @@ the newbie.
 clan
 none
 x
-664
+194
 y
-608
+201
 audiooff
 race
 human
 exp
-5775
+5415
 hp
-99
+200
 maxhp
 200
 mp
@@ -23,7 +23,7 @@ mp
 maxmp
 60
 cash
-1989
+1865
 stre
 39
 inte
@@ -43,6 +43,10 @@ clerical group
 skill
 enchantment group
 1
+condition
+nohunger
+1
+66
 condition
 deadbush
 1
@@ -96,10 +100,6 @@ monsterhunting
 1
 -1
 condition
-dude
-1
--1
-condition
 walk
 1
 -1
@@ -109,19 +109,23 @@ inforest
 -1
 condition
 thirst
-145
+78
 -1
 condition
 flanfood
 1
 -1
+condition
+dude
+1
+-1
 wield2
 Kaizer Blade
-391715
+391467
 -1
 torso2
 bronze suit
-2055
+1952
 -1
 item2
 minormend
