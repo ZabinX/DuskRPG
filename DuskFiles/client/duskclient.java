@@ -8,6 +8,16 @@ at your wish, under the condition that you do not edit or
 remove this license, and accompany it with all redistributions.
 */
 
+/*
+Special Thanks to:
+
+Randall Leeds for the following code portions
+as well as many other small changes and deprecation fixes:
+Float/Unfloat
+
+Joe Alloway for shadowed text and the !set command
+*/
+
 import java.applet.*;
 
 public class duskclient extends Applet

@@ -10,19 +10,15 @@ remove this license, and accompany it with all redistributions.
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
-import java.util.Vector;
-import java.lang.Math;
-import java.lang.reflect.Array;
-import java.util.StringTokenizer;
-import java.applet.*;
-import java.net.*;
+import java.io.IOException;
+import javax.swing.*;
 
-public class BattleFrame extends Frame implements MouseListener,KeyListener
+public class BattleFrame extends JFrame implements MouseListener,KeyListener
 {
 	Dusk appParent;
-	TextArea txtEdit;
-	TextField txtInput = new TextField();
+        JScrollPane scrText = new JScrollPane();
+	JTextArea txtEdit;
+	JTextField txtInput = new JTextField();
 	Color textbackground;
 	
 	public BattleFrame(Dusk inParent)
@@ -30,14 +26,17 @@ public class BattleFrame extends Frame implements MouseListener,KeyListener
 		appParent = inParent;
 		setLayout(new BorderLayout());
 		txtInput.setVisible(true);
-		textbackground = new Color(220,220,220);
+		textbackground = new Color(89,89,89);
         txtInput.setBackground(textbackground);
 		add(txtInput, "North");
-		txtEdit = new TextArea(20,80);
-		add(txtEdit);
+		txtEdit = new JTextArea(40,30);
+		scrText.setVisible(true);
+		scrText.getViewport().add(txtEdit);
+		add(scrText);
 		txtInput.addKeyListener(this);
-		setBackground(appParent.frame.background);
+//		setBackground(appParent.frame.background);
 		addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
 			public void windowClosing(java.awt.event.WindowEvent e) {
 				thisWindowClosing(e);
 			}
@@ -46,13 +45,19 @@ public class BattleFrame extends Frame implements MouseListener,KeyListener
 	}
 	
 	//Accept mouse input
+        @Override
 	public void mousePressed(MouseEvent evt)  {}
+        @Override
 	public void mouseReleased(MouseEvent evt) {}
+        @Override
 	public void mouseClicked(MouseEvent evt)  {}
+        @Override
 	public void mouseEntered(MouseEvent evt)  {}
+        @Override
 	public void mouseExited(MouseEvent evt)   {}
 	
 	//Accept key input
+        @Override
 	public void keyPressed(KeyEvent evt)
 	{
 		if (!appParent.blnConnected)
@@ -120,18 +125,19 @@ public class BattleFrame extends Frame implements MouseListener,KeyListener
 	    				{
 	    					appParent.stmOut.writeBytes(appParent.strSet+"\n");
 	    				}
-		 				return;
 	   				}
+
 		 		}
 			}
-	    }catch(Exception e)
+	    }catch(IOException e)
 	    {
 	        appParent.addText("Error at keyPressed(): "+e.toString()+"\n");
 	    }
 	    }
-		return;
 	}
+        @Override
 	public void keyReleased(KeyEvent evt){}
+        @Override
 	public void keyTyped(KeyEvent evt){}
 
 	void thisWindowClosing(WindowEvent e)

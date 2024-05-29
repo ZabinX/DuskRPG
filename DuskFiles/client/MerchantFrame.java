@@ -10,6 +10,7 @@ remove this license, and accompany it with all redistributions.
 
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 import java.io.*;
 import java.util.Vector;
 import java.lang.Math;
@@ -18,60 +19,58 @@ import java.util.StringTokenizer;
 import java.applet.*;
 import java.net.*;
 
-public class MerchantFrame extends Frame implements MouseListener
+class MerchantFrame extends JFrame implements MouseListener
 {
 	Dusk appParent;
-	Button btnBuy,
+	JButton btnBuy,
 			btnSell;
-	Choice chcBuy,
+	JComboBox chcBuy,
 			chcSell;
-	TextField txtQuantity;
-	Label lblQuantity;
+	JTextField txtQuantity;
+	JLabel lblQuantity;
 	
 	public MerchantFrame(Dusk inParent)
 	{
 		appParent = inParent;
 		setTitle("Merchant");
-		chcBuy = new Choice();
-		chcBuy.setLocation(0,30);
-		chcBuy.setSize(150,30);
+		chcBuy = new JComboBox();
+		chcBuy.setLocation(0,20);
+		chcBuy.setSize(150,20);
 		chcBuy.setVisible(true);
-		chcSell = new Choice();
-		chcSell.setLocation(150,30);
-		chcSell.setSize(150,30);
+		chcSell = new JComboBox();
+		chcSell.setLocation(150,20);
+		chcSell.setSize(150,20);
 		chcSell.setVisible(true);
-		txtQuantity = new TextField();
-		txtQuantity.setLocation(150,50);
-		txtQuantity.setSize(75,30);
+		txtQuantity = new JTextField();
+		txtQuantity.setLocation(150,40);
+		txtQuantity.setSize(75,20);
 		txtQuantity.setText("1");
 		txtQuantity.setVisible(true);
-		txtQuantity.setBackground(appParent.frame.textbackground);
-		lblQuantity = new Label();
+		lblQuantity = new JLabel();
 		lblQuantity.setText("Quantity:");
-		lblQuantity.setLocation(75,50);
-		lblQuantity.setSize(75,30);
+		lblQuantity.setLocation(75,40);
+		lblQuantity.setSize(75,20);
 		lblQuantity.setVisible(true);
-		lblQuantity.setAlignment(Label.RIGHT);
-		btnBuy = new Button();
+		lblQuantity.setHorizontalAlignment(JLabel.RIGHT);
+		btnBuy = new JButton();
 		btnBuy.setLabel("Buy");
-		btnBuy.setLocation(80,70);
-		btnBuy.setSize(70,30);
+		btnBuy.setLocation(80,60);
+		btnBuy.setSize(70,20);
 		btnBuy.setVisible(true);
-		btnSell = new Button();
+		btnSell = new JButton();
 		btnSell.setLabel("Sell");
-		btnSell.setLocation(150,70);
-		btnSell.setSize(70,30);
+		btnSell.setLocation(150,60);
+		btnSell.setSize(70,20);
 		btnSell.setVisible(true);
 		
 		setLocation(20,20);
-		setLayout(null);
-		add(chcBuy);
-		add(chcSell);
-		add(txtQuantity);
-		add(lblQuantity);
-		add(btnBuy);
-		add(btnSell);
-		setBackground(appParent.frame.background);
+		getContentPane().setLayout(null);
+		getContentPane().add(chcBuy);
+		getContentPane().add(chcSell);
+		getContentPane().add(txtQuantity);
+		getContentPane().add(lblQuantity);
+		getContentPane().add(btnBuy);
+		getContentPane().add(btnSell);
 		btnBuy.addMouseListener(this);
 		btnSell.addMouseListener(this);
 		

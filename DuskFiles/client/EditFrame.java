@@ -8,8 +8,19 @@ at your wish, under the condition that you do not edit or
 remove this license, and accompany it with all redistributions.
 */
 
+/*
+Special Thanks to:
+
+Randall Leeds for the following code portions
+as well as many other small changes and deprecation fixes:
+Float/Unfloat
+
+Joe Alloway for shadowed text and the !set command
+*/
+
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 import java.io.*;
 import java.util.Vector;
 import java.lang.Math;
@@ -18,11 +29,12 @@ import java.util.StringTokenizer;
 import java.applet.*;
 import java.net.*;
 
-public class EditFrame extends Frame implements MouseListener
+class EditFrame extends JFrame implements MouseListener
 {
 	Dusk appParent;
-	TextArea txtEdit;
-	Button btnSubmit;
+	JScrollPane scrEdit;
+	JTextArea txtEdit;
+	JButton btnSubmit;
 	String strName;
 	
 	public EditFrame(String inName,Dusk inParent, boolean blnSubmit)
@@ -30,22 +42,22 @@ public class EditFrame extends Frame implements MouseListener
 		appParent = inParent;
 		strName = inName;
 		setTitle(strName);
-		setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
 		if (blnSubmit)
 		{
-			btnSubmit = new Button("Submit");
-			add(btnSubmit,"South");
+			btnSubmit = new JButton("Submit");
+			getContentPane().add(btnSubmit,"South");
 			btnSubmit.addMouseListener(this);
 		}
-		txtEdit = new TextArea(40,40);
-		add(txtEdit);
-		setBackground(appParent.frame.background);
+		scrEdit = new JScrollPane();
+		txtEdit = new JTextArea();
+		scrEdit.getViewport().add(txtEdit);
+		getContentPane().add(scrEdit,"Center");
 		addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosing(java.awt.event.WindowEvent e) {
 				thisWindowClosing(e);
 			}
 		});
-		pack();
 	}
 	
 	//Accept mouse input
@@ -61,7 +73,7 @@ public class EditFrame extends Frame implements MouseListener
 				appParent.stmOut.writeBytes(txtEdit.getText()+"\n--EOF--\n");
 			}catch(Exception e)
 			{
-				appParent.addText("Error while submitting file: "+e.toString());
+				appParent.frame.txtOutput.append("Error while submitting file: "+e.toString());
 			}
 		}
 	}

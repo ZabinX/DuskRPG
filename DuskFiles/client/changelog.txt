@@ -19,3 +19,14 @@ W3
 	Changed references to dusk.wesowin.org to the SourceForge site.
 	Changed the default connection to be the loopback address 127.0.0.1 and
 		the default port to match the one in the server pack.
+Z47 (2024)
+        Added NotZed's DuskZ fix @ flicker walking animation alternate between
+                the two frames for smoother animation.
+        Added numbers to drawEntity to resize players/sprites back to maybe original size.
+        Added Target label to display targets hp in the Main frame.
+        Use swing components, sprites load faster and fixes the nasty flicking glitches.
+        Added swing look and feel flatlaf Dark theme.
+        Increased the size of displayed map by 1/2inch or so.
+        Increased GUI size to start at a good size.
+        Added potion and magic buttons to make healing and casting spells easy.
+        Compiled with Netbeans 17 using java 17. Applets are depracated.

@@ -18,6 +18,8 @@ Float/Unfloat
 Joe Alloway for shadowed text and the !set command
 */
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -31,10 +33,11 @@ import java.applet.*;
 import java.net.*;
 import javax.swing.text.*;
 import javax.swing.JScrollBar;
+import javax.swing.UIManager;
 
-public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListener, ActionListener, ImageObserver
+public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListener, ImageObserver
 {
-	static String strVersion="2.7.1.W3";
+	static String strVersion="2.7.1.Z47";
 	
 	int numSpriteImages,
 	    numPlayerImages,
@@ -51,6 +54,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	String strTile = "-1";
     long loncash;
 	boolean blnLoaded,
+                        blnRefreshing,
 			blnMenuRefresh,
 			blnConnected=false,
 			blnApplet;
@@ -92,12 +96,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			blnMusic=true;
     Thread thrRun;
     	
-    int intImageSize = 32;
+    int intImageSize = 36;
     
     String strSet = null;
     
     MainFrame frame;
 	BattleFrame frmBattle;
+ //       MagicFrame frmMagic;
 	MerchantFrame frmMerchant;
 	
 	Graphics g;
@@ -123,6 +128,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	{
 		try
 		{
+//                try
+//    		{
+//        		UIManager.setLookAndFeel( new FlatDarkLaf() );
+//   			}catch (Exception e) {}
 			frame = new MainFrame(this);
 			frame.initComponents();
 			frame.setVisible(true);
@@ -163,6 +172,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				frame.btnConnect.imgMouseOver = Toolkit.getDefaultToolkit().getImage("images/cmo.gif");
 				frame.btnConnect.imgMouseDown = Toolkit.getDefaultToolkit().getImage("images/cmd.gif");
 				*/
+                                //frame.btnMagic.repaint();
 				frame.btnConnect.repaint();
 				/*
 				frame.btnEquipment.imgNormal = Toolkit.getDefaultToolkit().getImage("images/en.gif");
@@ -182,11 +192,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				frame.btnQuit.imgMouseDown = Toolkit.getDefaultToolkit().getImage("images/qmd.gif");
 				*/
 				frame.btnQuit.repaint();
+                                frame.btnPotion.repaint();
+                                frame.btnPotion2.repaint();
+                                frame.btnPotion3.repaint();
+                                frame.btnPotion4.repaint();
 				paint();
 			}
 			}catch(Exception e)
 			{
-				e.printStackTrace();
 			}
 			if (blnApplet)
 			{
@@ -201,7 +214,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			thrGraphics = new GraphicsThread(this);
 		}catch (Exception e) 
 		{
-			e.printStackTrace();
 		}
 	}
 
@@ -237,7 +249,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		{
 			System.err.println("Error connecting to server: "+e.toString());
 			addText("Error connecting to server: "+e.toString()+"\n");
-			return;
 		}
 	}
 	
@@ -287,7 +298,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				green = Integer.parseInt(tokStore.nextToken());
 				strBlue = tokStore.nextToken();
 				blue = Integer.parseInt(strBlue.substring(0,strBlue.length()));
-			} catch (Exception e) {}
+			} catch (NumberFormatException e) {}
 			if (red < 0) red = 0;
 			if (green < 0) green = 0;
 			if (blue < 0) blue = 0;
@@ -301,13 +312,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	}
 	
 	synchronized void addText(int red,int green, int blue,String strAdd)
-	{
+		{
 		if (frame.docOutput.getLength() > 8000) //if the text area has more than 8000, characters, only keep last 4000;
 		{
 			try
 			{
 				frame.docOutput.remove(0,4000);
-			} catch (Exception e) {}
+			} catch (BadLocationException e) {}
 		}
 
 		SimpleAttributeSet style = new SimpleAttributeSet();
@@ -315,10 +326,11 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		try
 		{
 			frame.docOutput.insertString(frame.docOutput.getEndPosition().getOffset()-1,strAdd,style);
-		}catch (Exception e) 
+		}catch (BadLocationException e) 
 		{
 			System.err.println(e.toString());
 		}
+
 
 		JScrollBar sb = frame.scrText.getVerticalScrollBar();
 		if (!sb.getValueIsAdjusting())
@@ -373,8 +385,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			try
 			{
 	   			stmOut.writeBytes("rement "+entStore.ID+"\n");
-			}catch(Exception e){}
-			reloadChoiceLook();
+			}catch(IOException e){}
+			reloadJComboBoxLook();
 			return;
 		}
 		for (i=0;i<xloc;i++)
@@ -660,6 +672,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	}
 	
 	//Thread to process incoming commands
+        @Override
 	public void	run()
 	{
 		int intStore,
@@ -749,7 +762,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 					frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
 					vctMerchantItems = new Vector(0,5);
-					reloadChoiceLookGetAttack();
+					reloadJComboBoxLook();
+					reloadJComboBoxGet();
+					reloadJComboBoxAttack();
 		        	update();
 		        	paint();
 					}
@@ -801,7 +816,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		            {
 		          		addEntity(entStore);
 		            }
-					reloadChoiceLookGetAttack();
+					reloadJComboBoxLook();
+					reloadJComboBoxGet();
+					reloadJComboBoxAttack();
 					update();
 					paint();
 					}
@@ -903,7 +920,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						intStore = Integer.parseInt(stmIn.readLine());
 					}	
 					} 
-					catch (Exception e)
+					catch (IOException | NumberFormatException e)
 					{
 					}
 		            frame.frmEquipment.chcWield.addItem("none");
@@ -916,23 +933,23 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		            frame.frmEquipment.chcEyes.addItem("none");
 		            frame.frmEquipment.chcHands.addItem("none");
 		        	frame.frmEquipment.blnRefreshMenus = false;
-					reloadChoiceDrop();
+					reloadJComboBoxDrop();
 		            break;
 		        }
 		        case (7):  //update Equipment
 		        {
 					try
 					{
-						frame.frmEquipment.Label9.setText("Wielded: "+stmIn.readLine()); 
-						frame.frmEquipment.Label2.setText("Arms: "+stmIn.readLine()); 
-						frame.frmEquipment.Label3.setText("Legs: "+stmIn.readLine()); 
-						frame.frmEquipment.Label1.setText("Torso: "+stmIn.readLine()); 
-						frame.frmEquipment.Label6.setText("Waist: "+stmIn.readLine()); 
-						frame.frmEquipment.Label4.setText("Neck: "+stmIn.readLine()); 
+						frame.frmEquipment.JLabel9.setText("Wielded: "+stmIn.readLine()); 
+						frame.frmEquipment.JLabel2.setText("Arms: "+stmIn.readLine()); 
+						frame.frmEquipment.JLabel3.setText("Legs: "+stmIn.readLine()); 
+						frame.frmEquipment.JLabel1.setText("Torso: "+stmIn.readLine()); 
+						frame.frmEquipment.JLabel6.setText("Waist: "+stmIn.readLine()); 
+						frame.frmEquipment.JLabel4.setText("Neck: "+stmIn.readLine()); 
 						frame.frmEquipment.lblSkull.setText("Skull: "+stmIn.readLine()); 
-						frame.frmEquipment.Label5.setText("Eyes: "+stmIn.readLine()); 
-						frame.frmEquipment.Label7.setText("Hands: "+stmIn.readLine());
-					}catch (Exception e)
+						frame.frmEquipment.JLabel5.setText("Eyes: "+stmIn.readLine()); 
+						frame.frmEquipment.JLabel7.setText("Hands: "+stmIn.readLine());
+					}catch (IOException e)
 					{
 						System.err.println("Error loading equipment" + e.toString());
 					}
@@ -950,7 +967,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		               	 	strStore = stmIn.readLine();
 		                }
 						frame.txtOther.setText(strStore2);
-					}catch (Exception e)
+					}catch (IOException e)
 					{
 						System.err.println("Error loading stats" + e.toString());
 					}
@@ -970,7 +987,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	            		vctChoiceActionItems.addElement(strStore);
 	            		strStore = stmIn.readLine();
 	            	}
-					reloadChoiceAction();
+					reloadJComboBoxAction();
 	            	break;
 				}
 				case(11): //load music
@@ -994,7 +1011,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 								{
 									audMusic[intStore][intStore2] = appShell.getAudioClip(new URL(strStore));
 									while (audMusic[intStore][intStore2] == null) {}
-								}catch(Exception e)
+								}catch(MalformedURLException e)
 								{
 									System.err.println("Error while trying to load music file "+strStore+":"+e.toString());
 								}
@@ -1002,7 +1019,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						}
 						addText("Music loaded.\n");
 						}
-					}catch(Exception e)
+					}catch(IOException | NumberFormatException e)
 					{
 						blnMusic = false;
 						addText("Your java virtual machine does not support midi music\n");
@@ -1020,7 +1037,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						if (audMusicPlaying != null) audMusicPlaying.stop();
 						audMusicPlaying = audMusic[intStore][(int)(Math.random()*intNumSongs[intStore])];
 						audMusicPlaying.loop();
-					}catch(Exception e)
+					}catch(IOException | NumberFormatException e)
 					{
 						System.err.println("Error while trying to play music file:" + e.toString());
 					}
@@ -1042,16 +1059,18 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					try
 					{
 						audSFX[Integer.parseInt(stmIn.readLine())].play();
-					}catch(Exception e){}
+					}catch(IOException | NumberFormatException e){}
 					break;
 				}
 				case (16): //remove entity
 				{
 					synchronized(vctEntities)
 					{
-					lngStore = Long.valueOf(stmIn.readLine()).longValue();
+					lngStore = Long.parseLong(stmIn.readLine());
 					removeEntity(lngStore);
-					reloadChoiceLookGetAttack();
+					reloadJComboBoxLook();
+					reloadJComboBoxGet();
+					reloadJComboBoxAttack();
 					update();
 					paint(); // Wildern added
 					}
@@ -1066,7 +1085,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						strStore = stmIn.readLine();
 					}
 					frame.btnMerchant.setEnabled(true);
-					reloadChoiceBuy();
+					reloadJComboBoxBuy();
 					break;
 				}
 				case (18): //view/edit
@@ -1129,7 +1148,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						vctSell.addElement(strStore);
 						strStore = stmIn.readLine();
 					}
-					reloadChoiceSell();
+					reloadJComboBoxSell();
 					break;
 				}
 				case (23): //colour chat
@@ -1170,9 +1189,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							{
 								addEntity(entStore);
 							}catch (Exception var13) {
-                                                            var13.printStackTrace();
                                                         }
-							reloadChoiceAttack();
+							reloadJComboBoxAttack();
 							if (ID != ID) {
                                                         //thrGraphics.addEntityToMove(entStore,0);
                                                         // Notzeds hack -- ID != ID fixes flicker. Zach- added "update" to the second break to keep mobs movement updated while idle.
@@ -1219,9 +1237,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							{
 								addEntity(entStore);
 							}catch (Exception var13) {
-                                                            var13.printStackTrace();
                                                         }
-							reloadChoiceAttack();
+							reloadJComboBoxAttack();
 							if (ID != ID) {
                                                         //thrGraphics.addEntityToMove(entStore,1);
                                                         update();
@@ -1264,9 +1281,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							{
 								addEntity(entStore);
 							}catch (Exception var13) {
-                                                            var13.printStackTrace();
                                                         }
-							reloadChoiceAttack();
+							reloadJComboBoxAttack();
 							if (ID != ID) {
                                                         //thrGraphics.addEntityToMove(entStore,2);
                                                         update();
@@ -1309,9 +1325,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							{
 								addEntity(entStore);
 							}catch (Exception var13) {
-                                                            var13.printStackTrace();
                                                         }
-							reloadChoiceAttack();
+							reloadJComboBoxAttack();
 							if (ID != ID) {
                                                         //thrGraphics.addEntityToMove(entStore,3);
                                                         update();
@@ -1331,7 +1346,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (29): //set flag
 				{
-					lngStore = Long.valueOf(stmIn.readLine()).longValue();
+					lngStore = Long.parseLong(stmIn.readLine());
 					intStore = Integer.parseInt(stmIn.readLine());
 					synchronized(vctEntities)
 					{
@@ -1370,6 +1385,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					strStore = stmIn.readLine();
 					frmBattle.setTitle(strStore);
 					frmBattle.txtEdit.setText("");
+                                        frame.lblTarget.setText("");    //Zach added target HP in mainframe. Doesn't work if popups off.
 					break;
 				}
 				case (32): //show battle window and update title
@@ -1378,6 +1394,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						frmBattle.show();
 					strStore = stmIn.readLine();
 					frmBattle.setTitle(strStore);
+                                        frame.lblTarget.setText(strStore);   //Zach added target HP in mainframe. Doesn't work if popups off.
 					break;
 				}
 				case (33): //add text to battle window
@@ -1393,7 +1410,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					System.err.println("Lost incoming byte: " + incoming);	
 				}
 			}
-		}catch(Exception e)
+		}catch(IOException | NumberFormatException e)
 		{
 			System.err.println("Error at run() with value " + incoming +" : "+e.toString());
 			e.printStackTrace(System.out);
@@ -1406,49 +1423,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		System.err.println("Error at run() with value " + incoming);
 	}
 	
-	public void reloadChoiceLookGetAttack()
-	{
-		Entity entStore;
-		blnMenuRefresh = true;
-		try
-		{
-			frame.chcLook.removeAll();
-			frame.chcGet.removeAll();
-			frame.chcAttack.removeAll();
-		}catch (Exception e){};
-		frame.chcLook.addItem("Look");
-		frame.chcGet.addItem("Get");
-		frame.chcAttack.addItem("Attack");
-		Iterator iter = vctEntities.iterator();
-		while (iter.hasNext())
-		{
-			entStore = (Entity)iter.next();
-			// Look
-			if (entStore.intNum == 0)
-				frame.chcLook.addItem(entStore.strName);
-			else
-				frame.chcLook.addItem(entStore.intNum+"."+entStore.strName);
-			// Get
-			if (entStore.intType==1 && (Math.abs(LocX - entStore.intLocX) + Math.abs(LocY - entStore.intLocY) < 2))
-	        {
-				if (entStore.intNum == 0)
-					frame.chcGet.addItem(entStore.strName);
-				else
-					frame.chcGet.addItem(entStore.intNum+"."+entStore.strName);
-	        }
-			// Attack
-			if ((entStore.intType==0 || entStore.intType==1 || entStore.intType==4) && (Math.abs(LocX - entStore.intLocX) + Math.abs(LocY - entStore.intLocY) <= range))
-			{
-				if (entStore.intNum == 0)
-					frame.chcAttack.addItem(entStore.strName);
-				else
-					frame.chcAttack.addItem(entStore.intNum+"."+entStore.strName);
-			}
-		}
-		blnMenuRefresh = false;
-	}
-
-	public void reloadChoiceLook()
+	public void reloadJComboBoxLook()
 	{
 		int i,
 			i2;
@@ -1456,49 +1431,28 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		blnMenuRefresh = true;
 		try
 		{
-			frame.chcLook.removeAll();
+			frame.chcLook.removeAllItems();
 		}catch (Exception e){};
 		frame.chcLook.addItem("Look");
-		Iterator iter = vctEntities.iterator();
-		while (iter.hasNext())
+		for (i=0;i<mapSize;i++)
 		{
-			entStore = (Entity)iter.next();
-			// Look
-			if (entStore.intNum == 0)
-				frame.chcLook.addItem(entStore.strName);
-			else
-				frame.chcLook.addItem(entStore.intNum+"."+entStore.strName);
-		}
-		blnMenuRefresh = false;
-	}
-	
-	public void reloadChoiceAttack()
-	{
-		int i,
-			i2;
-		Entity entStore;
-		blnMenuRefresh = true;
-		try
-		{
-			frame.chcAttack.removeAll();
-		}catch (Exception e){};
-		frame.chcAttack.addItem("Attack");
-		Iterator iter = vctEntities.iterator();
-		while (iter.hasNext())
-		{
-			entStore = (Entity)iter.next();
-			if ((entStore.intType==0 || entStore.intType==1 || entStore.intType==4) && (Math.abs(LocX - entStore.intLocX) + Math.abs(LocY - entStore.intLocY) <= range))
+			for (i2=0;i2<mapSize;i2++)
 			{
-				if (entStore.intNum == 0)
-					frame.chcAttack.addItem(entStore.strName);
-				else
-					frame.chcAttack.addItem(entStore.intNum+"."+entStore.strName);
+				entStore = entEntities[i][i2];
+				while (entStore != null)
+				{
+					if (entStore.intNum == 0)
+						frame.chcLook.addItem(entStore.strName);
+					else
+						frame.chcLook.addItem(entStore.intNum+"."+entStore.strName);
+					entStore = entStore.entNext;
+				}
 			}
 		}
 		blnMenuRefresh = false;
 	}
 	
-	public void reloadChoiceGet()
+	public void reloadJComboBoxAttack()
 	{
 		int i,
 			i2;
@@ -1506,30 +1460,68 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		blnMenuRefresh = true;
 		try
 		{
-			frame.chcGet.removeAll();
+			frame.chcAttack.removeAllItems();
 		}catch (Exception e){};
-		frame.chcGet.addItem("Get");
-		Iterator iter = vctEntities.iterator();
-		while (iter.hasNext())
+		frame.chcAttack.addItem("Attack");
+		for (i=0;i<mapSize;i++)
 		{
-			entStore = (Entity)iter.next();
-			if (entStore.intType==1 && (Math.abs(LocX - entStore.intLocX) + Math.abs(LocY - entStore.intLocY) < 2))
-	        {
-				if (entStore.intNum == 0)
-					frame.chcGet.addItem(entStore.strName);
-				else
-					frame.chcGet.addItem(entStore.intNum+"."+entStore.strName);
-	        }
+			for (i2=0;i2<mapSize;i2++)
+			{
+				entStore = entEntities[i][i2];
+				while (entStore != null)
+				{
+					if ((entStore.intType==0 || entStore.intType==1 || entStore.intType==4) && (Math.abs(LocX - entStore.intLocX) + Math.abs(LocY - entStore.intLocY) < 2))
+					{
+						if (entStore.intNum == 0)
+							frame.chcAttack.addItem(entStore.strName);
+						else
+							frame.chcAttack.addItem(entStore.intNum+"."+entStore.strName);
+					}
+					entStore = entStore.entNext;
+				}
+			}
 		}
 		blnMenuRefresh = false;
 	}
 	
-	public void reloadChoiceBuy()
+	public void reloadJComboBoxGet()
+	{
+		int i,
+			i2;
+		Entity entStore;
+		blnMenuRefresh = true;
+		try
+		{
+			frame.chcGet.removeAllItems();
+		}catch (Exception e){};
+		frame.chcGet.addItem("Get");
+		for (i=0;i<mapSize;i++)
+		{
+			for (i2=0;i2<mapSize;i2++)
+			{
+				entStore = entEntities[i][i2];
+				while (entStore != null)
+				{
+		        	if (entStore.intType==1 && (LocX - entStore.intLocX) + (LocY - entStore.intLocY) < 2)
+	        		{
+						if (entStore.intNum == 0)
+							frame.chcGet.addItem(entStore.strName);
+						else
+							frame.chcGet.addItem(entStore.intNum+"."+entStore.strName);
+	            	}
+					entStore = entStore.entNext;
+				}
+			}
+		}
+		blnMenuRefresh = false;
+	}
+	
+	public void reloadJComboBoxBuy()
 	{
 		blnMenuRefresh = true;
 		try
 		{
-			frmMerchant.chcBuy.removeAll();
+			frmMerchant.chcBuy.removeAllItems();
 		}catch(Exception e){}
 		int i;
 		for (i=0;i<vctMerchantItems.size();i++)
@@ -1539,12 +1531,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		blnMenuRefresh = false;
 	}
 	
-	public void reloadChoiceSell()
+	public void reloadJComboBoxSell()
 	{
 		blnMenuRefresh = true;
 		try
 		{
-			frmMerchant.chcSell.removeAll();
+			frmMerchant.chcSell.removeAllItems();
 		}catch(Exception e){}
 		int i;
 		for (i=0;i<vctSell.size();i++)
@@ -1554,12 +1546,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		blnMenuRefresh = false;
 	}
 	
-	public void reloadChoiceDrop()
+	public void reloadJComboBoxDrop()
 	{
 		blnMenuRefresh = true;
 		try
 		{
-			frame.chcDrop.removeAll();
+			frame.chcDrop.removeAllItems();
 		}catch(Exception e){}
 		frame.chcDrop.addItem("Drop");
 		int i;
@@ -1570,12 +1562,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		blnMenuRefresh = false;
 	}
 	
-	public void reloadChoiceAction()
+	public void reloadJComboBoxAction()
 	{
 		blnMenuRefresh = true;
 		try
 		{
-			frame.chcAction.removeAll();
+			frame.chcAction.removeAllItems();
 		}catch(Exception e){}
 		frame.chcAction.addItem("Action");
 		int i;
@@ -1585,7 +1577,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 		blnMenuRefresh = false;
 	}
-	
+		
 	public void scaleImages()
 	{
 		try
@@ -1606,7 +1598,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				mdtTracker.addImage(imgPlayers,0);
 				mdtTracker.addImage(imgSprites,0);
 				mdtTracker.waitForAll();
-			}catch(Exception e)
+			}catch(InterruptedException e)
 			{
 				System.err.println("Error while scaling for images: "+e.toString());
 			}                       
@@ -1616,12 +1608,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	public void scaleWindow()
 	{
 		//frame.pnlGraphics
-		if ((frame.pnlContents.getBounds().width-480) > (frame.pnlContents.getBounds().height-150))
+		if ((frame.pnlContents.getBounds().width-310) > (frame.pnlContents.getBounds().height-100))
 		{
-			frame.pnlGraphics.setSize(frame.pnlContents.getBounds().height-150,frame.pnlContents.getBounds().height-150);
+			frame.pnlGraphics.setSize(frame.pnlContents.getBounds().height-100,frame.pnlContents.getBounds().height-100);
 		}else
 		{
-			frame.pnlGraphics.setSize(frame.pnlContents.getBounds().width-480,frame.pnlContents.getBounds().width-480);
+			frame.pnlGraphics.setSize(frame.pnlContents.getBounds().width-310,frame.pnlContents.getBounds().width-310);
 		}
 		intImageSize = frame.pnlGraphics.getBounds().width/mapSize;
 		if (intImageSize < 1)
@@ -1639,15 +1631,19 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		frame.txtInput.setSize(frame.pnlContents.getBounds().width,25);
 		frame.pnlStats.setSize(frame.pnlContents.getBounds().width-frame.pnlGraphics.getBounds().width,frame.pnlGraphics.getBounds().height);
 		frame.pnlStats.setLocation(frame.pnlGraphics.getBounds().width,0);
-		frame.txtOther.setSize(frame.pnlStats.getBounds().width-140,frame.pnlStats.getBounds().height-40);
+		frame.txtOther.setSize(frame.pnlStats.getBounds().width-140,frame.pnlStats.getBounds().height-60);
+                frame.lblTarget.setSize(frame.pnlStats.getBounds().width, 20);
 		frame.lblInfo.setSize(frame.pnlContents.getBounds().width,20);
 		frame.scrText.getVerticalScrollBar().setValue(frame.scrText.getVerticalScrollBar().getMaximum());
 		System.gc();
 	}
 	
 	//Accept mouse input
+        @Override
 	public void mousePressed(MouseEvent evt){}
+        @Override
 	public void mouseReleased(MouseEvent evt){}
+        @Override
 	public void mouseClicked(MouseEvent evt)
 	{
 		if (!blnConnected)
@@ -1666,17 +1662,20 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
  			try
  			{
  	 			stmOut.writeBytes("goto " + destX + " " + destY + "\n");
- 			}catch(Exception e)
+ 			}catch(IOException e)
  			{
  	 			addText("Error at mouseDown(): "+e.toString()+"\n");
  			}
 		}
 		frame.txtInput.requestFocus();
 	}
+        @Override
 	public void mouseEntered(MouseEvent evt){}
+        @Override
 	public void mouseExited(MouseEvent evt){}
 
 	//Accept key input
+        @Override
 	public void keyPressed(KeyEvent evt)
 	{
 		if (!blnConnected)
@@ -1744,19 +1743,21 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	    				{
 	    					stmOut.writeBytes(strSet+"\n");
 	    				}
-		 				return;
 	   				}
+
 		 		}
 			}
-	    }catch(Exception e)
+	    }catch(IOException e)
 	    {
 	        addText("Error at keyPressed(): "+e.toString()+"\n");
 	    }
 	    }
-		return;
 	}
+        @Override
 	public void keyReleased(KeyEvent evt){}
+        @Override
 	public void keyTyped(KeyEvent evt){}
+        @Override
 	public void componentResized(ComponentEvent e)
 	{
 		scaleWindow();
@@ -1764,10 +1765,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		update(); 
 		paint(); //Wildern added
 	}
+        @Override
 	public void componentMoved(ComponentEvent e){}
+        @Override
 	public void componentShown(ComponentEvent e){}
+        @Override
 	public void componentHidden(ComponentEvent e){}
 	
+/*        @Override
 	public void actionPerformed(ActionEvent evt)
 	{
 		if (evt.getSource() == frame.btnConnect)
@@ -1781,6 +1786,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				frame.frmEquipment.show();
 				frame.frmEquipment.setSize(300, 440);
 			}
+                }else if (evt.getSource() == frame.btnMagic)
+		{
+			if (frame.frmMagic != null)
+			{
+				frame.frmMagic.show();
+				frame.frmMagic.setSize(300, 440);
+			}      
 		}else if (evt.getSource() == frame.btnMerchant)
 		{
 			if (frmMerchant != null)
@@ -1788,17 +1800,45 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				frmMerchant.show();
 				frmMerchant.setSize(300,120);
 			}
+                }else if (evt.getSource() == frame.btnPotion)
+		{
+			try
+			{
+				if (blnConnected)
+					stmOut.writeBytes("use minormend\n");
+                        }catch(IOException exc){}
+                }else if (evt.getSource() == frame.btnPotion2)
+		{
+			try
+			{
+				if (blnConnected)
+					stmOut.writeBytes("use mendpotion\n");
+                        }catch(IOException exc){}
+                }else if (evt.getSource() == frame.btnPotion3)
+		{
+			try
+			{
+				if (blnConnected)
+					stmOut.writeBytes("use minormana\n");
+                        }catch(IOException exc){}
+                }else if (evt.getSource() == frame.btnPotion4)
+		{
+			try
+			{
+				if (blnConnected)
+					stmOut.writeBytes("use manapotion\n");
+                        }catch(IOException exc){}
 		}else if (evt.getSource() == frame.btnQuit)
 		{
 			try
 			{
 				if (blnConnected)
 					stmOut.writeBytes("quit\n");
-			}catch(Exception exc){}
+			}catch(IOException exc){}
 			try
 			{
 				sckConnection.close();
-			}catch (Exception exc){}
+			}catch (IOException exc){}
 			try
 			{
 				imgOriginalSprites.flush();
@@ -1818,7 +1858,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 		}
 	}	
-
+*/
 
 	void thisWindowClosing(WindowEvent e)
 	{
@@ -1892,7 +1932,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			try
 			{
 				gD.drawImage(imgSprites,
-							(int)(x*intImageSize)-48,(int)(y*intImageSize)-48,   //Zach hack bigger sprites added -48
+							(int)(x*intImageSize)-52,(int)(y*intImageSize)-52,   //Zach hack bigger sprites -48,-50
 							(int)((x+1.5)*intImageSize),(int)((y+1)*intImageSize),  //1.5 used to be 1
 							entStore.intImage*intImageSize,0,
 							(entStore.intImage+1)*intImageSize,intImageSize,
@@ -1903,10 +1943,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			try
 			{
 				gD.drawImage(imgPlayers,
-								(int)(x*intImageSize)-48,(int)(y*intImageSize)-64,   //Zach hack bigger sprites added -48, -64 
-								(int)((x+1.5)*intImageSize),(int)((y+1)*intImageSize),   //1.5 these values may need tweaking
-								(entStore.intImage*8+entStore.intStep)*intImageSize,0,
-								(entStore.intImage*8+entStore.intStep+1)*intImageSize,intImageSize,
+								(int)(x*intImageSize)-52,(int)(y*intImageSize)-52,   //Zach hack bigger sprites added -48,-50 
+								(int)((x+1.5)*intImageSize),(int)((y+1)*intImageSize),   //image is scaled 3 times now oops 
+								(entStore.intImage*8+entStore.intStep)*intImageSize,0, //images are distorted in small screen, and this hack
+								(entStore.intImage*8+entStore.intStep+1)*intImageSize,intImageSize,  //works best nearly or max fullscreen
 								null);
 			}catch(Exception e){}
 		}
@@ -1926,6 +1966,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 	
+        @Override
 	public boolean imageUpdate(Image img,
                                      int infoflags,
                                      int x,

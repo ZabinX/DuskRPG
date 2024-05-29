@@ -10,6 +10,7 @@ remove this license, and accompany it with all redistributions.
 
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 import java.io.*;
 import java.util.Vector;
 import java.lang.Math;
@@ -18,37 +19,37 @@ import java.util.StringTokenizer;
 import java.applet.*;
 import java.net.*;
 
-public class EquipmentFrame extends Frame implements ActionListener
+class EquipmentFrame extends JFrame implements ActionListener
 {
 	Dusk appParent;
 	boolean blnRefreshMenus;
 	
-	Choice chcSkull = new Choice();
-	Choice chcArms = new Choice();
-	Choice chcEyes = new Choice();
-	Choice chcTorso = new Choice();
-	Choice chcLegs = new Choice();
-	Choice chcNeck = new Choice();
-	Choice chcWaist = new Choice();
-	Choice chcHands = new Choice();
-	Choice chcWield = new Choice();
-	Label lblSkull = new Label();
-	Label Label1 = new Label();
-	Label Label2 = new Label();
-	Label Label3 = new Label();
-	Label Label4 = new Label();
-	Label Label5 = new Label();
-	Label Label6 = new Label();
-	Label Label7 = new Label();
-	Label Label8 = new Label();
-	Label Label9 = new Label();
+	JComboBox chcSkull = new JComboBox();
+	JComboBox chcArms = new JComboBox();
+	JComboBox chcEyes = new JComboBox();
+	JComboBox chcTorso = new JComboBox();
+	JComboBox chcLegs = new JComboBox();
+	JComboBox chcNeck = new JComboBox();
+	JComboBox chcWaist = new JComboBox();
+	JComboBox chcHands = new JComboBox();
+	JComboBox chcWield = new JComboBox();
+	JLabel lblSkull = new JLabel();
+	JLabel JLabel1 = new JLabel();
+	JLabel JLabel2 = new JLabel();
+	JLabel JLabel3 = new JLabel();
+	JLabel JLabel4 = new JLabel();
+	JLabel JLabel5 = new JLabel();
+	JLabel JLabel6 = new JLabel();
+	JLabel JLabel7 = new JLabel();
+	JLabel JLabel8 = new JLabel();
+	JLabel JLabel9 = new JLabel();
 
 	public EquipmentFrame(Dusk inAppParent)
 	{
 	    try
 	    {
-	        appParent = inAppParent;
 	        initComponents();
+	        appParent = inAppParent;
 	    }catch (Exception e)
 	    {
 	        System.err.println("Error at EquipmentFrame(): "+e.toString());
@@ -57,6 +58,7 @@ public class EquipmentFrame extends Frame implements ActionListener
 
 	public void initComponents() throws Exception
 	{
+		
 		chcSkull.setLocation(30, 40);
 		chcSkull.setVisible(true);
 		chcSkull.setSize(240, 20);
@@ -98,128 +100,85 @@ public class EquipmentFrame extends Frame implements ActionListener
 		lblSkull.setVisible(true);
 		lblSkull.setSize(400, 20);
 
-		Label1.setText("Torso:");
-		Label1.setLocation(10, 60);
-		Label1.setVisible(true);
-		Label1.setSize(400, 20);
+		JLabel1.setText("Torso:");
+		JLabel1.setLocation(10, 60);
+		JLabel1.setVisible(true);
+		JLabel1.setSize(400, 20);
 
-		Label2.setText("Arms:");
-		Label2.setLocation(9, 100);
-		Label2.setVisible(true);
-		Label2.setSize(400, 20);
+		JLabel2.setText("Arms:");
+		JLabel2.setLocation(9, 100);
+		JLabel2.setVisible(true);
+		JLabel2.setSize(400, 20);
 
-		Label3.setText("Legs:");
-		Label3.setLocation(9, 135);
-		Label3.setVisible(true);
-		Label3.setSize(400, 20);
+		JLabel3.setText("Legs:");
+		JLabel3.setLocation(9, 135);
+		JLabel3.setVisible(true);
+		JLabel3.setSize(400, 20);
 
-		Label4.setText("Neck:");
-		Label4.setLocation(10, 180);
-		Label4.setVisible(true);
-		Label4.setSize(400, 20);
+		JLabel4.setText("Neck:");
+		JLabel4.setLocation(10, 180);
+		JLabel4.setVisible(true);
+		JLabel4.setSize(400, 20);
 
-		Label5.setText("Eyes:");
-		Label5.setLocation(10, 220);
-		Label5.setVisible(true);
-		Label5.setSize(400, 20);
+		JLabel5.setText("Eyes:");
+		JLabel5.setLocation(10, 220);
+		JLabel5.setVisible(true);
+		JLabel5.setSize(400, 20);
 
-		Label6.setText("Waist:");
-		Label6.setLocation(10, 260);
-		Label6.setVisible(true);
-		Label6.setSize(400, 20);
+		JLabel6.setText("Waist:");
+		JLabel6.setLocation(10, 260);
+		JLabel6.setVisible(true);
+		JLabel6.setSize(400, 20);
 
-		Label7.setText("Hands:");
-		Label7.setLocation(10, 300);
-		Label7.setVisible(true);
-		Label7.setSize(400, 20);
+		JLabel7.setText("Hands:");
+		JLabel7.setLocation(10, 300);
+		JLabel7.setVisible(true);
+		JLabel7.setSize(400, 20);
 
-		Label9.setText("Wielded:");
-		Label9.setLocation(10, 340);
-		Label9.setVisible(true);
-		Label9.setSize(400, 20);
+		JLabel9.setText("Wielded:");
+		JLabel9.setLocation(10, 340);
+		JLabel9.setVisible(true);
+		JLabel9.setSize(400, 20);
 
-		Label8.setText("Equipment");
-		Label8.setLocation(10, 0);
-		Label8.setAlignment(Label.CENTER);
-		Label8.setVisible(true);
-		Label8.setSize(280, 20);
+		JLabel8.setText("Equipment");
+		JLabel8.setLocation(10, 0);
+		JLabel8.setHorizontalAlignment(JLabel.CENTER);
+		JLabel8.setVisible(true);
+		JLabel8.setSize(280, 20);
 
 		setLocation(0, 0);
 		setTitle("Equipment");
-		setLayout(null);
-		setSize(300, 440);
-		add(chcSkull);
-		add(chcArms);
-		add(chcEyes);
-		add(chcTorso);
-		add(chcLegs);
-		add(chcNeck);
-		add(chcWaist);
-		add(chcHands);
-		add(chcWield);
-		add(lblSkull);
-		add(Label1);
-		add(Label2);
-		add(Label3);
-		add(Label4);
-		add(Label5);
-		add(Label6);
-		add(Label7);
-		add(Label8);
-		add(Label9);
-		setBackground(appParent.frame.background);
-
-
-		chcSkull.addItemListener(new java.awt.event.ItemListener() {
-			public void itemStateChanged(java.awt.event.ItemEvent e) {
-				Equip(7);
-			}
-		});
-		chcArms.addItemListener(new java.awt.event.ItemListener() {
-			public void itemStateChanged(java.awt.event.ItemEvent e) {
-				Equip(2);			
-			}
-		});
-		chcEyes.addItemListener(new java.awt.event.ItemListener() {
-			public void itemStateChanged(java.awt.event.ItemEvent e) {
-				Equip(8);			
-			}
-		});
-		chcTorso.addItemListener(new java.awt.event.ItemListener() {
-			public void itemStateChanged(java.awt.event.ItemEvent e) {
-				Equip(4);			
-			}
-		});
-		chcLegs.addItemListener(new java.awt.event.ItemListener() {
-			public void itemStateChanged(java.awt.event.ItemEvent e) {
-				Equip(3);			
-			}
-		});
-		chcNeck.addItemListener(new java.awt.event.ItemListener() {
-			public void itemStateChanged(java.awt.event.ItemEvent e) {
-				Equip(6);			
-			}
-		});
-		chcWaist.addItemListener(new java.awt.event.ItemListener() {
-			public void itemStateChanged(java.awt.event.ItemEvent e) {
-				Equip(5);			
-			}
-		});
-		chcHands.addItemListener(new java.awt.event.ItemListener() {
-			public void itemStateChanged(java.awt.event.ItemEvent e) {
-				Equip(9);			
-			}
-		});
-		chcWield.addItemListener(new java.awt.event.ItemListener() {
-			public void itemStateChanged(java.awt.event.ItemEvent e) {
-				Equip(1);
-			}
-		});
-		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
-				thisWindowClosing(e);
-			}
-		});
+		getContentPane().setLayout(null);
+		getContentPane().setSize(300, 440);
+		getContentPane().add(chcSkull);
+		getContentPane().add(chcArms);
+		getContentPane().add(chcEyes);
+		getContentPane().add(chcTorso);
+		getContentPane().add(chcLegs);
+		getContentPane().add(chcNeck);
+		getContentPane().add(chcWaist);
+		getContentPane().add(chcHands);
+		getContentPane().add(chcWield);
+		getContentPane().add(lblSkull);
+		getContentPane().add(JLabel1);
+		getContentPane().add(JLabel2);
+		getContentPane().add(JLabel3);
+		getContentPane().add(JLabel4);
+		getContentPane().add(JLabel5);
+		getContentPane().add(JLabel6);
+		getContentPane().add(JLabel7);
+		getContentPane().add(JLabel8);
+		getContentPane().add(JLabel9);
+		
+		chcWield.addActionListener(this);
+		chcArms.addActionListener(this);
+		chcLegs.addActionListener(this);
+		chcTorso.addActionListener(this);
+		chcWaist.addActionListener(this);
+		chcNeck.addActionListener(this);
+		chcSkull.addActionListener(this);
+		chcEyes.addActionListener(this);
+		chcHands.addActionListener(this);
 		
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -404,7 +363,7 @@ public class EquipmentFrame extends Frame implements ActionListener
 		}
 		}catch(Exception e)
 		{
-			appParent.addText("Error at Equip(): "+e.toString());
+			appParent.frame.txtOutput.append("Error at Equip(): "+e.toString());
 		}
 	}
 }

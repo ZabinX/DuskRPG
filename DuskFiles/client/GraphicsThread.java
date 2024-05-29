@@ -185,7 +185,7 @@ try {
 						}
 					}
 					entStore.intMoveDirection = -1;
-					appParent.reloadChoiceAttack();
+					appParent.reloadJComboBoxAttack();
 //					appParent.update();
 					appParent.paint();
 				}else
