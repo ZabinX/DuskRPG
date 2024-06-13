@@ -1,0 +1,6 @@
+(function(){var P$=Clazz.newPackage("java.awt"),I$=[];
+/*i*/var C$=Clazz.newInterface(P$, "LayoutManager2", null, null, 'java.awt.LayoutManager');
+
+C$.$clinit$=2;
+})();
+;Clazz.setTVer('5.0.1-v2');//Created 2024-05-06 14:57:05 Java2ScriptVisitor version 5.0.1-v2 net.sf.j2s.core.jar version 5.0.1-v2
