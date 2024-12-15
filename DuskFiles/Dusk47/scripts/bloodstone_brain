@@ -1,0 +1,18 @@
+#Zabin script testing
+livingthing target enemy trigger
+if and hasCondition target bloodstoneore hasCondition target bloodstoneore1
+removeCondition target bloodstoneore
+endscript
+end
+#
+livingthing target enemy trigger
+if hasCondition target bloodstoneore1
+addCondition target bloodstoneore
+endscript
+end
+#
+livingthing target enemy trigger
+addCondition target bloodstoneore1
+chat enemy trigger "You think **Maybe I should use a varaxium pickaxe.**"
+endscript
+

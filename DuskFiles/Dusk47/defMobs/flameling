@@ -1,28 +1,28 @@
 maxhp
-1000
+10000
 maxmp
-300
+30000
 stre
-50
+300
 inte
-40
+100
 dext
-60
+633
 wisd
-50
+33
 cons
-40
+33
 image
 40
 giveitem
-demonite
-0.1
-onBattle
-flameling_brain
+demon horns
+1
+faction
+alligator
 bravery
-1
+9
 grouprelation
-1
+9
 .
 
 

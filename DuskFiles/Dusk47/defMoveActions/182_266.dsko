@@ -1,1 +1,1 @@
-trigger cp 500 *trigger "It's too dangerous..." ,trigger +2  
+trigger cp 300 *trigger "You need 300cp to enter here..." ,trigger +2  

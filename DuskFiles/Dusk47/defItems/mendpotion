@@ -1,9 +1,9 @@
 type
 food
 description
-A not so fancy glass bottle full of a strange liquid.
+A fancy glass bottle full of a strange liquid.
 cost
-100
+50
 image
 58
 onuse

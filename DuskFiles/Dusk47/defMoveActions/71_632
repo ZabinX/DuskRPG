@@ -1,3 +1,9 @@
+if ! isPlayer trigger
+	endscript
+end
+if hasCondition trigger chicken
+	endscript
+	end
 if hasCondition trigger blackbeardquest
 	endscript
 	end
@@ -8,174 +14,12 @@ if hasCondition trigger shenville_pq_0
 	createoneusemob "BlackBeard" 63 627
 	removeCondition trigger shenville_pq_0
 	addCondition trigger shenville_0
-	chat trigger "As you enter the harbor you hear some pirates' in the back room.  *AarrrR MaateyY* *SshimberrR me TimberrRs."
+	addCondition trigger intavern
+	chat trigger "As you enter the room you hear some pirates' in the back room.  *AarrrR MaateyY* *SshimberrR me TimberrRs."
 	inc trigger locx 1
 	endscript
 end
-if hasCondition trigger shenville_0
-	livingthing guard1 local trigger "Pirate"
-		if = guard1 locX 78
-			if = guard1 locY 627
-			set guard1 locxy 1 1
-			end
-		end
-	livingthing guard2 local trigger "Pirate Guard"
-		if = guard2 locX 73
-			if = guard2 locY 626
-			set guard2 locxy 1 1
-			end
-		end
-	livingthing guard3 local trigger "Pirate Guard"
-		if = guard3 locX 74
-			if = guard3 locY 627
-			set guard3 locxy 1 1
-			end
-		end
-	livingthing guard1 local trigger "Pirate Assassin"
-		if = guard1 locX 67
-			if = guard1 locY 627
-			set guard1 locxy 1 1
-			end
-		end
-	livingthing guard2 local trigger "Pirate Assassin"
-		if = guard2 locX 68
-			if = guard2 locY 626
-			set guard2 locxy 1 1
-			end
-		end
-	livingthing guard3 local trigger "BlackBeard"
-		if = guard3 locX 63 
-			if = guard3 locY 627
-			set guard3 locxy 1 1
-			end
-		end
-	inc trigger locx -1
-	chat trigger "It appears you were chicken and ran away rather then fighting the pirates.  You have to talk with the king to reset the quest now and you can finish it later when your not chicken!  BbbaaaakKK BbaaK!"  
-	endscript
-end
-if hasCondition trigger killedpirate
-	livingthing guard1 local trigger "Pirate"
-		if = guard1 locX 78
-			if = guard1 locY 627
-			set guard1 locxy 1 1
-			end
-		end
-	livingthing guard2 local trigger "Pirate Guard"
-		if = guard2 locX 73
-			if = guard2 locY 626
-			set guard2 locxy 1 1
-			end
-		end
-	livingthing guard3 local trigger "Pirate Guard"
-		if = guard3 locX 74
-			if = guard3 locY 627
-			set guard3 locxy 1 1
-			end
-		end
-	livingthing guard1 local trigger "Pirate Assassin"
-		if = guard1 locX 67
-			if = guard1 locY 627
-			set guard1 locxy 1 1
-			end
-		end
-	livingthing guard2 local trigger "Pirate Assassin"
-		if = guard2 locX 68
-			if = guard2 locY 626
-			set guard2 locxy 1 1
-			end
-		end
-	livingthing guard3 local trigger "BlackBeard"
-		if = guard3 locX 63 
-			if = guard3 locY 627
-			set guard3 locxy 1 1
-			end
-		end
-	inc trigger locx -1
-	chat trigger "It appears you were chicken and ran away rather then fighting all of the pirates.  You have to talk with the king to reset the quest now and you can finish it later when your not chicken!  BbbaaaakKK BbaaK!"  
-	endscript
-end
-if hasCondition trigger killedpirateguard
-	livingthing guard1 local trigger "Pirate"
-		if = guard1 locX 78
-			if = guard1 locY 627
-			set guard1 locxy 1 1
-			end
-		end
-	livingthing guard2 local trigger "Pirate Guard"
-		if = guard2 locX 73
-			if = guard2 locY 626
-			set guard2 locxy 1 1
-			end
-		end
-	livingthing guard3 local trigger "Pirate Guard"
-		if = guard3 locX 74
-			if = guard3 locY 627
-			set guard3 locxy 1 1
-			end
-		end
-	livingthing guard1 local trigger "Pirate Assassin"
-		if = guard1 locX 67
-			if = guard1 locY 627
-			set guard1 locxy 1 1
-			end
-		end
-	livingthing guard2 local trigger "Pirate Assassin"
-		if = guard2 locX 68
-			if = guard2 locY 626
-			set guard2 locxy 1 1
-			end
-		end
-	livingthing guard3 local trigger "BlackBeard"
-		if = guard3 locX 63 
-			if = guard3 locY 627
-			set guard3 locxy 1 1
-			end
-		end
-	inc trigger locx -1
-	chat trigger "It appears you were chicken and ran away rather then fighting all of the pirates.  You have to talk with the king to reset the quest now and you can finish it later when your not chicken!  BbbaaaakKK BbaaK!"  
-	endscript
-end
-if hasCondition trigger killedpirateassassin
-	livingthing guard1 local trigger "Pirate"
-		if = guard1 locX 78
-			if = guard1 locY 627
-			set guard1 locxy 1 1
-			end
-		end
-	livingthing guard2 local trigger "Pirate Guard"
-		if = guard2 locX 73
-			if = guard2 locY 626
-			set guard2 locxy 1 1
-			end
-		end
-	livingthing guard3 local trigger "Pirate Guard"
-		if = guard3 locX 74
-			if = guard3 locY 627
-			set guard3 locxy 1 1
-			end
-		end
-	livingthing guard1 local trigger "Pirate Assassin"
-		if = guard1 locX 67
-			if = guard1 locY 627
-			set guard1 locxy 1 1
-			end
-		end
-	livingthing guard2 local trigger "Pirate Assassin"
-		if = guard2 locX 68
-			if = guard2 locY 626
-			set guard2 locxy 1 1
-			end
-		end
-	livingthing guard3 local trigger "BlackBeard"
-		if = guard3 locX 63 
-			if = guard3 locY 627
-			set guard3 locxy 1 1
-			end
-		end
-	inc trigger locx -1
-	chat trigger "It appears you were chicken and ran away rather then fighting all of the pirates.  You have to talk with the king to reset the quest now and you can finish it later when your not chicken!  BbbaaaakKK BbaaK!"  
-	endscript
-end
+
 
 
 

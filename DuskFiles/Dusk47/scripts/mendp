@@ -1,8 +1,7 @@
 if hasItem trigger mendpotion
-	chat trigger "You sip on the potion. +100HP.  Now you have en empty bottle."
+	chat trigger "+100HP."
 	inc trigger hp 100
 	removeItem trigger mendpotion
-	giveItem trigger "empty bottle"
 end
 endscript
 

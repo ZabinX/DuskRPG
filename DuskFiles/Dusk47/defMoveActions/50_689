@@ -14,8 +14,8 @@ if hasCondition trigger shenville_mq_0
 	end
 #
 if hasCondition trigger shenville_gfq_0
-	chat trigger "MerlinXsays: I know that in the gold forest live dangerous felines"
-	chat trigger "MerlinX says: there are secret entrances to enter into the forest"
+	chat trigger "MerlinXsays: I know that in the lava forest live dangerous invisible felines."
+	chat trigger "MerlinX says: You'll need lava boots to enter the lava forest."
 	endscript
 	end
 #
@@ -26,5 +26,6 @@ if hasCondition trigger shenville_pq_0
 #
 chat trigger "The guy says: hi"
 endscript
+
 
 

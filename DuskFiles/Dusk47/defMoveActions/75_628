@@ -1,0 +1,39 @@
+if ! isPlayer trigger
+	endscript
+end
+if hasCondition trigger chicken
+	livingthing guard1 local trigger "Pirate"
+		if = guard1 locX 78
+			if = guard1 locY 627
+			set guard1 locxy 215 191
+			end
+		end
+	livingthing guard2 local trigger "Pirate Guard"
+		if = guard2 locX 73
+			if = guard2 locY 626
+			set guard2 locxy 215 191
+			end
+		end
+	removeCondition trigger chicken
+	removeCondition trigger intavern
+	set trigger locxy 69 632
+	endscript
+end
+if hasCondition trigger shenville_0
+	livingthing guard1 local trigger "Pirate"
+		if = guard1 locX 78
+			if = guard1 locY 627
+			set guard1 locxy 215 191
+			end
+		end
+	livingthing guard2 local trigger "Pirate Guard"
+		if = guard2 locX 73
+			if = guard2 locY 626
+			set guard2 locxy 215 191
+			end
+		end
+	set trigger locxy 81 627
+	endscript
+end
+
+

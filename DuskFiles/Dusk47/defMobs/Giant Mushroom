@@ -1,5 +1,5 @@
 maxhp
-200
+2000
 maxmp
 7000
 stre
@@ -20,5 +20,4 @@ grouprelation
 1
 onBattle
 mushroom_brain
-
 .

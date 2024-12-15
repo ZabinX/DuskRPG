@@ -1,5 +1,6 @@
 if ismob trigger
-    endscript
+	inc trigger locxy 215 191
+	endscript
 end
 if ispet trigger
     endscript
@@ -35,6 +36,8 @@ if < trigger cp 200
     	endscript
 end
 endscript
+
+
 
 
 

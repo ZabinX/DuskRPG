@@ -1,16 +1,4 @@
-if hasCondition trigger shenville_0
-	livingthing guard1 local trigger "Pirate Assassin"
-	if ismob guard1
-	order guard1 "wake"
-        	order guard1 concat "a " name trigger
-	end
-	livingthing guard1 local trigger "1.Pirate Assassin"
-	if ismob guard1
-	order guard1 "wake"
-        	order guard1 concat "a " name trigger
-	end
-	endscript
-end
+
 
 
 

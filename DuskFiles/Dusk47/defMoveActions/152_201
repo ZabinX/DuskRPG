@@ -1,18 +1,6 @@
 if ispet trigger
     endscript
 end
-if hasCondition trigger inforest
-	createoneusemob "Mutant Scorpion" 153 200
-	createoneusemob "Mutant Scorpion" 154 201
-	createoneusemob "Mutant Scorpion" 153 202
-	chat trigger "The gods know you managed to stumbled in here while drunk and decide to give you scorpions instead."
-	chat trigger "You are surrounded by Mutant Scorpions!"
-	addcondition trigger inforest2	
-	addcondition trigger checktreasure
-	removeCondition trigger inforest
-	inc trigger locx 1
-	endscript
-end
 #
 if hasCondition trigger checktreasure
 	chat trigger "The treasure chest is still empty."
@@ -25,6 +13,7 @@ addcondition trigger checktreasure
 chat trigger "Sweet!  You found 1kgp!."
 endscript
 end
+
 
 
 

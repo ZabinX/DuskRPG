@@ -1,0 +1,32 @@
+#Zabins' ore mining script
+if isInBattle trigger
+	if ! hasItem trigger bloodstonepickaxe
+		order trigger flee
+		order trigger reset
+		inc trigger hp -100
+		set trigger locxy 143 266
+		chat trigger "*ouch* -100hp the gods are madder then hell at you right now.."
+		removecondition trigger magicplant1
+		endscript
+	end
+end
+if isInBattle trigger
+	if hasItem trigger bloodstonepickaxe
+		livingthing target enemy trigger
+		if < target hp 1
+		order target "wear rockprotection"
+		chat trigger "You strike the rock with a pickaxe."
+		endscript
+	end
+end
+if isInBattle trigger
+	if hasItem trigger bloodstonepickaxe
+		livingthing target enemy trigger
+		order target "unwear rockprotection"
+		chat trigger "You strike the rock with a pickaxe."
+		endscript
+	end
+end
+
+
+

@@ -74,7 +74,9 @@ if and hasCondition trigger blackbeardquest hasItem trigger crown
 		chat trigger "You get 10K gp"
 	chat trigger "You, hiding your wounds, say: it was my pleasure"
 	chat trigger "Eduardo says: I'm so sad..."
-	removeCondition trigger recievedcrown
+	removeCondition trigger shenville_pq_0
+	removeCondition trigger shenville_0
+	removeCondition trigger intavern
 	addCondition trigger shenville_gfq_0
 	endscript
 	end
@@ -91,27 +93,6 @@ if hasCondition trigger shenville_0
 	addCondition trigger shenville_pq_0
 	endscript
 	end
-if hasCondition trigger killedpirate	
-	chat trigger "Eduardo says: pirates at the harbor east of the village stole my Royal Crown"
-	chat trigger "Eduardo says: can you bring it back to me?"
-	removeCondition trigger killedpirate
-	addCondition trigger shenville_pq_0
-	endscript
-	end
-if hasCondition trigger killedpirateguard	
-	chat trigger "Eduardo says: pirates at the harbor east of the village stole my Royal Crown"
-	chat trigger "Eduardo says: can you bring it back to me?"
-	removeCondition trigger killedpirateguard
-	addCondition trigger shenville_pq_0
-	endscript
-	end
-if hasCondition trigger killedpirateassassin	
-	chat trigger "Eduardo says: pirates at the harbor east of the village stole my Royal Crown"
-	chat trigger "Eduardo says: can you bring it back to me?"
-	removeCondition trigger killedpirateassassin
-	addCondition trigger shenville_pq_0
-	endscript
-	end
 #
 if hasCondition trigger shenville_end
 	chat trigger "Eduardo says: tnx again"
@@ -124,6 +105,9 @@ chat trigger "Eduardo says: I got some work for you, remember to talk to me ofte
 chat trigger "Eduardo says: and with the guys at the bar, they'll help you"
 addCondition trigger shenville_0
 endscript
+
+
+
 
 
 

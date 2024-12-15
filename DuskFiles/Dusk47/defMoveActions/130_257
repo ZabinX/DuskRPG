@@ -1,0 +1,60 @@
+if hasCondition trigger puzzlefinished
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	createoneusemob "Chris" 156 94
+	set trigger locxy 157 94
+	endscript
+end
+if hasCondition trigger ballidiot
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	order trigger "emote kicked the ball like a fool, thus (MasterGod) Zabin decided to let the GarbageMan do his job ..."
+	createoneusemob "GarbageMan" 216 190
+	set trigger locxy 215 190
+	endscript
+end
+if hasCondition trigger mushroomhole3
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	set trigger locxy 133 259
+	removecondition trigger mushroomhole3
+	endscript
+end
+if hasCondition trigger mushroomhole2
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	set trigger locxy 133 259
+	removecondition trigger mushroomhole2
+	endscript
+end
+if hasCondition trigger mushroomhole
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	set trigger locxy 133 259
+	removecondition trigger mushroomhole
+	endscript
+end
+set trigger locxy 133 259
+endscript
+end
+

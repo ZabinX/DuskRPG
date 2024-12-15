@@ -1,0 +1,4 @@
+trigger puzzlefinished guard2 local trigger "magicplant" guard2 locX 133 guard2 locY 257 -guard2 215 191 "Chris"156 94 -trigger 157 94 trigger ballidiot guard2 local trigger "magicplant" guard2 locX 133 guard2 locY 257 -guard2 215 191 trigger "emote kicked the ball like a fool, thus (MasterGod) Zabin decided to let the GarbageMan do his job ..." "GarbageMan"216 190 -trigger 215 190 trigger mushroomhole3 guard2 local trigger "magicplant" guard2 locX 133 guard2 locY 257 -guard2 215 191 -trigger 133 259 
+trigger mushroomhole3 trigger mushroomhole2 guard2 local trigger "magicplant" guard2 locX 133 guard2 locY 257 -guard2 215 191 -trigger 133 259 
+trigger mushroomhole2 trigger mushroomhole guard2 local trigger "magicplant" guard2 locX 133 guard2 locY 257 -guard2 215 191 -trigger 133 259 
+trigger mushroomhole -trigger 133 259  

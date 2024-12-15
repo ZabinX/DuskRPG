@@ -26,7 +26,7 @@ Site=http://127.0.0.1/dusk/client.html
 PetCost=100
 #
 #Should the game check use line-of-sight
-LineOfSight=true
+LineOfSight=false
 #
 #Should the game use AI (Artificial Intelligence)
 Ai=true

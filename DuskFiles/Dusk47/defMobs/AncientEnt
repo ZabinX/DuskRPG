@@ -20,7 +20,19 @@ image
 277
 giveitem
 healpotion
-0.05
+1
+giveitem
+healpotion
+1
+giveitem
+healpotion
+.75
+giveitem
+healpotion
+.50
+giveitem
+healpotion
+.25
 skill
 double attack
 33

@@ -2,14 +2,19 @@ if ! isPlayer trigger
 	endscript
 	end
 #
+if hasCondition trigger bhquestEnd
+	chat trigger "Cheif Bounty Hunter says: Thanks for all your help."
+	endscript
+end
 #
 if hasCondition trigger orkgoddefeat
-	removeCondition orkgoddefeat
-	addCondition trigger bhquestEnd
-	string outText concat concat "Cheif Bounty Hunter says: I'm very impressed " name trigger "I was battling the Ork God, blinked my eyes for a fraction of a second and when they opened I noticed I was flying backwards."
-	chat trigger "Cheif Bounty Hunter says: Thats when I fell off Death Mountain and broke my leg. I am truly greatful you took care of that piece of ****.  Here's a little bonus from me ;)"
+	string outText concat concat "Cheif Bounty Hunter says: I'm very impressed " name trigger ". I was battling the Ork God, blinked my eyes for a fraction of a second and when they opened I noticed I was flying backwards."
+	chat trigger outText
+	chat trigger "Cheif Bounty Hunter says: Thats when I broke my leg. I am truly greatful you took care of that piece of ****.  Here's a little bonus from me ;)"
 	inc trigger cash 25000
 	chat trigger "You get 25K gp"
+	removeCondition trigger orkgoddefeat
+	addCondition trigger bhquestend
 	endscript
 end
 if hasCondition trigger bhquest5
@@ -112,6 +117,7 @@ end
 	addCondition trigger bhquest1
 	endscript
 end
+
 
 
 

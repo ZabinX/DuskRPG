@@ -2,7 +2,7 @@ if isPlayer trigger
 	livingthing guard1 local trigger "ball"
 		if = guard1 locX 546
 			if = guard1 locY 609
-			set guard1 locxy 1 1
+			set guard1 locxy 215 191
 			chat trigger "**You step on the switch and hear a loud click!**"
 			chat trigger "**Then follows crashing, grinding, and thumping noises as the trigger keeps going off until a door opens up ahead. **"
 			order trigger reset
@@ -16,13 +16,14 @@ if isPlayer trigger
 			end
 		end
 end
-chat trigger "**You step on the switch and nothing happens.**"
 removeCondition trigger checkpuzzlecomplete
 removeCondition trigger ballsouth4
 removeCondition trigger balleast5
 removeCondition trigger ballnorth5
 set trigger locxy 544 615
 endscript
+
+
 
 
 

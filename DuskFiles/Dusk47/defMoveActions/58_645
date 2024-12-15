@@ -10,3 +10,8 @@ if hasCondition trigger savedhusband
 	createoneusemob "Chris" 63 648
 	endscript
 end
+if hasCondition trigger savedhusbandend
+	createoneusemob "Chris" 63 648
+	endscript
+end
+

@@ -1,9 +1,9 @@
 maxhp
 15000
 maxmp
-0
+15000
 stre
-4500
+200
 inte
 100
 dext
@@ -13,18 +13,18 @@ wisd
 cons
 1000
 bravery
-1.5
+9
 grouprelation
-1
+9
 image
-5
-giveitem
-orkgodkey
-1
-faction
-ork
+264
 condition
 detect invis
 0
 -1
+skill
+double attack
+100
+onBattle
+orkgod_brain
 .

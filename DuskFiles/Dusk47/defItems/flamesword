@@ -9,7 +9,7 @@ mod
 image
 80
 durability
-500000
+5000000
 onWear
 start_flame_sword
 onUnWear

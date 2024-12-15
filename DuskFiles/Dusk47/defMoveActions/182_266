@@ -1,5 +1,7 @@
-if < trigger cp 500
-     chat trigger "It's too dangerous..."
+if < trigger cp 300
+     chat trigger "You need 300cp to enter here..."
      inc trigger locy +2
      endscript
 end
+
+

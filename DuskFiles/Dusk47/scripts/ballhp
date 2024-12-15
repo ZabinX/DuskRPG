@@ -1,4 +1,10 @@
 #Zabins' puzzle ball script
+if ismob trigger
+    endscript
+end
+if ispet trigger
+    endscript
+end
 if isInBattle trigger
 	if hasCondition trigger ballnorth
 		livingthing guard1 local trigger "ball"
@@ -10,7 +16,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger ballnorth
 				order trigger reset
-				changetile 531 614 394
+				changetile 531 614 370
 				changetile 531 616 629
 				endscript
 				end
@@ -22,11 +28,11 @@ if isInBattle trigger
 				if = guard1 locY 614
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball north.  The ball falls into the water and disappears.  You have to reset the puzzle now.**"
 				removecondition trigger ballsouth
 				order trigger reset
-				changetile 531 614 394
+				changetile 531 614 370
 				endscript
 				end
 			end
@@ -41,7 +47,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into the wall.**"
 				removecondition trigger balleast
 				order trigger reset
-				changetile 531 614 394
+				changetile 531 614 370
 				changetile 528 614 629
 				endscript
 				end
@@ -57,7 +63,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger ballwest
 				order trigger reset
-				changetile 531 614 394
+				changetile 531 614 370
 				changetile 543 614 629
 				endscript
 				end
@@ -69,11 +75,11 @@ if isInBattle trigger
 				if = guard1 locY 614
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into the wall.  It's stuck in the corner now.**"
 				removecondition trigger ballnorth2
 				order trigger reset
-				changetile 528 614 394
+				changetile 528 614 370
 				changetile 528 619 629
 				endscript
 				end
@@ -85,12 +91,12 @@ if isInBattle trigger
 				if = guard1 locY 614
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball north.  The ball rolls past Chris and falls into the water and disappears.  You have to reset the puzzle now.**"
 				chat trigger "**Chris says,'Hey!, why are you trying to hit me with that heavy ball!!??'*"
 				removecondition trigger ballsouth2
 				order trigger reset
-				changetile 528 614 394
+				changetile 528 614 370
 				endscript
 				end
 			end
@@ -131,11 +137,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a rock.  It's stuck in the corner now.**"
 				removecondition trigger balleast3
 				order trigger reset
-				changetile 531 616 394
+				changetile 531 616 370
 				changetile 530 616 629
 				endscript
 				end
@@ -151,7 +157,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballwest3
 				order trigger reset
-				changetile 531 616 394
+				changetile 531 616 370
 				changetile 536 616 629
 				endscript
 				end
@@ -163,11 +169,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a dead giant mushroom.  It's stuck in the corner now.**"
 				removecondition trigger ballwest3
 				order trigger reset
-				changetile 531 616 394
+				changetile 531 616 370
 				changetile 534 616 629
 				endscript
 				end
@@ -179,11 +185,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a rock.  It's stuck in the corner now.**"
 				removecondition trigger ballwest3
 				order trigger reset
-				changetile 531 616 394
+				changetile 531 616 370
 				changetile 537 616 629
 				endscript
 				end
@@ -199,7 +205,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a dead giant mushroom*"
 				removecondition trigger ballwest3
 				order trigger reset
-				changetile 531 616 394
+				changetile 531 616 370
 				changetile 539 616 629
 				endscript
 				end
@@ -218,7 +224,7 @@ if isInBattle trigger
 							chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a giant mushroom!*"
 							removecondition trigger ballwest3
 							order trigger reset
-							changetile 531 616 394
+							changetile 531 616 370
 							changetile 535 616 629
 							endscript
 							end
@@ -240,7 +246,7 @@ if isInBattle trigger
 							chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a giant mushroom!*"
 							removecondition trigger ballwest3
 							order trigger reset
-							changetile 531 616 394
+							changetile 531 616 370
 							changetile 538 616 629
 							endscript
 							end
@@ -254,11 +260,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into the wall.  It's stuck now.**"
 				removecondition trigger balleast3
 				order trigger reset
-				changetile 531 616 394
+				changetile 531 616 370
 				changetile 545 616 629
 				endscript
 				end
@@ -274,7 +280,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger ballnorth4
 				order trigger reset
-				changetile 543 614 394
+				changetile 543 614 370
 				changetile 543 616 629
 				endscript
 				end
@@ -319,11 +325,11 @@ if isInBattle trigger
 				if = guard1 locY 614
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball north and it keeps rolling until it stops crashing into a rock.  It's stuck in the corner now.*"
 				removecondition trigger ballsouth4
 				order trigger reset
-				changetile 543 614 394
+				changetile 543 614 370
 				changetile 543 613 629
 				endscript
 				end
@@ -363,11 +369,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into the wall.  It's stuck in the corner now.*"
 				removecondition trigger ballwest5
 				order trigger reset
-				changetile 543 616 394
+				changetile 543 616 370
 				changetile 545 616 629
 				endscript
 				end
@@ -379,11 +385,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a dead giant mushroom.  It's stuck now.**"
 				removecondition trigger balleast5
 				order trigger reset
-				changetile 543 616 394
+				changetile 543 616 370
 				changetile 541 616 629
 				endscript
 				end
@@ -399,7 +405,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger balleast5
 				order trigger reset
-				changetile 543 616 394
+				changetile 543 616 370
 				changetile 539 616 629
 				endscript
 				end
@@ -418,7 +424,7 @@ if isInBattle trigger
 							chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a giant mushroom!*"
 							removecondition trigger balleast5
 							order trigger reset
-							changetile 543 616 394
+							changetile 543 616 370
 							changetile 540 616 629
 							endscript
 							end
@@ -432,11 +438,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a rock.  It's stuck now.**"
 				removecondition trigger balleast5
 				order trigger reset
-				changetile 543 616 394
+				changetile 543 616 370
 				changetile 538 616 629
 				endscript
 				end
@@ -452,7 +458,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a dead giant mushroom*"
 				removecondition trigger balleast5
 				order trigger reset
-				changetile 543 616 394
+				changetile 543 616 370
 				changetile 536 616 629
 				endscript
 				end
@@ -472,7 +478,7 @@ if isInBattle trigger
 							chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a giant mushroom!*"
 							removecondition trigger balleast5
 							order trigger reset
-							changetile 543 616 394
+							changetile 543 616 370
 							changetile 537 616 629
 							endscript
 							end
@@ -486,11 +492,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into the wall.  It's stuck now.**"
 				removecondition trigger balleast5
 				order trigger reset
-				changetile 543 616 394
+				changetile 543 616 370
 				changetile 530 616 629
 				endscript
 				end
@@ -502,11 +508,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**Why did I kick the ball this way.  The target is totally the opposite direction!  That was dumb.** The ball has nowhere to go now so you better go reset the puzzle now."
 				removecondition trigger ballnorth6
 				order trigger reset
-				changetile 539 616 394
+				changetile 539 616 370
 				changetile 539 618 629
 				endscript
 				end
@@ -536,7 +542,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball north and it keeps rolling until it stops crashing into a rock.*"
 				removecondition trigger ballsouth6
 				order trigger reset
-				changetile 539 616 394
+				changetile 539 616 370
 				changetile 539 613 629
 				endscript
 				end
@@ -548,11 +554,11 @@ if isInBattle trigger
 				if = guard1 locY 613
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a rock.  It's stuck in the corner now.**"
 				removecondition trigger ballwest7
 				order trigger reset
-				changetile 539 613 394
+				changetile 539 613 370
 				changetile 540 613 629
 				endscript
 				end
@@ -568,7 +574,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger balleast7
 				order trigger reset
-				changetile 539 613 394
+				changetile 539 613 370
 				changetile 534 613 629
 				endscript
 				end
@@ -594,11 +600,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into the wall.  It's stuck in the corner now.**"
 				removecondition trigger ballnorth8
 				order trigger reset
-				changetile 536 616 394
+				changetile 536 616 370
 				changetile 536 619 629
 				endscript
 				end
@@ -614,7 +620,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball north and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger ballsouth8
 				order trigger reset
-				changetile 536 616 394
+				changetile 536 616 370
 				changetile 536 613 629
 				endscript
 				end
@@ -658,7 +664,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger balleast9
 				order trigger reset
-				changetile 536 613 394
+				changetile 536 613 370
 				changetile 534 613 629
 				endscript
 				end
@@ -670,11 +676,11 @@ if isInBattle trigger
 				if = guard1 locY 613
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger  "**You kick the heavy ball east and it keeps rolling until it stops crashing into a rock.  It's stuck in the corner now.**"
 				removecondition trigger ballwest9
 				order trigger reset
-				changetile 536 613 394
+				changetile 536 613 370
 				changetile 540 613 629
 				endscript
 				end
@@ -700,11 +706,11 @@ if isInBattle trigger
 				if = guard1 locY 613
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into a rock.  !!Sorry but I didn't script this possibility!!  You need to reset the puzzle now.**"
 				removecondition trigger ballnorth10
 				order trigger reset
-				changetile 534 613 394
+				changetile 534 613 370
 				changetile 534 616 629
 				endscript
 				end
@@ -716,11 +722,12 @@ if isInBattle trigger
 				if = guard1 locY 613
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 534 612
+				set guard1 locxy 215 191
+				createoneusemob "ball" 534 612
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger ballsouth10
 				order trigger reset
-				changetile 534 613 394
+				changetile 534 613 370
 				changetile 534 612 629
 				endscript
 				end
@@ -746,11 +753,11 @@ if isInBattle trigger
 				if = guard1 locY 612
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**Why did I kick the ball this way.  The target is totally the opposite direction!  That was dumb.** The ball has nowhere to go now so you better go reset the puzzle now."
 				removecondition trigger balleast11
 				order trigger reset
-				changetile 534 612 394
+				changetile 534 612 370
 				changetile 528 611 629
 				endscript
 				end
@@ -762,11 +769,12 @@ if isInBattle trigger
 				if = guard1 locY 612
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 535 612
+				set guard1 locxy 215 191
+				createoneusemob "ball" 535 612
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger ballwest11
 				order trigger reset
-				changetile 534 612 394
+				changetile 534 612 370
 				changetile 535 612 629
 				endscript
 				end
@@ -792,11 +800,11 @@ if isInBattle trigger
 				if = guard1 locY 612
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball north and it keeps rolling until it stops crashing into a rock.  It's stuck in the corner now.**"
 				removecondition trigger ballsouth12
 				order trigger reset
-				changetile 535 612 394
+				changetile 535 612 370
 				changetile 535 611 629
 				endscript
 				end
@@ -812,7 +820,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballnorth12
 				order trigger reset
-				changetile 535 612 394
+				changetile 535 612 370
 				changetile 535 615 629
 				endscript
 				end
@@ -828,7 +836,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger ballnorth12
 				order trigger reset
-				changetile 535 612 394
+				changetile 535 612 370
 				changetile 535 616 629
 				endscript
 				end
@@ -858,7 +866,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger balleast13
 				order trigger reset
-				changetile 535 615 394
+				changetile 535 615 370
 				changetile 534 615 629
 				endscript
 				end
@@ -874,7 +882,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballwest13
 				order trigger reset
-				changetile 535 615 394
+				changetile 535 615 370
 				changetile 538 615 629
 				endscript
 				end
@@ -886,11 +894,11 @@ if isInBattle trigger
 				if = guard1 locY 615
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball north and it keeps rolling until it stops crashing into a rock.  It's stuck in the corner now.**"
 				removecondition trigger ballwest13
 				order trigger reset
-				changetile 535 615 394
+				changetile 535 615 370
 				changetile 544 615 630
 				endscript
 				end
@@ -916,11 +924,11 @@ if isInBattle trigger
 				if = guard1 locY 615
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**Why did I kick the ball this way.  The target is totally the opposite direction!  That was dumb.** The ball has nowhere to go now so you better go reset the puzzle now."
 				removecondition trigger ballnorth14
 				order trigger reset
-				changetile 538 615 394
+				changetile 538 615 370
 				changetile 528 616 629
 				endscript
 				end
@@ -936,7 +944,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball north and it keeps rolling until it stops crashing into the wall.**"
 				removecondition trigger ballsouth14
 				order trigger reset
-				changetile 538 615 394
+				changetile 538 615 370
 				changetile 538 610 629
 				endscript
 				end
@@ -962,11 +970,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**Why did I kick the ball this way.  The target is totally the opposite direction!  That was dumb.** The ball has nowhere to go now so you better go reset the puzzle now."
 				removecondition trigger balleast15
 				order trigger reset
-				changetile 535 616 394
+				changetile 535 616 370
 				changetile 530 616 629
 				endscript
 				end
@@ -1001,7 +1009,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballwest15
 				order trigger reset
-				changetile 535 616 394
+				changetile 535 616 370
 				changetile 536 616 629
 				endscript
 				end
@@ -1013,7 +1021,7 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "*A giant mushroom is blocking the way!  It's stuck in the corner now.**"
 				removecondition trigger ballwest15
 				order trigger reset
@@ -1027,11 +1035,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom.  It's stuck in the corner now.**"
 				removecondition trigger ballwest15
 				order trigger reset
-				changetile 535 616 394
+				changetile 535 616 370
 				changetile 537 616 629
 				endscript
 				end
@@ -1047,7 +1055,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballwest15
 				order trigger reset
-				changetile 535 616 394
+				changetile 535 616 370
 				changetile 539 616 629
 				endscript
 				end
@@ -1067,7 +1075,7 @@ if isInBattle trigger
 							chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a giant mushroom!*"
 							removecondition trigger ballwest15
 							order trigger reset
-							changetile 535 616 394
+							changetile 535 616 370
 							changetile 538 616 629
 							endscript
 							end
@@ -1081,11 +1089,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into the wall.  It's stuck in the corner now.**"
 				removecondition trigger ballwest15
 				order trigger reset
-				changetile 535 616 394
+				changetile 535 616 370
 				changetile 545 616 629
 				endscript
 				end
@@ -1111,11 +1119,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**Why did I kick the ball this way.  The target is totally the opposite direction!  That was dumb.** The ball has nowhere to go now so you better go reset the puzzle now."
 				removecondition trigger ballwest16
 				order trigger reset
-				changetile 540 616 394
+				changetile 540 616 370
 				changetile 545 616 629
 				endscript
 				end
@@ -1146,7 +1154,7 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "*A giant mushroom is blocking the way!  It's stuck in the corner now.**"
 				removecondition trigger balleast16
 				order trigger reset
@@ -1164,7 +1172,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger balleast16
 				order trigger reset
-				changetile 540 616 394
+				changetile 540 616 370
 				changetile 536 616 629
 				endscript
 				end
@@ -1176,11 +1184,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a dead giant mushroom.  It's stuck in the corner now.***"
 				removecondition trigger balleast16
 				order trigger reset
-				changetile 540 616 394
+				changetile 540 616 370
 				changetile 538 616 629
 				endscript
 				end
@@ -1200,7 +1208,7 @@ if isInBattle trigger
 							chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a giant mushroom!*"
 							removecondition trigger balleast16
 							order trigger reset
-							changetile 540 616 394
+							changetile 540 616 370
 							changetile 537 616 629
 							endscript
 							end
@@ -1214,11 +1222,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into the wall.  It's stuck in the corner now.**"
 				removecondition trigger balleast16
 				order trigger reset
-				changetile 540 616 394
+				changetile 540 616 370
 				changetile 530 616 629
 				endscript
 				end
@@ -1244,11 +1252,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**Why did I kick the ball this way.  The target is totally the opposite direction!  That was dumb.** The ball has nowhere to go now so you better go reset the puzzle now."
 				removecondition trigger ballwest17
 				order trigger reset
-				changetile 537 616 394
+				changetile 537 616 370
 				changetile 545 616 629
 				endscript
 				end
@@ -1279,7 +1287,7 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "*A giant dead mushroom is blocking the way!  It's stuck in the corner now.**"
 				removecondition trigger balleast17
 				order trigger reset
@@ -1293,11 +1301,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a rock.  It's stuck in the corner now.**"
 				removecondition trigger balleast17
 				order trigger reset
-				changetile 537 616 394
+				changetile 537 616 370
 				changetile 530 616 629
 				endscript
 				end
@@ -1323,11 +1331,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**Why did I kick the ball this way.  The target is totally the opposite direction!  That was dumb.** The ball has nowhere to go now so you better go reset the puzzle now."
 				removecondition trigger ballwest18
 				order trigger reset
-				changetile 538 616 394
+				changetile 538 616 370
 				changetile 545 616 629
 				endscript
 				end
@@ -1358,7 +1366,7 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "*A giant dead mushroom is blocking the way!  It's stuck in the corner now.**"
 				removecondition trigger balleast18
 				order trigger reset
@@ -1372,11 +1380,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a rock.  It's stuck in the corner now.**"
 				removecondition trigger balleast18
 				order trigger reset
-				changetile 538 616 394
+				changetile 538 616 370
 				changetile 530 616 629
 				endscript
 				end
@@ -1402,11 +1410,11 @@ if isInBattle trigger
 				if = guard1 locY 616
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**Why did I kick the ball this way.  The target is totally the opposite direction!  That was dumb.** The ball has nowhere to go now so you better go reset the puzzle now."
 				removecondition trigger balleast19
 				order trigger reset
-				changetile 538 610 394
+				changetile 538 610 370
 				changetile 536 610 629
 				endscript
 				end
@@ -1425,7 +1433,7 @@ if isInBattle trigger
 							chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a giant mushroom!*"
 							removecondition trigger ballwest19
 							order trigger reset
-							changetile 538 610 394
+							changetile 538 610 370
 							changetile 540 610 629
 							endscript
 							end
@@ -1443,7 +1451,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom!*"
 				removecondition trigger ballwest19
 				order trigger reset
-				changetile 538 610 394
+				changetile 538 610 370
 				changetile 540 610 629
 				endscript
 				end
@@ -1455,11 +1463,11 @@ if isInBattle trigger
 				if = guard1 locY 610
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom.  It's stuck now.**"
 				removecondition trigger ballwest19
 				order trigger reset
-				changetile 538 610 394
+				changetile 538 610 370
 				changetile 539 610 629
 				endscript
 				end
@@ -1475,7 +1483,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballwest19
 				order trigger reset
-				changetile 538 610 394
+				changetile 538 610 370
 				changetile 541 610 629
 				endscript
 				end
@@ -1491,7 +1499,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballwest19
 				order trigger reset
-				changetile 538 610 394
+				changetile 538 610 370
 				changetile 540 610 629
 				endscript
 				end
@@ -1507,7 +1515,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballwest19
 				order trigger reset
-				changetile 538 610 394
+				changetile 538 610 370
 				changetile 541 610 629
 				endscript
 				end
@@ -1523,7 +1531,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger ballwest19
 				order trigger reset
-				changetile 538 610 394
+				changetile 538 610 370
 				changetile 544 610 629
 				endscript
 				end
@@ -1572,7 +1580,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballwest20
 				order trigger reset
-				changetile 540 610 394
+				changetile 540 610 370
 				changetile 541 610 629
 				endscript
 				end
@@ -1588,7 +1596,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger ballwest20
 				order trigger reset
-				changetile 538 610 394
+				changetile 538 610 370
 				changetile 544 610 629
 				endscript
 				end
@@ -1618,7 +1626,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger ballnorth20
 				order trigger reset
-				changetile 540 610 394
+				changetile 540 610 370
 				changetile 540 611 629
 				endscript
 				end
@@ -1630,11 +1638,11 @@ if isInBattle trigger
 				if = guard1 locY 610
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball north.  The ball hits the angled wall and rolls to the right.  It's stuck now.**"
 				removecondition trigger ballsouth20
 				order trigger reset
-				changetile 540 610 394
+				changetile 540 610 370
 				changetile 542 609 629
 				endscript
 				end
@@ -1646,11 +1654,11 @@ if isInBattle trigger
 				if = guard1 locY 610
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball west and it keeps rolling until it stops crashing into a rock.  It's stuck now.**"
 				removecondition trigger balleast20
 				order trigger reset
-				changetile 540 610 394
+				changetile 540 610 370
 				changetile 536 610 629
 				endscript
 				end
@@ -1676,11 +1684,11 @@ if isInBattle trigger
 				if = guard1 locY 611
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**Why did I kick the ball this way.  The target is totally the opposite direction!  That was dumb.** The ball has nowhere to go now so you better go reset the puzzle now."
 				removecondition trigger balleast21
 				order trigger reset
-				changetile 540 611 394
+				changetile 540 611 370
 				changetile 535 611 629
 				endscript
 				end
@@ -1711,7 +1719,7 @@ if isInBattle trigger
 				if = guard1 locY 611
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "*A dead giant mushroom is blocking the way!  The ball is stuck now.*"
 				removecondition trigger ballwest21
 				order trigger reset
@@ -1729,7 +1737,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballwest21
 				order trigger reset
-				changetile 540 611 394
+				changetile 540 611 370
 				changetile 541 611 629
 				endscript
 				end
@@ -1741,7 +1749,7 @@ if isInBattle trigger
 				if = guard1 locY 611
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "*A dead giant mushroom is blocking the way!  The ball is stuck now.*"
 				removecondition trigger ballwest21
 				order trigger reset
@@ -1759,7 +1767,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballwest21
 				order trigger reset
-				changetile 540 611 394
+				changetile 540 611 370
 				changetile 541 611 629
 				endscript
 				end
@@ -1775,7 +1783,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballwest21
 				order trigger reset
-				changetile 540 611 394
+				changetile 540 611 370
 				changetile 542 611 629
 				endscript
 				end
@@ -1791,7 +1799,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into the wall.**"
 				removecondition trigger ballwest21
 				order trigger reset
-				changetile 540 610 394
+				changetile 540 610 370
 				changetile 546 611 629
 				endscript
 				end
@@ -1831,11 +1839,11 @@ if isInBattle trigger
 				if = guard1 locY 610
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**Why did I kick the ball this way.  The target is totally the opposite direction!  That was dumb.** The ball has nowhere to go now so you better go reset the puzzle now."
 				removecondition trigger ballsouth22
 				order trigger reset
-				changetile 541 610 394
+				changetile 541 610 370
 				changetile 541 609 629
 				endscript
 				end
@@ -1866,7 +1874,7 @@ if isInBattle trigger
 				if = guard1 locY 610
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "*A dead giant mushroom is blocking the way!  The ball is stuck now.*"
 				removecondition trigger ballnorth22
 				order trigger reset
@@ -1884,7 +1892,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballnorth22
 				order trigger reset
-				changetile 541 610 394
+				changetile 541 610 370
 				changetile 541 611 629
 				endscript
 				end
@@ -1896,11 +1904,11 @@ if isInBattle trigger
 				if = guard1 locY 610
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into a rock.  The ball is stuck now.**"
 				removecondition trigger ballnorth22
 				order trigger reset
-				changetile 541 610 394
+				changetile 541 610 370
 				changetile 541 612 629
 				endscript
 				end
@@ -1926,11 +1934,11 @@ if isInBattle trigger
 				if = guard1 locY 611
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into a rock.  The ball is stuck now.**"
 				removecondition trigger ballnorth23
 				order trigger reset
-				changetile 541 610 394
+				changetile 541 610 370
 				changetile 541 612 629
 				endscript
 				end
@@ -1970,11 +1978,11 @@ if isInBattle trigger
 				if = guard1 locY 611
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**Why did I kick the ball this way.  The target is totally the opposite direction!  That was dumb.** The ball has nowhere to go now so you better go reset the puzzle now."
 				removecondition trigger balleast23
 				order trigger reset
-				changetile 541 611 394
+				changetile 541 611 370
 				changetile 535 611 629
 				endscript
 				end
@@ -2018,7 +2026,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball north and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballsouth23
 				order trigger reset
-				changetile 541 611 394
+				changetile 541 611 370
 				changetile 541 610 629
 				endscript
 				end
@@ -2030,11 +2038,11 @@ if isInBattle trigger
 				if = guard1 locY 611
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**Why did I kick the ball this way.  The target is totally the opposite direction!  That was dumb.** The ball has nowhere to go now so you better go reset the puzzle now."
 				removecondition trigger balleast23
 				order trigger reset
-				changetile 541 611 394
+				changetile 541 611 370
 				changetile 541 609 629
 				endscript
 				end
@@ -2078,7 +2086,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into a dead giant mushroom.**"
 				removecondition trigger ballwest23
 				order trigger reset
-				changetile 541 611 394
+				changetile 541 611 370
 				changetile 542 611 629
 				endscript
 				end
@@ -2094,7 +2102,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into the wall.**"
 				removecondition trigger ballwest23
 				order trigger reset
-				changetile 541 611 394
+				changetile 541 611 370
 				changetile 546 611 629
 				endscript
 				end
@@ -2106,11 +2114,11 @@ if isInBattle trigger
 				if = guard1 locY 611
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into a dead giant mushroom.  The ball is stuck now.**"
 				removecondition trigger ballnorth24
 				order trigger reset
-				changetile 542 611 394
+				changetile 542 611 370
 				changetile 542 612 629
 				endscript
 				end
@@ -2126,7 +2134,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball south and it magically curves to the right then stops crashing into a rock.**"
 				removecondition trigger ballnorth24
 				order trigger reset
-				changetile 542 611 394
+				changetile 542 611 370
 				changetile 543 616 629
 				endscript
 				end
@@ -2152,11 +2160,11 @@ if isInBattle trigger
 				if = guard1 locY 611
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "**You kick the heavy ball north and it keeps rolling until it stops crashing into the wall.  The ball is stuck now.**"
 				removecondition trigger ballsouth24
 				order trigger reset
-				changetile 542 611 394
+				changetile 542 611 370
 				changetile 542 609 629
 				endscript
 				end
@@ -2214,7 +2222,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball south and it keeps rolling until it stops crashing into a rock.**"
 				removecondition trigger ballnorth25
 				order trigger reset
-				changetile 544 610 394
+				changetile 544 610 370
 				changetile 544 611 629
 				endscript
 				end
@@ -2230,7 +2238,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball north and it keeps rolling until it stops crashing into the wall.  The ball is stuck now.**"
 				removecondition trigger ballsouth25
 				order trigger reset
-				changetile 544 610 394
+				changetile 544 610 370
 				changetile 544 609 629
 				endscript
 				end
@@ -2260,7 +2268,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball east and it keeps rolling until it stops crashing into the wall.  The ball is almost there!!**"
 				removecondition trigger ballwest26
 				order trigger reset
-				changetile 544 611 394
+				changetile 544 611 370
 				changetile 546 611 629
 				endscript
 				end
@@ -2272,7 +2280,7 @@ if isInBattle trigger
 				if = guard1 locY 611
 				order guard1 flee
 				order guard1 reset
-				set guard1 locxy 1 1
+				set guard1 locxy 215 191
 				chat trigger "MasterGod Zabin says, 'Are you testing if I scripted this possibility?!?(In the future I may)'"
 				chat trigger "MasterGod Zabin says, 'Well, I haven't yet and since you were monkeying around trying to kick the ball into odd places completely the opposite direction of the target ... '"
 				chat trigger "MasterGod Zabin says, 'I'm going to reset the puzzle and send you to play with my buddy the GarbageMan!  Next time don't kick the ball in such a odd direction!'"
@@ -2309,7 +2317,7 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball north and it keeps rolling until it stops crashing into a rock.  The ball is stuck now.**"
 				removecondition trigger ballnorth27
 				order trigger reset
-				changetile 546 611 394
+				changetile 546 611 370
 				changetile 546 613 629
 				endscript
 				end
@@ -2325,14 +2333,15 @@ if isInBattle trigger
 				chat trigger "**You kick the heavy ball north and it lands on the trigger!  Congratulations!!**"
 				removecondition trigger ballsouth27
 				order trigger reset
-				changetile 546 611 394
+				changetile 546 611 370
 				changetile 546 609 630
 				endscript
 				end
 			end
 	end
-end
 endscript
+end
+
 
 
 

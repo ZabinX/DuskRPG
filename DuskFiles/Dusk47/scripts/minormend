@@ -1,3 +1,6 @@
-chat trigger "You sip on the potion"
-inc trigger hp 20
+if hasItem trigger minormend
+	chat trigger "+20HP."
+	inc trigger hp 20
+	removeItem trigger minormend
+end
 endscript

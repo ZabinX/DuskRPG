@@ -1,4 +1,4 @@
-trigger checkpuzzlecomplete -trigger 544 614 *trigger "**You step on the switch and nothing happens.**" 
+trigger checkpuzzlecomplete -trigger 544 614 
 trigger ballsouth4 
 trigger balleast5 
 trigger ballnorth5  

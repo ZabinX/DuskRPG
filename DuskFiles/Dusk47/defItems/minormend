@@ -2,13 +2,13 @@ type
 food
 a small glass bottle full of a strange liquid
 cost
-100
+10
 image
-55
+194
 onuse
 minormend
 uses
-10
+1
 .
 
 

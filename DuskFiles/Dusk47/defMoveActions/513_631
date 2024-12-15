@@ -1,6 +1,6 @@
 if hasCondition trigger mushroomwest
 	createoneusemob "Giant Mushroom" 528 659
-	changetile 529 659 394
+	changetile 529 659 370
 	changetile 513 631 625
 	changetile 513 629 426
 	changetile 531 659 453

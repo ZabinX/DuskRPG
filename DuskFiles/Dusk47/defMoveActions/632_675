@@ -71,7 +71,7 @@ if and hasItem trigger "generic shield" hasItem trigger "iron ingot"
 				removeItem trigger "iron ingot"
 				if hasItem trigger "iron ingot"
 					removeItem trigger "iron ingot"
-					giveitem trigger "iron sheild"
+					giveitem trigger "iron shield"
 					chat trigger " Here's a iron shield!"
 					inc trigger cash -3000
 					endscript
@@ -159,4 +159,5 @@ chat trigger "Scraggly says: I have mined this cave empty... and I don't need my
 chat trigger "Scraggly says: Feel free to use my furnace to smelt iron ore. I need 5 iron ingots and a template on the table of the item you want. I'll craft any item for you, 3k gp a peice."
 addCondition trigger blacksmith
 endscript 
+
 

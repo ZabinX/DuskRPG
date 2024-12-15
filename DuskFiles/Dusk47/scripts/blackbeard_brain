@@ -16,5 +16,6 @@ addCondition target blackbeardbattle1
 chat enemy trigger "BlackBeard says: So Eduardo sent you here forrR his crown, huh?  I stole his crown to make some quick cash to buy me kids food."
 chat enemy trigger "BlackBeard says: I know it wasn't rrright stealing this crown and everything, but it's what I do... "
 chat enemy trigger "BlackBeard says: I can't be giving you this crown back so easily, yourrR going to have to fight me fors it."
-endscrip
+endscript
+
 

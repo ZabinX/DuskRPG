@@ -1,20 +1,23 @@
-<html>
-<head>
-<title>Dusk 2.7.3 hosted by WeaveMN</title>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>The ledgend of Dusk</title>
+    <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
 </head>
-
-<body text="#cccccc" link="#ffa54f" vlink="#990099" alink="#000099" bgcolor="#333333">
-
-Welcome to "Dusk 2.7.3 hosted by WeaveMN".<br>
-For more information on Dusk, visit <a href="http://duskrpg.blogspot.com/">Zabin's DuskRPG Blog</a>.<br>
-
-<hr>
-
-<applet code="client.duskclient" archive="duskclient.jar" width="0" height="0">
-<param name="address" value="weavercrazytown.com">
-<param name="port" value="7474">
-<param name="webAssetPath" value="http://dusk.weavercrazytown.com:8080/rc">
-</applet>
-
-</body>
+  <body>
+    <applet
+      code="client.duskclient"
+      archive="duskclient.jar"
+      height="0"
+      width="0"
+    >
+      <param name="address" value="http://127.0.0.1/">
+      <param name="port" value="7474">
+      <param name="webAssetPath" value="http://127.0.0.1/dusk/rc/somedusk/">
+    </applet>
+    <script>
+      cheerpjInit();
+    </script>
+  </body>
 </html>

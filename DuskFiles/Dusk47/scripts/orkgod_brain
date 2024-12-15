@@ -13,7 +13,7 @@ end
 #
 livingthing target enemy trigger
 addCondition target orkgodquest1
-chat enemy trigger "Ork God says:  The first mortal to kill me get's my untimately powerful sword."
+chat enemy trigger "Ork God says: You don't stand a chance again me!."
 endscript
 
 

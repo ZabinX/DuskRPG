@@ -1,6 +1,3 @@
-if < trigger cp 200
-     chat trigger "It's too dangerous..."
-     inc trigger locx -1
-     endscript
-end
+
+
 

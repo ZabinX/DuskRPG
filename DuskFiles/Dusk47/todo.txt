@@ -1,0 +1,55 @@
+*DONE* Fix reloadprefs ... it does not work.
+
+4 vectors of mobs.
+	all of the mobs.
+	just the dead ones.
+	just the ones that can see players.
+	just the ones that need to regen hp or mp.
+This might speed up computation associated with mobs.
+
+*DONE*isSaving boolean for the game engine.
+	use to disable multiple saves at the same time.
+	prevent changes to map, mobs, merchants, props, signs, etc while saving.
+
+Allow names of game files to be set in prefs.
+	mobs, signs, shortmap, props, merchants, etc...
+
+Allow names of stats to be set in prefs.
+	this should not affect how the game accesses them
+	not sure if it should affect scripts or not
+
+*DONE*Allow display of item totals in inventory
+
+Allow dropping/giving of specific inventory items
+
+Limit size of inventory based on strength/cp
+
+*DONE* kill script function
+	kill trigger "poison"  - this would kill the player, trigger the
+		onDeath scripts and gecho that the player had been killed by poison.
+
+Allow player/pet renaming race change up to a certain cp
+*DONE* with allowing race change
+
+Take away god ability to create items on the map, make it a spell group/command
+	that puts it in their inventory instead.  Might also want to take away the
+	ability to drop items, so they have to be given.
+
+Add a start/form clan command that allows players to make their own damn clans.
+	Will need to use the dirty word filter.
+
+*DONE* Make wear/unwear/use case insensitive since items are case insensitive
+
+*DONE*Make an ItemList class that overrides the vector operations (addElement,
+	etc) to allow for the inventory operations above.
+Add an unreceived send limit to LivingThing and abort sends after this limit
+	has been reached.
+Create a message protocol for sending messages to the client, so the client
+	can recover cleanly from an "lost incoming byte" error state by skipping
+	to the next message header.
+Change all file access to be SQL based
+	player files
+	script files (move action, can move, commands, spells, etc)
+	compiled script files
+	conditions
+	item definitions

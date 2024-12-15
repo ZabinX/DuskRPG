@@ -1,2 +1,1 @@
-(trigger trigger inforest "Mutant Scorpion"153 200 "Mutant Scorpion"154 201 "Mutant Scorpion"153 202 *trigger "The gods know you managed to stumbled in here while drunk and decide to give you scorpions instead." *trigger "You are surrounded by Mutant Scorpions!" trigger inforest2 trigger checktreasure 
-trigger inforest ,trigger 1 trigger checktreasure *trigger "The treasure chest is still empty." ,trigger 1 ,trigger 1000 trigger checktreasure *trigger "Sweet!  You found 1kgp!."  
+(trigger trigger checktreasure *trigger "The treasure chest is still empty." ,trigger 1 ,trigger 1000 trigger checktreasure *trigger "Sweet!  You found 1kgp!."  

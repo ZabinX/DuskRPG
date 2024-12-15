@@ -2,6 +2,6 @@ mend
 counter poison
 armor
 bless
-create drink
-create food
+create_drink
+create_food
 heal

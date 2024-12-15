@@ -7,11 +7,11 @@ a Moon Jacket, Your eyes squink up from the bright light reflecting in a billion
 cost
 2000
 mod
-0
+40
 image
 206
 durability
-50000
+90000000
 onWear
 start_moon_jacket
 onUnWear
