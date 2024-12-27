@@ -1,0 +1,13 @@
+type
+item
+description
+a glowing red flask 
+cost
+500
+image
+6
+onuse
+flask
+uses
+1
+.

@@ -8,8 +8,8 @@ if and hasCondition trigger blacksmithnotz if < trigger cash 3000
 	endscript
 end
 # Craft
-if and hasItem trigger "crimteel pickaxe template" hasItem trigger "5.crimsteel ingot"
-	removeItem trigger "crimteel pickaxe template"
+if and hasItem trigger "crimsteel pickaxe template" hasItem trigger "5.crimsteel ingot"
+	removeItem trigger "crimsteel pickaxe template"
 	removeItem trigger "crimsteel ingot"
 	removeItem trigger "crimsteel ingot"
 	removeItem trigger "crimsteel ingot"
@@ -104,5 +104,6 @@ chat trigger "NotZ says: My brother in the house to the east crafts the best arm
 chat trigger "NotZ says: You need to supply me the ingots. I need 5 ingots and a pickaxe template. I'll craft any pickaxe for you, 3k gp a piece."
 addCondition trigger blacksmithnotz
 endscript 
+
 
 
