@@ -103,14 +103,6 @@ end
 674
 pickaxe
 end
-7
-627
-train:black magic group
-end
-12
-626
-train:warrior group
-end
 417
 452
 FlameSword
@@ -141,4 +133,14 @@ God Sword template
 God Shield template
 God Suit template
 God Helmet template
+end
+101
+594
+train:warrior group
+end
+77
+568
+Apple
+Beer
+Sandwich
 end

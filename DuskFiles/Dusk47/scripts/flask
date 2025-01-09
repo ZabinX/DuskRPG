@@ -1,5 +1,5 @@
 chat trigger "You read the scroll and the area around you fills up with smoke."
-removeItem trigger recall
+removeItem trigger flask
 order trigger "emote vanishes in a puff of smoke"
 if hascondition trigger "hot springs"
     removecondition trigger "hot springs"
@@ -28,3 +28,4 @@ if strequals clan trigger "arena_fight"
     changeclan trigger "none"
 end
 endscript
+

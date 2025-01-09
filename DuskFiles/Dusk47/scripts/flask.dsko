@@ -1,4 +1,4 @@
-*trigger "You read the scroll and the area around you fills up with smoke." !trigger recall trigger "emote vanishes in a puff of smoke" trigger "hot springs" 
+*trigger "You read the scroll and the area around you fills up with smoke." !trigger flask trigger "emote vanishes in a puff of smoke" trigger "hot springs" 
 trigger "hot springs" trigger "lava bath" 
 trigger "lava bath" trigger "ice bath" 
 trigger "ice bath" trigger "ogrefight" 

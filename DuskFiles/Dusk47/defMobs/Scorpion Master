@@ -1,0 +1,38 @@
+maxhp
+2000
+maxmp
+5000
+stre
+400
+inte
+200
+dext
+633
+wisd
+330
+cons
+330
+image
+219
+bravery
+9
+grouprelation
+9
+giveitem
+mendpotion
+1
+giveitem
+mendpotion
+0.5
+giveitem
+bag of gold
+0.025
+faction
+shade
+skill
+double attack
+100
+skill
+triple attack
+100
+.

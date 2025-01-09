@@ -15,13 +15,14 @@ if isInBattle trigger
 			chat trigger "Shade Master says:  I can't believe it... You're going to regret this! *Shade Master shoves you into a rabbit hole.*"
 			addCondition trigger killedshademaster
 			addConditionWithDuration trigger mushroomtimer 1000
-			inc trigger exp 1000
+			set target hp 20000
 			set trigger locxy 544 688
 			createoneusemob "magicplant" 133 257
 		end
 	end
 end
 endscript
+
 
 
 

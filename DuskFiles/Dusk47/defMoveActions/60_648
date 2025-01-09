@@ -6,7 +6,9 @@ if and hasCondition trigger killedshademaster hasCondition trigger savedhusband
 	chat trigger "Kristina says: I can't believe it!  My husband is back home!"
 	chat trigger "Kristina says: Thank you so much for saving my husband!!"
 	giveItem trigger "Moon Jacket"
+	inc trigger exp 5000
 	chat trigger "Kristina says: Here take his extra Moon Jacket."
+	chat trigger "You get 5000 exp!"
 	removeCondition trigger kristinaquest2
 	removeCondition trigger killedshademaster
 	removeCondition trigger savedhusband
@@ -42,6 +44,7 @@ chat trigger "Kristina says: Oh thanks.  I've been quite depressed and bed ridde
 chat trigger "Kristina says: You look like the adventerous type, can you do me a favor?"
 addCondition trigger kristinaquest
 endscript
+
 
 
 

@@ -23,4 +23,9 @@ Tooth
 0.5
 faction
 hungryogre
+condition
+detect invis
+0
+-1
 .
+

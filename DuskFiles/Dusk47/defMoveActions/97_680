@@ -51,10 +51,10 @@ if hasCondition trigger shenville_mq_0
 #
 if and and hasCondition trigger shenville_gfq_0 hasItem trigger black_tooth hasItem trigger white_tooth
 	removeItem trigger black_tooth
-	removeItem trigger whitetooth
+	removeItem trigger white_tooth
 	chat trigger "You say: Newbie citizen has been revenged"
 	chat trigger "Eduardo says: great !!! But I got a new trouble"
-	chat trigger "Eduardo says: Eli, my son, is going to die..."
+	chat trigger "Eduardo says: Eli, my son, is in trouble..."
 	removeCondition trigger shenville_gfq_0
 	addCondition trigger shenville_mq_0
 	endscript
@@ -105,6 +105,7 @@ chat trigger "Eduardo says: I got some work for you, remember to talk to me ofte
 chat trigger "Eduardo says: and with the guys at the bar, they'll help you"
 addCondition trigger shenville_0
 endscript
+
 
 
 
