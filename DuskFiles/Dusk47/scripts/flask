@@ -22,9 +22,36 @@ end
 if hascondition trigger "necrofight"
      removecondition trigger "necrofight"
 end
+if hasCondition trigger mushroomhole
+	addcondition trigger fromflask
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger mushroomhole2
+	addcondition trigger fromflask
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger mushroomhole3
+	addcondition trigger fromflask
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger puzzle
+	addcondition trigger fromflask
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger puzzlefinished
+	set trigger locxy 543 632
+	endscript
+end
 set trigger locxy 446 528
 order trigger "emote arrives in a flash of light."
 if strequals clan trigger "arena_fight"
+    changeclan trigger "none"
+end
+if strequals clan trigger "wilderness"
     changeclan trigger "none"
 end
 endscript

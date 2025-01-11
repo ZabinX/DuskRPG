@@ -1,3 +1,131 @@
+#Check if they used recall or flask
+if and hasCondition trigger puzzlefinished hasCondition trigger fromrecall
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	createoneusemob "Chris" 156 94
+	set trigger locxy 157 94
+	removecondition trigger fromrecall
+	endscript
+end
+if and hasCondition trigger puzzlefinished hasCondition trigger fromflask
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	createoneusemob "Chris" 156 94
+	set trigger locxy 157 94
+	removecondition trigger fromflask
+	endscript
+end
+if and hasCondition trigger ballidiot hasCondition trigger fromrecall
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	order trigger "emote kicked the ball like a fool, thus (MasterGod) Zabin decided to let the GarbageMan do his job ..."
+	createoneusemob "GarbageMan" 216 190
+	set trigger locxy 215 190
+	removecondition trigger fromrecall
+	removecondition trigger ballidiot
+	endscript
+end
+if and hasCondition trigger ballidiot hasCondition trigger fromflask
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	order trigger "emote kicked the ball like a fool, thus (MasterGod) Zabin decided to let the GarbageMan do his job ..."
+	createoneusemob "GarbageMan" 216 190
+	set trigger locxy 215 190
+	removecondition trigger fromflask
+	removecondition trigger ballidiot
+	endscript
+end
+if and hasCondition trigger mushroomhole3 hasCondition trigger fromrecall
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	set trigger locxy 200 200
+	removecondition trigger mushroomhole3
+	removecondition trigger fromrecall
+	endscript
+end
+if and hasCondition trigger mushroomhole3 hasCondition trigger fromflask
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	set trigger locxy 446 528
+	removecondition trigger mushroomhole3
+	removecondition trigger fromflask
+	endscript
+end
+if and hasCondition trigger mushroomhole2 hasCondition trigger fromrecall
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	set trigger locxy 200 200
+	removecondition trigger mushroomhole2
+	removecondition trigger fromrecall
+	endscript
+end
+if and hasCondition trigger mushroomhole2 hasCondition trigger fromflask
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	set trigger locxy 446 528
+	removecondition trigger mushroomhole2
+	removecondition trigger fromflask
+	endscript
+end
+if and hasCondition trigger mushroomhole hasCondition trigger fromrecall
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	set trigger locxy 200 200
+	removecondition trigger mushroomhole
+	removecondition trigger fromrecall
+	endscript
+end
+if and hasCondition trigger mushroomhole hasCondition trigger fromflask
+	livingthing guard2 local trigger "magicplant"
+		if = guard2 locX 133
+			if = guard2 locY 257
+			set guard2 locxy 215 191
+			end
+		end
+	set trigger locxy 446 528
+	removecondition trigger mushroomhole
+	removecondition trigger fromflask
+	endscript
+end
+
+#end check
+
 if hasCondition trigger puzzlefinished
 	livingthing guard2 local trigger "magicplant"
 		if = guard2 locX 133
@@ -57,4 +185,6 @@ end
 set trigger locxy 133 259
 endscript
 end
+
+
 

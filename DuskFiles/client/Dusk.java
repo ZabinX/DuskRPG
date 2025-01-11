@@ -109,8 +109,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	Graphics gD;
 	GraphicsThread thrGraphics;
 	
-	String address = "dusk.wesowin.org";
-	int port = 7423;
+	String address = "127.0.0.1";
+	int port = 7474;
     
     public Dusk(Applet parent)
     {
@@ -128,10 +128,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	{
 		try
 		{
-//                try
-//    		{
-//        		UIManager.setLookAndFeel( new FlatDarkLaf() );
-//   			}catch (Exception e) {}
+                try
+    		{
+        		UIManager.setLookAndFeel( new FlatDarkLaf() );
+   			}catch (Exception e) {}
 			frame = new MainFrame(this);
 			frame.initComponents();
 			frame.setVisible(true);

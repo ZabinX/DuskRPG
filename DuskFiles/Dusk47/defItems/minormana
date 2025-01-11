@@ -1,9 +1,9 @@
 type
 food
 description
-A potion that will restore up to 1,000 MP.  It has one use.
+A potion that will restore 100 MP.  It has one use.
 cost
-10000
+100
 image
 57
 onuse

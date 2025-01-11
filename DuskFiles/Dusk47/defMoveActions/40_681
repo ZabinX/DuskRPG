@@ -15,7 +15,7 @@ if hasCondition trigger shenville_mq_0
 	end
 #
 if hasCondition trigger shenville_gfq_0
-	chat trigger "Crush says: poor man... he was so good... I got to console his wife :-)"
+	chat trigger "Crush says: poor man... he was so good... "
 	endscript
 	end
 #
@@ -26,4 +26,5 @@ if hasCondition trigger shenville_pq_0
 #
 chat trigger "Crush says: hi"
 endscript
+
 

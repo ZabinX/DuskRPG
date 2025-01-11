@@ -607,7 +607,7 @@ public class MainFrame extends JFrame implements ItemListener
 		try
 		{
 			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast drink\n");
+				appParent.stmOut.writeBytes("cast create_drink\n");
                 }catch(IOException exc){}
         }
         public void btnFoodActionPerformed(java.awt.event.ActionEvent e)
@@ -615,7 +615,7 @@ public class MainFrame extends JFrame implements ItemListener
 		try
 		{
 			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast food\n");
+				appParent.stmOut.writeBytes("cast create_food\n");
                 }catch(IOException exc){}
         }
         public void btnHealActionPerformed(java.awt.event.ActionEvent e)
@@ -631,7 +631,7 @@ public class MainFrame extends JFrame implements ItemListener
 		try
 		{
 			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast detectinvis\n");
+				appParent.stmOut.writeBytes("cast detect_invis\n");
                 }catch(IOException exc){}
         }
         public void btnInvisActionPerformed(java.awt.event.ActionEvent e)
