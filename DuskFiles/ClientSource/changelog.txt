@@ -26,7 +26,7 @@ Z47 (2024)
         Added Target label to display targets hp in the Main frame.
         Use swing components, sprites load faster and fixes the nasty flicking glitches.
         Added swing look and feel flatlaf Dark theme.
-        Increased the size of displayed map by 1/2inch or so.
+        Increased the size of displayed map by 1/2inch or so.  (1280, 720));
         Increased GUI size to start at a good size.
         Added potion and magic buttons to make healing and casting spells easy.
         Compiled with Netbeans 17 using java 17. Applets are depracated.

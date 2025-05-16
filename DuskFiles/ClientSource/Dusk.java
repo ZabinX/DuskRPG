@@ -65,7 +65,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     AudioClip audMusicPlaying;
     Applet appShell;
     String strRCAddress;
-    String strWebAssetPath = "";
+    String strWebAssetPath = "http://127.0.0.1:8080/DuskServerClientCheerpj/wwwClient/rc/somedusk";
     
     Vector vctMerchantItems,
     		vctSell,
@@ -135,7 +135,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			frame = new MainFrame(this);
 			frame.initComponents();
 			frame.setVisible(true);
-			frame.docOutput.insertString(0,"Dusk Client v"+strVersion+" -- https://sourceforge.net/projects/duskrpg/\n",null);
+			frame.docOutput.insertString(0,"Dusk Client v"+strVersion+" -- https://duskrpg.blogspot.com/\n",null);
 			addText("You are using Java version "+System.getProperty("java.version")+"\n");
 			frame.txtInput.addKeyListener(this);
 			frame.addComponentListener(this);
