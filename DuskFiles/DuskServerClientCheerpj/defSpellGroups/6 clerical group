@@ -1,0 +1,39 @@
+# heal: usage -> heal [target]  Heals a target fully
+livingthing target caster
+number difT 0
+#
+# did the user specify a target?
+#
+if variableisstring param0
+	livingthing target local caster param0
+	if ! or or isplayer target ispet target ismob target
+		chat caster "You do not see them here."
+		endscript
+	end
+	number difT 1
+end
+#
+# variable declaration
+#
+number mp caster mp
+number ratio / caster wisd 33
+number ratio + ratio 1
+number hpDif - target maxHp target hp
+number mpNeeded / hpDif ratio
+#
+# healing and mp consumption computing
+#
+if < mp mpNeeded
+	number hpDif * mp ratio
+	number mpNeeded mp
+end
+inc target hp hpDif
+inc caster mp * -1 mpNeeded
+#
+# notify them of the change
+#
+if = difT 1
+	chat caster concat concat "You let the magic flow and heal " name target "."
+end
+chat target "You have been healed."
+endscript

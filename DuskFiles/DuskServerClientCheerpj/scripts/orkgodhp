@@ -1,0 +1,10 @@
+if isInBattle trigger
+	livingthing target enemy trigger
+	if < target hp 1
+	addCondition trigger orkgoddefeat
+	removeCondition trigger bhquest5
+	chat trigger "Ork God says:  I can't believe it..."
+	end
+end
+endscript
+

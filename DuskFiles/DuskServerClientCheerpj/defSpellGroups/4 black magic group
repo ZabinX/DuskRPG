@@ -1,0 +1,32 @@
+if isinbattle caster
+	if hasCondition enemy caster "taco"
+	chat caster "This spell has no effect."
+	endscript
+	end	
+if isinbattle caster
+	number damage * + 2.6 * rand 1.9 + caster stre caster inte 
+	number power * + 4 * rand 2 + caster stre caster inte 
+	if isclan caster "Gods"
+		inc enemy caster hp * -1 power
+		inc caster damdone power
+		chat caster concat concat concat concat " You use your Shiftyness to corrupt " name enemy caster " . He gets " power " damage."
+		chat enemy caster concat concat " Your body and soul becomes Shiftified. You get " power " damage."
+	endscript
+	end
+		inc enemy caster hp * -1 damage
+		inc caster damdone damage
+		chat caster concat concat concat concat " You use your dark powers to corrupt " name enemy caster " . He gets " damage " damage."
+		chat enemy caster concat concat " Your body and soul becomes corrupted. You get " damage " damage."
+	endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript
+
+
+
+
+
+
+
+
+

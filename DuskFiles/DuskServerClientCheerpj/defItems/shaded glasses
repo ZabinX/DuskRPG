@@ -1,0 +1,18 @@
+type
+armor
+kind
+eyes
+description
+Shaded Glasses
+cost
+125
+mod
+60
+image
+7
+durability
+2400
+onWear
+wear_normal_armor
+.
+

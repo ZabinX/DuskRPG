@@ -1,0 +1,65 @@
+maxhp
+100000
+maxmp
+10000
+stre
+800
+inte
+200
+dext
+1000
+wisd
+1000
+cons
+500
+bravery
+10
+grouprelation
+10.0
+description
+A huge dragon that can eat you in one bite.
+image
+151
+giveitem
+healpotion
+0.05
+skill
+double attack
+100
+skill
+triple attack
+100
+skill
+quadruple attack
+100
+skill
+warrior group
+100
+skill
+clerical group
+100
+skill
+enchantment group
+100
+skill
+druidic group
+100
+skill
+white magic group
+100
+onBattle
+dragonlord_brain
+condition
+armor
+0
+-1
+condition
+strength
+0
+-1
+condition
+detect invis
+0
+-1
+.
+

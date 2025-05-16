@@ -1,0 +1,10 @@
+if ispet trigger
+    endscript
+end
+if = trigger cp 39
+    chat trigger "You need to visit the Newbie Tutorial first.  Go to your right."
+    order trigger leave
+    inc trigger locy -1
+    endscript
+end
+endscript

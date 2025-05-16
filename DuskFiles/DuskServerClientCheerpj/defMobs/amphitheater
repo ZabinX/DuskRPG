@@ -1,0 +1,35 @@
+maxhp
+9999
+maxmp
+10
+stre
+400
+inte
+5
+dext
+200
+wisd
+5
+cons
+5000
+image
+4
+bravery
+1.3
+grouprelation
+1
+giveitem
+powerblade
+0.6
+faction
+smurf
+skill
+double attack
+60
+skill
+triple attack
+60
+skill
+quadruple attack
+10
+.

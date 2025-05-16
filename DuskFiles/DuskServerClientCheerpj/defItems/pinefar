@@ -1,0 +1,14 @@
+type
+item
+description
+a scroll that returns you to PineFar
+cost
+500
+image
+6
+onuse
+pinefar
+uses
+1
+.
+

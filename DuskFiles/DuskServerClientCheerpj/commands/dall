@@ -1,0 +1,7 @@
+if < trigger privs 3
+    chat trigger "huh?"
+    endscript
+end
+set trigger locxy 195 0
+endscript
+

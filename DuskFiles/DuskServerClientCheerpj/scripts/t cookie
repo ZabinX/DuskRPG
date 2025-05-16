@@ -1,0 +1,4 @@
+chat trigger "You eat the tasty everlasting almond cookie."
+addconditionwithduration trigger nohunger 60000
+removeitem trigger almond cookie
+endscript

@@ -1,0 +1,7 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger "inside"
+    removecondition trigger "inside"
+end
+endscript

@@ -7,7 +7,7 @@ zeek
 exp
 4529
 hp
--378
+-346
 maxhp
 20
 mp
@@ -40,11 +40,11 @@ coalore1
 -1
 condition
 hunger
-2
+34
 -1
 condition
 thirst
-15
+47
 -1
 condition
 ticket

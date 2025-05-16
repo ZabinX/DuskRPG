@@ -1,0 +1,41 @@
+if hasCondition trigger puzzle
+	chat trigger "You kick the mushrooms and spores fly everywhere.  You must be tripping from all these spores because you hear foot steps in the distance again."
+	removeCondition trigger puzzle
+	set trigger locxy 540 612
+	endscript
+end
+if hasCondition trigger puzzlefinished
+	set trigger locxy 540 612
+	endscript
+end
+if hasCondition trigger mushroomhole
+	chat trigger "You kick the mushrooms and spores fly everywhere.  You must be tripping from all these spores because you hear foot steps in the distance again."
+	set trigger locxy 540 612
+	endscript
+end
+if hasCondition trigger mushroomhole2
+	chat trigger "You kick the mushrooms and spores fly everywhere.  You must be tripping from all these spores because you hear foot steps in the distance again."
+	set trigger locxy 540 612
+	endscript
+end
+if hasCondition trigger mushroomhole3
+	chat trigger "You kick the mushrooms and spores fly everywhere.  You must be tripping from all these spores because you hear foot steps in the distance again."
+	set trigger locxy 540 612
+	endscript
+end
+if hasCondition trigger mushroomhole3
+	chat trigger "There's no reason for you to go on a trip!  So you decide to save the shrooms for later."
+	endscript
+end
+if hasCondition trigger mushroomtimewarp
+	chat trigger "You kick the mushrooms and spores fly everywhere.  You must be tripping from all these spores because you hear foot steps in the distance again."
+	set trigger locxy 540 612
+	endscript
+end
+if ! hasCondition trigger mushroomtimewarp
+	addCondition trigger mushroomtimewarp
+	endscript
+end
+
+
+

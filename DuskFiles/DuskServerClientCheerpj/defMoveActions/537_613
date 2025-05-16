@@ -1,0 +1,4 @@
+removeCondition trigger ballwest7
+addCondition trigger balleast9
+endscript
+

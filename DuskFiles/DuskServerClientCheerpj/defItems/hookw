@@ -1,0 +1,14 @@
+type
+weapon
+description
+a pirate's hook
+cost
+50
+mod
+177
+image
+9
+durability
+30000
+.
+

@@ -1,0 +1,17 @@
+#Thorns: causes slight damage to the target
+#
+#
+if isinbattle caster
+	livingthing target enemy caster
+	number i caster inte
+	number maxdamage * 2 i
+	number damage + i * rand maxdamage
+	inc target hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat "You call upon the lands to sting " name enemy caster " for " damage " damage."
+	chat enemy caster concat concat "Magical thorns sting your body for " damage " damage."
+	endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript
+

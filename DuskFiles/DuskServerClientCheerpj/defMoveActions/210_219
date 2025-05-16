@@ -1,0 +1,5 @@
+if ispet trigger
+    endscript
+end
+chat trigger "Armor Merchant says:  Stand in front of me on the green X to trade."
+endscript

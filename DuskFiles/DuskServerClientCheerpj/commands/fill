@@ -1,0 +1,43 @@
+if < trigger privs 4
+    chat trigger "huh?"
+    endscript
+end
+number startX param0
+number startY param1
+number stopX param2
+number stopY param3
+if > startX stopX
+    chat trigger "Start X cannot be higher than stop X."
+    endscript
+end
+if > startY stopY
+    chat trigger "Start Y cannot be higher than stop Y."
+    endscript
+end
+if or > -stopX startX 11
+    > -stopY startY 11
+    chat trigger "No more than 11 tiles in one direction at a time."
+    endscript
+end
+number tile param4
+if variableisstring param5
+    number currentX param5
+    number currentY param6
+end
+if ! variableisstring param5
+    number currentX startX
+    number currentY startY
+end
+set trigger locxy currentX currentY
+string command concat ">" tile
+order trigger command
+number currentX + currentX 1
+if > currentX stopX
+    number currentX startX
+    number currentY + currentY 1
+end
+if ! > currentY stopY
+    string command concat concat concat concat concat concat concat concat concat concat concat concat concat "fill " startX " " startY " " stopX " " stopY " " tile " " currentX " " currentY
+    order trigger command
+end
+endscript

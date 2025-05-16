@@ -1,0 +1,16 @@
+type
+weapon
+description
+a bearded axe of gnomish design.  It looks useful for chopping off toes
+cost
+100
+mod
+180
+image
+9
+durability
+3000
+.
+
+
+

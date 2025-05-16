@@ -1,0 +1,316 @@
+number doorx 120
+number doory 92
+if hascondition trigger "wilderndoor2"
+    number doorx 145
+    number doory 58
+end
+if hascondition trigger "wilderndoor3"
+    number doorx 185
+    number doory 123
+end
+if hascondition trigger "wilderndoor4"
+    number doorx 149
+    number doory 66
+end
+if hascondition trigger "wilderndoor5"
+    number doorx 155
+    number doory 116
+end
+if and < trigger locx doorx < trigger locy doory
+    chat trigger "Wildern's key vibrates and points to the southeast."
+    if hascondition trigger "hwkey6"
+        removecondition trigger "hwkey6"
+        chat trigger "Wildern's key vibrates from your grasp and flies off."
+        removeitem trigger "housewildernkey"
+        endscript
+    end
+    if hascondition trigger "hwkey5"
+        removecondition trigger "hwkey5"
+        chat trigger "Wildern's key almost vibrates from your grasp."
+        addcondition trigger "hwkey6"
+        endscript
+    end
+    if hascondition trigger "hwkey4"
+        removecondition trigger "hwkey4"
+        addcondition trigger "hwkey5"
+        endscript
+    end
+    if hascondition trigger "hwkey3"
+        removecondition trigger "hwkey3"
+        addcondition trigger "hwkey4"
+        endscript
+    end
+    if hascondition trigger "hwkey2"
+        removecondition trigger "hwkey2"
+        addcondition trigger "hwkey3"
+        endscript
+    end
+    if hascondition trigger "hwkey1"
+        removecondition trigger "hwkey1"
+        addcondition trigger "hwkey2"
+        endscript
+    end
+    addcondition trigger "hwkey1"
+    endscript
+end
+if and < trigger locx doorx > trigger locy doory
+    chat trigger "Wildern's key vibrates and points to the northeast."
+    if hascondition trigger "hwkey6"
+        removecondition trigger "hwkey6"
+        chat trigger "Wildern's key vibrates from your grasp and flies off."
+        removeitem trigger "housewildernkey"
+        endscript
+    end
+    if hascondition trigger "hwkey5"
+        removecondition trigger "hwkey5"
+        chat trigger "Wildern's key almost vibrates from your grasp."
+        addcondition trigger "hwkey6"
+        endscript
+    end
+    if hascondition trigger "hwkey4"
+        removecondition trigger "hwkey4"
+        addcondition trigger "hwkey5"
+        endscript
+    end
+    if hascondition trigger "hwkey3"
+        removecondition trigger "hwkey3"
+        addcondition trigger "hwkey4"
+        endscript
+    end
+    if hascondition trigger "hwkey2"
+        removecondition trigger "hwkey2"
+        addcondition trigger "hwkey3"
+        endscript
+    end
+    if hascondition trigger "hwkey1"
+        removecondition trigger "hwkey1"
+        addcondition trigger "hwkey2"
+        endscript
+    end
+    addcondition trigger "hwkey1"
+    endscript
+end
+if and > trigger locx doorx < trigger locy doory
+    chat trigger "Wildern's key vibrates and points to the southwest."
+    if hascondition trigger "hwkey6"
+        removecondition trigger "hwkey6"
+        chat trigger "Wildern's key vibrates from your grasp and flies off."
+        removeitem trigger "housewildernkey"
+        endscript
+    end
+    if hascondition trigger "hwkey5"
+        removecondition trigger "hwkey5"
+        chat trigger "Wildern's key almost vibrates from your grasp."
+        addcondition trigger "hwkey6"
+        endscript
+    end
+    if hascondition trigger "hwkey4"
+        removecondition trigger "hwkey4"
+        addcondition trigger "hwkey5"
+        endscript
+    end
+    if hascondition trigger "hwkey3"
+        removecondition trigger "hwkey3"
+        addcondition trigger "hwkey4"
+        endscript
+    end
+    if hascondition trigger "hwkey2"
+        removecondition trigger "hwkey2"
+        addcondition trigger "hwkey3"
+        endscript
+    end
+    if hascondition trigger "hwkey1"
+        removecondition trigger "hwkey1"
+        addcondition trigger "hwkey2"
+        endscript
+    end
+    addcondition trigger "hwkey1"
+    endscript
+end
+if and > trigger locx doorx > trigger locy doory
+    chat trigger "Wildern's key vibrates and points to the northwest."
+    if hascondition trigger "hwkey6"
+        removecondition trigger "hwkey6"
+        chat trigger "Wildern's key vibrates from your grasp and flies off."
+        removeitem trigger "housewildernkey"
+        endscript
+    end
+    if hascondition trigger "hwkey5"
+        removecondition trigger "hwkey5"
+        chat trigger "Wildern's key almost vibrates from your grasp."
+        addcondition trigger "hwkey6"
+        endscript
+    end
+    if hascondition trigger "hwkey4"
+        removecondition trigger "hwkey4"
+        addcondition trigger "hwkey5"
+        endscript
+    end
+    if hascondition trigger "hwkey3"
+        removecondition trigger "hwkey3"
+        addcondition trigger "hwkey4"
+        endscript
+    end
+    if hascondition trigger "hwkey2"
+        removecondition trigger "hwkey2"
+        addcondition trigger "hwkey3"
+        endscript
+    end
+    if hascondition trigger "hwkey1"
+        removecondition trigger "hwkey1"
+        addcondition trigger "hwkey2"
+        endscript
+    end
+    addcondition trigger "hwkey1"
+    endscript
+end
+if and < trigger locx doorx = trigger locy doory
+    chat trigger "Wildern's key vibrates and points to the east."
+    if hascondition trigger "hwkey6"
+        removecondition trigger "hwkey6"
+        chat trigger "Wildern's key vibrates from your grasp and flies off."
+        removeitem trigger "housewildernkey"
+        endscript
+    end
+    if hascondition trigger "hwkey5"
+        removecondition trigger "hwkey5"
+        chat trigger "Wildern's key almost vibrates from your grasp."
+        addcondition trigger "hwkey6"
+        endscript
+    end
+    if hascondition trigger "hwkey4"
+        removecondition trigger "hwkey4"
+        addcondition trigger "hwkey5"
+        endscript
+    end
+    if hascondition trigger "hwkey3"
+        removecondition trigger "hwkey3"
+        addcondition trigger "hwkey4"
+        endscript
+    end
+    if hascondition trigger "hwkey2"
+        removecondition trigger "hwkey2"
+        addcondition trigger "hwkey3"
+        endscript
+    end
+    if hascondition trigger "hwkey1"
+        removecondition trigger "hwkey1"
+        addcondition trigger "hwkey2"
+        endscript
+    end
+    addcondition trigger "hwkey1"
+    endscript
+end
+if and > trigger locy doory = trigger locx doorx
+    chat trigger "Wildern's key vibrates and points to the north."
+    if hascondition trigger "hwkey6"
+        removecondition trigger "hwkey6"
+        chat trigger "Wildern's key vibrates from your grasp and flies off."
+        removeitem trigger "housewildernkey"
+        endscript
+    end
+    if hascondition trigger "hwkey5"
+        removecondition trigger "hwkey5"
+        chat trigger "Wildern's key almost vibrates from your grasp."
+        addcondition trigger "hwkey6"
+        endscript
+    end
+    if hascondition trigger "hwkey4"
+        removecondition trigger "hwkey4"
+        addcondition trigger "hwkey5"
+        endscript
+    end
+    if hascondition trigger "hwkey3"
+        removecondition trigger "hwkey3"
+        addcondition trigger "hwkey4"
+        endscript
+    end
+    if hascondition trigger "hwkey2"
+        removecondition trigger "hwkey2"
+        addcondition trigger "hwkey3"
+        endscript
+    end
+    if hascondition trigger "hwkey1"
+        removecondition trigger "hwkey1"
+        addcondition trigger "hwkey2"
+        endscript
+    end
+    addcondition trigger "hwkey1"
+    endscript
+end
+if and > trigger locx doorx = trigger locy doory
+    chat trigger "Wildern's key vibrates and points to the west."
+    if hascondition trigger "hwkey6"
+        removecondition trigger "hwkey6"
+        chat trigger "Wildern's key vibrates from your grasp and flies off."
+        removeitem trigger "housewildernkey"
+        endscript
+    end
+    if hascondition trigger "hwkey5"
+        removecondition trigger "hwkey5"
+        chat trigger "Wildern's key almost vibrates from your grasp."
+        addcondition trigger "hwkey6"
+        endscript
+    end
+    if hascondition trigger "hwkey4"
+        removecondition trigger "hwkey4"
+        addcondition trigger "hwkey5"
+        endscript
+    end
+    if hascondition trigger "hwkey3"
+        removecondition trigger "hwkey3"
+        addcondition trigger "hwkey4"
+        endscript
+    end
+    if hascondition trigger "hwkey2"
+        removecondition trigger "hwkey2"
+        addcondition trigger "hwkey3"
+        endscript
+    end
+    if hascondition trigger "hwkey1"
+        removecondition trigger "hwkey1"
+        addcondition trigger "hwkey2"
+        endscript
+    end
+    addcondition trigger "hwkey1"
+    endscript
+end
+if and < trigger locy doory = trigger locx doorx
+    chat trigger "Wildern's key vibrates and points to the south."
+    if hascondition trigger "hwkey6"
+        removecondition trigger "hwkey6"
+        chat trigger "Wildern's key vibrates from your grasp and flies off."
+        removeitem trigger "housewildernkey"
+        endscript
+    end
+    if hascondition trigger "hwkey5"
+        removecondition trigger "hwkey5"
+        chat trigger "Wildern's key almost vibrates from your grasp."
+        addcondition trigger "hwkey6"
+        endscript
+    end
+    if hascondition trigger "hwkey4"
+        removecondition trigger "hwkey4"
+        addcondition trigger "hwkey5"
+        endscript
+    end
+    if hascondition trigger "hwkey3"
+        removecondition trigger "hwkey3"
+        addcondition trigger "hwkey4"
+        endscript
+    end
+    if hascondition trigger "hwkey2"
+        removecondition trigger "hwkey2"
+        addcondition trigger "hwkey3"
+        endscript
+    end
+    if hascondition trigger "hwkey1"
+        removecondition trigger "hwkey1"
+        addcondition trigger "hwkey2"
+        endscript
+    end
+    addcondition trigger "hwkey1"
+    endscript
+end
+endscript
+

@@ -1,0 +1,44 @@
+maxhp
+40000
+maxmp
+7000
+stre
+1600
+int
+100
+dext
+1500
+wisd
+100
+cons
+4000
+image
+14
+bravery
+6
+grouprelation
+1
+giveitem
+doom sickle
+1
+faction
+demon
+skill
+double attack
+100
+skill
+triple attack
+100
+skill
+quadruple attack
+100
+skill
+dodge
+50
+condition
+detect invis
+1
+-1
+.
+
+

@@ -1,0 +1,6 @@
+if ispet trigger
+    endscript
+end
+chat trigger "Once you step on top of the merchant, your Merchant button should become active.  Click it.
+Get yourself a free cloth shirt and wooden dagger from the merchant, your going to need it."
+endscript

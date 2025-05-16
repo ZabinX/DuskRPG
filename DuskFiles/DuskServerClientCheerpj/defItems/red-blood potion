@@ -1,0 +1,14 @@
+type
+food
+description
+A small vial of red-colored liquid.
+cost
+1000
+image
+6
+onuse
+strength
+uses
+5
+.
+

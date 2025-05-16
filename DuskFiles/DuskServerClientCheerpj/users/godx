@@ -1,0 +1,1311 @@
+wassup
+privs
+0
+title
+the newbie.
+clan
+none
+x
+194
+y
+201
+nopopup
+audiooff
+race
+alian
+exp
+4817
+hp
+37
+maxhp
+900
+mp
+60
+maxmp
+60
+cash
+539
+stre
+100
+inte
+7
+dext
+7
+cons
+7
+wisd
+7
+skill
+Double Attack
+56
+skill
+enchantment group
+1
+skill
+clerical group
+1
+condition
+kristaquestend
+1
+-1
+condition
+drherbiequestend
+1
+-1
+condition
+flanaga1
+1
+-1
+condition
+flanagapoint
+1
+-1
+condition
+killedflanaga
+1
+-1
+condition
+xyphoidquestend
+1
+-1
+condition
+bhquest3
+1
+-1
+condition
+ticketguy
+1
+-1
+condition
+dmb14
+1
+-1
+condition
+dmb09
+1
+-1
+condition
+dmb08
+1
+-1
+condition
+dmb07
+1
+-1
+condition
+dmb06
+1
+-1
+condition
+dmb05
+1
+-1
+condition
+dmb04
+1
+-1
+condition
+dmb02
+1
+-1
+condition
+dmb00
+1
+-1
+condition
+deadbush
+1
+-1
+condition
+ironsmelter
+1
+-1
+condition
+ironore1
+1
+-1
+condition
+ballswarning
+1
+-1
+condition
+excaliburquest
+1
+-1
+condition
+blacksmith
+1
+-1
+condition
+monsterhunting
+1
+-1
+condition
+intro
+1
+-1
+condition
+farmerquest
+1
+-1
+condition
+nohunger
+1
+54
+condition
+nothirst
+1
+55
+condition
+flanfood1
+1
+-1
+condition
+inforest
+1
+-1
+condition
+dude
+1
+-1
+wield2
+FlameSword
+465408
+-1
+legs2
+Moon Shoes
+43450
+-1
+torso2
+cloth shirt
+1430
+-1
+waist2
+bronze belt
+947
+-1
+skull2
+bronze helmet
+947
+-1
+eyes2
+diamond goggles
+29701
+-1
+hands2
+Moon Gloves
+43822
+-1
+item2
+pickaxe
+-1
+-1
+item2
+HealPotion
+-1
+28
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+venom
+-1
+-1
+item2
+newspaper
+-1
+-1
+item2
+stone fist
+99288
+-1
+item2
+bronze gloves
+1827
+-1
+item2
+ale
+-1
+1
+item2
+Banditleaderscalp1
+-1
+-1
+item2
+cloth shirt
+3000
+-1
+item2
+cloth shirt
+678
+-1
+item2
+mandrake juice
+-1
+60
+item2
+CastingNet
+-1
+-1
+item2
+emerald
+-1
+-1
+item2
+emerald
+-1
+-1
+item2
+emerald
+-1
+-1
+item2
+emerald
+-1
+-1
+item2
+emerald
+-1
+-1
+item2
+emerald
+-1
+-1
+item2
+emerald
+-1
+-1
+item2
+emerald
+-1
+-1
+item2
+emerald
+-1
+-1
+item2
+emerald
+-1
+-1
+item2
+emerald
+-1
+-1
+item2
+emerald
+-1
+-1
+item2
+emerald
+-1
+-1
+item2
+hide
+-1
+-1
+item2
+hide
+-1
+-1
+item2
+hide
+-1
+-1
+item2
+hide
+-1
+-1
+item2
+hide
+-1
+-1
+item2
+hide
+-1
+-1
+item2
+hide
+-1
+-1
+item2
+hide
+-1
+-1
+item2
+ale3
+-1
+0
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ruby
+-1
+-1
+item2
+ale2
+-1
+1
+item2
+minormend
+-1
+0
+item2
+wooden dagger
+2750
+-1
+item2
+HelmetEelCorpse
+-1
+-1
+item2
+diamond
+-1
+-1
+item2
+diamond
+-1
+-1
+item2
+diamond
+-1
+-1
+item2
+diamond
+-1
+-1
+item2
+diamond
+-1
+-1
+item2
+diamond
+-1
+-1
+item2
+diamond
+-1
+-1
+item2
+diamond
+-1
+-1
+item2
+diamond
+-1
+-1
+item2
+diamond
+-1
+-1
+item2
+diamond
+-1
+-1
+item2
+bronze leggings
+2400
+-1
+item2
+crystal
+-1
+-1
+item2
+crystal
+-1
+-1
+item2
+crystal
+-1
+-1
+item2
+crystal
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Tooth
+-1
+-1
+item2
+Bassbaby
+-1
+-1
+item2
+Bassbaby
+-1
+-1
+item2
+Bassbaby
+-1
+-1
+item2
+Bassbaby
+-1
+-1
+item2
+Eyeofnewt
+-1
+1
+item2
+Excalibur
+1200
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+item2
+iron ore
+-1
+-1
+.

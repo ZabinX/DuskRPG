@@ -1,0 +1,5 @@
+chat trigger "You eat the yummy bear claw.. mmmmmmmmmm!"
+addconditionwithduration trigger nohunger 2500
+removeitem trigger bearclaw
+endscript
+

@@ -1,0 +1,4 @@
+inc trigger constitutionBonus -100
+inc trigger acBonus -50
+endscript
+

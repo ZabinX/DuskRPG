@@ -1,0 +1,3 @@
+inc trigger acBonus -900000
+inc trigger dexterityBonus -900000
+endscript

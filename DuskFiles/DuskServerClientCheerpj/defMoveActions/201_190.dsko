@@ -1,0 +1,1 @@
+)trigger ,trigger 215 191 (trigger  trigger "excaliburquest1" *trigger "*There's a magic barrier preventing you from coming closer.*" ,trigger 1  trigger "excaliburquest" *trigger "*There's a magic barrier preventing you from coming closer.*" ,trigger 1 .199 191 56  

@@ -6,14 +6,14 @@ the newbie.
 clan
 none
 x
-212
+211
 y
-223
+194
 audiooff
 race
-darkelf
+human
 exp
-24
+0
 hp
 20
 maxhp
@@ -25,7 +25,7 @@ maxmp
 cash
 0
 stre
-8
+7
 inte
 7
 dext
@@ -35,91 +35,19 @@ cons
 wisd
 7
 condition
-intro
+nothirst
 1
--1
+1131
 condition
-drherbiequest
+nohunger
+1
+1131
+condition
+intro
 1
 -1
 condition
 dude
 1
--1
-condition
-inforest
-1
--1
-condition
-deadbush
-1
--1
-condition
-thirst
-13
--1
-wield2
-wooden dagger
-2957
--1
-torso2
-cloth shirt
-2992
--1
-item2
-cloth shirt
-3000
--1
-item2
-cloth shirt
-3000
--1
-item2
-cloth shirt
-3000
--1
-item2
-cloth shirt
-3000
--1
-item2
-cloth shirt
-3000
--1
-item2
-minormend
--1
-1
-item2
-minormend
--1
-1
-item2
-minormend
--1
-1
-item2
-minormend
--1
-1
-item2
-minormend
--1
-1
-item2
-minormend
--1
-1
-item2
-minormend
--1
-1
-item2
-wooden dagger
-3000
--1
-item2
-wooden dagger
-3000
 -1
 .

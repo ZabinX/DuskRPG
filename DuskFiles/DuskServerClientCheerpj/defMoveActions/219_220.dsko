@@ -1,0 +1,1 @@
+(trigger trigger cp 39 *trigger "You need to spend your EXP first." trigger leave ,trigger -1  

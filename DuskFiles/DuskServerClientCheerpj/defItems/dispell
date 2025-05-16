@@ -1,0 +1,13 @@
+type
+item
+description
+a vial of swirling colors
+cost
+1000
+image
+6
+onuse
+dispell
+uses
+1
+.

@@ -1,0 +1,13 @@
+type
+item
+description
+a sales list for Ivy's herb and magic store
+cost
+0
+image
+6
+onuse
+saleslist
+uses
+-1
+.

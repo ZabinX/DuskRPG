@@ -1,0 +1,13 @@
+type
+item
+description
+a blood red stone believed to heal people
+cost
+300
+image
+6
+onuse
+bloodstone
+uses
+1
+.

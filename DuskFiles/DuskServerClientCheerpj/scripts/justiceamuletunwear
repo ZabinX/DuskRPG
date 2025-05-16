@@ -1,0 +1,6 @@
+if < trigger cp 1000
+    endscript
+end
+inc trigger constitutionbonus -50
+inc trigger hpbonus -500
+endscript

@@ -1,0 +1,48 @@
+if < trigger privs 4
+    chat trigger "huh?"
+    endscript
+end
+if variableisstring param0
+    livingthing target param0
+    if and ! ispet target
+        and ! isplayer target
+        ! ismob target
+        chat trigger "Usage skill <livingthing> <set/inc> <skill/spell> [value]"
+        endscript
+    end
+end
+if variableisstring param1
+    if and ! strequals param1 "set"
+        ! strequals param1 "inc"
+        chat trigger "Usage skill <livingthing> <SET/INC> <skill/spell> [value]"
+        endscript
+    end
+end
+if variableisstring param2
+    if strequals param1 "set"
+        if variableisstring param3
+            number value param3
+            set target skill param2 value
+            chat trigger concat concat concat concat concat concat "set skill " param2 " on " name target " to " value "."
+            log trigger concat concat concat concat concat concat "set skill " param2 " on " name target " to " value "."
+            endscript
+        end
+        chat trigger "Usage skill <livingthing> <set/inc> <skill/spell> [VALUE]"
+        endscript
+    end
+    if strequals param1 "inc"
+        if variableisstring param3
+            number value param3
+            inc target skill param2 value
+            chat trigger concat concat concat concat concat concat "inc skill " param2 " on " name target " by " value "."
+            log trigger concat concat concat concat concat concat "inc skill " param2 " on " name target " by " value "."
+            endscript
+        end
+        chat trigger "Usage skill <livingthing> <set/inc> <skill/spell> [VALUE]"
+    end
+end
+chat trigger "Usage skill <livingthing> <set/inc> <skill/spell> [value]"
+endscript
+
+
+

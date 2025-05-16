@@ -1,0 +1,12 @@
+livingthing guard1 local trigger "Chris"
+	if = guard1 locX 524
+		if = guard1 locY 659
+		set guard1 locxy 523 659
+		end
+	end
+if hasCondition trigger mushroomhole3
+	chat trigger "Krista's dad didn't go this way."
+	inc trigger locy -2
+	endscript
+end
+

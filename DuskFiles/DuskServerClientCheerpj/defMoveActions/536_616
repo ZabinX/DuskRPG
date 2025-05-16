@@ -1,0 +1,20 @@
+removeCondition trigger north2
+removeCondition trigger south2
+removeCondition trigger east2
+removeCondition trigger west2
+removeCondition trigger ballnorth8
+removeCondition trigger ballsouth8
+removeCondition trigger balleast8
+removeCondition trigger ballwest8
+removeCondition trigger balleast13
+addCondition trigger balleast15
+addCondition trigger ballwest17
+removeCondition trigger ballwest18
+endscript
+
+
+
+
+
+
+

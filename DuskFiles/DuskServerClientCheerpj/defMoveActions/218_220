@@ -1,0 +1,6 @@
+if > trigger cp 41
+     chat trigger "You already done the tutorial."
+     inc trigger locx +1
+     endscript
+end
+

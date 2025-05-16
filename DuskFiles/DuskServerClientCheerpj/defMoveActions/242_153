@@ -1,0 +1,8 @@
+if ! isPlayer trigger
+	endscript
+	end
+#
+chat trigger "Linda says: Hi, the portal up the road will bring you to a blacksmith who specializes in Iron armors."
+endscript
+
+

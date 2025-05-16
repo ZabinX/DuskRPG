@@ -1,0 +1,16 @@
+type
+armor
+kind
+torso
+description
+a rusty suit
+cost
+20
+mod
+1
+image
+7
+durability
+3000
+.
+

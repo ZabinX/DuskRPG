@@ -1,0 +1,5 @@
+chat trigger "The ground beneath you calms and you are at full agility again."
+inc trigger dexteritybonus 20
+endscript
+
+

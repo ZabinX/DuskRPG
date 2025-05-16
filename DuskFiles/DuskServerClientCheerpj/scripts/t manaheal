@@ -1,0 +1,5 @@
+inc trigger mp 100
+chat trigger "the stone flashes bright blue as your mana regenerates then quickly vanishes"
+removeitem trigger "manastone"
+endscript
+

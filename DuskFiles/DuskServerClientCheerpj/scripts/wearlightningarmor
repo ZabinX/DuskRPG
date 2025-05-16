@@ -1,0 +1,6 @@
+if < trigger cp 3000
+	order trigger "unwear lightning scale mail"
+	chat trigger "You are too weak to wear this type of armor."
+	endscript
+	end
+endscript

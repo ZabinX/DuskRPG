@@ -1,0 +1,12 @@
+type
+weapon
+description
+a katana
+cost
+1000
+mod
+300
+image
+9
+durability
+40000

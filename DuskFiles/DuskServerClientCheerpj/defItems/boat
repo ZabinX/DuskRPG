@@ -1,0 +1,14 @@
+type
+item
+image
+17
+description
+A small wooden boat.
+onget
+getboat
+uses
+0
+.
+
+
+

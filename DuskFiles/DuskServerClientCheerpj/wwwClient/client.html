@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>DuskCheerpJ test</title>
+    <script src="https://cjrtnc.leaningtech.com/4.0/loader.js"></script>
+  </head>
+  <body>
+    <script>
+      (async function () {
+        await cheerpjInit({});
+        cheerpjCreateDisplay(1280, 720);
+        await cheerpjRunJar("/app/wwwClient/duskclient.jar");
+      })();
+    </script>
+  </body>
+</html>

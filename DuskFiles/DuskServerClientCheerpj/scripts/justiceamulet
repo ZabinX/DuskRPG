@@ -1,0 +1,8 @@
+if < trigger cp 1000
+    chat trigger "You must experience more before you can wield this sword."
+    order trigger "unwear justice amulet"
+    endscript
+end
+inc trigger constitutionbonus 50
+inc trigger hpbonus 500
+endscript

@@ -1,0 +1,12 @@
+#Zabins' ore mining script
+if isInBattle trigger
+	if ! hasItem trigger someshi
+		order trigger flee
+		order trigger reset
+		inc trigger hp -100
+		set trigger locxy 412 580
+		chat trigger "*ouch* -100hp *you think* attact it's heart."
+		removecondition trigger 1dragonlord1
+		endscript
+	end
+end

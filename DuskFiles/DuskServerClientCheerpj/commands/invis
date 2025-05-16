@@ -1,0 +1,22 @@
+if < trigger privs 3
+    chat trigger "huh?"
+    endscript
+end
+#
+# cool way to use the same script to affect trigger and target
+#
+livingthing target trigger
+if variableisstring param0
+    livingthing target param0
+    if ! ispet target
+        chat trigger concat name target " is not your pet, this is not to be used on players."
+        endscript
+    end
+end
+#
+# Give them God invis
+#
+addcondition target "invis"
+addcondition target "detect invis"
+chat trigger concat "Permanent invis and detect invis granted to " name target
+endscript

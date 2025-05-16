@@ -1,0 +1,23 @@
+if hasCondition trigger savedhusbandend
+	livingthing guard1 local trigger "Chris"
+		if = guard1 locX 63
+			if = guard1 locY 648
+			set guard1 locxy 215 191
+			set trigger locxy 242 200
+			endscript
+			end
+		end
+end
+if hasCondition trigger savedhusband
+	livingthing guard1 local trigger "Chris"
+		if = guard1 locX 63
+			if = guard1 locY 648
+			set guard1 locxy 215 191
+			set trigger locxy 242 200
+			endscript
+			end
+		end
+end
+set trigger locxy 242 200
+endscript
+

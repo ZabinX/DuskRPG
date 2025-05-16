@@ -1,0 +1,36 @@
+maxhp
+2000
+maxmp
+100
+stre
+110
+inte
+100
+dext
+100
+wisd
+100
+cons
+100
+image
+67
+bravery
+1
+grouprelation
+1
+giveitem
+HelmetSharkCorpse
+1
+skill
+double attack
+65
+skill
+triple attack
+65
+skill
+dodge
+50
+.
+
+
+

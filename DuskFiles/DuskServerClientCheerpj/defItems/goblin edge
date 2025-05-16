@@ -1,0 +1,17 @@
+type
+weapon
+description
+Deadly sword forged by the goblins
+cost
+2000
+mod
+850
+image
+9
+durability
+8000000
+onWear
+goblinedge
+onUnWear
+goblinedgeend
+

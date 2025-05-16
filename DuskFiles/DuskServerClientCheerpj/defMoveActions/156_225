@@ -1,0 +1,11 @@
+#drunk script
+if ispet trigger
+	endscript
+	end
+#
+if hasItem trigger ale3
+	order trigger "use ale3"
+	inc trigger locx -2
+	chat trigger "Your drank the ale and tripped and fell over the bush!"
+end
+endscript

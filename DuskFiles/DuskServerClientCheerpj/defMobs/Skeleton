@@ -1,0 +1,33 @@
+maxhp
+200
+maxmp
+400
+stre
+20
+inte
+20
+dext
+100
+cons
+20
+wisd
+20
+image
+29
+bravery
+1
+grouprelation
+1
+wield
+long sword
+-1
+-1
+giveitem
+long sword
+1
+faction
+skeleton
+.
+
+
+

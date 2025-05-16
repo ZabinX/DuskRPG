@@ -1,0 +1,4 @@
+order trigger "help message from Wildern"
+removecondition trigger hmessage
+log trigger "message from wildern was displayed"
+endscript

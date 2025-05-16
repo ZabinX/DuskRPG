@@ -1,0 +1,20 @@
+#
+# This is a hidden quest item, not to be sold or given out by mobs
+#
+type
+item
+description
+a gem that provides magical strength until you log out
+cost
+2000
+image
+6
+onget
+getgemofpower
+ondrop
+dropgemofpower
+onuse
+gemofpower
+uses
+1
+.

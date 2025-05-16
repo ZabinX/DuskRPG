@@ -1,0 +1,35 @@
+#diamondgoggles y-1
+if ispet trigger
+    endscript
+end
+if hasItem trigger "generic goggles"
+inc trigger locy -1
+chat trigger " You already have a generic goggles!"
+endscript
+end
+if hasItem trigger "generic helmet"
+inc trigger locy -1
+chat trigger " You already have a generic helmet!"
+endscript
+end
+if hasItem trigger "generic tunic"
+inc trigger locy -1
+chat trigger " You already have a generic tunic!"
+endscript
+end
+if hasItem trigger "generic shield"
+inc trigger locy -1
+chat trigger " You already have a generic shield!"
+endscript
+end
+if hasItem trigger "generic necklace"
+inc trigger locy -1
+chat trigger " You already have a generic necklace!"
+endscript
+end
+giveitem trigger "generic goggles"
+chat trigger " You get a generic goggles!"
+endscript
+
+
+

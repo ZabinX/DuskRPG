@@ -1,0 +1,20 @@
+type
+armor
+kind
+skull
+description
+a bronze helmet
+cost
+200
+mod
+40
+image
+112
+durability
+2400
+onWear
+wear_normal_armor
+.
+
+
+

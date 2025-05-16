@@ -1,0 +1,1 @@
+dir * 4 rand dir 1 trigger n trigger "emote burps" dir 2 trigger s trigger "emote burps" dir 3 trigger e trigger "emote burps" dir 4 trigger w trigger "emote burps"  

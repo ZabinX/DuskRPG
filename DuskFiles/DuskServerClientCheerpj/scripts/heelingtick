@@ -1,0 +1,7 @@
+livingthing bother Wildern
+number wx bother locx
+number wy bother locy
+string fangOrder concat concat concat "getoverthere Fang " wx " " wy
+order trigger fangOrder
+chat trigger "*pop*"
+endscript

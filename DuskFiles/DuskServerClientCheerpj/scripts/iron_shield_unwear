@@ -1,0 +1,6 @@
+inc trigger dexterityBonus -20
+inc trigger constitutionbonus -10
+inc trigger acbonus -5
+endscript
+
+

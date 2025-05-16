@@ -1,0 +1,3 @@
+trigger mushroomhole3 "Giant Mushroom2"536 616 "Giant Mushroom3"539 616 "Giant Mushroom4"541 610 "Giant Mushroom5"541 611 "Giant Mushroom6"542 611 "Giant Mushroom7"543 613 "ball"531 614 
+trigger mushroomhole3 trigger puzzle trigger mushroomtimewarp "Giant Mushroom2"536 616 "Giant Mushroom3"539 616 "Giant Mushroom4"541 610 "Giant Mushroom5"541 611 "Giant Mushroom6"542 611 "Giant Mushroom7"543 613 "ball"531 614 
+trigger mushroomtimewarp trigger puzzle  

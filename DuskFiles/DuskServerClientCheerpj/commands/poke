@@ -1,0 +1,21 @@
+if not variableisstring param0
+	order trigger "emote pokes himself relentlessly."
+	endscript
+end
+livingthing target local trigger param0
+if not isplayer target
+	chat trigger "You do not see them here."
+	endscript
+end
+if and < - trigger locx target locx 2 > - trigger locx target locx -2
+	if and < - trigger locy target locy 2 > - trigger locy target locy -2
+		chat trigger concat concat "You poke " name target " relentlessly."
+		chat target concat name trigger " pokes you relentlessly."
+		order trigger concat concat "emote pokes " name target " relentlessly."
+		endscript
+	end
+	chat trigger "You are too far away."
+	endscript
+end
+chat trigger "You are too far away."
+endscript

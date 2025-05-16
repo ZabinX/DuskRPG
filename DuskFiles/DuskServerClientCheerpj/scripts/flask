@@ -1,0 +1,58 @@
+chat trigger "You read the scroll and the area around you fills up with smoke."
+removeItem trigger flask
+order trigger "emote vanishes in a puff of smoke"
+if hascondition trigger "hot springs"
+    removecondition trigger "hot springs"
+end
+if hascondition trigger "lava bath"
+    removecondition trigger "lava bath"
+end
+if hascondition trigger "ice bath"
+    removecondition trigger "ice bath"
+end
+if hascondition trigger "ogrefight"
+    removecondition trigger "ogrefight"
+end
+if hascondition trigger "intown"
+    removecondition trigger "intown"
+end
+if hascondition trigger inside
+    removecondition trigger inside
+end
+if hascondition trigger "necrofight"
+     removecondition trigger "necrofight"
+end
+if hasCondition trigger mushroomhole
+	addcondition trigger fromflask
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger mushroomhole2
+	addcondition trigger fromflask
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger mushroomhole3
+	addcondition trigger fromflask
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger puzzle
+	addcondition trigger fromflask
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger puzzlefinished
+	set trigger locxy 543 632
+	endscript
+end
+set trigger locxy 446 528
+order trigger "emote arrives in a flash of light."
+if strequals clan trigger "arena_fight"
+    changeclan trigger "none"
+end
+if strequals clan trigger "wilderness"
+    changeclan trigger "none"
+end
+endscript
+

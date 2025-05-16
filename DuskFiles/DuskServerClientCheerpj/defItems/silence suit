@@ -1,0 +1,15 @@
+type
+armor
+kind
+torso
+description
+A rare suit worn by the silencers
+cost
+6500
+mod
+150
+image
+7
+durability
+95000
+.

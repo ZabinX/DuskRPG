@@ -1,0 +1,17 @@
+#Ifrit: causes Minor damage to enemy.
+#
+#
+if isinbattle caster
+	number damage * 90 * 3 rand
+	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " As a last resort, you call upon Ifrit to attack " name enemy caster " with a giant ball of lava for " damage "  damage."
+	chat enemy caster concat concat " lava scorch your body for " damage "  damage."
+	endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript
+
+
+
+

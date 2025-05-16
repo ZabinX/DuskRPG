@@ -1,0 +1,29 @@
+maxhp
+30000
+maxmp
+10
+stre
+800
+inte
+8
+dext
+400
+wisd
+5
+cons
+5000
+bravery
+2
+grouprelation
+0.5
+image
+14
+faction
+demon
+skill
+double attack
+100
+skill
+triple attack
+50
+.

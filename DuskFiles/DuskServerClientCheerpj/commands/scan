@@ -1,0 +1,2422 @@
+if < trigger privs 3
+    chat trigger "huh?"
+    endscript   
+end
+if variableisstring param0
+    livingthing target param0
+    if or or isplayer target ispet target ismob target
+        #
+        # variable declaration
+        #
+        number x target locx
+        number y target locy
+        number gp target cash
+        number exp target exp
+        number cp target cp
+        number hp target hp
+        number ac target ac
+        number dammod target dammod
+        number maxHp target maxHp
+        number mp target mp
+        number maxmp target maxMp
+        number str target stre
+        number int target inte
+        number dex target dext
+        number con target cons
+        number wis target wisd
+        number dodge target skill "Dodge"
+        number double target skill "Double Attack"
+        number triple target skill "Triple Attack"
+        number quadruple target skill "Quadruple Attack"
+        number disguise target skill "Disguise"
+        number clerical target skill "clerical group"
+        number druidic target skill "druidic group"
+        number enchantment target skill "enchantment group"
+        number telepathy target skill "telepathy group"
+        number summons target skill "summons group"
+        number warrior target skill "warrior group"
+        number black target skill "black magic group"
+        number white target skill "white magic group"
+        number alchemy target skill "alchemy group"
+        number fire target skill "elemental fire group"
+        number ice target skill "elemental ice group"
+        #
+        # notify caster/trigger of target's stats
+        #
+        chat trigger concat concat concat concat " Name: " name target " (" cp " cp)"
+        chat trigger concat concat concat concat concat concat concat "   HP: " hp "/" maxHp "  MP: " mp "/" maxMp
+        chat trigger concat concat concat "   Loc: " x "/" y
+        chat trigger concat concat "   Cash: " gp " gp"
+        chat trigger concat "   Exp: " exp
+        chat trigger "   Stats with all bonuses:"
+        chat trigger concat "   str: " str
+        chat trigger concat "   int: " int
+        chat trigger concat "   dex: " dex
+        chat trigger concat "   con: " con
+        chat trigger concat "   wis: " wis
+        chat trigger concat concat "   AC: " ac " (dex counted in)"
+        chat trigger concat "   DamMod: " dammod
+        if < 0 dodge
+            chat trigger concat "   Dodge: " dodge
+        end
+        if < 0 double
+            chat trigger concat "   Double Attack: " double
+        end
+        if < 0 triple
+            chat trigger concat "   Triple Attack: " triple
+        end
+        if < 0 quadruple
+            chat trigger concat "   Quadruple Attack: " quadruple
+        end
+        if < 0 disguise
+            chat trigger concat "   Disguise: " disguise
+        end
+        if < 0 clerical
+            chat trigger concat "   clerical group: " clerical
+        end
+        if < 0 druidic
+            chat trigger concat "   druidic group: " druidic
+        end
+        if < 0 enchantment
+            chat trigger concat "   enchantment group: " enchantment
+        end
+        if < 0 telepathy
+            chat trigger concat "   telepathy group: " telepathy
+        end
+        if < 0 black
+            chat trigger concat "   black magic group: " black
+        end
+        if < 0 white
+            chat trigger concat "   white magic group: " white
+        end
+        if < 0 alchemy
+            chat trigger concat "   alchemy group: " alchemy
+        end
+        if < 0 summons
+            chat trigger concat "   summons group: " summons
+        end
+        if < 0 warrior
+            chat trigger concat "   warrior group: " warrior
+        end
+        if < 0 fire
+            chat trigger concat "   elemental fire group: " fire
+        end
+        if < 0 ice
+            chat trigger concat "   elemental ice group: " ice
+        end
+        #
+        # Condition Check
+        #
+        chat trigger "They are affected by the following conditions:"
+        if hasCondition target "nothirst"
+            chat trigger "   nothirst"
+        end
+        if hasCondition target "nohunger"
+            chat trigger "   nohunger"
+        end
+        if hasCondition target "hunger"
+            chat trigger "   hunger"
+        end
+        if hasCondition target "thirst"
+            chat trigger "   thirst"
+        end
+        if hasCondition target "hpregen"
+            chat trigger "   hpregen"
+        end
+        if hasCondition target "bless"
+            chat trigger "   bless"
+        end
+        if hasCondition target "armor"
+            chat trigger "   armor"
+        end
+        if hasCondition target "safe"
+            chat trigger "   safe"
+        end
+        if hasCondition target "invis"
+            chat trigger "   invis"
+        end
+        if hasCondition target "detect invis"
+            chat trigger "   detect invis"
+        end
+        if hasCondition target "n tired"
+            chat trigger "   n tired"
+        end
+        if hasCondition target "newbiequestcompleted"
+            chat trigger "   newbiequestcompleted"
+        end
+        if hasCondition target "helpedbyunred"
+            chat trigger "   helpedbyunred"
+        end
+        if hasCondition target "unredintruder"
+            chat trigger "   unredintruder"
+        end
+        if hasCondition target "unredconquestattempt"
+            chat trigger "   unredconquestattempt"
+        end
+        if hasCondition target "poison"
+            chat trigger "   poison"
+        end
+        if hasCondition target "n entangled"
+            chat trigger "   n entangled"
+        end
+        if hasCondition target "fire shield"
+            chat trigger "   fire shield"
+        end
+        if hasCondition target "entangled"
+            chat trigger "   entangled"
+        end
+        if hasCondition target "tired"
+            chat trigger "   tired"
+        end
+        if hasCondition target "quit"
+            chat trigger "   quit"
+        end
+        if hasCondition target "quest1"
+            chat trigger "   quest1"
+        end
+        if hasCondition target "mob_attack"
+            chat trigger "   mob_attack"
+        end
+        if hasCondition target "jailed"
+            chat trigger "   jailed"
+        end
+        if hasCondition target "natural colors"
+            chat trigger "   natural colors"
+        end
+        if hasCondition target "inbath"
+            chat trigger "   inbath"
+        end
+        if hasCondition target "orkq"
+            chat trigger "   orkq"
+        end
+        if hasCondition target "curse"
+            chat trigger "   curse"
+        end
+        if hasCondition target "red"
+            chat trigger "   red"
+        end
+        if hasCondition target "blue"
+            chat trigger "   blue"
+        end
+        if hasCondition target "banned"
+            chat trigger "   banned"
+        end
+        if hasCondition target "umbra1"
+            chat trigger "   umbra1"
+        end
+        if hasCondition target "umbra2"
+            chat trigger "   umbra2"
+        end
+        if hasCondition target "umbra3"
+            chat trigger "   umbra3"
+        end
+        if hasCondition target "cursed"
+            chat trigger "   cursed"
+        end
+        if hasCondition target "dead"
+            chat trigger "   dead"
+        end
+        if hasCondition target "umbra0"
+            chat trigger "   umbra0"
+        end
+        if hasCondition target "ctf"
+            chat trigger "   ctf"
+        end
+        if hasCondition target "killer instinct"
+            chat trigger "   killer instinct"
+        end
+        if hasCondition target "poisoned"
+            chat trigger "   poisoned"
+        end
+        if hasCondition target "ginseng"
+            chat trigger "   ginseng"
+        end
+        if hasCondition target "drunk"
+            chat trigger "   drunk"
+        end
+        if hasCondition target "heeling"
+            chat trigger "   heeling"
+        end
+        if hasCondition target "wings"
+            chat trigger "   wings"
+        end
+        if hasCondition target "focus"
+            chat trigger "   focus"
+        end
+        if hasCondition target "inside"
+            chat trigger "   inside"
+        end
+        if hasCondition target "foundwildernkey"
+            chat trigger "   foundwildernkey"
+        end
+        if hasCondition target "hwkey1"
+            chat trigger "   hwkey1"
+        end
+        if hasCondition target "hwkey2"
+            chat trigger "   hwkey2"
+        end
+        if hasCondition target "hwkey5"
+            chat trigger "   hwkey5"
+        end
+        if hasCondition target "hwkey4"
+            chat trigger "   hwkey4"
+        end
+        if hasCondition target "hwkey3"
+            chat trigger "   hwkey3"
+        end
+        if hasCondition target "mob2_attack"
+            chat trigger "   mob2_attack"
+        end
+        if hasCondition target "wraithfight"
+            chat trigger "   wraithfight"
+        end
+        if hasCondition target "invis2"
+            chat trigger "   invis2"
+        end
+        if hasCondition target "atdmbank"
+            chat trigger "   atdmbank"
+        end
+        if hasCondition target "banktransaction"
+            chat trigger "   banktransaction"
+        end
+        if hasCondition target "foundwildernhouse"
+            chat trigger "   foundwildernhouse"
+        end
+        if hasCondition target "searchedhere"
+            chat trigger "   searchedhere"
+        end
+        if hasCondition target "harden"
+            chat trigger "   harden"
+        end
+        if hasCondition target "harden1"
+            chat trigger "   harden1"
+        end
+        if hasCondition target "harden2"
+            chat trigger "   harden2"
+        end
+        if hasCondition target "harden3"
+            chat trigger "   harden3"
+        end
+        if hasCondition target "harden4"
+            chat trigger "   harden4"
+        end
+        if hasCondition target "harden5"
+            chat trigger "   harden5"
+        end
+        if hasCondition target "harden6"
+            chat trigger "   harden6"
+        end
+        if hasCondition target "harden7"
+            chat trigger "   harden7"
+        end
+        if hasCondition target "harden8"
+            chat trigger "   harden8"
+        end
+        if hasCondition target "harden9"
+            chat trigger "   harden9"
+        end
+        if hasCondition target "harden10"
+            chat trigger "   harden10"
+        end
+        if hasCondition target "endurance"
+            chat trigger "   endurance"
+        end
+        if hasCondition target "endurance2"
+            chat trigger "   endurance2"
+        end
+        if hasCondition target "endurance3"
+            chat trigger "   endurance3"
+        end
+        if hasCondition target "endurance4"
+            chat trigger "   endurance4"
+        end
+        if hasCondition target "endurance5"
+            chat trigger "   endurance5"
+        end
+        if hasCondition target "endurance6"
+            chat trigger "   endurance6"
+        end
+        if hasCondition target "endurance7"
+            chat trigger "   endurance7"
+        end
+        if hasCondition target "endurance10"
+            chat trigger "   endurance10"
+        end
+        if hasCondition target "endurance9"
+            chat trigger "   endurance9"
+        end
+        if hasCondition target "endurance8"
+            chat trigger "   endurance8"
+        end
+        if hasCondition target "strength"
+            chat trigger "   strength"
+        end
+        if hasCondition target "courage"
+            chat trigger "   courage"
+        end
+        if hasCondition target "strength10"
+            chat trigger "   strength10"
+        end
+        if hasCondition target "strength9"
+            chat trigger "   strength9"
+        end
+        if hasCondition target "strength8"
+            chat trigger "   strength8"
+        end
+        if hasCondition target "strength7"
+            chat trigger "   strength7"
+        end
+        if hasCondition target "strength6"
+            chat trigger "   strength6"
+        end
+        if hasCondition target "strength5"
+            chat trigger "   strength5"
+        end
+        if hasCondition target "strength3"
+            chat trigger "   strength3"
+        end
+        if hasCondition target "strength4"
+            chat trigger "   strength4"
+        end
+        if hasCondition target "strength2"
+            chat trigger "   strength2"
+        end
+        if hasCondition target "courage4"
+            chat trigger "   courage4"
+        end
+        if hasCondition target "courage5"
+            chat trigger "   courage5"
+        end
+        if hasCondition target "courage6"
+            chat trigger "   courage6"
+        end
+        if hasCondition target "courage8"
+            chat trigger "   courage8"
+        end
+        if hasCondition target "courage2"
+            chat trigger "   courage2"
+        end
+        if hasCondition target "courage3"
+            chat trigger "   courage3"
+        end
+        if hasCondition target "courage7"
+            chat trigger "   courage7"
+        end
+        if hasCondition target "courage9"
+            chat trigger "   courage9"
+        end
+        if hasCondition target "courage10"
+            chat trigger "   courage10"
+        end
+        if hasCondition target "fear"
+            chat trigger "   fear"
+        end
+        if hasCondition target "fear2"
+            chat trigger "   fear2"
+        end
+        if hasCondition target "fear3"
+            chat trigger "   fear3"
+        end
+        if hasCondition target "fear4"
+            chat trigger "   fear4"
+        end
+        if hasCondition target "fear5"
+            chat trigger "   fear5"
+        end
+        if hasCondition target "fear6"
+            chat trigger "   fear6"
+        end
+        if hasCondition target "fear7"
+            chat trigger "   fear7"
+        end
+        if hasCondition target "fear8"
+            chat trigger "   fear8"
+        end
+        if hasCondition target "fear9"
+            chat trigger "   fear9"
+        end
+        if hasCondition target "fear10"
+            chat trigger "   fear10"
+        end
+        if hasCondition target "weakness"
+            chat trigger "   weakness"
+        end
+        if hasCondition target "weakness2"
+            chat trigger "   weakness2"
+        end
+        if hasCondition target "weakness3"
+            chat trigger "   weakness3"
+        end
+        if hasCondition target "weakness4"
+            chat trigger "   weakness4"
+        end
+        if hasCondition target "weakness5"
+            chat trigger "   weakness5"
+        end
+        if hasCondition target "weakness6"
+            chat trigger "   weakness6"
+        end
+        if hasCondition target "weakness7"
+            chat trigger "   weakness7"
+        end
+        if hasCondition target "weakness8"
+            chat trigger "   weakness8"
+        end
+        if hasCondition target "weakness9"
+            chat trigger "   weakness9"
+        end
+        if hasCondition target "weakness10"
+            chat trigger "   weakness10"
+        end
+        if hasCondition target "allowedboat"
+            chat trigger "   allowedboat"
+        end
+        if hasCondition target "wilderndoor1"
+            chat trigger "   wilderndoor1"
+        end
+        if hasCondition target "wilderndoor2"
+            chat trigger "   wilderndoor2"
+        end
+        if hasCondition target "hwkey6"
+            chat trigger "   hwkey6"
+        end
+        if hasCondition target "wilderndoor3"
+            chat trigger "   wilderndoor3"
+        end
+        if hasCondition target "wilderndoor5"
+            chat trigger "   wilderndoor5"
+        end
+        if hasCondition target "wilderndoor4"
+            chat trigger "   wilderndoor4"
+        end
+        if hasCondition target "no telepath"
+            chat trigger "   no telepath"
+        end
+        if hasCondition target "purple pill"
+            chat trigger "   purple pill"
+        end
+        if hasCondition target "dmb00"
+            chat trigger "   dmb00"
+        end
+        if hasCondition target "dmb01"
+            chat trigger "   dmb01"
+        end
+        if hasCondition target "dmb02"
+            chat trigger "   dmb02"
+        end
+        if hasCondition target "dmb03"
+            chat trigger "   dmb03"
+        end
+        if hasCondition target "dmb04"
+            chat trigger "   dmb04"
+        end
+        if hasCondition target "dmb05"
+            chat trigger "   dmb05"
+        end
+        if hasCondition target "dmb06"
+            chat trigger "   dmb06"
+        end
+        if hasCondition target "dmb07"
+            chat trigger "   dmb07"
+        end
+        if hasCondition target "dmb08"
+            chat trigger "   dmb08"
+        end
+        if hasCondition target "dmb09"
+            chat trigger "   dmb09"
+        end
+        if hasCondition target "dmb10"
+            chat trigger "   dmb10"
+        end
+        if hasCondition target "dmb11"
+            chat trigger "   dmb11"
+        end
+        if hasCondition target "dmb12"
+            chat trigger "   dmb12"
+        end
+        if hasCondition target "dmb13"
+            chat trigger "   dmb13"
+        end
+        if hasCondition target "dmb14"
+            chat trigger "   dmb14"
+        end
+        if hasCondition target "dmb15"
+            chat trigger "   dmb15"
+        end
+        if hasCondition target "dmb16"
+            chat trigger "   dmb16"
+        end
+        if hasCondition target "dmb17"
+            chat trigger "   dmb17"
+        end
+        if hasCondition target "dmb18"
+            chat trigger "   dmb18"
+        end
+        if hasCondition target "dmb19"
+            chat trigger "   dmb19"
+        end
+        if hasCondition target "dmb20"
+            chat trigger "   dmb20"
+        end
+        if hasCondition target "dmb21"
+            chat trigger "   dmb21"
+        end
+        if hasCondition target "dmb22"
+            chat trigger "   dmb22"
+        end
+        if hasCondition target "dmb23"
+            chat trigger "   dmb23"
+        end
+        if hasCondition target "dmb24"
+            chat trigger "   dmb24"
+        end
+        if hasCondition target "dmb25"
+            chat trigger "   dmb25"
+        end
+        if hasCondition target "dmb26"
+            chat trigger "   dmb26"
+        end
+        if hasCondition target "dmb27"
+            chat trigger "   dmb27"
+        end
+        if hasCondition target "dmb28"
+            chat trigger "   dmb28"
+        end
+        if hasCondition target "dmb29"
+            chat trigger "   dmb29"
+        end
+        if hasCondition target "dmb30"
+            chat trigger "   dmb30"
+        end
+        if hasCondition target "oq_door1"
+            chat trigger "   oq_door1"
+        end
+        if hasCondition target "oq_door3"
+            chat trigger "   oq_door3"
+        end
+        if hasCondition target "oq_door4"
+            chat trigger "   oq_door4"
+        end
+        if hasCondition target "oq_door5"
+            chat trigger "   oq_door5"
+        end
+        if hasCondition target "oq_door2"
+            chat trigger "   oq_door2"
+        end
+        if hasCondition target "str bonus"
+            chat trigger "   str bonus"
+        end
+        if hasCondition target "hot springs"
+            chat trigger "   hot springs"
+        end
+        if hasCondition target "hidekeeper"
+            chat trigger "   hidekeeper"
+        end
+        if hasCondition target "foundpinefar"
+            chat trigger "   foundpinefar"
+        end
+        if hasCondition target "message"
+            chat trigger "   message"
+        end
+        if hasCondition target "detect invis2"
+            chat trigger "   detect invis2"
+        end
+        if hasCondition target "onlake"
+            chat trigger "   onlake"
+        end
+        if hasCondition target "jeweler_quest"
+            chat trigger "   jeweler_quest"
+        end
+        if hasCondition target "intown"
+            chat trigger "   intown"
+        end
+        if hasCondition target "guard_attack"
+            chat trigger "   guard_attack"
+        end
+        if hasCondition target "dropping"
+            chat trigger "   dropping"
+        end
+        if hasCondition target "pred1"
+            chat trigger "   pred1"
+        end
+        if hasCondition target "west"
+            chat trigger "   west"
+        end
+        if hasCondition target "east"
+            chat trigger "   east"
+        end
+        if hasCondition target "north"
+            chat trigger "   north"
+        end
+        if hasCondition target "south"
+            chat trigger "   south"
+        end
+        if hasCondition target "maze1"
+            chat trigger "   maze1"
+        end
+        if hasCondition target "maze2"
+            chat trigger "   maze2"
+        end
+        if hasCondition target "maze3"
+            chat trigger "   maze3"
+        end
+        if hasCondition target "maze4"
+            chat trigger "   maze4"
+        end
+        if hasCondition target "iron1"
+            chat trigger "   iron1"
+        end
+        if hasCondition target "iron2"
+            chat trigger "   iron2"
+        end
+        if hasCondition target "iron3"
+            chat trigger "   iron3"
+        end
+        if hasCondition target "iron4"
+            chat trigger "   iron4"
+        end
+        if hasCondition target "iron5"
+            chat trigger "   iron5"
+        end
+        if hasCondition target "iron6"
+            chat trigger "   iron6"
+        end
+        if hasCondition target "iron7"
+            chat trigger "   iron7"
+        end
+        if hasCondition target "iron8"
+            chat trigger "   iron8"
+        end
+        if hasCondition target "iron9"
+            chat trigger "   iron9"
+        end
+        if hasCondition target "iron10"
+            chat trigger "   iron10"
+        end
+        if hasCondition target "silver1"
+            chat trigger "   silver1"
+        end
+        if hasCondition target "silver2"
+            chat trigger "   silver2"
+        end
+        if hasCondition target "silver3"
+            chat trigger "   silver3"
+        end
+        if hasCondition target "silver4"
+            chat trigger "   silver4"
+        end
+        if hasCondition target "silver5"
+            chat trigger "   silver5"
+        end
+        if hasCondition target "silver6"
+            chat trigger "   silver6"
+        end
+        if hasCondition target "silver7"
+            chat trigger "   silver7"
+        end
+        if hasCondition target "silver8"
+            chat trigger "   silver8"
+        end
+        if hasCondition target "silver9"
+            chat trigger "   silver9"
+        end
+        if hasCondition target "silver10"
+            chat trigger "   silver10"
+        end
+        if hasCondition target "gold1"
+            chat trigger "   gold1"
+        end
+        if hasCondition target "gold2"
+            chat trigger "   gold2"
+        end
+        if hasCondition target "gold3"
+            chat trigger "   gold3"
+        end
+        if hasCondition target "gold4"
+            chat trigger "   gold4"
+        end
+        if hasCondition target "gold5"
+            chat trigger "   gold5"
+        end
+        if hasCondition target "gold6"
+            chat trigger "   gold6"
+        end
+        if hasCondition target "gold7"
+            chat trigger "   gold7"
+        end
+        if hasCondition target "gold8"
+            chat trigger "   gold8"
+        end
+        if hasCondition target "gold9"
+            chat trigger "   gold9"
+        end
+        if hasCondition target "gold10"
+            chat trigger "   gold10"
+        end
+        if hasCondition target "crown1"
+            chat trigger "   crown1"
+        end
+        if hasCondition target "crown2"
+            chat trigger "   crown2"
+        end
+        if hasCondition target "crown3"
+            chat trigger "   crown3"
+        end
+        if hasCondition target "crown4"
+            chat trigger "   crown4"
+        end
+        if hasCondition target "crown5"
+            chat trigger "   crown5"
+        end
+        if hasCondition target "crown6"
+            chat trigger "   crown6"
+        end
+        if hasCondition target "crown7"
+            chat trigger "   crown7"
+        end
+        if hasCondition target "crown8"
+            chat trigger "   crown8"
+        end
+        if hasCondition target "crown9"
+            chat trigger "   crown9"
+        end
+        if hasCondition target "crown10"
+            chat trigger "   crown10"
+        end
+        if hasCondition target "oq_switch1"
+            chat trigger "   oq_switch1"
+        end
+        if hasCondition target "oq_switch2"
+            chat trigger "   oq_switch2"
+        end
+        if hasCondition target "oq_switch3"
+            chat trigger "   oq_switch3"
+        end
+        if hasCondition target "oq_switch4"
+            chat trigger "   oq_switch4"
+        end
+        if hasCondition target "oq_switch5"
+            chat trigger "   oq_switch5"
+        end
+        if hasCondition target "finished_jeweler_quest"
+            chat trigger "   finished_jeweler_quest"
+        end
+        if hasCondition target "ogrefight"
+            chat trigger "   ogrefight"
+        end
+        if hasCondition target "shenville_pq_0"
+            chat trigger "   shenville_pq_0"
+        end
+        if hasCondition target "shenville_0"
+            chat trigger "   shenville_0"
+        end
+        if hasCondition target "shenville_gfq_0"
+            chat trigger "   shenville_gfq_0"
+        end
+        if hasCondition target "shenville_mq_0"
+            chat trigger "   shenville_mq_0"
+        end
+        if hasCondition target "shenville_end"
+            chat trigger "   shenville_end"
+        end
+        if hasCondition target "shenville_mq_1"
+            chat trigger "   shenville_mq_1"
+        end
+        if hasCondition target "shenville_dq_0"
+            chat trigger "   shenville_dq_0"
+        end
+        if hasCondition target "shenville_dq_1"
+            chat trigger "   shenville_dq_1"
+        end
+        if hasCondition target "shenville_puzzle_0"
+            chat trigger "   shenville_puzzle_0"
+        end
+        if hasCondition target "shenville_puzzle_1"
+            chat trigger "   shenville_puzzle_1"
+        end
+        if hasCondition target "shenville_puzzle_2"
+            chat trigger "   shenville_puzzle_2"
+        end
+        if hasCondition target "shenville_puzzle_3"
+            chat trigger "   shenville_puzzle_3"
+        end
+        if hasCondition target "dragonsword"
+            chat trigger "   dragonsword"
+        end
+        if hasCondition target "ice shield"
+            chat trigger "   ice shield"
+        end
+        if hasCondition target "lava bath"
+            chat trigger "   lava bath"
+        end
+        if hasCondition target "killedsupergnoll"
+            chat trigger "   killedsupergnoll"
+        end
+        if hasCondition target "treasure1"
+            chat trigger "   treasure1"
+        end
+        if hasCondition target "treasure2"
+            chat trigger "   treasure2"
+        end
+        if hasCondition target "treasure3"
+            chat trigger "   treasure3"
+        end
+        if hasCondition target "treasure4"
+            chat trigger "   treasure4"
+        end
+        if hasCondition target "treasure5"
+            chat trigger "   treasure5"
+        end
+        if hasCondition target "treasure6"
+            chat trigger "   treasure6"
+        end
+        if hasCondition target "treasure7"
+            chat trigger "   treasure7"
+        end
+        if hasCondition target "treasure8"
+            chat trigger "   treasure8"
+        end
+        if hasCondition target "treasure9"
+            chat trigger "   treasure9"
+        end
+        if hasCondition target "treasure10"
+            chat trigger "   treasure10"
+        end
+        if hasCondition target "treasure11"
+            chat trigger "   treasure11"
+        end
+        if hasCondition target "treasure12"
+            chat trigger "   treasure12"
+        end
+        if hasCondition target "treasure13"
+            chat trigger "   treasure13"
+        end
+        if hasCondition target "treasure14"
+            chat trigger "   treasure14"
+        end
+        if hasCondition target "treasure15"
+            chat trigger "   treasure15"
+        end
+        if hasCondition target "foundtreasure"
+            chat trigger "   foundtreasure"
+        end
+        if hasCondition target " thunder_rings_charging"
+            chat trigger "    thunder_rings_charging"
+        end
+        if hasCondition target "sleep"
+            chat trigger "   sleep"
+        end
+        if hasCondition target "cast_limit_qs"
+            chat trigger "   cast_limit_qs"
+        end
+        if hasCondition target "poweroverwhelming"
+            chat trigger "   poweroverwhelming"
+        end
+        if hasCondition target "hmessage"
+            chat trigger "   hmessage"
+        end
+        if hasCondition target "ice bath"
+            chat trigger "   ice bath"
+        end
+        if hasCondition target "current"
+            chat trigger "   current"
+        end
+        if hasCondition target "northcurrent"
+            chat trigger "   northcurrent"
+        end
+        if hasCondition target "southcurrent"
+            chat trigger "   southcurrent"
+        end
+        if hasCondition target "eastcurrent"
+            chat trigger "   eastcurrent"
+        end
+        if hasCondition target "westcurrent"
+            chat trigger "   westcurrent"
+        end
+        if hasCondition target "cast_limit_ale"
+            chat trigger "   cast_limit_ale"
+        end
+        if hasCondition target "fwkeyfind1"
+            chat trigger "   fwkeyfind1"
+        end
+        if hasCondition target "fwkeyfind2"
+            chat trigger "   fwkeyfind2"
+        end
+        if hasCondition target "fwkeyfound"
+            chat trigger "   fwkeyfound"
+        end
+        if hasCondition target "fwquest"
+            chat trigger "   fwquest"
+        end
+        if hasCondition target "fwquestfinal"
+            chat trigger "   fwquestfinal"
+        end
+        if hasCondition target "shadowman"
+            chat trigger "   shadowman"
+        end
+        if hasCondition target "necrofight"
+            chat trigger "   necrofight"
+        end
+        if hasCondition target "mpregen"
+            chat trigger "   mpregen"
+        end
+        if hasCondition target "cast_limit_sandwich"
+            chat trigger "   cast_limit_sandwich"
+        end
+        #
+        # Inventory Check
+        #
+        chat trigger "They have the following inventory:"
+        if hasItem target "wooden dagger"
+            number total target count "wooden dagger"
+            chat trigger concat concat "   " total " wooden dagger"
+        end
+        if hasItem target "short sword"
+            number total target count "short sword"
+            chat trigger concat concat "   " total " short sword"
+        end
+        if hasItem target "aluminum belt"
+            number total target count "aluminum belt"
+            chat trigger concat concat "   " total " aluminum belt"
+        end
+        if hasItem target "lumberjack axe"
+            number total target count "lumberjack axe"
+            chat trigger concat concat "   " total " lumberjack axe"
+        end
+        if hasItem target "long sword"
+            number total target count "long sword"
+            chat trigger concat concat "   " total " long sword"
+        end
+        if hasItem target "iron suit"
+            number total target count "iron suit"
+            chat trigger concat concat "   " total " iron suit"
+        end
+        if hasItem target "iron sleeves"
+            number total target count "iron sleeves"
+            chat trigger concat concat "   " total " iron sleeves"
+        end
+        if hasItem target "iron leggings"
+            number total target count "iron leggings"
+            chat trigger concat concat "   " total " iron leggings"
+        end
+        if hasItem target "iron helmet"
+            number total target count "iron helmet"
+            chat trigger concat concat "   " total " iron helmet"
+        end
+        if hasItem target "iron gloves"
+            number total target count "iron gloves"
+            chat trigger concat concat "   " total " iron gloves"
+        end
+        if hasItem target "iron belt"
+            number total target count "iron belt"
+            chat trigger concat concat "   " total " iron belt"
+        end
+        if hasItem target "hgkey"
+            number total target count "hgkey"
+            chat trigger concat concat "   " total " hgkey"
+        end
+        if hasItem target "dagger"
+            number total target count "dagger"
+            chat trigger concat concat "   " total " dagger"
+        end
+        if hasItem target "cloth shirt"
+            number total target count "cloth shirt"
+            chat trigger concat concat "   " total " cloth shirt"
+        end
+        if hasItem target "broad axe"
+            number total target count "broad axe"
+            chat trigger concat concat "   " total " broad axe"
+        end
+        if hasItem target "boom box"
+            number total target count "boom box"
+            chat trigger concat concat "   " total " boom box"
+        end
+        if hasItem target "assassin blade"
+            number total target count "assassin blade"
+            chat trigger concat concat "   " total " assassin blade"
+        end
+        if hasItem target "aluminum gloves"
+            number total target count "aluminum gloves"
+            chat trigger concat concat "   " total " aluminum gloves"
+        end
+        if hasItem target "aluminum helmet"
+            number total target count "aluminum helmet"
+            chat trigger concat concat "   " total " aluminum helmet"
+        end
+        if hasItem target "aluminum leggings"
+            number total target count "aluminum leggings"
+            chat trigger concat concat "   " total " aluminum leggings"
+        end
+        if hasItem target "aluminum sleeves"
+            number total target count "aluminum sleeves"
+            chat trigger concat concat "   " total " aluminum sleeves"
+        end
+        if hasItem target "aluminum suit"
+            number total target count "aluminum suit"
+            chat trigger concat concat "   " total " aluminum suit"
+        end
+        if hasItem target "broad sword"
+            number total target count "broad sword"
+            chat trigger concat concat "   " total " broad sword"
+        end
+        if hasItem target "bronze belt"
+            number total target count "bronze belt"
+            chat trigger concat concat "   " total " bronze belt"
+        end
+        if hasItem target "bronze gloves"
+            number total target count "bronze gloves"
+            chat trigger concat concat "   " total " bronze gloves"
+        end
+        if hasItem target "bronze helmet"
+            number total target count "bronze helmet"
+            chat trigger concat concat "   " total " bronze helmet"
+        end
+        if hasItem target "bronze leggings"
+            number total target count "bronze leggings"
+            chat trigger concat concat "   " total " bronze leggings"
+        end
+        if hasItem target "bronze sleeves"
+            number total target count "bronze sleeves"
+            chat trigger concat concat "   " total " bronze sleeves"
+        end
+        if hasItem target "bronze suit"
+            number total target count "bronze suit"
+            chat trigger concat concat "   " total " bronze suit"
+        end
+        if hasItem target "expert sword"
+            number total target count "expert sword"
+            chat trigger concat concat "   " total " expert sword"
+        end
+        if hasItem target "gold belt"
+            number total target count "gold belt"
+            chat trigger concat concat "   " total " gold belt"
+        end
+        if hasItem target "gold gloves"
+            number total target count "gold gloves"
+            chat trigger concat concat "   " total " gold gloves"
+        end
+        if hasItem target "gold helmet"
+            number total target count "gold helmet"
+            chat trigger concat concat "   " total " gold helmet"
+        end
+        if hasItem target "gold leggings"
+            number total target count "gold leggings"
+            chat trigger concat concat "   " total " gold leggings"
+        end
+        if hasItem target "gold sleeves"
+            number total target count "gold sleeves"
+            chat trigger concat concat "   " total " gold sleeves"
+        end
+        if hasItem target "gold suit"
+            number total target count "gold suit"
+            chat trigger concat concat "   " total " gold suit"
+        end
+        if hasItem target "heavy mace"
+            number total target count "heavy mace"
+            chat trigger concat concat "   " total " heavy mace"
+        end
+        if hasItem target "platinum belt"
+            number total target count "platinum belt"
+            chat trigger concat concat "   " total " platinum belt"
+        end
+        if hasItem target "platinum gloves"
+            number total target count "platinum gloves"
+            chat trigger concat concat "   " total " platinum gloves"
+        end
+        if hasItem target "platinum helmet"
+            number total target count "platinum helmet"
+            chat trigger concat concat "   " total " platinum helmet"
+        end
+        if hasItem target "platinum leggings"
+            number total target count "platinum leggings"
+            chat trigger concat concat "   " total " platinum leggings"
+        end
+        if hasItem target "platinum suit"
+            number total target count "platinum suit"
+            chat trigger concat concat "   " total " platinum suit"
+        end
+        if hasItem target "silver belt"
+            number total target count "silver belt"
+            chat trigger concat concat "   " total " silver belt"
+        end
+        if hasItem target "silver gloves"
+            number total target count "silver gloves"
+            chat trigger concat concat "   " total " silver gloves"
+        end
+        if hasItem target "apple"
+            number total target count "apple"
+            chat trigger concat concat "   " total " apple"
+        end
+        if hasItem target "silver helmet"
+            number total target count "silver helmet"
+            chat trigger concat concat "   " total " silver helmet"
+        end
+        if hasItem target "silver leggings"
+            number total target count "silver leggings"
+            chat trigger concat concat "   " total " silver leggings"
+        end
+        if hasItem target "silver sleeves"
+            number total target count "silver sleeves"
+            chat trigger concat concat "   " total " silver sleeves"
+        end
+        if hasItem target "silver suit"
+            number total target count "silver suit"
+            chat trigger concat concat "   " total " silver suit"
+        end
+        if hasItem target "steel belt"
+            number total target count "steel belt"
+            chat trigger concat concat "   " total " steel belt"
+        end
+        if hasItem target "steel gloves"
+            number total target count "steel gloves"
+            chat trigger concat concat "   " total " steel gloves"
+        end
+        if hasItem target "steel helmet"
+            number total target count "steel helmet"
+            chat trigger concat concat "   " total " steel helmet"
+        end
+        if hasItem target "steel leggings"
+            number total target count "steel leggings"
+            chat trigger concat concat "   " total " steel leggings"
+        end
+        if hasItem target "steel sleeves"
+            number total target count "steel sleeves"
+            chat trigger concat concat "   " total " steel sleeves"
+        end
+        if hasItem target "steel suit"
+            number total target count "steel suit"
+            chat trigger concat concat "   " total " steel suit"
+        end
+        if hasItem target "titanium belt"
+            number total target count "titanium belt"
+            chat trigger concat concat "   " total " titanium belt"
+        end
+        if hasItem target "titanium gloves"
+            number total target count "titanium gloves"
+            chat trigger concat concat "   " total " titanium gloves"
+        end
+        if hasItem target "titanium helmet"
+            number total target count "titanium helmet"
+            chat trigger concat concat "   " total " titanium helmet"
+        end
+        if hasItem target "titanium leggings"
+            number total target count "titanium leggings"
+            chat trigger concat concat "   " total " titanium leggings"
+        end
+        if hasItem target "titanium sleeves"
+            number total target count "titanium sleeves"
+            chat trigger concat concat "   " total " titanium sleeves"
+        end
+        if hasItem target "titanium suit"
+            number total target count "titanium suit"
+            chat trigger concat concat "   " total " titanium suit"
+        end
+        if hasItem target "platinum sleeves"
+            number total target count "platinum sleeves"
+            chat trigger concat concat "   " total " platinum sleeves"
+        end
+        if hasItem target "god gold"
+            number total target count "god gold"
+            chat trigger concat concat "   " total " god gold"
+        end
+        if hasItem target "sandwich"
+            number total target count "sandwich"
+            chat trigger concat concat "   " total " sandwich"
+        end
+        if hasItem target "ale"
+            number total target count "ale"
+            chat trigger concat concat "   " total " ale"
+        end
+        if hasItem target "heavy axe"
+            number total target count "heavy axe"
+            chat trigger concat concat "   " total " heavy axe"
+        end
+        if hasItem target "godexp"
+            number total target count "godexp"
+            chat trigger concat concat "   " total " godexp"
+        end
+        if hasItem target "boat"
+            number total target count "boat"
+            chat trigger concat concat "   " total " boat"
+        end
+        if hasItem target "quarter staff"
+            number total target count "quarter staff"
+            chat trigger concat concat "   " total " quarter staff"
+        end
+        if hasItem target "tom sword"
+            number total target count "tom sword"
+            chat trigger concat concat "   " total " tom sword"
+        end
+        if hasItem target "vampire fangs"
+            number total target count "vampire fangs"
+            chat trigger concat concat "   " total " vampire fangs"
+        end
+        if hasItem target "demon horns"
+            number total target count "demon horns"
+            chat trigger concat concat "   " total " demon horns"
+        end
+        if hasItem target "stone fist"
+            number total target count "stone fist"
+            chat trigger concat concat "   " total " stone fist"
+        end
+        if hasItem target "medallion"
+            number total target count "medallion"
+            chat trigger concat concat "   " total " medallion"
+        end
+        if hasItem target "purple pills"
+            number total target count "purple pills"
+            chat trigger concat concat "   " total " purple pills"
+        end
+        if hasItem target "wine"
+            number total target count "wine"
+            chat trigger concat concat "   " total " wine"
+        end
+        if hasItem target "dcloak"
+            number total target count "dcloak"
+            chat trigger concat concat "   " total " dcloak"
+        end
+        if hasItem target "gilded necklace"
+            number total target count "gilded necklace"
+            chat trigger concat concat "   " total " gilded necklace"
+        end
+        if hasItem target "shaded glasses"
+            number total target count "shaded glasses"
+            chat trigger concat concat "   " total " shaded glasses"
+        end
+        if hasItem target "house1key"
+            number total target count "house1key"
+            chat trigger concat concat "   " total " house1key"
+        end
+        if hasItem target "food"
+            number total target count "food"
+            chat trigger concat concat "   " total " food"
+        end
+        if hasItem target "xpresso"
+            number total target count "xpresso"
+            chat trigger concat concat "   " total " xpresso"
+        end
+        if hasItem target "mardi gras beads"
+            number total target count "mardi gras beads"
+            chat trigger concat concat "   " total " mardi gras beads"
+        end
+        if hasItem target "scroll"
+            number total target count "scroll"
+            chat trigger concat concat "   " total " scroll"
+        end
+        if hasItem target "mine_pick"
+            number total target count "mine_pick"
+            chat trigger concat concat "   " total " mine_pick"
+        end
+        if hasItem target "housecyrilkey"
+            number total target count "housecyrilkey"
+            chat trigger concat concat "   " total " housecyrilkey"
+        end
+        if hasItem target "unred sword"
+            number total target count "unred sword"
+            chat trigger concat concat "   " total " unred sword"
+        end
+        if hasItem target "housewildernkey"
+            number total target count "housewildernkey"
+            chat trigger concat concat "   " total " housewildernkey"
+        end
+        if hasItem target "keg of ale"
+            number total target count "keg of ale"
+            chat trigger concat concat "   " total " keg of ale"
+        end
+        if hasItem target "ork1house"
+            number total target count "ork1house"
+            chat trigger concat concat "   " total " ork1house"
+        end
+        if hasItem target "healthstone"
+            number total target count "healthstone"
+            chat trigger concat concat "   " total " healthstone"
+        end
+        if hasItem target "powerblade"
+            number total target count "powerblade"
+            chat trigger concat concat "   " total " powerblade"
+        end
+        if hasItem target "manastone"
+            number total target count "manastone"
+            chat trigger concat concat "   " total " manastone"
+        end
+        if hasItem target "combostone"
+            number total target count "combostone"
+            chat trigger concat concat "   " total " combostone"
+        end
+        if hasItem target "bean"
+            number total target count "bean"
+            chat trigger concat concat "   " total " bean"
+        end
+        if hasItem target "gnoll belt"
+            number total target count "gnoll belt"
+            chat trigger concat concat "   " total " gnoll belt"
+        end
+        if hasItem target "gauntlets"
+            number total target count "gauntlets"
+            chat trigger concat concat "   " total " gauntlets"
+        end
+        if hasItem target "cheese"
+            number total target count "cheese"
+            chat trigger concat concat "   " total " cheese"
+        end
+        if hasItem target "house2key"
+            number total target count "house2key"
+            chat trigger concat concat "   " total " house2key"
+        end
+        if hasItem target "darkblade"
+            number total target count "darkblade"
+            chat trigger concat concat "   " total " darkblade"
+        end
+        if hasItem target "pkey"
+            number total target count "pkey"
+            chat trigger concat concat "   " total " pkey"
+        end
+        if hasItem target "sgc"
+            number total target count "sgc"
+            chat trigger concat concat "   " total " sgc"
+        end
+        if hasItem target "strabo key"
+            number total target count "strabo key"
+            chat trigger concat concat "   " total " strabo key"
+        end
+        if hasItem target "orkstone"
+            number total target count "orkstone"
+            chat trigger concat concat "   " total " orkstone"
+        end
+        if hasItem target "water"
+            number total target count "water"
+            chat trigger concat concat "   " total " water"
+        end
+        if hasItem target "orksword"
+            number total target count "orksword"
+            chat trigger concat concat "   " total " orksword"
+        end
+        if hasItem target "hookw"
+            number total target count "hookw"
+            chat trigger concat concat "   " total " hookw"
+        end
+        if hasItem target "crown"
+            number total target count "crown"
+            chat trigger concat concat "   " total " crown"
+        end
+        if hasItem target "houseunredkey"
+            number total target count "houseunredkey"
+            chat trigger concat concat "   " total " houseunredkey"
+        end
+        if hasItem target "questsword"
+            number total target count "questsword"
+            chat trigger concat concat "   " total " questsword"
+        end
+        if hasItem target "red gauntlets"
+            number total target count "red gauntlets"
+            chat trigger concat concat "   " total " red gauntlets"
+        end
+        if hasItem target "detect"
+            number total target count "detect"
+            chat trigger concat concat "   " total " detect"
+        end
+        if hasItem target "inferno necklace"
+            number total target count "inferno necklace"
+            chat trigger concat concat "   " total " inferno necklace"
+        end
+        if hasItem target "houselariakey"
+            number total target count "houselariakey"
+            chat trigger concat concat "   " total " houselariakey"
+        end
+        if hasItem target "mithril mail"
+            number total target count "mithril mail"
+            chat trigger concat concat "   " total " mithril mail"
+        end
+        if hasItem target "baron"
+            number total target count "baron"
+            chat trigger concat concat "   " total " baron"
+        end
+        if hasItem target "enchanted gem"
+            number total target count "enchanted gem"
+            chat trigger concat concat "   " total " enchanted gem"
+        end
+        if hasItem target "magic hammer"
+            number total target count "magic hammer"
+            chat trigger concat concat "   " total " magic hammer"
+        end
+        if hasItem target "enchantedgem"
+            number total target count "enchantedgem"
+            chat trigger concat concat "   " total " enchantedgem"
+        end
+        if hasItem target "tilgovihousekey"
+            number total target count "tilgovihousekey"
+            chat trigger concat concat "   " total " tilgovihousekey"
+        end
+        if hasItem target "dragon blood"
+            number total target count "dragon blood"
+            chat trigger concat concat "   " total " dragon blood"
+        end
+        if hasItem target "raft"
+            number total target count "raft"
+            chat trigger concat concat "   " total " raft"
+        end
+        if hasItem target "gem"
+            number total target count "gem"
+            chat trigger concat concat "   " total " gem"
+        end
+        if hasItem target "shades"
+            number total target count "shades"
+            chat trigger concat concat "   " total " shades"
+        end
+        if hasItem target "blue flag"
+            number total target count "blue flag"
+            chat trigger concat concat "   " total " blue flag"
+        end
+        if hasItem target "red flag"
+            number total target count "red flag"
+            chat trigger concat concat "   " total " red flag"
+        end
+        if hasItem target "cookie"
+            number total target count "cookie"
+            chat trigger concat concat "   " total " cookie"
+        end
+        if hasItem target "house3key"
+            number total target count "house3key"
+            chat trigger concat concat "   " total " house3key"
+        end
+        if hasItem target "tirepotion"
+            number total target count "tirepotion"
+            chat trigger concat concat "   " total " tirepotion"
+        end
+        if hasItem target "ale2"
+            number total target count "ale2"
+            chat trigger concat concat "   " total " ale2"
+        end
+        if hasItem target "healpotion"
+            number total target count "healpotion"
+            chat trigger concat concat "   " total " healpotion"
+        end
+        if hasItem target "sword of slaying"
+            number total target count "sword of slaying"
+            chat trigger concat concat "   " total " sword of slaying"
+        end
+        if hasItem target "ice dragon scale"
+            number total target count "ice dragon scale"
+            chat trigger concat concat "   " total " ice dragon scale"
+        end
+        if hasItem target "summer1key"
+            number total target count "summer1key"
+            chat trigger concat concat "   " total " summer1key"
+        end
+        if hasItem target "summer2key"
+            number total target count "summer2key"
+            chat trigger concat concat "   " total " summer2key"
+        end
+        if hasItem target "orkgodkey"
+            number total target count "orkgodkey"
+            chat trigger concat concat "   " total " orkgodkey"
+        end
+        if hasItem target "ork bane"
+            number total target count "ork bane"
+            chat trigger concat concat "   " total " ork bane"
+        end
+        if hasItem target "orksheild"
+            number total target count "orksheild"
+            chat trigger concat concat "   " total " orksheild"
+        end
+        if hasItem target "cigarette"
+            number total target count "cigarette"
+            chat trigger concat concat "   " total " cigarette"
+        end
+        if hasItem target "blackrose"
+            number total target count "blackrose"
+            chat trigger concat concat "   " total " blackrose"
+        end
+        if hasItem target "fire dragon scale"
+            number total target count "fire dragon scale"
+            chat trigger concat concat "   " total " fire dragon scale"
+        end
+        if hasItem target "frag_pass"
+            number total target count "frag_pass"
+            chat trigger concat concat "   " total " frag_pass"
+        end
+        if hasItem target "megaheal"
+            number total target count "megaheal"
+            chat trigger concat concat "   " total " megaheal"
+        end
+        if hasItem target "half_frag_key"
+            number total target count "half_frag_key"
+            chat trigger concat concat "   " total " half_frag_key"
+        end
+        if hasItem target "elven casting leathers"
+            number total target count "elven casting leathers"
+            chat trigger concat concat "   " total " elven casting leathers"
+        end
+        if hasItem target "rope & grapnel"
+            number total target count "rope & grapnel"
+            chat trigger concat concat "   " total " rope & grapnel"
+        end
+        if hasItem target "elven waraxe"
+            number total target count "elven waraxe"
+            chat trigger concat concat "   " total " elven waraxe"
+        end
+        if hasItem target "ork2house"
+            number total target count "ork2house"
+            chat trigger concat concat "   " total " ork2house"
+        end
+        if hasItem target "ork3house"
+            number total target count "ork3house"
+            chat trigger concat concat "   " total " ork3house"
+        end
+        if hasItem target "ork4house"
+            number total target count "ork4house"
+            chat trigger concat concat "   " total " ork4house"
+        end
+        if hasItem target "ork5house"
+            number total target count "ork5house"
+            chat trigger concat concat "   " total " ork5house"
+        end
+        if hasItem target "housebeezerkey"
+            number total target count "housebeezerkey"
+            chat trigger concat concat "   " total " housebeezerkey"
+        end
+        if hasItem target "housemystickey"
+            number total target count "housemystickey"
+            chat trigger concat concat "   " total " housemystickey"
+        end
+        if hasItem target "orky sword"
+            number total target count "orky sword"
+            chat trigger concat concat "   " total " orky sword"
+        end
+        if hasItem target "ice dragon tooth"
+            number total target count "ice dragon tooth"
+            chat trigger concat concat "   " total " ice dragon tooth"
+        end
+        if hasItem target "elven tower shield"
+            number total target count "elven tower shield"
+            chat trigger concat concat "   " total " elven tower shield"
+        end
+        if hasItem target "ork6house"
+            number total target count "ork6house"
+            chat trigger concat concat "   " total " ork6house"
+        end
+        if hasItem target "ork7house"
+            number total target count "ork7house"
+            chat trigger concat concat "   " total " ork7house"
+        end
+        if hasItem target "ork8house"
+            number total target count "ork8house"
+            chat trigger concat concat "   " total " ork8house"
+        end
+        if hasItem target "ork9house"
+            number total target count "ork9house"
+            chat trigger concat concat "   " total " ork9house"
+        end
+        if hasItem target "fire dragon tooth"
+            number total target count "fire dragon tooth"
+            chat trigger concat concat "   " total " fire dragon tooth"
+        end
+        if hasItem target "baron key"
+            number total target count "baron key"
+            chat trigger concat concat "   " total " baron key"
+        end
+        if hasItem target "raffle1ticket"
+            number total target count "raffle1ticket"
+            chat trigger concat concat "   " total " raffle1ticket"
+        end
+        if hasItem target "raffle2ticket"
+            number total target count "raffle2ticket"
+            chat trigger concat concat "   " total " raffle2ticket"
+        end
+        if hasItem target "raffle3ticket"
+            number total target count "raffle3ticket"
+            chat trigger concat concat "   " total " raffle3ticket"
+        end
+        if hasItem target "raffle4ticket"
+            number total target count "raffle4ticket"
+            chat trigger concat concat "   " total " raffle4ticket"
+        end
+        if hasItem target "dragon sword"
+            number total target count "dragon sword"
+            chat trigger concat concat "   " total " dragon sword"
+        end
+        if hasItem target "blood-red potion"
+            number total target count "blood-red potion"
+            chat trigger concat concat "   " total " blood-red potion"
+        end
+        if hasItem target "red-blood potion"
+            number total target count "red-blood potion"
+            chat trigger concat concat "   " total " red-blood potion"
+        end
+        if hasItem target "elven broadsword"
+            number total target count "elven broadsword"
+            chat trigger concat concat "   " total " elven broadsword"
+        end
+        if hasItem target "mage powersword"
+            number total target count "mage powersword"
+            chat trigger concat concat "   " total " mage powersword"
+        end
+        if hasItem target "dwarven chainmail"
+            number total target count "dwarven chainmail"
+            chat trigger concat concat "   " total " dwarven chainmail"
+        end
+        if hasItem target "well-bounded dwarven shield"
+            number total target count "well-bounded dwarven shield"
+            chat trigger concat concat "   " total " well-bounded dwarven shield"
+        end
+        if hasItem target "dwarven leg-greeves"
+            number total target count "dwarven leg-greeves"
+            chat trigger concat concat "   " total " dwarven leg-greeves"
+        end
+        if hasItem target "dwarven helm"
+            number total target count "dwarven helm"
+            chat trigger concat concat "   " total " dwarven helm"
+        end
+        if hasItem target "dwarven belt"
+            number total target count "dwarven belt"
+            chat trigger concat concat "   " total " dwarven belt"
+        end
+        if hasItem target "dwarven gloves"
+            number total target count "dwarven gloves"
+            chat trigger concat concat "   " total " dwarven gloves"
+        end
+        if hasItem target "dwarven claidhmore"
+            number total target count "dwarven claidhmore"
+            chat trigger concat concat "   " total " dwarven claidhmore"
+        end
+        if hasItem target "pcloak"
+            number total target count "pcloak"
+            chat trigger concat concat "   " total " pcloak"
+        end
+        if hasItem target "psuit"
+            number total target count "psuit"
+            chat trigger concat concat "   " total " psuit"
+        end
+        if hasItem target "strabo"
+            number total target count "strabo"
+            chat trigger concat concat "   " total " strabo"
+        end
+        if hasItem target "lecture"
+            number total target count "lecture"
+            chat trigger concat concat "   " total " lecture"
+        end
+        if hasItem target "smurfmirror"
+            number total target count "smurfmirror"
+            chat trigger concat concat "   " total " smurfmirror"
+        end
+        if hasItem target "bearded axe"
+            number total target count "bearded axe"
+            chat trigger concat concat "   " total " bearded axe"
+        end
+        if hasItem target "runed shortsword"
+            number total target count "runed shortsword"
+            chat trigger concat concat "   " total " runed shortsword"
+        end
+        if hasItem target "thinking cap"
+            number total target count "thinking cap"
+            chat trigger concat concat "   " total " thinking cap"
+        end
+        if hasItem target "energy crystal"
+            number total target count "energy crystal"
+            chat trigger concat concat "   " total " energy crystal"
+        end
+        if hasItem target "sdkey"
+            number total target count "sdkey"
+            chat trigger concat concat "   " total " sdkey"
+        end
+        if hasItem target "rusty armor"
+            number total target count "rusty armor"
+            chat trigger concat concat "   " total " rusty armor"
+        end
+        if hasItem target "broken shield"
+            number total target count "broken shield"
+            chat trigger concat concat "   " total " broken shield"
+        end
+        if hasItem target "small wooden shield"
+            number total target count "small wooden shield"
+            chat trigger concat concat "   " total " small wooden shield"
+        end
+        if hasItem target "wool cloak"
+            number total target count "wool cloak"
+            chat trigger concat concat "   " total " wool cloak"
+        end
+        if hasItem target "cold blade"
+            number total target count "cold blade"
+            chat trigger concat concat "   " total " cold blade"
+        end
+        if hasItem target "enchanted cape of protection"
+            number total target count "enchanted cape of protection"
+            chat trigger concat concat "   " total " enchanted cape of protection"
+        end
+        if hasItem target "bearclaw"
+            number total target count "bearclaw"
+            chat trigger concat concat "   " total " bearclaw"
+        end
+        if hasItem target "housecheesekey"
+            number total target count "housecheesekey"
+            chat trigger concat concat "   " total " housecheesekey"
+        end
+        if hasItem target "frag sword"
+            number total target count "frag sword"
+            chat trigger concat concat "   " total " frag sword"
+        end
+        if hasItem target "hptoken"
+            number total target count "hptoken"
+            chat trigger concat concat "   " total " hptoken"
+        end
+        if hasItem target "housezeralkey"
+            number total target count "housezeralkey"
+            chat trigger concat concat "   " total " housezeralkey"
+        end
+        if hasItem target "recall"
+            number total target count "recall"
+            chat trigger concat concat "   " total " recall"
+        end
+        if hasItem target "absinthe"
+            number total target count "absinthe"
+            chat trigger concat concat "   " total " absinthe"
+        end
+        if hasItem target "gatecrasher"
+            number total target count "gatecrasher"
+            chat trigger concat concat "   " total " gatecrasher"
+        end
+        if hasItem target "ork kite"
+            number total target count "ork kite"
+            chat trigger concat concat "   " total " ork kite"
+        end
+        if hasItem target "unredsword"
+            number total target count "unredsword"
+            chat trigger concat concat "   " total " unredsword"
+        end
+        if hasItem target "amulet"
+            number total target count "amulet"
+            chat trigger concat concat "   " total " amulet"
+        end
+        if hasItem target "chelm"
+            number total target count "chelm"
+            chat trigger concat concat "   " total " chelm"
+        end
+        if hasItem target "black_tooth"
+            number total target count "black_tooth"
+            chat trigger concat concat "   " total " black_tooth"
+        end
+        if hasItem target "mendpotion"
+            number total target count "mendpotion"
+            chat trigger concat concat "   " total " mendpotion"
+        end
+        if hasItem target "jeweled necklace"
+            number total target count "jeweled necklace"
+            chat trigger concat concat "   " total " jeweled necklace"
+        end
+        if hasItem target "thors blood"
+            number total target count "thors blood"
+            chat trigger concat concat "   " total " thors blood"
+        end
+        if hasItem target "wolfsbane"
+            number total target count "wolfsbane"
+            chat trigger concat concat "   " total " wolfsbane"
+        end
+        if hasItem target "lavendar"
+            number total target count "lavendar"
+            chat trigger concat concat "   " total " lavendar"
+        end
+        if hasItem target "water bottle"
+            number total target count "water bottle"
+            chat trigger concat concat "   " total " water bottle"
+        end
+        if hasItem target "mushroom"
+            number total target count "mushroom"
+            chat trigger concat concat "   " total " mushroom"
+        end
+        if hasItem target "asmads potion"
+            number total target count "asmads potion"
+            chat trigger concat concat "   " total " asmads potion"
+        end
+        if hasItem target "blood stone"
+            number total target count "blood stone"
+            chat trigger concat concat "   " total " blood stone"
+        end
+        if hasItem target "mandrake"
+            number total target count "mandrake"
+            chat trigger concat concat "   " total " mandrake"
+        end
+        if hasItem target "sales list"
+            number total target count "sales list"
+            chat trigger concat concat "   " total " sales list"
+        end
+        if hasItem target "demon blade"
+            number total target count "demon blade"
+            chat trigger concat concat "   " total " demon blade"
+        end
+        if hasItem target "bank card"
+            number total target count "bank card"
+            chat trigger concat concat "   " total " bank card"
+        end
+        if hasItem target "dispell"
+            number total target count "dispell"
+            chat trigger concat concat "   " total " dispell"
+        end
+        if hasItem target "silver ingot"
+            number total target count "silver ingot"
+            chat trigger concat concat "   " total " silver ingot"
+        end
+        if hasItem target "gold ingot"
+            number total target count "gold ingot"
+            chat trigger concat concat "   " total " gold ingot"
+        end
+        if hasItem target "iron ingot"
+            number total target count "iron ingot"
+            chat trigger concat concat "   " total " iron ingot"
+        end
+        if hasItem target "dwarf king crown"
+            number total target count "dwarf king crown"
+            chat trigger concat concat "   " total " dwarf king crown"
+        end
+        if hasItem target "lightning rod"
+            number total target count "lightning rod"
+            chat trigger concat concat "   " total " lightning rod"
+        end
+        if hasItem target "crystal suit"
+            number total target count "crystal suit"
+            chat trigger concat concat "   " total " crystal suit"
+        end
+        if hasItem target "scale mail"
+            number total target count "scale mail"
+            chat trigger concat concat "   " total " scale mail"
+        end
+        if hasItem target "milk"
+            number total target count "milk"
+            chat trigger concat concat "   " total " milk"
+        end
+        if hasItem target "horned helmet"
+            number total target count "horned helmet"
+            chat trigger concat concat "   " total " horned helmet"
+        end
+        if hasItem target "blood axe"
+            number total target count "blood axe"
+            chat trigger concat concat "   " total " blood axe"
+        end
+        if hasItem target "sabre"
+            number total target count "sabre"
+            chat trigger concat concat "   " total " sabre"
+        end
+        if hasItem target "katana"
+            number total target count "katana"
+            chat trigger concat concat "   " total " katana"
+        end
+        if hasItem target "white_tooth"
+            number total target count "white_tooth"
+            chat trigger concat concat "   " total " white_tooth"
+        end
+        if hasItem target "mptoken"
+            number total target count "mptoken"
+            chat trigger concat concat "   " total " mptoken"
+        end
+        if hasItem target "pillow"
+            number total target count "pillow"
+            chat trigger concat concat "   " total " pillow"
+        end
+        if hasItem target "mead"
+            number total target count "mead"
+            chat trigger concat concat "   " total " mead"
+        end
+        if hasItem target "meat"
+            number total target count "meat"
+            chat trigger concat concat "   " total " meat"
+        end
+        if hasItem target "reward"
+            number total target count "reward"
+            chat trigger concat concat "   " total " reward"
+        end
+        if hasItem target "rare spell component"
+            number total target count "rare spell component"
+            chat trigger concat concat "   " total " rare spell component"
+        end
+        if hasItem target "dragon tooth"
+            number total target count "dragon tooth"
+            chat trigger concat concat "   " total " dragon tooth"
+        end
+        if hasItem target "dragon scale"
+            number total target count "dragon scale"
+            chat trigger concat concat "   " total " dragon scale"
+        end
+        if hasItem target "ogre blood"
+            number total target count "ogre blood"
+            chat trigger concat concat "   " total " ogre blood"
+        end
+        if hasItem target "phoenix feather"
+            number total target count "phoenix feather"
+            chat trigger concat concat "   " total " phoenix feather"
+        end
+        if hasItem target "ice dragon blood"
+            number total target count "ice dragon blood"
+            chat trigger concat concat "   " total " ice dragon blood"
+        end
+        if hasItem target "fire dragon blood"
+            number total target count "fire dragon blood"
+            chat trigger concat concat "   " total " fire dragon blood"
+        end
+        if hasItem target "microwave dinner"
+            number total target count "microwave dinner"
+            chat trigger concat concat "   " total " microwave dinner"
+        end
+        if hasItem target "unicorn horn"
+            number total target count "unicorn horn"
+            chat trigger concat concat "   " total " unicorn horn"
+        end
+        if hasItem target "nedalkey"
+            number total target count "nedalkey"
+            chat trigger concat concat "   " total " nedalkey"
+        end
+        if hasItem target "zagokey"
+            number total target count "zagokey"
+            chat trigger concat concat "   " total " zagokey"
+        end
+        if hasItem target "darkokey"
+            number total target count "darkokey"
+            chat trigger concat concat "   " total " darkokey"
+        end
+        if hasItem target "exp sword"
+            number total target count "exp sword"
+            chat trigger concat concat "   " total " exp sword"
+        end
+        if hasItem target "gboots"
+            number total target count "gboots"
+            chat trigger concat concat "   " total " gboots"
+        end
+        if hasItem target "invis"
+            number total target count "invis"
+            chat trigger concat concat "   " total " invis"
+        end
+        if hasItem target "minormend"
+            number total target count "minormend"
+            chat trigger concat concat "   " total " minormend"
+        end
+        if hasItem target "pinefar"
+            number total target count "pinefar"
+            chat trigger concat concat "   " total " pinefar"
+        end
+        if hasItem target "inferno eyes"
+            number total target count "inferno eyes"
+            chat trigger concat concat "   " total " inferno eyes"
+        end
+        if hasItem target "blood"
+            number total target count "blood"
+            chat trigger concat concat "   " total " blood"
+        end
+        if hasItem target "inferno chain mail"
+            number total target count "inferno chain mail"
+            chat trigger concat concat "   " total " inferno chain mail"
+        end
+        if hasItem target "ranger gauntlets"
+            number total target count "ranger gauntlets"
+            chat trigger concat concat "   " total " ranger gauntlets"
+        end
+        if hasItem target "goblin straps"
+            number total target count "goblin straps"
+            chat trigger concat concat "   " total " goblin straps"
+        end
+        if hasItem target "cursed dagger"
+            number total target count "cursed dagger"
+            chat trigger concat concat "   " total " cursed dagger"
+        end
+        if hasItem target "chaos suit"
+            number total target count "chaos suit"
+            chat trigger concat concat "   " total " chaos suit"
+        end
+        if hasItem target "chaos shield"
+            number total target count "chaos shield"
+            chat trigger concat concat "   " total " chaos shield"
+        end
+        if hasItem target "chaos helm"
+            number total target count "chaos helm"
+            chat trigger concat concat "   " total " chaos helm"
+        end
+        if hasItem target "chaos leggings"
+            number total target count "chaos leggings"
+            chat trigger concat concat "   " total " chaos leggings"
+        end
+        if hasItem target "bag of gold"
+            number total target count "bag of gold"
+            chat trigger concat concat "   " total " bag of gold"
+        end
+        if hasItem target "bag of gems"
+            number total target count "bag of gems"
+            chat trigger concat concat "   " total " bag of gems"
+        end
+        if hasItem target "gem of protection"
+            number total target count "gem of protection"
+            chat trigger concat concat "   " total " gem of protection"
+        end
+        if hasItem target "flesh"
+            number total target count "flesh"
+            chat trigger concat concat "   " total " flesh"
+        end
+        if hasItem target "titanium sword"
+            number total target count "titanium sword"
+            chat trigger concat concat "   " total " titanium sword"
+        end
+        if hasItem target "str bonus"
+            number total target count "str bonus"
+            chat trigger concat concat "   " total " str bonus"
+        end
+        if hasItem target "ginseng"
+            number total target count "ginseng"
+            chat trigger concat concat "   " total " ginseng"
+        end
+        if hasItem target "dark mail"
+            number total target count "dark mail"
+            chat trigger concat concat "   " total " dark mail"
+        end
+        if hasItem target "beer"
+            number total target count "beer"
+            chat trigger concat concat "   " total " beer"
+        end
+        if hasItem target "inferno axe"
+            number total target count "inferno axe"
+            chat trigger concat concat "   " total " inferno axe"
+        end
+        if hasItem target "inferno helm"
+            number total target count "inferno helm"
+            chat trigger concat concat "   " total " inferno helm"
+        end
+        if hasItem target "inferno gloves"
+            number total target count "inferno gloves"
+            chat trigger concat concat "   " total " inferno gloves"
+        end
+        if hasItem target "inferno sleeves"
+            number total target count "inferno sleeves"
+            chat trigger concat concat "   " total " inferno sleeves"
+        end
+        if hasItem target "inferno belt"
+            number total target count "inferno belt"
+            chat trigger concat concat "   " total " inferno belt"
+        end
+        if hasItem target "inferno boots"
+            number total target count "inferno boots"
+            chat trigger concat concat "   " total " inferno boots"
+        end
+        if hasItem target "firewalls brew"
+            number total target count "firewalls brew"
+            chat trigger concat concat "   " total " firewalls brew"
+        end
+        if hasItem target "blood bane"
+            number total target count "blood bane"
+            chat trigger concat concat "   " total " blood bane"
+        end
+        if hasItem target "basement_key"
+            number total target count "basement_key"
+            chat trigger concat concat "   " total " basement_key"
+        end
+        if hasItem target "zombie sword"
+            number total target count "zombie sword"
+            chat trigger concat concat "   " total " zombie sword"
+        end
+        if hasItem target "portal key"
+            number total target count "portal key"
+            chat trigger concat concat "   " total " portal key"
+        end
+        if hasItem target "portalkey"
+            number total target count "portalkey"
+            chat trigger concat concat "   " total " portalkey"
+        end
+        if hasItem target "tiny statue"
+            number total target count "tiny statue"
+            chat trigger concat concat "   " total " tiny statue"
+        end
+        if hasItem target "forest scythe"
+            number total target count "forest scythe"
+            chat trigger concat concat "   " total " forest scythe"
+        end
+        if hasItem target "gem of power"
+            number total target count "gem of power"
+            chat trigger concat concat "   " total " gem of power"
+        end
+        if hasItem target "chest of gems"
+            number total target count "chest of gems"
+            chat trigger concat concat "   " total " chest of gems"
+        end
+        if hasItem target "shade cap"
+            number total target count "shade cap"
+            chat trigger concat concat "   " total " shade cap"
+        end
+        if hasItem target "rejuvenation"
+            number total target count "rejuvenation"
+            chat trigger concat concat "   " total " rejuvenation"
+        end
+        if hasItem target "fragdaddy test"
+            number total target count "fragdaddy test"
+            chat trigger concat concat "   " total " fragdaddy test"
+        end
+        if hasItem target "hunter god key"
+            number total target count "hunter god key"
+            chat trigger concat concat "   " total " hunter god key"
+        end
+        if hasItem target "war axe"
+            number total target count "war axe"
+            chat trigger concat concat "   " total " war axe"
+        end
+        if hasItem target "lightning dragon tooth"
+            number total target count "lightning dragon tooth"
+            chat trigger concat concat "   " total " lightning dragon tooth"
+        end
+        if hasItem target "lightning dragon scale"
+            number total target count "lightning dragon scale"
+            chat trigger concat concat "   " total " lightning dragon scale"
+        end
+        if hasItem target "doom sickle"
+            number total target count "doom sickle"
+            chat trigger concat concat "   " total " doom sickle"
+        end
+        if hasItem target "broken gem"
+            number total target count "broken gem"
+            chat trigger concat concat "   " total " broken gem"
+        end
+        if hasItem target "dark helmet"
+            number total target count "dark helmet"
+            chat trigger concat concat "   " total " dark helmet"
+        end
+        if hasItem target "scythe"
+            number total target count "scythe"
+            chat trigger concat concat "   " total " scythe"
+        end
+        if hasItem target "zombie death blade"
+            number total target count "zombie death blade"
+            chat trigger concat concat "   " total " zombie death blade"
+        end
+        if hasItem target "jeweled horn"
+            number total target count "jeweled horn"
+            chat trigger concat concat "   " total " jeweled horn"
+        end
+        if hasItem target "kilgore"
+            number total target count "kilgore"
+            chat trigger concat concat "   " total " kilgore"
+        end
+        if hasItem target "kilgore key"
+            number total target count "kilgore key"
+            chat trigger concat concat "   " total " kilgore key"
+        end
+        if hasItem target "wtc"
+            number total target count "wtc"
+            chat trigger concat concat "   " total " wtc"
+        end
+        if hasItem target "golden apple"
+            number total target count "golden apple"
+            chat trigger concat concat "   " total " golden apple"
+        end
+        if hasItem target "swampdragon head"
+            number total target count "swampdragon head"
+            chat trigger concat concat "   " total " swampdragon head"
+        end
+        if hasItem target "forsaken blade"
+            number total target count "forsaken blade"
+            chat trigger concat concat "   " total " forsaken blade"
+        end
+        if hasItem target "power_suit"
+            number total target count "power_suit"
+            chat trigger concat concat "   " total " power_suit"
+        end
+        if hasItem target "basement_key2"
+            number total target count "basement_key2"
+            chat trigger concat concat "   " total " basement_key2"
+        end
+        if hasItem target "basement_key3"
+            number total target count "basement_key3"
+            chat trigger concat concat "   " total " basement_key3"
+        end
+        if hasItem target "spoon"
+            number total target count "spoon"
+            chat trigger concat concat "   " total " spoon"
+        end
+        if hasItem target "lizard scale"
+            number total target count "lizard scale"
+            chat trigger concat concat "   " total " lizard scale"
+        end
+        if hasItem target "wave pike"
+            number total target count "wave pike"
+            chat trigger concat concat "   " total " wave pike"
+        end
+        if hasItem target "scale suit"
+            number total target count "scale suit"
+            chat trigger concat concat "   " total " scale suit"
+        end
+        if hasItem target "darkcrono mail"
+            number total target count "darkcrono mail"
+            chat trigger concat concat "   " total " darkcrono mail"
+        end
+        if hasItem target "darkcrono blade"
+            number total target count "darkcrono blade"
+            chat trigger concat concat "   " total " darkcrono blade"
+        end
+        if hasItem target "nectar"
+            number total target count "nectar"
+            chat trigger concat concat "   " total " nectar"
+        end
+        if hasItem target "free trip to start"
+            number total target count "free trip to start"
+            chat trigger concat concat "   " total " free trip to start"
+        end
+        if hasItem target "dragon amulet"
+            number total target count "dragon amulet"
+            chat trigger concat concat "   " total " dragon amulet"
+        end
+        if hasItem target "amulet of defense"
+            number total target count "amulet of defense"
+            chat trigger concat concat "   " total " amulet of defense"
+        end
+        if hasItem target "justice amulet"
+            number total target count "justice amulet"
+            chat trigger concat concat "   " total " justice amulet"
+        end
+        if hasItem target "shadow amulet"
+            number total target count "shadow amulet"
+            chat trigger concat concat "   " total " shadow amulet"
+        end
+        if hasItem target "thunder blade"
+            number total target count "thunder blade"
+            chat trigger concat concat "   " total " thunder blade"
+        end
+        if hasItem target "helm of thought"
+            number total target count "helm of thought"
+            chat trigger concat concat "   " total " helm of thought"
+        end
+        if hasItem target "energy amulet"
+            number total target count "energy amulet"
+            chat trigger concat concat "   " total " energy amulet"
+        end
+        if hasItem target "lightning scale mail"
+            number total target count "lightning scale mail"
+            chat trigger concat concat "   " total " lightning scale mail"
+        end
+        if hasItem target "lightning shield"
+            number total target count "lightning shield"
+            chat trigger concat concat "   " total " lightning shield"
+        end
+        if hasItem target "lightning fists"
+            number total target count "lightning fists"
+            chat trigger concat concat "   " total " lightning fists"
+        end
+        if hasItem target "lightning scale boots"
+            number total target count "lightning scale boots"
+            chat trigger concat concat "   " total " lightning scale boots"
+        end
+        if hasItem target "thermal goggles"
+            number total target count "thermal goggles"
+            chat trigger concat concat "   " total " thermal goggles"
+        end
+        if hasItem target "minormana"
+            number total target count "minormana"
+            chat trigger concat concat "   " total " minormana"
+        end
+        if hasItem target "lightning belt"
+            number total target count "lightning belt"
+            chat trigger concat concat "   " total " lightning belt"
+        end
+        if hasItem target "manapotion"
+            number total target count "manapotion"
+            chat trigger concat concat "   " total " manapotion"
+        end
+        if hasItem target "slingblade"
+            number total target count "slingblade"
+            chat trigger concat concat "   " total " slingblade"
+        end
+        if hasItem target "fragdaddy only"
+            number total target count "fragdaddy only"
+            chat trigger concat concat "   " total " fragdaddy only"
+        end
+        if hasItem target "spirit mace"
+            number total target count "spirit mace"
+            chat trigger concat concat "   " total " spirit mace"
+        end
+        if hasItem target "incubus key"
+            number total target count "incubus key"
+            chat trigger concat concat "   " total " incubus key"
+        end
+        if hasItem target "thunder rings"
+            number total target count "thunder rings"
+            chat trigger concat concat "   " total " thunder rings"
+        end
+        if hasItem target "crystal ball"
+            number total target count "crystal ball"
+            chat trigger concat concat "   " total " crystal ball"
+        end
+        if hasItem target "crystal belt"
+            number total target count "crystal belt"
+            chat trigger concat concat "   " total " crystal belt"
+        end
+        if hasItem target "crystal orb"
+            number total target count "crystal orb"
+            chat trigger concat concat "   " total " crystal orb"
+        end
+        if hasItem target "crystal sword"
+            number total target count "crystal sword"
+            chat trigger concat concat "   " total " crystal sword"
+        end
+        if hasItem target "goblin edge"
+            number total target count "goblin edge"
+            chat trigger concat concat "   " total " goblin edge"
+        end
+        if hasItem target "red axe"
+            number total target count "red axe"
+            chat trigger concat concat "   " total " red axe"
+        end
+        if hasItem target "green eye"
+            number total target count "green eye"
+            chat trigger concat concat "   " total " green eye"
+        end
+        if hasItem target "silence suit"
+            number total target count "silence suit"
+            chat trigger concat concat "   " total " silence suit"
+        end
+        if hasItem target "chaos belt"
+            number total target count "chaos belt"
+            chat trigger concat concat "   " total " chaos belt"
+        end
+        if hasItem target "chaos gauntlets"
+            number total target count "chaos gauntlets"
+            chat trigger concat concat "   " total " chaos gauntlets"
+        end
+        if hasItem target "thunder orb"
+            number total target count "thunder orb"
+            chat trigger concat concat "   " total " thunder orb"
+        end
+        if hasItem target "royal sabre"
+            number total target count "royal sabre"
+            chat trigger concat concat "   " total " royal sabre"
+        end
+        if hasItem target "hell blade"
+            number total target count "hell blade"
+            chat trigger concat concat "   " total " hell blade"
+        end
+        if hasItem target "darkcrono's treat"
+            number total target count "darkcrono's treat"
+            chat trigger concat concat "   " total " darkcrono's treat"
+        end
+        if hasItem target "pheonix mail"
+            number total target count "pheonix mail"
+            chat trigger concat concat "   " total " pheonix mail"
+        end
+        if hasItem target "pheonix helm"
+            number total target count "pheonix helm"
+            chat trigger concat concat "   " total " pheonix helm"
+        end
+        if hasItem target "pheonix pads"
+            number total target count "pheonix pads"
+            chat trigger concat concat "   " total " pheonix pads"
+        end
+        if hasItem target "pheonix gloves"
+            number total target count "pheonix gloves"
+            chat trigger concat concat "   " total " pheonix gloves"
+        end
+        if hasItem target "pheonix belt"
+            number total target count "pheonix belt"
+            chat trigger concat concat "   " total " pheonix belt"
+        end
+        #
+        # Notify target if he has same or higher security rank.
+        #
+        if ! < target privs trigger privs
+            chat target concat name trigger " has scanned your stats."
+        end
+        endscript
+    end
+    chat trigger "You do not see them."
+    endscript
+end
+chat trigger "Pick a target to scan."
+endscript

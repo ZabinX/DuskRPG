@@ -1,0 +1,7 @@
+inc trigger hp 550
+inc trigger mp 550
+chat trigger "you see your own reflection in the combostone and you instantly feel better"
+removeitem trigger "combostone"
+endscript
+
+

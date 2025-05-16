@@ -1,0 +1,9 @@
+if hasCondition trigger kristinaquest2
+	chat trigger "Shade Master says: Are you looking for Chris? Haha I didn't kill him,  just saving him for breakfast. You can join him if you kill me, but I'll respawn in a bit and be ready for breakfast time...hehe *drools*"
+	endscript
+end
+if ! hasCondition trigger kristinaquest2
+	chat trigger "There's some kind of a force field!
+	inc trigger locy 1
+	endscript
+end

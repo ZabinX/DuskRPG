@@ -1,0 +1,6 @@
+removeCondition trigger ballnorth25
+removeCondition trigger ballsouth25
+removeCondition trigger ballwest25
+addCondition trigger ballnorth26
+endscript
+

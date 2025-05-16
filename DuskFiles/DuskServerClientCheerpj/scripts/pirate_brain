@@ -1,0 +1,18 @@
+#Zabin script testing
+livingthing target enemy trigger
+if and hasCondition target piratebattle hasCondition target piratebattle1
+removeCondition target piratebattle
+endscript
+end
+#
+livingthing target enemy trigger
+if hasCondition target piratebattle1
+addCondition target piratebattle
+endscript
+end
+#
+livingthing target enemy trigger
+addCondition target piratebattle1
+chat enemy trigger "Pirate says: Hey Boss, someone's here looking for the crown.  They are serious.  I'll fight them off."
+endscript
+

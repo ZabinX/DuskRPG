@@ -1,0 +1,20 @@
+type
+armor
+kind
+hands
+description
+gloves worn by the pheonix pharoh
+cost
+2000
+mod
+120
+image
+7
+durability
+200000
+onWear
+pheonix3
+onUnWear
+pheonix3end
+.
+
