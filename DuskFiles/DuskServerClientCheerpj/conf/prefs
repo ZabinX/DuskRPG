@@ -3,11 +3,11 @@
 #
 #
 #What port will the server run on:
-Port=7474
+Port=8080
 #
 #Where have you stored the game resources:
 #WARNING: Make sure this address is followed by a slash!!
-RCAddress=http://127.0.0.1:8080/DuskServerClientCheerpj/wwwClient/rc/somedusk/
+RCAddress=https://dusk.comet-richter.ts.net/wwwClient/rc/somedusk/
 #
 RCName=somedusk
 #
@@ -20,7 +20,7 @@ TrackerPort=7401
 #
 Name=Just Some Dusk
 #
-Site=http://127.0.0.1:8080/DuskServerClientCheerpj/wwwClient/client.html
+Site=https://dusk.comet-richter.ts.net/wwwClient/client.html
 #
 #How much gp should a pet cost:
 PetCost=100
