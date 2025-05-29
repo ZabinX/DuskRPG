@@ -8,9 +8,11 @@
   <body>
     <script>
       (async function () {
-        await cheerpjInit({});
+        await cheerpjInit({
+          tailscaleAuthKey: "tskey-auth-kZCseW3cTS11CNTRL-n2yjQLzCuLWUpdcejPi3MWQwsrodSuBe",
+	});
         cheerpjCreateDisplay(1280, 720);
-        await cheerpjRunJar("/app/wwwClient/duskclient.jar");
+        await cheerpjRunJar("/app/duskclient.jar");
       })();
     </script>
   </body>
