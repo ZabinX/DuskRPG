@@ -7,7 +7,7 @@ Port=7474
 #
 #Where have you stored the game resources:
 #WARNING: Make sure this address is followed by a slash!!
-RCAddress=http://dusk.comet-richter.ts.net/wwwClient/rc/somedusk/
+RCAddress=http://127.0.0.1/wwwClient/rc/somedusk/
 #
 RCName=somedusk
 #
