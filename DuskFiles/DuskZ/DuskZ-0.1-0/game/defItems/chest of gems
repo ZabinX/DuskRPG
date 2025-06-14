@@ -1,8 +1,0 @@
-type.Item=chest of gems
-name=chest of gems
-description=a large chest of prescious gems
-image=6
-cost=20000
-weight=0
-volume=0
-=end

@@ -1,8 +1,0 @@
-type.Item=phoenix feather
-name=phoenix feather
-description=the tail feather of a Phoenix
-image=6
-cost=1000
-weight=0
-volume=0
-=end

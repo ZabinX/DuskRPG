@@ -1,8 +1,0 @@
-type.Item=bag of gold
-name=bag of gold
-description=a small sack of gold
-image=6
-cost=4000
-weight=0
-volume=0
-=end

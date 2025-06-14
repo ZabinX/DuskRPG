@@ -1,8 +1,0 @@
-type.Item=keg of ale
-name=keg of ale
-description=A large keg of elven-brewed ale
-image=6
-cost=0
-weight=0
-volume=0
-=end

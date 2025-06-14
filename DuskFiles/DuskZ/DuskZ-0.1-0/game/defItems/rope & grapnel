@@ -1,8 +1,0 @@
-type.Item=rope & grapnel
-name=rope & grapnel
-description=You see a rope and grapnel for climbing walls.
-image=13
-cost=1000
-weight=0
-volume=0
-=end

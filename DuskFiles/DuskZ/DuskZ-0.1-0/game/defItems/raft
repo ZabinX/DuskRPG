@@ -1,9 +1,0 @@
-type.Item=raft
-name=raft
-description=A small wooden raft.
-image=17
-cost=0
-weight=0
-volume=0
-uses=0
-=end

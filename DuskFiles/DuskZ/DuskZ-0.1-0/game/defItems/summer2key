@@ -1,9 +1,0 @@
-type.Item=summer2key
-name=summer2key
-description=Buy key's for house.
-image=27
-cost=0
-weight=0
-volume=0
-uses=0
-=end

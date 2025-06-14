@@ -1,7 +1,0 @@
-type.Training=wisdom
-name=Wisdom
-description=Train Wisdom
-image=211
-cost=100
-skill=wis
-=end

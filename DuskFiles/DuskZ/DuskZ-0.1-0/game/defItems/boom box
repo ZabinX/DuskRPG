@@ -1,8 +1,0 @@
-type.Item=boom box
-name=boom box
-description=a boom box, playin some tunes
-image=13
-cost=10
-weight=0
-volume=0
-=end

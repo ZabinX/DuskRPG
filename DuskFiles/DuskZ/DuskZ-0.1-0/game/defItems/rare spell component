@@ -1,9 +1,0 @@
-type.Item=rare spell component
-name=rare spell component
-description=an item to be given only by slaying a mob
-image=27
-cost=0
-weight=0
-volume=0
-onGet=getspellcomponent
-=end

@@ -1,8 +1,0 @@
-type.Item=dragon blood
-name=dragon blood
-description=the blood of a dragon
-image=6
-cost=1000
-weight=0
-volume=0
-=end

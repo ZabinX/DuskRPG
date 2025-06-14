@@ -1,8 +1,0 @@
-type.Item=microwave dinner
-name=microwave dinner
-description=a microwave dinner. Unfortunatally, microwaves don't exist in this world
-image=6
-cost=100
-weight=0
-volume=0
-=end

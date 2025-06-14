@@ -1,8 +1,0 @@
-type.Item=gold ingot
-name=gold ingot
-description=a golden ingot!
-image=6
-cost=400
-weight=0
-volume=0
-=end

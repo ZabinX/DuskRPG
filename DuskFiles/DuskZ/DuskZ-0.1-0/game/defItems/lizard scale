@@ -1,8 +1,0 @@
-type.Item=lizard scale
-name=lizard scale
-description=a lizard's scale, prehaps you could sell it for some gp.
-image=6
-cost=150
-weight=0
-volume=0
-=end

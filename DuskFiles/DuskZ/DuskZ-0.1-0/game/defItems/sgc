@@ -1,8 +1,0 @@
-type.Item=sgc
-name=sgc
-image=6
-cost=0
-weight=0
-volume=0
-onGet=killedsupergnoll
-=end

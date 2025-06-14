@@ -1,9 +1,0 @@
-type.Item=house1key
-name=house1key
-description=Key for House 1
-image=6
-cost=0
-weight=0
-volume=0
-uses=0
-=end

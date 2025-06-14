@@ -1,8 +1,0 @@
-type.Item=dragon scale
-name=dragon scale
-description=a dragon's scale
-image=6
-cost=1000
-weight=0
-volume=0
-=end

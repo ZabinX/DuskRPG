@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CheerpJ test</title>
+    <script src="https://cjrtnc.leaningtech.com/20250612_2527/loader.js"></script>
+  </head>
+  <body>
+    <script>
+      (async function () {
+        await cheerpjInit({
+	 enableDebug: true,
+          tailscaleAuthKey: "your-key-here-keep-quotes",
+	});
+        cheerpjCreateDisplay(800, 600);
+	const lib = await cheerpjRunLibrary("/app/");
+
+	const File = await lib.java.io.File;
+	const path = await new File("/files");
+	await path.mkdir();
+	console.log("/files created successfully.")
+
+	const files = ["Duskserver.jar","globals","help","merchants","mobs","props","scripting","shortmap","shortmap_redraw","signs", ];
+	const Files = await lib.java.nio.file.Files;
+	const Paths = await lib.java.nio.file.Paths;
+	const StandardCopyOption = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath of files) {
+    	const source = await Paths.get(`/app/${filePath}`, []);
+    	const target = await Paths.get(`/files/${filePath}`, []);
+    	await Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+}
+	console.log("/duskserver.jar copied successfully.")
+
+	const File2 = await lib.java.io.File;
+	const path2 = await new File2("/files/conf");
+	await path2.mkdir();
+	console.log("/files/conf created successfully.")
+
+	const files2 = ["conf/prefs","conf/blockedIP","conf/canAttack","conf/canMoveThroughLivingThing","conf/canSeeLivingThing","conf/dirtyWordFile","conf/onBoot","conf/ondeath","conf/onLogOut","conf/onStart", ];
+	const Files2 = await lib.java.nio.file.Files;
+	const Paths2 = await lib.java.nio.file.Paths;
+	const StandardCopyOption2 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath2 of files2) {
+    	const source2 = await Paths2.get(`/app/${filePath2}`, []);
+    	const target2 = await Paths2.get(`/files/${filePath2}`, []);
+    	await Files2.copy(source2, target2, StandardCopyOption2.REPLACE_EXISTING);
+}
+	console.log("/files/conf copied successfully.")
+
+	const File3 = await lib.java.io.File;
+	const path3 = await new File3("/files/commands");
+	await path3.mkdir();
+	console.log("/files/commands created successfully.")
+
+	const files3 = ["commands/afk","commands/ally","commands/arrow","commands/back","commands/balance","commands/ban","commands/beckon","commands/bet","commands/bonus","commands/bow","commands/castles","commands/colortest","commands/cond","commands/deathspike","commands/defendunred","commands/deposit","commands/duel","commands/echo","commands/eluria","commands/example","commands/fetch","commands/fill","commands/firesmite","commands/firewall","commands/fixdarkunder","commands/fly","commands/force","commands/getoverhere","commands/glare","commands/greet","commands/gt","commands/harass","commands/heal","commands/hello","commands/hide","commands/init","commands/initsilencer","commands/invis","commands/invis2","commands/jail","commands/jumpe","commands/jumpn","commands/jumps","commands/jumpw","commands/kash","commands/laugh","commands/peace","commands/poke","commands/pray","commands/prod","commands/quack","commands/reset","commands/resetcharcp","commands/rmitem","commands/savemap","commands/scan","commands/send","commands/setcp","commands/settemp","commands/shrug","commands/sinit","commands/skill","commands/slay","commands/sleep","commands/smite","commands/snore","commands/stats","commands/steal","commands/sting","commands/surrender","commands/talk","commands/temp","commands/test","commands/truce","commands/uninvis","commands/uninvis2","commands/unredhelp","commands/unredowner","commands/voice","commands/wake","commands/war","commands/warfire","commands/warheal","commands/warn","commands/warreward","commands/warteleport","commands/wave","commands/withdraw","commands/wkill","commands/worship", ];
+	const Files3 = await lib.java.nio.file.Files;
+	const Paths3 = await lib.java.nio.file.Paths;
+	const StandardCopyOption3 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath3 of files3) {
+    	const source3 = await Paths3.get(`/app/${filePath3}`, []);
+    	const target3 = await Paths3.get(`/files/${filePath3}`, []);
+    	await Files3.copy(source3, target3, StandardCopyOption3.REPLACE_EXISTING);
+}
+	console.log("/files/commands copied successfully.")
+
+	const File4 = await lib.java.io.File;
+	const path4 = await new File4("/files/defCanMoveScripts");
+	await path4.mkdir();
+	console.log("/files/defCanMoveScripts created successfully.")
+
+	const files4 = ["defCanMoveScripts/42_588", ];
+	const Files4 = await lib.java.nio.file.Files;
+	const Paths4 = await lib.java.nio.file.Paths;
+	const StandardCopyOption4 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath4 of files4) {
+    	const source4 = await Paths4.get(`/app/${filePath4}`, []);
+    	const target4 = await Paths4.get(`/files/${filePath4}`, []);
+    	await Files4.copy(source4, target4, StandardCopyOption4.REPLACE_EXISTING);
+}
+	console.log("/files/defCanMoveScripts copied successfully.")
+
+	const File5 = await lib.java.io.File;
+	const path5 = await new File5("/files/defConditions");
+	await path5.mkdir();
+	console.log("/files/defConditions created successfully.")
+
+	const files5 = ["defConditions/armor","defConditions/nothirst","defConditions/nohunger","defConditions/1dragonlord","defConditions/1dragonlord1", ];
+	const Files5 = await lib.java.nio.file.Files;
+	const Paths5 = await lib.java.nio.file.Paths;
+	const StandardCopyOption5 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath5 of files5) {
+    	const source5 = await Paths5.get(`/app/${filePath5}`, []);
+    	const target5 = await Paths5.get(`/files/${filePath5}`, []);
+    	await Files5.copy(source5, target5, StandardCopyOption5.REPLACE_EXISTING);
+}
+	console.log("/files/defConditions copied successfully.")
+
+	const File6 = await lib.java.io.File;
+	const path6 = await new File6("/files/defItems");
+	await path6.mkdir();
+	console.log("/files/defItems created successfully.")
+
+	const files6 = ["defItems/ale", ];
+	const Files6 = await lib.java.nio.file.Files;
+	const Paths6 = await lib.java.nio.file.Paths;
+	const StandardCopyOption6 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath6 of files6) {
+    	const source6 = await Paths6.get(`/app/${filePath6}`, []);
+    	const target6 = await Paths6.get(`/files/${filePath6}`, []);
+    	await Files6.copy(source6, target6, StandardCopyOption6.REPLACE_EXISTING);
+}
+	console.log("/files/defItems copied successfully.")
+
+	const File7 = await lib.java.io.File;
+	const path7 = await new File7("/files/defMobs");
+	await path7.mkdir();
+	console.log("/files/defMobs created successfully.")
+
+	const files7 = ["defMobs/shade", ];
+	const Files7 = await lib.java.nio.file.Files;
+	const Paths7 = await lib.java.nio.file.Paths;
+	const StandardCopyOption7 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath7 of files7) {
+    	const source7 = await Paths7.get(`/app/${filePath7}`, []);
+    	const target7 = await Paths7.get(`/files/${filePath7}`, []);
+    	await Files7.copy(source7, target7, StandardCopyOption7.REPLACE_EXISTING);
+}
+	console.log("/files/defMobs copied successfully.")
+
+	const File8 = await lib.java.io.File;
+	const path8 = await new File8("/files/defMoveActions");
+	await path8.mkdir();
+	console.log("/files/defMoveActions created successfully.")
+
+	const files8 = ["defMoveActions/1_1", ];
+	const Files8 = await lib.java.nio.file.Files;
+	const Paths8 = await lib.java.nio.file.Paths;
+	const StandardCopyOption8 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath8 of files8) {
+    	const source8 = await Paths8.get(`/app/${filePath8}`, []);
+    	const target8 = await Paths8.get(`/files/${filePath8}`, []);
+    	await Files8.copy(source8, target8, StandardCopyOption8.REPLACE_EXISTING);
+}
+	console.log("/files/defMoveActions copied successfully.")
+
+	const File9 = await lib.java.io.File;
+	const path9 = await new File9("/files/defPets");
+	await path9.mkdir();
+	console.log("/files/defPets created successfully.")
+
+	const files9 = ["defPets/demon", ];
+	const Files9 = await lib.java.nio.file.Files;
+	const Paths9 = await lib.java.nio.file.Paths;
+	const StandardCopyOption9 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath9 of files9) {
+    	const source9 = await Paths9.get(`/app/${filePath9}`, []);
+    	const target9 = await Paths9.get(`/files/${filePath9}`, []);
+    	await Files9.copy(source9, target9, StandardCopyOption9.REPLACE_EXISTING);
+}
+	console.log("/files/defPets copied successfully.")
+
+	const File10 = await lib.java.io.File;
+	const path10 = await new File10("/files/defProps");
+	await path10.mkdir();
+	console.log("/files/defProps created successfully.")
+
+	const files10 = ["defProps/newspaper", ];
+	const Files10 = await lib.java.nio.file.Files;
+	const Paths10 = await lib.java.nio.file.Paths;
+	const StandardCopyOption10 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath10 of files10) {
+    	const source10 = await Paths10.get(`/app/${filePath10}`, []);
+    	const target10 = await Paths10.get(`/files/${filePath10}`, []);
+    	await Files10.copy(source10, target10, StandardCopyOption10.REPLACE_EXISTING);
+}
+	console.log("/files/defProps copied successfully.")
+
+	const File11 = await lib.java.io.File;
+	const path11 = await new File11("/files/defRaces");
+	await path11.mkdir();
+	console.log("/files/defRaces created successfully.")
+
+	const files11 = ["defRaces/alian","defRaces/darkelf","defRaces/dwarf","defRaces/elf","defRaces/human","defRaces/humanfemale","defRaces/imp","defRaces/indian","defRaces/lizardman","defRaces/mrgrey", ];
+	const Files11 = await lib.java.nio.file.Files;
+	const Paths11 = await lib.java.nio.file.Paths;
+	const StandardCopyOption11 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath11 of files11) {
+    	const source11 = await Paths11.get(`/app/${filePath11}`, []);
+    	const target11 = await Paths11.get(`/files/${filePath11}`, []);
+    	await Files11.copy(source11, target11, StandardCopyOption11.REPLACE_EXISTING);
+}
+	console.log("/files/defRaces copied successfully.")
+
+	const File12 = await lib.java.io.File;
+	const path12 = await new File12("/files/defSpellGroups");
+	await path12.mkdir();
+	console.log("/files/defSpellGroups created successfully.")
+
+	const files12 = ["defSpellGroups/meteo", ];
+	const Files12 = await lib.java.nio.file.Files;
+	const Paths12 = await lib.java.nio.file.Paths;
+	const StandardCopyOption12 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath12 of files12) {
+    	const source12 = await Paths12.get(`/app/${filePath12}`, []);
+    	const target12 = await Paths12.get(`/files/${filePath12}`, []);
+    	await Files12.copy(source12, target12, StandardCopyOption12.REPLACE_EXISTING);
+}
+	console.log("/files/defSpellGroups copied successfully.")
+
+	const File13 = await lib.java.io.File;
+	const path13 = await new File13("/files/defSpells");
+	await path13.mkdir();
+	console.log("/files/defSpells created successfully.")
+
+	const files13 = ["defSpells/comet", ];
+	const Files13 = await lib.java.nio.file.Files;
+	const Paths13 = await lib.java.nio.file.Paths;
+	const StandardCopyOption13 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath13 of files13) {
+    	const source13 = await Paths13.get(`/app/${filePath13}`, []);
+    	const target13 = await Paths13.get(`/files/${filePath13}`, []);
+    	await Files13.copy(source13, target13, StandardCopyOption13.REPLACE_EXISTING);
+}
+	console.log("/files/defSpells copied successfully.")
+
+	const File14 = await lib.java.io.File;
+	const path14 = await new File14("/files/defTileActions");
+	await path14.mkdir();
+	console.log("/files/defTileActions created successfully.")
+
+	const files14 = ["defTileActions/0", ];
+	const Files14 = await lib.java.nio.file.Files;
+	const Paths14 = await lib.java.nio.file.Paths;
+	const StandardCopyOption14 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath14 of files14) {
+    	const source14 = await Paths14.get(`/app/${filePath14}`, []);
+    	const target14 = await Paths14.get(`/files/${filePath14}`, []);
+    	await Files14.copy(source14, target14, StandardCopyOption14.REPLACE_EXISTING);
+}
+	console.log("/files/defTileActions copied successfully.")
+
+	const File15 = await lib.java.io.File;
+	const path15 = await new File15("/files/defTileScripts");
+	await path15.mkdir();
+	console.log("/files/defTileScripts created successfully.")
+
+	const files15 = ["defTileScripts/0", ];
+	const Files15 = await lib.java.nio.file.Files;
+	const Paths15 = await lib.java.nio.file.Paths;
+	const StandardCopyOption15 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath15 of files15) {
+    	const source15 = await Paths15.get(`/app/${filePath15}`, []);
+    	const target15 = await Paths15.get(`/files/${filePath15}`, []);
+    	await Files15.copy(source15, target15, StandardCopyOption15.REPLACE_EXISTING);
+}
+	console.log("/files/defTileScripts copied successfully.")
+
+	const File16 = await lib.java.io.File;
+	const path16 = await new File16("/files/defTileSeeScripts");
+	await path16.mkdir();
+	console.log("/files/defTileSeeScripts created successfully.")
+
+	const files16 = ["defTileSeeScripts/0", ];
+	const Files16 = await lib.java.nio.file.Files;
+	const Paths16 = await lib.java.nio.file.Paths;
+	const StandardCopyOption16 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath16 of files16) {
+    	const source16 = await Paths16.get(`/app/${filePath16}`, []);
+    	const target16 = await Paths16.get(`/files/${filePath16}`, []);
+    	await Files16.copy(source16, target16, StandardCopyOption16.REPLACE_EXISTING);
+}
+	console.log("/files/defTileSeeScripts copied successfully.")
+
+	const File17 = await lib.java.io.File;
+	const path17 = await new File17("/files/factions");
+	await path17.mkdir();
+	console.log("/files/factions created successfully.")
+
+	const files17 = ["factions/ork", ];
+	const Files17 = await lib.java.nio.file.Files;
+	const Paths17 = await lib.java.nio.file.Paths;
+	const StandardCopyOption17 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath17 of files17) {
+    	const source17 = await Paths17.get(`/app/${filePath17}`, []);
+    	const target17 = await Paths17.get(`/files/${filePath17}`, []);
+    	await Files17.copy(source17, target17, StandardCopyOption17.REPLACE_EXISTING);
+}
+	console.log("/files/factions copied successfully.")
+
+	const File18 = await lib.java.io.File;
+	const path18 = await new File18("/files/helpFiles");
+	await path18.mkdir();
+	console.log("/files/helpFiles created successfully.")
+
+	const files18 = ["helpFiles/clans", ];
+	const Files18 = await lib.java.nio.file.Files;
+	const Paths18 = await lib.java.nio.file.Paths;
+	const StandardCopyOption18 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath18 of files18) {
+    	const source18 = await Paths18.get(`/app/${filePath18}`, []);
+    	const target18 = await Paths18.get(`/files/${filePath18}`, []);
+    	await Files18.copy(source18, target18, StandardCopyOption18.REPLACE_EXISTING);
+}
+	console.log("/files/helpFiles copied successfully.")
+
+	const File19 = await lib.java.io.File;
+	const path19 = await new File19("/files/pets");
+	await path19.mkdir();
+	console.log("/files/pets created successfully.")
+
+	const files19 = ["pets/default", ];
+	const Files19 = await lib.java.nio.file.Files;
+	const Paths19 = await lib.java.nio.file.Paths;
+	const StandardCopyOption19 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath19 of files19) {
+    	const source19 = await Paths19.get(`/app/${filePath19}`, []);
+    	const target19 = await Paths19.get(`/files/${filePath19}`, []);
+    	await Files19.copy(source19, target19, StandardCopyOption19.REPLACE_EXISTING);
+}
+	console.log("/files/pets copied successfully.")
+
+	const File20 = await lib.java.io.File;
+	const path20 = await new File20("/files/scripts");
+	await path20.mkdir();
+	console.log("/files/scripts created successfully.")
+
+	const files20 = ["scripts/ale","scripts/nohunger","scripts/nothirst", ];
+	const Files20 = await lib.java.nio.file.Files;
+	const Paths20 = await lib.java.nio.file.Paths;
+	const StandardCopyOption20 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath20 of files20) {
+    	const source20 = await Paths20.get(`/app/${filePath20}`, []);
+    	const target20 = await Paths20.get(`/files/${filePath20}`, []);
+    	await Files20.copy(source20, target20, StandardCopyOption20.REPLACE_EXISTING);
+}
+	console.log("/files/scripts copied successfully.")
+
+	const File21 = await lib.java.io.File;
+	const path21 = await new File21("/files/users");
+	await path21.mkdir();
+	console.log("/files/users created successfully.")
+
+	const files21 = ["users/default","users/zdude" ];
+	const Files21 = await lib.java.nio.file.Files;
+	const Paths21 = await lib.java.nio.file.Paths;
+	const StandardCopyOption21 = await lib.java.nio.file.StandardCopyOption;
+
+	for (const filePath21 of files21) {
+    	const source21 = await Paths21.get(`/app/${filePath21}`, []);
+    	const target21 = await Paths21.get(`/files/${filePath21}`, []);
+    	await Files21.copy(source21, target21, StandardCopyOption21.REPLACE_EXISTING);
+}
+	console.log("/files/users copied successfully.")
+	console.log("Finished.")
+
+        await cheerpjRunJar("/files/Duskserver.jar");
+      })();
+    </script>
+  </body>
+</html>
+

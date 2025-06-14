@@ -1,9 +1,0 @@
-type.Item=housecheesekey
-name=housecheesekey
-description=Key for cheeseman's House
-image=27
-cost=0
-weight=0
-volume=0
-uses=0
-=end

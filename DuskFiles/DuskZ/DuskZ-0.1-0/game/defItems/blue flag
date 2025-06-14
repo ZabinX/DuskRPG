@@ -1,9 +1,0 @@
-type.Item=blue flag
-name=blue flag
-description=a blue flag.
-image=19
-cost=1
-weight=0
-volume=0
-onGet=gotblueflag
-=end

@@ -1,9 +1,0 @@
-type.Item=lightning rod
-name=lightning rod
-description=a lightning rod
-image=6
-cost=1
-weight=0
-volume=0
-onGet=getlightningrod
-=end

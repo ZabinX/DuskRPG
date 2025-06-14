@@ -1,9 +1,0 @@
-type.Item=tilgovihousekey
-name=tilgovihousekey
-description=A key showing ownership or respectability in the Divine Shack of Tilgovi.
-image=6
-cost=0
-weight=0
-volume=0
-uses=0
-=end

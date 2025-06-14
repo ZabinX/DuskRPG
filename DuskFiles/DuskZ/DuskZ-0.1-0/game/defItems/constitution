@@ -1,7 +1,0 @@
-type.Training=constitution
-name=Constitution
-description=Train Constitution
-image=211
-cost=100
-skill=con
-=end

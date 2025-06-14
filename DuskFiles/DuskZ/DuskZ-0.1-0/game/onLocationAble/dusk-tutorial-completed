@@ -1,7 +1,0 @@
-
-if (trigger.getInteger("dusk-tutorial") == 1) {
-    trigger.chat("You've already completed the tutorial, go find something better to do.");
-    false;
-} else {
-    true;
-}

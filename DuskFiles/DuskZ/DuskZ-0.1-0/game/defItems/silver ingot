@@ -1,8 +1,0 @@
-type.Item=silver ingot
-name=silver ingot
-description=a silver ingot.
-image=6
-cost=200
-weight=0
-volume=0
-=end

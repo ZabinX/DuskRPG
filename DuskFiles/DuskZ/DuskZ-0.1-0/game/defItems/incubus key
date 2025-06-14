@@ -1,9 +1,0 @@
-type.Item=incubus key
-name=incubus key
-description=An item only to be given by incubus
-image=27
-cost=0
-weight=0
-volume=0
-onGet=getincubus
-=end

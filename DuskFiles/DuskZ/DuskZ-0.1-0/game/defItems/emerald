@@ -1,8 +1,0 @@
-type.Item=emerald
-name=emerald
-description=a huge rare emerald, this thing must be worth a fortune
-image=87
-cost=1000
-weight=0
-volume=0
-=end

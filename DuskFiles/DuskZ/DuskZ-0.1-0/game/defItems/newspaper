@@ -1,9 +1,0 @@
-type.Item=newspaper
-name=newspaper
-description=the latest issue of ' Dusk RPG !!
-image=69
-cost=0
-weight=0
-volume=0
-onUse=readNewspaper
-=end

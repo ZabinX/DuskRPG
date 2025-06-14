@@ -1,8 +1,0 @@
-type.Item=basement_key
-name=basement_key
-description=a key with the luminair crest on it.
-image=27
-cost=0
-weight=0
-volume=0
-=end

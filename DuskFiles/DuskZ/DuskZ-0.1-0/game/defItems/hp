@@ -1,7 +1,0 @@
-type.Training=hp
-name=HP
-description=Train HP, increase maximum HP by 10
-image=211
-cost=100
-skill=hp
-=end

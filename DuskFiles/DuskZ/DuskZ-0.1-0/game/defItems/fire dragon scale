@@ -1,8 +1,0 @@
-type.Item=fire dragon scale
-name=fire dragon scale
-description=a fire dragon's scale
-image=6
-cost=1000
-weight=0
-volume=0
-=end

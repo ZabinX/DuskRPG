@@ -1,8 +1,0 @@
-type.Item=spoon
-name=spoon
-description=a spoon
-image=6
-cost=0
-weight=0
-volume=0
-=end

@@ -1,8 +1,0 @@
-type.Item=ogre blood
-name=ogre blood
-description=the blood of a great Ogre
-image=6
-cost=1000
-weight=0
-volume=0
-=end

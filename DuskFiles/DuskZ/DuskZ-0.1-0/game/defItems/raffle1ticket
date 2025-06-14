@@ -1,8 +1,0 @@
-type.Item=raffle1ticket
-name=raffle1ticket
-description=A small piece of paper with the words "Raffle Ticket" written on it.
-image=6
-cost=5000
-weight=0
-volume=0
-=end

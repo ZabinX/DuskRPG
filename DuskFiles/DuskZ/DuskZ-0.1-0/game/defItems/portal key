@@ -1,9 +1,0 @@
-type.Item=portal key
-name=portal key
-description=a weird-shaped key
-image=6
-cost=0
-weight=0
-volume=0
-uses=0
-=end

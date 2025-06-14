@@ -1,8 +1,0 @@
-type.Item=unicorn horn
-name=unicorn horn
-description=a unicorn's horn
-image=6
-cost=1000
-weight=0
-volume=0
-=end
