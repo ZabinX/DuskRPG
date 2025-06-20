@@ -7,7 +7,7 @@ Port=7474
 #
 #Where have you stored the game resources:
 #WARNING: Make sure this address is followed by a slash!!
-RCAddress=http://127.0.0.1/wwwClient/rc/somedusk/
+RCAddress=https://dusk.comet-richter.ts.net/rc/somedusk/
 #
 RCName=somedusk
 #
@@ -20,7 +20,7 @@ TrackerPort=7401
 #
 Name=Just Some Dusk
 #
-Site=http://dusk.comet-richter.ts.net/client.html
+Site=https://dusk.comet-richter.ts.net/client.html
 #
 #How much gp should a pet cost:
 PetCost=100
