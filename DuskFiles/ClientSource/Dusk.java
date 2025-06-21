@@ -65,7 +65,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     AudioClip audMusicPlaying;
     Applet appShell;
     String strRCAddress;
-    String strWebAssetPath = "http://127.0.0.1:8080/DuskServerClientCheerpj/wwwClient/rc/somedusk";
+    String strWebAssetPath = "";
     
     Vector vctMerchantItems,
     		vctSell,
@@ -109,7 +109,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	Graphics gD;
 	GraphicsThread thrGraphics;
 	
-	String address = "127.0.0.1";
+	String address = "dusk.comet-richter.ts.net";
 	int port = 7474;
     
     public Dusk(Applet parent)

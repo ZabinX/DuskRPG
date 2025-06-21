@@ -46,9 +46,9 @@ public class GraphicsThread implements Runnable
 			prefix = "";
 			try
 			{
-				appParent.imgOriginalMap = appParent.appShell.getImage(new URL(prefix+appParent.strRCAddress+"/images/map.gif"));
-				appParent.imgOriginalPlayers = appParent.appShell.getImage(new URL(prefix+appParent.strRCAddress+"/images/players.gif"));
-				appParent.imgOriginalSprites = appParent.appShell.getImage(new URL(prefix+appParent.strRCAddress+"/images/sprites.gif"));
+				appParent.imgOriginalMap = appParent.appShell.getImage(new URL(appParent.strWebAssetPath+"/images/map.gif"));
+				appParent.imgOriginalPlayers = appParent.appShell.getImage(new URL(appParent.strWebAssetPath+"/images/players.gif"));
+				appParent.imgOriginalSprites = appParent.appShell.getImage(new URL(appParent.strWebAssetPath+"/images/sprites.gif"));
 //				appParent.imgOriginalMap = appParent.appShell.getImage(new URL(prefix+appParent.strRCAddress+"/images/map.png"));
 //				appParent.imgOriginalPlayers = appParent.appShell.getImage(new URL(prefix+appParent.strRCAddress+"/images/players.png"));
 //				appParent.imgOriginalSprites = appParent.appShell.getImage(new URL(prefix+appParent.strRCAddress+"/images/sprites.png"));
@@ -57,12 +57,12 @@ public class GraphicsThread implements Runnable
 				System.err.println("Error loading images: "+e.toString());
 			}
 		}
-                else
+		else
 		{
-			prefix = "rc/";
-			appParent.imgOriginalMap = Toolkit.getDefaultToolkit().getImage(prefix+appParent.strRCAddress+"/images/map.gif");
-			appParent.imgOriginalPlayers = Toolkit.getDefaultToolkit().getImage(prefix+appParent.strRCAddress+"/images/players.gif");
-			appParent.imgOriginalSprites = Toolkit.getDefaultToolkit().getImage(prefix+appParent.strRCAddress+"/images/sprites.gif");
+			prefix = "/app/rc/";
+			appParent.imgOriginalMap = Toolkit.getDefaultToolkit().getImage(prefix+"somedusk/images/map.gif");
+			appParent.imgOriginalPlayers = Toolkit.getDefaultToolkit().getImage(prefix+"somedusk/images/players.gif");
+			appParent.imgOriginalSprites = Toolkit.getDefaultToolkit().getImage(prefix+"somedusk/images/sprites.gif");
 //			appParent.imgOriginalMap = Toolkit.getDefaultToolkit().getImage(prefix+appParent.strRCAddress+"/images/map.png");
 //			appParent.imgOriginalPlayers = Toolkit.getDefaultToolkit().getImage(prefix+appParent.strRCAddress+"/images/players.png");
 //			appParent.imgOriginalSprites = Toolkit.getDefaultToolkit().getImage(prefix+appParent.strRCAddress+"/images/sprites.png");
