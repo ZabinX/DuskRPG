@@ -623,35 +623,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	void removeEntityFromBuffer(Entity entStore)
 	{
-		synchronized(vctEntities)
-		{
-		vctEntities.removeElement(entStore);
 		Entity entStore2;
-		int intStore= (int)entStore.intLocX - LocX + viewRange,
-			intStore2= (int)entStore.intLocY - LocY + viewRange;
-		try
-		{
-			entStore2 = entBuffer[intStore][intStore2];
-			while (entStore2 != entStore)
-			{
-				entStore2 = entStore2.entNext;
-			}
-			entStore2 = entStore2.entNext;
-			while (entStore2 != null)
-			{
-				if (entStore.strName.equalsIgnoreCase(entStore2.strName))
-				{
-					entStore2.intNum--;
-				}
-				entStore2 = entStore2.entNext;
-			}
-		}catch(Exception e) {}
+		int intStore= (int) (entStore.intLocX - LocX + viewRange),
+			intStore2= (int) (entStore.intLocY - LocY + viewRange);
 		if (intStore < 0)
 			intStore = 0;
 		if (intStore2 < 0)
 			intStore2 = 0;
-		else
-			intStore2++;
+		
 		for (;intStore<mapSize;intStore++)
 		{
 			for (;intStore2<mapSize;intStore2++)
@@ -667,7 +646,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 			}
 			intStore2 = 0;
-		}
 		}
 	}
 	
@@ -839,15 +817,15 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		        	frame.frmEquipment.blnRefreshMenus = true;
 		        	try
 		        	{
-		            	frame.frmEquipment.chcWield.removeAll();
-		            	frame.frmEquipment.chcArms.removeAll();
-		            	frame.frmEquipment.chcLegs.removeAll();
-		            	frame.frmEquipment.chcTorso.removeAll();
-		            	frame.frmEquipment.chcWaist.removeAll();
-		            	frame.frmEquipment.chcNeck.removeAll();
-		            	frame.frmEquipment.chcSkull.removeAll();
-		            	frame.frmEquipment.chcEyes.removeAll();
-		            	frame.frmEquipment.chcHands.removeAll();
+		            	frame.frmEquipment.chcWield.removeAllItems();
+		            	frame.frmEquipment.chcArms.removeAllItems();
+		            	frame.frmEquipment.chcLegs.removeAllItems();
+		            	frame.frmEquipment.chcTorso.removeAllItems();
+		            	frame.frmEquipment.chcWaist.removeAllItems();
+		            	frame.frmEquipment.chcNeck.removeAllItems();
+		            	frame.frmEquipment.chcSkull.removeAllItems();
+		            	frame.frmEquipment.chcEyes.removeAllItems();
+		            	frame.frmEquipment.chcHands.removeAllItems();
 		            }catch(Exception e){}
 		            try
 		            {

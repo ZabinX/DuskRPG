@@ -29,4 +29,6 @@ Z47 (2024)
         Increased the size of displayed map by 1/2inch or so.  (1280, 720));
         Increased GUI size to start at a good size.
         Added potion and magic buttons to make healing and casting spells easy.
-        Compiled with Netbeans 17 using java 17. Applets are depracated.
+        Compiled with Netbeans 8 using java 8. Applets are depracated.
+Z4747 (2025)
+        Some fixes and changes to work with Cheerpj. 
