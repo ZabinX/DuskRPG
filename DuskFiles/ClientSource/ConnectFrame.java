@@ -28,8 +28,6 @@ public class ConnectFrame extends JFrame
 	javax.swing.JLabel lblAddress = new javax.swing.JLabel();
 	javax.swing.JTextField txtPort = new javax.swing.JTextField();
 	javax.swing.JLabel lblPort = new javax.swing.JLabel();
-	javax.swing.JButton btnBookmark = new javax.swing.JButton();
-	javax.swing.JButton btnRemove = new javax.swing.JButton();
 
 	public ConnectFrame(Dusk inParent)
 	{
@@ -66,9 +64,9 @@ public class ConnectFrame extends JFrame
 		if (!appParent.blnApplet)
 		{
 			btnConnect.setText("Connect");
-			btnConnect.setLocation(new java.awt.Point(10, 140));
+			btnConnect.setLocation(new java.awt.Point(10, 100));
 			btnConnect.setVisible(true);
-			btnConnect.setSize(new java.awt.Dimension(140, 20));
+			btnConnect.setSize(new java.awt.Dimension(140, 60));
 		}
 		
 		txtName.setText("New Dusk");
@@ -96,16 +94,6 @@ public class ConnectFrame extends JFrame
 		lblPort.setVisible(true);
 		lblPort.setSize(new java.awt.Dimension(50, 20));
 
-		btnBookmark.setText("Add Bookmark");
-		btnBookmark.setLocation(new java.awt.Point(10, 100));
-		btnBookmark.setVisible(true);
-		btnBookmark.setSize(new java.awt.Dimension(140, 20));
-
-		btnRemove.setText("Remove Bookmark");
-		btnRemove.setLocation(new java.awt.Point(10, 120));
-		btnRemove.setVisible(true);
-		btnRemove.setSize(new java.awt.Dimension(140, 20));
-
 		setLocation(new java.awt.Point(0, 0));
 		setTitle("frmConnect");
 		getContentPane().setLayout(null);
@@ -117,8 +105,6 @@ public class ConnectFrame extends JFrame
 		getContentPane().add(lblAddress);
 		getContentPane().add(txtPort);
 		getContentPane().add(lblPort);
-		getContentPane().add(btnBookmark);
-		getContentPane().add(btnRemove);
 
 		lstBookmarks.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -128,16 +114,6 @@ public class ConnectFrame extends JFrame
 		btnConnect.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				btnConnectActionPerformed(e);
-			}
-		});
-		btnBookmark.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				btnBookmarkActionPerformed(e);
-			}
-		});
-		btnRemove.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				btnRemoveActionPerformed(e);
 			}
 		});
 		addWindowListener(new java.awt.event.WindowAdapter() {
