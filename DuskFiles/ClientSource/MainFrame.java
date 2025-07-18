@@ -149,8 +149,9 @@ public class MainFrame extends JFrame implements ItemListener
 		btnMerchant.setEnabled(false);
 
 		lblInfo.setLocation(new java.awt.Point(10, 520));
+                lblInfo.setFont(new Font("Serif", Font.PLAIN, 20));
 		lblInfo.setVisible(true);
-		lblInfo.setSize(new java.awt.Dimension(290, 20));
+		lblInfo.setSize(new java.awt.Dimension(290, 40));
                 
                 lblBookc.setLocation(new java.awt.Point(10, 370));
 		lblBookc.setVisible(true);
@@ -308,6 +309,7 @@ public class MainFrame extends JFrame implements ItemListener
 		txtOther.setVisible(true);
                 
                 lblTarget.setLocation(new Point(10, 540));
+                lblTarget.setFont(new Font("Serif", Font.PLAIN, 20));
                 lblTarget.setVisible(true);
                 lblTarget.setSize(new Dimension(140, 40));
                 
