@@ -1895,16 +1895,31 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		{
 			if (entStore.intFlag == 1)
 			{
+                            	double CurrentHPWidth = (double) intImageSize / intmaxhp;
+                                double HPBarValue = CurrentHPWidth * inthp;
 				gD.setColor(Color.green);
 				gD.drawRoundRect((int)(x*intImageSize),(int)(y*intImageSize),
 							intImageSize,intImageSize,intImageSize/3,intImageSize/3);
-			}else if (entStore.intFlag == 2)
+			                gD.setColor(new Color(35, 35, 35));
+                                        gD.fillRect((int)(x*intImageSize)- 1, (int)(y*intImageSize) - 66, (int)(intImageSize) + 2, 12);
+
+                                        gD.setColor(new Color(255, 0, 30));
+                                        gD.fillRect((int)(x*intImageSize), (int)(y*intImageSize) - 65, (int) HPBarValue, 10);
+                        }else if (entStore.intFlag == 2)
 			{
+                            	double CurrentHPWidth = (double) intImageSize / intmaxhp;
+                                double HPBarValue = CurrentHPWidth * inthp;                            
 				gD.setColor(Color.red);
 				gD.drawRoundRect((int)(x*intImageSize),(int)(y*intImageSize),
 							intImageSize,intImageSize,intImageSize/3,intImageSize/3);
-			}
+			                gD.setColor(new Color(35, 35, 35));
+                                        gD.fillRect((int)(x*intImageSize)- 1, (int)(y*intImageSize) - 66, (int)(intImageSize) + 2, 12);
+
+                                        gD.setColor(new Color(255, 0, 30));
+                                        gD.fillRect((int)(x*intImageSize), (int)(y*intImageSize) - 65, (int) HPBarValue, 10);			
+                        }
 		}
+
 		if (entStore.intStep == -1)
 		{
 			try
