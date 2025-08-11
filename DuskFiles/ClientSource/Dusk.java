@@ -809,6 +809,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					intsp = Integer.parseInt(stmIn.readLine());
 					intmaxsp = Integer.parseInt(stmIn.readLine());
 					frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
+                                        update();
 		            break;
 		        }
 		        case (6):  //update Items
@@ -1907,8 +1908,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                                         gD.fillRect((int)(x*intImageSize), (int)(y*intImageSize) - 65, (int) HPBarValue, 10);
                         }else if (entStore.intFlag == 2)
 			{
-                            	double CurrentHPWidth = (double) intImageSize / intmaxhp;
-                                double HPBarValue = CurrentHPWidth * inthp;                            
+                            	double CurrentHPWidth2 = (double) intImageSize / intmaxhp;
+                                double HPBarValue2 = CurrentHPWidth2 * inthp;                            
 				gD.setColor(Color.red);
 				gD.drawRoundRect((int)(x*intImageSize),(int)(y*intImageSize),
 							intImageSize,intImageSize,intImageSize/3,intImageSize/3);
@@ -1916,7 +1917,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                                         gD.fillRect((int)(x*intImageSize)- 1, (int)(y*intImageSize) - 66, (int)(intImageSize) + 2, 12);
 
                                         gD.setColor(new Color(255, 0, 30));
-                                        gD.fillRect((int)(x*intImageSize), (int)(y*intImageSize) - 65, (int) HPBarValue, 10);			
+                                        gD.fillRect((int)(x*intImageSize), (int)(y*intImageSize) - 65, (int) HPBarValue2, 10);			
                         }
 		}
 
