@@ -59,7 +59,7 @@ public class GraphicsThread implements Runnable
 		}
 		else
 		{
-			prefix = "/app/rc/";
+			prefix = "rc/";
 			appParent.imgOriginalMap = Toolkit.getDefaultToolkit().getImage(prefix+"somedusk/images/map.gif");
 			appParent.imgOriginalPlayers = Toolkit.getDefaultToolkit().getImage(prefix+"somedusk/images/players.gif");
 			appParent.imgOriginalSprites = Toolkit.getDefaultToolkit().getImage(prefix+"somedusk/images/sprites.gif");
