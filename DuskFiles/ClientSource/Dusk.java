@@ -47,7 +47,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
         LocX=0,
         LocY=0,
         inthp,
+        hp2,
         intmaxhp,
+        maxhp2,
         intsp,
         intmaxsp,
         range=1;
@@ -1365,7 +1367,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					frmBattle.setTitle(strStore);
 					frmBattle.txtEdit.setText("");
                                         frame.lblTarget.setText("");    //Zach added target HP in mainframe. Doesn't work if popups off.
-					break;
+                                        break;
 				}
 				case (32): //show battle window and update title
 				{
@@ -1382,7 +1384,32 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						frmBattle.show();
 					strStore = stmIn.readLine();
 					frmBattle.txtEdit.append(strStore+"\n");
-					break;
+                                        break;
+				}
+                                case (34): //Zach's try on adding enemy hp bar. Don't work :( needs a update method somewhere.
+				{
+                                    try {
+                                    // Extract HP
+                                        String HpData = stmIn.readLine();
+                                           if (HpData == null) {
+                                        System.err.println("Input stream ended before the expected line was found.");
+                                        } else {
+                                        // Now it is safe to process the string
+                                        String[] hpValues = HpData.trim().split(" ");
+
+                                        // Convert to integers
+                                        hp2 = Integer.parseInt(hpValues[0]);
+                                        maxhp2 = Integer.parseInt(hpValues[1]);
+                                        }
+                                        } catch (NumberFormatException e) {
+                                        // This exception is thrown if the string parts are not valid integers.
+                                        System.err.println("Failed to parse HP values: " + e.getMessage());
+    
+                                        } catch (ArrayIndexOutOfBoundsException e) {
+                                        // This exception is thrown if the split string doesn't have at least two parts.
+                                        System.err.println("Received data is not in the expected format (e.g., 'HP MaxHP')");
+                                        }
+                                    break;
 				}
 				default:  //if an incoming byte doesn't fit the switch
 				{
@@ -1908,8 +1935,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                                         gD.fillRect((int)(x*intImageSize), (int)(y*intImageSize) - 65, (int) HPBarValue, 10);
                         }else if (entStore.intFlag == 2)
 			{
-                            	double CurrentHPWidth2 = (double) intImageSize / intmaxhp;
-                                double HPBarValue2 = CurrentHPWidth2 * inthp;                            
+                            	double CurrentHPWidth2 = (double) intImageSize / maxhp2;
+                                double HPBarValue2 = CurrentHPWidth2 * hp2;                            
 				gD.setColor(Color.red);
 				gD.drawRoundRect((int)(x*intImageSize),(int)(y*intImageSize),
 							intImageSize,intImageSize,intImageSize/3,intImageSize/3);
