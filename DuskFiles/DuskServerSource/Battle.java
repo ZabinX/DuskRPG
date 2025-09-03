@@ -803,6 +803,12 @@ public class Battle
            			strStore = attack(thnStore,thnTarget, range, strStore);
 				}
 				strStore += ".";
+				for (int j=0; j<vctSide1.size(); j++) {
+					LivingThing player = (LivingThing)vctSide1.elementAt(j);
+					if (player.isPlayer()) {
+						player.updateOpponentHP(thnTarget);
+					}
+				}
 			}
 			chatMessage("\t"+strStore);
 		}
@@ -914,6 +920,12 @@ public class Battle
            			strStore = attack(thnStore,thnTarget, range, strStore);
 				}
 				strStore += ".";
+				for (int j=0; j<vctSide2.size(); j++) {
+					LivingThing player = (LivingThing)vctSide2.elementAt(j);
+					if (player.isPlayer()) {
+						player.updateOpponentHP(thnTarget);
+					}
+				}
 			}
 			chatMessage("\t"+strStore);
 		}

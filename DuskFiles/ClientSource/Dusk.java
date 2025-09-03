@@ -47,9 +47,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
         LocX=0,
         LocY=0,
         inthp,
-        hp2,
         intmaxhp,
-        maxhp2,
         intsp,
         intmaxsp,
         range=1;
@@ -1386,31 +1384,37 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					frmBattle.txtEdit.append(strStore+"\n");
                                         break;
 				}
-                                case (34): //Zach's try on adding enemy hp bar. Don't work :( needs a update method somewhere.
-				{
+                                case (34):
+                                {
                                     try {
-                                    // Extract HP
+                                        long opponentID = Long.parseLong(stmIn.readLine());
                                         String HpData = stmIn.readLine();
                                            if (HpData == null) {
                                         System.err.println("Input stream ended before the expected line was found.");
                                         } else {
-                                        // Now it is safe to process the string
                                         String[] hpValues = HpData.trim().split(" ");
+                                        int newHp = Integer.parseInt(hpValues[0]);
+                                        int newMaxHp = Integer.parseInt(hpValues[1]);
 
-                                        // Convert to integers
-                                        hp2 = Integer.parseInt(hpValues[0]);
-                                        maxhp2 = Integer.parseInt(hpValues[1]);
+                                        // Find the entity and update its HP
+                                        synchronized(vctEntities) {
+                                            for (int i = 0; i < vctEntities.size(); i++) {
+                                                Entity ent = (Entity)vctEntities.elementAt(i);
+                                                if (ent.ID == opponentID) {
+                                                    ent.hp = newHp;
+                                                    ent.maxhp = newMaxHp;
+                                                    break;
+                                                }
+                                            }
                                         }
-                                        } catch (NumberFormatException e) {
-                                        // This exception is thrown if the string parts are not valid integers.
-                                        System.err.println("Failed to parse HP values: " + e.getMessage());
-    
-                                        } catch (ArrayIndexOutOfBoundsException e) {
-                                        // This exception is thrown if the split string doesn't have at least two parts.
-                                        System.err.println("Received data is not in the expected format (e.g., 'HP MaxHP')");
                                         }
+                                    } catch (Exception e) {
+                                        System.err.println("Error updating opponent HP: " + e.getMessage());
+                                    }
+                                    update();
+                                    paint();
                                     break;
-				}
+                                }
 				default:  //if an incoming byte doesn't fit the switch
 				{
 					System.err.println("Lost incoming byte: " + incoming);	
@@ -1935,8 +1939,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                                         gD.fillRect((int)(x*intImageSize), (int)(y*intImageSize) - 65, (int) HPBarValue, 10);
                         }else if (entStore.intFlag == 2)
 			{
-                            	double CurrentHPWidth2 = (double) intImageSize / maxhp2;
-                                double HPBarValue2 = CurrentHPWidth2 * hp2;                            
+                            if (entStore.maxhp > 0) {
+				double CurrentHPWidth2 = (double) intImageSize / entStore.maxhp;
+                                double HPBarValue2 = CurrentHPWidth2 * entStore.hp;
 				gD.setColor(Color.red);
 				gD.drawRoundRect((int)(x*intImageSize),(int)(y*intImageSize),
 							intImageSize,intImageSize,intImageSize/3,intImageSize/3);
@@ -1944,7 +1949,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                                         gD.fillRect((int)(x*intImageSize)- 1, (int)(y*intImageSize) - 66, (int)(intImageSize) + 2, 12);
 
                                         gD.setColor(new Color(255, 0, 30));
-                                        gD.fillRect((int)(x*intImageSize), (int)(y*intImageSize) - 65, (int) HPBarValue2, 10);			
+                                        gD.fillRect((int)(x*intImageSize), (int)(y*intImageSize) - 65, (int) HPBarValue2, 10);
+                            }
                         }
 		}
 
