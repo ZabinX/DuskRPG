@@ -2086,6 +2086,17 @@ public class LivingThing extends DuskObject implements Runnable
 		}
 	}
 	
+	public void updateOpponentHP(LivingThing opponent)
+	{
+	    if (isPlayer() && blnWorking && !blnIsClosing)
+	    {
+	        String strResult = "" + (char)34;
+	        strResult += opponent.ID + "\n";
+	        strResult += opponent.hp + " " + opponent.maxhp + "\n";
+	        send(strResult);
+	    }
+	}
+
 	public void updateMap()
 	{
 		//update map:

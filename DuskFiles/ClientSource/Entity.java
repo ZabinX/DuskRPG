@@ -31,6 +31,8 @@ public class Entity
         1 ally
         2 enemy
         */
+    int hp,
+        maxhp;
     long ID;
     Entity entNext=null;
     
@@ -43,5 +45,7 @@ public class Entity
     	intImage = inImage;
     	intStep = inStep;
     	intType = inintType;
+        hp = 0;
+        maxhp = 0;
     }
 }
