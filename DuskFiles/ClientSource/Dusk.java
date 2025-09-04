@@ -71,7 +71,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     		vctSell,
     		vctChoiceDropItems,
     		vctChoiceActionItems,
-    		vctEntities;
+    		vctEntities,
+                vctTileAnims;
     
 	Image imgOriginalSprites;
 	Image imgOriginalPlayers;
@@ -245,6 +246,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			vctSell = new Vector(0,3);
 			vctChoiceDropItems = new Vector(0,3);
 			vctChoiceActionItems = new Vector(0,3);
+                        vctTileAnims = new Vector(0,3);
 		}catch(Exception e)
 		{
 			System.err.println("Error connecting to server: "+e.toString());
@@ -743,7 +745,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					reloadJComboBoxLook();
 					reloadJComboBoxGet();
 					reloadJComboBoxAttack();
-		        	update();
+		        	update(0);
 		        	paint();
 					}
 		            break;
@@ -797,7 +799,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					reloadJComboBoxLook();
 					reloadJComboBoxGet();
 					reloadJComboBoxAttack();
-					update();
+					update(0);
 					paint();
 					}
 		            break;
@@ -809,7 +811,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					intsp = Integer.parseInt(stmIn.readLine());
 					intmaxsp = Integer.parseInt(stmIn.readLine());
 					frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
-                                        update();
+                                        update(0);
 		            break;
 		        }
 		        case (6):  //update Items
@@ -1050,7 +1052,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					reloadJComboBoxLook();
 					reloadJComboBoxGet();
 					reloadJComboBoxAttack();
-					update();
+					update(0);
 					paint(); // Wildern added
 					}
 					break;
@@ -1176,14 +1178,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                                                         // HACK: Don't update the screen display if the user moves, attempted
                                                         // fix at flicker-on-move stuff.
                                                         // The server should always send an UpdateLocMap every time
-                                                        update();
+                                                        update(0);
 							paint();
                                                         }
 							break;
 						}
 					}
                                     }
-                            update();
+                            update(0);
 		            break;
 				}
 				case (25): //move south
@@ -1220,14 +1222,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							reloadJComboBoxAttack();
 							if (ID != ID) {
                                                         //thrGraphics.addEntityToMove(entStore,1);
-                                                        update();
+                                                        update(0);
 							paint();
                                                         }
 							break;
 						}
 					}
                                     }
-                            update();
+                            update(0);
 		            break;
 				}
 				case (26): //move west
@@ -1264,14 +1266,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							reloadJComboBoxAttack();
 							if (ID != ID) {
                                                         //thrGraphics.addEntityToMove(entStore,2);
-                                                        update();
+                                                        update(0);
 							paint();
                                                         }
 							break;
 						}
 					}
                                     }
-                            update();
+                            update(0);
 		            break;
 				}
 				case (27): //move east
@@ -1308,14 +1310,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							reloadJComboBoxAttack();
 							if (ID != ID) {
                                                         //thrGraphics.addEntityToMove(entStore,3);
-                                                        update();
+                                                        update(0);
 							paint();
                                                         }
 							break;
 						}
 					}
                                     }
-                            update();
+                            update(0);
 		            break;
 				}
 				case (28): //update range
@@ -1340,7 +1342,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							}
 						}
 					}
-					update();
+					update(0);
 					break;
 				}
 				case (30): //clear all flags
@@ -1354,7 +1356,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							entStore.intFlag = 0;
 						}
 					}
-					update();
+					update(0);
 					break;	
 				}
 				case (31): //show battle window and clear text
@@ -1411,10 +1413,23 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                                     } catch (Exception e) {
                                         System.err.println("Error updating opponent HP: " + e.getMessage());
                                     }
-                                    update();
+                                    update(0);
                                     paint();
                                     break;
                                 }
+                                case (35): //receive tile animation data
+				{
+					vctTileAnims = new Vector(0,5);
+					int tileID = Integer.parseInt(stmIn.readLine());
+					while (tileID != -1)
+					{
+						int frameCount = Integer.parseInt(stmIn.readLine());
+						int delay = Integer.parseInt(stmIn.readLine());
+						vctTileAnims.addElement(new TileAnim(tileID, frameCount, delay));
+						tileID = Integer.parseInt(stmIn.readLine());
+					}
+					break;
+				}
 				default:  //if an incoming byte doesn't fit the switch
 				{
 					System.err.println("Lost incoming byte: " + incoming);	
@@ -1772,7 +1787,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	{
 		scaleWindow();
 		scaleImages();
-		update(); 
+		update(0); 
 		paint(); //Wildern added
 	}
         @Override
@@ -1876,7 +1891,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	}
 	
 	//Display graphics
-	public void update()
+	public void update(int intAnimTick)
 	{
 		synchronized (vctEntities)
 		{
@@ -1890,12 +1905,34 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					//Draw map(background)
 					try
 					{
-						gD.drawImage(imgMap,
-										i*intImageSize,i2*intImageSize,
-										(i+1)*intImageSize,(i2+1)*intImageSize,
-										shrMap[i][i2]*intImageSize,0,
-										(shrMap[i][i2]+1)*intImageSize,intImageSize,
-										null);
+					int tileID = shrMap[i][i2];
+					TileAnim anim = null;
+					if (vctTileAnims != null) {
+							for (int j=0; j<vctTileAnims.size(); j++) {
+								TileAnim tempAnim = (TileAnim)vctTileAnims.elementAt(j);
+								if (tempAnim.tileID == tileID) {
+									anim = tempAnim;
+									break;
+								}
+							}
+						}
+
+						if (anim != null) {
+							int frame = (intAnimTick / anim.delay) % anim.frameCount;
+							gD.drawImage(imgMap,
+												i*intImageSize,i2*intImageSize,
+												(i+1)*intImageSize,(i2+1)*intImageSize,
+												(tileID+frame)*intImageSize,0,
+												(tileID+frame+1)*intImageSize,intImageSize,
+												null);
+						} else {
+							gD.drawImage(imgMap,
+												i*intImageSize,i2*intImageSize,
+												(i+1)*intImageSize,(i2+1)*intImageSize,
+												tileID*intImageSize,0,
+												(tileID+1)*intImageSize,intImageSize,
+												null);
+						}
 				    }catch(Exception e)
 				    {
 				        try

@@ -3226,6 +3226,7 @@ public class LivingThing extends DuskObject implements Runnable
 			updateMusic();
         	playMusic(0);
 		}
+                sendTileAnims();
 		if (!(hasCondition("invis") && (privs > 2)))
 		{
 			engGame.log.printMessage(Log.INFO, sckConnection.getInetAddress().toString()+":"+strName+" has entered the world");
@@ -4165,4 +4166,29 @@ public class LivingThing extends DuskObject implements Runnable
 	{
 		send((char)21+"");
 	}
-}
+        
+        
+	public void sendTileAnims()
+	{
+		try
+		{
+			String strResult = ""+(char)35;
+			TileAnim anim;
+			for (int i=0; i<engGame.vctTileAnims.size(); i++)
+			{
+				anim = (TileAnim)engGame.vctTileAnims.elementAt(i);
+				strResult += anim.tileID + "\n";
+				strResult += anim.frameCount + "\n";
+				strResult += anim.delay + "\n";
+			}
+			strResult += "-1\n";
+			send(strResult);
+                        engGame.log.printMessage(Log.INFO, "Sent tile animations to " + strName);
+		}catch(Exception e)
+		{
+		    engGame.log.printError("sendTileAnims():"+strName+" disconnected", e);
+			blnStopThread = true;
+		}
+	}
+ }
+
