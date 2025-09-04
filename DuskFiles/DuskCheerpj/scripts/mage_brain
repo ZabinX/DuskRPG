@@ -1,8 +1,0 @@
-if < trigger hp 5000
-    order trigger "cast heal"
-    order trigger "say casting heal"
-    endscript
-end
-order trigger "say casting thorns"
-order trigger "cast thorns"
-endscript

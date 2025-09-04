@@ -1,7 +1,0 @@
-if ! strequals name trigger "wildern"
-    chat trigger "huh?"
-    endscript
-end
-gecho concat name trigger " steps out of the trees and into this world."
-order trigger uninvis
-endscript

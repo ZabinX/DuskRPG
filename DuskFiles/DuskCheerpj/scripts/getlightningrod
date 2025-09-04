@@ -1,7 +1,0 @@
-order trigger "drop lightning rod"
-gecho concat concat "A bolt of lightning flies from the sky, striking " name trigger "."
-set trigger locxy 100 100
-set trigger hp 5
-addcondition trigger safe
-gecho concat name trigger " has been killed by lightning."
-endscript

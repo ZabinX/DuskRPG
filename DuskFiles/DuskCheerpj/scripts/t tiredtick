@@ -1,3 +1,0 @@
-chat trigger "You cannot fight sleep any longer..."
-order trigger sleep
-endscript

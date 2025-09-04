@@ -1,8 +1,0 @@
-if not variableisstring param0
-    order trigger "gossip DarkCrono is the most sexy Italian god of all of dusk, and really good looking to!"
-    endscript
-end
-endscript  
-
-
-

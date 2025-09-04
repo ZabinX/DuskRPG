@@ -1,5 +1,0 @@
-chat trigger "You sip on the dark potion."
-removecondition trigger "tired"
-endscript
-
-

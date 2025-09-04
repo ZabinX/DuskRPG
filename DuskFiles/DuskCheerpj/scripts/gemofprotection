@@ -1,6 +1,0 @@
-inc trigger acbonus 200
-removeitem trigger "gem of protection"
-chat trigger "The gem explodes into a swirling cloud of glittering dust."
-chat trigger "The dust clings to your skin making it as hard as the gem."
-log trigger " used a Gem of Protection."
-endscript

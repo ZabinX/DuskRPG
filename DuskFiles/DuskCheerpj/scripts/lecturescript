@@ -1,5 +1,0 @@
-chat trigger "You really didn't need to know about the socio-economic implications of the advent of smurf culture on"
-chat trigger "terranean populations...but now you do.  Aren't you lucky?"
-removeitem trigger lecture
-endscript
-

@@ -1,7 +1,0 @@
-inc trigger hp 1000
-inc trigger mp 1000
-if and = trigger hp trigger maxhp
-    = trigger mp trigger maxmp
-    removecondition trigger "hot springs"
-end
-endscript

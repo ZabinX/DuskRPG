@@ -1,5 +1,0 @@
-addconditionwithduration trigger "ginseng" 120
-removeitem trigger "ginseng"
-chat trigger "Your mind is much more clear now."
-endscript
-

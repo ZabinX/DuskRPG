@@ -1,6 +1,0 @@
-if < trigger cp 3000
-	order trigger "unwear lightning amulet"
-	chat trigger "You are too weak to wear this type of amulet."
-	endscript
-	end
-endscript

@@ -1,1 +1,0 @@
-'trigger outText concat concat "Argon says:  Don't be scared "name trigger ". I ain't like the rest of the Deamons.  Just trying to make some money to send my daughter to college." trigger demonshop outText concat concat "Thanks for the busniess. "name trigger ",..and be careful those flamelings throw lava at you." *trigger outText  

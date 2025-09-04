@@ -1,7 +1,0 @@
-if < trigger cp 3000
-	order trigger "unwear energy amulet"
-	chat trigger "You are unable to control the power of the amulet at this time."
-	endscript
-	end
-addcondition trigger mpregen
-endscript

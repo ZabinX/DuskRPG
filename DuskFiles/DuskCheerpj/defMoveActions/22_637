@@ -1,8 +1,0 @@
-if ! isPlayer trigger
-	endscript
-	end
-#
-chat trigger "PJnerd says: This magic trainer here knows a lot of magic, but there's even more out there."
-chat trigger "PJnerd says: Check out the village to the north/west. You'll discover even more magic groups."
-endscript
-

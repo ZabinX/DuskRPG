@@ -1,8 +1,0 @@
-if hasItem trigger mendpotion
-	chat trigger "+100HP."
-	inc trigger hp 100
-	removeItem trigger mendpotion
-end
-endscript
-
-

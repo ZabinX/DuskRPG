@@ -1,8 +1,0 @@
-if ! trigger hascondition reward
-    chat trigger "You cannot get your reward."
-    endscript
-end
-chat trigger "Warfire smiles on you and puts a pot of GodGold in your inventory."
-giveitem trigger godgold
-removecondition trigger reward
-endscript

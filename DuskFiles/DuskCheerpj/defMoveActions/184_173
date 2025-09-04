@@ -1,8 +1,0 @@
-if ispet trigger
-    endscript
-end
-if strequals clan trigger "arena_fight"
-    chat trigger "You are no longer in a clan, and other players cannot attack you."
-    changeclan trigger "none"
-end
-endscript

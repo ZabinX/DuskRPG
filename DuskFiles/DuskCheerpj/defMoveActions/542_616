@@ -1,4 +1,0 @@
-addCondition trigger ballwest5
-removeCondition trigger balleast16
-endscript
-

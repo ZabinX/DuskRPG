@@ -1,7 +1,0 @@
-if > trigger maxhp 1500
-    inc trigger hpbonus 1500
-    if < trigger hp trigger maxhp
-        inc trigger hp 1500
-    end
-end
-endscript

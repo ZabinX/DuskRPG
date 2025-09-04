@@ -1,7 +1,0 @@
-livingthing guard1 local trigger "Chris"
-	if = guard1 locX 506
-		if = guard1 locY 673
-		set guard1 locxy 498 673
-		end
-	end
-endscript

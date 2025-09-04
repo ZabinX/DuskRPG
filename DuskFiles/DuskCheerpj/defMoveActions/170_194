@@ -1,9 +1,0 @@
-if isPlayer trigger
-	string outText concat concat " Welcome to Death Mountain village " name trigger ". Enjoy your visit."
-	if hasCondition trigger intown
-		string outText concat concat " This is the end of town. " name trigger ", please be careful."
-	end
-	chat trigger outText
-end
-endscript
-

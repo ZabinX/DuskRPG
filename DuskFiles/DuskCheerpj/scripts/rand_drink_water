@@ -1,4 +1,0 @@
-chat trigger "*Glu glu glu*"
-addConditionWithDuration trigger nothirst 5000
-removeItem trigger water
-endscript

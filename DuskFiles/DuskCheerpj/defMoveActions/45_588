@@ -1,6 +1,0 @@
-if ispet trigger
-    endscript
-end
-order trigger "help war"
-chat trigger "Help window for war has been opened."
-endscript

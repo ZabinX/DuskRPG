@@ -1,6 +1,0 @@
-if ispet trigger
-    endscript
-end
-order trigger "help newbie"
-chat trigger "Help window for newbies has been opened."
-endscript

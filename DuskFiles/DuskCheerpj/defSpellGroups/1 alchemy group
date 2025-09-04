@@ -1,4 +1,0 @@
-addconditionwithduration caster "translater" 5
-chat caster " You suddenly have the ability to translate the Elysium language."
-endscript
-

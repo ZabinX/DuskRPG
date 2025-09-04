@@ -1,8 +1,0 @@
-if < trigger privs 3
-    chat trigger "huh?"
-    endscript
-end
-order trigger "invis"
-order trigger concat concat "gecho " name trigger " submerges into a pool of lava."
-endscript
-

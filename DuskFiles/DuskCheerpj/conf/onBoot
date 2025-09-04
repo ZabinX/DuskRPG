@@ -1,4 +1,0 @@
-#no need to initialize globals here anymore
-#as they are saved with the save command
-#and loaded on server start
-endscript

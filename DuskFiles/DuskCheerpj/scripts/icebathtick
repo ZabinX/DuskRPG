@@ -1,7 +1,0 @@
-inc trigger hp 250
-inc trigger mp 250
-if and = trigger hp trigger maxhp
-    = trigger mp trigger maxmp
-    removecondition trigger "ice bath"
-end
-endscript

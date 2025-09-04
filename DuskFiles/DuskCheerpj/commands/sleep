@@ -1,4 +1,0 @@
-if ! hascondition trigger sleep
-    addcondition trigger sleep
-end
-endscript

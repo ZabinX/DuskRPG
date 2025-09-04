@@ -1,7 +1,0 @@
-if ispet trigger
-    endscript
-end
-if ! hascondition trigger "inside"
-    addcondition trigger "inside"
-end
-endscript

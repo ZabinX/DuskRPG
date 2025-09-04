@@ -1,9 +1,0 @@
-#Warfire is here command
-if < trigger privs 3
-    chat trigger "huh?"
-    endscript
-end
-#order trigger "uninvis"
-order trigger "gecho The heavy rumble of thunder tells you Warfire has left this world."
-order trigger "cast invis"
-endscript

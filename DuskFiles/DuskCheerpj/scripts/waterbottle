@@ -1,5 +1,0 @@
-if or ! hasitem trigger mushroom
-if ! hasitem trigger azeala
-chat trigger "You need either an Azeala or a Mushroom to mix with this water"
-endscript
-

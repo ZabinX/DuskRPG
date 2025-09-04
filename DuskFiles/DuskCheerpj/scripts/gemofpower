@@ -1,6 +1,0 @@
-inc trigger strengthbonus 100
-removeitem trigger "gem of power"
-chat trigger "The gem explodes into a swirling cloud of fire."
-chat trigger "You feel the fire enter your muscles."
-log trigger " used a Gem of Power."
-endscript

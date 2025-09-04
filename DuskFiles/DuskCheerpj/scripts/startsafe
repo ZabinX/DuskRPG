@@ -1,5 +1,0 @@
-chat trigger "You are safe from attacks."
-addflag trigger "safe"
-endscript
-
-

@@ -1,6 +1,0 @@
-if ispet trigger
-    endscript
-end
-order trigger "help stats"
-chat trigger "Help window for stats has been opened."
-endscript

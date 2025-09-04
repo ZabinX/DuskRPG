@@ -1,7 +1,0 @@
-set trigger hp 5
-set trigger locxy 100 100
-order trigger "emote died a horrible death."
-removeflag trigger "dead"
-endscript
-
-

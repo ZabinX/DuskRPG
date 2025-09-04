@@ -1,4 +1,0 @@
-inc trigger MP 300
-chat trigger " Upon eating the mandrake root your weakened magic powers quickly return. You regain 300 Magic Points."
-removeitem trigger "mandrake root"
-endscript

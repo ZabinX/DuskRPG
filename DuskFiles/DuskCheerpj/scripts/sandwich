@@ -1,4 +1,0 @@
-chat trigger "You eat a sandwich."
-addconditionwithduration trigger nohunger 2400
-removeitem trigger sandwich
-endscript

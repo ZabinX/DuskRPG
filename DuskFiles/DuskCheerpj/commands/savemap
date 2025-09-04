@@ -1,7 +1,0 @@
-if < trigger privs 3
-	chat trigger "huh?"
-	endscript	
-end
-chat trigger "Saving map..."
-order trigger ";I am currently saving the map. Sorry for any inconvienience this will cause in lag or other sorts."
-endscript
