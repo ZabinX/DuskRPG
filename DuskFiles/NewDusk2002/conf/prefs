@@ -14,7 +14,7 @@ rcaddress
 http://66.134.60.66/wesowin/newdusk/newrc/
 #
 rcname
-newdusk
+somedusk
 #
 #How many connections will you allow to your server (0=infinite):
 maxconnections
