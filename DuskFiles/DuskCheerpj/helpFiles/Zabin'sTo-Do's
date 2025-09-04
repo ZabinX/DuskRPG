@@ -1,0 +1,84 @@
+---------------Things to do:  (Things I can do in the Dusk scripting.) X means it's done.
+
+ 1. Fix mend spell so it works in battle.  (I've tested spells inBattle and they don't seem to work.  I probably can't fix this.)
+X2. Make ore mob that you can only kill when you have a pickaxe.
+X3. Finish the mushroom puzzle quest.
+ 4. Make scripts that check if someone is currently doing the puzzle or the pirate quest.
+X5. Fix TileSee scripts so the player could look over desks, bushes or whatever you could see over.  Doors, stairs, or whatever else you can walk on but shouldn't see through. (I had line of sight turned off but I decided I wanted to use it.)(Done, but still may need some touch ups.)
+X6. I only want mendpotions to be 1 use and once used get removed and a empty bottle is replaced.
+ 7. Finish all of Chief bounty hunter's quests.
+X8. Finish Dr Herbie's quests.
+ 9. Make at least 2 clan territories and 1 castle for the clans to fight over ownership of.
+X10. Garbage Man mob who kills all the mobs/oneusemobs.  (There isn't a kill mob script-that I am aware of- so the only way to get rid of a mob is by killing it.)
+X11. Krista's quest needs another condition so it doesn't skip dialog if you already caught some fish.
+X12. The hermit should quit helping you and just give you advice on magic when you reach 100cp.
+(Woah, this has become quite a list.  Once completed I'll call it episode 1 of Duskmoon!)
+
+---------------Things to do for episode 2:
+
+1. Setup furnace for smelting ores.
+2. Smithing bars into weapons/armor.
+3. More story line quests.
+4. Fix every item's image that isn't correct.
+
+---------------Known Glitches:  (These things need to be fixed in the Java programming, which I can't do)
+
+1. Walking animation has a flicker and doesn't alternate between frames.
+2. Wrongly threaded AWT sometimes flickers between the main frame and battle frame.  rarely all the text in the dialog box disappears.
+X3. Logging into the game online from a applet sometimes has -1 images loaded. (probably because we're running an ancient java applet on new technology.)(Andy fixed this:D!)
+4. Fix magic so it works in battle.  (I see a lot of existing magic spells which were scripted for battle but they don't seem to work.)  
+5. Very rarely while fighting a lot of mobs at once (5+) the mobs HP gets stuck and the only thing you can do is flee to restart the battle.
+
+----------------Pixel art to do's:  (I keep poking at organizing the art I would like to use to build a Dusk world.  Dusk is seeing some improvements by a professional programmer 'NotZed' and as I'm not a programmer (I only know Dusk script :P) I thought maybe I could provide some pro pixel art for his upgraded Dusk.  Once he implemented animated tiles in Dusk I've been quite persistant on improving my animation skills.)
+
+1. Make another flower animation.
+2. Finish beach animation.
+3. Make shadows for everything and figure out the colors for the alpha blend.
+4. Finish the art that I haven't already converted to DawnBringer's 32 Color palette.
+5. Tall grass animation.
+47. Once I've completed a whole games worth of art I'd like to make a game with the great art I've done.  (This is currently impossible with the old Dusk engine.) Currently NotZed's fork of the Dusk engine is only about halfway finished.  I'd love to make a Dusk world with his new Duskserver using the art I've been working on but currently this is only a dream of mine.  Much more work needs to be done on his fork before it can be played.
+
+--------------Mushroom quest info:(reference info)
+
+Ball 629.
+Ball on trigger 630.
+Cave floor 370.
+Trigger 626.
+Trigger activated 625.
+Cave floor with fire 610.
+Magma wall 504.
+Water rock 306.
+ball mob and Giant Mushroom 2-7.
+
+Chris' locxy's
+544 679
+544 675
+538 673
+533 674
+528 668
+528 667
+528 666
+523 659
+522 659
+513 659
+513 660
+513 661
+513 662
+513 663
+513 664
+513 665
+513 666
+513 667
+507 673
+506 673
+498 673
+497 673
+
+The very last reset cleanup script that sends the player where they should go-504 670 
+This script still needs the specific's about where to send the player. (finished, needs testing)
+
+onDeath and onLogout scripts need to check for 'mushroomhole-2&3','puzzle', and even 'puzzlefinished' conditions so the player is sent to the reset button- 543_632(finished, needs testing)
+
+544 688 rabbit-hole-puzzle start
+
+

@@ -1,0 +1,13 @@
+if strequals name trigger "Strabo's Keeper"
+    set trigger locxy 179 161
+    endscript
+end
+if strequals name trigger "Baron's Keeper"
+    set trigger locxy 68 21
+    endscript
+end
+if strequals name trigger "Kilgore's Keeper"
+    set trigger locxy 43 108
+    endscript
+end
+endscript

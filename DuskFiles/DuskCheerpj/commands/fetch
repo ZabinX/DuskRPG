@@ -1,0 +1,18 @@
+if < trigger privs 3
+	chat trigger "huh?"
+	endscript	
+end
+if variableisstring param0
+	livingthing target param0
+	if and and ! isplayer target ! ispet target ! ismob target
+        chat trigger "They are not in this world."
+        endscript
+    end
+	number tlocx target locx
+	number tlocy target locy
+    chat trigger concat concat concat concat concat "Fetched " name target " from location " tlocx "," tlocy
+	set target locxy trigger locx trigger locy
+	endscript
+end
+chat trigger "Fetch who?"
+endscript

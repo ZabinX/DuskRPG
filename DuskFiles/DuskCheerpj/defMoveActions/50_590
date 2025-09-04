@@ -1,0 +1,6 @@
+if ispet trigger
+    endscript
+end
+order trigger "help skills"
+chat trigger "Help window for skills has been opened."
+endscript

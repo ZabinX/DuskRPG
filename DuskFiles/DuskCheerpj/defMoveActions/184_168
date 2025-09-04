@@ -1,0 +1,8 @@
+if ispet trigger
+    endscript
+end
+if isclan trigger "none"
+    chat trigger "While you are in the arena, other players can attack you."
+    changeclan trigger "arena_fight"
+end
+endscript

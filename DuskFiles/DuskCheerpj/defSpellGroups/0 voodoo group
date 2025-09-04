@@ -1,0 +1,26 @@
+# flowris
+#
+# spell name: poison
+#
+number duration * caster inte 5
+# check if param0 is valid
+livingthing target local caster param0
+if not variableIsLivingthing target
+	chat caster "He's not here"
+	endscript
+	end
+# check if the target is a player
+if not isPlayer target
+	chat caster "You can't poison it"
+	endscript
+	end
+# check if the target is figthing
+if isInBattle target
+	chat caster "You can't poison a player when he figths"
+	endscript
+	end
+# code
+addconditionWithDuration target poison duration
+chat caster concat "You have poisoned " name target
+chat target concat name caster " has poisoned you"
+endscript

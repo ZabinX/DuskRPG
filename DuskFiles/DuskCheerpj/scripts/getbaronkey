@@ -1,0 +1,34 @@
+number x global baronx
+number y global barony
+if < trigger privs 1
+    removeitem trigger "baron key"
+    createitem "Baron Key" x y
+    chat trigger "Only a clan leader may pick up this item."
+    endscript
+end
+if hascondition trigger dropping
+    endscript
+end
+if or strequals clan trigger global straboclan
+       strequals clan trigger global kilgoreclan
+    removeitem trigger "baron key"
+    createitem "Baron Key" x y
+    chat trigger "Your clan can only control one castle at a time."
+    endscript
+end
+if strequals clan trigger global straboclanally
+    chat trigger concat "You dissolve your allegience with " global straboclan
+    global string straboclanally "nostraboclanally"
+end
+if strequals clan trigger global kilgoreclanally
+    chat trigger concat "You dissolve your allegience with " global kilgoreclan
+    global string kilgoreclanally "nokilgoreclanally"
+end
+if ! strequals clan trigger global baronclan
+    global string baronclanally "nobaronclanally"
+end
+global string baronclan clan trigger
+global string baron_name_keyholder concat name trigger " now carries the key to Castle Baron."
+order trigger concat concat "gossip " global baronclan " now controls Castle Baron."
+chat trigger "Your clan now has access to Castle Baron."
+endscript

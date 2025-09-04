@@ -1,0 +1,19 @@
+type
+armor
+kind
+neck
+description
+A string of Mardi Gras beads
+cost
+80
+mod
+20
+image
+7
+durability
+1800
+onWear
+wear_normal_armor
+.
+
+

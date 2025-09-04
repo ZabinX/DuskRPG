@@ -1,0 +1,38 @@
+#Bahamut: causes MAJOR damage to enemy.
+#
+#
+if isinbattle caster
+	if hasCondition enemy caster "taco"
+	chat caster "The spell has no effect."
+	endscript
+end
+if isinbattle caster
+	if ! hasCondition enemy caster "taco"
+	number damage * + 20 * rand 1.8 + caster stre caster inte
+	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat " As a last resort, you call upon the Bahamut to attack " name enemy caster " with a giant flare for " damage "  damage."
+	chat enemy caster concat " Flares scorch your body for " damage "  damage."
+	endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

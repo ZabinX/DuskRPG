@@ -1,0 +1,34 @@
+#shield
+if ispet trigger
+    endscript
+end
+if hasItem trigger "generic shield"
+inc trigger locx -1
+chat trigger " You already have a generic shield!"
+endscript
+end
+if hasItem trigger "generic helmet"
+inc trigger locx -1
+chat trigger " You already have a generic helmet!"
+endscript
+end
+if hasItem trigger "generic tunic"
+inc trigger locx -1
+chat trigger " You already have a generic tunic!"
+endscript
+end
+if hasItem trigger "generic goggles"
+inc trigger locx -1
+chat trigger " You already have generic goggles!"
+endscript
+end
+if hasItem trigger "generic necklace"
+inc trigger locx -1
+chat trigger " You already have generic necklace!"
+endscript
+end
+giveitem trigger "generic shield"
+chat trigger " You got a generic shield!"
+endscript
+
+

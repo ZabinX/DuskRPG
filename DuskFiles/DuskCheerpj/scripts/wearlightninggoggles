@@ -1,0 +1,7 @@
+if < trigger cp 3000
+	order trigger "unwear lightning goggles"
+	chat trigger "You are too weak to wear this type of goggles."
+	endscript
+	end
+endscript
+

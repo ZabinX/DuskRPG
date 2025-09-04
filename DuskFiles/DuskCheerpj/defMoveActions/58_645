@@ -1,0 +1,17 @@
+if hasCondition trigger savedhusband
+	livingthing guard1 local trigger "Chris"
+		if = guard1 locX 63
+			if = guard1 locY 648
+			endscript
+			end
+		end
+end
+if hasCondition trigger savedhusband
+	createoneusemob "Chris" 63 648
+	endscript
+end
+if hasCondition trigger savedhusbandend
+	createoneusemob "Chris" 63 648
+	endscript
+end
+

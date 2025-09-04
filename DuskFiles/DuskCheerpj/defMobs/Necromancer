@@ -1,0 +1,50 @@
+maxhp
+35000
+maxmp
+4000
+stre
+1500
+inte
+4000
+dext
+1500
+wisd
+4900
+cons
+5400
+bravery
+1.8
+grouprelation
+1
+image
+2
+giveitem
+dragonite breastplate
+.5
+giveitem
+rare spell component
+1
+faction
+vampire
+wield
+ork bane
+-1
+-1
+condition
+detect invis
+1
+-1
+skill
+double attack
+100
+skill
+triple attack
+100
+skill
+quadruple attack
+75
+skill
+dodge
+40
+.
+

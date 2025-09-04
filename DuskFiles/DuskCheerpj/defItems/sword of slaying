@@ -1,0 +1,16 @@
+type
+weapon
+description
+a glowing red sword
+cost
+2000
+mod
+900
+image
+9
+durability
+1000000
+onWear
+slayerstart
+onUnWear
+slayerend

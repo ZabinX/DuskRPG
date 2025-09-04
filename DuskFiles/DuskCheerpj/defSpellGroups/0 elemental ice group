@@ -1,0 +1,44 @@
+#Ice Shield
+#
+# Halves the damage done to the caster by spells
+# from the elemental fire group
+#
+# Doubles the damage done to the caster by spells
+# from the elemental ice group
+#
+# If caster already has fire shield in place,
+# both spells cancel each other out
+#
+#
+if ! hasitem caster "Ice Dragon Scale"
+    chat caster "You cannot cast this spell without an Ice Dragon Scale."
+    endscript
+end
+removeitem caster "Ice Dragon Scale"
+number duration * caster inte 6
+if variableisstring param0
+    livingthing target local caster param0
+    if and ! isplayer target and ! ispet target ! ismob target
+        chat caster "You do not see them here."
+        endscript
+    end
+    chat caster concat concat "You summon protective ice to guard " name target "."
+    chat target concat name caster " surrounds you with protective ice."
+    if hascondition target "fire shield"
+        chat target "Ice and fire collide with explosive force."
+        chat target "You are remarkably unharmed."
+        removecondition target "fire shield"
+        endscript
+    end
+    addconditionwithduration target "ice shield" duration
+    endscript
+end
+chat caster "You surround yourself with protective ice."
+if hascondition caster "fire shield"
+    chat caster "Ice and fire collide with explosive force."
+    chat caster "You are remarkably unharmed."
+    removecondition caster "fire shield"
+    endscript
+end
+addconditionwithduration caster "ice shield" duration
+endscript

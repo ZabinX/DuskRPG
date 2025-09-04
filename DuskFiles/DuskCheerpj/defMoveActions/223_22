@@ -1,0 +1,9 @@
+if ispet trigger
+    endscript
+end
+if isclan trigger "none"
+    chat trigger "While you are in the wilderness, other players can attack you."
+    changeclan trigger "wilderness"
+end
+endscript
+

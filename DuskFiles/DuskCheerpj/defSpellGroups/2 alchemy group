@@ -1,0 +1,55 @@
+#Herbology used to convert herbs into healing power.
+#
+#
+if ! hasitem caster "wolfsbane"
+	if hasitem caster "mandrake"
+		chat caster "You extract juices from a mandrake to  make an anti-curse potion"
+		giveitem caster "anti-curse potion"
+		removeitem caster "mandrake"
+		endscript
+	end
+end
+if hasitem caster wolfsbane
+	if hasItem caster "mandrake"
+		chat caster " You mix a wolfsbane and mandrake to make a Red Potion"
+		giveitem caster "Red Potion"
+		removeitem caster mandrake
+		removeitem caster wolfsbane
+		endscript
+	end
+end
+if hasitem caster lavendar
+	if hasitem caster wolfsbane
+		chat caster "You mix the lavendar and wolfsbane together and make a Green Potion"
+		giveitem caster "Green Potion"
+		removeitem caster "wolfsbane"
+		removeitem caster "lavendar"
+		endscript
+	end
+end
+if hasitem caster "Red Potion"
+	if hasitem caster "Green Potion"
+	if hasItem caster "azeala"
+		chat caster "You mix the Red and Green Potions together and make a rare Blue Potion"
+		giveitem caster "Blue Potion"
+		removeitem caster "Red Potion"
+		removeitem caster "Green Potion"
+removeitem caster "azeala"
+		endscript
+	end
+end
+if hasitem caster "mushroom"
+	chat caster "You mix the mushroom and some water together and make a rare Blue Potion"
+	giveitem caster "Blue Potion"
+	removeitem caster "mushroom"
+	endscript
+end
+
+
+
+
+
+
+
+
+

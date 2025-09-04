@@ -1,0 +1,31 @@
+if ! hascondition trigger "foundwildernkey"
+    chat trigger "Wildern's key wriggles free from your grasp and vanishes in a puff of smoke."
+    chat trigger "It was as if the key knew you were not the one to find it."
+    removeitem trigger "housewildernkey"
+end
+    if hascondition trigger "hwkey6"
+        removecondition trigger "hwkey6"
+        endscript
+    end
+    if hascondition trigger "hwkey5"
+        removecondition trigger "hwkey5"
+        endscript
+    end
+    if hascondition trigger "hwkey4"
+        removecondition trigger "hwkey4"
+        endscript
+    end
+    if hascondition trigger "hwkey3"
+        removecondition trigger "hwkey3"
+        endscript
+    end
+    if hascondition trigger "hwkey2"
+        removecondition trigger "hwkey2"
+        endscript
+    end
+    if hascondition trigger "hwkey1"
+        removecondition trigger "hwkey1"
+        endscript
+    end
+endscript
+

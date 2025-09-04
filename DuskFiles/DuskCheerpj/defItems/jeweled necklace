@@ -1,0 +1,20 @@
+type
+armor
+kind
+neck
+description
+a necklace of jewels that seem to float
+cost
+125
+mod
+60
+image
+7
+durability
+24000
+onwear
+jeweled_necklace_wear
+onunwear
+jeweled_necklace_unwear
+.
+

@@ -1,0 +1,16 @@
+type
+food
+description
+an apple with a golden sheen
+cost
+5000
+image
+6
+onuse
+goldapple
+uses
+1
+.
+
+
+

@@ -1,0 +1,13 @@
+if not variableisstring param0
+	order trigger "emote shrugs."
+	endscript
+end
+livingthing target local trigger param0
+if not isplayer target
+	chat trigger "You do not see them here."
+	endscript
+end
+chat trigger concat concat "You shrug your shoulders at " name target "."
+chat target concat name trigger " shrugs at you."
+order trigger concat concat "emote shrugs his shoulders at " name target "."
+endscript

@@ -1,0 +1,4 @@
+chat trigger "You eat a cookie."
+addconditionwithduration trigger nohunger 5000
+removeitem trigger cookie
+endscript

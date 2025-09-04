@@ -1,0 +1,13 @@
+type
+item
+description
+a cherry flavored herb that heals Hit Points
+cost
+150
+image
+6
+onuse
+lavendar
+uses
+1
+.

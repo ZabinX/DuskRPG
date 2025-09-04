@@ -1,0 +1,5 @@
+chat trigger "**Gulp Gulp**  That was some excellent spring water!"
+removecondition trigger thirst
+addconditionwithduration trigger nothirst 1000
+endscript
+

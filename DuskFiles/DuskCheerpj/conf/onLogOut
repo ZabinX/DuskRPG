@@ -1,0 +1,48 @@
+if hasCondition trigger mushroomhole
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger mushroomhole2
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger mushroomhole3
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger puzzle
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger puzzlefinished
+	set trigger locxy 543 632
+	endscript
+end
+if hasCondition trigger intavern
+	set trigger locxy 65 628
+	endscript
+end
+if hascondition trigger "excaliburquest"
+	changetile 199 191 56
+	end
+end
+if hascondition trigger "silencer_fight"
+    removecondition trigger "silencer_fight"
+    if hascondition trigger allowed_boat
+        removecondition trigger allowed_boat
+		removeitem trigger boat
+    end
+    set trigger locxy 121 41
+end
+if hasitem trigger "Strabo Key"
+    global string strabo_name_keyholder concat name trigger " now carries the key to Castle Strabo."
+end
+if hasitem trigger "Baron Key"
+    global string baron_name_keyholder concat name trigger " now carries the key to Castle Baron."
+end
+if hasitem trigger "Kilgore Key"
+    global string kilgore_name_keyholder concat name trigger " now carries the key to Castle Kilgore."
+end
+endscript
+
+

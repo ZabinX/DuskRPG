@@ -1,0 +1,4 @@
+trigger checkpuzzlecomplete -trigger 544 614 
+trigger ballsouth4 
+trigger balleast5 
+trigger ballnorth5  

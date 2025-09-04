@@ -1,0 +1,13 @@
+type
+food
+description
+some nicely aged cheese
+cost
+50
+image
+6
+onuse
+cheese
+uses
+1
+.

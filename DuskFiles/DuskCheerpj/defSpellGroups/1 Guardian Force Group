@@ -1,0 +1,21 @@
+#Shiva: causes Minor damage to enemy.
+#
+#
+if isinbattle caster
+	number damage * 120 * 3 rand
+	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " You call upon a Guardian Force-Shiva-to attack " name enemy caster " with swift coldness and peircing dimonds shred it's body doing " damage "  damage."
+	chat enemy caster concat concat " swift coldness and peircing dimonds shred your body for " damage "  damage."
+	endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript
+
+
+
+
+
+
+
+

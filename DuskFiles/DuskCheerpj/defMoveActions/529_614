@@ -1,0 +1,7 @@
+if ismob trigger
+	inc trigger locx -1
+	endscript
+end
+addCondition trigger balleast2
+endscript
+

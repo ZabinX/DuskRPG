@@ -1,0 +1,1 @@
+caster "10.sandwich" *caster "10 sandwiches is enough for now." 	caster cast_limit_sandwich 600 caster cast_limit_sandwich *caster "You need to wait a bit before casting this again." caster wisd * rand 100 *caster "A sandwich appears in your hand." ;caster "sandwich" *caster "You search your mind for the words to conjure food, but fail to find them."  

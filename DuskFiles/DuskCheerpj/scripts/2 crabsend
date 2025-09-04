@@ -1,0 +1,16 @@
+if > trigger privs 3  
+  inc trigger strengthBonus -1002
+  inc trigger intelligenceBonus -1000
+  inc trigger dexterityBonus -999
+  inc trigger constitutionBonus -1004
+  inc trigger wisdomBonus -1004
+  inc trigger acBonus -1000
+  inc trigger HPBonus -9980
+  inc trigger MPBonus -4980
+end
+endscript
+
+
+
+
+

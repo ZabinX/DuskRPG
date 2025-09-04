@@ -1,0 +1,11 @@
+#Entangle: Lowers a targets dexterity greatly.
+#
+#
+if isInBattle caster
+	livingthing target enemy caster
+	chat caster "You conjure vines from the ground to hinder your foes agility."
+	addconditionwithduration target "entangled" caster inte
+	endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript

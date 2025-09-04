@@ -1,0 +1,18 @@
+type
+armor
+kind
+legs
+description
+some aluminum leggings
+cost
+15
+mod
+15
+image
+7
+durability
+600
+onWear
+wear_normal_armor
+.
+

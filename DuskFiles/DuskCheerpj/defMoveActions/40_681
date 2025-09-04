@@ -1,0 +1,30 @@
+# guy that tell funny information
+if ! isPlayer trigger
+	endscript
+	end
+#
+if hasCondition trigger shenville_dq_0
+	chat trigger "Crush says: I'm serious this time:"
+	chat trigger "Crush says: to enter into the portal keep in mind previous quests..."
+	endscript
+	end
+#
+if hasCondition trigger shenville_mq_0
+	chat trigger "Crush says: Eli is a lovable kid... he burps often !"
+	endscript
+	end
+#
+if hasCondition trigger shenville_gfq_0
+	chat trigger "Crush says: poor man... he was so good... "
+	endscript
+	end
+#
+if hasCondition trigger shenville_pq_0
+	chat trigger "Crush says: lol... they always steal Eduardo's crown !"
+	endscript
+	end
+#
+chat trigger "Crush says: hi"
+endscript
+
+

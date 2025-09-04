@@ -1,0 +1,8 @@
+inc trigger maxHP 10
+inc trigger exp 200
+chat trigger "Your Quest Gem disappears as you feel a new level of strength flooding your body."
+removeitem trigger "gem1"
+endscript
+
+
+

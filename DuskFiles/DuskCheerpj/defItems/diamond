@@ -1,0 +1,13 @@
+type
+item
+description
+a rare diamond, this thing is worth a lot
+cost
+700
+mod
+0
+image
+247
+onget
+getdiamond
+

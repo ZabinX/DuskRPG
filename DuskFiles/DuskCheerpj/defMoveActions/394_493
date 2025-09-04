@@ -1,0 +1,7 @@
+if ispet trigger
+    endscript
+end
+if hascondition trigger "ballswarning"
+    removecondition trigger "ballswarning"
+end
+endscript

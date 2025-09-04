@@ -1,0 +1,5 @@
+addconditionwithduration trigger "str bonus" 120
+removeitem trigger "str bonus"
+chat trigger "You feel stronger."
+endscript
+

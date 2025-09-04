@@ -1,0 +1,20 @@
+type
+armor
+kind
+waist
+description
+a gnoll belt
+cost
+100
+mod
+60
+image
+7
+durability
+10000
+onWear
+wear_normal_armor
+.
+
+
+

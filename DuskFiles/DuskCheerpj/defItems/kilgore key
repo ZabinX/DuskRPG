@@ -1,0 +1,15 @@
+type
+item
+description
+the key for Castle Kilgore
+cost
+1
+image
+27
+uses
+0
+onget
+getkilgorekey
+ondrop
+dropkilgorekey
+.

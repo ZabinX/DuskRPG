@@ -1,0 +1,1 @@
+trigger cp 300 *trigger "You must experience more before you can wield this sword." command concat "unwear "itemname trigger command ,trigger 100 ,trigger 100 ,trigger 100  

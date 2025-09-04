@@ -1,0 +1,11 @@
+type
+item
+description
+a statue lying on the ground that looks like you, perhaps you should take it
+cost
+0
+image
+25
+onget
+make_mimic
+.

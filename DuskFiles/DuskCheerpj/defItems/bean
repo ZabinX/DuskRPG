@@ -1,0 +1,14 @@
+type
+food
+description
+an energetic bean
+cost
+10
+image
+6
+onuse
+bean
+uses
+1
+.
+

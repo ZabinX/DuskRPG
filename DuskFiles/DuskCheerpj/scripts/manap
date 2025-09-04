@@ -1,0 +1,4 @@
+chat trigger "You sip on the glowing blue potion"
+inc trigger mp 500
+removeitem trigger manapotion
+endscript

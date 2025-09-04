@@ -1,0 +1,15 @@
+if ! isWearing trigger fireboots
+	if > trigger hp 101
+	chat trigger " YEEEEOOOUUUUCHHHHH!!!!!!! That's hot!"
+	inc trigger hp -100
+	endscript
+	end
+	if < trigger hp 101
+	chat trigger "You died!"
+	set trigger hp 1
+	set trigger locxy 394 494
+	endscript
+	end
+chat trigger "You pass through the fire unharmed"
+endscript
+

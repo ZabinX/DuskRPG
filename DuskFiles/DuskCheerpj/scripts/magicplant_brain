@@ -1,0 +1,18 @@
+#Zabin script testing
+livingthing target enemy trigger
+if and hasCondition target magicplant hasCondition target magicplant1
+removeCondition target magicplant
+endscript
+end
+#
+livingthing target enemy trigger
+if hasCondition target magicplant1
+addCondition target magicplant
+endscript
+end
+#
+livingthing target enemy trigger
+addCondition target magicplant1
+chat enemy trigger "You think **Maybe I shouldn't mess with this magic plant**"
+endscript
+

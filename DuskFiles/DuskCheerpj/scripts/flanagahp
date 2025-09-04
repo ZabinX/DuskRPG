@@ -1,0 +1,39 @@
+if isInBattle trigger
+	livingthing target enemy trigger
+	if < target hp 300
+	inc target hp 30
+	chat trigger "**flanaga healed itself 30hp**"
+	end
+end
+if isInBattle trigger
+	livingthing target enemy trigger
+	if < target hp 1
+	addCondition trigger killedflanaga
+	removeCondition trigger flanaga
+	chat trigger "**flanaga uses it's last bit of MP to warp you out of her cave.  Flanaga dies**"
+	set trigger locxy 200 200
+	end
+end
+if < 1 * 10 rand
+	endscript
+	end
+#
+number c * rand 5
+if = c 0
+	addCondition trigger flanagapoint
+	removeCondition trigger flanaga
+	set trigger locxy 155 240
+	chat trigger "**flanaga cast a huge tidlewave washing you away.**  You earn a monsterpoint! **You poped out the under-water-water-slide (nearly drowned) and managed to pull yourself up the river bank.**"
+	endscript
+	end
+inc trigger hp -75
+addCondition trigger flanagapoint
+chat enemy trigger "flanaga spits fire at you for 75 damage!, You earn a monsterpoint!"
+endscript
+
+
+
+
+
+
+

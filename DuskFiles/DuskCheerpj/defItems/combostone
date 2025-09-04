@@ -1,0 +1,17 @@
+type
+item
+description
+a dark green combo stone
+cost
+500
+image
+6
+onuse
+t t comboheal
+uses
+1
+.
+
+
+
+

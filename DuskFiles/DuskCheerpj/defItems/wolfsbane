@@ -1,0 +1,15 @@
+type
+item
+description
+a grape colored herb that heals ur MP
+cost
+200
+image
+6
+onuse
+wolfsbane
+uses
+1
+.
+
+

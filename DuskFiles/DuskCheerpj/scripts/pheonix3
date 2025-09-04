@@ -1,0 +1,10 @@
+if < trigger cp 1000
+    chat trigger "You must experience more before you can use this armor."
+    order trigger "unwear pheonix gloves"
+    endscript
+end
+endscript
+
+
+
+

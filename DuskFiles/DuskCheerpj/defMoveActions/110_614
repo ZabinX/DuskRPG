@@ -1,0 +1,116 @@
+#blacksmith script
+if ! isPlayer trigger
+	endscript
+end
+if and hasCondition trigger blacksmithzabin if < trigger cash 3000
+	inc trigger locy 1
+	chat trigger " Zabin says: Come back when you have enough money!"
+	endscript
+end
+# Craft
+if and hasItem trigger "God Sword template" hasItem trigger "crimsteel ingot"
+if and hasItem trigger "mythril ingot" hasItem trigger "varaxium ingot"
+if and hasItem trigger "bloodstone ingot" hasItem trigger "duskite ingot"
+	removeItem trigger "God Sword template"
+	removeItem trigger "crimsteel ingot"
+	removeItem trigger "mythril ingot"
+	removeItem trigger "varaxium ingot"
+	removeItem trigger "bloodstone ingot"
+	removeItem trigger "duskite ingot"
+	giveitem trigger "God Sword"
+	chat trigger " Here's a God Sword!"
+	inc trigger cash -3000
+	endscript
+	end
+end
+end
+end
+if and hasItem trigger "God Shield template" hasItem trigger "crimsteel ingot"
+if and hasItem trigger "mythril ingot" hasItem trigger "varaxium ingot"
+if and hasItem trigger "bloodstone ingot" hasItem trigger "duskite ingot"
+	removeItem trigger "God Shield template"
+	removeItem trigger "crimsteel ingot"
+	removeItem trigger "mythril ingot"
+	removeItem trigger "varaxium ingot"
+	removeItem trigger "bloodstone ingot"
+	removeItem trigger "duskite ingot"
+	giveitem trigger "God Shield"
+	chat trigger " Here's a God Shield!"
+	inc trigger cash -3000
+	endscript
+	end
+end
+end
+end
+if and hasItem trigger "God Suit template" hasItem trigger "crimsteel ingot"
+if and hasItem trigger "mythril ingot" hasItem trigger "varaxium ingot"
+if and hasItem trigger "bloodstone ingot" hasItem trigger "duskite ingot"
+	removeItem trigger "God Suit template"
+	removeItem trigger "crimsteel ingot"
+	removeItem trigger "mythril ingot"
+	removeItem trigger "varaxium ingot"
+	removeItem trigger "bloodstone ingot"
+	removeItem trigger "duskite ingot"
+	giveitem trigger "God Suit"
+	chat trigger " Here's a God Suit!"
+	inc trigger cash -3000
+	endscript
+	end
+end
+end
+end
+if and hasItem trigger "God Helmet template" hasItem trigger "crimsteel ingot"
+if and hasItem trigger "mythril ingot" hasItem trigger "varaxium ingot"
+if and hasItem trigger "bloodstone ingot" hasItem trigger "duskite ingot"
+	removeItem trigger "God Helmet template"
+	removeItem trigger "crimsteel ingot"
+	removeItem trigger "mythril ingot"
+	removeItem trigger "varaxium ingot"
+	removeItem trigger "bloodstone ingot"
+	removeItem trigger "duskite ingot"
+	giveitem trigger "God Helmet"
+	chat trigger " Here's a God Helmet!"
+	inc trigger cash -3000
+	endscript
+	end
+end
+end
+end
+#
+if and hasCondition trigger blacksmithzabin hasItem trigger "crimsteel ingot"
+	chat trigger "Zabin says: You need to supply me the ingots. I need 1 ingot of all 5 types of ore plus a template of the item you want. I'll craft any for you, 3k gp a piece."
+	endscript
+	end
+#
+if and hasCondition trigger blacksmithzabin hasItem trigger "mythril ingot"
+	chat trigger "Zabin says: You need to supply me the ingots. I need 1 ingot of all 5 types of ore plus a template of the item you want. I'll craft any for you, 3k gp a piece."
+	endscript
+	end
+#
+if and hasCondition trigger blacksmithzabin hasItem trigger "varaxium ingot"
+	chat trigger "Zabin says: You need to supply me the ingots. I need 1 ingot of all 5 types of ore plus a template of the item you want. I'll craft any for you, 3k gp a piece."
+	endscript
+	end
+#
+if and hasCondition trigger blacksmithzabin hasItem trigger "bloodstone ingot"
+	chat trigger "Zabin says: You need to supply me the ingots. I need 1 ingot of all 5 types of ore plus a template of the item you want. I'll craft any for you, 3k gp a piece."
+	endscript
+	end
+#
+if and hasCondition trigger blacksmithzabin hasItem trigger "duskite ingot"
+	chat trigger "Zabin says: You need to supply me the ingots. I need 1 ingot of all 5 types of ore plus a template of the item you want. I'll craft any for you, 3k gp a piece."
+	endscript
+	end
+#
+if hasCondition trigger blacksmithzabin
+	chat trigger "Zabin says: Have you smelted any ingots yet? Just toss the ores and some coal into the furnace to smelt an ingot."
+	chat trigger "Zabin says: You need to supply me the ingots. I need 1 ingot of all 5 types of ore plus a template of the item you want. I'll craft any for you, 3k gp a piece."
+	endscript
+	end
+# first meeting
+chat trigger "Zabin says: I'm a blacksmith, and I can make God armor!"
+chat trigger "Zabin says: My brother outside crafts pickaxes. There's 5 types of ore and I need 1 ingot of each kind of ore to make 1 item of God gear."
+chat trigger "Zabin says: You need to supply me the ingots. I need 1 ingot of all 5 types of ore plus a template of the item you want. I'll craft any for you, 3k gp a piece."
+addCondition trigger blacksmithzabin
+endscript 
+

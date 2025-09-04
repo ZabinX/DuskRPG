@@ -1,0 +1,8 @@
+if < trigger cp 300
+     chat trigger "You need 500cp to enter here..."
+     inc trigger locy +1
+     endscript
+end
+set trigger locxy 633 547
+endscript
+

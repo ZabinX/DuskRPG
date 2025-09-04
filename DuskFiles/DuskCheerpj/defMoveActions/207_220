@@ -1,0 +1,5 @@
+if ispet trigger
+    endscript
+end
+chat trigger "Continue down the path to the Armor Merchant."
+endscript

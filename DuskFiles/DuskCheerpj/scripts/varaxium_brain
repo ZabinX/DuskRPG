@@ -1,0 +1,18 @@
+#Zabin script testing
+livingthing target enemy trigger
+if and hasCondition target varaxiumore hasCondition target varaxiumore1
+removeCondition target varaxiumore
+endscript
+end
+#
+livingthing target enemy trigger
+if hasCondition target varaxiumore1
+addCondition target varaxiumore
+endscript
+end
+#
+livingthing target enemy trigger
+addCondition target varaxiumore1
+chat enemy trigger "You think **Maybe I should use a mythril pickaxe.**"
+endscript
+

@@ -1,0 +1,16 @@
+type
+food
+description
+A small vial of blood-red liquid...
+cost
+1000
+image
+6
+onuse
+strength
+uses
+5
+.
+
+
+

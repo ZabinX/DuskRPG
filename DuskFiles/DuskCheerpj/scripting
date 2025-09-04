@@ -1,0 +1,509 @@
+                            Scripting 101
+
+    The intent of this document is to give any god (new or veteran) a guide
+to scripting in Dusk.  This document will have script commands specific to
+this Dusk.
+
+    Only High and Master gods can submit scripts (any god can view them).
+
+    There will be specific examples of how to code tiles that do the following:
+        -Message a player.
+        -Message a player moving in a specific direction.
+        -Teleporting a player to another location.
+        -Making a door that only lets certain players through.
+    There will be specific examples of how to get mobs to do the following:
+        -Message a player when that player enters an area.
+        -Message a player when combat begins.
+        -Cast spells in combat.
+        -Use special abilities in combat.
+        -Reward a player and teleport them when that player defeats the mob.
+    There will be specific examples of how to code items that do the following:
+        -Can only be used/worn by a specific player (cp, race, clan, etc).
+        -That only allows a player to have one (one item per player).
+        -That only allows a clan to have one (one item per clan).
+        -That is restricted to a certain map area.
+        -That behaves differently for different players (cp, race, clan, etc).
+    There will be a general guide to scripting quests as well.
+
+#########################
+Section 1: Basic commands
+#########################
+
+Certain variables are filled in for you before the script starts.
+
+trigger - This is the livingthing that caused the script to be run.  They
+    either moved onto the tile or used the item, etc.
+
+    *** NOTE:
+        For spell scripts, trigger is replaced with caster and is the
+        livingthing that cast the spell.
+    ***
+
+param0, param1, ... - These are arguments passed in by the player.  Arguments
+    usually accompany spells and scripted commands.
+    "cast invis bozo_the_newbie" would call the script for the invis spell
+    with the string "bozo_the_newbie" in variable param0.
+
+name <livingthing> - This returns a string containing the name of the specified
+    livingthing.
+
+clan <livingthing> - This returns a string containing the clan name that the
+    specified livingthing is a member of (will return "none" if they are not
+    a member of a clan).
+
+concat <string1> <string2> - This returns a single string that is simply
+    string1 followed by string2.
+
+    *** code sample:
+        chat target concat name caster " has cast a spell on you."
+    ***
+
+if - When the condition following the if is TRUE, the script that is after
+    the if statement and before the end statement for that if is run.
+	When the condition following the if is FALSE, all script that is after
+    the if statement and before the end statement for that if is skipped.
+
+    *** NOTE:
+        Every if statement MUST have a matching end statement.
+    ***
+
+! - Reverses the value of a condition
+    Used with if statements and in "can" scripts (can move, can see, etc)
+    "if ispet trigger" would be true if the trigger was a pet.
+    "if ! ispet trigger" would be true if the trigger was NOT a pet.
+
+    *** NOTE:
+        There must be one space and only one space between the ! and the
+        statement following it.
+    ***
+
+not - same as ! (same as above)
+
+end - ends an if statement.
+    If and ends can be nested within other if statements.
+
+    *** code example:
+        if ! ispet trigger
+            if ! is mob trigger
+                chat trigger "You must be a player."
+            end
+        end
+    ***
+
+    *** NOTE:
+        Indenting the statements between the if and its matching end statement
+        make it easier to see which script will be executed when the condition
+        for the if is TRUE.
+    ***
+
+strEquals <string1> <string2> - Used as a condition with an if statement.
+    When string1 and string2 are equal (case does not matter), strEquals will
+    return true.
+
+    *** code sample:
+        string s1 "Test"
+        string s2 "tesT"
+        if strequals s1 s2
+            chat trigger "case does not matter."
+        end
+    ***
+
+playSound <Sound ID> <X location> <Y location> - Plays the sound specified at
+    the specified location.
+
+order <livingthing> <command> - Orders a livingthing (player, mob, pet) to
+    execute that command.  Essentially the same as having the player type
+    something into the command line or ordering a pet to do something.
+
+hasCondition <livingthing> <condition> - Returns true when the livingthing has
+    the specified condition.
+
+addCondition <livingthing> <condition> - Adds the condition to a livingthing.
+    Adding the condition again if the living thing already has it does no harm.
+    In some cases, you will want to check to see if the livingthing already has
+    the condition and only add it if they do not.
+
+addConditionWithDuraction <livingthing> <condition> <duration> - Adds the
+    condition for specified duration (in seconds).  This behaves exactly as
+    addCondition except that the condition will be removed automatically after
+    the specified duration.
+
+removeCondition <livingthing> <condition> - Removes the condition from the
+    livingthing. While removing a condition that a livingthing does not have
+    will not hurt anything, it is a good practice to make sure that the
+    livingthing has the condition before removing it.
+
+    *** code example:
+        if hascondition trigger "invis"
+            removecondition trigger "invis"
+        end
+    ***
+
+hasFlag <livingthing> <flag> - Returns true when the livingthing has the
+    specified flag.
+
+    *** NOTE:
+        This will not detect the <sleeping> flag as this is an internal
+        game flag.
+    ***
+
+addFlag <livingthing> <flag> - Adds the specified flag to the livingthing.
+    A flag is the name that gets put on you.  In this example,
+    "<invis>bozo_the_newbie", invis is the flag.
+
+removeFlag <livingthing> <flag> - Removes a flag from a livingthing.
+
+livingthing <name> <value> - Declares a new livingthing variable with the
+    specified name and value.
+
+    *** NOTE:
+         All variable names must be one word.
+         Variable names must not match any of the script commands.
+    ***
+
+number <name> <value> - Declares a number variable with the specified value.
+
+string <name> <value> - Declares a string variable with the specified value.
+
+or <condition1> <condition2> - Used as a condition with an if statement.
+    Combines two conditions.  When EITHER of the two conditions following the or
+    returns true, then the or returns true.
+
+    *** code example:
+        if or ! ispet target ! isplayer target
+            chat trigger "You can only target players or pets."
+        end
+    ***
+
+and <condition1> <condition2> - Used as a condition with an if statement.
+    Combines two conditions.  When BOTH of the conditions following the and
+    return true, then the and returns true.
+
+    *** code example:
+        if and isplayer trigger and hascondition trigger "invis"
+            chat trigger "You are an invisible player."
+        end
+    ***
+
+< <value1> <value2> - Used as a condition with an if statement.
+    Compares two numbers.  When value1 is less than value2, < returns true.
+
+    *** code example:
+        if < trigger cp 40
+            chat trigger "You are a newbie."
+        end
+    ***
+
+> <value1> <value2> - Used as a condition with an if statement.
+    Compares two numbers.  When value1 is greater than value2, > returns true.
+
+    *** code example:
+        if > trigger cp 6000
+            chat trigger "You have way too much time on your hands."
+        end
+    ***
+
+isInBattle <livingthing> - Used as a condition with an if statement.
+    When the livingthing is in a battle, isInBattle returns true.
+
+isPlayer <livingthing> - Used as a condition with an if statement.
+    When the livingthing is a player, isPlayer returns true.
+
+isPet <livingthing> - Used as a condition with an if statement.
+    When the livingthing is a pet, isPet returns true.
+
+isMob <livingthing> - Used as a condition with an if statement.
+    When the livingthing is a mob, isMob returns true.
+
+isClan <livingthing> <string> - Used as a condition with an if statement.
+    When the liviningthing's clan matches the string, isClan returns true.
+
+isRace <livingthing> <string> - Used as a condition with an if statement.
+    When the liviningthing's race matches the string, isRace returns true.
+
+hasItem <livingthing> <itemname> - Used as a condition with an if statement.
+    When the livingthing has the named item, hasItem returns true.
+
+giveItem <livingthing> <itemname> - Gives the livingthing this item.
+
+removeItem <livingthing> <itemname> - Removes this item from the livingthing
+    so it will no longer be in their inventory.
+
+isWearing <livingthing> <itemname> - Used as a condition with an if statement.
+    When the livingthing is wearing the named item, isWearing returns true.
+
+unWear <livingthing> <itemname> - Forces this livingthing to unwear the item.
+    Any scripts that happen onUnwear will run as well.
+    Itemname can be "all" to force the livingthing to stop wearing all armor
+    and thier weapon.
+
+variableIsNumber <variablename> - Used as a condition with an if statement.
+    Will return true when the named variable is a number.
+
+    *** NOTE:
+        Variables passed into the script as parameters (param0, param1, etc.)
+        Are always strings (even if that string is a number).
+    ***
+
+variableIsLivingThing <variablename> - Used as a condition with an if statement.
+    Will return true when the named variable is a livingthing.
+
+    *** NOTE:
+        Variables passed into the script as parameters (param0, param1, etc.)
+        Are always strings (even if that string is a number).
+    ***
+
+variableIsString <variablename> - Used as a condition with an if statement.
+    Will return true when the named variable is a string.
+
+    *** NOTE:
+        Variables passed into the script as parameters (param0, param1, etc.)
+        Are always strings (even if that string is a number).
+    ***
+
+chat <livingthing> <string> - Chats a message to a livingthing.
+    Chat messages can be more than one line long as long as the string is
+    enclosed in double quotes.
+
+    *** code sample
+        chat trigger "-----------------------------------------
+
+	    Welcome to New Dusk!
+
+        -----------------------------------------"
+    ***
+
+endscript - Ends the script.  Can be used with if statements to control when
+    the script ends.
+
+    *** code sample
+        if ispet trigger
+            endscript
+        end
+        chat trigger "This way, only the player gets the message."
+        endscript
+    ***
+
+    *** NOTE:
+        Every script that is not a "can" script (can move, can see, etc)
+        MUST have and endscript as the last statement.
+    ***
+
+set <livingthing> <value> <set value> - Sets the value to the specified number
+    Primarily used for setting a player's location (teleporting) them.
+
+    *** code sample
+        set trigger locXY 100 100
+    ***
+
+    *** NOTE:
+        Set should be used very carefully, it is very easy to either harm
+        a veteran player or give a newbie a cheat with set.
+    ***
+
+inc <livingthing> <value> <increment value> - Increments the value by the
+    specified increment value.  Primarily used to provide temporary changes
+    to stat bonuses and to force a player back one tile when they try to
+    pass a door that they cannot.
+
+    *** NOTE:
+        inc is "safer" than set.  It is harder to completely destroy a
+        character by accident with inc.
+    ***
+
+Below are listed values that can be incremented or set:
+locX
+locY
+locXY
+exp
+cash
+hp
+hpBonus
+maxHp
+mp
+mpBonus
+maxMp
+damDone
+strength
+strengthBonus
+intelligence
+intelligenceBonus
+dexterity
+dexterityBonus
+wisdom
+wisdomBonus
+constitution
+constitutionBonus
+acBonus
+damModBonus
+
+
+You can also check to see what values a player has for most stats (the bonuses
+get added in, so you cannot check the stat and the bonuse seperately)
+
+*** NOTE:
+    The names used to check values are DIFFERENT from the ones used to
+    set/inc the values.
+***
+
+*** code sample
+    if variableisstring param0
+        livingthing target param0
+        if or or isplayer target ispet target ismob target
+            number priv_level target privs
+            number x target locx
+            number y target locy
+            number gp target cash
+            number exp target exp
+            number cp target cp
+            number hp target hp
+            number ac target ac
+            number dammod target dammod
+            number maxHp target maxHp
+            number mp target mp
+            number maxmp target maxMp
+            number str target stre
+            number int target inte
+            number dex target dext
+            number con target cons
+            number wis target wisd
+            number dodge target skill "Dodge"
+            number double target skill "Double Attack"
+            number triple target skill "Triple Attack"
+            number quadruple target skill "Quadruple Attack"
+            number disguise target skill "Disguise"
+            number clerical target skill "clerical group"
+        end
+    end
+***
+
+*** NOTE:
+    For the skill values, a zero meanse that they do not have that skill.
+***
+
+
+###################################
+Section 2: Making your first script
+###################################
+
+The easiest scripts to practice scripting with are the command scripts.
+Type "view command test" and a window should open up.  If the window is not
+empty, you can try test1, or <yourname>test (list commands will tell you what
+names are in use)
+
+When you get a blank window, type the following code sample:
+(don't type the lines with the ***, just what is bewteen them)
+
+*** code sample:
+   chat trigger "Hello world!"
+   endscript
+***
+
+Then press the submit button.  You should see "Submit of test was successful."
+or something to that effect.  Type "test" and you should get "Hello world!"
+in the chat window.
+
+Not very interesting, I know, so let's make it a bit more interesting.  Instead
+of using chat, let's use the order command.  Open your test script, if you do
+not already have a window open for your test script, and change it to the
+following:
+
+*** code sample:
+    order trigger gecho concat name trigger " has entered the world."
+    endscript
+***
+
+Submit it and run it by typing test.  You should now have gechoed something
+that makes it look like you just logged in.
+
+Since only gods can use gecho, this script should only let gods run it.  Let's
+restrict the command to gods only.
+
+*** code sample:
+    if < trigger privs 3
+        chat trigger "huh?"
+        endscript
+    end
+    order trigger gecho concat name trigger " has entered the world."
+    endscript
+***
+
+Ok, so it is a little better now, but what is the point of just repeating the
+fact that you have entered the world?  Let's take advantage of the fact that
+invisible gods do not show up in who and do not get announced when entering or
+exiting the world.
+
+Make two command scripts, name the first <yourname>enter
+
+*** code sample:
+    if < trigger privs 3
+        chat trigger "huh?"
+        endscript
+    end
+    order trigger "uninvis"
+    order trigger gecho concat name trigger " has entered the world."
+    endscript
+***
+
+and the second <yourname>exit
+
+*** code sample:
+    if < trigger privs 3
+        chat trigger "huh?"
+        endscript
+    end
+    order trigger "invis"
+    order trigger gecho concat name trigger " has logged out."
+    endscript
+***
+
+If the invis and uninvis commands do not exist, you can make those too.  They
+simply add and remove the condition invis from the trigger.  Invis should be
+restricted to be a god only command (since it is adding invis with no MP cost
+and unlimited duration), but uninvis should not (players should be able to
+become visible whenever they want to)
+
+invis command:
+
+*** code sample:
+    if < trigger privs 3
+        chat trigger "huh?"
+        endscript
+    end
+    addcondition trigger "invis"
+    endscript
+***
+
+uninvis command:
+
+*** code sample:
+    if hascondition trigger "invis"
+        removecondition trigger "invis"
+        chat trigger "You are no longer invisible."
+        endscript
+    end
+    chat trigger "huh?"
+    endscript
+***
+
+Now you have two commands that will let you hide/show yourself to players
+without actually logging out.  You can customize the messages to be whatever
+you want (as long as you keep it clean and fairly short... don't want to
+annoy the players)
+
+You may also want to make sure that no other god uses your enter/exit commands.
+You can restrict them to only allow you to run them with the following change:
+
+*** code sample:
+    if < trigger privs 3
+        chat trigger "huh?"
+        endscript
+    end
+    if ! strequals name trigger "<yourname>"
+        chat trigger "huh?"
+        endscript
+    end
+    order trigger "uninvis"
+    order trigger gecho concat name trigger " has entered the world."
+    endscript
+***

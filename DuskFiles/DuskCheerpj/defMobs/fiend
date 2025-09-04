@@ -1,0 +1,36 @@
+maxhp
+400
+maxmp
+150
+stre
+50
+inte
+95
+dext
+70
+cons
+65
+wisd
+55
+image
+14
+bravery
+1
+grouprelation
+3
+giveitem
+broken gem
+.5
+giveitem
+red axe
+.01
+faction
+demon
+skill
+double attack
+10
+.
+
+
+
+

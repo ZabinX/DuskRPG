@@ -1,0 +1,20 @@
+type
+armor
+kind
+neck
+description
+a dark cloak
+cost
+100
+mod
+60
+image
+6
+onWear
+pcloakStart
+onUnWear
+pcloakEnd
+durability
+1000
+.
+

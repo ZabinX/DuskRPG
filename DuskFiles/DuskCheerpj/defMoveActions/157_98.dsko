@@ -1,0 +1,2 @@
+trigger puzzlefinished *trigger "*You open the treasure box and it's full of gold coins!" ,trigger 20000 *trigger "You found 20kgp!." trigger puzzlereward 
+trigger puzzlefinished trigger puzzlereward *trigger "The treasure chest is still empty."  

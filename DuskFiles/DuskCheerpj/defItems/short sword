@@ -1,0 +1,14 @@
+type
+weapon
+description
+a short sword
+cost
+50
+mod
+125
+image
+201
+durability
+3000
+.
+

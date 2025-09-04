@@ -1,0 +1,7 @@
+trigger target enemy trigger target hp 1 trigger north3 *trigger "**The giant mushroom dies, it's dead body falls to the south.**" 
+trigger north3 .539 617 642 trigger mushroomnorth3 trigger south3 *trigger "**The giant mushroom dies, it's dead body falls to the north.**" 
+trigger south3 .539 615 642 trigger mushroomsouth3 trigger east3 guard1 local trigger "ball" guard1 locX 538 guard1 locY 616 *trigger "**The giant mushroom dies, it's dead body falls down.**" 
+trigger east3 .539 616 642 trigger mushroomeast3d trigger east3 *trigger "**The giant mushroom dies, it's dead body falls to the west.**" 
+trigger east3 .538 616 642 trigger mushroomeast3 trigger west3 guard1 local trigger "ball" guard1 locX 540 guard1 locY 616 *trigger "**The giant mushroom dies, it's dead body falls down.**" 
+trigger west3 .539 616 642 trigger mushroomeast3d trigger west3 *trigger "**The giant mushroom dies, it's dead body falls to the east.**" 
+trigger west3 .540 616 642 trigger mushroomwest3  

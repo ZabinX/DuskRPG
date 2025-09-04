@@ -1,0 +1,36 @@
+maxhp
+1750
+maxmp
+1500
+stre
+310
+inte
+50
+dext
+10
+wisd
+50
+cons
+50
+image
+15
+bravery
+0.9
+grouprelation
+0.25
+giveitem
+cold blade
+0.5
+faction
+demon
+wield
+dagger
+-1
+-1
+skill
+double attack
+100
+skill
+triple attack
+20
+.

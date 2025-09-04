@@ -1,0 +1,15 @@
+type
+weapon
+description
+An Elven Waraxe
+cost
+100000
+mod
+1000000
+image
+9
+durability
+1000000
+
+
+

@@ -1,0 +1,42 @@
+maxhp
+50000
+maxmp
+0
+stre
+8000
+inte
+2300
+dext
+2300
+wisd
+4000
+cons
+5000
+bravery
+3
+grouprelation
+2
+image
+3
+giveitem
+Questsword
+0.1
+giveitem
+slingblade
+0.05
+faction
+wraith
+condition
+detect invis
+1
+-1
+skill
+double attack
+100
+skill
+triple attack
+100
+skill
+quadruple attack
+20
+.

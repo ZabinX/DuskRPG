@@ -1,0 +1,11 @@
+if < trigger cp 2000
+    chat trigger "You must be stronger before you can wield this axe."
+    order trigger "unwear inferno axe"
+    endscript
+end
+inc trigger strengthbonus 50
+inc trigger wisdombonus 30
+enscript
+
+
+

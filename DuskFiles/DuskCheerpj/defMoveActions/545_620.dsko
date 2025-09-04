@@ -1,0 +1,1 @@
+trigger mushroomtimewarp guard1 local trigger "Giant Mushroom3" guard1 locX 539 guard1 locY 617 *trigger "You need to hit the reset button!" ,trigger 1 guard2 local trigger "Giant Mushroom7" guard2 locX 543 guard2 locY 613 *trigger "You need to hit the reset button!" ,trigger 1  

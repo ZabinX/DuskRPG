@@ -1,0 +1,14 @@
+addcondition trigger dropping
+if hascondition trigger inside
+    chat trigger "You cannot drop the key to Castle Strabo here."
+    order trigger "get strabo key"
+    removecondition trigger dropping
+    endscript
+end
+removecondition trigger dropping
+global number strabox trigger locx
+global number straboy trigger locy
+global string strabo_name_keyholder concat concat concat "Strabo Key has been dropped at " global strabox "," global straboy
+endscript
+
+

@@ -1,0 +1,2 @@
+(trigger trigger "inside" 
+trigger "inside" *trigger "You found a secret passage!" -trigger 208 230  

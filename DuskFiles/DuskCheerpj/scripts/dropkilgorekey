@@ -1,0 +1,13 @@
+addcondition trigger dropping
+if hascondition trigger inside
+    chat trigger "You cannot drop the key to Castle Kilgore here."
+    order trigger "get kilgore key"
+    removecondition trigger dropping
+    endscript
+end
+removecondition trigger dropping
+global number kilgorex trigger locx
+global number kilgorey trigger locy
+global string kilgore_name_keyholder concat concat concat "Kilgore Key has been dropped at " global kilgorex "," global kilgorey
+endscript
+
