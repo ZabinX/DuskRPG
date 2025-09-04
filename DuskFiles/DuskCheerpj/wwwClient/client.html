@@ -8,9 +8,7 @@
   <body>
     <script>
       (async function () {
-        await cheerpjInit({
-          tailscaleAuthKey: "your-key-here-keep-quotes",
-	});
+        await cheerpjInit();
         cheerpjCreateDisplay(1280, 720);
         await cheerpjRunJar("/app/duskclient.jar");
       })();

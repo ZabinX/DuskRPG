@@ -3626,7 +3626,7 @@ public class LivingThing extends DuskObject implements Runnable
 	
 	public void updateMusic()
 	{
-		/*try
+		try
 		{
 			String strResult="";
 			String strStore,
@@ -3671,18 +3671,18 @@ public class LivingThing extends DuskObject implements Runnable
 		}catch(Exception e)
 		{
 			engGame.log.printError("updateMusic()", e);
-		}*/
+		}
 	}
 	
 	public void playMusic(int type)
 	{
-		/*try
+		try
 		{
 			send(""+((char)12)+""+type+"\n");
 		}catch(Exception e)
 		{
 			engGame.log.printError("playMusic()", e);
-		}*/
+		}
 	}
 	
 	public void playSFX(int intSFX)
