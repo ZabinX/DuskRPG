@@ -1147,6 +1147,11 @@ public class Script
 				rafCompile.writeBytes(getStringForCompile());
 				rafCompile.writeBytes(getStringForCompile());
     			return true;
+		}else if (strStore.equalsIgnoreCase("playmusic"))
+		{
+				rafCompile.writeByte(60);
+				rafCompile.writeBytes(parseValueForCompile());
+			return true;
     		}
     	rafCompile.writeBytes(strStore+" ");
         return true;
@@ -2093,6 +2098,11 @@ public class Script
 					}
     				return true;
     			}
+				case 60:
+				{
+					getLivingThing("trigger").playMusic((int)parseValue());
+					return true;
+				}
 				case 32:
 				{
 					return true;
