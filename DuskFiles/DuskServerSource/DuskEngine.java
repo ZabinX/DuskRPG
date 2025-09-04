@@ -75,7 +75,7 @@ public class DuskEngine implements Runnable
 			scrOnLogOut=null;
 	//End Prefs
 	
-	static String version="2.6.2.W42";
+	static String version="2.6.2.W47";
 	Date datStart= new Date(System.currentTimeMillis());
 	
 	protected int MapRows,
@@ -96,6 +96,7 @@ public class DuskEngine implements Runnable
 		vctTiles,
 		vctTileActions,
 		vctSeeTiles,
+                vctTileAnims,
 		vctFactions,
 		vctSpellGroups,
 		vctBannedIP,
@@ -123,6 +124,7 @@ public class DuskEngine implements Runnable
 		vctPets = new Vector(0,10);
 		vctProps = new Vector(0,10);
 		vctTiles = new Vector(0,1);
+                vctTileAnims = new Vector(0,1);
 		vctTileActions = new Vector(0,1);
 		vctSeeTiles = new Vector(0,1);
 		vctFactions = new Vector(0,5);
@@ -762,7 +764,36 @@ public class DuskEngine implements Runnable
 				}
 			}catch (Exception e) { }
 		}
-	}
+			synchronized(vctTileAnims)
+		{
+			try
+			{
+				log.printMessage(Log.INFO, "Loading Tile Animations...");
+				vctTileAnims = new Vector(0,1);
+				File animsDir = new File("defTileAnims/");
+				if (animsDir.exists() && animsDir.isDirectory()) {
+					File[] animFiles = animsDir.listFiles();
+					for (File animFile : animFiles) {
+						try {
+							int tileID = Integer.parseInt(animFile.getName());
+							RandomAccessFile raf = new RandomAccessFile(animFile, "r");
+							int frameCount = Integer.parseInt(raf.readLine());
+							int delay = Integer.parseInt(raf.readLine());
+							raf.close();
+							vctTileAnims.addElement(new TileAnim(tileID, frameCount, delay));
+							log.printMessage(Log.VERBOSE, "Loaded animation for tile " + tileID + ": " + frameCount + " frames, " + delay + " delay.");
+						} catch (Exception e) {
+							log.printError("loadPrefs(): Error loading animation for tile " + animFile.getName(), e);
+						}
+					}
+				} else {
+					log.printMessage(Log.INFO, "No 'defTileAnims' directory found, skipping tile animation loading.");
+				}
+			}catch (Exception e) { 
+				log.printError("loadPrefs(): Error loading tile animations", e);
+			}
+		}
+        }
 	
 	synchronized long getID()
 	{

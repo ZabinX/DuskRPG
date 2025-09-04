@@ -23,6 +23,7 @@ public class GraphicsThread implements Runnable
 	Dusk appParent;
 	Thread thread;
 	Vector vctToMove;
+        int intAnimTick = 0;
 
 	GraphicsThread(Dusk inParent)
 	{
@@ -132,7 +133,7 @@ try {
 		}
 		appParent.addText((Array.getLength(appParent.audSFX))+" audio files loaded.\n");
 		}
-		appParent.update();
+                appParent.update(intAnimTick);
 		appParent.paint();
 		int timer=0;
 		Entity entStore;
@@ -142,6 +143,10 @@ try {
 			{
 				Thread.sleep(10);
 			}catch(Exception e){}
+                        intAnimTick++;
+			if (intAnimTick > 10000) {
+				intAnimTick = 0;
+			}
 			timer++;
 			synchronized(appParent.vctEntities)
 			{
@@ -186,7 +191,7 @@ try {
 					}
 					entStore.intMoveDirection = -1;
 					appParent.reloadJComboBoxAttack();
-//					appParent.update();
+//					appParent.update(intAnimTick);
 					appParent.paint();
 				}else
 					entStore.intTicks--;
@@ -195,7 +200,8 @@ try {
 			}
 			if (timer == 25)
 			{
-				appParent.paint();
+				appParent.update(intAnimTick);
+                                appParent.paint();
 				timer = 0;
 			}
 		}
