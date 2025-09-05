@@ -370,8 +370,8 @@ public class MainFrame extends JFrame implements ItemListener
 		getContentPane().setLayout(new BorderLayout());
 		setSize(new java.awt.Dimension(1280, 720));
 		getContentPane().add(pnlContents, BorderLayout.CENTER);
-		pnlContents.add(pnlStats);
 		pnlContents.add(pnlGraphics);
+		pnlContents.add(pnlStats);
 		pnlContents.add(txtInput);
 		pnlContents.add(scrText);
 		

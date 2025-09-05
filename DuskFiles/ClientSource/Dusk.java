@@ -1654,12 +1654,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		//Set up other objects proportionally
 		frame.txtInput.setLocation(0,frame.pnlGraphics.getBounds().height);
 		frame.scrText.setLocation(0,frame.pnlGraphics.getBounds().height+25);
-		frame.scrText.setSize(frame.pnlContents.getBounds().width,frame.pnlContents.getBounds().height-frame.pnlGraphics.getBounds().height-25);
-		frame.txtInput.setSize(frame.pnlContents.getBounds().width,25);
-		frame.scrText.getViewport().setSize(frame.pnlContents.getBounds().width,frame.pnlContents.getBounds().height-frame.pnlGraphics.getBounds().height-25);
-		frame.txtInput.setSize(frame.pnlContents.getBounds().width,25);
-		frame.pnlStats.setSize(frame.pnlContents.getBounds().width-frame.pnlGraphics.getBounds().width,frame.pnlGraphics.getBounds().height);
-		frame.pnlStats.setLocation(frame.pnlGraphics.getBounds().width,0);
+		frame.scrText.setSize(frame.pnlGraphics.getBounds().width,frame.pnlContents.getBounds().height-frame.pnlGraphics.getBounds().height-25);
+		frame.txtInput.setSize(frame.pnlGraphics.getBounds().width,25);
+		frame.pnlStats.setSize(frame.pnlContents.getBounds().width-frame.pnlGraphics.getBounds().width,frame.pnlContents.getBounds().height);
+		frame.pnlStats.setLocation(frame.pnlGraphics.getBounds().width ,0);
 		frame.txtOther.setSize(frame.pnlStats.getBounds().width-140,frame.pnlStats.getBounds().height-60);
                 frame.lblTarget.setSize(frame.pnlStats.getBounds().width, 20);
 		frame.lblInfo.setSize(frame.pnlContents.getBounds().width,20);
