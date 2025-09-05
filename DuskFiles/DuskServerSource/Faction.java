@@ -205,16 +205,16 @@ public class Faction
 		double dblStore,
 				dblEnemy=0;
 		boolean blnCanSee;
-		x = thnStore.intLocX - engGame.viewrange + 1;
-		x1 = thnStore.intLocX + engGame.viewrange - 1;
+		x = thnStore.intLocX - engGame.viewrangeX + 1;
+		x1 = thnStore.intLocX + engGame.viewrangeX - 1;
 		if (x < 0) {
 			x=0;
 		}
 		if (x1 > (engGame.MapColumns-1)) {
 			x1=engGame.MapColumns-1;
 		}
-		y = thnStore.intLocY - engGame.viewrange + 1;
-		y1 = thnStore.intLocY + engGame.viewrange - 1;
+		y = thnStore.intLocY - engGame.viewrangeY + 1;
+		y1 = thnStore.intLocY + engGame.viewrangeY - 1;
 		if (y < 0) {
 			y=0;
 		}
@@ -354,15 +354,15 @@ public class Faction
 				int destY;
 				if (thnEnemy.intLocX > thnStore.intLocX)
 				{
-					destX = thnStore.intLocX - engGame.viewrange;
+					destX = thnStore.intLocX - engGame.viewrangeX;
 				} else {
-					destX = thnStore.intLocX + engGame.viewrange;
+					destX = thnStore.intLocX + engGame.viewrangeX;
 				}
 				if (thnEnemy.intLocY > thnStore.intLocY)
 				{
-					destY = thnStore.intLocY - engGame.viewrange;
+					destY = thnStore.intLocY - engGame.viewrangeY;
 				} else {
-					destY = thnStore.intLocY + engGame.viewrange;
+					destY = thnStore.intLocY + engGame.viewrangeY;
 				}
 				thnStore.goTo(destX, destY);
 			}

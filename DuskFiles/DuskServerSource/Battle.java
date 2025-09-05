@@ -760,7 +760,7 @@ public class Battle
 			/*
 				End the battle if the closest target is off of the screen.
 			*/
-			if (range > engGame.viewrange)
+			if (range > engGame.viewrangeX)
 			{
 				endBattle();
 				return;
@@ -877,7 +877,7 @@ public class Battle
 			/*
 				End the battle if the closest target is off of the screen.
 			*/
-			if (range > engGame.viewrange)
+			if (range > engGame.viewrangeX)
 			{
 				endBattle();
 				return;

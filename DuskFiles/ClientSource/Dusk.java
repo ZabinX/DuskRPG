@@ -87,8 +87,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	DataInputStream stmIn;
 	
 	short shrMap[][];
-	int mapSize=11,
-		viewRange=5;
+	int mapSizeX=21,
+		mapSizeY=11,
+		viewRangeX=10,
+		viewRangeY=5;
 	
 	Entity entEntities[][],
 			entBuffer[][];
@@ -238,7 +240,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			thrRun.start();
 			blnConnected = true;
 			//Initialize objects
-			entEntities = new Entity[mapSize][mapSize];
+			entEntities = new Entity[mapSizeX][mapSizeY];
 			frmMerchant = new MerchantFrame(this);
 			frmBattle = new BattleFrame(this);
 			vctEntities = new Vector(0,3);
@@ -354,8 +356,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		Entity entStore2=null;
 		int i = 0,
 			i2 = 0;
-		double xloc = entStore.intLocX - LocX + viewRange,
-			yloc = entStore.intLocY - LocY + viewRange;
+		double xloc = entStore.intLocX - LocX + viewRangeX,
+			yloc = entStore.intLocY - LocY + viewRangeY;
 		if (entStore.intMoveDirection != -1)
 		{
 			switch (entStore.intMoveDirection)
@@ -382,7 +384,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 			}
 		}
-		if (xloc > mapSize || yloc > mapSize || xloc < 0 || yloc < 0)
+		if (xloc > mapSizeX || yloc > mapSizeY || xloc < 0 || yloc < 0)
 		{
 			try
 			{
@@ -393,7 +395,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 		for (i=0;i<xloc;i++)
 		{
-			for (i2=0;i2<mapSize;i2++)
+			for (i2=0;i2<mapSizeY;i2++)
 			{
 				entStore2 = entEntities[i][i2];
 				while (entStore2 != null)
@@ -433,9 +435,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			entStore2.entNext = entStore;
 		}
 		vctEntities.addElement(entStore);
-		for (i=(int)xloc;i<mapSize;i++)
+		for (i=(int)xloc;i<mapSizeX;i++)
 		{
-			for (;i2<mapSize;i2++)
+			for (;i2<mapSizeY;i2++)
 			{
 				entStore2 = entEntities[i][i2];
 				while (entStore2 != null)
@@ -461,9 +463,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		boolean blnBreak=false;
 		synchronized (vctEntities)
 		{
-		for (intStore=0;intStore<mapSize&&blnBreak==false;intStore++)
+		for (intStore=0;intStore<mapSizeX&&blnBreak==false;intStore++)
 		{
-			for (intStore2=0;intStore2<mapSize&&blnBreak==false;intStore2++)
+			for (intStore2=0;intStore2<mapSizeY&&blnBreak==false;intStore2++)
 			{
 				entStore2 = entEntities[intStore][intStore2];
 				if (entStore2 != null)
@@ -511,9 +513,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		if (entStore != null)
 		{
 			intStore--;
-		    for (;intStore<mapSize;intStore++)
+		    for (;intStore<mapSizeX;intStore++)
 			{
-				for (;intStore2<mapSize;intStore2++)
+				for (;intStore2<mapSizeY;intStore2++)
 				{
 					entStore2 = entEntities[intStore][intStore2];
 					while (entStore2 != null)
@@ -538,8 +540,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		{
 		vctEntities.removeElement(entStore);
 		Entity entStore2;
-		double dblStore = entStore.intLocX - LocX + viewRange,
-			dblStore2 = entStore.intLocY - LocY + viewRange;
+		double dblStore = entStore.intLocX - LocX + viewRangeX,
+			dblStore2 = entStore.intLocY - LocY + viewRangeY;
 		if (entStore.intMoveDirection != -1)
 		{
 			switch (entStore.intMoveDirection)
@@ -604,9 +606,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			dblStore2 = 0;
 		else
 			dblStore2++;
-		for (;dblStore<mapSize;dblStore++)
+		for (;dblStore<mapSizeX;dblStore++)
 		{
-			for (;dblStore2<mapSize;dblStore2++)
+			for (;dblStore2<mapSizeY;dblStore2++)
 			{
 				entStore2 = entEntities[(int)dblStore][(int)dblStore2];
 				while (entStore2 != null)
@@ -626,16 +628,16 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	void removeEntityFromBuffer(Entity entStore)
 	{
 		Entity entStore2;
-		int intStore= (int) (entStore.intLocX - LocX + viewRange),
-			intStore2= (int) (entStore.intLocY - LocY + viewRange);
+		int intStore= (int) (entStore.intLocX - LocX + viewRangeX),
+			intStore2= (int) (entStore.intLocY - LocY + viewRangeY);
 		if (intStore < 0)
 			intStore = 0;
 		if (intStore2 < 0)
 			intStore2 = 0;
 		
-		for (;intStore<mapSize;intStore++)
+		for (;intStore<mapSizeX;intStore++)
 		{
-			for (;intStore2<mapSize;intStore2++)
+			for (;intStore2<mapSizeY;intStore2++)
 			{
 				entStore2 = entBuffer[intStore][intStore2];
 				while (entStore2 != null)
@@ -701,9 +703,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		        		changeLocY = Integer.parseInt(stmIn.readLine()) - LocY;
 					LocX += changeLocX;
 					LocY += changeLocY;
-		            for (i=0;i<mapSize;i++)
+		            for (i=0;i<mapSizeX;i++)
 					{
-						for (i2=0;i2<mapSize;i2++)
+						for (i2=0;i2<mapSizeY;i2++)
 						{
 							shrMap[i][i2] = Short.parseShort(stmIn.readLine());
 						}
@@ -712,16 +714,16 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					while (iter.hasNext())
 					{
 						entStore = (Entity)iter.next();
-						if (Math.abs(entStore.intLocX - LocX) > viewRange || Math.abs(entStore.intLocY - LocY) > viewRange)
+						if (Math.abs(entStore.intLocX - LocX) > viewRangeX || Math.abs(entStore.intLocY - LocY) > viewRangeY)
 						{
 							iter.remove();
 						}
 					}
 		        	entBuffer = entEntities;
-		            entEntities = new Entity[mapSize][mapSize];
-		            for (i=0;i<mapSize;i++)
+		            entEntities = new Entity[mapSizeX][mapSizeY];
+		            for (i=0;i<mapSizeX;i++)
 					{
-						for (i2=0;i2<mapSize;i2++)
+						for (i2=0;i2<mapSizeY;i2++)
 						{
 							entStore = entBuffer[i][i2];
 		            		if (entStore != null)
@@ -1085,10 +1087,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				{
 		        	synchronized(vctEntities)
 		        	{
-					mapSize = Integer.parseInt(stmIn.readLine());
-					viewRange = (mapSize-1)/2;
-					entEntities = new Entity[mapSize][mapSize];
-					shrMap = new short[mapSize][mapSize];
+					mapSizeX = Integer.parseInt(stmIn.readLine());
+					mapSizeY = Integer.parseInt(stmIn.readLine());
+					viewRangeX = (mapSizeX-1)/2;
+					viewRangeY = (mapSizeY-1)/2;
+					entEntities = new Entity[mapSizeX][mapSizeY];
+					shrMap = new short[mapSizeX][mapSizeY];
 					if (blnApplet)
 					{
 						stmOut.writeBytes("appletimages\n");
@@ -1459,9 +1463,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			frame.chcLook.removeAllItems();
 		}catch (Exception e){};
 		frame.chcLook.addItem("Look");
-		for (i=0;i<mapSize;i++)
+		for (i=0;i<mapSizeX;i++)
 		{
-			for (i2=0;i2<mapSize;i2++)
+			for (i2=0;i2<mapSizeY;i2++)
 			{
 				entStore = entEntities[i][i2];
 				while (entStore != null)
@@ -1488,9 +1492,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			frame.chcAttack.removeAllItems();
 		}catch (Exception e){};
 		frame.chcAttack.addItem("Attack");
-		for (i=0;i<mapSize;i++)
+		for (i=0;i<mapSizeX;i++)
 		{
-			for (i2=0;i2<mapSize;i2++)
+			for (i2=0;i2<mapSizeY;i2++)
 			{
 				entStore = entEntities[i][i2];
 				while (entStore != null)
@@ -1520,9 +1524,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			frame.chcGet.removeAllItems();
 		}catch (Exception e){};
 		frame.chcGet.addItem("Get");
-		for (i=0;i<mapSize;i++)
+		for (i=0;i<mapSizeX;i++)
 		{
-			for (i2=0;i2<mapSize;i2++)
+			for (i2=0;i2<mapSizeY;i2++)
 			{
 				entStore = entEntities[i][i2];
 				while (entStore != null)
@@ -1633,18 +1637,18 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	public void scaleWindow()
 	{
 		//frame.pnlGraphics
-		if ((frame.pnlContents.getBounds().width-310) > (frame.pnlContents.getBounds().height-100))
-		{
-			frame.pnlGraphics.setSize(frame.pnlContents.getBounds().height-100,frame.pnlContents.getBounds().height-100);
-		}else
-		{
-			frame.pnlGraphics.setSize(frame.pnlContents.getBounds().width-310,frame.pnlContents.getBounds().width-310);
+		int width = frame.pnlContents.getBounds().width-310;
+		int height = (int)(width / 2);
+		if (height > frame.pnlContents.getBounds().height-100) {
+			height = frame.pnlContents.getBounds().height-100;
+			width = height * 2;
 		}
-		intImageSize = frame.pnlGraphics.getBounds().width/mapSize;
+		frame.pnlGraphics.setSize(width,height);
+		intImageSize = frame.pnlGraphics.getBounds().width/mapSizeX;
 		if (intImageSize < 1)
 			intImageSize = 1;
-		frame.pnlGraphics.setSize(intImageSize*mapSize,intImageSize*mapSize);
-		imgDisplay = frame.pnlGraphics.createImage(intImageSize*mapSize,intImageSize*mapSize);
+		frame.pnlGraphics.setSize(intImageSize*mapSizeX,intImageSize*mapSizeY);
+		imgDisplay = frame.pnlGraphics.createImage(intImageSize*mapSizeX,intImageSize*mapSizeY);
 		gD = imgDisplay.getGraphics();
 		g = frame.pnlGraphics.getGraphics();
 		//Set up other objects proportionally
@@ -1680,8 +1684,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
  			if(!blnLoaded) return;
  	
  			//Find coordinates of click on map
- 			int destX = (x / intImageSize) + LocX - viewRange;
- 			int destY = (y / intImageSize) + LocY - viewRange;
+ 			int destX = (x / intImageSize) + LocX - viewRangeX;
+ 			int destY = (y / intImageSize) + LocY - viewRangeY;
  			
  			//Move to location
  			try
@@ -1898,9 +1902,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			int i,
 				i2;
 			Entity entStore;
-			for (i=0;i<mapSize;i++)
+			for (i=0;i<mapSizeX;i++)
 			{
-				for (i2=0;i2<mapSize;i2++)
+				for (i2=0;i2<mapSizeY;i2++)
 				{
 					//Draw map(background)
 					try
@@ -1957,8 +1961,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	void drawEntity(Entity entStore)
 	{
-		double x = entStore.intLocX-LocX+viewRange;
-		double y = entStore.intLocY-LocY+viewRange;
+		double x = entStore.intLocX-LocX+viewRangeX;
+		double y = entStore.intLocY-LocY+viewRangeY;
 		//Draw flag
 		if (entStore.intFlag != 0)
 		{

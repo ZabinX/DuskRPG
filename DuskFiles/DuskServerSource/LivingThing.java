@@ -1599,7 +1599,7 @@ public class LivingThing extends DuskObject implements Runnable
 				return "You can't move while you're following someone.";
 			}
 		}
-		if (Math.abs(destX - intLocX) > engGame.viewrange || Math.abs(destY - intLocY) > engGame.viewrange)
+		if (Math.abs(destX - intLocX) > engGame.viewrangeX || Math.abs(destY - intLocY) > engGame.viewrangeY)
 		{
 			return null; 
 		}
@@ -1790,10 +1790,10 @@ public class LivingThing extends DuskObject implements Runnable
 		{
 			if (isMob())
 			{
-				int maxY = originalY + engGame.viewrange;
-				int minY = originalY - engGame.viewrange;
-				int maxX = originalX + engGame.viewrange;
-				int minX = originalX - engGame.viewrange;
+				int maxY = originalY + engGame.viewrangeY;
+				int minY = originalY - engGame.viewrangeY;
+				int maxX = originalX + engGame.viewrangeX;
+				int minX = originalX - engGame.viewrangeX;
 				if ((newLocY > maxY) || (newLocY < minY) || (newLocX > maxX) || (newLocX < minX))
 				{
 					return;
@@ -1806,16 +1806,16 @@ public class LivingThing extends DuskObject implements Runnable
 		DuskObject objStore;
 		boolean blnCanSee;
 		int x, x1, y, y1, y2;
-		x = intLocX-engGame.viewrange;
+		x = intLocX-engGame.viewrangeX;
 		if (x < 0)
 			x = 0;
-		x1 = intLocX+1+engGame.viewrange;
+		x1 = intLocX+1+engGame.viewrangeX;
 		if (x1 > engGame.MapColumns)
 			x1 = engGame.MapColumns;
-		y1 = intLocY-engGame.viewrange;
+		y1 = intLocY-engGame.viewrangeY;
 		if (y1 < 0)
 			y1 = 0;
-		y2 = intLocY+1+engGame.viewrange;
+		y2 = intLocY+1+engGame.viewrangeY;
 		if (y2 > engGame.MapRows)
 			y2 = engGame.MapRows;
 		for (;x<x1;x++)
@@ -1963,24 +1963,24 @@ public class LivingThing extends DuskObject implements Runnable
 		int i,i2,i3;
 		boolean blnCanSee;
 		i=0;
-	    if (intLocX-engGame.viewrange<0)
+	    if (intLocX-engGame.viewrangeX<0)
 		{
-	    	i = -1*(intLocX-engGame.viewrange);
+	    	i = -1*(intLocX-engGame.viewrangeX);
 	    }
 	   	i2=0;
-	    if (intLocY-engGame.viewrange<0)
+	    if (intLocY-engGame.viewrangeY<0)
 	    {
-	    	i2 = -1*(intLocY-engGame.viewrange);
+	    	i2 = -1*(intLocY-engGame.viewrangeY);
 	    }
-		for (;i<engGame.mapsize;i++)
+		for (;i<engGame.mapsizeX;i++)
 		{
-			if (intLocX+i-engGame.viewrange<engGame.MapColumns)
+			if (intLocX+i-engGame.viewrangeX<engGame.MapColumns)
 			{
-				for (i3=i2;i3<engGame.mapsize;i3++)
+				for (i3=i2;i3<engGame.mapsizeY;i3++)
 				{
-					if (intLocY+i3-engGame.viewrange<engGame.MapRows)
+					if (intLocY+i3-engGame.viewrangeY<engGame.MapRows)
 					{
-						objStore = engGame.objEntities[intLocX+i-engGame.viewrange][intLocY+i3-engGame.viewrange];
+						objStore = engGame.objEntities[intLocX+i-engGame.viewrangeX][intLocY+i3-engGame.viewrangeY];
 						while (objStore != null)
 						{
 							if (objStore.isLivingThing() && objStore != this)
@@ -2028,7 +2028,7 @@ public class LivingThing extends DuskObject implements Runnable
 		{
 			if (isMob())
 			{
-				if (!(Math.abs(originalX-newLocX) < engGame.viewrange && Math.abs(originalY-newLocY) < engGame.viewrange))
+				if (!(Math.abs(originalX-newLocX) < engGame.viewrangeX && Math.abs(originalY-newLocY) < engGame.viewrangeY))
 				{
 					return;
 				}	
@@ -2103,13 +2103,13 @@ public class LivingThing extends DuskObject implements Runnable
 	    String strResult = ""+(char)2;
 		strResult += intLocX+"\n";
 		strResult += intLocY+"\n";
-	    for (int i=0;i<engGame.mapsize;i++)
+	    for (int i=0;i<engGame.mapsizeX;i++)
 	    {
-	    	for (int i2=0;i2<engGame.mapsize;i2++)
+	    	for (int i2=0;i2<engGame.mapsizeY;i2++)
 	    	{
 	    		try
 	    		{
-	    			strResult += engGame.shrMap[intLocX-engGame.viewrange+i][intLocY-engGame.viewrange+i2]+"\n";
+	    			strResult += engGame.shrMap[intLocX-engGame.viewrangeX+i][intLocY-engGame.viewrangeY+i2]+"\n";
 	    		}catch (Exception e)
 	    		{
 	    			strResult += "0\n";
@@ -3094,24 +3094,24 @@ public class LivingThing extends DuskObject implements Runnable
 		}
 		//Search surrounding area
 	   	i=0;
-	    if (intLocX-engGame.viewrange<0)
+	    if (intLocX-engGame.viewrangeX<0)
 		{
-	    	i = -1*(intLocX-engGame.viewrange);
+	    	i = -1*(intLocX-engGame.viewrangeX);
 	    }
 	   	i2=0;
-	    if (intLocY-engGame.viewrange<0)
+	    if (intLocY-engGame.viewrangeY<0)
 	    {
-	    	i2 = -1*(intLocY-engGame.viewrange);
+	    	i2 = -1*(intLocY-engGame.viewrangeY);
 	    }
-		for (;i<engGame.mapsize;i++)
+		for (;i<engGame.mapsizeX;i++)
 		{
-			if (intLocX+i-engGame.viewrange<engGame.MapColumns)
+			if (intLocX+i-engGame.viewrangeX<engGame.MapColumns)
 			{
-				for (i3=i2;i3<engGame.mapsize;i3++)
+				for (i3=i2;i3<engGame.mapsizeY;i3++)
 				{
-					if (intLocY+i3-engGame.viewrange<engGame.MapRows)
+					if (intLocY+i3-engGame.viewrangeY<engGame.MapRows)
 					{
-						objStore = engGame.objEntities[intLocX+i-engGame.viewrange][intLocY+i3-engGame.viewrange];
+						objStore = engGame.objEntities[intLocX+i-engGame.viewrangeX][intLocY+i3-engGame.viewrangeY];
 						while (objStore != null)
 						{
 							if (objStore.strName.equalsIgnoreCase(strName))
@@ -4134,7 +4134,8 @@ public class LivingThing extends DuskObject implements Runnable
 	{
 		int i,i2;
 		String strResult = (char)19+"";
-		strResult += engGame.mapsize+"\n";
+		strResult += engGame.mapsizeX+"\n";
+		strResult += engGame.mapsizeY+"\n";
 		send(strResult);
 	}
 		
@@ -4191,4 +4192,5 @@ public class LivingThing extends DuskObject implements Runnable
 		}
 	}
  }
+
 
