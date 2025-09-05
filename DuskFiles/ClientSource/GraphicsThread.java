@@ -80,8 +80,11 @@ public class GraphicsThread implements Runnable
 			System.err.println("Error while waiting for images: "+e.toString());
 		}
 		appParent.numMapImages = (appParent.imgOriginalMap.getWidth(null)/appParent.imgOriginalMap.getHeight(null))-1;
+		appParent.intOriginalTileSize = appParent.imgOriginalMap.getHeight(null);
 		appParent.numPlayerImages = ((appParent.imgOriginalPlayers.getWidth(null)/appParent.imgOriginalPlayers.getHeight(null))/8)-1;
+		appParent.intOriginalPlayerSize = appParent.imgOriginalPlayers.getHeight(null);
 		appParent.numSpriteImages = (appParent.imgOriginalSprites.getWidth(null)/appParent.imgOriginalSprites.getHeight(null))-1;
+		appParent.intOriginalSpriteSize = appParent.imgOriginalSprites.getHeight(null);
 		appParent.addText((appParent.numMapImages+appParent.numPlayerImages+appParent.numSpriteImages)+" image files loaded.\n");
 		appParent.scaleImages();
 		if (!appParent.blnApplet)

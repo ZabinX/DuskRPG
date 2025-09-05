@@ -371,10 +371,10 @@ public class MainFrame extends JFrame implements ItemListener
 		setSize(new java.awt.Dimension(1280, 720));
 		getContentPane().add(pnlContents, BorderLayout.CENTER);
 		pnlContents.add(pnlGraphics);
-		pnlContents.add(pnlStats);
 		pnlContents.add(txtInput);
 		pnlContents.add(scrText);
-		
+		pnlContents.add(pnlStats);
+                
 		chcAttack.addItemListener(this);
 		chcAction.addItemListener(this);
 		chcLook.addItemListener(this);

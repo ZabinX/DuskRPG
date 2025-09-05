@@ -42,6 +42,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	int numSpriteImages,
 	    numPlayerImages,
 	    numMapImages,
+	    intOriginalTileSize,
+	    intOriginalPlayerSize,
+	    intOriginalSpriteSize,
         MapRows=0,
         MapColumns=0,
         LocX=0,
@@ -1609,29 +1612,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		
 	public void scaleImages()
 	{
-		try
-		{
-			if (imgMap != null)
-				imgMap.flush();
-			if (imgPlayers != null)
-				imgMap.flush();
-			if (imgSprites != null)
-				imgMap.flush();
-			imgMap = imgOriginalMap.getScaledInstance(intImageSize*(numMapImages+1),intImageSize,Image.SCALE_DEFAULT);
-			imgPlayers = imgOriginalPlayers.getScaledInstance(intImageSize*(numPlayerImages+1)*8,intImageSize,Image.SCALE_DEFAULT);
-			imgSprites = imgOriginalSprites.getScaledInstance(intImageSize*(numSpriteImages+1),intImageSize,Image.SCALE_DEFAULT);
-			try
-			{
-				MediaTracker mdtTracker = new MediaTracker(frame);
-				mdtTracker.addImage(imgMap,0);
-				mdtTracker.addImage(imgPlayers,0);
-				mdtTracker.addImage(imgSprites,0);
-				mdtTracker.waitForAll();
-			}catch(InterruptedException e)
-			{
-				System.err.println("Error while scaling for images: "+e.toString());
-			}                       
-		}catch (Exception e){}
+		// Scaling is now done on the fly in the update() and drawEntity() methods.
 	}
 	
 	public void scaleWindow()
@@ -1654,10 +1635,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		//Set up other objects proportionally
 		frame.txtInput.setLocation(0,frame.pnlGraphics.getBounds().height);
 		frame.scrText.setLocation(0,frame.pnlGraphics.getBounds().height+25);
-		frame.scrText.setSize(frame.pnlGraphics.getBounds().width,frame.pnlContents.getBounds().height-frame.pnlGraphics.getBounds().height-25);
-		frame.txtInput.setSize(frame.pnlGraphics.getBounds().width,25);
+		frame.scrText.setSize(frame.pnlGraphics.getBounds().width - 200,frame.pnlContents.getBounds().height-frame.pnlGraphics.getBounds().height-25);
+		frame.txtInput.setSize(frame.pnlGraphics.getBounds().width - 200,25);
 		frame.pnlStats.setSize(frame.pnlContents.getBounds().width-frame.pnlGraphics.getBounds().width,frame.pnlContents.getBounds().height);
-		frame.pnlStats.setLocation(frame.pnlGraphics.getBounds().width ,0);
+		frame.pnlStats.setLocation(frame.pnlGraphics.getBounds().width,0);
 		frame.txtOther.setSize(frame.pnlStats.getBounds().width-140,frame.pnlStats.getBounds().height-60);
                 frame.lblTarget.setSize(frame.pnlStats.getBounds().width, 20);
 		frame.lblInfo.setSize(frame.pnlContents.getBounds().width,20);
@@ -1921,29 +1902,29 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 						if (anim != null) {
 							int frame = (intAnimTick / anim.delay) % anim.frameCount;
-							gD.drawImage(imgMap,
+							gD.drawImage(imgOriginalMap,
 												i*intImageSize,i2*intImageSize,
 												(i+1)*intImageSize,(i2+1)*intImageSize,
-												(tileID+frame)*intImageSize,0,
-												(tileID+frame+1)*intImageSize,intImageSize,
+												(tileID+frame)*intOriginalTileSize,0,
+												(tileID+frame+1)*intOriginalTileSize,intOriginalTileSize,
 												null);
 						} else {
-							gD.drawImage(imgMap,
+							gD.drawImage(imgOriginalMap,
 												i*intImageSize,i2*intImageSize,
 												(i+1)*intImageSize,(i2+1)*intImageSize,
-												tileID*intImageSize,0,
-												(tileID+1)*intImageSize,intImageSize,
+												tileID*intOriginalTileSize,0,
+												(tileID+1)*intOriginalTileSize,intOriginalTileSize,
 												null);
 						}
 				    }catch(Exception e)
 				    {
 				        try
 						{
-							gD.drawImage(imgMap,
+							gD.drawImage(imgOriginalMap,
 											i*intImageSize,i2*intImageSize,
 											(i+1)*intImageSize,(i2+1)*intImageSize,
 											0,0,
-											intImageSize,intImageSize,
+											intOriginalTileSize,intOriginalTileSize,
 											null);
 				 		}catch(Exception exc){}
 					}
@@ -1993,26 +1974,32 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                         }
 		}
 
-		if (entStore.intStep == -1)
+		if (entStore.intStep == -1) // This is for sprites (e.g., items on the ground)
 		{
 			try
 			{
-				gD.drawImage(imgSprites,
-							(int)(x*intImageSize)-52,(int)(y*intImageSize)-52,   //Zach hack bigger sprites -48,-50
-							(int)((x+1.5)*intImageSize),(int)((y+1)*intImageSize),  //1.5 used to be 1
-							entStore.intImage*intImageSize,0,
-							(entStore.intImage+1)*intImageSize,intImageSize,
+				int spriteScreenSize = intImageSize * 2; // 64x64 sprites should be twice the size of 32x32 tiles
+				int xPos = (int)(x * intImageSize) - (spriteScreenSize / 4); // Center horizontally
+				int yPos = (int)(y * intImageSize) - (spriteScreenSize / 2); // Shift up to align feet
+				gD.drawImage(imgOriginalSprites,
+							xPos, yPos,
+							xPos + spriteScreenSize, yPos + spriteScreenSize,
+							entStore.intImage*intOriginalSpriteSize,0,
+							(entStore.intImage+1)*intOriginalSpriteSize,intOriginalSpriteSize,
 							null);
 			}catch(Exception e){}
-		}else
+		}else // This is for players
 		{
 			try
 			{
-				gD.drawImage(imgPlayers,
-								(int)(x*intImageSize)-52,(int)(y*intImageSize)-52,   //Zach hack bigger sprites added -48,-50 
-								(int)((x+1.5)*intImageSize),(int)((y+1)*intImageSize),   //image is scaled 3 times now oops 
-								(entStore.intImage*8+entStore.intStep)*intImageSize,0, //images are distorted in small screen, and this hack
-								(entStore.intImage*8+entStore.intStep+1)*intImageSize,intImageSize,  //works best nearly or max fullscreen
+				int playerScreenSize = intImageSize * 2;
+				int xPos = (int)(x * intImageSize) - (playerScreenSize / 4); // Center horizontally
+				int yPos = (int)(y * intImageSize) - (playerScreenSize / 2); // Shift up to align feet
+				gD.drawImage(imgOriginalPlayers,
+								xPos, yPos,
+								xPos + playerScreenSize, yPos + playerScreenSize,
+								(entStore.intImage*8+entStore.intStep)*intOriginalPlayerSize,0,
+								(entStore.intImage*8+entStore.intStep+1)*intOriginalPlayerSize,intOriginalPlayerSize,
 								null);
 			}catch(Exception e){}
 		}
