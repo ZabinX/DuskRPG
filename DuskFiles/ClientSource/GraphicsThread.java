@@ -22,22 +22,13 @@ public class GraphicsThread implements Runnable
 {
 	Dusk appParent;
 	Thread thread;
-	Vector vctToMove;
-        int intAnimTick = 0;
+    int intAnimTick = 0;
 
 	GraphicsThread(Dusk inParent)
 	{
 		appParent = inParent;
-		vctToMove = new Vector(0,5);
 	}
 	
-	void addEntityToMove(Entity entStore, int direction)
-	{
-		entStore.intTicks = 12;
-		entStore.intMoveDirection = direction;
-		vctToMove.addElement(entStore);
-	}
-
 	public void run()
 	{
 		int i=0;
@@ -136,77 +127,40 @@ try {
 		}
 		appParent.addText((Array.getLength(appParent.audSFX))+" audio files loaded.\n");
 		}
-                appParent.update(intAnimTick);
+        appParent.update(intAnimTick);
 		appParent.paint();
-		int timer=0;
-		Entity entStore;
+
+		// The main game loop.
 		while (true)
 		{
-			try
+			if (appParent.blnConnected && appParent.blnLoaded)
 			{
-				Thread.sleep(10);
-			}catch(Exception e){}
-                        intAnimTick++;
-			if (intAnimTick > 10000) {
-				intAnimTick = 0;
-			}
-			timer++;
-			synchronized(appParent.vctEntities)
-			{
-			for (i=0;i<vctToMove.size();i++)
-			{
-				entStore = (Entity)vctToMove.elementAt(i);
-				synchronized(entStore)
+				try
 				{
-				if (entStore.intTicks == 0)
-				{
-					vctToMove.removeElement(entStore);
-					switch (entStore.intMoveDirection)
-					{
-						case 0: //north
-						{
-//						entStore.intLocY -= 0.5;
-							if (entStore.intStep != -1)
-								entStore.intStep = 0;
-							break;
-						}
-						case 1: //south
-						{
-//						entStore.intLocY += 0.5;
-							if (entStore.intStep != -1)
-								entStore.intStep = 2;
-							break;
-						}
-						case 2: //west
-						{
-//						entStore.intLocX -= 0.5;
-							if (entStore.intStep != -1)
-								entStore.intStep = 4;
-							break;
-						}
-						case 3: //east
-						{
-//						entStore.intLocX += 0.5;
-							if (entStore.intStep != -1)
-								entStore.intStep = 6;
-							break;
-						}
+					// Increment animation tick. Reset to avoid overflow.
+					intAnimTick++;
+					if (intAnimTick > 10000) {
+						intAnimTick = 0;
 					}
-					entStore.intMoveDirection = -1;
-					appParent.reloadJComboBoxAttack();
-//					appParent.update(intAnimTick);
+
+					appParent.update(intAnimTick);
 					appParent.paint();
-				}else
-					entStore.intTicks--;
+
+					// Sleep to control frame rate, aiming for ~50 FPS.
+					Thread.sleep(20);
+				}catch(Exception e){
+					System.err.println("Error in graphics thread: " + e.toString());
 				}
 			}
-			}
-			if (timer == 25)
+			else
 			{
-				appParent.update(intAnimTick);
-                                appParent.paint();
-				timer = 0;
+				// If not loaded or connected, sleep longer to avoid burning CPU.
+				try
+				{
+					Thread.sleep(100);
+				}catch(Exception e){}
 			}
 		}
 	}
 }
+

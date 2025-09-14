@@ -1,22 +1,12 @@
-/*
-All code copyright Tom Weingarten (captaint@home.com) 2000
-Tom Weingarten makes no assurances as to the reliability or
-functionality of this code. Use at your own risk.
+/* All code copyright Tom Weingarten (captaint@home.com) 2000 Tom Weingarten makes no assurances as to the reliability or functionality of this code. Use at your own risk.
 
-You are free to edit or redistribute this code or any portion
-at your wish, under the condition that you do not edit or
-remove this license, and accompany it with all redistributions.
-*/
+You are free to edit or redistribute this code or any portion at your wish, under the condition that you do not edit or remove this license, and accompany it with all redistributions. */
 
-/*
-Special Thanks to:
+/* Special Thanks to:
 
-Randall Leeds for the following code portions
-as well as many other small changes and deprecation fixes:
-Float/Unfloat
+Randall Leeds for the following code portions as well as many other small changes and deprecation fixes: Float/Unfloat
 
-Joe Alloway for shadowed text and the !set command
-*/
+Joe Alloway for shadowed text and the !set command */
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
@@ -26,6 +16,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.Vector;
 import java.util.Iterator;
+import java.util.HashMap;
 import java.lang.Math;
 import java.lang.reflect.Array;
 import java.util.StringTokenizer;
@@ -74,8 +65,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     		vctSell,
     		vctChoiceDropItems,
     		vctChoiceActionItems,
-    		vctEntities,
-                vctTileAnims;
+    		vctEntities;
+    Vector<TileAnim> vctTileAnims;
     
 	Image imgOriginalSprites;
 	Image imgOriginalPlayers;
@@ -95,12 +86,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		viewRangeX=10,
 		viewRangeY=5;
 	
-	Entity entEntities[][],
-			entBuffer[][];
+	HashMap<Long, Entity> hmpEntities;
 	
 	boolean intStep,
 			blnMusic=true;
     Thread thrRun;
+    
+    Entity player;
+    double cameraX, cameraY;
     	
     int intImageSize = 36;
     
@@ -108,7 +101,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     
     MainFrame frame;
 	BattleFrame frmBattle;
- //       MagicFrame frmMagic;
 	MerchantFrame frmMerchant;
 	
 	Graphics g;
@@ -152,56 +144,20 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			{
 			if (blnApplet)
 			{
-				/*
-				frame.btnEquipment.imgNormal = Toolkit.getDefaultToolkit().getImage(getClass().getResource("en.gif"));
-				frame.btnEquipment.imgMouseOver = Toolkit.getDefaultToolkit().getImage(getClass().getResource("emo.gif"));
-				frame.btnEquipment.imgMouseDown = Toolkit.getDefaultToolkit().getImage(getClass().getResource("emd.gif"));
-				*/
 				frame.btnEquipment.repaint();
-				/*
-				frame.btnMerchant.imgNormal = Toolkit.getDefaultToolkit().getImage(getClass().getResource("mn.gif"));
-				frame.btnMerchant.imgMouseOver = Toolkit.getDefaultToolkit().getImage(getClass().getResource("mmo.gif"));
-				frame.btnMerchant.imgMouseDown = Toolkit.getDefaultToolkit().getImage(getClass().getResource("mmd.gif"));
-				*/
 				frame.btnMerchant.repaint();
-				/*
-				frame.btnQuit.imgNormal = Toolkit.getDefaultToolkit().getImage(getClass().getResource("qn.gif"));
-				frame.btnQuit.imgMouseOver = Toolkit.getDefaultToolkit().getImage(getClass().getResource("qmo.gif"));
-				frame.btnQuit.imgMouseDown = Toolkit.getDefaultToolkit().getImage(getClass().getResource("qmd.gif"));
-				*/
 				frame.btnQuit.repaint();
 				paint();
 			}else
 			{
-				/*
-				frame.btnConnect.imgNormal = Toolkit.getDefaultToolkit().getImage("images/cn.gif");
-				frame.btnConnect.imgMouseOver = Toolkit.getDefaultToolkit().getImage("images/cmo.gif");
-				frame.btnConnect.imgMouseDown = Toolkit.getDefaultToolkit().getImage("images/cmd.gif");
-				*/
-                                //frame.btnMagic.repaint();
-				frame.btnConnect.repaint();
-				/*
-				frame.btnEquipment.imgNormal = Toolkit.getDefaultToolkit().getImage("images/en.gif");
-				frame.btnEquipment.imgMouseOver = Toolkit.getDefaultToolkit().getImage("images/emo.gif");
-				frame.btnEquipment.imgMouseDown = Toolkit.getDefaultToolkit().getImage("images/emd.gif");
-				*/
+                frame.btnConnect.repaint();
 				frame.btnEquipment.repaint();
-				/*
-				frame.btnMerchant.imgNormal = Toolkit.getDefaultToolkit().getImage("images/mn.gif");
-				frame.btnMerchant.imgMouseOver = Toolkit.getDefaultToolkit().getImage("images/mmo.gif");
-				frame.btnMerchant.imgMouseDown = Toolkit.getDefaultToolkit().getImage("images/mmd.gif");
-				*/
 				frame.btnMerchant.repaint();
-				/*
-				frame.btnQuit.imgNormal = Toolkit.getDefaultToolkit().getImage("images/qn.gif");
-				frame.btnQuit.imgMouseOver = Toolkit.getDefaultToolkit().getImage("images/qmo.gif");
-				frame.btnQuit.imgMouseDown = Toolkit.getDefaultToolkit().getImage("images/qmd.gif");
-				*/
 				frame.btnQuit.repaint();
-                                frame.btnPotion.repaint();
-                                frame.btnPotion2.repaint();
-                                frame.btnPotion3.repaint();
-                                frame.btnPotion4.repaint();
+                frame.btnPotion.repaint();
+                frame.btnPotion2.repaint();
+                frame.btnPotion3.repaint();
+                frame.btnPotion4.repaint();
 				paint();
 			}
 			}catch(Exception e)
@@ -223,7 +179,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 
-	// Main entry point
 	static public void main(String[] args) 
 	{
 		new Dusk();
@@ -231,19 +186,16 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	void connect()
 	{
-		// Connect to Server
 		try
 		{
 			sckConnection = new Socket(address,port);
 			stmOut = new DataOutputStream(sckConnection.getOutputStream());
 			stmIn = new DataInputStream(sckConnection.getInputStream());
 			addText("Please enter your character name or the name of a new character: \n");
-			// Load Images and start checking for incoming commands
 			thrRun = new Thread(this);
 			thrRun.start();
 			blnConnected = true;
-			//Initialize objects
-			entEntities = new Entity[mapSizeX][mapSizeY];
+			hmpEntities = new HashMap<Long, Entity>();
 			frmMerchant = new MerchantFrame(this);
 			frmBattle = new BattleFrame(this);
 			vctEntities = new Vector(0,3);
@@ -251,7 +203,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			vctSell = new Vector(0,3);
 			vctChoiceDropItems = new Vector(0,3);
 			vctChoiceActionItems = new Vector(0,3);
-                        vctTileAnims = new Vector(0,3);
+            vctTileAnims = new Vector<TileAnim>(0,3);
 		}catch(Exception e)
 		{
 			System.err.println("Error connecting to server: "+e.toString());
@@ -261,21 +213,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	void addText(String strAdd)
 	{
-		int i,
-			j,
-			red,
-			green,
-			blue;
-		String strStore=null;
-		String strRGB;
-		String strBlue;
+		int i,j,red,green,blue;
+		String strStore=null,strRGB,strBlue;
 		StringTokenizer tokStore;
 		i = strAdd.indexOf("<RGB ");
 		while(strAdd != null && i != -1)
 		{
-			red=0;
-			green=0;
-			blue=0;
+			red=0; green=0; blue=0;
 			if (i != 0)
 			{
 				strStore = strAdd.substring(0,i);
@@ -300,18 +244,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			tokStore = new StringTokenizer(strRGB);
 			try
 			{
-				tokStore.nextToken();	//Skip over initial RGB
+				tokStore.nextToken();
 				red = Integer.parseInt(tokStore.nextToken());
 				green = Integer.parseInt(tokStore.nextToken());
 				strBlue = tokStore.nextToken();
 				blue = Integer.parseInt(strBlue.substring(0,strBlue.length()));
 			} catch (NumberFormatException e) {}
-			if (red < 0) red = 0;
-			if (green < 0) green = 0;
-			if (blue < 0) blue = 0;
-			if (red > 255) red = 255;
-			if (green > 255) green = 255;
-			if (blue > 255) blue = 255;
+			if (red < 0) red = 0; if (green < 0) green = 0; if (blue < 0) blue = 0;
+			if (red > 255) red = 255; if (green > 255) green = 255; if (blue > 255) blue = 255;
 			addText(red, green, blue, strStore);
 		}
 		if (strAdd != null)
@@ -319,8 +259,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	}
 	
 	synchronized void addText(int red,int green, int blue,String strAdd)
-		{
-		if (frame.docOutput.getLength() > 8000) //if the text area has more than 8000, characters, only keep last 4000;
+	{
+		if (frame.docOutput.getLength() > 8000)
 		{
 			try
 			{
@@ -338,7 +278,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			System.err.println(e.toString());
 		}
 
-
 		JScrollBar sb = frame.scrText.getVerticalScrollBar();
 		if (!sb.getValueIsAdjusting())
 		{
@@ -355,309 +294,49 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	{
 		synchronized (vctEntities)
 		{
-		entStore.intNum = 0;
-		Entity entStore2=null;
-		int i = 0,
-			i2 = 0;
-		double xloc = entStore.intLocX - LocX + viewRangeX,
-			yloc = entStore.intLocY - LocY + viewRangeY;
-		if (entStore.intMoveDirection != -1)
-		{
-			switch (entStore.intMoveDirection)
-			{
-				case 0:
-				{
-//					yloc -= .5;
-					break;
-				}
-				case 1:
-				{
-//					yloc += .5;
-					break;
-				}
-				case 2:
-				{
-//					xloc -= .5;
-					break;
-				}
-				case 3:
-				{
-//					xloc += .5;
-					break;
-				}
+			if (hmpEntities.containsKey(entStore.ID)) {
+				return;
 			}
-		}
-		if (xloc > mapSizeX || yloc > mapSizeY || xloc < 0 || yloc < 0)
-		{
-			try
-			{
-	   			stmOut.writeBytes("rement "+entStore.ID+"\n");
-			}catch(IOException e){}
-			reloadJComboBoxLook();
-			return;
-		}
-		for (i=0;i<xloc;i++)
-		{
-			for (i2=0;i2<mapSizeY;i2++)
-			{
-				entStore2 = entEntities[i][i2];
-				while (entStore2 != null)
-				{
-					if (entStore.strName.equalsIgnoreCase(entStore2.strName))
-					{
-						entStore.intNum++;
-					}
-					entStore2 = entStore2.entNext;
-				}
-			}
-		}
-		for (i2=0;i2<yloc+1;i2++)
-		{
-			entStore2 = entEntities[(int)xloc][i2];
-			if (entStore2 != null)
-			{
-				if (entStore.strName.equalsIgnoreCase(entStore2.strName))
-				{
-					entStore.intNum++;
-				}
-				while (entStore2.entNext != null)
-				{
-					if (entStore.strName.equalsIgnoreCase(entStore2.strName))
-					{
-						entStore.intNum++;
-					}
-					entStore2 = entStore2.entNext;
-				}
-			}
-		}
-		if (entStore2 == null)
-		{
-			entEntities[(int)xloc][(int)yloc] = entStore;
-		}else
-		{
-			entStore2.entNext = entStore;
-		}
-		vctEntities.addElement(entStore);
-		for (i=(int)xloc;i<mapSizeX;i++)
-		{
-			for (;i2<mapSizeY;i2++)
-			{
-				entStore2 = entEntities[i][i2];
-				while (entStore2 != null)
-				{
-					if (entStore.strName.equalsIgnoreCase(entStore2.strName))
-					{
-						entStore2.intNum++;
-					}
-					entStore2 = entStore2.entNext;
-				}
-			}
-			i2=0;
-		}
+
+			hmpEntities.put(entStore.ID, entStore);
+			vctEntities.addElement(entStore);
+			
+			entStore.pixelX = entStore.intLocX * intImageSize;
+			entStore.pixelY = entStore.intLocY * intImageSize;
+			entStore.targetX = entStore.pixelX;
+			entStore.targetY = entStore.pixelY;
+
+			updateEntityNumbers();
 		}
 	}
 	
 	void removeEntity(long lngStore)
 	{
-		Entity entStore = null,
-				entStore2;
-		int intStore,
-			intStore2=0;
-		boolean blnBreak=false;
 		synchronized (vctEntities)
 		{
-		for (intStore=0;intStore<mapSizeX&&blnBreak==false;intStore++)
-		{
-			for (intStore2=0;intStore2<mapSizeY&&blnBreak==false;intStore2++)
-			{
-				entStore2 = entEntities[intStore][intStore2];
-				if (entStore2 != null)
-				{
-					if (entStore2.ID == lngStore)
-					{
-						vctEntities.removeElement(entStore2);
-						entEntities[intStore][intStore2] = entStore2.entNext;
-						entStore = entStore2;
-						entStore2 = entStore2.entNext;
-						while (entStore2 != null)
-						{
-							if (entStore.strName.equalsIgnoreCase(entStore2.strName))
-							{
-								entStore2.intNum--;
-							}
-							entStore2 = entStore2.entNext;
-						}
-						blnBreak=true;
-					}else
-					{
-						while (entStore2.entNext != null)
-						{
-							if (entStore2.entNext.ID == lngStore)
-							{
-								vctEntities.removeElement(entStore2.entNext);
-								entStore = entStore2.entNext;
-								entStore2.entNext = entStore2.entNext.entNext;
-								blnBreak=true;
-								while (entStore2.entNext != null)
-								{
-									if (entStore.strName.equalsIgnoreCase(entStore2.entNext.strName))
-									{
-										entStore2.entNext.intNum--;
-									}
-									entStore2 = entStore2.entNext;
-								}
-							}else
-								entStore2 = entStore2.entNext;
-						}
-					}
-				}
+			Entity entStore = hmpEntities.get(lngStore);
+			if (entStore != null) {
+				hmpEntities.remove(lngStore);
+				vctEntities.removeElement(entStore);
+				updateEntityNumbers();
 			}
 		}
-		if (entStore != null)
-		{
-			intStore--;
-		    for (;intStore<mapSizeX;intStore++)
-			{
-				for (;intStore2<mapSizeY;intStore2++)
-				{
-					entStore2 = entEntities[intStore][intStore2];
-					while (entStore2 != null)
-					{
-						if (entStore.strName.equalsIgnoreCase(entStore2.strName))
-						{
-							entStore2.intNum--;
-						}
-						entStore2 = entStore2.entNext;
-					}
-				}
-				intStore2 = 0;
+	}
+
+	void updateEntityNumbers() {
+		HashMap<String, Integer> nameCounts = new HashMap<>();
+		for (int i = 0; i < vctEntities.size(); i++) {
+			Entity ent = (Entity)vctEntities.elementAt(i);
+			Integer count = nameCounts.get(ent.strName);
+			if (count == null) {
+				count = 0;
 			}
-			vctEntities.removeElement(entStore);
-		}
+			ent.intNum = count;
+			nameCounts.put(ent.strName, count + 1);
 		}
 	}
 	
-	void removeEntity(Entity entStore)
-	{
-		synchronized(vctEntities)
-		{
-		vctEntities.removeElement(entStore);
-		Entity entStore2;
-		double dblStore = entStore.intLocX - LocX + viewRangeX,
-			dblStore2 = entStore.intLocY - LocY + viewRangeY;
-		if (entStore.intMoveDirection != -1)
-		{
-			switch (entStore.intMoveDirection)
-			{
-				case 0:
-				{
-//					dblStore2 -= .5;
-					break;
-				}
-				case 1:
-				{
-//					dblStore2 += .5;
-					break;
-				}
-				case 2:
-				{
-//					dblStore -= .5;
-					break;
-				}
-				case 3:
-				{
-//					dblStore += .5;
-					break;
-				}
-			}
-		}
-		try
-		{
-			entStore2 = entEntities[(int)dblStore][(int)dblStore2];
-			if (entStore2 == null)
-				return;
-			if (entStore == entStore2)
-			{
-				entEntities[(int)dblStore][(int)dblStore2] = entStore.entNext;
-				entStore.entNext = null;
-			}else
-			{
-				while (entStore2.entNext != null && entStore2.entNext != entStore)
-				{
-					entStore2 = entStore2.entNext;
-				}
-				if (entStore2.entNext == null)
-				{
-					return;
-				}
-				entStore2.entNext = entStore2.entNext.entNext;
-				entStore.entNext = null;
-				entStore2 = entStore2.entNext;
-			}
-			while (entStore2 != null)
-			{
-				if (entStore.strName.equalsIgnoreCase(entStore2.strName))
-				{
-					entStore2.intNum--;
-				}
-				entStore2 = entStore2.entNext;
-			}
-		}catch(Exception e) {}
-		if (dblStore < 0)
-			dblStore = 0;
-		if (dblStore2 < 0)
-			dblStore2 = 0;
-		else
-			dblStore2++;
-		for (;dblStore<mapSizeX;dblStore++)
-		{
-			for (;dblStore2<mapSizeY;dblStore2++)
-			{
-				entStore2 = entEntities[(int)dblStore][(int)dblStore2];
-				while (entStore2 != null)
-				{
-					if (entStore.strName.equalsIgnoreCase(entStore2.strName))
-					{
-						entStore2.intNum--;
-					}
-					entStore2 = entStore2.entNext;
-				}
-			}
-			dblStore2 = 0;
-		}
-		}
-	}
-	
-	void removeEntityFromBuffer(Entity entStore)
-	{
-		Entity entStore2;
-		int intStore= (int) (entStore.intLocX - LocX + viewRangeX),
-			intStore2= (int) (entStore.intLocY - LocY + viewRangeY);
-		if (intStore < 0)
-			intStore = 0;
-		if (intStore2 < 0)
-			intStore2 = 0;
-		
-		for (;intStore<mapSizeX;intStore++)
-		{
-			for (;intStore2<mapSizeY;intStore2++)
-			{
-				entStore2 = entBuffer[intStore][intStore2];
-				while (entStore2 != null)
-				{
-					if (entStore.strName.equalsIgnoreCase(entStore2.strName))
-					{
-						entStore2.intNum--;
-					}
-					entStore2 = entStore2.entNext;
-				}
-			}
-			intStore2 = 0;
-		}
-	}
-	
-	//Thread to process incoming commands
-        @Override
+    @Override
 	public void	run()
 	{
 		int intStore,
@@ -674,18 +353,17 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		{
 		try
 		{
-		    // Handle incoming messages from Server
 		    incoming = stmIn.read();
 		    switch (incoming)
 		    {
-		    	case(0): //Quit
+		    	case(0):
 		    	{
 		    		blnLoaded = false;
 					blnConnected = false;
 					sckConnection.close();
 					return;
 		    	}
-				case(1):  //update Images
+				case(1):
 				{
 					strRCAddress = stmIn.readLine();
 					try
@@ -696,71 +374,48 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					thrGraphics.thread.start();
 					break;
 				}
-		        case (2):  //update Loc and Map
+		        case (2):
 		        {
 					synchronized(vctEntities)
 					{
-		        	int i,
-		        		i2,
-						changeLocX = Integer.parseInt(stmIn.readLine()) - LocX,
-		        		changeLocY = Integer.parseInt(stmIn.readLine()) - LocY;
-					LocX += changeLocX;
-					LocY += changeLocY;
-		            for (i=0;i<mapSizeX;i++)
-					{
-						for (i2=0;i2<mapSizeY;i2++)
+						LocX = Integer.parseInt(stmIn.readLine());
+						LocY = Integer.parseInt(stmIn.readLine());
+
+						for (int i=0;i<mapSizeX;i++)
 						{
-							shrMap[i][i2] = Short.parseShort(stmIn.readLine());
-						}
-					}
-					Iterator iter = vctEntities.iterator();
-					while (iter.hasNext())
-					{
-						entStore = (Entity)iter.next();
-						if (Math.abs(entStore.intLocX - LocX) > viewRangeX || Math.abs(entStore.intLocY - LocY) > viewRangeY)
-						{
-							iter.remove();
-						}
-					}
-		        	entBuffer = entEntities;
-		            entEntities = new Entity[mapSizeX][mapSizeY];
-		            for (i=0;i<mapSizeX;i++)
-					{
-						for (i2=0;i2<mapSizeY;i2++)
-						{
-							entStore = entBuffer[i][i2];
-		            		if (entStore != null)
-		            		{
-		            			try
-		            			{
-		            				entEntities[i - changeLocX][i2 - changeLocY] = entStore;
-								}catch(Exception e)
-								{
-									do
-									{
-										removeEntityFromBuffer(entStore);
-										entStore = entStore.entNext;
-									}while (entStore != null);
-								}
+							for (int i2=0;i2<mapSizeY;i2++)
+							{
+								shrMap[i][i2] = Short.parseShort(stmIn.readLine());
 							}
 						}
-					}
-					frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
-					vctMerchantItems = new Vector(0,5);
-					reloadJComboBoxLook();
-					reloadJComboBoxGet();
-					reloadJComboBoxAttack();
-		        	update(0);
-		        	paint();
+						
+						Iterator<Entity> iter = vctEntities.iterator();
+						while (iter.hasNext())
+						{
+							entStore = iter.next();
+							if (Math.abs(entStore.intLocX - LocX) > viewRangeX || Math.abs(entStore.intLocY - LocY) > viewRangeY)
+							{
+								iter.remove();
+								hmpEntities.remove(entStore.ID);
+							}
+						}
+
+						frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
+						vctMerchantItems = new Vector(0,5);
+						updateEntityNumbers();
+						reloadJComboBoxLook();
+						reloadJComboBoxGet();
+						reloadJComboBoxAttack();
+						findPlayer();
 					}
 		            break;
 		        }
-		        case (3):  //incoming chat
+		        case (3):
 		        {
 		        	addText(stmIn.readLine()+"\n");
 		            break;
 		        }
-		        case (4):  //add Entity
+		        case (4):
 		        {
 		        	synchronized(vctEntities)
 		        	{
@@ -800,26 +455,26 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		            if (entStore != null)
 		            {
 		          		addEntity(entStore);
+		          		if (entStore.intLocX == LocX && entStore.intLocY == LocY && entStore.intType == 0) {
+		          			findPlayer();
+		          		}
 		            }
 					reloadJComboBoxLook();
 					reloadJComboBoxGet();
 					reloadJComboBoxAttack();
-					update(0);
-					paint();
 					}
 		            break;
 		        }
-		        case (5):  //update Stats
+		        case (5):
 		        {
 					inthp = Integer.parseInt(stmIn.readLine());
 					intmaxhp = Integer.parseInt(stmIn.readLine());
 					intsp = Integer.parseInt(stmIn.readLine());
 					intmaxsp = Integer.parseInt(stmIn.readLine());
 					frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
-                                        update(0);
 		            break;
 		        }
-		        case (6):  //update Items
+		        case (6):
 		        {
 		        	vctChoiceDropItems = new Vector(0,5);
 		        	frame.frmEquipment.blnRefreshMenus = true;
@@ -843,72 +498,21 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						strStore = stmIn.readLine();
 						switch (intStore)
 						{
-						case (0):
-						{
-							vctChoiceDropItems.addElement(strStore);
-							break;
-						}
-						case (1):
-						{
-							vctChoiceDropItems.addElement(strStore);
-							frame.frmEquipment.chcWield.addItem(strStore);
-							break;
-						}
-						case (2):
-						{
-							vctChoiceDropItems.addElement(strStore);
-							frame.frmEquipment.chcArms.addItem(strStore);
-							break;
-						}
-						case (3):
-						{
-							vctChoiceDropItems.addElement(strStore);
-							frame.frmEquipment.chcLegs.addItem(strStore);
-							break;
-						}
-						case (4):
-						{
-							vctChoiceDropItems.addElement(strStore);
-							frame.frmEquipment.chcTorso.addItem(strStore);
-							break;
-						}
-						case (5):
-						{
-							vctChoiceDropItems.addElement(strStore);
-							frame.frmEquipment.chcWaist.addItem(strStore);
-							break;
-						}
-						case (6):
-						{
-							vctChoiceDropItems.addElement(strStore);
-							frame.frmEquipment.chcNeck.addItem(strStore);
-							break;
-						}
-						case (7):
-						{
-							vctChoiceDropItems.addElement(strStore);
-							frame.frmEquipment.chcSkull.addItem(strStore);
-							break;
-						}
-						case (8):
-						{
-							vctChoiceDropItems.addElement(strStore);
-							frame.frmEquipment.chcEyes.addItem(strStore);
-							break;
-						}
-						case (9):
-						{
-							vctChoiceDropItems.addElement(strStore);
-							frame.frmEquipment.chcHands.addItem(strStore);
-							break;
-						}
+						case (0): vctChoiceDropItems.addElement(strStore); break;
+						case (1): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcWield.addItem(strStore); break;
+						case (2): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcArms.addItem(strStore); break;
+						case (3): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcLegs.addItem(strStore); break;
+						case (4): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcTorso.addItem(strStore); break;
+						case (5): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcWaist.addItem(strStore); break;
+						case (6): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcNeck.addItem(strStore); break;
+						case (7): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcSkull.addItem(strStore); break;
+						case (8): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcEyes.addItem(strStore); break;
+						case (9): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcHands.addItem(strStore); break;
 						}
 						intStore = Integer.parseInt(stmIn.readLine());
 					}	
 					} 
-					catch (IOException | NumberFormatException e)
-					{
-					}
+					catch (IOException | NumberFormatException e) {}
 		            frame.frmEquipment.chcWield.addItem("none");
 		            frame.frmEquipment.chcArms.addItem("none");
 		            frame.frmEquipment.chcLegs.addItem("none");
@@ -922,7 +526,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					reloadJComboBoxDrop();
 		            break;
 		        }
-		        case (7):  //update Equipment
+		        case (7):
 		        {
 					try
 					{
@@ -935,13 +539,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						frame.frmEquipment.lblSkull.setText("Skull: "+stmIn.readLine()); 
 						frame.frmEquipment.JLabel5.setText("Eyes: "+stmIn.readLine()); 
 						frame.frmEquipment.JLabel7.setText("Hands: "+stmIn.readLine());
-					}catch (IOException e)
-					{
-						System.err.println("Error loading equipment" + e.toString());
-					}
+					}catch (IOException e) { System.err.println("Error loading equipment" + e.toString()); }
 					break;
 				}
-				case (8):  //update Stats
+				case (8):
 				{
 					try
 					{
@@ -953,18 +554,15 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		               	 	strStore = stmIn.readLine();
 		                }
 						frame.txtOther.setText(strStore2);
-					}catch (IOException e)
-					{
-						System.err.println("Error loading stats" + e.toString());
-					}
+					}catch (IOException e) { System.err.println("Error loading stats" + e.toString()); }
 					break;
 				}
-				case (9):  //halt
+				case (9):
 				{
 			    	blnLoaded = false;
 			    	break;
 				}
-				case (10):  //update Actions
+				case (10):
 				{
 	            	strStore = stmIn.readLine();
 	            	vctChoiceActionItems = new Vector(0,5);
@@ -976,7 +574,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					reloadJComboBoxAction();
 	            	break;
 				}
-				case(11): //load music
+				case(11):
 				{
 					try
 					{
@@ -997,10 +595,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 								{
 									audMusic[intStore][intStore2] = appShell.getAudioClip(new URL(strStore));
 									while (audMusic[intStore][intStore2] == null) {}
-								}catch(MalformedURLException e)
-								{
-									System.err.println("Error while trying to load music file "+strStore+":"+e.toString());
-								}
+								}catch(MalformedURLException e) { System.err.println("Error while trying to load music file "+strStore+":"+e.toString()); }
 							}
 						}
 						addText("Music loaded.\n");
@@ -1013,7 +608,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 					break;
 				}
-				case(12): //play music
+				case(12):
 				{
 					if (blnMusic)
 					{
@@ -1023,24 +618,21 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						if (audMusicPlaying != null) audMusicPlaying.stop();
 						audMusicPlaying = audMusic[intStore][(int)(Math.random()*intNumSongs[intStore])];
 						audMusicPlaying.loop();
-					}catch(IOException | NumberFormatException e)
-					{
-						System.err.println("Error while trying to play music file:" + e.toString());
-					}
+					}catch(IOException | NumberFormatException e) { System.err.println("Error while trying to play music file:" + e.toString()); }
 					}
 					break;
 				}
-				case(13): //stillThere?
+				case(13):
 				{
 					stmOut.writeBytes("notdead\n");
 					break;
 				}
-				case (14): //proceed
+				case (14):
 				{
 			    	blnLoaded = true;
 			    	break;
 				}
-				case (15): //play sfx
+				case (15):
 				{
 					try
 					{
@@ -1048,7 +640,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}catch(IOException | NumberFormatException e){}
 					break;
 				}
-				case (16): //remove entity
+				case (16):
 				{
 					synchronized(vctEntities)
 					{
@@ -1057,12 +649,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					reloadJComboBoxLook();
 					reloadJComboBoxGet();
 					reloadJComboBoxAttack();
-					update(0);
-					paint(); // Wildern added
 					}
 					break;
 				}
-				case (17): //update Merchant
+				case (17):
 				{
 					strStore = stmIn.readLine();
 					while (!strStore.equals("."))
@@ -1074,7 +664,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					reloadJComboBoxBuy();
 					break;
 				}
-				case (18): //view/edit
+				case (18):
 				{
 					EditFrame frmEdit = new EditFrame(stmIn.readLine(),this,true);
 					frmEdit.show();
@@ -1086,7 +676,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 					break;
 				}
-				case (19): //resize Map
+				case (19):
 				{
 		        	synchronized(vctEntities)
 		        	{
@@ -1094,7 +684,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					mapSizeY = Integer.parseInt(stmIn.readLine());
 					viewRangeX = (mapSizeX-1)/2;
 					viewRangeY = (mapSizeY-1)/2;
-					entEntities = new Entity[mapSizeX][mapSizeY];
 					shrMap = new short[mapSizeX][mapSizeY];
 					if (blnApplet)
 					{
@@ -1107,7 +696,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 					break;
 				}
-				case (20): //view/no-edit
+				case (20):
 				{
 					EditFrame frmEdit = new EditFrame(stmIn.readLine(),this,false);
 					frmEdit.show();
@@ -1119,7 +708,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 					break;
 				}
-				case (21): //offMerchant
+				case (21):
 				{
 					frmMerchant.hide();
 					vctMerchantItems = new Vector(0,5);
@@ -1127,7 +716,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					frame.btnMerchant.setEnabled(false);
 					break;
 				}
-				case (22): //update Sell
+				case (22):
 				{
 					vctSell = new Vector(0,5);
 					strStore = stmIn.readLine();
@@ -1139,7 +728,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					reloadJComboBoxSell();
 					break;
 				}
-				case (23): //colour chat
+				case (23):
 				{
 		            addText(Integer.parseInt(strStore = stmIn.readLine()),
 		            		Integer.parseInt(strStore = stmIn.readLine()),
@@ -1147,286 +736,155 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		            		stmIn.readLine()+"\n");
 		            break;
 				}
-				case (24): //move north --New walking animation, implmented by Zach- written by Tom and NotZed.
+				case (24):
 				{
 					long ID = Long.parseLong(stmIn.readLine());
 					synchronized(vctEntities)
     				{
-					for (int i=0;i<vctEntities.size();i++)
-					{
-						entStore = (Entity)vctEntities.elementAt(i);
-						if (entStore.ID == ID)
-						{
-                                                    if (entStore.intMoveDirection == -1);
-                                                    removeEntity(entStore);
-                                                    if (entStore.intStep != -1)
-                                                    {
-							if (entStore.intMoveDirection == 0)
-							{
-                                                            entStore.intStep ^= 1;
-                                                        } else {
-                                                            entStore.intStep = 1;
-                                                            entStore.intMoveDirection = 0;
-                                                            }
-                                                        }
-                                                    
-                                                                entStore.intLocY += -1;
-                                                                entStore.intLocX += 0;
-                                                                
-							try
-							{
-								addEntity(entStore);
-							}catch (Exception var13) {
-                                                        }
-							reloadJComboBoxAttack();
-							if (ID != ID) {
-                                                        //thrGraphics.addEntityToMove(entStore,0);
-                                                        // Notzeds hack -- ID != ID fixes flicker. Zach- added "update" to the second break to keep mobs movement updated while idle.
-                                                        // HACK: Don't update the screen display if the user moves, attempted
-                                                        // fix at flicker-on-move stuff.
-                                                        // The server should always send an UpdateLocMap every time
-                                                        update(0);
-							paint();
-                                                        }
-							break;
+						entStore = hmpEntities.get(ID);
+						if (entStore != null) {
+							if (!entStore.isMoving) {
+								startMove(entStore, 0);
+							} else {
+								entStore.queuedMoves.add(0);
+							}
 						}
-					}
-                                    }
-                            update(0);
+                    }
 		            break;
 				}
-				case (25): //move south
+				case (25):
 				{
 					long ID = Long.parseLong(stmIn.readLine());
 					synchronized(vctEntities)
     				{
-					for (int i=0;i<vctEntities.size();i++)
-					{
-						entStore = (Entity)vctEntities.elementAt(i);
-						if (entStore.ID == ID)
-						{
-                                                    if (entStore.intMoveDirection == -1);
-                                                    removeEntity(entStore);
-                                                    if (entStore.intStep != -1)
-                                                    {
-							if (entStore.intMoveDirection == 1)
-							{
-                                                            entStore.intStep ^= 1;
-                                                        } else {
-                                                            entStore.intStep = 3;
-                                                            entStore.intMoveDirection = 1;
-                                                            }
-                                                        }
-                                                    
-                                                                entStore.intLocY += 1;
-                                                                entStore.intLocX += 0;
-                                                                
-							try
-							{
-								addEntity(entStore);
-							}catch (Exception var13) {
-                                                        }
-							reloadJComboBoxAttack();
-							if (ID != ID) {
-                                                        //thrGraphics.addEntityToMove(entStore,1);
-                                                        update(0);
-							paint();
-                                                        }
-							break;
+						entStore = hmpEntities.get(ID);
+						if (entStore != null) {
+							if (!entStore.isMoving) {
+								startMove(entStore, 1);
+							} else {
+								entStore.queuedMoves.add(1);
+							}
 						}
-					}
-                                    }
-                            update(0);
+                    }
 		            break;
 				}
-				case (26): //move west
+				case (26):
 				{
 					long ID = Long.parseLong(stmIn.readLine());
 					synchronized(vctEntities)
     				{
-					for (int i=0;i<vctEntities.size();i++)
-					{
-						entStore = (Entity)vctEntities.elementAt(i);
-						if (entStore.ID == ID)
-						{
-                                                    if (entStore.intMoveDirection == -1);
-                                                    removeEntity(entStore);
-                                                    if (entStore.intStep != -1)
-                                                    {
-							if (entStore.intMoveDirection == 2)
-							{
-                                                            entStore.intStep ^= 1;
-                                                        } else {
-                                                            entStore.intStep = 5;
-                                                            entStore.intMoveDirection = 2;
-                                                            }
-                                                        }
-                                                    
-                                                                entStore.intLocY += 0;
-                                                                entStore.intLocX += -1;
-                                                                
-							try
-							{
-								addEntity(entStore);
-							}catch (Exception var13) {
-                                                        }
-							reloadJComboBoxAttack();
-							if (ID != ID) {
-                                                        //thrGraphics.addEntityToMove(entStore,2);
-                                                        update(0);
-							paint();
-                                                        }
-							break;
+						entStore = hmpEntities.get(ID);
+						if (entStore != null) {
+							if (!entStore.isMoving) {
+								startMove(entStore, 2);
+							} else {
+								entStore.queuedMoves.add(2);
+							}
 						}
-					}
-                                    }
-                            update(0);
+                    }
 		            break;
 				}
-				case (27): //move east
+				case (27):
 				{
 					long ID = Long.parseLong(stmIn.readLine());
 					synchronized(vctEntities)
     				{
-					for (int i=0;i<vctEntities.size();i++)
-					{
-						entStore = (Entity)vctEntities.elementAt(i);
-						if (entStore.ID == ID)
-						{
-                                                    if (entStore.intMoveDirection == -1);
-                                                    removeEntity(entStore);
-                                                    if (entStore.intStep != -1)
-                                                    {
-							if (entStore.intMoveDirection == 3)
-							{
-                                                            entStore.intStep ^= 1;
-                                                        } else {
-                                                            entStore.intStep = 7;
-                                                            entStore.intMoveDirection = 3;
-                                                            }
-                                                        }
-                                                        
-                                                                entStore.intLocY += 0;
-                                                                entStore.intLocX += 1;
-                                                                
-							try
-							{
-								addEntity(entStore);
-							}catch (Exception var13) {
-                                                        }
-							reloadJComboBoxAttack();
-							if (ID != ID) {
-                                                        //thrGraphics.addEntityToMove(entStore,3);
-                                                        update(0);
-							paint();
-                                                        }
-							break;
+						entStore = hmpEntities.get(ID);
+						if (entStore != null) {
+							if (!entStore.isMoving) {
+								startMove(entStore, 3);
+							} else {
+								entStore.queuedMoves.add(3);
+							}
 						}
-					}
-                                    }
-                            update(0);
+                    }
 		            break;
 				}
-				case (28): //update range
+				case (28):
 				{
 					range = Integer.parseInt(stmIn.readLine());
 					break;
 				}
-				case (29): //set flag
+				case (29):
 				{
 					lngStore = Long.parseLong(stmIn.readLine());
 					intStore = Integer.parseInt(stmIn.readLine());
 					synchronized(vctEntities)
 					{
-						Iterator iter = vctEntities.iterator();
-						while (iter.hasNext())
+						entStore = hmpEntities.get(lngStore);
+						if (entStore != null)
 						{
-								entStore = (Entity)iter.next();
-							if (entStore.ID == lngStore)
-							{
-								entStore.intFlag = intStore;
-									break;
-							}
+							entStore.intFlag = intStore;
 						}
 					}
-					update(0);
 					break;
 				}
-				case (30): //clear all flags
+				case (30):
 				{
 					synchronized(vctEntities)
 					{
-						Iterator iter = vctEntities.iterator();
-						while (iter.hasNext())
-						{
-							entStore = (Entity)iter.next();
+						for (int i=0; i<vctEntities.size(); i++) {
+							entStore = (Entity)vctEntities.elementAt(i);
 							entStore.intFlag = 0;
 						}
 					}
-					update(0);
 					break;	
 				}
-				case (31): //show battle window and clear text
+				case (31):
 				{
 					if (!frmBattle.isShowing())
 						frmBattle.show();
 					strStore = stmIn.readLine();
 					frmBattle.setTitle(strStore);
 					frmBattle.txtEdit.setText("");
-                                        frame.lblTarget.setText("");    //Zach added target HP in mainframe. Doesn't work if popups off.
-                                        break;
+                    frame.lblTarget.setText("");
+                    break;
 				}
-				case (32): //show battle window and update title
+				case (32):
 				{
 					if (!frmBattle.isShowing())
 						frmBattle.show();
 					strStore = stmIn.readLine();
 					frmBattle.setTitle(strStore);
-                                        frame.lblTarget.setText(strStore);   //Zach added target HP in mainframe. Doesn't work if popups off.
+                    frame.lblTarget.setText(strStore);
 					break;
 				}
-				case (33): //add text to battle window
+				case (33):
 				{
 					if (!frmBattle.isShowing())
 						frmBattle.show();
 					strStore = stmIn.readLine();
 					frmBattle.txtEdit.append(strStore+"\n");
-                                        break;
+                    break;
 				}
-                                case (34):
-                                {
-                                    try {
-                                        long opponentID = Long.parseLong(stmIn.readLine());
-                                        String HpData = stmIn.readLine();
-                                           if (HpData == null) {
-                                        System.err.println("Input stream ended before the expected line was found.");
-                                        } else {
-                                        String[] hpValues = HpData.trim().split(" ");
-                                        int newHp = Integer.parseInt(hpValues[0]);
-                                        int newMaxHp = Integer.parseInt(hpValues[1]);
+                case (34):
+                {
+                    try {
+                        long opponentID = Long.parseLong(stmIn.readLine());
+                        String HpData = stmIn.readLine();
+                           if (HpData == null) {
+                        System.err.println("Input stream ended before the expected line was found.");
+                        } else {
+                        String[] hpValues = HpData.trim().split(" ");
+                        int newHp = Integer.parseInt(hpValues[0]);
+                        int newMaxHp = Integer.parseInt(hpValues[1]);
 
-                                        // Find the entity and update its HP
-                                        synchronized(vctEntities) {
-                                            for (int i = 0; i < vctEntities.size(); i++) {
-                                                Entity ent = (Entity)vctEntities.elementAt(i);
-                                                if (ent.ID == opponentID) {
-                                                    ent.hp = newHp;
-                                                    ent.maxhp = newMaxHp;
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                        }
-                                    } catch (Exception e) {
-                                        System.err.println("Error updating opponent HP: " + e.getMessage());
-                                    }
-                                    update(0);
-                                    paint();
-                                    break;
-                                }
-                                case (35): //receive tile animation data
+                        synchronized(vctEntities) {
+							entStore = hmpEntities.get(opponentID);
+							if (entStore != null) {
+								entStore.hp = newHp;
+								entStore.maxhp = newMaxHp;
+							}
+                        }
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error updating opponent HP: " + e.getMessage());
+                    }
+                    break;
+                }
+                case (35):
 				{
-					vctTileAnims = new Vector(0,5);
+					vctTileAnims = new Vector<TileAnim>(0,5);
 					int tileID = Integer.parseInt(stmIn.readLine());
 					while (tileID != -1)
 					{
@@ -1437,7 +895,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 					break;
 				}
-				default:  //if an incoming byte doesn't fit the switch
+				default:
 				{
 					System.err.println("Lost incoming byte: " + incoming);	
 				}
@@ -1457,8 +915,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	public void reloadJComboBoxLook()
 	{
-		int i,
-			i2;
+		int i;
 		Entity entStore;
 		blnMenuRefresh = true;
 		try
@@ -1466,28 +923,20 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			frame.chcLook.removeAllItems();
 		}catch (Exception e){};
 		frame.chcLook.addItem("Look");
-		for (i=0;i<mapSizeX;i++)
+		for (i=0;i<vctEntities.size();i++)
 		{
-			for (i2=0;i2<mapSizeY;i2++)
-			{
-				entStore = entEntities[i][i2];
-				while (entStore != null)
-				{
-					if (entStore.intNum == 0)
-						frame.chcLook.addItem(entStore.strName);
-					else
-						frame.chcLook.addItem(entStore.intNum+"."+entStore.strName);
-					entStore = entStore.entNext;
-				}
-			}
+			entStore = (Entity)vctEntities.elementAt(i);
+			if (entStore.intNum == 0)
+				frame.chcLook.addItem(entStore.strName);
+			else
+				frame.chcLook.addItem(entStore.intNum+"."+entStore.strName);
 		}
 		blnMenuRefresh = false;
 	}
 	
 	public void reloadJComboBoxAttack()
 	{
-		int i,
-			i2;
+		int i;
 		Entity entStore;
 		blnMenuRefresh = true;
 		try
@@ -1495,22 +944,15 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			frame.chcAttack.removeAllItems();
 		}catch (Exception e){};
 		frame.chcAttack.addItem("Attack");
-		for (i=0;i<mapSizeX;i++)
+		for (i=0;i<vctEntities.size();i++)
 		{
-			for (i2=0;i2<mapSizeY;i2++)
+			entStore = (Entity)vctEntities.elementAt(i);
+			if ((entStore.intType==0 || entStore.intType==1 || entStore.intType==4) && (Math.abs(LocX - entStore.intLocX) + Math.abs(LocY - entStore.intLocY) < 2))
 			{
-				entStore = entEntities[i][i2];
-				while (entStore != null)
-				{
-					if ((entStore.intType==0 || entStore.intType==1 || entStore.intType==4) && (Math.abs(LocX - entStore.intLocX) + Math.abs(LocY - entStore.intLocY) < 2))
-					{
-						if (entStore.intNum == 0)
-							frame.chcAttack.addItem(entStore.strName);
-						else
-							frame.chcAttack.addItem(entStore.intNum+"."+entStore.strName);
-					}
-					entStore = entStore.entNext;
-				}
+				if (entStore.intNum == 0)
+					frame.chcAttack.addItem(entStore.strName);
+				else
+					frame.chcAttack.addItem(entStore.intNum+"."+entStore.strName);
 			}
 		}
 		blnMenuRefresh = false;
@@ -1518,8 +960,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	public void reloadJComboBoxGet()
 	{
-		int i,
-			i2;
+		int i;
 		Entity entStore;
 		blnMenuRefresh = true;
 		try
@@ -1527,22 +968,15 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			frame.chcGet.removeAllItems();
 		}catch (Exception e){};
 		frame.chcGet.addItem("Get");
-		for (i=0;i<mapSizeX;i++)
+		for (i=0;i<vctEntities.size();i++)
 		{
-			for (i2=0;i2<mapSizeY;i2++)
+			entStore = (Entity)vctEntities.elementAt(i);
+			if (entStore.intType==1 && (LocX - entStore.intLocX) + (LocY - entStore.intLocY) < 2)
 			{
-				entStore = entEntities[i][i2];
-				while (entStore != null)
-				{
-		        	if (entStore.intType==1 && (LocX - entStore.intLocX) + (LocY - entStore.intLocY) < 2)
-	        		{
-						if (entStore.intNum == 0)
-							frame.chcGet.addItem(entStore.strName);
-						else
-							frame.chcGet.addItem(entStore.intNum+"."+entStore.strName);
-	            	}
-					entStore = entStore.entNext;
-				}
+				if (entStore.intNum == 0)
+					frame.chcGet.addItem(entStore.strName);
+				else
+					frame.chcGet.addItem(entStore.intNum+"."+entStore.strName);
 			}
 		}
 		blnMenuRefresh = false;
@@ -1609,15 +1043,29 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 		blnMenuRefresh = false;
 	}
+
+	void findPlayer() {
+	    synchronized(vctEntities) {
+	        for(int i=0; i<vctEntities.size(); i++) {
+	            Entity ent = (Entity)vctEntities.elementAt(i);
+	            if (ent.intLocX == LocX && ent.intLocY == LocY && ent.intType == 0) {
+	                player = ent;
+	                if (cameraX == 0 && cameraY == 0) {
+						cameraX = player.pixelX - ((double)frame.pnlGraphics.getWidth() / 2.0);
+						cameraY = player.pixelY - ((double)frame.pnlGraphics.getHeight() / 2.0);
+	                }
+	                return;
+	            }
+	        }
+	    }
+	}
 		
 	public void scaleImages()
 	{
-		// Scaling is now done on the fly in the update() and drawEntity() methods.
 	}
 	
 	public void scaleWindow()
 	{
-		//frame.pnlGraphics
 		int width = frame.pnlContents.getBounds().width-310;
 		int height = (int)(width / 2);
 		if (height > frame.pnlContents.getBounds().height-100) {
@@ -1628,25 +1076,23 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		intImageSize = frame.pnlGraphics.getBounds().width/mapSizeX;
 		if (intImageSize < 1)
 			intImageSize = 1;
-		frame.pnlGraphics.setSize(intImageSize*mapSizeX,intImageSize*mapSizeY);
-		imgDisplay = frame.pnlGraphics.createImage(intImageSize*mapSizeX,intImageSize*mapSizeY);
+		frame.pnlGraphics.setSize(intImageSize * mapSizeX, intImageSize * mapSizeY);
+		imgDisplay = frame.pnlGraphics.createImage(intImageSize * mapSizeX, intImageSize * mapSizeY);
 		gD = imgDisplay.getGraphics();
 		g = frame.pnlGraphics.getGraphics();
-		//Set up other objects proportionally
 		frame.txtInput.setLocation(0,frame.pnlGraphics.getBounds().height);
 		frame.scrText.setLocation(0,frame.pnlGraphics.getBounds().height+25);
-		frame.scrText.setSize(frame.pnlGraphics.getBounds().width - 200,frame.pnlContents.getBounds().height-frame.pnlGraphics.getBounds().height-25);
-		frame.txtInput.setSize(frame.pnlGraphics.getBounds().width - 200,25);
+		frame.scrText.setSize(frame.pnlContents.getBounds().width - 200,frame.pnlContents.getBounds().height-frame.pnlGraphics.getBounds().height-25);
+		frame.txtInput.setSize(frame.pnlContents.getBounds().width - 200,25);
 		frame.pnlStats.setSize(frame.pnlContents.getBounds().width-frame.pnlGraphics.getBounds().width,frame.pnlContents.getBounds().height);
 		frame.pnlStats.setLocation(frame.pnlGraphics.getBounds().width,0);
 		frame.txtOther.setSize(frame.pnlStats.getBounds().width-140,frame.pnlStats.getBounds().height-60);
-                frame.lblTarget.setSize(frame.pnlStats.getBounds().width, 20);
+        frame.lblTarget.setSize(frame.pnlStats.getBounds().width, 20);
 		frame.lblInfo.setSize(frame.pnlContents.getBounds().width,20);
 		frame.scrText.getVerticalScrollBar().setValue(frame.scrText.getVerticalScrollBar().getMaximum());
 		System.gc();
 	}
 	
-	//Accept mouse input
         @Override
 	public void mousePressed(MouseEvent evt){}
         @Override
@@ -1662,11 +1108,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			int y = evt.getY();
  			if(!blnLoaded) return;
  	
- 			//Find coordinates of click on map
- 			int destX = (x / intImageSize) + LocX - viewRangeX;
- 			int destY = (y / intImageSize) + LocY - viewRangeY;
+ 			int destX = (int)( (x + cameraX) / intImageSize );
+ 			int destY = (int)( (y + cameraY) / intImageSize );
  			
- 			//Move to location
  			try
  			{
  	 			stmOut.writeBytes("goto " + destX + " " + destY + "\n");
@@ -1682,7 +1126,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
         @Override
 	public void mouseExited(MouseEvent evt){}
 
-	//Accept key input
         @Override
 	public void keyPressed(KeyEvent evt)
 	{
@@ -1696,7 +1139,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	    	if (nkey == KeyEvent.VK_ENTER)
 	    	{
 	    		String strStore = frame.txtInput.getText();
-	    		//Thanks to Joe Alloway for this addition
 	    		if(strStore.startsWith("!"))
 	    		{
 					if (strStore.length()==1)
@@ -1710,50 +1152,19 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				{
 	    			stmOut.writeBytes(strStore+"\n");
 				}
-				//End contribution by Joe Alloway
 	    		frame.txtInput.setText("");
 	    	}
 	    	if (blnLoaded)
 	    	{
-				switch (nkey)
-	   			{
-	    			case 38: //up-down-left-right
-	    			{
-	    				stmOut.writeBytes("n\n");
-	    				if (strSet != null)
-	    				{
-	    					stmOut.writeBytes(strSet+"\n");
-	    				}
-						return;
-	   				}
-	   				case 40:
-	   				{
-	   					stmOut.writeBytes("s\n");
-	    				if (strSet != null)
-	    				{
-	    					stmOut.writeBytes(strSet+"\n");
-	    				}
-						return;
-	   				}
-	   				case 37:
-	   				{
-	   		    		stmOut.writeBytes("w\n");
-	    				if (strSet != null)
-	    				{
-	    					stmOut.writeBytes(strSet+"\n");
-	    				}
-						return;
-	   				}
-	   				case 39:
-	   				{
-	   		    		stmOut.writeBytes("e\n");
-	    				if (strSet != null)
-	    				{
-	    					stmOut.writeBytes(strSet+"\n");
-	    				}
-	   				}
-
-		 		}
+				if (player != null && !player.isMoving) {
+					switch (nkey)
+					{
+						case 38: stmOut.writeBytes("n\n"); if (strSet != null) stmOut.writeBytes(strSet+"\n"); break;
+						case 40: stmOut.writeBytes("s\n"); if (strSet != null) stmOut.writeBytes(strSet+"\n"); break;
+						case 37: stmOut.writeBytes("w\n"); if (strSet != null) stmOut.writeBytes(strSet+"\n"); break;
+						case 39: stmOut.writeBytes("e\n"); if (strSet != null) stmOut.writeBytes(strSet+"\n"); break;
+					}
+				}
 			}
 	    }catch(IOException e)
 	    {
@@ -1770,8 +1181,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	{
 		scaleWindow();
 		scaleImages();
-		update(0); 
-		paint(); //Wildern added
 	}
         @Override
 	public void componentMoved(ComponentEvent e){}
@@ -1780,207 +1189,211 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
         @Override
 	public void componentHidden(ComponentEvent e){}
 	
-/*        @Override
-	public void actionPerformed(ActionEvent evt)
-	{
-		if (evt.getSource() == frame.btnConnect)
-		{
-			frame.frmConnect.show();
-			frame.frmConnect.setSize(350, 200);
-		}else if (evt.getSource() == frame.btnEquipment)
-		{
-			if (frame.frmEquipment != null)
-			{
-				frame.frmEquipment.show();
-				frame.frmEquipment.setSize(300, 440);
-			}
-                }else if (evt.getSource() == frame.btnMagic)
-		{
-			if (frame.frmMagic != null)
-			{
-				frame.frmMagic.show();
-				frame.frmMagic.setSize(300, 440);
-			}      
-		}else if (evt.getSource() == frame.btnMerchant)
-		{
-			if (frmMerchant != null)
-			{
-				frmMerchant.show();
-				frmMerchant.setSize(300,120);
-			}
-                }else if (evt.getSource() == frame.btnPotion)
-		{
-			try
-			{
-				if (blnConnected)
-					stmOut.writeBytes("use minormend\n");
-                        }catch(IOException exc){}
-                }else if (evt.getSource() == frame.btnPotion2)
-		{
-			try
-			{
-				if (blnConnected)
-					stmOut.writeBytes("use mendpotion\n");
-                        }catch(IOException exc){}
-                }else if (evt.getSource() == frame.btnPotion3)
-		{
-			try
-			{
-				if (blnConnected)
-					stmOut.writeBytes("use minormana\n");
-                        }catch(IOException exc){}
-                }else if (evt.getSource() == frame.btnPotion4)
-		{
-			try
-			{
-				if (blnConnected)
-					stmOut.writeBytes("use manapotion\n");
-                        }catch(IOException exc){}
-		}else if (evt.getSource() == frame.btnQuit)
-		{
-			try
-			{
-				if (blnConnected)
-					stmOut.writeBytes("quit\n");
-			}catch(IOException exc){}
-			try
-			{
-				sckConnection.close();
-			}catch (IOException exc){}
-			try
-			{
-				imgOriginalSprites.flush();
-				imgOriginalPlayers.flush();
-				imgOriginalMap.flush();
-				imgSprites.flush();
-				imgPlayers.flush();
-				imgMap.flush();
-			}catch(Exception exc) {}
-			System.gc();
-			if (blnApplet)
-			{
-				appShell.destroy();
-			}else
-			{
-				System.exit(0);
-			}
-		}
-	}	
-*/
-
 	void thisWindowClosing(WindowEvent e)
 	{
 		frame.setVisible(false);
 	}
 	
-	//Display graphics
+	private void startMove(Entity ent, int direction) {
+		if (direction < 0 || direction > 3) return;
+
+		ent.walkFrameToggle = !ent.walkFrameToggle;
+		int frameOffset = ent.walkFrameToggle ? 1 : 0;
+
+		if (direction == 0) { // North
+			if (ent.intStep != -1) ent.intStep = 0 + frameOffset;
+			ent.intMoveDirection = 0;
+			ent.targetX = ent.pixelX;
+			ent.targetY = ent.pixelY - intImageSize;
+			ent.pendingLocX = (int)ent.intLocX;
+			ent.pendingLocY = (int)ent.intLocY - 1;
+		} else if (direction == 1) { // South
+			if (ent.intStep != -1) ent.intStep = 2 + frameOffset;
+			ent.intMoveDirection = 1;
+			ent.targetX = ent.pixelX;
+			ent.targetY = ent.pixelY + intImageSize;
+			ent.pendingLocX = (int)ent.intLocX;
+			ent.pendingLocY = (int)ent.intLocY + 1;
+		} else if (direction == 2) { // West
+			if (ent.intStep != -1) ent.intStep = 4 + frameOffset;
+			ent.intMoveDirection = 2;
+			ent.targetX = ent.pixelX - intImageSize;
+			ent.targetY = ent.pixelY;
+			ent.pendingLocX = (int)ent.intLocX - 1;
+			ent.pendingLocY = (int)ent.intLocY;
+		} else if (direction == 3) { // East
+			if (ent.intStep != -1) ent.intStep = 6 + frameOffset;
+			ent.intMoveDirection = 3;
+			ent.targetX = ent.pixelX + intImageSize;
+			ent.targetY = ent.pixelY;
+			ent.pendingLocX = (int)ent.intLocX + 1;
+			ent.pendingLocY = (int)ent.intLocY;
+		}
+		ent.hasPendingMove = true;
+		ent.isMoving = true;
+	}
+
 	public void update(int intAnimTick)
 	{
-		synchronized (vctEntities)
-		{
-			int i,
-				i2;
-			Entity entStore;
-			for (i=0;i<mapSizeX;i++)
-			{
-				for (i2=0;i2<mapSizeY;i2++)
-				{
-					//Draw map(background)
-					try
-					{
-					int tileID = shrMap[i][i2];
-					TileAnim anim = null;
-					if (vctTileAnims != null) {
-							for (int j=0; j<vctTileAnims.size(); j++) {
-								TileAnim tempAnim = (TileAnim)vctTileAnims.elementAt(j);
-								if (tempAnim.tileID == tileID) {
-									anim = tempAnim;
-									break;
-								}
-							}
+		final double entityMoveSpeed = (double)intImageSize / 8.0;
+
+	    synchronized (vctEntities) {
+	        for (int i=0; i<vctEntities.size(); i++) {
+	            Entity ent = (Entity)vctEntities.elementAt(i);
+	            if (ent.isMoving) {
+	                double dx = ent.targetX - ent.pixelX;
+	                double dy = ent.targetY - ent.pixelY;
+					double distance = Math.sqrt(dx*dx + dy*dy);
+	
+	                if (distance < entityMoveSpeed) {
+	                    ent.pixelX = ent.targetX;
+	                    ent.pixelY = ent.targetY;
+	                    ent.isMoving = false;
+	                    ent.intMoveDirection = -1;
+
+						if (ent.hasPendingMove) {
+							ent.intLocX = ent.pendingLocX;
+							ent.intLocY = ent.pendingLocY;
+							ent.hasPendingMove = false;
 						}
 
-						if (anim != null) {
-							int frame = (intAnimTick / anim.delay) % anim.frameCount;
-							gD.drawImage(imgOriginalMap,
-												i*intImageSize,i2*intImageSize,
-												(i+1)*intImageSize,(i2+1)*intImageSize,
-												(tileID+frame)*intOriginalTileSize,0,
-												(tileID+frame+1)*intOriginalTileSize,intOriginalTileSize,
-												null);
-						} else {
-							gD.drawImage(imgOriginalMap,
-												i*intImageSize,i2*intImageSize,
-												(i+1)*intImageSize,(i2+1)*intImageSize,
-												tileID*intOriginalTileSize,0,
-												(tileID+1)*intOriginalTileSize,intOriginalTileSize,
-												null);
+						if (!ent.queuedMoves.isEmpty()) {
+							startMove(ent, ent.queuedMoves.poll());
 						}
-				    }catch(Exception e)
-				    {
-				        try
-						{
+
+	                    if (ent == player) {
+	                        reloadJComboBoxAttack();
+	                    }
+	                } else { 
+						double angle = Math.atan2(dy, dx);
+						ent.pixelX += entityMoveSpeed * Math.cos(angle);
+						ent.pixelY += entityMoveSpeed * Math.sin(angle);
+	                }
+	            }
+	        }
+	    }
+	
+		synchronized (vctEntities) {
+			if (player != null) {
+				if (frame.pnlGraphics.getWidth() == 0) return;
+	
+				double targetCameraX = player.pixelX - (frame.pnlGraphics.getWidth() / 2.0);
+				double targetCameraY = player.pixelY - (frame.pnlGraphics.getHeight() / 2.0);
+	
+				double minCameraX = (double)(LocX - viewRangeX) * intImageSize;
+				double minCameraY = (double)(LocY - viewRangeY) * intImageSize;
+				double maxCameraX = (double)(LocX - viewRangeX + mapSizeX) * intImageSize - frame.pnlGraphics.getWidth();
+				double maxCameraY = (double)(LocY - viewRangeY + mapSizeY) * intImageSize - frame.pnlGraphics.getHeight();
+	
+				targetCameraX = Math.max(minCameraX, Math.min(targetCameraX, maxCameraX));
+				targetCameraY = Math.max(minCameraY, Math.min(targetCameraY, maxCameraY));
+	
+				double cameraSmoothing = 0.1;
+				cameraX += (targetCameraX - cameraX) * cameraSmoothing;
+				cameraY += (targetCameraY - cameraY) * cameraSmoothing;
+			}
+			
+			gD.setColor(Color.black);
+			gD.fillRect(0, 0, imgDisplay.getWidth(null), imgDisplay.getHeight(null));
+		
+			int startTileX = (int)Math.floor(cameraX / intImageSize);
+			int startTileY = (int)Math.floor(cameraY / intImageSize);
+			int endTileX = (int)Math.floor((cameraX + frame.pnlGraphics.getWidth()) / intImageSize) + 1;
+			int endTileY = (int)Math.floor((cameraY + frame.pnlGraphics.getHeight()) / intImageSize) + 1;
+	
+			double offsetX = cameraX - (startTileX * intImageSize);
+			double offsetY = cameraY - (startTileY * intImageSize);
+	
+			for (int i=startTileX; i<endTileX; i++) {
+				for (int i2=startTileY; i2<endTileY; i2++) {
+					int mapGridX = i - (LocX - viewRangeX);
+					int mapGridY = i2 - (LocY - viewRangeY);
+	
+					if (mapGridX >= 0 && mapGridX < mapSizeX && mapGridY >= 0 && mapGridY < mapSizeY) {
+						try {
+							int tileID = shrMap[mapGridX][mapGridY];
+							int tileIDToDraw = tileID;
+							TileAnim anim = null;
+							if (vctTileAnims != null) {
+								for (int j=0; j<vctTileAnims.size(); j++) {
+									TileAnim tempAnim = vctTileAnims.elementAt(j);
+									if (tempAnim.tileID == tileID) {
+										anim = tempAnim;
+										break;
+									}
+								}
+							}
+			
+							double screenX = (i - startTileX) * intImageSize - offsetX;
+							double screenY = (i2 - startTileY) * intImageSize - offsetY;
+			
+							if (anim != null) {
+								int frame = (intAnimTick / anim.delay) % anim.frameCount;
+								tileIDToDraw = tileID + frame;
+							}
+							
 							gD.drawImage(imgOriginalMap,
-											i*intImageSize,i2*intImageSize,
-											(i+1)*intImageSize,(i2+1)*intImageSize,
-											0,0,
-											intOriginalTileSize,intOriginalTileSize,
-											null);
-				 		}catch(Exception exc){}
+										(int)screenX, (int)screenY,
+										(int)(screenX + intImageSize), (int)(screenY + intImageSize),
+										tileIDToDraw * intOriginalTileSize, 0,
+										(tileIDToDraw + 1) * intOriginalTileSize, intOriginalTileSize,
+										null);
+	
+						} catch(Exception e) {}
 					}
 				}
 			}
-			for (i=0;i<vctEntities.size();i++) //Draw entities
-			{
-				entStore = (Entity)vctEntities.elementAt(i);
-				drawEntity(entStore);
-			}
 		}
+	
+	    synchronized (vctEntities) {
+	        for (int i=0; i<vctEntities.size(); i++) {
+	            Entity entStore = (Entity)vctEntities.elementAt(i);
+	            drawEntity(entStore);
+	        }
+	    }
 	}
 	
 	void drawEntity(Entity entStore)
 	{
-		double x = entStore.intLocX-LocX+viewRangeX;
-		double y = entStore.intLocY-LocY+viewRangeY;
-		//Draw flag
+		double screenX = entStore.pixelX - cameraX;
+		double screenY = entStore.pixelY - cameraY;
+
 		if (entStore.intFlag != 0)
 		{
 			if (entStore.intFlag == 1)
 			{
-                            	double CurrentHPWidth = (double) intImageSize / intmaxhp;
-                                double HPBarValue = CurrentHPWidth * inthp;
+                double CurrentHPWidth = (double) intImageSize / intmaxhp;
+                double HPBarValue = CurrentHPWidth * inthp;
 				gD.setColor(Color.green);
-				gD.drawRoundRect((int)(x*intImageSize),(int)(y*intImageSize),
+				gD.drawRoundRect((int)screenX,(int)screenY,
 							intImageSize,intImageSize,intImageSize/3,intImageSize/3);
-			                gD.setColor(new Color(35, 35, 35));
-                                        gD.fillRect((int)(x*intImageSize)- 1, (int)(y*intImageSize) - 66, (int)(intImageSize) + 2, 12);
-
-                                        gD.setColor(new Color(255, 0, 30));
-                                        gD.fillRect((int)(x*intImageSize), (int)(y*intImageSize) - 65, (int) HPBarValue, 10);
-                        }else if (entStore.intFlag == 2)
+			    gD.setColor(new Color(35, 35, 35));
+                gD.fillRect((int)screenX - 1, (int)screenY - 66, (int)(intImageSize) + 2, 12);
+                gD.setColor(new Color(255, 0, 30));
+                gD.fillRect((int)screenX, (int)screenY - 65, (int) HPBarValue, 10);
+            }else if (entStore.intFlag == 2)
 			{
-                            if (entStore.maxhp > 0) {
+                if (entStore.maxhp > 0) {
 				double CurrentHPWidth2 = (double) intImageSize / entStore.maxhp;
-                                double HPBarValue2 = CurrentHPWidth2 * entStore.hp;
+                double HPBarValue2 = CurrentHPWidth2 * entStore.hp;
 				gD.setColor(Color.red);
-				gD.drawRoundRect((int)(x*intImageSize),(int)(y*intImageSize),
+				gD.drawRoundRect((int)screenX,(int)screenY,
 							intImageSize,intImageSize,intImageSize/3,intImageSize/3);
-			                gD.setColor(new Color(35, 35, 35));
-                                        gD.fillRect((int)(x*intImageSize)- 1, (int)(y*intImageSize) - 66, (int)(intImageSize) + 2, 12);
-
-                                        gD.setColor(new Color(255, 0, 30));
-                                        gD.fillRect((int)(x*intImageSize), (int)(y*intImageSize) - 65, (int) HPBarValue2, 10);
-                            }
-                        }
+			    gD.setColor(new Color(35, 35, 35));
+                gD.fillRect((int)screenX - 1, (int)screenY - 66, (int)(intImageSize) + 2, 12);
+                gD.setColor(new Color(255, 0, 30));
+                gD.fillRect((int)screenX, (int)screenY - 65, (int) HPBarValue2, 10);
+                }
+            }
 		}
 
-		if (entStore.intStep == -1) // This is for sprites (e.g., items on the ground)
+		if (entStore.intStep == -1)
 		{
 			try
 			{
-				int spriteScreenSize = intImageSize * 2; // 64x64 sprites should be twice the size of 32x32 tiles
-				int xPos = (int)(x * intImageSize) - (spriteScreenSize / 4); // Center horizontally
-				int yPos = (int)(y * intImageSize) - (spriteScreenSize / 2); // Shift up to align feet
+				int spriteScreenSize = intImageSize * 2;
+				int xPos = (int)screenX - (spriteScreenSize / 4);
+				int yPos = (int)screenY - (spriteScreenSize / 2);
 				gD.drawImage(imgOriginalSprites,
 							xPos, yPos,
 							xPos + spriteScreenSize, yPos + spriteScreenSize,
@@ -1988,13 +1401,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							(entStore.intImage+1)*intOriginalSpriteSize,intOriginalSpriteSize,
 							null);
 			}catch(Exception e){}
-		}else // This is for players
+		}else
 		{
 			try
 			{
 				int playerScreenSize = intImageSize * 2;
-				int xPos = (int)(x * intImageSize) - (playerScreenSize / 4); // Center horizontally
-				int yPos = (int)(y * intImageSize) - (playerScreenSize / 2); // Shift up to align feet
+				int xPos = (int)screenX - (playerScreenSize / 4);
+				int yPos = (int)screenY - (playerScreenSize / 2);
 				gD.drawImage(imgOriginalPlayers,
 								xPos, yPos,
 								xPos + playerScreenSize, yPos + playerScreenSize,
@@ -2003,19 +1416,18 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 								null);
 			}catch(Exception e){}
 		}
-		//Multi-colored text by Joe Alloway
 		if (entStore.intNum == 0)
 		{
 			gD.setColor(Color.black);
-			gD.drawString(entStore.strName,(int)(x*intImageSize)-1,(int)((y+1)*intImageSize)); 
+			gD.drawString(entStore.strName,(int)screenX-1,(int)(screenY+intImageSize)); 
 			gD.setColor(Color.white);
-			gD.drawString(entStore.strName,(int)(x*intImageSize),(int)((y+1)*intImageSize)); 
+			gD.drawString(entStore.strName,(int)screenX,(int)(screenY+intImageSize)); 
 		}else
 		{
 			gD.setColor(Color.black);
-			gD.drawString(entStore.intNum+"."+entStore.strName,(int)(x*intImageSize)-1,(int)((y+1)*intImageSize)); 
+			gD.drawString(entStore.intNum+"."+entStore.strName,(int)screenX-1,(int)(screenY+intImageSize)); 
 			gD.setColor(Color.white);
-			gD.drawString(entStore.intNum+"."+entStore.strName,(int)(x*intImageSize),(int)((y+1)*intImageSize)); 
+			gD.drawString(entStore.intNum+"."+entStore.strName,(int)screenX,(int)(screenY+intImageSize)); 
 		}
 	}
 	
@@ -2038,3 +1450,4 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		g.drawImage(imgDisplay,0,0,this);
 	}
 }
+
