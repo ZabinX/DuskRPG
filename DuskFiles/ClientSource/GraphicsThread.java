@@ -17,6 +17,7 @@ import java.lang.reflect.Array;
 import java.util.StringTokenizer;
 import java.applet.*;
 import java.net.*;
+import javax.imageio.ImageIO;
 
 public class GraphicsThread implements Runnable
 {
@@ -38,13 +39,11 @@ public class GraphicsThread implements Runnable
 			prefix = "";
 			try
 			{
-				appParent.imgOriginalMap = appParent.appShell.getImage(new URL(appParent.strWebAssetPath+"/images/map.gif"));
-				appParent.imgOriginalPlayers = appParent.appShell.getImage(new URL(appParent.strWebAssetPath+"/images/players.gif"));
-				appParent.imgOriginalSprites = appParent.appShell.getImage(new URL(appParent.strWebAssetPath+"/images/sprites.gif"));
-//				appParent.imgOriginalMap = appParent.appShell.getImage(new URL(prefix+appParent.strRCAddress+"/images/map.png"));
-//				appParent.imgOriginalPlayers = appParent.appShell.getImage(new URL(prefix+appParent.strRCAddress+"/images/players.png"));
-//				appParent.imgOriginalSprites = appParent.appShell.getImage(new URL(prefix+appParent.strRCAddress+"/images/sprites.png"));
-			}catch(Exception e)
+				appParent.imgOriginalMap = ImageIO.read(new URL(appParent.strWebAssetPath+"/images/map.gif"));
+				appParent.imgOriginalPlayers = ImageIO.read(new URL(appParent.strWebAssetPath+"/images/players.gif"));
+				appParent.imgOriginalSprites = ImageIO.read(new URL(appParent.strWebAssetPath+"/images/sprites.gif"));
+			}
+			catch(IOException e)
 			{
 				System.err.println("Error loading images: "+e.toString());
 			}
@@ -52,12 +51,16 @@ public class GraphicsThread implements Runnable
 		else
 		{
 			prefix = "rc/";
-			appParent.imgOriginalMap = Toolkit.getDefaultToolkit().getImage(prefix+"somedusk/images/map.gif");
-			appParent.imgOriginalPlayers = Toolkit.getDefaultToolkit().getImage(prefix+"somedusk/images/players.gif");
-			appParent.imgOriginalSprites = Toolkit.getDefaultToolkit().getImage(prefix+"somedusk/images/sprites.gif");
-//			appParent.imgOriginalMap = Toolkit.getDefaultToolkit().getImage(prefix+appParent.strRCAddress+"/images/map.png");
-//			appParent.imgOriginalPlayers = Toolkit.getDefaultToolkit().getImage(prefix+appParent.strRCAddress+"/images/players.png");
-//			appParent.imgOriginalSprites = Toolkit.getDefaultToolkit().getImage(prefix+appParent.strRCAddress+"/images/sprites.png");
+			try
+			{
+				appParent.imgOriginalMap = ImageIO.read(new File(prefix+"somedusk/images/map.gif"));
+				appParent.imgOriginalPlayers = ImageIO.read(new File(prefix+"somedusk/images/players.gif"));
+				appParent.imgOriginalSprites = ImageIO.read(new File(prefix+"somedusk/images/sprites.gif"));
+			}
+			catch(IOException e)
+			{
+				System.err.println("Error loading images: "+e.toString());
+			}
 		}
 		try
 		{
@@ -163,4 +166,6 @@ try {
 		}
 	}
 }
+
+
 

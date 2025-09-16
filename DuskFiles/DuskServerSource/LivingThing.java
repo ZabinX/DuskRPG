@@ -12,6 +12,8 @@ import java.io.*;
 import java.util.Date;
 import java.util.Vector;
 import java.util.Iterator;
+import java.util.Collections;
+import java.util.Comparator;
 import java.net.Socket;
 
 
@@ -3073,26 +3075,22 @@ public class LivingThing extends DuskObject implements Runnable
 	
 	DuskObject getLocalObject(String strName)
 	{
-		int i,
-			i2,
-			i3;
-		DuskObject objStore;
-		//Parse String
-		int intNumber=0;
-		boolean blnCanSee;
-		i = strName.indexOf(".");
-		if (i != -1)
-		{
-			try
-			{
-				intNumber = Integer.parseInt(strName.substring(0,i));
-				strName = strName.substring(i+1,strName.length());
-			}catch(NumberFormatException e)
-			{
+		// Parse the numbered name (e.g., "1.Goblin")
+		int intNumber = 0;
+		int dotIndex = strName.indexOf(".");
+		if (dotIndex != -1) {
+			try {
+				intNumber = Integer.parseInt(strName.substring(0, dotIndex));
+				strName = strName.substring(dotIndex + 1);
+			} catch (NumberFormatException e) {
+				// If parsing fails, treat it as the first one.
 				intNumber = 0;
 			}
 		}
-		//Search surrounding area
+
+		// Gather all entities in the local area.
+		Vector<DuskObject> localObjects = new Vector<>();
+		int i, i2, i3;
 	   	i=0;
 	    if (intLocX-engGame.viewrangeX<0)
 		{
@@ -3111,34 +3109,43 @@ public class LivingThing extends DuskObject implements Runnable
 				{
 					if (intLocY+i3-engGame.viewrangeY<engGame.MapRows)
 					{
-						objStore = engGame.objEntities[intLocX+i-engGame.viewrangeX][intLocY+i3-engGame.viewrangeY];
+						DuskObject objStore = engGame.objEntities[intLocX+i-engGame.viewrangeX][intLocY+i3-engGame.viewrangeY];
 						while (objStore != null)
 						{
-							if (objStore.strName.equalsIgnoreCase(strName))
-							{
-								if (engGame.scrCanSeeLivingThing != null && objStore.isLivingThing())
-								{
-									synchronized(engGame.scrCanSeeLivingThing)
-									{
-										engGame.scrCanSeeLivingThing.varVariables.clearVariables();
-										engGame.scrCanSeeLivingThing.varVariables.addVariable("seeing",this);
-										engGame.scrCanSeeLivingThing.varVariables.addVariable("seen",(LivingThing)objStore);
-										blnCanSee = engGame.scrCanSeeLivingThing.rewindAndParseScript();
-									}
-								}else
-									blnCanSee=true;
-								if (blnCanSee && engGame.canSeeTo(this,objStore.intLocX,objStore.intLocY))
-									if(intNumber==0)
-										return objStore;
-									else
-										intNumber--;
-							}
+							localObjects.addElement(objStore);
 							objStore = objStore.objNext;
 						}
 					}
 				}
 			}
 		}
+
+		// Sort the local list by ID to ensure deterministic order.
+		Collections.sort(localObjects, new Comparator<DuskObject>() {
+			@Override
+			public int compare(DuskObject o1, DuskObject o2) {
+				return Long.compare(o1.ID, o2.ID);
+			}
+		});
+		
+		// Find the Nth entity with the matching name from the sorted local list.
+		int currentCount = 0;
+		for (DuskObject objStore : localObjects) {
+			if (objStore.strName.equalsIgnoreCase(strName)) {
+				if (currentCount == intNumber) {
+					// Check if the entity is actually visible to the player
+					if (objStore.isLivingThing()) {
+						if (engGame.canSeeTo(this, objStore.intLocX, objStore.intLocY)) {
+							return objStore;
+						}
+					} else { // It's an item or other object, which is always "visible" if in range
+						return objStore;
+					}
+				}
+				currentCount++;
+			}
+		}
+
 		return null;
 	}
 	
@@ -4192,5 +4199,3 @@ public class LivingThing extends DuskObject implements Runnable
 		}
 	}
  }
-
-

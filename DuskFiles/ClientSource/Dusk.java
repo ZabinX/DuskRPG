@@ -17,6 +17,8 @@ import java.io.*;
 import java.util.Vector;
 import java.util.Iterator;
 import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
 import java.lang.Math;
 import java.lang.reflect.Array;
 import java.util.StringTokenizer;
@@ -324,6 +326,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	}
 
 	void updateEntityNumbers() {
+		// Sort by ID to ensure deterministic numbering
+		Collections.sort(vctEntities, new Comparator<Entity>() {
+			@Override
+			public int compare(Entity e1, Entity e2) {
+				return Long.compare(e1.ID, e2.ID);
+			}
+		});
+
 		HashMap<String, Integer> nameCounts = new HashMap<>();
 		for (int i = 0; i < vctEntities.size(); i++) {
 			Entity ent = (Entity)vctEntities.elementAt(i);
@@ -1181,6 +1191,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	{
 		scaleWindow();
 		scaleImages();
+		if (thrGraphics != null) {
+			update(thrGraphics.intAnimTick);
+			paint();
+		}
 	}
         @Override
 	public void componentMoved(ComponentEvent e){}
