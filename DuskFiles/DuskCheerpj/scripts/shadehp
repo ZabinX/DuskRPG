@@ -1,6 +1,3 @@
-if ! isPlayer trigger
-	endscript
-end
 if isInBattle trigger
 	livingthing target enemy trigger
 	if < target hp 1
