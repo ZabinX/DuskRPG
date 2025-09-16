@@ -301,7 +301,7 @@ public class MainFrame extends JFrame implements ItemListener
 		btnRight.setVisible(true);
 		btnRight.setSize(new java.awt.Dimension(64, 64));
                 
-		scrTextOther.setLocation(new java.awt.Point(540, 60));
+		scrTextOther.setLocation(new java.awt.Point(140, 60));
 		scrTextOther.setVisible(true);
 		scrTextOther.setSize(new java.awt.Dimension(150, 500));
 		scrTextOther.getViewport().add(txtOther);

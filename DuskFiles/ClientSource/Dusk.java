@@ -925,17 +925,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	public void reloadJComboBoxLook()
 	{
-		int i;
-		Entity entStore;
 		blnMenuRefresh = true;
 		try
 		{
 			frame.chcLook.removeAllItems();
 		}catch (Exception e){};
 		frame.chcLook.addItem("Look");
-		for (i=0;i<vctEntities.size();i++)
+		for (Entity entStore : hmpEntities.values())
 		{
-			entStore = (Entity)vctEntities.elementAt(i);
 			if (entStore.intNum == 0)
 				frame.chcLook.addItem(entStore.strName);
 			else
@@ -946,17 +943,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	public void reloadJComboBoxAttack()
 	{
-		int i;
-		Entity entStore;
 		blnMenuRefresh = true;
 		try
 		{
 			frame.chcAttack.removeAllItems();
 		}catch (Exception e){};
 		frame.chcAttack.addItem("Attack");
-		for (i=0;i<vctEntities.size();i++)
+		for (Entity entStore : hmpEntities.values())
 		{
-			entStore = (Entity)vctEntities.elementAt(i);
 			if ((entStore.intType==0 || entStore.intType==1 || entStore.intType==4) && (Math.abs(LocX - entStore.intLocX) + Math.abs(LocY - entStore.intLocY) < 2))
 			{
 				if (entStore.intNum == 0)
@@ -970,17 +964,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	public void reloadJComboBoxGet()
 	{
-		int i;
-		Entity entStore;
 		blnMenuRefresh = true;
 		try
 		{
 			frame.chcGet.removeAllItems();
 		}catch (Exception e){};
 		frame.chcGet.addItem("Get");
-		for (i=0;i<vctEntities.size();i++)
+		for (Entity entStore : hmpEntities.values())
 		{
-			entStore = (Entity)vctEntities.elementAt(i);
 			if (entStore.intType==1 && (LocX - entStore.intLocX) + (LocY - entStore.intLocY) < 2)
 			{
 				if (entStore.intNum == 0)
@@ -1083,11 +1074,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			width = height * 2;
 		}
 		frame.pnlGraphics.setSize(width,height);
-		intImageSize = frame.pnlGraphics.getBounds().width/mapSizeX;
+		intImageSize = frame.pnlGraphics.getBounds().width/21; // Use fixed viewport width
 		if (intImageSize < 1)
 			intImageSize = 1;
-		frame.pnlGraphics.setSize(intImageSize * mapSizeX, intImageSize * mapSizeY);
-		imgDisplay = frame.pnlGraphics.createImage(intImageSize * mapSizeX, intImageSize * mapSizeY);
+		// The panel should be the size of the window, not the entire map data
+		// The drawing loop will handle the camera position.
+		frame.pnlGraphics.setSize(width, height); 
+		imgDisplay = frame.pnlGraphics.createImage(width, height);
 		gD = imgDisplay.getGraphics();
 		g = frame.pnlGraphics.getGraphics();
 		frame.txtInput.setLocation(0,frame.pnlGraphics.getBounds().height);
