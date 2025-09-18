@@ -36,8 +36,10 @@ public class DuskEngine implements Runnable
 		signimage,
 		battlesound=-1,
 		mobrespawnspeed,
-		viewrangeX=20,
-		viewrangeY=10,
+		viewrangeX=10,
+		viewrangeY=5,
+		entityViewrangeX=10,
+		entityViewrangeY=5,
 		oldviewrangeX=0,
 		oldviewrangeY=0,
 		mapsizeX=21,
@@ -55,7 +57,7 @@ public class DuskEngine implements Runnable
 		gpfleemod=1D/64D,	//default 1/64
 		expfleemod=1D/64D;
 	long lngMobTicks=1000,	//default 1000 milliseconds(1 second) per tick
-		lngPlayerTicks=250,	//default 250 milliseconds(1/4 second) per tick
+		lngPlayerTicks=125,	//default 125 milliseconds(1/8 second) per tick
 		floodLimit=1000;	//default 1000 milliseconds(1 second) btw messages
 	String trackername="Just Some World.",
 			site="none",
@@ -585,6 +587,8 @@ public class DuskEngine implements Runnable
 		expfleemod			= settings.getDouble("ExpFleeMod",expfleemod);
 		viewrangeX			= settings.getInt("ViewRangeX",viewrangeX);
 		viewrangeY			= settings.getInt("ViewRangeY",viewrangeY);
+		entityViewrangeX	= settings.getInt("EntityViewRangeX",entityViewrangeX);
+		entityViewrangeY	= settings.getInt("EntityViewRangeY",entityViewrangeY);
 		lngMobTicks			= settings.getLong("MobTicks",lngMobTicks);
 		lngPlayerTicks		= settings.getLong("PlayerTicks",lngPlayerTicks);
 		if (viewrangeX != oldviewrangeX || viewrangeY != oldviewrangeY)
@@ -833,24 +837,24 @@ public class DuskEngine implements Runnable
 			i3;
 		DuskObject objStore;
 	   	i=0;
-	    if (intLocX-viewrangeX<0)
+	    if (intLocX-entityViewrangeX<0)
 		{
-	    	i = -1*(intLocX-viewrangeX);
+	    	i = -1*(intLocX-entityViewrangeX);
 	    }
 	   	i2=0;
-	    if (intLocY-viewrangeY<0)
+	    if (intLocY-entityViewrangeY<0)
 	    {
-	    	i2 = -1*(intLocY-viewrangeY);
+	    	i2 = -1*(intLocY-entityViewrangeY);
 	    }
-		for (;i<mapsizeX;i++)
+		for (;i<1+(2*entityViewrangeX);i++)
 		{
-			if (intLocX+i-viewrangeX<MapColumns)
+			if (intLocX+i-entityViewrangeX<MapColumns)
 			{
-				for (i3=i2;i3<mapsizeY;i3++)
+				for (i3=i2;i3<1+(2*entityViewrangeY);i3++)
 				{
-					if (intLocY+i3-viewrangeY<MapRows)
+					if (intLocY+i3-entityViewrangeY<MapRows)
 					{
-						objStore = objEntities[intLocX+i-viewrangeX][intLocY+i3-viewrangeY];
+						objStore = objEntities[intLocX+i-entityViewrangeX][intLocY+i3-entityViewrangeY];
 						while (objStore != null)
 						{
 	        				if (objStore.isLivingThing())
@@ -906,27 +910,27 @@ public class DuskEngine implements Runnable
 		boolean blnCanSee;
 		
 		i=0;
-	    if (thnRefresh.intLocX-viewrangeX<0)
+	    if (thnRefresh.intLocX-entityViewrangeX<0)
 		{
-	    	i = -1*(thnRefresh.intLocX-viewrangeX);
+	    	i = -1*(thnRefresh.intLocX-entityViewrangeX);
 	    }
 	   	i2=0;
-	    if (thnRefresh.intLocY-viewrangeY<0)
+	    if (thnRefresh.intLocY-entityViewrangeY<0)
 	    {
-	    	i2 = -1*(thnRefresh.intLocY-viewrangeY);
+	    	i2 = -1*(thnRefresh.intLocY-entityViewrangeY);
 	    }
-		for (;i<mapsizeX;i++)
+		for (;i<1+(2*entityViewrangeX);i++)
 		{
-			if (thnRefresh.intLocX+i-viewrangeX < MapColumns)
+			if (thnRefresh.intLocX+i-entityViewrangeX < MapColumns)
 			{
-				for (i3=i2;i3<mapsizeY;i3++)
+				for (i3=i2;i3<1+(2*entityViewrangeY);i3++)
 				{
-					if (thnRefresh.intLocY+i3-viewrangeY < MapRows)
+					if (thnRefresh.intLocY+i3-entityViewrangeY < MapRows)
 					{
-						objStore = objEntities[thnRefresh.intLocX+i-viewrangeX][thnRefresh.intLocY+i3-viewrangeY];
+						objStore = objEntities[thnRefresh.intLocX+i-entityViewrangeX][thnRefresh.intLocY+i3-entityViewrangeY];
 						if (objStore != null)
 						{
-							if (canSeeTo(thnRefresh,thnRefresh.intLocX+i-viewrangeX,thnRefresh.intLocY+i3-viewrangeY))
+							if (canSeeTo(thnRefresh,thnRefresh.intLocX+i-entityViewrangeX,thnRefresh.intLocY+i3-entityViewrangeY))
 							{
 							do
 							{
@@ -1185,24 +1189,24 @@ public class DuskEngine implements Runnable
 		boolean blnCanSee;
 		
 		i=0;
-	    if (objRefresh.intLocX-viewrangeX<0)
+	    if (objRefresh.intLocX-entityViewrangeX<0)
 		{
-	    	i = -1*(objRefresh.intLocX-viewrangeX);
+	    	i = -1*(objRefresh.intLocX-entityViewrangeX);
 	    }
 	   	i2=0;
-	    if (objRefresh.intLocY-viewrangeY<0)
+	    if (objRefresh.intLocY-entityViewrangeY<0)
 	    {
-	    	i2 = -1*(objRefresh.intLocY-viewrangeY);
+	    	i2 = -1*(objRefresh.intLocY-entityViewrangeY);
 	    }
-		for (;i<mapsizeX;i++)
+		for (;i<1+(2*entityViewrangeX);i++)
 		{
-			if (objRefresh.intLocX+i-viewrangeX < MapColumns)
+			if (objRefresh.intLocX+i-entityViewrangeX < MapColumns)
 			{
-				for (i3=i2;i3<mapsizeY;i3++)
+				for (i3=i2;i3<1+(2*entityViewrangeY);i3++)
 				{
-					if (objRefresh.intLocY+i3-viewrangeY < MapRows)
+					if (objRefresh.intLocY+i3-entityViewrangeY < MapRows)
 					{
-						objStore = objEntities[objRefresh.intLocX+i-viewrangeX][objRefresh.intLocY+i3-viewrangeY];
+						objStore = objEntities[objRefresh.intLocX+i-entityViewrangeX][objRefresh.intLocY+i3-entityViewrangeY];
 						while (objStore != null)
 						{
 							if (objStore.isLivingThing())
@@ -1360,24 +1364,24 @@ public class DuskEngine implements Runnable
 		String strResult;
 		
 		i=0;
-	    if (objRefresh.intLocX-viewrangeX<0)
+	    if (objRefresh.intLocX-entityViewrangeX<0)
 		{
-	    	i = -1*(objRefresh.intLocX-viewrangeX);
+	    	i = -1*(objRefresh.intLocX-entityViewrangeX);
 	    }
 	   	i2=0;
-	    if (objRefresh.intLocY-viewrangeY<0)
+	    if (objRefresh.intLocY-entityViewrangeY<0)
 	    {
-	    	i2 = -1*(objRefresh.intLocY-viewrangeY);
+	    	i2 = -1*(objRefresh.intLocY-entityViewrangeY);
 	    }
-		for (;i<mapsizeX;i++)
+		for (;i<1+(2*entityViewrangeX);i++)
 		{
-			if (objRefresh.intLocX+i-viewrangeX < MapColumns)
+			if (objRefresh.intLocX+i-entityViewrangeX < MapColumns)
 			{
-				for (i3=i2;i3<mapsizeY;i3++)
+				for (i3=i2;i3<1+(2*entityViewrangeY);i3++)
 				{
-					if (objRefresh.intLocY+i3-viewrangeY < MapRows)
+					if (objRefresh.intLocY+i3-entityViewrangeY < MapRows)
 					{
-						objStore = objEntities[objRefresh.intLocX+i-viewrangeX][objRefresh.intLocY+i3-viewrangeY];
+						objStore = objEntities[objRefresh.intLocX+i-entityViewrangeX][objRefresh.intLocY+i3-entityViewrangeY];
 						while (objStore != null)
 						{
 							if (objStore.isLivingThing())
@@ -2096,7 +2100,7 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 	//Following by Randall Leeds and Tom Weingarten
 	boolean canSeeTo(LivingThing thnStore,int destX, int destY)
     {
-    	if (Math.abs(thnStore.intLocX-destX)>viewrangeX || Math.abs(thnStore.intLocY-destY)>viewrangeY)
+    	if (Math.abs(thnStore.intLocX-destX)>entityViewrangeX || Math.abs(thnStore.intLocY-destY)>entityViewrangeY)
     	{
     		return false;
     	}
@@ -2698,18 +2702,18 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		LivingThing thnStore;
 		int i=0, i2=0, i3;
 	
-		if (intLocX-viewrangeX<0) i = -1*(intLocX-viewrangeX);	
-		if (intLocY-viewrangeY<0) i2 = -1*(intLocY-viewrangeY);
+		if (intLocX-entityViewrangeX<0) i = -1*(intLocX-entityViewrangeX);	
+		if (intLocY-entityViewrangeY<0) i2 = -1*(intLocY-entityViewrangeY);
 		
-		for (;i<mapsizeX;i++)
+		for (;i<1+(2*entityViewrangeX);i++)
 		{
-			if (intLocX+i-viewrangeX<MapColumns)
+			if (intLocX+i-entityViewrangeX<MapColumns)
 			{
-				for (i3=i2;i3<mapsizeY;i3++)
+				for (i3=i2;i3<1+(2*entityViewrangeY);i3++)
 				{
-					if (intLocY+i3-viewrangeY<MapRows)
+					if (intLocY+i3-entityViewrangeY<MapRows)
 					{
-						objStore = objEntities[intLocX+i-viewrangeX][intLocY+i3-viewrangeY];
+						objStore = objEntities[intLocX+i-entityViewrangeX][intLocY+i3-entityViewrangeY];
 						while (objStore != null)
 						{
 							if (objStore.isLivingThing())
@@ -2973,3 +2977,5 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		}
 	}
 }
+
+

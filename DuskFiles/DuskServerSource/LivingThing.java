@@ -1601,7 +1601,7 @@ public class LivingThing extends DuskObject implements Runnable
 				return "You can't move while you're following someone.";
 			}
 		}
-		if (Math.abs(destX - intLocX) > engGame.viewrangeX || Math.abs(destY - intLocY) > engGame.viewrangeY)
+		if (Math.abs(destX - intLocX) > engGame.entityViewrangeX || Math.abs(destY - intLocY) > engGame.entityViewrangeY)
 		{
 			return null; 
 		}
@@ -1808,16 +1808,16 @@ public class LivingThing extends DuskObject implements Runnable
 		DuskObject objStore;
 		boolean blnCanSee;
 		int x, x1, y, y1, y2;
-		x = intLocX-engGame.viewrangeX;
+		x = intLocX-engGame.entityViewrangeX;
 		if (x < 0)
 			x = 0;
-		x1 = intLocX+1+engGame.viewrangeX;
+		x1 = intLocX+1+engGame.entityViewrangeX;
 		if (x1 > engGame.MapColumns)
 			x1 = engGame.MapColumns;
-		y1 = intLocY-engGame.viewrangeY;
+		y1 = intLocY-engGame.entityViewrangeY;
 		if (y1 < 0)
 			y1 = 0;
-		y2 = intLocY+1+engGame.viewrangeY;
+		y2 = intLocY+1+engGame.entityViewrangeY;
 		if (y2 > engGame.MapRows)
 			y2 = engGame.MapRows;
 		for (;x<x1;x++)
@@ -1965,24 +1965,24 @@ public class LivingThing extends DuskObject implements Runnable
 		int i,i2,i3;
 		boolean blnCanSee;
 		i=0;
-	    if (intLocX-engGame.viewrangeX<0)
+	    if (intLocX-engGame.entityViewrangeX<0)
 		{
-	    	i = -1*(intLocX-engGame.viewrangeX);
+	    	i = -1*(intLocX-engGame.entityViewrangeX);
 	    }
 	   	i2=0;
-	    if (intLocY-engGame.viewrangeY<0)
+	    if (intLocY-engGame.entityViewrangeY<0)
 	    {
-	    	i2 = -1*(intLocY-engGame.viewrangeY);
+	    	i2 = -1*(intLocY-engGame.entityViewrangeY);
 	    }
-		for (;i<engGame.mapsizeX;i++)
+		for (;i<1+(2*engGame.entityViewrangeX);i++)
 		{
-			if (intLocX+i-engGame.viewrangeX<engGame.MapColumns)
+			if (intLocX+i-engGame.entityViewrangeX<engGame.MapColumns)
 			{
-				for (i3=i2;i3<engGame.mapsizeY;i3++)
+				for (i3=i2;i3<1+(2*engGame.entityViewrangeY);i3++)
 				{
-					if (intLocY+i3-engGame.viewrangeY<engGame.MapRows)
+					if (intLocY+i3-engGame.entityViewrangeY<engGame.MapRows)
 					{
-						objStore = engGame.objEntities[intLocX+i-engGame.viewrangeX][intLocY+i3-engGame.viewrangeY];
+						objStore = engGame.objEntities[intLocX+i-engGame.entityViewrangeX][intLocY+i3-engGame.entityViewrangeY];
 						while (objStore != null)
 						{
 							if (objStore.isLivingThing() && objStore != this)
@@ -3092,24 +3092,24 @@ public class LivingThing extends DuskObject implements Runnable
 		Vector<DuskObject> localObjects = new Vector<>();
 		int i, i2, i3;
 	   	i=0;
-	    if (intLocX-engGame.viewrangeX<0)
+	    if (intLocX-engGame.entityViewrangeX<0)
 		{
-	    	i = -1*(intLocX-engGame.viewrangeX);
+	    	i = -1*(intLocX-engGame.entityViewrangeX);
 	    }
 	   	i2=0;
-	    if (intLocY-engGame.viewrangeY<0)
+	    if (intLocY-engGame.entityViewrangeY<0)
 	    {
-	    	i2 = -1*(intLocY-engGame.viewrangeY);
+	    	i2 = -1*(intLocY-engGame.entityViewrangeY);
 	    }
-		for (;i<engGame.mapsizeX;i++)
+		for (;i<1+(2*engGame.entityViewrangeX);i++)
 		{
-			if (intLocX+i-engGame.viewrangeX<engGame.MapColumns)
+			if (intLocX+i-engGame.entityViewrangeX<engGame.MapColumns)
 			{
-				for (i3=i2;i3<engGame.mapsizeY;i3++)
+				for (i3=i2;i3<1+(2*engGame.entityViewrangeY);i3++)
 				{
-					if (intLocY+i3-engGame.viewrangeY<engGame.MapRows)
+					if (intLocY+i3-engGame.entityViewrangeY<engGame.MapRows)
 					{
-						DuskObject objStore = engGame.objEntities[intLocX+i-engGame.viewrangeX][intLocY+i3-engGame.viewrangeY];
+						DuskObject objStore = engGame.objEntities[intLocX+i-engGame.entityViewrangeX][intLocY+i3-engGame.entityViewrangeY];
 						while (objStore != null)
 						{
 							localObjects.addElement(objStore);

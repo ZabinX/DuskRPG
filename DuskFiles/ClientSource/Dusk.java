@@ -97,7 +97,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     Entity player;
     double cameraX, cameraY;
     	
-    int intImageSize = 36;
+    int intImageSize = 32;
     
     String strSet = null;
     
@@ -1242,7 +1242,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 	public void update(int intAnimTick)
 	{
-		final double entityMoveSpeed = (double)intImageSize / 8.0;
+		final double entityMoveSpeed = (double)intImageSize / 5.0;
 
 	    synchronized (vctEntities) {
 	        for (int i=0; i<vctEntities.size(); i++) {
@@ -1457,4 +1457,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		g.drawImage(imgDisplay,0,0,this);
 	}
 }
+
+
 
