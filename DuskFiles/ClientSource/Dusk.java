@@ -1322,8 +1322,15 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	
 	    synchronized (vctEntities) {
-	        for (int i=0; i<vctEntities.size(); i++) {
-	            Entity entStore = (Entity)vctEntities.elementAt(i);
+	        Vector<Entity> sortedEntities = new Vector<>(vctEntities);
+	        Collections.sort(sortedEntities, new Comparator<Entity>() {
+	            @Override
+	            public int compare(Entity e1, Entity e2) {
+	                return Double.compare(e1.pixelY, e2.pixelY);
+	            }
+	        });
+
+	        for (Entity entStore : sortedEntities) {
 	            drawEntity(entStore);
 	        }
 	    }
@@ -1417,6 +1424,3 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		g.drawImage(imgDisplay,0,0,this);
 	}
 }
-
-
-
