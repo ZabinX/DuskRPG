@@ -97,7 +97,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     Entity player;
     double cameraX, cameraY;
     	
-    int intImageSize = 32;
+    int intImageSize = 36;
     
     String strSet = null;
     
@@ -307,8 +307,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			entStore.pixelY = entStore.intLocY * intImageSize;
 			entStore.targetX = entStore.pixelX;
 			entStore.targetY = entStore.pixelY;
-
-			updateEntityNumbers();
 		}
 	}
 	
@@ -320,33 +318,11 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			if (entStore != null) {
 				hmpEntities.remove(lngStore);
 				vctEntities.removeElement(entStore);
-				updateEntityNumbers();
 			}
 		}
 	}
 
-	void updateEntityNumbers() {
-		// Sort by ID to ensure deterministic numbering
-		Collections.sort(vctEntities, new Comparator<Entity>() {
-			@Override
-			public int compare(Entity e1, Entity e2) {
-				return Long.compare(e1.ID, e2.ID);
-			}
-		});
-
-		HashMap<String, Integer> nameCounts = new HashMap<>();
-		for (int i = 0; i < vctEntities.size(); i++) {
-			Entity ent = (Entity)vctEntities.elementAt(i);
-			Integer count = nameCounts.get(ent.strName);
-			if (count == null) {
-				count = 0;
-			}
-			ent.intNum = count;
-			nameCounts.put(ent.strName, count + 1);
-		}
-	}
-	
-    @Override
+	@Override
 	public void	run()
 	{
 		int intStore,
@@ -412,7 +388,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 						frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
 						vctMerchantItems = new Vector(0,5);
-						updateEntityNumbers();
 						reloadJComboBoxLook();
 						reloadJComboBoxGet();
 						reloadJComboBoxAttack();
@@ -933,10 +908,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		frame.chcLook.addItem("Look");
 		for (Entity entStore : hmpEntities.values())
 		{
-			if (entStore.intNum == 0)
-				frame.chcLook.addItem(entStore.strName);
-			else
-				frame.chcLook.addItem(entStore.intNum+"."+entStore.strName);
+			if (Math.abs(LocX - entStore.intLocX) <= 10 && Math.abs(LocY - entStore.intLocY) <= 5)
+			{
+				frame.chcLook.addItem(entStore.strName + " #" + entStore.ID);
+			}
 		}
 		blnMenuRefresh = false;
 	}
@@ -951,12 +926,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		frame.chcAttack.addItem("Attack");
 		for (Entity entStore : hmpEntities.values())
 		{
-			if ((entStore.intType==0 || entStore.intType==1 || entStore.intType==4) && (Math.abs(LocX - entStore.intLocX) + Math.abs(LocY - entStore.intLocY) < 2))
+			if ((entStore.intType==0 || entStore.intType==1 || entStore.intType==4) && (Math.abs(LocX - entStore.intLocX) + Math.abs(LocY - entStore.intLocY) <= range))
 			{
-				if (entStore.intNum == 0)
-					frame.chcAttack.addItem(entStore.strName);
-				else
-					frame.chcAttack.addItem(entStore.intNum+"."+entStore.strName);
+				frame.chcAttack.addItem(entStore.strName + " #" + entStore.ID);
 			}
 		}
 		blnMenuRefresh = false;
@@ -974,10 +946,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		{
 			if (entStore.intType==1 && (LocX - entStore.intLocX) + (LocY - entStore.intLocY) < 2)
 			{
-				if (entStore.intNum == 0)
-					frame.chcGet.addItem(entStore.strName);
-				else
-					frame.chcGet.addItem(entStore.intNum+"."+entStore.strName);
+				frame.chcGet.addItem(entStore.strName + " #" + entStore.ID);
 			}
 		}
 		blnMenuRefresh = false;
@@ -1242,7 +1211,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 	public void update(int intAnimTick)
 	{
-		final double entityMoveSpeed = (double)intImageSize / 5.0;
+		final double entityMoveSpeed = (double)intImageSize / 8.0;
 
 	    synchronized (vctEntities) {
 	        for (int i=0; i<vctEntities.size(); i++) {
@@ -1423,19 +1392,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 								null);
 			}catch(Exception e){}
 		}
-		if (entStore.intNum == 0)
-		{
-			gD.setColor(Color.black);
-			gD.drawString(entStore.strName,(int)screenX-1,(int)(screenY+intImageSize)); 
-			gD.setColor(Color.white);
-			gD.drawString(entStore.strName,(int)screenX,(int)(screenY+intImageSize)); 
-		}else
-		{
-			gD.setColor(Color.black);
-			gD.drawString(entStore.intNum+"."+entStore.strName,(int)screenX-1,(int)(screenY+intImageSize)); 
-			gD.setColor(Color.white);
-			gD.drawString(entStore.intNum+"."+entStore.strName,(int)screenX,(int)(screenY+intImageSize)); 
-		}
+		gD.setColor(Color.black);
+		gD.drawString(entStore.strName,(int)screenX-1,(int)(screenY+intImageSize)); 
+		gD.setColor(Color.white);
+		gD.drawString(entStore.strName,(int)screenX,(int)(screenY+intImageSize)); 
 	}
 	
         @Override
@@ -1457,6 +1417,3 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		g.drawImage(imgDisplay,0,0,this);
 	}
 }
-
-
-

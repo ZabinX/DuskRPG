@@ -1937,7 +1937,19 @@ public class Commands
 			{
 				return "You can't do that while you're sleeping";
 			}
-			DuskObject objStore = lt.getLocalObject(strArgs);
+			DuskObject objStore = null;
+			int lastHash = strArgs.lastIndexOf(" #");
+			if (lastHash != -1) {
+				try {
+					long id = Long.parseLong(strArgs.substring(lastHash + 2));
+					objStore = getObjectByID(engGame, id);
+				} catch (NumberFormatException e) {
+					objStore = null;
+				}
+			} else {
+				objStore = lt.getLocalObject(strArgs);
+			}
+
 			if (objStore == null)
 			{
 				return "You don't see that here.";
@@ -1996,7 +2008,19 @@ public class Commands
 			{
 				return "You can't do that while you're sleeping";
 			}
-			DuskObject objStore = lt.getLocalObject(strArgs);
+			DuskObject objStore = null;
+			int lastHash = strArgs.lastIndexOf(" #");
+			if (lastHash != -1) {
+				try {
+					long id = Long.parseLong(strArgs.substring(lastHash + 2));
+					objStore = getObjectByID(engGame, id);
+				} catch (NumberFormatException e) {
+					objStore = null;
+				}
+			} else {
+				objStore = lt.getLocalObject(strArgs);
+			}
+
 			if (objStore != null)
 			{
 				if (objStore.isLivingThing())
@@ -2248,7 +2272,19 @@ public class Commands
 			{
 				return "Get what?";
 			}
-			DuskObject objStore = lt.getLocalObject(strArgs);
+			DuskObject objStore = null;
+			int lastHash = strArgs.lastIndexOf(" #");
+			if (lastHash != -1) {
+				try {
+					long id = Long.parseLong(strArgs.substring(lastHash + 2));
+					objStore = getObjectByID(engGame, id);
+				} catch (NumberFormatException e) {
+					objStore = null;
+				}
+			} else {
+				objStore = lt.getLocalObject(strArgs);
+			}
+
 			if (objStore == null)
 			{
 				return "You don't see that here.";
@@ -3384,4 +3420,48 @@ public class Commands
 		}
 		return null;
 	}
+
+	private static DuskObject getObjectByID(DuskEngine engGame, long id)
+	{
+		// This is not the most efficient implementation, but it's the safest to add without a major refactor.
+		// A better implementation would use a HashMap in DuskEngine to store all objects by ID.
+		DuskObject obj;
+		for (int i = 0; i < engGame.vctSockets.size(); i++)
+		{
+			obj = (DuskObject)engGame.vctSockets.elementAt(i);
+			if (obj.ID == id) return obj;
+		}
+		for (int i = 0; i < engGame.vctMobs.size(); i++)
+		{
+			obj = (DuskObject)engGame.vctMobs.elementAt(i);
+			if (obj.ID == id) return obj;
+		}
+		for (int i = 0; i < engGame.vctItems.size(); i++)
+		{
+			obj = (DuskObject)engGame.vctItems.elementAt(i);
+			if (obj.ID == id) return obj;
+		}
+		for (int i = 0; i < engGame.vctSigns.size(); i++)
+		{
+			obj = (DuskObject)engGame.vctSigns.elementAt(i);
+			if (obj.ID == id) return obj;
+		}
+		for (int i = 0; i < engGame.vctProps.size(); i++)
+		{
+			obj = (DuskObject)engGame.vctProps.elementAt(i);
+			if (obj.ID == id) return obj;
+		}
+		for (int i = 0; i < engGame.vctMerchants.size(); i++)
+		{
+			obj = (DuskObject)engGame.vctMerchants.elementAt(i);
+			if (obj.ID == id) return obj;
+		}
+		for (int i = 0; i < engGame.vctPets.size(); i++)
+		{
+			obj = (DuskObject)engGame.vctPets.elementAt(i);
+			if (obj.ID == id) return obj;
+		}
+		return null;
+	}
 }
+
