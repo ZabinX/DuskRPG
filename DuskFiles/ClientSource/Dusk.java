@@ -1037,18 +1037,23 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	public void scaleWindow()
 	{
 		int width = frame.pnlContents.getBounds().width-310;
-		int height = (int)(width / 2);
-		if (height > frame.pnlContents.getBounds().height-100) {
-			height = frame.pnlContents.getBounds().height-100;
-			width = height * 2;
-		}
-		frame.pnlGraphics.setSize(width,height);
-		intImageSize = frame.pnlGraphics.getBounds().width/21; // Use fixed viewport width
+		intImageSize = width/21;
 		if (intImageSize < 1)
 			intImageSize = 1;
-		// The panel should be the size of the window, not the entire map data
-		// The drawing loop will handle the camera position.
-		frame.pnlGraphics.setSize(width, height); 
+		
+		width = intImageSize * 21;
+		int height = intImageSize * 11;
+		
+		if (height > frame.pnlContents.getBounds().height-100) {
+			height = frame.pnlContents.getBounds().height-100;
+			intImageSize = height / 11;
+			if (intImageSize < 1)
+				intImageSize = 1;
+			width = intImageSize * 21;
+			height = intImageSize * 11;
+		}
+
+		frame.pnlGraphics.setSize(width,height); 
 		imgDisplay = frame.pnlGraphics.createImage(width, height);
 		gD = imgDisplay.getGraphics();
 		g = frame.pnlGraphics.getGraphics();
