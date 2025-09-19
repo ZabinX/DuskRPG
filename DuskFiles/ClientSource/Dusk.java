@@ -1085,7 +1085,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
  			
  			try
  			{
- 	 			stmOut.writeBytes("goto " + destX + " " + destY + "\n");
+ 	 			stmOut.writeBytes("findpath " + destX + " " + destY + "\n");
  			}catch(IOException e)
  			{
  	 			addText("Error at mouseDown(): "+e.toString()+"\n");
@@ -1417,3 +1417,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		g.drawImage(imgDisplay,0,0,this);
 	}
 }
+
+
+

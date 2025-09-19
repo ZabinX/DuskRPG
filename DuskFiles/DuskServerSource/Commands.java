@@ -60,6 +60,24 @@ public class Commands
 				return null;
 			}
 		}
+		if (strCommand.equals("findpath"))
+		{
+			if (lt.isPlayer()) {
+				int destX;
+				int destY;
+				try
+				{
+					destX = Integer.parseInt(strArgs.substring(0, strArgs.lastIndexOf(' ')));
+					destY = Integer.parseInt(strArgs.substring(strArgs.lastIndexOf(' ') + 1));
+				}catch(Exception e)
+				{
+					engGame.log.printError("parseCommand():"+lt.strName+" tried to "+strStore, e);
+					return null;
+				}
+				return lt.findpath(destX, destY);
+			}
+			return "Only players can use findpath.";
+		}
 		if (strCommand.equals("north") || strCommand.equals("n"))
 		{
 			if (lt.thnMaster != null)
@@ -3464,4 +3482,5 @@ public class Commands
 		return null;
 	}
 }
+
 
