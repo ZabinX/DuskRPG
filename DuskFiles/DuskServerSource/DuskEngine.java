@@ -80,7 +80,7 @@ public class DuskEngine implements Runnable
 			scrOnLogOut=null;
 	//End Prefs
 	
-	static String version="2.6.2.W47";
+	static String version="3.0z47";
 	Date datStart= new Date(System.currentTimeMillis());
 	
 	protected int MapRows,

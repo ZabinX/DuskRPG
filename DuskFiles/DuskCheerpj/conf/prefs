@@ -52,11 +52,11 @@ ExpGainMod=15
 MobReSpawnSpeed=200
 #
 #How far should a player be allowed to see?
-ViewRangeX=20
-ViewRangeY=10
+ViewRangeX=14
+ViewRangeY=8
 #How far should a player be allowed to see entities?
-EntityViewRangeX=20
-EntityViewRangeY=10
+EntityViewRangeX=14
+EntityViewRangeY=8
 #How large can player titles be?
 TitleCap=100
 #How large can player messages be?
@@ -64,7 +64,7 @@ MessageCap=300
 #How fast are mobs allowed to move? (default is 1 second = 1000)
 MobTicks=600
 #How fast are players allowed to move? (default is 1/4 second = 250)
-PlayerTicks=200
+PlayerTicks=185
 #Log file name.  Comment out the line to have messages go to standard out.
 LogFileName=log/dusk.txt
 #Level of detail output by game (the higher the number, the more you see).

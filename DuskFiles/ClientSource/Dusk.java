@@ -1269,9 +1269,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				targetCameraX = Math.max(minCameraX, Math.min(targetCameraX, maxCameraX));
 				targetCameraY = Math.max(minCameraY, Math.min(targetCameraY, maxCameraY));
 	
-				double cameraSmoothing = 0.1;
-				cameraX += (targetCameraX - cameraX) * cameraSmoothing;
-				cameraY += (targetCameraY - cameraY) * cameraSmoothing;
+				cameraX = targetCameraX;
+				cameraY = targetCameraY;
 			}
 			
 			gD.setColor(Color.black);

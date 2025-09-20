@@ -150,7 +150,7 @@ try {
 					appParent.paint();
 
 					// Sleep to control frame rate, aiming for ~50 FPS.
-					Thread.sleep(20);
+					Thread.sleep(10);
 				}catch(Exception e){
 					System.err.println("Error in graphics thread: " + e.toString());
 				}
