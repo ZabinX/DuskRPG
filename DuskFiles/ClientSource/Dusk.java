@@ -69,6 +69,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     		vctChoiceActionItems,
     		vctEntities;
     Vector<TileAnim> vctTileAnims;
+    Vector<DamageSplat> vctDamageSplats;
     
 	Image imgOriginalSprites;
 	Image imgOriginalPlayers;
@@ -206,6 +207,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			vctChoiceDropItems = new Vector(0,3);
 			vctChoiceActionItems = new Vector(0,3);
             vctTileAnims = new Vector<TileAnim>(0,3);
+            vctDamageSplats = new Vector<DamageSplat>(0,3);
 		}catch(Exception e)
 		{
 			System.err.println("Error connecting to server: "+e.toString());
@@ -593,6 +595,55 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 					break;
 				}
+                case (36):
+                {
+                    try {
+                        long attackerID = Long.parseLong(stmIn.readLine());
+                        long defenderID = Long.parseLong(stmIn.readLine());
+                        int damage = Integer.parseInt(stmIn.readLine());
+
+                        synchronized(vctEntities) {
+                            Entity attacker = hmpEntities.get(attackerID);
+                            Entity defender = hmpEntities.get(defenderID);
+
+                            if (attacker != null && defender != null) {
+                                // Check for an existing splat to aggregate
+                                DamageSplat existingSplat = null;
+                                for (DamageSplat splat : vctDamageSplats) {
+                                    if (splat.defenderID == defenderID && splat.lifetime > 50) {
+                                        existingSplat = splat;
+                                        break;
+                                    }
+                                }
+
+                                if (existingSplat != null) {
+                                    existingSplat.damage += damage;
+                                    existingSplat.text = String.valueOf(existingSplat.damage);
+                                    existingSplat.lifetime = 60; // Reset lifetime
+                                } else {
+                                    DamageSplat splat = new DamageSplat(
+                                        damage,
+                                        attackerID,
+                                        defenderID,
+                                        defender == player ? Color.CYAN : Color.RED
+                                    );
+                                    
+                                    double angle = Math.atan2(defender.pixelY - attacker.pixelY, defender.pixelX - attacker.pixelX);
+                                    angle += (Math.random() - 0.5) * 1.0; // Increased randomness
+                                    splat.vx = Math.cos(angle) * 0.75; // Halved speed
+                                    splat.vy = Math.sin(angle) * 0.75; // Halved speed
+                                    splat.x = defender.pixelX + intImageSize / 2;
+                                    splat.y = defender.pixelY;
+
+                                    vctDamageSplats.add(splat);
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error creating damage splat: " + e.getMessage());
+                    }
+                    break;
+                }
 				case(12):
 				{
 					if (blnMusic)
@@ -847,20 +898,18 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                     try {
                         long opponentID = Long.parseLong(stmIn.readLine());
                         String HpData = stmIn.readLine();
-                           if (HpData == null) {
-                        System.err.println("Input stream ended before the expected line was found.");
-                        } else {
-                        String[] hpValues = HpData.trim().split(" ");
-                        int newHp = Integer.parseInt(hpValues[0]);
-                        int newMaxHp = Integer.parseInt(hpValues[1]);
+                        if (HpData != null) {
+                            String[] hpValues = HpData.trim().split(" ");
+                            int newHp = Integer.parseInt(hpValues[0]);
+                            int newMaxHp = Integer.parseInt(hpValues[1]);
 
-                        synchronized(vctEntities) {
-							entStore = hmpEntities.get(opponentID);
-							if (entStore != null) {
-								entStore.hp = newHp;
-								entStore.maxhp = newMaxHp;
-							}
-                        }
+                            synchronized(vctEntities) {
+                                entStore = hmpEntities.get(opponentID);
+                                if (entStore != null) {
+                                    entStore.hp = newHp;
+                                    entStore.maxhp = newMaxHp;
+                                }
+                            }
                         }
                     } catch (Exception e) {
                         System.err.println("Error updating opponent HP: " + e.getMessage());
@@ -1218,6 +1267,18 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	{
 		final double entityMoveSpeed = (double)intImageSize / 8.0;
 
+	    synchronized (vctDamageSplats) {
+	        for (int i = vctDamageSplats.size() - 1; i >= 0; i--) {
+	            DamageSplat splat = vctDamageSplats.elementAt(i);
+	            splat.x += splat.vx;
+	            splat.y += splat.vy;
+	            splat.lifetime--;
+	            if (splat.lifetime <= 0) {
+	                vctDamageSplats.removeElementAt(i);
+	            }
+	        }
+	    }
+
 	    synchronized (vctEntities) {
 	        for (int i=0; i<vctEntities.size(); i++) {
 	            Entity ent = (Entity)vctEntities.elementAt(i);
@@ -1337,6 +1398,21 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	        for (Entity entStore : sortedEntities) {
 	            drawEntity(entStore);
 	        }
+	    }
+	    
+	    synchronized (vctDamageSplats) {
+	    	Font originalFont = gD.getFont();
+	    	Font boldFont = new Font(originalFont.getName(), Font.BOLD, 16);
+	    	gD.setFont(boldFont);
+	        for (DamageSplat splat : vctDamageSplats) {
+	            double screenX = splat.x - cameraX;
+	            double screenY = splat.y - cameraY;
+	            gD.setColor(Color.BLACK);
+	            gD.drawString(splat.text, (int)screenX + 1, (int)screenY + 1);
+	            gD.setColor(splat.color);
+	            gD.drawString(splat.text, (int)screenX, (int)screenY);
+	        }
+	        gD.setFont(originalFont);
 	    }
 	}
 	

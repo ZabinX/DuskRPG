@@ -2135,6 +2135,18 @@ public class LivingThing extends DuskObject implements Runnable
 	    }
 	}
 
+	public void sendDamageSplat(long attackerID, long defenderID, int damage)
+	{
+		if (isPlayer() && blnWorking && !blnIsClosing)
+		{
+			String strResult = "" + (char)36;
+			strResult += attackerID + "\n";
+			strResult += defenderID + "\n";
+			strResult += damage + "\n";
+			send(strResult);
+		}
+	}
+
 	public void updateMap()
 	{
 		//update map:

@@ -231,6 +231,20 @@ public class Battle
             s += thnAttacking.strName + " did " + i + " to " + thnAttacked.strName;
             thnAttacked.hp -= i;
             thnAttacking.lngDamDone += i;
+            
+            for (int j=0; j<vctSide1.size(); j++) {
+                LivingThing player = (LivingThing)vctSide1.elementAt(j);
+                if (player.isPlayer()) {
+                    player.sendDamageSplat(thnAttacking.ID, thnAttacked.ID, i);
+                }
+            }
+            for (int j=0; j<vctSide2.size(); j++) {
+                LivingThing player = (LivingThing)vctSide2.elementAt(j);
+                if (player.isPlayer()) {
+                    player.sendDamageSplat(thnAttacking.ID, thnAttacked.ID, i);
+                }
+            }
+
             thnAttacking.weaponDam(i);
             thnAttacked.armorDam(i);
         }
