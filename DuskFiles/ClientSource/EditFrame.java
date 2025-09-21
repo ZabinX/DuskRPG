@@ -73,7 +73,7 @@ class EditFrame extends JFrame implements MouseListener
 				appParent.stmOut.writeBytes(txtEdit.getText()+"\n--EOF--\n");
 			}catch(Exception e)
 			{
-				appParent.frame.txtOutput.append("Error while submitting file: "+e.toString());
+				appParent.addText("Error while submitting file: "+e.toString()+"\n");
 			}
 		}
 	}
@@ -85,4 +85,7 @@ class EditFrame extends JFrame implements MouseListener
 		setVisible(false);
 	}
 }
+
+
+
 

@@ -22,6 +22,8 @@ import java.util.Comparator;
 import java.lang.Math;
 import java.lang.reflect.Array;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.applet.*;
 import java.net.*;
 import javax.swing.text.*;
@@ -174,7 +176,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		   		connect();
 		    }else
 			{
-				addText(255,0,0,"Click \"connect\" to connect to a server and begin playing.\n");
+				addText("<RGB 255 0 0>Click \"connect\" to connect to a server and begin playing.</RGB>\n");
 			}
 			thrGraphics = new GraphicsThread(this);
 		}catch (Exception e) 
@@ -215,54 +217,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 	
-	void addText(String strAdd)
-	{
-		int i,j,red,green,blue;
-		String strStore=null,strRGB,strBlue;
-		StringTokenizer tokStore;
-		i = strAdd.indexOf("<RGB ");
-		while(strAdd != null && i != -1)
-		{
-			red=0; green=0; blue=0;
-			if (i != 0)
-			{
-				strStore = strAdd.substring(0,i);
-				addText(0,0,0,strStore);
-			}
-			strAdd = strAdd.substring(i+1);
-			j = strAdd.indexOf(">");
-			strRGB = strAdd.substring(0,j);
-			strAdd = strAdd.substring(j+1);
-			i = strAdd.indexOf("</RGB>");
-			if (i != -1)
-			{
-				strStore = strAdd.substring(0,i);
-				strAdd = strAdd.substring(i+6);
-				i = strAdd.indexOf("<RGB ");
-			} else
-			{
-				strStore = strAdd;
-				strAdd = null;
-				i = -1;
-			}
-			tokStore = new StringTokenizer(strRGB);
-			try
-			{
-				tokStore.nextToken();
-				red = Integer.parseInt(tokStore.nextToken());
-				green = Integer.parseInt(tokStore.nextToken());
-				strBlue = tokStore.nextToken();
-				blue = Integer.parseInt(strBlue.substring(0,strBlue.length()));
-			} catch (NumberFormatException e) {}
-			if (red < 0) red = 0; if (green < 0) green = 0; if (blue < 0) blue = 0;
-			if (red > 255) red = 255; if (green > 255) green = 255; if (blue > 255) blue = 255;
-			addText(red, green, blue, strStore);
-		}
-		if (strAdd != null)
-			addText(0,0,0,strAdd);
-	}
-	
-	synchronized void addText(int red,int green, int blue,String strAdd)
+	synchronized void addText(String strAdd)
 	{
 		if (frame.docOutput.getLength() > 8000)
 		{
@@ -272,13 +227,44 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			} catch (BadLocationException e) {}
 		}
 
-		SimpleAttributeSet style = new SimpleAttributeSet();
-		StyleConstants.setForeground(style,new Color(red,green,blue));
-		try
-		{
-			frame.docOutput.insertString(frame.docOutput.getEndPosition().getOffset()-1,strAdd,style);
-		}catch (BadLocationException e) 
-		{
+		try {
+			Pattern pattern = Pattern.compile("<RGB (\\d+) (\\d+) (\\d+)>(.*?)</RGB>");
+			Matcher matcher = pattern.matcher(strAdd);
+			
+			int lastIndex = 0;
+			while (matcher.find()) {
+				// Append text before the match (default color)
+				if (matcher.start() > lastIndex) {
+					String text = strAdd.substring(lastIndex, matcher.start());
+					frame.docOutput.insertString(frame.docOutput.getLength(), text, null);
+				}
+				
+				// Append the colored text
+				try {
+					int red = Integer.parseInt(matcher.group(1));
+					int green = Integer.parseInt(matcher.group(2));
+					int blue = Integer.parseInt(matcher.group(3));
+					String text = matcher.group(4);
+
+					SimpleAttributeSet style = new SimpleAttributeSet();
+					StyleConstants.setForeground(style, new Color(red, green, blue));
+					frame.docOutput.insertString(frame.docOutput.getLength(), text, style);
+
+				} catch (NumberFormatException e) {
+					// If parsing fails, just add the raw tag text in default color
+					frame.docOutput.insertString(frame.docOutput.getLength(), matcher.group(0), null);
+					System.err.println("Error parsing RGB tag: " + e.getMessage());
+				}
+				
+				lastIndex = matcher.end();
+			}
+			
+			// Append any remaining text after the last match (default color)
+			if (lastIndex < strAdd.length()) {
+				frame.docOutput.insertString(frame.docOutput.getLength(), strAdd.substring(lastIndex), null);
+			}
+
+		} catch (BadLocationException e) {
 			System.err.println(e.toString());
 		}
 
@@ -766,10 +752,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (23):
 				{
-		            addText(Integer.parseInt(strStore = stmIn.readLine()),
-		            		Integer.parseInt(strStore = stmIn.readLine()),
-		            		Integer.parseInt(strStore = stmIn.readLine()),
-		            		stmIn.readLine()+"\n");
+                    int red = Integer.parseInt(stmIn.readLine());
+                    int green = Integer.parseInt(stmIn.readLine());
+                    int blue = Integer.parseInt(stmIn.readLine());
+                    String text = stmIn.readLine();
+                    String formattedText = "<RGB " + red + " " + green + " " + blue + ">" + text + "</RGB>\n";
+                    addText(formattedText);
 		            break;
 				}
 				case (24):

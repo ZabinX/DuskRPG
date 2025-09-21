@@ -363,7 +363,7 @@ class EquipmentFrame extends JFrame implements ActionListener
 		}
 		}catch(Exception e)
 		{
-			appParent.frame.txtOutput.append("Error at Equip(): "+e.toString());
+			appParent.addText("Error at Equip(): "+e.toString()+"\n");
 		}
 	}
 }

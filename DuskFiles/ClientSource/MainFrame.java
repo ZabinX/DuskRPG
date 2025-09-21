@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import javax.swing.*;
+import javax.swing.JTextPane;
 import java.util.StringTokenizer;
 import javax.swing.text.Document;
 
@@ -71,7 +72,7 @@ public class MainFrame extends JFrame implements ItemListener
         JButton btnWake = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zeye.png")));
 	JPanel pnlGraphics = new JPanel();
 	JTextField txtInput = new JTextField();
-	JTextArea txtOutput = new JTextArea();
+	JTextPane txtOutput = new JTextPane();
 	JScrollPane scrText = new JScrollPane();
         Document docOutput;
 	EquipmentFrame frmEquipment;
@@ -1009,3 +1010,4 @@ public class MainFrame extends JFrame implements ItemListener
 		}
 	}
 }
+
