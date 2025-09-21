@@ -225,6 +225,19 @@ public class Battle
         {
             if(engGame.battlesound != -1)
                 engGame.playSound(engGame.battlesound, thnAttacked.intLocX,thnAttacked.intLocY);
+            int randomSound = (int)(Math.random() * 12);
+            for (int j=0; j<vctSide1.size(); j++) {
+                LivingThing player = (LivingThing)vctSide1.elementAt(j);
+                if (player.isPlayer()) {
+                    player.playSound(randomSound);
+                }
+            }
+            for (int j=0; j<vctSide2.size(); j++) {
+                LivingThing player = (LivingThing)vctSide2.elementAt(j);
+                if (player.isPlayer()) {
+                    player.playSound(randomSound);
+                }
+            }
             int i = damRoll(thnAttacking,thnAttacked, range);
             if(i < 0)
                 i = 0;

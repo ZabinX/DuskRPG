@@ -85,51 +85,6 @@ public class GraphicsThread implements Runnable
 		{
 			prefix = "file:"+System.getProperty("user.dir")+prefix;
 		}
-		//Load audio
-		if (appParent.blnApplet)
-		{
-		URL urlStore;
-		appParent.addText("Loading audio.\n");
-		Vector vctStore = new Vector(0);
-/*
-		try
-		{
-			i=0;
-			urlStore = new URL(appParent.strRCAddress+"audio/sfx/"+i+".au");
-			while(urlStore.openStream() != null)
-			{
-				vctStore.addElement(appParent.appShell.getAudioClip(urlStore));
-				i++;
-				urlStore = new URL(appParent.strRCAddress+"audio/sfx/"+i+".au");
-			}
-		}catch (Exception e)
-		{
-		}
-*/
-try {
-    urlStore = new URL(prefix+appParent.strRCAddress+"/audio/sfx/0.au");
-    HttpURLConnection urlConnection = (HttpURLConnection)urlStore.openConnection
-();
-    vctStore.addElement(Applet.newAudioClip(urlStore));
-    urlStore = new URL(prefix+appParent.strRCAddress+"/audio/sfx/1.au");
-    urlConnection = (HttpURLConnection)urlStore.openConnection();
-    vctStore.addElement(Applet.newAudioClip(urlStore));
-}catch (Exception e){}
-		appParent.audSFX = new AudioClip[vctStore.size()];
-		try
-		{
-			for (i=0;i<vctStore.size();i++)
-			{
-				appParent.audSFX[i] = (AudioClip)vctStore.elementAt(i);
-			}
-		}catch (Exception e)
-		{
-			System.err.println("Error loading audio: "+e.toString());
-			appParent.addText("Error loading audio: "+e.toString()+"\n");
-			return;
-		}
-		appParent.addText((Array.getLength(appParent.audSFX))+" audio files loaded.\n");
-		}
         appParent.update(intAnimTick);
 		appParent.paint();
 
@@ -166,6 +121,3 @@ try {
 		}
 	}
 }
-
-
-

@@ -25,7 +25,11 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.applet.*;
+import java.io.File;
+import java.io.InputStream;
+import java.io.BufferedInputStream;
 import java.net.*;
+import javax.sound.sampled.*;
 import javax.swing.text.*;
 import javax.swing.JScrollBar;
 import javax.swing.UIManager;
@@ -58,9 +62,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			blnApplet;
 	int intMusicTypes;
 	int intNumSongs[];
-    AudioClip audSFX[],
+    Clip audSFX[],
     			audMusic[][];
-    AudioClip audMusicPlaying;
+    Clip audMusicPlaying;
     Applet appShell;
     String strRCAddress;
     String strWebAssetPath = "";
@@ -177,6 +181,22 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		    }else
 			{
 				addText("<RGB 255 0 0>Click \"connect\" to connect to a server and begin playing.</RGB>\n");
+			}
+			try {
+				audSFX = new Clip[12];
+				for (int i = 0; i < 12; i++) {
+					String fileName = String.format("/rc/somedusk/audio/sfx/hit%02d.wav", i + 1);
+					InputStream audioSrc = Dusk.class.getResourceAsStream(fileName);
+					if (audioSrc == null) {
+						continue;
+					}
+					InputStream bufferedIn = new BufferedInputStream(audioSrc);
+					AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedIn);
+					audSFX[i] = AudioSystem.getClip();
+					audSFX[i].open(audioInputStream);
+				}
+			} catch(Exception e) {
+				System.err.println("Error loading sound effects: " + e.toString());
 			}
 			thrGraphics = new GraphicsThread(this);
 		}catch (Exception e) 
@@ -551,28 +571,27 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				{
 					try
 					{
-						if (blnApplet)
-						{
 						addText("Loading music.\n");
 						intMusicTypes = Integer.parseInt(stmIn.readLine());
-						audMusic = new AudioClip[intMusicTypes][];
+						audMusic = new Clip[intMusicTypes][];
 						intNumSongs = new int[intMusicTypes];
 						for (intStore=0;intStore<intMusicTypes;intStore++)
 						{
 							intNumSongs[intStore] = Integer.parseInt(stmIn.readLine());
-							audMusic[intStore] = new AudioClip[intNumSongs[intStore]];
+							audMusic[intStore] = new Clip[intNumSongs[intStore]];
 							for (intStore2=0;intStore2<intNumSongs[intStore];intStore2++)
 							{
 								strStore = stmIn.readLine();
 								try
 								{
-									audMusic[intStore][intStore2] = appShell.getAudioClip(new URL(strStore));
-									while (audMusic[intStore][intStore2] == null) {}
-								}catch(MalformedURLException e) { System.err.println("Error while trying to load music file "+strStore+":"+e.toString()); }
+									AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(strStore).getAbsoluteFile());
+									audMusic[intStore][intStore2] = AudioSystem.getClip();
+									audMusic[intStore][intStore2].open(audioInputStream);
+									audioInputStream.close();
+								}catch(Exception e) { System.err.println("Error while trying to load music file "+strStore+":"+e.toString()); }
 							}
 						}
 						addText("Music loaded.\n");
-						}
 					}catch(IOException | NumberFormatException e)
 					{
 						blnMusic = false;
@@ -639,7 +658,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						intStore = Integer.parseInt(stmIn.readLine());
 						if (audMusicPlaying != null) audMusicPlaying.stop();
 						audMusicPlaying = audMusic[intStore][(int)(Math.random()*intNumSongs[intStore])];
-						audMusicPlaying.loop();
+						audMusicPlaying.loop(Clip.LOOP_CONTINUOUSLY);
 					}catch(IOException | NumberFormatException e) { System.err.println("Error while trying to play music file:" + e.toString()); }
 					}
 					break;
@@ -658,8 +677,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				{
 					try
 					{
-						audSFX[Integer.parseInt(stmIn.readLine())].play();
-					}catch(IOException | NumberFormatException e){}
+						int sfxIndex = Integer.parseInt(stmIn.readLine());
+						if (audSFX != null && sfxIndex >= 0 && sfxIndex < audSFX.length && audSFX[sfxIndex] != null) {
+							audSFX[sfxIndex].setFramePosition(0);
+							audSFX[sfxIndex].start();
+						}
+					}catch(Exception e){}
 					break;
 				}
 				case (16):

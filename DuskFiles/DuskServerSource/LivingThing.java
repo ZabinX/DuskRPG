@@ -3740,6 +3740,14 @@ public class LivingThing extends DuskObject implements Runnable
 		}*/
 	}
 	
+	public void playSound(int intSound)
+	{
+		if (isPlayer() && audioon)
+		{
+			send(""+(char)15+intSound+"\n");
+		}
+	}
+	
 	public void playSFX(int intSFX)
 	{
 		if (audioon)
