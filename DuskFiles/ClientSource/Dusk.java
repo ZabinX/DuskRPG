@@ -63,7 +63,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	int intMusicTypes;
 	int intNumSongs[];
     Clip audSFX[],
-    			audMusic[][];
+    			audMusic[][],
+				audLocationMusic[];
     Clip audMusicPlaying;
     Applet appShell;
     String strRCAddress;
@@ -198,6 +199,26 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			} catch(Exception e) {
 				System.err.println("Error loading sound effects: " + e.toString());
 			}
+			
+			try {
+				audLocationMusic = new Clip[2];
+				String[] musicFiles = {"a_better_world-orch.wav", "The_9th_Circle_V2.wav"};
+				for (int i = 0; i < musicFiles.length; i++) {
+					String fileName = "/rc/somedusk/audio/sfx/" + musicFiles[i];
+					InputStream audioSrc = Dusk.class.getResourceAsStream(fileName);
+					if (audioSrc == null) {
+						System.err.println("Error: Music resource not found: " + fileName);
+						continue;
+					}
+					InputStream bufferedIn = new BufferedInputStream(audioSrc);
+					AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedIn);
+					audLocationMusic[i] = AudioSystem.getClip();
+					audLocationMusic[i].open(audioInputStream);
+				}
+			} catch (Exception e) {
+				System.err.println("Error loading location music: " + e.toString());
+			}
+
 			thrGraphics = new GraphicsThread(this);
 		}catch (Exception e) 
 		{
@@ -597,6 +618,34 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						blnMusic = false;
 						addText("Your java virtual machine does not support midi music\n");
 						System.err.println("Error while trying to load music files:"+e.toString());
+					}
+					break;
+				}
+				case (60): // playLocationMusic
+				{
+					if (blnMusic) {
+						try {
+							int songIndex = Integer.parseInt(stmIn.readLine());
+							if (audMusicPlaying != null) {
+								audMusicPlaying.stop();
+							}
+							if (audLocationMusic != null && songIndex >= 0 && songIndex < audLocationMusic.length) {
+								audMusicPlaying = audLocationMusic[songIndex];
+								if (audMusicPlaying != null) {
+									audMusicPlaying.setFramePosition(0);
+									audMusicPlaying.loop(Clip.LOOP_CONTINUOUSLY);
+								}
+							}
+						} catch (Exception e) {
+							System.err.println("Error playing location music: " + e.toString());
+						}
+					}
+					break;
+				}
+				case (61): // stopLocationMusic
+				{
+					if (blnMusic && audMusicPlaying != null) {
+						audMusicPlaying.stop();
 					}
 					break;
 				}

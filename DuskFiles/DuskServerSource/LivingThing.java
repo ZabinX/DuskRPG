@@ -2060,6 +2060,18 @@ public class LivingThing extends DuskObject implements Runnable
 		}
 	}
 
+	public void playLocationMusic(int songIndex) {
+		if (isPlayer() && audioon) {
+			send("" + (char)60 + songIndex + "\n");
+		}
+	}
+
+	public void stopLocationMusic() {
+		if (isPlayer() && audioon) {
+			send("" + (char)61 + "\n");
+		}
+	}
+
 	public void changeLoc(int newLocX, int newLocY)
 	{
 		if (privs>1 || (batBattle == null && !blnSleep && engGame.canMoveTo(newLocX,newLocY,this)))

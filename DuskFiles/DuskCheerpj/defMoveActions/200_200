@@ -1,3 +1,5 @@
+playmusic 0
+
 if ispet trigger
     endscript
 end
@@ -11,5 +13,6 @@ if ! hascondition trigger "dude"
     endscript
 end
 endscript
+
 
 

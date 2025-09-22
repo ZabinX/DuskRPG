@@ -36,7 +36,16 @@ removeCondition trigger pirateassassinbattle
 removeCondition trigger pirateassassinbattle1
 removeCondition trigger blackbeardbattle
 removeCondition trigger blackbeardbattle1
+playmusic 1
 endscript
+
+
+
+
+
+
+
+
 
 
 

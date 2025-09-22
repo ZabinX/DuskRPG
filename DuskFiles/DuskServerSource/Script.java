@@ -1147,7 +1147,14 @@ public class Script
 				rafCompile.writeBytes(getStringForCompile());
 				rafCompile.writeBytes(getStringForCompile());
     			return true;
-    		}
+    		} else if (strStore.equalsIgnoreCase("playmusic")) {
+				rafCompile.writeByte(60);
+				rafCompile.writeBytes(parseValueForCompile());
+				return true;
+			} else if (strStore.equalsIgnoreCase("stopmusic")) {
+				rafCompile.writeByte(61);
+				return true;
+			}
     	rafCompile.writeBytes(strStore+" ");
         return true;
 	}
@@ -2093,6 +2100,22 @@ public class Script
 					}
     				return true;
     			}
+				case 60:
+				{
+					LivingThing thnStore = getLivingThing("trigger");
+					if (thnStore != null) {
+						thnStore.playLocationMusic((int)parseValue());
+					}
+					return true;
+				}
+				case 61:
+				{
+					LivingThing thnStore = getLivingThing("trigger");
+					if (thnStore != null) {
+						thnStore.stopLocationMusic();
+					}
+					return true;
+				}
 				case 32:
 				{
 					return true;
@@ -2208,3 +2231,4 @@ public class Script
 	    return 0;
 	}
 }
+

@@ -225,7 +225,7 @@ public class Battle
         {
             if(engGame.battlesound != -1)
                 engGame.playSound(engGame.battlesound, thnAttacked.intLocX,thnAttacked.intLocY);
-            int randomSound = (int)(Math.random() * 12);
+            int randomSound = (int)(Math.random() * 37);
             for (int j=0; j<vctSide1.size(); j++) {
                 LivingThing player = (LivingThing)vctSide1.elementAt(j);
                 if (player.isPlayer()) {
