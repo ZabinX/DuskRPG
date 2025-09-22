@@ -55,6 +55,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
         range=1;
 	String strTile = "-1";
     long loncash;
+    long playerTicks = 200;
 	boolean blnLoaded,
                         blnRefreshing,
 			blnMenuRefresh,
@@ -698,6 +699,15 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                     }
                     break;
                 }
+                case (37):
+                {
+                    try {
+                        playerTicks = Long.parseLong(stmIn.readLine());
+                    } catch (Exception e) {
+                        System.err.println("Error reading playerTicks: " + e.getMessage());
+                    }
+                    break;
+                }
 				case(12):
 				{
 					if (blnMusic)
@@ -1325,7 +1335,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 	public void update(int intAnimTick)
 	{
-		final double entityMoveSpeed = (double)intImageSize / 8.0;
+		final double entityMoveSpeed = (double)intImageSize / (playerTicks / 40.0);
 
 	    synchronized (vctDamageSplats) {
 	        for (int i = vctDamageSplats.size() - 1; i >= 0; i--) {

@@ -4212,6 +4212,7 @@ public class LivingThing extends DuskObject implements Runnable
 		strResult += engGame.mapsizeX+"\n";
 		strResult += engGame.mapsizeY+"\n";
 		send(strResult);
+		send((char)37 + "" + engGame.lngPlayerTicks + "\n");
 	}
 		
 	void updateSell()
