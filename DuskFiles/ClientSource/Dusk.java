@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.io.BufferedInputStream;
 import java.net.*;
 import javax.sound.sampled.*;
+import javax.swing.ImageIcon;
 import javax.swing.text.*;
 import javax.swing.JScrollBar;
 import javax.swing.UIManager;
@@ -1391,11 +1392,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	                }
 	            }
 	        }
-	    }
-	
-		int startTileX = 0, startTileY = 0, endTileX = 0, endTileY = 0;
-		double offsetX = 0, offsetY = 0;
-		synchronized (vctEntities) {
+	    
+			int startTileX = 0, startTileY = 0, endTileX = 0, endTileY = 0;
+			double offsetX = 0, offsetY = 0;
 			if (player != null) {
 				if (frame.pnlGraphics.getWidth() == 0) return;
 	
@@ -1464,9 +1463,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 				}
 			}
-		}
 	
-	    synchronized (vctEntities) {
 	        Vector<Entity> sortedEntities = new Vector<>(vctEntities);
 	        Collections.sort(sortedEntities, new Comparator<Entity>() {
 	            @Override
@@ -1478,10 +1475,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	        for (Entity entStore : sortedEntities) {
 	            drawEntity(entStore);
 	        }
-	    }
 		
-		// Draw alpha layer
-		for (int i=startTileX; i<endTileX; i++) {
+		    // Draw alpha layer
+		    for (int i=startTileX; i<endTileX; i++) {
 			for (int i2=startTileY; i2<endTileY; i2++) {
 				int mapGridX = i - (LocX - viewRangeX);
 				int mapGridY = i2 - (LocY - viewRangeY);
@@ -1506,7 +1502,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 		}
 	    
-	    synchronized (vctDamageSplats) {
 	    	Font originalFont = gD.getFont();
 	    	Font boldFont = new Font(originalFont.getName(), Font.BOLD, 16);
 	    	gD.setFont(boldFont);
