@@ -1,6 +1,0 @@
-if isInBattle trigger
-	order trigger "cast thorns"
-end
-endscript
-
-

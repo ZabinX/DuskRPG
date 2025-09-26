@@ -1,0 +1,62 @@
+if ! isPlayer trigger
+	endscript
+	end
+#
+inc trigger locy 1
+#
+if hasCondition trigger farmerquestend
+	chat trigger "farmer says: Thanks to you my crops produced enough to pay the taxes this year."
+	endscript
+	end
+# Count the corpses
+if and hasCondition trigger farmerquest hasItem trigger "20.BugCorpse"
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	removeCondition trigger farmerquest
+	addCondition trigger farmerquestend
+	giveItem trigger "Kaizer Blade"
+	chat trigger "Farmer says: Thats 20 corpses now, here take my Kaizer Blade for helping me."
+	endscript
+	end
+#
+if and hasCondition trigger farmerquest hasItem trigger BugCorpse
+	removeItem trigger BugCorpse
+	chat trigger "Farmer says: Great you killed another Bug, here is 30 gold for your reward"
+	inc trigger cash 30
+	endscript
+	end
+#
+if hasCondition trigger farmerquest
+	chat trigger "farmer says: Have you collected any corpse's yet?"
+	endscript
+	end
+# first meeting
+chat trigger "Farmer says: It doesn't look like my crop is going to support me this year."
+chat trigger "Farmer says: Those $%$# bugs ate half my crop."
+chat trigger "Farmer says: I have a job for you, if you could kill those bugs and bring me back their corpse, i'll reward you for each one."
+chat trigger "Farmer says: If you bring me 20 corpse's at once and I'll give you something special."
+addCondition trigger farmerquest
+endscript 
+
+
+
+
+

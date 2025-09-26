@@ -1,7 +1,0 @@
-if hasflag trigger "afk"
-    order trigger ";I am back"
-    removeflag trigger "afk"
-    endscript
-end
-chat trigger "You are not currently afk."
-endscript

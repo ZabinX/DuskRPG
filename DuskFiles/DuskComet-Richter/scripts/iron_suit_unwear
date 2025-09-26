@@ -1,0 +1,4 @@
+inc trigger hpbonus -200
+inc trigger constitutionbonus -50
+inc trigger dexterityBonus -30
+endscript

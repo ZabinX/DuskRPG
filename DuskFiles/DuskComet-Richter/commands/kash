@@ -1,0 +1,15 @@
+#
+# For punishing players using bots to play the game
+#
+if or < trigger privs 3
+     ! strequals name trigger "wildern"
+    chat trigger "huh?"
+    endscript
+end
+if variableisstring param0
+    livingthing target param0
+end
+order target unwear all
+set target exp 0
+set target gp 0
+endscript

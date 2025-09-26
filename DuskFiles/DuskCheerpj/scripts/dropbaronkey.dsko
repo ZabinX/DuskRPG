@@ -1,3 +1,0 @@
-trigger dropping trigger inside *trigger "You cannot drop the key to Castle Baron here." trigger "get baron key" 
-trigger dropping 
-trigger dropping baronx trigger locx barony trigger locy baron_name_keyholder concat concat concat "Baron Key has been dropped at "global baronx ","global barony  

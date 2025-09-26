@@ -1,0 +1,19 @@
+type
+armor
+kind
+waist
+description
+a belt constructed of the legendary metal dragonite
+cost
+25000
+mod
+5000
+image
+7
+durability
+2950000
+onWear
+wear_normal_armor
+.
+
+

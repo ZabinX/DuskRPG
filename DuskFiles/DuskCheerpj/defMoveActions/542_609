@@ -1,9 +1,0 @@
-removeCondition trigger east4
-removeCondition trigger north4
-removeCondition trigger north6
-removeCondition trigger ballnorth22
-removeCondition trigger ballnorth24
-endscript
-
-
-

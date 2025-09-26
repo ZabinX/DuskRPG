@@ -1,0 +1,9 @@
+if ispet trigger
+    endscript
+end
+if < trigger cp 3000
+    endscript
+end
+inc trigger strengthbonus -100
+endscript
+

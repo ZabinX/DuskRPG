@@ -1,6 +1,0 @@
-if hasItem trigger minormend
-	chat trigger "+20HP."
-	inc trigger hp 20
-	removeItem trigger minormend
-end
-endscript

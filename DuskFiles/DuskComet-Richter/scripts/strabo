@@ -1,0 +1,39 @@
+chat trigger "You read the scroll and the area around you fills up with smoke."
+order trigger "emote vanishes in a puff of smoke."
+set trigger locxy 175 161
+if hascondition trigger "allowedboat"
+    removecondition trigger "allowedboat"
+    removeitem trigger boat
+end
+removeItem trigger strabo
+if hascondition trigger inside
+    removecondition trigger inside
+end
+if hascondition trigger "ogrefight"
+    removecondition trigger "ogrefight"
+end
+if hascondition trigger "hot springs"
+    removecondition trigger "hot springs"
+end
+if hascondition trigger "lava bath"
+    removecondition trigger "lava bath"
+end
+if hascondition trigger "ice bath"
+    removecondition trigger "ice bath"
+end
+if hascondition trigger "intown"
+    removecondition trigger "intown"
+end
+if hascondition trigger "necrofight"
+     removecondition trigger "necrofight"
+end
+order trigger "emote arrives in a flash of light."
+if strequals clan trigger "arena_fight"
+    changeclan trigger "none"
+end
+endscript
+
+
+
+
+

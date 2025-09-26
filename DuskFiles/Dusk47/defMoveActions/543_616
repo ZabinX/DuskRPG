@@ -1,5 +1,0 @@
-removeCondition trigger ballsouth4
-removeCondition trigger ballnorth5
-removeCondition trigger balleast5
-removeCondition trigger ballwest5
-endscript

@@ -1,5 +1,0 @@
-set trigger locxy 15 122
-chat trigger "Your world goes completely dark."
-set trigger hp -999
-endscript
-

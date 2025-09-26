@@ -1,0 +1,15 @@
+type
+food
+description
+an apple
+cost
+10
+image
+308
+onuse
+apple
+uses
+1
+.
+
+

@@ -1,0 +1,25 @@
+if ! isPlayer trigger
+	endscript
+end
+if isInBattle trigger
+	livingthing target enemy trigger
+	if < target hp 1
+	chat trigger "*Blackbeard grabs you, pulls you along as he flees out the door.*"
+	chat trigger "Blackbeard says: Here's Ed's crown back!  I'll find anotherrR line of busniess, I sware. *Blackbeard speeds out of the tavern!*"
+	addCondition trigger blackbeardquest
+	chat trigger "You recieve Ed's crown! +2000exp."
+	giveitem trigger "crown"
+	inc trigger exp 2000
+	set trigger locxy 65 628
+	end
+end
+endscript
+
+
+
+
+
+
+
+
+

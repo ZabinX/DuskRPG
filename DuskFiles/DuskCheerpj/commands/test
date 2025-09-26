@@ -1,8 +1,0 @@
-if < trigger privs 4
-    chat trigger "huh?"
-    endscript
-end
-chat trigger "This is just a \"test\""
-endscript
-
-

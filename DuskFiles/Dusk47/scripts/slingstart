@@ -1,9 +1,0 @@
-if < trigger cp 2400
-   chat trigger "You must be more experienced before you may wield this blade of great destruction."
-   order trigger "unwear slingblade"
-   endscript
-end
-inc trigger strengthbonus 45
-endscript
-
-

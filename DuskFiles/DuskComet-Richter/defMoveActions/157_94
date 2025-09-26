@@ -1,0 +1,19 @@
+if hasCondition trigger puzzlefinished
+	chat trigger "*Chris says: You deserve what's in that treasure box over there."
+	addCondition trigger savedhusband
+	endscript
+end
+#
+if and hasCondition trigger puzzlereward hasItem trigger ClimbersRope
+	chat trigger "Chris says: I'll meet you back at my house."
+	endscript
+end
+if hasCondition trigger puzzlereward
+	chat trigger "Chris says: It looks like we are stuck on this cliff.  Luckily I have some climbers rope."
+	chat trigger "Chris says: Here's a rope for you.  You shouldn't have any problem getting down the cliff now."
+	giveItem trigger ClimbersRope
+	chat trigger "You got a ClimbersRope!"
+	endscript
+end
+
+

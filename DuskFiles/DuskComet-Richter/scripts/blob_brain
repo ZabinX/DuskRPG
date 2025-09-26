@@ -1,0 +1,17 @@
+# flowris
+#
+# when the mob got 2/3 hp it creates a new mob
+#
+if > trigger hp 10000
+	if < trigger hp 20000
+		livingthing target enemy trigger
+		chat trigger "blob splits"
+		createoneusemob blob trigger locx trigger locy
+		set trigger hp 10000
+		end
+	end
+endscript
+
+
+
+

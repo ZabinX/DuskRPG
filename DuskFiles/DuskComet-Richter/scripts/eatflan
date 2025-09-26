@@ -1,0 +1,28 @@
+if isInBattle trigger
+	livingthing target enemy trigger
+	if < target hp 1
+		if hasCondition trigger hunger
+			chat trigger "**You couldn't stand being hungry anymore so you ate the flan you just killed**   You also earned a monster point!"
+			removecondition trigger hunger
+			removecondition trigger flanfood1
+			addconditionwithduration trigger nohunger 500
+			addCondition trigger flanpoint
+		end
+	end
+end
+endscript
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

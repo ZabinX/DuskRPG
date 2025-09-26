@@ -1,0 +1,7 @@
+if ismob trigger
+	inc trigger locx -1
+	endscript
+end
+removeCondition trigger ballnorth12
+endscript
+

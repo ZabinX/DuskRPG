@@ -1,6 +1,0 @@
-removeItem trigger bean
-if < trigger hp trigger maxhp
-	inc trigger hp 100
-	chat trigger "You feel better now"
-	end
-endscript

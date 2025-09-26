@@ -1,0 +1,14 @@
+type
+food
+a small glass bottle full of a strange liquid
+cost
+10
+image
+194
+onuse
+minormend
+uses
+1
+.
+
+

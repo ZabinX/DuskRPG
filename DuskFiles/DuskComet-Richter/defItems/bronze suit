@@ -1,0 +1,20 @@
+type
+armor
+kind
+torso
+description
+a suit made from bronze
+cost
+400
+mod
+40
+image
+147
+durability
+2400
+onWear
+wear_normal_armor
+.
+
+
+

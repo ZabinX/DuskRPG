@@ -1,0 +1,19 @@
+type
+weapon
+description
+The ledgendary sword Excalibur.
+cost
+5000
+mod
+200
+image
+348
+durability
+50000000
+onWear
+start_excalibur
+onUnWear
+end_excalibur
+.
+
+

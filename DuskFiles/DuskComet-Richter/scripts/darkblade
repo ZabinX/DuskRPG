@@ -1,0 +1,8 @@
+if isRace trigger darkelf
+end
+if ! isRace trigger darkelf
+	chat trigger "You can not wear this item."
+	unWear trigger darkblade
+end
+endscript
+

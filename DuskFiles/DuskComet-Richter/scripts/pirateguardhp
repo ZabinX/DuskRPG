@@ -1,0 +1,8 @@
+if isInBattle trigger
+	livingthing target enemy trigger
+	if < target hp 1
+	chat trigger "*When the pirate guard dies he uses his last bit of energy to push you further into the room.*"
+	set trigger locxy 68 627
+	end
+end
+endscript

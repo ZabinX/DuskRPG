@@ -1,0 +1,150 @@
+210
+218
+cloth shirt
+wooden dagger
+end
+218
+219
+train:Strength
+end
+28
+650
+wooden dagger
+dagger
+short sword
+long sword
+broad sword
+broad axe
+heavy axe
+end
+43
+650
+bronze suit
+bronze helmet
+bronze sleeves
+bronze leggings
+bronze belt
+bronze gloves
+end
+11
+612
+train:Strength
+train:Constitution
+train:HP
+train:MP
+train:Dexterity
+train:Wisdom
+train:Intelligence
+train:Double Attack
+end
+37
+636
+cookie
+milk
+sandwich
+healpotion
+mendpotion
+minormend
+minormana
+meat
+end
+394
+463
+FlameSword
+end
+23
+633
+train:enchantment group
+train:clerical group
+end
+669
+651
+end
+182
+180
+Purple Pills
+Recall
+Dispell
+MendPotion
+Energy Crystal
+HealPotion
+Invis
+Xpresso
+Detect
+MinorMana
+ManaPotion
+end
+257
+178
+CastingNet
+FishingPole
+bait
+end
+187
+179
+CanBeefStew
+sandwich
+bean
+bearclaw
+cookie
+end
+191
+170
+pet
+end
+48
+684
+ale
+ale2
+ale3
+sandwich
+end
+636
+674
+pickaxe
+end
+417
+452
+FlameSword
+end
+124
+113
+train:Dodge
+train:Triple Attack
+end
+432
+524
+Recall
+Flask
+FlameSword
+end
+238
+157
+iron pickaxe
+crimsteel pickaxe template
+mythril pickaxe template
+varaxium pickaxe template
+bloodstone pickaxe template
+duskite pickaxe template
+end
+104
+617
+God Sword template
+God Shield template
+God Suit template
+God Helmet template
+end
+101
+594
+train:warrior group
+end
+77
+568
+Apple
+Beer
+Sandwich
+end
+640
+542
+train:Quadruple Attack
+end

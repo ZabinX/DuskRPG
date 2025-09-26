@@ -1,6 +1,0 @@
-if ispet trigger
-    endscript
-end
-order trigger "help commands"
-chat trigger "Help window for commands has been opened."
-endscript

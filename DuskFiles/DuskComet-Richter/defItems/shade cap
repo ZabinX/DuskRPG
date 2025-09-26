@@ -1,0 +1,22 @@
+type
+armor
+kind
+skull
+description
+the cap the shade master wears on his head
+cost
+400
+mod
+52
+image
+7
+durability
+30000
+onWear
+wear_normal_armor
+.
+
+
+
+
+

@@ -1,9 +1,0 @@
-if isPlayer trigger
-	string outText concat concat "Argon says:  Don't be scared " name trigger ". I ain't like the rest of the Deamons.  Just trying to make some money to send my daughter to college."
-	if hasCondition trigger demonshop
-		string outText concat concat "Thanks for the busniess. " name trigger ",..and be careful those flamelings throw lava at you."
-	end
-	chat trigger outText
-end
-endscript
-

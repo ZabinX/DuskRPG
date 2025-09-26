@@ -1,0 +1,19 @@
+type
+armor
+kind
+legs
+description
+a set of leggings constructed of the legendary metal dragonite
+cost
+30000
+mod
+5000
+image
+7
+durability
+3200000
+onWear
+wear_normal_armor
+.
+
+

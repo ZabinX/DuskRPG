@@ -1,0 +1,26 @@
+if isInBattle trigger
+	livingthing target enemy trigger
+	if < trigger hp 150
+	number damage * + .01 * rand .02 + target hp target mp
+	inc target hp * -1 damage
+	inc trigger damdone damage
+	chat trigger concat concat concat concat " Many spiders swarm and attacks " name enemy trigger ". He gets " damage " damage."
+	chat enemy trigger concat concat " **Spider bit you with its venomous teeth** You get poisoned causing " damage " damage."
+	end
+end
+if isinbattle trigger
+	livingthing target enemy trigger
+	if < trigger hp 1
+	number damage * + .4 * rand .4 + trigger stre trigger inte 
+	inc target hp * -1 damage
+	inc trigger damdone damage
+	chat trigger concat concat concat concat " Many spiders swarm and attacks " name enemy trigger ". He gets " damage " damage."
+	chat enemy trigger concat concat " Many spiders swarm and attack you doing " damage " damage."
+	endscript
+	end
+end
+endscript
+
+
+
+

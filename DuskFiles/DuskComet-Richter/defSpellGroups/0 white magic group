@@ -1,0 +1,24 @@
+#Focus: Increases Dammod
+#
+#
+number duration * caster inte 3
+if < duration 60
+    number duration 60
+end
+if variableisstring param0 #If a target is specified
+	livingthing target local caster param0
+	    if or or isplayer target ispet target ismob target
+		chat caster concat concat "You make " name target " focus his energy into his weapon."
+		chat target concat name caster " makes you focus your energy into your weapon."
+		addconditionwithduration target "focus" duration
+		endscript
+	end
+	chat caster "You do not see them here."
+	endscript
+end
+#
+#Else no target is specified
+chat caster "You focus your energy into your weapon"
+addconditionwithduration caster "focus" duration
+endscript
+

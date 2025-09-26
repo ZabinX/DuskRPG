@@ -1,0 +1,18 @@
+type
+weapon
+description
+A mace from the heavens.
+cost 
+3000
+mod
+1000
+image
+9
+onWear
+spiritstart
+onUnWear
+spiritend
+durability
+14000000
+.
+

@@ -1,4 +1,0 @@
-chat trigger "You feast on the meat."
-addconditionwithduration trigger nohunger 10000
-removeitem trigger meat
-endscript

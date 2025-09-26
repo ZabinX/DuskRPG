@@ -1,0 +1,4 @@
+inc trigger hp 350
+chat trigger " The Blood Stone heals you returning 350 Hit Points"
+removeitem trigger "blood stone"
+endscript

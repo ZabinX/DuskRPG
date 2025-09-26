@@ -1,8 +1,0 @@
-if < trigger privs 3
-    chat trigger "huh?"
-    endscript
-end
-inc trigger locxy 15 0
-endscript
-
-

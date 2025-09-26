@@ -1,9 +1,0 @@
-if < trigger privs 3
-    chat trigger "huh?"
-    endscript
-end
-chatc trigger 255 0 0 "red"
-chatc trigger 0 255 0 "green"
-chatc trigger 0 0 255 "blue"
-endscript
-

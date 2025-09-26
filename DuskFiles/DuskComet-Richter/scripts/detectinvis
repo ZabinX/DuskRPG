@@ -1,0 +1,4 @@
+chat trigger "As you read the text of the scroll, the world shimmers before you."
+removeitem trigger detect
+addconditionwithduration trigger "detect invis" 600
+endscript

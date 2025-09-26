@@ -1,0 +1,5 @@
+inc trigger hp 100
+chat trigger " 100 Hit Points are restored."
+removeitem trigger "lavendar"
+endscript
+

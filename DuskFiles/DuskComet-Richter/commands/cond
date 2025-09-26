@@ -1,0 +1,47 @@
+if < trigger privs 4
+    chat trigger "huh?"
+    endscript
+end
+if variableisstring param0
+    livingthing target local trigger param0
+    if and ! isplayer target and ! ispet target ! ismob target
+        livingthing target global param0
+        if and ! isplayer target and ! ispet target ! ismob target
+            chat trigger "Usage cond <Livingthing> <add/remove> <condition> [duration]"
+            endscript
+        end
+    end
+end
+if variableisstring param1
+    if and ! strequals param1 "add"
+        ! strequals param1 "remove"
+        chat trigger "Usage cond <livingthing> <Add/Remove> <condition> [duration]"
+        endscript
+    end
+end
+if variableisstring param2
+    if strequals param1 "add"
+        if variableisstring param3
+            number duration param3
+            addconditionwithduration target param2 duration
+            chat trigger concat concat concat concat concat concat "added condition " param2 " to " name target " for " duration " seconds."
+            log trigger concat concat concat concat concat concat "added condition " param2 " to " name target " for " duration " seconds."
+            endscript
+        end
+        addcondition target param2
+        chat trigger concat concat concat concat "added condition " param2 " to " name target " with no duration."
+        log trigger concat concat concat concat "added condition " param2 " to " name target " with no duration."
+        endscript
+    end
+    if strequals param1 "remove"
+        removecondition target param2
+        chat trigger concat concat concat "removed condition " param2 " from " name target
+        log trigger concat concat concat "removed condition " param2 " from " name target
+        endscript
+    end
+end
+chat trigger "Usage cond <livingthing> <add/remove> <condition> [duration]"
+endscript
+
+
+

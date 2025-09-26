@@ -1,0 +1,15 @@
+if < trigger cp 200
+	set trigger locxy 388 489
+	chat trigger "MasterDemon says:  Weaklings get the easy way out of hell.  Besides I eat weaklings like you for breakfast."
+end
+if > trigger cp 200
+	inc trigger locx -1
+	chat trigger "MasterDemon says:  The gods can't help you now.  BWAHAHA... SEE IF YOU CAN GET OUT NOW."
+end
+endscript
+
+
+
+
+
+

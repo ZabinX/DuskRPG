@@ -1,4 +1,0 @@
-chat trigger "You sip on the glowing potion"
-inc trigger mp 100
-removeitem trigger minormana
-endscript

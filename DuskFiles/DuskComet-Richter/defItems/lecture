@@ -1,0 +1,13 @@
+type
+item
+description
+This could be interesting...
+cost
+0
+image
+6
+onuse
+lecturescript
+uses
+1
+.

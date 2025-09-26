@@ -1,0 +1,8 @@
+if ! hasitem trigger "newspaper"
+chat trigger "You took a copy of The Dusk Ages News"
+giveitem trigger "newspaper"
+endscript
+end
+chat trigger "You only need 1 copy at a time"
+end
+endscript

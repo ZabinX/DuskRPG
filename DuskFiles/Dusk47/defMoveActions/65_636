@@ -1,6 +1,0 @@
-if hasCondition trigger safe
-	removeCondition trigger safe
-end
-endscript
-
-

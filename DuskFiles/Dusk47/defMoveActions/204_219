@@ -1,6 +1,0 @@
-if ! hasitem trigger "minormend"
-chat trigger "Go pickup that minormend over there. Then kill this scorpion. Try not to die."
-createitem "minormend" 201 219
-endscript
-end
-

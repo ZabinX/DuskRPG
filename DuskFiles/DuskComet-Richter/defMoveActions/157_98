@@ -1,0 +1,13 @@
+if hasCondition trigger puzzlefinished
+	chat trigger "*You open the treasure box and it's full of gold coins!"
+	inc trigger cash 20000
+	chat trigger "You found 20kgp!."
+	addcondition trigger puzzlereward
+	removeCondition trigger puzzlefinished
+	endscript
+end
+#
+if hasCondition trigger puzzlereward
+	chat trigger "The treasure chest is still empty."
+	endscript
+end

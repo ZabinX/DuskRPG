@@ -1,0 +1,6 @@
+#Quarterstaff: summons a quarterstaff for druidic use
+#
+#
+chat caster "A druidic quarter staff appears in your inventory."
+giveitem caster "quarter staff"
+endscript

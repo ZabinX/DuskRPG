@@ -1,0 +1,13 @@
+type
+item
+description
+the scroll brings you to the pillar of the pheonix
+cost
+100
+image
+6
+onuse
+pheonixscroll
+uses
+1
+.

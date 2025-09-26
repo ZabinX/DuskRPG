@@ -1,0 +1,32 @@
+#Burn
+#
+# Does damage from two times caster int+wis to four times caster int+wis
+#
+# Damage is halved by ice shield
+# Damage is doubled by fire shield
+#
+#
+if ! hasitem caster "Fire Dragon Tooth"
+    chat caster "You cannot cast this spell without a Fire Dragon Tooth."
+    endscript
+end
+removeitem caster "Fire Dragon Tooth"
+number baseDamage * 2 + caster inte caster wisd
+number addDamage * 2 + caster inte caster wisd
+number damage + baseDamage * addDamage rand
+if isinbattle caster
+    livingthing target enemy caster
+    if hasCondition target "ice shield"
+        number damage / damage 2
+    end
+    if hasCondition target "fire shield"
+        number damage * damage 2
+    end
+    inc target hp * -1 damage
+    inc caster damdone damage
+    chat target concat concat concat name caster " burns you for " damage " damage."
+    chat caster concat concat concat concat "You burn " name target " for " damage " damage."
+    endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript

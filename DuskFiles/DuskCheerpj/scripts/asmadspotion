@@ -1,5 +1,0 @@
-inc trigger mp 150
-inc trigger hp 150
-chat trigger " The magic potion heals your wounds and magic energy giving you back 150 Hit points and 150 Magic points"
-removeitem trigger "asmads potion"
-endscript

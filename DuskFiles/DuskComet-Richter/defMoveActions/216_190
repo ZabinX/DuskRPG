@@ -1,0 +1,9 @@
+if ismob trigger
+	livingthing guard2 local trigger "rocks"
+	if ismob guard2
+	order guard2 "wake"
+        	order guard2 concat "a " name trigger
+	end
+end
+endscript
+

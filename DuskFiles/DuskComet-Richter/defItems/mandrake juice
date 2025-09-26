@@ -1,0 +1,14 @@
+type
+food
+description
+A fancy glass bottle full of a strange liquid.
+cost
+1000
+image
+299
+onuse
+mandrakejuice
+uses
+100
+.
+

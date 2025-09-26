@@ -1,0 +1,7 @@
+if ispet trigger
+    endscript
+end
+chat trigger 	"Here is a weak scorpion attack it by typing-- a scorpion -- or clicking it's name in the attack menu.  
+Sometimes a monster will attack you so watch out for your HP and try not to die..."
+endscript
+

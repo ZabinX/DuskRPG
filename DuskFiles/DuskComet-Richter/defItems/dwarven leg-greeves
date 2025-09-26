@@ -1,0 +1,23 @@
+#Eclipse
+#Pinefar Equipment
+type
+armor
+kind
+legs
+description
+a set of dwarven leg-greeves
+cost
+150
+mod
+90
+image
+7
+durability
+5000
+onWear
+wear_normal_armor
+.
+
+
+
+

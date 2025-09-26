@@ -1,3 +1,0 @@
-chat trigger "The ground beneath you grows with vines wherever you walk, hindering your agility."
-inc trigger dexteritybonus -20
-endscript

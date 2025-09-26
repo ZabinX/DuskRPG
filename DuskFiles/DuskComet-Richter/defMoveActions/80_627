@@ -1,0 +1,10 @@
+if hasCondition trigger blackbeardquest
+	chat trigger "*You look in the room and feel bad about all the blood splatters everywhere, and decide not to enter."
+	inc trigger locx 1
+end
+endscript
+if hasItem trigger crown
+	addCondition trigger blackbeardquest
+	inc trigger locx 1
+end
+endscript

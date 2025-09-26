@@ -1,0 +1,15 @@
+type
+item
+description
+the latest issue of ' Dusk RPG !!
+onUse
+readNewspaper
+uses
+-1
+image
+69
+.
+
+
+
+

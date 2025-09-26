@@ -1,6 +1,0 @@
-if < trigger cp 500
-	order trigger "unwear inferno chain mail"
-	chat trigger "You are too weak to wear this type of armor."
-	endscript
-	end
-endscript

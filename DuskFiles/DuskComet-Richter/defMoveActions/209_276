@@ -1,0 +1,4 @@
+if ! hasCondition trigger inforest
+	addcondition trigger inforest
+	endscript
+end

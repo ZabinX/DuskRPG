@@ -1,0 +1,69 @@
+maxhp
+10000
+maxmp
+50000
+stre
+200
+inte
+300
+dext
+2000
+wisd
+500
+cons
+500
+bravery
+1.8
+grouprelation
+0.7
+image
+24
+faction
+mage
+wield
+sword of slaying
+-1
+-1
+skull
+thinking cap
+-1
+-1
+skill
+double attack
+100
+skill
+triple attack
+100
+skill
+quadruple attack
+100
+skill
+warrior group
+100
+skill
+clerical group
+100
+skill
+enchantment group
+100
+skill
+druidic group
+100
+skill
+white magic group
+100
+condition
+detect invis
+0
+-1
+.
+
+
+
+
+
+
+
+
+
+

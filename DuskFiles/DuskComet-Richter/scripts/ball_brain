@@ -1,0 +1,17 @@
+#Zabin script testing
+livingthing target enemy trigger
+if and hasCondition target ball hasCondition target ballb
+removeCondition target ball
+endscript
+end
+#
+livingthing target enemy trigger
+if hasCondition target ballb
+addCondition target ball
+endscript
+end
+#
+livingthing target enemy trigger
+addCondition target ballb
+chat enemy trigger "You think **This heavy ball should activate that switch over there.**"
+endscript

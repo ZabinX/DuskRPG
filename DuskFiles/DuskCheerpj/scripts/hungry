@@ -1,9 +1,0 @@
-if hascondition trigger nohunger
-    removecondition trigger nohunger
-end
-inc trigger constitutionbonus -2
-inc trigger wisdombonus -2
-inc trigger strengthbonus -1
-inc trigger intelligencebonus -1
-inc trigger dexteritybonus -1
-endscript

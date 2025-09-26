@@ -1,9 +1,0 @@
-if < trigger cp 3000
-    endscript
-end
-inc trigger wisdomBonus -250
-inc trigger intelligenceBonus -150
-inc trigger acBonus 200
-endscript
-
-

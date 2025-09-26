@@ -1,0 +1,4 @@
+removeCondition trigger south3
+removeCondition trigger ballsouth6
+endscript
+

@@ -1,0 +1,9 @@
+#Warfire is here command
+if < trigger privs 3
+    chat trigger "huh?"
+    endscript
+end
+order trigger "uninvis"
+order trigger "gecho The fire elements collide with the power of the Gods and Warfire morphs up from the depths of the world."
+#chat trigger "cast invis"
+endscript

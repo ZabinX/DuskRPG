@@ -1,9 +1,0 @@
-if ispet trigger
-    endscript
-end
-if strequals clan trigger "wilderness"
-    chat trigger "You are no longer in the wilderness, and other players cannot attack you."
-    changeclan trigger "none"
-end
-endscript
-

@@ -1,0 +1,3 @@
+global string kilgore_name_keyholder "Kilgore Key has been dropped at 117, 68"
+global string baron_name_keyholder "nobaronclanally"
+endscript

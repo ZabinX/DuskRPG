@@ -1,0 +1,11 @@
+if ! hasitem trigger "water bottle"
+chat trigger " You need to mix this with some fresh water."
+endscript
+end
+removeitem trigger mushroom
+removeitem trigger "water bottle"
+chat trigger " You mix the mushroom with the fresh water to get a glowing yellowish potion. Wonder what it does...."
+giveitem trigger "asmads potion"
+endscript
+end
+

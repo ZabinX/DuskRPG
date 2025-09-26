@@ -1,0 +1,17 @@
+#Cactuar: causes Major damage to enemy.
+#
+#
+if isinbattle caster
+	number damage * 190 * 3 rand
+	inc enemy caster hp * -1 damage
+	inc caster damdone damage
+	chat caster concat concat concat concat " You call upon a Guardian Force-Cactuar-to attack " name enemy caster " , Cactuar throws about 1000 needles at it doing " damage "  damage."
+	chat enemy caster concat concat " You get stung with 1000 needles doing " damage "  damage."
+	endscript
+end
+chat caster "You must be in battle to use this spell."
+endscript
+
+
+
+

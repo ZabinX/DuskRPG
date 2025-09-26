@@ -1,6 +1,0 @@
-if isPet trigger
-  removeCondition trigger invis
-  removeCondition trigger "detect invis"
-end
-endscript
-

@@ -1,0 +1,12 @@
+type
+weapon
+description
+a rather lumpy pillow
+cost
+350
+mod
+250
+image
+6
+durability
+20000

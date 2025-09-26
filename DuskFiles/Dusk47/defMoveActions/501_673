@@ -1,9 +1,0 @@
-livingthing guard1 local trigger "Chris"
-if = guard1 locX 497
-	if = guard1 locY 673
-	set guard1 locxy 215 191
-	chat trigger "Woah, trippy!  It looks like he just disappeared into a cloud of mushroom spores."
-	chat trigger "**You think: Maybe I'm hallucinating this from all these spores but this might be the only way to find that guy again.  I better go kick that mushroom over there like he just did."
-	endscript
-	end
-end

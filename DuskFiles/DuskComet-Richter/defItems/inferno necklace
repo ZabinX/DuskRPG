@@ -1,0 +1,19 @@
+type
+armor
+kind
+neck
+description
+a medallion on a black rope bearing the Inferno God's Crest
+cost
+2000
+mod
+750
+image
+7
+durability
+80000
+onWear
+wear_normal_armor
+.
+
+

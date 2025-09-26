@@ -1,4 +1,0 @@
-if ismob trigger
-	inc trigger locxy 215 191
-	endscript
-end

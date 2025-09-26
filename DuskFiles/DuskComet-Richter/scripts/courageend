@@ -1,0 +1,5 @@
+inc trigger hpbonus -75
+if > trigger hp trigger maxhp
+    inc trigger hp -75
+end
+endscript

@@ -1,0 +1,20 @@
+#Create Food: Creates food in your hand for eating
+#
+#
+if hasitem caster "10.sandwich"
+    chat caster "10 sandwiches is enough for now."
+    addconditionwithduration caster cast_limit_sandwich 600
+    endscript
+end
+if hascondition caster cast_limit_sandwich
+    chat caster "You need to wait a bit before casting this again."
+    endscript
+end
+if > caster wisd * rand 100
+    chat caster "A sandwich appears in your hand."
+    giveitem caster "sandwich"
+    endscript
+end
+chat caster "You search your mind for the words to conjure food, but fail to find them."
+endscript
+

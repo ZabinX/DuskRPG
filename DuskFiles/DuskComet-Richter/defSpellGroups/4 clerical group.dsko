@@ -1,0 +1,1 @@
+caster "10.ale" *caster "10 ales is enough for now." 	caster cast_limit_ale 600 caster cast_limit_ale *caster "You need to wait a bit before casting this again." caster wisd * rand 100 *caster "Some ale appears in your hand." ;caster "ale" *caster "You search your mind for the words to conjure drink, but fail to find them."  

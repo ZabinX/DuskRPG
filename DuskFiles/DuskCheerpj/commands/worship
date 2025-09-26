@@ -1,6 +1,0 @@
-if not variableisstring param0
-     order trigger "gossip Praise The GODS !!!!"
-     endscript
-end
-endscript
-

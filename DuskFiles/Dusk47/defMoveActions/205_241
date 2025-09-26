@@ -1,9 +1,0 @@
-if ispet trigger
-    endscript
-end
-if ! hascondition trigger "deadbush"
-    addcondition trigger "deadbush"
-    chat trigger "I think I should take a closer look at that dead looking bush"
-    endscript
-end
-endscript

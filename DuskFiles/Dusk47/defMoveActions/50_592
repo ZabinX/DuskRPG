@@ -1,6 +1,0 @@
-if ispet trigger
-    endscript
-end
-order trigger "help social"
-chat trigger "Help window for social has been opened."
-endscript

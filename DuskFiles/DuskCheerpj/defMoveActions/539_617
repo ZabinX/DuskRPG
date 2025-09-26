@@ -1,8 +1,0 @@
-addCondition trigger south3
-addCondition trigger ballsouth6
-removeCondition trigger ballwest16
-removeCondition trigger balleast18
-endscript
-
-
-

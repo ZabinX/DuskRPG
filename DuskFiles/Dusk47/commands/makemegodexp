@@ -1,9 +1,0 @@
-if < trigger privs 3
-    chat trigger "huh?"
-    endscript
-end
-inc trigger exp 100000
-endscript
-
-
-

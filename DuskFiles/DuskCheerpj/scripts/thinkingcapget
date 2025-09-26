@@ -1,5 +1,0 @@
-if ! hascondition trigger "foundwildernhouse"
-    chat trigger "You have not earned the right to have this."
-    order trigger "drop Thinking Cap"
-end
-endscript

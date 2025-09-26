@@ -1,6 +1,0 @@
-chat trigger "You enjoy a large cool glass of firewalls special brew."
-addconditionwithduration trigger nothirst 200000
-removeitem trigger "firewalls brew"
-endscript
-
-

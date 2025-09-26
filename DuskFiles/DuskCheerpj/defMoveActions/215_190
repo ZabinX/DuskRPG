@@ -1,4 +1,0 @@
-livingthing guard1 local trigger "GarbageMan"
-order guard1 concat "a " name trigger
-endscript
-

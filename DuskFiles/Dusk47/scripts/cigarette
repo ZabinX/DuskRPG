@@ -1,6 +1,0 @@
-removeItem trigger cigarette
-order trigger ".smokes"
-set trigger hp * 0.96 trigger hp
-chat trigger "Smoking is bad :-)"
-endscript
-

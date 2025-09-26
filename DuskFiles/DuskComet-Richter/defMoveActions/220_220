@@ -1,0 +1,9 @@
+if ispet trigger
+    endscript
+end
+if = trigger cp 40
+    chat trigger concat concat " Thats the end of the newbie tutorial " name trigger ".  Read the scrolls in the house of knowledge to learn more."
+    endscript
+end
+endscript
+

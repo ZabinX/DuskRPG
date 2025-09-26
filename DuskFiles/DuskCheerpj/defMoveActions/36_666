@@ -1,8 +1,0 @@
-if ispet trigger
-	endscript
-end
-	addCondition trigger "intro"
-	endscript
-end
-
-

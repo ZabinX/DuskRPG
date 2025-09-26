@@ -1,0 +1,19 @@
+type
+armor
+kind
+waist
+description
+a titanium belt
+cost
+280
+mod
+80
+image
+7
+durability
+4800
+onWear
+wear_normal_armor
+.
+
+

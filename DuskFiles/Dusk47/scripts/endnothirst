@@ -1,4 +1,0 @@
-if ! hascondition trigger thirst
-    addcondition trigger thirst
-end
-endscript

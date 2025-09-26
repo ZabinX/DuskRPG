@@ -1,0 +1,8 @@
+if ispet trigger
+    endscript
+end
+chat trigger "Welcome to the weapon/armor shop."
+set trigger locxy 28 653
+endscript
+
+

@@ -1,6 +1,0 @@
-if < trigger cp 3000
-	order trigger "unwear lightning shield"
-	chat trigger "You are too weak to use this shield."
-	endscript
-	end
-endscript

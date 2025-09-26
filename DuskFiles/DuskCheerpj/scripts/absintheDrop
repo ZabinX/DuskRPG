@@ -1,4 +1,0 @@
-order trigger "get absinthe"
-removeItem trigger absinthe
-chat trigger "You pour the absinthe out and stare in disbelief as it eats a hole in the ground."
-endscript

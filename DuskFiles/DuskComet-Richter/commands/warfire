@@ -1,0 +1,73 @@
+#
+# Warfire uses this command to test scripts
+#
+if < trigger privs 3
+    chat trigger "huh?"
+    endscript
+end
+#
+# So I don't have to change caster to trigger and back again
+#
+livingthing caster trigger
+if variableisstring param0
+    livingthing target param0
+end
+#
+# Test script code to follow
+#
+#if hasitem target boat
+#    removeitem target boat
+#    chat trigger "got a boat"
+#    endscript
+#end
+chat trigger "Nothing being tested at the moment."
+#
+# For fixing access to my house
+#
+#addcondition target "foundwildernkey"
+#addcondition target "foundwildernhouse"
+#
+# They only get one of the following
+#
+#addcondition target "wilderndoor1"
+#addcondition target "wilderndoor2"
+#addcondition target "wilderndoor3"
+#addcondition target "wilderndoor4"
+#addcondition target "wilderndoor5"
+#
+#UnTire: Remove Tire
+#
+#
+#if variableisstring param0
+#	livingthing target local caster param0
+#	if not or or isplayer target ispet target ismob target
+#		chat caster "There is no such being here."
+#		endscript
+#	end
+#	chat caster concat concat "You convince the mind of " name target " that it is no longer tired."
+#	removecondition target "tired"
+#	endscript
+#end
+#endscript
+#
+#Pre battle things
+#inc trigger maxhp 10000
+#inc trigger hp 10000
+#inc trigger strengthbonus 30
+#Post battle things
+#set trigger maxHp 10000
+#set trigger hp 10000
+#
+addcondition trigger "reward"
+#
+# Invis2 things
+#addcondition target "invis2"
+endscript
+#
+# Always end the script
+#
+endscript
+
+
+
+

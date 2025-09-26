@@ -1,0 +1,20 @@
+if ispet trigger
+   endscript
+end
+if and ! iswearing trigger "Cloth Shirt"
+    ! > trigger ac 0
+    chat trigger "If you are having trouble with the Equipment button, you can type 'wear Cloth Shirt'."
+    inc trigger locx -1
+    endscript
+end
+chat trigger "See how your AC increased from 0 when you wore the shirt? (AC stands for Armor Credits.  The more AC you have the less EXP you get)."
+if and ! iswearing trigger "Wooden Dagger"
+    ! > trigger dammod 100
+    chat trigger "If you are having trouble with the Equipment button, you can type 'wear Wooden Dagger'."
+    inc trigger locx -1
+    endscript
+end
+chat trigger "See how your DamMod increased from 100 when you wore the wooden dagger? (more DamMod is better but also reduces the amount of EXP earned)."
+endscript
+
+

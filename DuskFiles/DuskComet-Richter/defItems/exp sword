@@ -1,0 +1,23 @@
+type
+weapon
+description
+the experience's sword
+cost
+10
+mod
+100
+image
+9
+durability
+500000
+onWear
+start_exp_sword
+onUnWear
+end_exp_sword
+.
+
+
+
+
+
+

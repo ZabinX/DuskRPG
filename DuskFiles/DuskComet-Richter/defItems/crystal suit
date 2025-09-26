@@ -1,0 +1,20 @@
+type
+armor
+kind
+torso
+description
+a crystal suit
+cost
+5000
+mod
+84
+image
+7
+durability
+100000
+onWear
+wear_normal_armor
+.
+
+
+

@@ -1,1 +1,0 @@
-'trigger outText concat concat " Welcome to Death Mountain village "name trigger ". Enjoy your visit." trigger intown outText concat concat " This is the end of town. "name trigger ", please be careful." *trigger outText  

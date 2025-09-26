@@ -1,0 +1,13 @@
+if and hasCondition trigger kristaquest2shoes hasItem trigger ExtraShoes
+	chat trigger "You think * I shouldn't be snooping in a young girl's dresser anymore.*"
+	endscript
+	end
+if hasCondition trigger kristaquest2
+	giveItem trigger "ExtraShoes"
+	chat trigger "You pulled Krista's shoes out of the dresser in a hurry."
+	removeCondition trigger kristaquest2
+	addCondition trigger kristaquest2shoes
+	endscript
+	end
+
+

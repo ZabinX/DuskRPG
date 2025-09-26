@@ -1,0 +1,17 @@
+if hasCondition trigger mushroomhole2
+	chat trigger "Krista's dad didn't go this way."
+	inc trigger locy -1
+	endscript
+end
+if hasCondition trigger mushroomhole
+	createoneusemob "Chris" 544 679
+	chat trigger "You hear foot steps up ahead and you sware you saw a glimpse of somebody."
+	chat trigger "That could be Krista's dad 'Chris', maybe he's still alive."
+	chat trigger "Or maybe you're just tripping from all the mushroom spores in the air."
+	removecondition trigger mushroomhole
+	addCondition trigger mushroomhole2
+	endscript
+end
+
+
+

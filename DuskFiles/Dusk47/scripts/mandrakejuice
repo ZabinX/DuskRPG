@@ -1,4 +1,0 @@
-chat trigger "You sip on the bright green potion"
-inc trigger hp 300
-inc trigger mp 300
-endscript

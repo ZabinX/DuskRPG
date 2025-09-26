@@ -81,7 +81,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     
 	Image imgOriginalSprites;
 	Image imgOriginalPlayers;
-	Image imgOriginalMap;
+	Image imgOriginalMap, imgOriginalMapAlpha;
 	Image imgSprites;
 	Image imgPlayers;
 	Image imgMap;
@@ -91,7 +91,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	DataOutputStream stmOut;
 	DataInputStream stmIn;
 	
-	short shrMap[][];
+	short shrMap[][], shrMapAlpha[][];
 	int mapSizeX=21,
 		mapSizeY=11,
 		viewRangeX=10,
@@ -402,6 +402,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							for (int i2=0;i2<mapSizeY;i2++)
 							{
 								shrMap[i][i2] = Short.parseShort(stmIn.readLine());
+							}
+						}
+						for (int i=0;i<mapSizeX;i++)
+						{
+							for (int i2=0;i2<mapSizeY;i2++)
+							{
+								shrMapAlpha[i][i2] = Short.parseShort(stmIn.readLine());
 							}
 						}
 						
@@ -789,6 +796,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					viewRangeX = (mapSizeX-1)/2;
 					viewRangeY = (mapSizeY-1)/2;
 					shrMap = new short[mapSizeX][mapSizeY];
+					shrMapAlpha = new short[mapSizeX][mapSizeY];
 					if (blnApplet)
 					{
 						stmOut.writeBytes("appletimages\n");
@@ -1385,6 +1393,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	        }
 	    }
 	
+		int startTileX = 0, startTileY = 0, endTileX = 0, endTileY = 0;
+		double offsetX = 0, offsetY = 0;
 		synchronized (vctEntities) {
 			if (player != null) {
 				if (frame.pnlGraphics.getWidth() == 0) return;
@@ -1407,13 +1417,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			gD.setColor(Color.black);
 			gD.fillRect(0, 0, imgDisplay.getWidth(null), imgDisplay.getHeight(null));
 		
-			int startTileX = (int)Math.floor(cameraX / intImageSize);
-			int startTileY = (int)Math.floor(cameraY / intImageSize);
-			int endTileX = (int)Math.floor((cameraX + frame.pnlGraphics.getWidth()) / intImageSize) + 1;
-			int endTileY = (int)Math.floor((cameraY + frame.pnlGraphics.getHeight()) / intImageSize) + 1;
+			startTileX = (int)Math.floor(cameraX / intImageSize);
+			startTileY = (int)Math.floor(cameraY / intImageSize);
+			endTileX = (int)Math.floor((cameraX + frame.pnlGraphics.getWidth()) / intImageSize) + 1;
+			endTileY = (int)Math.floor((cameraY + frame.pnlGraphics.getHeight()) / intImageSize) + 1;
 	
-			double offsetX = cameraX - (startTileX * intImageSize);
-			double offsetY = cameraY - (startTileY * intImageSize);
+			offsetX = cameraX - (startTileX * intImageSize);
+			offsetY = cameraY - (startTileY * intImageSize);
 	
 			for (int i=startTileX; i<endTileX; i++) {
 				for (int i2=startTileY; i2<endTileY; i2++) {
@@ -1469,6 +1479,32 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	            drawEntity(entStore);
 	        }
 	    }
+		
+		// Draw alpha layer
+		for (int i=startTileX; i<endTileX; i++) {
+			for (int i2=startTileY; i2<endTileY; i2++) {
+				int mapGridX = i - (LocX - viewRangeX);
+				int mapGridY = i2 - (LocY - viewRangeY);
+
+				if (mapGridX >= 0 && mapGridX < mapSizeX && mapGridY >= 0 && mapGridY < mapSizeY) {
+					try {
+						int tileID = shrMapAlpha[mapGridX][mapGridY];
+						if (tileID == 0) continue; // Skip transparent tile
+
+						double screenX = (i - startTileX) * intImageSize - offsetX;
+						double screenY = (i2 - startTileY) * intImageSize - offsetY;
+						
+						gD.drawImage(imgOriginalMapAlpha,
+									(int)screenX, (int)screenY,
+									(int)(screenX + intImageSize), (int)(screenY + intImageSize),
+									tileID * intOriginalTileSize, 0,
+									(tileID + 1) * intOriginalTileSize, intOriginalTileSize,
+									null);
+
+					} catch(Exception e) {}
+				}
+			}
+		}
 	    
 	    synchronized (vctDamageSplats) {
 	    	Font originalFont = gD.getFont();

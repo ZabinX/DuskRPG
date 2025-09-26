@@ -1,0 +1,12 @@
+if hasCondition trigger puzzle
+	chat trigger "Chris says: Woah!  Are you real?  I'm not sure if I'm hallucinating but can you get me out of here?"
+	chat trigger "Chris says: I've been barely surviving eating these flans that keep poping out of the spring here."
+	chat trigger "Chris says: I haven't been able to figure out this puzzle because my mind keeps wondering from all the spores in the air."
+end
+if hasCondition trigger puzzlefinished
+	chat trigger "Chris says: You figured out the puzzle!  Good job!  Now i'm anxious to get home and have a home cooked meal :D!"
+	chat trigger "Chris says: You go first and I'll catch up.  I'll see you later, thanks again for saving me!."
+end
+removeCondition trigger ballnorth2
+endscript
+

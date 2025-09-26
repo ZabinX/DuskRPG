@@ -1,4 +1,0 @@
-inc trigger MP 100
-chat trigger " Eating those nasty eyes didn't satisfy your hunger any but it restored some of your weakened magic powers. You regain 100 Magic Points."
-removeitem trigger "eye of newt"
-endscript

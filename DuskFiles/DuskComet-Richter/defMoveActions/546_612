@@ -1,0 +1,4 @@
+addCondition trigger ballsouth27
+addCondition trigger checkpuzzlecomplete
+endscript
+

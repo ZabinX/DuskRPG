@@ -1,0 +1,6 @@
+if < trigger hp 10000
+    order trigger "cast heal"
+    endscript
+end
+order trigger "cast thorns"
+endscript

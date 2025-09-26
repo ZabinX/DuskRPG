@@ -1,9 +1,0 @@
-if ispet trigger
-    endscript
-end
-if hascondition trigger "excaliburquest"
-	changetile 199 191 56
-    	endscript
-end
-endscript
-

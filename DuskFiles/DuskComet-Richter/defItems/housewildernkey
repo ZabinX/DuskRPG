@@ -1,0 +1,20 @@
+type
+item
+description
+Key for Wildern's House
+cost
+0
+image
+27
+uses
+10
+onget
+getwildernkey
+onuse
+usewildernkey
+.
+
+
+
+
+

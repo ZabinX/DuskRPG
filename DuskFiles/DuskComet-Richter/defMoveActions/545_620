@@ -1,0 +1,17 @@
+if hasCondition trigger mushroomtimewarp
+	livingthing guard1 local trigger "Giant Mushroom3"
+		if = guard1 locX 539
+			if = guard1 locY 617
+			chat trigger "You need to hit the reset button!"
+			inc trigger locy 1
+			end
+		end
+	livingthing guard2 local trigger "Giant Mushroom7"
+		if = guard2 locX 543
+			if = guard2 locY 613
+			chat trigger "You need to hit the reset button!"
+			inc trigger locy 1
+			end
+		end
+end
+endscript

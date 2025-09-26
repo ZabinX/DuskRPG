@@ -1,0 +1,28 @@
+#Healing Staff: Converts a quarterstaff into healing energies
+#
+#
+if ! hasitem caster "quarter staff"
+	chat caster "You do not have a druidic quarter staff!"
+endscript
+end
+	if variableisstring param0 #If a target is specified
+		livingthing target local caster param0
+			if variableislivingthing target
+				removeitem caster "quarter staff"
+				chat caster "Your quarter staff flares with healing power, then vanishes."
+				chat target "You feel slightly less wounded."
+				inc target hp * caster inte + 0.5 rand
+				endscript
+			end
+		endscript
+			chat caster "You do not see them here."
+		end
+	endscript
+	end
+	#Else no target is specified
+	removeitem caster "quarter staff"
+	chat caster "Your quarter staff flares with healing POWER, then vanishes."
+	inc caster hp * caster inte + 0.5 rand
+	endscript
+
+

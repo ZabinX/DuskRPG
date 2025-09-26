@@ -1,0 +1,13 @@
+type
+food
+description
+A potion that will restore 500 MP.  It has one use.
+cost
+500
+image
+6
+onuse
+manap
+uses
+1
+.

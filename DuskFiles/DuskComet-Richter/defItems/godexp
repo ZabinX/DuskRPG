@@ -1,0 +1,18 @@
+type
+item
+description
+a bag of glowing dust
+cost
+1
+image
+6
+onuse
+godexp
+ondrop
+dgodexp
+uses
+1
+.
+
+
+

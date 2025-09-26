@@ -1,0 +1,18 @@
+#Zabin script testing
+livingthing target enemy trigger
+if and hasCondition target duskiteore hasCondition target duskiteore1
+removeCondition target duskiteore
+endscript
+end
+#
+livingthing target enemy trigger
+if hasCondition target duskiteore1
+addCondition target duskiteore
+endscript
+end
+#
+livingthing target enemy trigger
+addCondition target duskiteore1
+chat enemy trigger "You think **Maybe I should use a bloodstone pickaxe.**"
+endscript
+

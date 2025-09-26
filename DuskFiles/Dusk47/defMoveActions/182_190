@@ -1,8 +1,0 @@
-if ispet trigger
-    endscript
-end
-chat trigger " Welcome to the Pub."
-set trigger locxy 30 687
-endscript
-
-

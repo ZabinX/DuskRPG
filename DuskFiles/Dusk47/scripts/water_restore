@@ -1,6 +1,0 @@
-chat trigger "As you drink the water, you feel as if you never needed a drink to again quench your thirst."
-addconditionwithduration trigger nothirst 10000
-removeitem trigger "rejuvenation"
-endscript
-
-

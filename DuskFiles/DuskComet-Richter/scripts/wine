@@ -1,0 +1,4 @@
+chat trigger "You enjoy a fine wine."
+addconditionwithduration trigger nothirst 20000
+removeitem trigger wine
+endscript

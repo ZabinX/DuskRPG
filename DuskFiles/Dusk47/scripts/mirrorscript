@@ -1,6 +1,0 @@
-chat trigger "In the mirror, you see a strange primate in a dark room.  Wow, this appears to be some sort of magic mirror...or...maybe not."
-chat trigger "Upon a second glance, you realize that it's just you.  Oops."
-removeitem trigger lecture
-endscript
-
-

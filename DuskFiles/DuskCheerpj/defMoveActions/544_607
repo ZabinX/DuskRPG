@@ -1,9 +1,0 @@
-if hasCondition trigger puzzle
-	removeCondition trigger puzzle
-	set trigger locxy 543 632
-	endscript
-end
-if hasCondition trigger puzzlefinished
-	set trigger locxy 544 604
-	endscript
-end

@@ -2178,6 +2178,19 @@ public class LivingThing extends DuskObject implements Runnable
 	    		}
 	    	}
 	    }
+        for (int i=0;i<engGame.mapsizeX;i++)
+        {
+            for (int i2=0;i2<engGame.mapsizeY;i2++)
+            {
+                try
+                {
+                    strResult += engGame.shrMapAlpha[intLocX-engGame.viewrangeX+i][intLocY-engGame.viewrangeY+i2]+"\n";
+                }catch (Exception e)
+                {
+                    strResult += "0\n";
+                }
+            }
+        }
 		send(strResult);
 	}
 	

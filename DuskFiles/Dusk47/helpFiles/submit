@@ -1,1 +1,0 @@
-The submit commandusage: view <filetype> <filename>ex. "submit item ale"After typing the command, then follow by typing out the file line by line, and then --EOF--You can submit the following types:itemmobcommandraceconditionhelpscriptspell groupspellpropmove actioncan movecan seetile actiontile movetile see

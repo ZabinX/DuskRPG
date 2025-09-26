@@ -1,0 +1,32 @@
+#Freeze
+#
+# Does damage from two times caster int+wis to four times caster int+wis
+#
+# Damage is halved by fire shield
+# Damage is doubled by ice shield
+#
+#
+if ! hasitem caster "Ice Dragon Tooth"
+    chat caster "You cannot cast this spell without an Ice Dragon Tooth."
+    endscript
+end
+removeitem caster "Ice Dragon Tooth"
+number baseDamage * 2 + caster inte caster wisd
+number addDamage * 2 + caster inte caster wisd
+number damage + baseDamage * addDamage rand
+if ! isinbattle caster
+    chat caster "You must be in battle to use this spell."
+    endscript
+end
+livingthing target enemy caster
+if hascondition target "fire shield"
+    number damage / damage 2
+end
+if hascondition target "ice shield"
+    number damage * damage 2
+end
+inc target hp * -1 damage
+inc caster damdone damage
+chat target concat concat concat name caster " freezes you for " damage " damage."
+chat caster concat concat concat concat "You freeze " name target " for " damage " damage."
+endscript

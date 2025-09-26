@@ -1,0 +1,15 @@
+type
+drink
+description
+some ale.
+cost
+10
+image
+67
+onuse
+ale
+uses
+1
+.
+
+
