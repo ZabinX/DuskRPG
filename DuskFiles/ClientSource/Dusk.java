@@ -105,7 +105,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     Thread thrRun;
     
     Entity player;
-    double cameraX, cameraY;
+    double cameraX, cameraY, targetCameraX, targetCameraY;
     	
     int intImageSize = 36;
     
@@ -1398,8 +1398,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			if (player != null) {
 				if (frame.pnlGraphics.getWidth() == 0) return;
 	
-				double targetCameraX = player.pixelX - (frame.pnlGraphics.getWidth() / 2.0);
-				double targetCameraY = player.pixelY - (frame.pnlGraphics.getHeight() / 2.0);
+				targetCameraX = player.pixelX - (frame.pnlGraphics.getWidth() / 2.0);
+				targetCameraY = player.pixelY - (frame.pnlGraphics.getHeight() / 2.0);
 	
 				double minCameraX = (double)(LocX - viewRangeX) * intImageSize;
 				double minCameraY = (double)(LocY - viewRangeY) * intImageSize;
@@ -1409,8 +1409,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				targetCameraX = Math.max(minCameraX, Math.min(targetCameraX, maxCameraX));
 				targetCameraY = Math.max(minCameraY, Math.min(targetCameraY, maxCameraY));
 	
-				cameraX = targetCameraX;
-				cameraY = targetCameraY;
+				double cameraSmoothing = 0.1;
+				cameraX += (targetCameraX - cameraX) * cameraSmoothing;
+				cameraY += (targetCameraY - cameraY) * cameraSmoothing;
 			}
 			
 			gD.setColor(Color.black);
@@ -1519,8 +1520,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	void drawEntity(Entity entStore)
 	{
-		double screenX = entStore.pixelX - cameraX;
-		double screenY = entStore.pixelY - cameraY;
+		double screenX, screenY;
+		if (entStore == player) {
+			screenX = entStore.pixelX - targetCameraX;
+			screenY = entStore.pixelY - targetCameraY;
+		} else {
+			screenX = entStore.pixelX - cameraX;
+			screenY = entStore.pixelY - cameraY;
+		}
 
 		if (entStore.intFlag != 0)
 		{
