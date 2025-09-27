@@ -34,6 +34,7 @@ import javax.swing.ImageIcon;
 import javax.swing.text.*;
 import javax.swing.JScrollBar;
 import javax.swing.UIManager;
+import javax.swing.SwingUtilities;
 
 public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListener, ImageObserver
 {
@@ -79,6 +80,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     		vctEntities;
     Vector<TileAnim> vctTileAnims;
     Vector<DamageSplat> vctDamageSplats;
+    Vector<CrossMarker> vctCrossMarkers;
     
 	Image imgOriginalSprites;
 	Image imgOriginalPlayers;
@@ -253,6 +255,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			vctChoiceActionItems = new Vector(0,3);
             vctTileAnims = new Vector<TileAnim>(0,3);
             vctDamageSplats = new Vector<DamageSplat>(0,3);
+            vctCrossMarkers = new Vector<CrossMarker>(0,3);
 		}catch(Exception e)
 		{
 			System.err.println("Error connecting to server: "+e.toString());
@@ -1157,6 +1160,20 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	        }
 	    }
 	}
+
+	Entity findMobAt(int x, int y) {
+		synchronized (vctEntities) {
+			for (int i = 0; i < vctEntities.size(); i++) {
+				Entity ent = (Entity) vctEntities.elementAt(i);
+				if (ent.intLocX == x && ent.intLocY == y && (ent.intType == 0 || ent.intType == 1 || ent.intType == 4)) {
+					if (ent != player) {
+						return ent;
+					}
+				}
+			}
+		}
+		return null;
+	}
 		
 	public void scaleImages()
 	{
@@ -1216,13 +1233,32 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
  			int destX = (int)( (x + cameraX) / intImageSize );
  			int destY = (int)( (y + cameraY) / intImageSize );
  			
- 			try
- 			{
- 	 			stmOut.writeBytes("findpath " + destX + " " + destY + "\n");
- 			}catch(IOException e)
- 			{
- 	 			addText("Error at mouseDown(): "+e.toString()+"\n");
- 			}
+			if (SwingUtilities.isLeftMouseButton(evt)) {
+				vctCrossMarkers.add(new CrossMarker(destX, destY, Color.GREEN, 50));
+				try {
+					stmOut.writeBytes("findpath " + destX + " " + destY + "\n");
+				} catch (IOException e) {
+					addText("Error at mouseClicked(): " + e.toString() + "\n");
+				}
+			} else if (SwingUtilities.isRightMouseButton(evt)) {
+				vctCrossMarkers.add(new CrossMarker(destX, destY, Color.RED, 50));
+				Entity mob = findMobAt(destX, destY);
+				if (mob != null) {
+					try {
+						// Send the correct attack command: "attack <name> #<ID>"
+						stmOut.writeBytes("attack " + mob.strName + " #" + mob.ID + "\n");
+					} catch (IOException e) {
+						addText("Error at mouseClicked() for attack: " + e.toString() + "\n");
+					}
+				} else {
+					// If no mob, just pathfind
+					try {
+						stmOut.writeBytes("findpath " + destX + " " + destY + "\n");
+					} catch (IOException e) {
+						addText("Error at mouseClicked() for findpath: " + e.toString() + "\n");
+					}
+				}
+			}
 		}
 		frame.txtInput.requestFocus();
 	}
@@ -1344,6 +1380,15 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 	public void update(int intAnimTick)
 	{
+		synchronized (vctCrossMarkers) {
+			for (int i = vctCrossMarkers.size() - 1; i >= 0; i--) {
+				CrossMarker marker = vctCrossMarkers.elementAt(i);
+				marker.lifetime--;
+				if (marker.lifetime <= 0) {
+					vctCrossMarkers.removeElementAt(i);
+				}
+			}
+		}
 		synchronized (vctEntities) {
 		final double entityMoveSpeed = (double)intImageSize / (playerTicks / 40.0);
 
@@ -1527,6 +1572,37 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	            gD.drawString(splat.text, (int)screenX, (int)screenY);
 	        }
 	        gD.setFont(originalFont);
+
+			if (vctCrossMarkers != null) {
+				synchronized (vctCrossMarkers) {
+					Graphics2D g2d = (Graphics2D) gD;
+					Stroke originalStroke = g2d.getStroke();
+					g2d.setStroke(new BasicStroke(3)); // Make the "X" thicker
+			
+					for (CrossMarker marker : vctCrossMarkers) {
+						double screenX = marker.mapX * intImageSize - cameraX;
+						double screenY = marker.mapY * intImageSize - cameraY;
+			
+						// Calculate alpha for fade-out effect
+						float alpha = (float) marker.lifetime / (float) marker.maxLifetime;
+						if (alpha < 0) alpha = 0;
+						if (alpha > 1) alpha = 1;
+			
+						// Set color with alpha
+						Color fadedColor = new Color(marker.color.getRed(), marker.color.getGreen(), marker.color.getBlue(), (int) (alpha * 255));
+						g2d.setColor(fadedColor);
+			
+						// Draw the "X"
+						int x1 = (int) screenX;
+						int y1 = (int) screenY;
+						int x2 = (int) (screenX + intImageSize);
+						int y2 = (int) (screenY + intImageSize);
+						g2d.drawLine(x1, y1, x2, y2);
+						g2d.drawLine(x1, y2, x2, y1);
+					}
+					g2d.setStroke(originalStroke); // Restore original stroke
+				}
+			}
 	    }
 	}
 }
