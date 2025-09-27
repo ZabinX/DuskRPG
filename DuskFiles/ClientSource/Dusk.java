@@ -1344,6 +1344,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 	public void update(int intAnimTick)
 	{
+		synchronized (vctEntities) {
 		final double entityMoveSpeed = (double)intImageSize / (playerTicks / 40.0);
 
 	    synchronized (vctDamageSplats) {
@@ -1401,15 +1402,26 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				targetCameraX = player.pixelX - (frame.pnlGraphics.getWidth() / 2.0);
 				targetCameraY = player.pixelY - (frame.pnlGraphics.getHeight() / 2.0);
 	
-				double minCameraX = (double)(LocX - viewRangeX) * intImageSize;
-				double minCameraY = (double)(LocY - viewRangeY) * intImageSize;
-				double maxCameraX = (double)(LocX - viewRangeX + mapSizeX) * intImageSize - frame.pnlGraphics.getWidth();
-				double maxCameraY = (double)(LocY - viewRangeY + mapSizeY) * intImageSize - frame.pnlGraphics.getHeight();
-	
+				// Define the intended display area, excluding the buffer.
+				int displayViewRangeX = 10;
+				int displayViewRangeY = 5;
+
+				// Calculate the boundaries of this display area in world coordinates.
+				double displayAreaLeft = (LocX - displayViewRangeX) * intImageSize;
+				double displayAreaTop = (LocY - displayViewRangeY) * intImageSize;
+				double displayAreaRight = (LocX + displayViewRangeX + 1) * intImageSize;
+				double displayAreaBottom = (LocY + displayViewRangeY + 1) * intImageSize;
+
+				// Clamp the camera's target to these boundaries.
+				double minCameraX = displayAreaLeft;
+				double maxCameraX = displayAreaRight - frame.pnlGraphics.getWidth();
+				double minCameraY = displayAreaTop;
+				double maxCameraY = displayAreaBottom - frame.pnlGraphics.getHeight();
+
 				targetCameraX = Math.max(minCameraX, Math.min(targetCameraX, maxCameraX));
 				targetCameraY = Math.max(minCameraY, Math.min(targetCameraY, maxCameraY));
-	
-				double cameraSmoothing = 0.1;
+
+				double cameraSmoothing = 0.05;
 				cameraX += (targetCameraX - cameraX) * cameraSmoothing;
 				cameraY += (targetCameraY - cameraY) * cameraSmoothing;
 			}
@@ -1517,13 +1529,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	        gD.setFont(originalFont);
 	    }
 	}
+}
 	
 	void drawEntity(Entity entStore)
 	{
 		double screenX, screenY;
 		if (entStore == player) {
-			screenX = entStore.pixelX - targetCameraX;
-			screenY = entStore.pixelY - targetCameraY;
+			screenX = 10 * intImageSize;
+			screenY = 5 * intImageSize;
 		} else {
 			screenX = entStore.pixelX - cameraX;
 			screenY = entStore.pixelY - cameraY;
