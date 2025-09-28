@@ -40,6 +40,7 @@ public class Entity
     boolean hasPendingMove;
     java.util.Queue<Integer> queuedMoves;
     boolean walkFrameToggle;
+    int animCounter;
     
     public Entity(String instrName, long inID, double inintLocX, double inintLocY,int inImage,int inStep,int inintType)
     {
@@ -64,5 +65,7 @@ public class Entity
         hasPendingMove = false;
         queuedMoves = new java.util.LinkedList<>();
         walkFrameToggle = false;
+        animCounter = 0;
     }
 }
+

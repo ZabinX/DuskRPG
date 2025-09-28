@@ -63,7 +63,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                         blnRefreshing,
 			blnMenuRefresh,
 			blnConnected=false,
-			blnApplet;
+			blnApplet,
+			blnPlayerAnimationLock=false;
 	int intMusicTypes;
 	int intNumSongs[];
     Clip audSFX[],
@@ -1410,32 +1411,25 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	private void startMove(Entity ent, int direction) {
 		if (direction < 0 || direction > 3) return;
 
-		ent.walkFrameToggle = !ent.walkFrameToggle;
-		int frameOffset = ent.walkFrameToggle ? 1 : 0;
-
 		if (direction == 0) { // North
-			if (ent.intStep != -1) ent.intStep = 0 + frameOffset;
 			ent.intMoveDirection = 0;
 			ent.targetX = ent.pixelX;
 			ent.targetY = ent.pixelY - intImageSize;
 			ent.pendingLocX = (int)ent.intLocX;
 			ent.pendingLocY = (int)ent.intLocY - 1;
 		} else if (direction == 1) { // South
-			if (ent.intStep != -1) ent.intStep = 2 + frameOffset;
 			ent.intMoveDirection = 1;
 			ent.targetX = ent.pixelX;
 			ent.targetY = ent.pixelY + intImageSize;
 			ent.pendingLocX = (int)ent.intLocX;
 			ent.pendingLocY = (int)ent.intLocY + 1;
 		} else if (direction == 2) { // West
-			if (ent.intStep != -1) ent.intStep = 4 + frameOffset;
 			ent.intMoveDirection = 2;
 			ent.targetX = ent.pixelX - intImageSize;
 			ent.targetY = ent.pixelY;
 			ent.pendingLocX = (int)ent.intLocX - 1;
 			ent.pendingLocY = (int)ent.intLocY;
 		} else if (direction == 3) { // East
-			if (ent.intStep != -1) ent.intStep = 6 + frameOffset;
 			ent.intMoveDirection = 3;
 			ent.targetX = ent.pixelX + intImageSize;
 			ent.targetY = ent.pixelY;
@@ -1448,6 +1442,21 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 	public void update(int intAnimTick)
 	{
+		if (blnPlayerAnimationLock) {
+			double cameraStopThreshold = 0.5;
+			if (Math.abs(cameraX - targetCameraX) < cameraStopThreshold && Math.abs(cameraY - targetCameraY) < cameraStopThreshold) {
+				blnPlayerAnimationLock = false;
+				if (player != null && player.intStep != -1) {
+					switch (player.intMoveDirection) {
+						case 0: player.intStep = 0; break;
+						case 1: player.intStep = 2; break;
+						case 2: player.intStep = 4; break;
+						case 3: player.intStep = 6; break;
+					}
+					player.intMoveDirection = -1;
+				}
+			}
+		}
 		synchronized (vctCrossMarkers) {
 			for (int i = vctCrossMarkers.size() - 1; i >= 0; i--) {
 				CrossMarker marker = vctCrossMarkers.elementAt(i);
@@ -1475,6 +1484,26 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	    synchronized (vctEntities) {
 	        for (int i=0; i<vctEntities.size(); i++) {
 	            Entity ent = (Entity)vctEntities.elementAt(i);
+				boolean shouldAnimate = ent.isMoving || (ent == player && blnPlayerAnimationLock);
+
+				if (shouldAnimate) {
+					ent.animCounter++;
+					int animThreshold = 15;
+					if (ent.animCounter >= animThreshold) {
+						ent.walkFrameToggle = !ent.walkFrameToggle;
+						ent.animCounter = 0;
+					}
+					int frameOffset = ent.walkFrameToggle ? 1 : 0;
+					if (ent.intStep != -1) {
+						switch (ent.intMoveDirection) {
+							case 0: ent.intStep = 0 + frameOffset; break;
+							case 1: ent.intStep = 2 + frameOffset; break;
+							case 2: ent.intStep = 4 + frameOffset; break;
+							case 3: ent.intStep = 6 + frameOffset; break;
+						}
+					}
+				}
+
 	            if (ent.isMoving) {
 	                double dx = ent.targetX - ent.pixelX;
 	                double dy = ent.targetY - ent.pixelY;
@@ -1484,7 +1513,20 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	                    ent.pixelX = ent.targetX;
 	                    ent.pixelY = ent.targetY;
 	                    ent.isMoving = false;
-	                    ent.intMoveDirection = -1;
+	
+	                    if (ent == player) {
+	                        blnPlayerAnimationLock = true;
+	                    } else {
+							if (ent.intStep != -1) {
+								switch (ent.intMoveDirection) {
+									case 0: ent.intStep = 0; break;
+									case 1: ent.intStep = 2; break;
+									case 2: ent.intStep = 4; break;
+									case 3: ent.intStep = 6; break;
+								}
+							}
+	                        ent.intMoveDirection = -1;
+	                    }
 
 						if (ent.hasPendingMove) {
 							ent.intLocX = ent.pendingLocX;
