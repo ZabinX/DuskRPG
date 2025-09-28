@@ -35,6 +35,7 @@ import javax.swing.text.*;
 import javax.swing.JScrollBar;
 import javax.swing.UIManager;
 import javax.swing.SwingUtilities;
+import java.awt.AlphaComposite;
 
 public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListener, ImageObserver
 {
@@ -81,6 +82,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     Vector<TileAnim> vctTileAnims;
     Vector<DamageSplat> vctDamageSplats;
     Vector<CrossMarker> vctCrossMarkers;
+    Vector<Particle> vctParticles;
     
 	Image imgOriginalSprites;
 	Image imgOriginalPlayers;
@@ -256,10 +258,45 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
             vctTileAnims = new Vector<TileAnim>(0,3);
             vctDamageSplats = new Vector<DamageSplat>(0,3);
             vctCrossMarkers = new Vector<CrossMarker>(0,3);
+            vctParticles = new Vector<Particle>(0,3);
 		}catch(Exception e)
 		{
 			System.err.println("Error connecting to server: "+e.toString());
 			addText("Error connecting to server: "+e.toString()+"\n");
+		}
+	}
+
+	public void spawnBloodParticles(Entity attacker, Entity defender, int damage) {
+		if (defender == null) return;
+		double angle = 0;
+		if (attacker != null) {
+			angle = Math.atan2(defender.pixelY - attacker.pixelY, defender.pixelX - attacker.pixelX);
+		}
+
+		synchronized (vctParticles) {
+			int count = damage / 2;
+			for (int i = 0; i < count; i++) {
+				double speed = 1.0 + Math.random() * 1.5;
+				double splatterAngle = angle + (Math.random() - 0.5) * (Math.PI / 1.5); // Radiate outwards
+				
+				double vx = Math.cos(splatterAngle) * speed;
+				double vy = Math.sin(splatterAngle) * speed;
+
+				int lifetime = 25 + (int)(Math.random() * 15);
+				Color color = new Color(180, 0, 0);
+				
+				Particle p = new Particle(
+					defender.pixelX + (intImageSize / 2.0),
+					defender.pixelY,
+					vx,
+					vy,
+					lifetime,
+					color,
+					2 + (int)(Math.random() * 2), // Size 2 or 3
+					ParticleType.BLOOD
+				);
+				vctParticles.add(p);
+			}
 		}
 	}
 	
@@ -493,10 +530,16 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		        }
 		        case (5):
 		        {
+					int oldhp = inthp;
 					inthp = Integer.parseInt(stmIn.readLine());
 					intmaxhp = Integer.parseInt(stmIn.readLine());
 					intsp = Integer.parseInt(stmIn.readLine());
 					intmaxsp = Integer.parseInt(stmIn.readLine());
+					if (inthp > oldhp) {
+						int hpHealed = inthp - oldhp;
+						int numStars = hpHealed;
+						spawnHealingParticles(player, numStars);
+					}
 					frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
 		            break;
 		        }
@@ -673,6 +716,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                             Entity defender = hmpEntities.get(defenderID);
 
                             if (attacker != null && defender != null) {
+                                spawnBloodParticles(attacker, defender, damage);
                                 // Check for an existing splat to aggregate
                                 DamageSplat existingSplat = null;
                                 for (DamageSplat splat : vctDamageSplats) {
@@ -1338,6 +1382,30 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	{
 		frame.setVisible(false);
 	}
+
+	public void spawnHealingParticles(Entity target, int count) {
+		if (target == null) return;
+		synchronized (vctParticles) {
+			for (int i = 0; i < count; i++) {
+				double angle = Math.random() * Math.PI; // Upward arc
+				double speed = 0.5 + Math.random() * 0.8;
+				double vx = (Math.random() - 0.5) * 2.0;
+				double vy = -speed;
+				int lifetime = 40 + (int)(Math.random() * 30);
+				Color color = Color.GREEN;
+				vctParticles.add(new Particle(
+					target.pixelX + (intImageSize / 2.0) + (Math.random() - 0.5) * intImageSize,
+					target.pixelY - (intImageSize / 2.0),
+					vx,
+					vy,
+					lifetime,
+					color,
+					2,
+					ParticleType.HEAL
+				));
+			}
+		}
+	}
 	
 	private void startMove(Entity ent, int direction) {
 		if (direction < 0 || direction > 3) return;
@@ -1602,6 +1670,26 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 					g2d.setStroke(originalStroke); // Restore original stroke
 				}
+			}
+			synchronized (vctParticles) {
+				Graphics2D g2d = (Graphics2D) gD;
+				for (int i = vctParticles.size() - 1; i >= 0; i--) {
+					Particle p = vctParticles.elementAt(i);
+					p.update();
+					if (p.isDead()) {
+						vctParticles.removeElementAt(i);
+					} else {
+						double screenX = p.x - cameraX;
+						double screenY = p.y - cameraY;
+						g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, p.alpha));
+						g2d.setColor(p.color);
+
+						// Draw a sparkle
+						int halfSize = p.size / 2;
+						g2d.fillRect((int)screenX - halfSize, (int)screenY - halfSize, p.size, p.size);
+					}
+				}
+				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f)); // Reset composite
 			}
 	    }
 	}
