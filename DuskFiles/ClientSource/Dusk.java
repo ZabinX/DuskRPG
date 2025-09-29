@@ -1575,9 +1575,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				targetCameraX = player.pixelX - (frame.pnlGraphics.getWidth() / 2.0);
 				targetCameraY = player.pixelY - (frame.pnlGraphics.getHeight() / 2.0);
 	
-				// Define the intended display area, excluding the buffer.
-				int displayViewRangeX = 10;
-				int displayViewRangeY = 5;
+				// Define the intended display area, including a buffer to prevent black bars.
+				int buffer = 2; // A 2-tile buffer.
+				int displayViewRangeX = viewRangeX - buffer;
+				int displayViewRangeY = viewRangeY - buffer;
 
 				// Calculate the boundaries of this display area in world coordinates.
 				double displayAreaLeft = (LocX - displayViewRangeX) * intImageSize;
