@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.HashMap;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.ArrayList;
 import java.lang.Math;
 import java.lang.reflect.Array;
 import java.util.StringTokenizer;
@@ -41,6 +42,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 {
 	static String strVersion="2.7.1.Z47";
 	
+    private static final Comparator<Entity> ySortComparator = new Comparator<Entity>() {
+        @Override
+        public int compare(Entity e1, Entity e2) {
+            return Double.compare(e1.pixelY, e2.pixelY);
+        }
+    };
+    private ArrayList<Entity> sortedEntities;
+
 	int numSpriteImages,
 	    numPlayerImages,
 	    numMapImages,
@@ -260,6 +269,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
             vctDamageSplats = new Vector<DamageSplat>(0,3);
             vctCrossMarkers = new Vector<CrossMarker>(0,3);
             vctParticles = new Vector<Particle>(0,3);
+            sortedEntities = new ArrayList<Entity>();
 		}catch(Exception e)
 		{
 			System.err.println("Error connecting to server: "+e.toString());
@@ -712,13 +722,17 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                         long defenderID = Long.parseLong(stmIn.readLine());
                         int damage = Integer.parseInt(stmIn.readLine());
 
+                        Entity attacker;
+                        Entity defender;
                         synchronized(vctEntities) {
-                            Entity attacker = hmpEntities.get(attackerID);
-                            Entity defender = hmpEntities.get(defenderID);
+                            attacker = hmpEntities.get(attackerID);
+                            defender = hmpEntities.get(defenderID);
+                        }
 
-                            if (attacker != null && defender != null) {
-                                spawnBloodParticles(attacker, defender, damage);
-                                // Check for an existing splat to aggregate
+                        if (attacker != null && defender != null) {
+                            spawnBloodParticles(attacker, defender, damage);
+                            // Check for an existing splat to aggregate
+                            synchronized(vctDamageSplats) {
                                 DamageSplat existingSplat = null;
                                 for (DamageSplat splat : vctDamageSplats) {
                                     if (splat.defenderID == defenderID && splat.lifetime > 50) {
@@ -1279,14 +1293,18 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
  			int destY = (int)( (y + cameraY) / intImageSize );
  			
 			if (SwingUtilities.isLeftMouseButton(evt)) {
-				vctCrossMarkers.add(new CrossMarker(destX, destY, Color.GREEN, 50));
+				synchronized(vctCrossMarkers) {
+					vctCrossMarkers.add(new CrossMarker(destX, destY, Color.GREEN, 50));
+				}
 				try {
 					stmOut.writeBytes("findpath " + destX + " " + destY + "\n");
 				} catch (IOException e) {
 					addText("Error at mouseClicked(): " + e.toString() + "\n");
 				}
 			} else if (SwingUtilities.isRightMouseButton(evt)) {
-				vctCrossMarkers.add(new CrossMarker(destX, destY, Color.RED, 50));
+				synchronized(vctCrossMarkers) {
+					vctCrossMarkers.add(new CrossMarker(destX, destY, Color.RED, 50));
+				}
 				Entity mob = findMobAt(destX, destY);
 				if (mob != null) {
 					try {
@@ -1632,13 +1650,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 			}
 	
-	        Vector<Entity> sortedEntities = new Vector<>(vctEntities);
-	        Collections.sort(sortedEntities, new Comparator<Entity>() {
-	            @Override
-	            public int compare(Entity e1, Entity e2) {
-	                return Double.compare(e1.pixelY, e2.pixelY);
-	            }
-	        });
+                sortedEntities.clear();
+                sortedEntities.addAll(vctEntities);
+                Collections.sort(sortedEntities, ySortComparator);
 
 	        for (Entity entStore : sortedEntities) {
 	            drawEntity(entStore);
