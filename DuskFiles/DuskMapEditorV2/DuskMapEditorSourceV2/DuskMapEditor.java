@@ -45,6 +45,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			blnActiveSelection=false,
 			blnActivePaste=false,
 			blnAlphaLayer=false,
+			blnAlphaVisible=true,
 			blnApplet;
     Applet appShell;
     
@@ -284,6 +285,12 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 		update();
 		paint();
     }
+
+	public void setAlphaVisible(boolean isVisible) {
+		blnAlphaVisible = isVisible;
+		update();
+		paint();
+	}
 	
 	//Accept mouse input
 	public void mousePressed(MouseEvent evt)
@@ -1322,13 +1329,15 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			}
 		}
 		// Draw alpha layer
-		for (i=0;i<=sx1;i++)
-		{
-			for (i2=0;i2<=sy1;i2++)
+		if (blnAlphaVisible) {
+			for (i=0;i<=sx1;i++)
 			{
-                if (shrMapAlpha[i+sx][i2+sy] != 0) { // Assuming tile 0 is transparent
-				    drawTile(imgMapAlpha,i,i2,shrMapAlpha[i+sx][i2+sy]);
-                }
+				for (i2=0;i2<=sy1;i2++)
+				{
+					if (shrMapAlpha[i+sx][i2+sy] != 0) { // Assuming tile 0 is transparent
+						drawTile(imgMapAlpha,i,i2,shrMapAlpha[i+sx][i2+sy]);
+					}
+				}
 			}
 		}
 		if (blnActiveSelection)

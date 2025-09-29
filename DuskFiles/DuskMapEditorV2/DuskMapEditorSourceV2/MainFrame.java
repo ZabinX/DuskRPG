@@ -21,6 +21,7 @@ public class MainFrame extends JFrame {
 
     // Other controls
     JCheckBox chkAlphaLayer = new JCheckBox("Alpha Layer");
+    JCheckBox chkAlphaVisible = new JCheckBox("Alpha Visible", true);
     JScrollBar scrollVert = new JScrollBar(JScrollBar.VERTICAL);
     JScrollBar scrollHorz = new JScrollBar(JScrollBar.HORIZONTAL);
     JLabel lblLocation = new JLabel();
@@ -90,6 +91,7 @@ public class MainFrame extends JFrame {
         pnlButtons.add(btnToolZoom);
         pnlButtons.add(new JSeparator(SwingConstants.VERTICAL));
         pnlButtons.add(chkAlphaLayer);
+        pnlButtons.add(chkAlphaVisible);
         pnlButtons.add(new JSeparator(SwingConstants.VERTICAL));
 
         pnlForeground.setPreferredSize(new Dimension(appParent.intImageOriginalSize, appParent.intImageOriginalSize));
@@ -216,6 +218,9 @@ public class MainFrame extends JFrame {
         btnToolZoom.addActionListener(toolListener);
 
         chkAlphaLayer.addItemListener(e -> appParent.setDrawingLayer(e.getStateChange() == ItemEvent.SELECTED));
+        chkAlphaVisible.addItemListener(e -> appParent.setAlphaVisible(e.getStateChange() == ItemEvent.SELECTED));
     }
 }
+
+
 
