@@ -61,6 +61,8 @@ public class MainFrame extends JFrame implements ItemListener
     JButton btnDown = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zdown.png")));
     JButton btnLeft = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zleft.png")));
     JButton btnRight = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zright.png")));
+    JButton btnSoundOn = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zsoundOnWhite.png")));
+    JButton btnSoundOff = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zsoundOffWhite.png")));
     JScrollPane scrTextOther = new JScrollPane();
 	JTextArea txtOther = new JTextArea();
 	JButton btnQuit = new JButton();
@@ -139,6 +141,8 @@ public class MainFrame extends JFrame implements ItemListener
                 pnlStats.add(btnDown);
                 pnlStats.add(btnLeft);
                 pnlStats.add(btnRight);
+                pnlStats.add(btnSoundOn);
+                pnlStats.add(btnSoundOff);
 		pnlStats.add(scrTextOther);
 		pnlStats.add(btnQuit);
                 pnlStats.add(btnPopupon);
@@ -153,206 +157,214 @@ public class MainFrame extends JFrame implements ItemListener
 		pnlContents.setVisible(true);
 
 		btnMerchant.setText("Merchant");
-		btnMerchant.setLocation(new java.awt.Point(140, 60));
+		btnMerchant.setLocation(new java.awt.Point(10, 90));
 		btnMerchant.setVisible(true);
-		btnMerchant.setSize(new java.awt.Dimension(120, 60));
+		btnMerchant.setSize(new java.awt.Dimension(120, 20));
 		btnMerchant.setEnabled(false);
 
-		lblInfo.setLocation(new java.awt.Point(10, 520));
-                lblInfo.setFont(new Font("Serif", Font.PLAIN, 20));
+		lblInfo.setLocation(new java.awt.Point(10, 10));
+                lblInfo.setFont(new Font("Serif", Font.PLAIN, 15));
 		lblInfo.setVisible(true);
 		lblInfo.setSize(new java.awt.Dimension(290, 40));
                 
-                lblBookc.setLocation(new java.awt.Point(10, 370));
+                lblBookc.setLocation(new java.awt.Point(10, 576));
 		lblBookc.setVisible(true);
 		lblBookc.setSize(new java.awt.Dimension(32, 32));
                 
-                lblBooke.setLocation(new java.awt.Point(10, 420));
+                lblBooke.setLocation(new java.awt.Point(10, 613));
 		lblBooke.setVisible(true);
 		lblBooke.setSize(new java.awt.Dimension(32, 32));
                 
-                lblBookw.setLocation(new java.awt.Point(10, 470));
+                lblBookw.setLocation(new java.awt.Point(10, 650));
 		lblBookw.setVisible(true);
 		lblBookw.setSize(new java.awt.Dimension(32, 32));
 
-		chcAttack.setLocation(new java.awt.Point(10, 130));
+		chcAttack.setLocation(new java.awt.Point(10, 180));
 		chcAttack.setVisible(true);
 		chcAttack.setSize(new java.awt.Dimension(120, 20));
 
-		chcAction.setLocation(new java.awt.Point(10, 160));
+		chcAction.setLocation(new java.awt.Point(10, 210));
 		chcAction.setVisible(true);
 		chcAction.setSize(new java.awt.Dimension(120, 20));
 
-		chcLook.setLocation(new java.awt.Point(10, 190));
+		chcLook.setLocation(new java.awt.Point(10, 240));
 		chcLook.setVisible(true);
 		chcLook.setSize(new java.awt.Dimension(120, 20));
 
-		chcGet.setLocation(new java.awt.Point(10, 220));
+		chcGet.setLocation(new java.awt.Point(10, 270));
 		chcGet.setVisible(true);
 		chcGet.setSize(new java.awt.Dimension(120, 20));
 
-		chcDrop.setLocation(new java.awt.Point(10, 250));
+		chcDrop.setLocation(new java.awt.Point(10, 300));
 		chcDrop.setVisible(true);
 		chcDrop.setSize(new java.awt.Dimension(120, 20));
                 
-                btnPotion.setLocation(new java.awt.Point(10, 290));
+                btnPotion.setLocation(new java.awt.Point(10, 330));
 		btnPotion.setVisible(true);
-		btnPotion.setSize(new java.awt.Dimension(64, 64));
+		btnPotion.setSize(new java.awt.Dimension(32, 32));
                 
-                btnPotion2.setLocation(new java.awt.Point(82, 290));
+                btnPotion2.setLocation(new java.awt.Point(47, 330));
 		btnPotion2.setVisible(true);
-		btnPotion2.setSize(new java.awt.Dimension(64, 64));
+		btnPotion2.setSize(new java.awt.Dimension(32, 32));
                 
-                btnPotion3.setLocation(new java.awt.Point(154, 290));
+                btnPotion3.setLocation(new java.awt.Point(84, 330));
 		btnPotion3.setVisible(true);
-		btnPotion3.setSize(new java.awt.Dimension(64, 64));
+		btnPotion3.setSize(new java.awt.Dimension(32, 32));
                 
-                btnPotion4.setLocation(new java.awt.Point(226, 290));
+                btnPotion4.setLocation(new java.awt.Point(121, 330));
 		btnPotion4.setVisible(true);
-		btnPotion4.setSize(new java.awt.Dimension(64, 64));
+		btnPotion4.setSize(new java.awt.Dimension(32, 32));
 
-                btnMend.setLocation(new java.awt.Point(60, 370));
+                btnMend.setLocation(new java.awt.Point(42, 576));
 		btnMend.setVisible(true);
 		btnMend.setSize(new java.awt.Dimension(32, 32));
                 
-                btnPoison.setLocation(new java.awt.Point(100, 370));
+                btnPoison.setLocation(new java.awt.Point(79, 576));
 		btnPoison.setVisible(true);
 		btnPoison.setSize(new java.awt.Dimension(32, 32));
                 
-                btnArmor.setLocation(new java.awt.Point(140, 370));
+                btnArmor.setLocation(new java.awt.Point(116, 576));
 		btnArmor.setVisible(true);
 		btnArmor.setSize(new java.awt.Dimension(32, 32));
                 
-                btnBless.setLocation(new java.awt.Point(180, 370));
+                btnBless.setLocation(new java.awt.Point(153, 576));
 		btnBless.setVisible(true);
 		btnBless.setSize(new java.awt.Dimension(32, 32));
                 
-                btnDrink.setLocation(new java.awt.Point(220, 370));
+                btnDrink.setLocation(new java.awt.Point(190, 576));
 		btnDrink.setVisible(true);
 		btnDrink.setSize(new java.awt.Dimension(32, 32));
                 
-                btnFood.setLocation(new java.awt.Point(260, 370));
+                btnFood.setLocation(new java.awt.Point(227, 576));
 		btnFood.setVisible(true);
 		btnFood.setSize(new java.awt.Dimension(32, 32));
                 
-                btnHeal.setLocation(new java.awt.Point(300, 370));
+                btnHeal.setLocation(new java.awt.Point(264, 576));
 		btnHeal.setVisible(true);
 		btnHeal.setSize(new java.awt.Dimension(32, 32));
                 
-                btnDetectinvis.setLocation(new java.awt.Point(60, 420));
+                btnDetectinvis.setLocation(new java.awt.Point(42, 613));
 		btnDetectinvis.setVisible(true);
 		btnDetectinvis.setSize(new java.awt.Dimension(32, 32));
                 
-                btnInvis.setLocation(new java.awt.Point(100, 420));
+                btnInvis.setLocation(new java.awt.Point(79, 613));
 		btnInvis.setVisible(true);
 		btnInvis.setSize(new java.awt.Dimension(32, 32));
                 
-                btnRegenerate.setLocation(new java.awt.Point(140, 420));
+                btnRegenerate.setLocation(new java.awt.Point(116, 613));
 		btnRegenerate.setVisible(true);
 		btnRegenerate.setSize(new java.awt.Dimension(32, 32));
                 
-                btnTerror.setLocation(new java.awt.Point(180, 420));
+                btnTerror.setLocation(new java.awt.Point(153, 613));
 		btnTerror.setVisible(true);
 		btnTerror.setSize(new java.awt.Dimension(32, 32));
                 
-                btnHarden.setLocation(new java.awt.Point(60, 470));
+                btnHarden.setLocation(new java.awt.Point(42, 650));
 		btnHarden.setVisible(true);
 		btnHarden.setSize(new java.awt.Dimension(32, 32));
                 
-                btnEndurance.setLocation(new java.awt.Point(100, 470));
+                btnEndurance.setLocation(new java.awt.Point(79, 650));
 		btnEndurance.setVisible(true);
 		btnEndurance.setSize(new java.awt.Dimension(32, 32));
                 
-                btnCourage.setLocation(new java.awt.Point(140, 470));
+                btnCourage.setLocation(new java.awt.Point(116, 650));
 		btnCourage.setVisible(true);
 		btnCourage.setSize(new java.awt.Dimension(32, 32));
                 
-                btnFear.setLocation(new java.awt.Point(180, 470));
+                btnFear.setLocation(new java.awt.Point(153, 650));
 		btnFear.setVisible(true);
 		btnFear.setSize(new java.awt.Dimension(32, 32));
                 
-                btnStrength.setLocation(new java.awt.Point(220, 470));
+                btnStrength.setLocation(new java.awt.Point(190, 650));
 		btnStrength.setVisible(true);
 		btnStrength.setSize(new java.awt.Dimension(32, 32));
                 
-                btnWeaken.setLocation(new java.awt.Point(260, 470));
+                btnWeaken.setLocation(new java.awt.Point(227, 650));
 		btnWeaken.setVisible(true);
 		btnWeaken.setSize(new java.awt.Dimension(32, 32));
                 
-                btnApple.setLocation(new java.awt.Point(350, 290));
+                btnApple.setLocation(new java.awt.Point(10, 367));
 		btnApple.setVisible(true);
 		btnApple.setSize(new java.awt.Dimension(32, 32));
                 
-                btnBeer.setLocation(new java.awt.Point(390, 290));
+                btnBeer.setLocation(new java.awt.Point(47, 367));
 		btnBeer.setVisible(true);
 		btnBeer.setSize(new java.awt.Dimension(32, 32));
                 
-                btnSandwich.setLocation(new java.awt.Point(430, 290));
+                btnSandwich.setLocation(new java.awt.Point(84, 367));
 		btnSandwich.setVisible(true);
 		btnSandwich.setSize(new java.awt.Dimension(32, 32));
                 
-                btnScroll.setLocation(new java.awt.Point(470, 290));
+                btnScroll.setLocation(new java.awt.Point(121, 367));
 		btnScroll.setVisible(true);
 		btnScroll.setSize(new java.awt.Dimension(32, 32));
                 
-                btnUp.setLocation(new java.awt.Point(396, 368));
+                btnUp.setLocation(new java.awt.Point(42, 466));
 		btnUp.setVisible(true);
-		btnUp.setSize(new java.awt.Dimension(64, 64));
+		btnUp.setSize(new java.awt.Dimension(32, 32));
                 
-                btnDown.setLocation(new java.awt.Point(396, 496));
+                btnDown.setLocation(new java.awt.Point(42, 530));
 		btnDown.setVisible(true);
-		btnDown.setSize(new java.awt.Dimension(64, 64));
+		btnDown.setSize(new java.awt.Dimension(32, 32));
                 
-                btnLeft.setLocation(new java.awt.Point(332, 432));
+                btnLeft.setLocation(new java.awt.Point(10, 498));
 		btnLeft.setVisible(true);
-		btnLeft.setSize(new java.awt.Dimension(64, 64));
+		btnLeft.setSize(new java.awt.Dimension(32, 32));
                 
-                btnRight.setLocation(new java.awt.Point(460, 432));
+                btnRight.setLocation(new java.awt.Point(74, 498));
 		btnRight.setVisible(true);
-		btnRight.setSize(new java.awt.Dimension(64, 64));
+		btnRight.setSize(new java.awt.Dimension(32, 32));
                 
-		scrTextOther.setLocation(new java.awt.Point(540, 60));
+                btnSoundOn.setLocation(new java.awt.Point(135, 60));
+		btnSoundOn.setVisible(true);
+		btnSoundOn.setSize(new java.awt.Dimension(30, 30));
+                
+                btnSoundOff.setLocation(new java.awt.Point(135, 95));
+		btnSoundOff.setVisible(true);
+		btnSoundOff.setSize(new java.awt.Dimension(30, 30));
+                
+		scrTextOther.setLocation(new java.awt.Point(170, 60));
 		scrTextOther.setVisible(true);
-		scrTextOther.setSize(new java.awt.Dimension(150, 500));
+		scrTextOther.setSize(new java.awt.Dimension(150, 480));
 		scrTextOther.getViewport().add(txtOther);
 
 		txtOther.setVisible(true);
                 
-                lblTarget.setLocation(new Point(10, 540));
-                lblTarget.setFont(new Font("Serif", Font.PLAIN, 20));
+                lblTarget.setLocation(new Point(10, 30));
+                lblTarget.setFont(new Font("Serif", Font.PLAIN, 15));
                 lblTarget.setVisible(true);
                 lblTarget.setSize(new Dimension(140, 40));
                 
 		btnQuit.setText("Quit");
-		btnQuit.setLocation(new java.awt.Point(400, 60));
+		btnQuit.setLocation(new java.awt.Point(40, 150));
 		btnQuit.setVisible(true);
-		btnQuit.setSize(new java.awt.Dimension(90, 60));
+		btnQuit.setSize(new java.awt.Dimension(90, 20));
                 
-		btnPopupon.setLocation(new java.awt.Point(350, 240));
+		btnPopupon.setLocation(new java.awt.Point(135, 130));
 		btnPopupon.setVisible(true);
 		btnPopupon.setSize(new java.awt.Dimension(32, 32));
                 
-		btnPopupoff.setLocation(new java.awt.Point(390, 240));
+		btnPopupoff.setLocation(new java.awt.Point(135, 167));
 		btnPopupoff.setVisible(true);
 		btnPopupoff.setSize(new java.awt.Dimension(32, 32));
                 
-                btnSleep.setLocation(new java.awt.Point(430, 240));
+                btnSleep.setLocation(new java.awt.Point(135, 204));
 		btnSleep.setVisible(true);
 		btnSleep.setSize(new java.awt.Dimension(32, 32));
                 
-                btnWake.setLocation(new java.awt.Point(470, 240));
+                btnWake.setLocation(new java.awt.Point(135, 241));
 		btnWake.setVisible(true);
 		btnWake.setSize(new java.awt.Dimension(32, 32));
 
 		btnEquipment.setText("Equipment");
-		btnEquipment.setLocation(new java.awt.Point(270, 60));
+		btnEquipment.setLocation(new java.awt.Point(10, 120));
 		btnEquipment.setVisible(true);
-		btnEquipment.setSize(new java.awt.Dimension(120, 60));
+		btnEquipment.setSize(new java.awt.Dimension(120, 20));
 		
 		btnConnect.setText("Connect");
 		btnConnect.setLocation(new java.awt.Point(10, 60));
 		btnConnect.setVisible(true);
-		btnConnect.setSize(new java.awt.Dimension(120, 60));
+		btnConnect.setSize(new java.awt.Dimension(120, 20));
 
 		pnlGraphics.setLocation(new java.awt.Point(0, 0));
 		pnlGraphics.setVisible(true);
@@ -584,6 +596,18 @@ public class MainFrame extends JFrame implements ItemListener
                         @Override
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				btnRightActionPerformed(e);
+			}
+		});
+                btnSoundOn.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				btnSoundOnActionPerformed(e);
+			}
+		});
+                btnSoundOff.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				btnSoundOffActionPerformed(e);
 			}
 		});
                 btnMerchant.addActionListener(new java.awt.event.ActionListener() {
@@ -897,6 +921,22 @@ public class MainFrame extends JFrame implements ItemListener
 		{
 			if (appParent.blnConnected)
 				appParent.stmOut.writeBytes("e\n");
+                }catch(IOException exc){}
+        }
+        public void btnSoundOnActionPerformed(java.awt.event.ActionEvent e)
+	{
+		try
+		{
+			if (appParent.blnConnected)
+				appParent.stmOut.writeBytes("audio on\n");
+                }catch(IOException exc){}
+        }
+        public void btnSoundOffActionPerformed(java.awt.event.ActionEvent e)
+	{
+		try
+		{
+			if (appParent.blnConnected)
+				appParent.stmOut.writeBytes("audio off\n");
                 }catch(IOException exc){}
         }
 	public void btnMerchantActionPerformed(java.awt.event.ActionEvent e)
