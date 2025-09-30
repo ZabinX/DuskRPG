@@ -126,7 +126,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     String strSet = null;
     
     MainFrame frame;
-	BattleFrame frmBattle;
 	MerchantFrame frmMerchant;
 	
 	Graphics g;
@@ -159,7 +158,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			frame = new MainFrame(this);
 			frame.initComponents();
 			frame.setVisible(true);
-			frame.docOutput.insertString(0,"Dusk Client v"+strVersion+" -- https://duskrpg.blogspot.com/\n",null);
+			frame.docGossip.insertString(0,"Dusk Client v"+strVersion+" -- https://duskrpg.blogspot.com/\n",null);
 			addText("You are using Java version "+System.getProperty("java.version")+"\n");
 			frame.txtInput.addKeyListener(this);
 			frame.addComponentListener(this);
@@ -259,7 +258,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			blnConnected = true;
 			hmpEntities = new HashMap<Long, Entity>();
 			frmMerchant = new MerchantFrame(this);
-			frmBattle = new BattleFrame(this);
 			vctEntities = new Vector(0,3);
 			vctMerchantItems = new Vector(0,3);
 			vctSell = new Vector(0,3);
@@ -313,11 +311,11 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	synchronized void addText(String strAdd)
 	{
-		if (frame.docOutput.getLength() > 8000)
+		if (frame.docGossip.getLength() > 8000)
 		{
 			try
 			{
-				frame.docOutput.remove(0,4000);
+				frame.docGossip.remove(0,4000);
 			} catch (BadLocationException e) {}
 		}
 
@@ -330,7 +328,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				// Append text before the match (default color)
 				if (matcher.start() > lastIndex) {
 					String text = strAdd.substring(lastIndex, matcher.start());
-					frame.docOutput.insertString(frame.docOutput.getLength(), text, null);
+					frame.docGossip.insertString(frame.docGossip.getLength(), text, null);
 				}
 				
 				// Append the colored text
@@ -342,11 +340,11 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 					SimpleAttributeSet style = new SimpleAttributeSet();
 					StyleConstants.setForeground(style, new Color(red, green, blue));
-					frame.docOutput.insertString(frame.docOutput.getLength(), text, style);
+					frame.docGossip.insertString(frame.docGossip.getLength(), text, style);
 
 				} catch (NumberFormatException e) {
 					// If parsing fails, just add the raw tag text in default color
-					frame.docOutput.insertString(frame.docOutput.getLength(), matcher.group(0), null);
+					frame.docGossip.insertString(frame.docGossip.getLength(), matcher.group(0), null);
 					System.err.println("Error parsing RGB tag: " + e.getMessage());
 				}
 				
@@ -355,14 +353,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			
 			// Append any remaining text after the last match (default color)
 			if (lastIndex < strAdd.length()) {
-				frame.docOutput.insertString(frame.docOutput.getLength(), strAdd.substring(lastIndex), null);
+				frame.docGossip.insertString(frame.docGossip.getLength(), strAdd.substring(lastIndex), null);
 			}
 
 		} catch (BadLocationException e) {
 			System.err.println(e.toString());
 		}
 
-		JScrollBar sb = frame.scrText.getVerticalScrollBar();
+		JScrollBar sb = frame.scrGossip.getVerticalScrollBar();
 		if (!sb.getValueIsAdjusting())
 		{
 			sb.setValueIsAdjusting(true);
@@ -1009,29 +1007,21 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (31):
 				{
-					if (!frmBattle.isShowing())
-						frmBattle.show();
 					strStore = stmIn.readLine();
-					frmBattle.setTitle(strStore);
-					frmBattle.txtEdit.setText("");
+					frame.txtBattle.setText("");
                     frame.lblTarget.setText("");
                     break;
 				}
 				case (32):
 				{
-					if (!frmBattle.isShowing())
-						frmBattle.show();
 					strStore = stmIn.readLine();
-					frmBattle.setTitle(strStore);
                     frame.lblTarget.setText(strStore);
 					break;
 				}
 				case (33):
 				{
-					if (!frmBattle.isShowing())
-						frmBattle.show();
 					strStore = stmIn.readLine();
-					frmBattle.txtEdit.append(strStore+"\n");
+					frame.txtBattle.append(strStore+"\n");
                     break;
 				}
                 case (34):
@@ -1262,15 +1252,19 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		gD = imgDisplay.getGraphics();
 		g = frame.pnlGraphics.getGraphics();
 		frame.txtInput.setLocation(0,frame.pnlGraphics.getBounds().height);
-		frame.scrText.setLocation(0,frame.pnlGraphics.getBounds().height+25);
-		frame.scrText.setSize(frame.pnlContents.getBounds().width - 200,frame.pnlContents.getBounds().height-frame.pnlGraphics.getBounds().height-25);
-		frame.txtInput.setSize(frame.pnlContents.getBounds().width - 200,25);
+		frame.pnlSouth.setLocation(0,frame.pnlGraphics.getBounds().height+25);
+		frame.pnlSouth.setSize(frame.pnlGraphics.getBounds().width,frame.pnlContents.getBounds().height-frame.pnlGraphics.getBounds().height-25);
+		frame.txtInput.setSize(frame.pnlGraphics.getBounds().width - 160,25);
+		frame.btnGossip.setSize(80, 25);
+		frame.btnBattle.setSize(80, 25);
+		frame.btnGossip.setLocation(frame.pnlGraphics.getBounds().width - 160, frame.pnlGraphics.getBounds().height);
+		frame.btnBattle.setLocation(frame.pnlGraphics.getBounds().width - 80, frame.pnlGraphics.getBounds().height);
 		frame.pnlStats.setSize(frame.pnlContents.getBounds().width-frame.pnlGraphics.getBounds().width,frame.pnlContents.getBounds().height);
 		frame.pnlStats.setLocation(frame.pnlGraphics.getBounds().width,0);
 		frame.txtOther.setSize(frame.pnlStats.getBounds().width-140,frame.pnlStats.getBounds().height-60);
         frame.lblTarget.setSize(frame.pnlStats.getBounds().width, 20);
 		frame.lblInfo.setSize(frame.pnlContents.getBounds().width,20);
-		frame.scrText.getVerticalScrollBar().setValue(frame.scrText.getVerticalScrollBar().getMaximum());
+		frame.scrGossip.getVerticalScrollBar().setValue(frame.scrGossip.getVerticalScrollBar().getMaximum());
 		System.gc();
 	}
 	

@@ -23,58 +23,67 @@ public class MainFrame extends JFrame implements ItemListener
 	JPanel pnlStats = new JPanel();
 	JButton btnMerchant = new JButton();
 	JLabel lblInfo = new JLabel();
-        JLabel lblBookc = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("zbookc.png")));
-        JLabel lblBooke = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("zbooke.png")));
-        JLabel lblBookw = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("zbookw.png")));
-        JLabel lblTarget = new JLabel("Target:");
+    JLabel lblBookc = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("zbookc.png")));
+    JLabel lblBooke = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("zbooke.png")));
+    JLabel lblBookw = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("zbookw.png")));
+    JLabel lblTarget = new JLabel("Target:");
 	JComboBox chcAttack = new JComboBox();
 	JComboBox chcAction = new JComboBox();
 	JComboBox chcLook = new JComboBox();
 	JComboBox chcGet = new JComboBox();
 	JComboBox chcDrop = new JComboBox();
-        JButton btnPotion = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zpotion.png")));
-        JButton btnPotion2 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zpotion2.png")));
-        JButton btnPotion3 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zpotion3.png")));
-        JButton btnPotion4 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zpotion4.png")));
+    JButton btnPotion = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zpotion.png")));
+    JButton btnPotion2 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zpotion2.png")));
+    JButton btnPotion3 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zpotion3.png")));
+    JButton btnPotion4 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zpotion4.png")));
 	JButton btnMend = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiccmend.png")));
-        JButton btnPoison = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiccpoison.png")));
-        JButton btnArmor = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiccarmor.png")));
-        JButton btnBless = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiccbless.png")));
-        JButton btnDrink = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiccdrink.png")));
-        JButton btnFood = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiccfood.png")));
-        JButton btnHeal = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiccheal.png")));
-        JButton btnDetectinvis = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagicedetectinvis.png")));
-        JButton btnInvis = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiceinvis.png")));
-        JButton btnRegenerate = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiceregenerate.png")));
-        JButton btnTerror = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiceterror.png")));
-        JButton btnHarden = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagicwharden.png")));
-        JButton btnEndurance = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagicwendurance.png")));
-        JButton btnCourage = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagicwcourage.png")));
-        JButton btnFear = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zbookw.png")));
-        JButton btnStrength = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagicwstrength.png")));
-        JButton btnWeaken = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zbookw.png")));
-        JButton btnApple = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zapple.png")));
-        JButton btnBeer = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zbeer.png")));
-        JButton btnSandwich = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zsandwich.png")));
-        JButton btnScroll = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zscroll.png")));
-        JButton btnUp = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zup.png")));
-        JButton btnDown = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zdown.png")));
-        JButton btnLeft = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zleft.png")));
-        JButton btnRight = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zright.png")));
-        JScrollPane scrTextOther = new JScrollPane();
+    JButton btnPoison = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiccpoison.png")));
+    JButton btnArmor = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiccarmor.png")));
+    JButton btnBless = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiccbless.png")));
+    JButton btnDrink = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiccdrink.png")));
+    JButton btnFood = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiccfood.png")));
+    JButton btnHeal = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiccheal.png")));
+    JButton btnDetectinvis = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagicedetectinvis.png")));
+    JButton btnInvis = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiceinvis.png")));
+    JButton btnRegenerate = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiceregenerate.png")));
+    JButton btnTerror = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagiceterror.png")));
+    JButton btnHarden = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagicwharden.png")));
+    JButton btnEndurance = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagicwendurance.png")));
+    JButton btnCourage = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagicwcourage.png")));
+    JButton btnFear = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zbookw.png")));
+    JButton btnStrength = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zmagicwstrength.png")));
+    JButton btnWeaken = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zbookw.png")));
+    JButton btnApple = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zapple.png")));
+    JButton btnBeer = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zbeer.png")));
+    JButton btnSandwich = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zsandwich.png")));
+    JButton btnScroll = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zscroll.png")));
+    JButton btnUp = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zup.png")));
+    JButton btnDown = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zdown.png")));
+    JButton btnLeft = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zleft.png")));
+    JButton btnRight = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zright.png")));
+    JScrollPane scrTextOther = new JScrollPane();
 	JTextArea txtOther = new JTextArea();
 	JButton btnQuit = new JButton();
 	JButton btnConnect = new JButton();
 	JButton btnEquipment = new JButton();
-        JButton btnPopupon = new JButton(new ImageIcon(getClass().getClassLoader().getResource("ztick.png")));
-        JButton btnPopupoff = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zcancel.png")));
-        JButton btnSleep = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zsleep.png")));
-        JButton btnWake = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zeye.png")));
+    JButton btnPopupon = new JButton(new ImageIcon(getClass().getClassLoader().getResource("ztick.png")));
+    JButton btnPopupoff = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zcancel.png")));
+    JButton btnSleep = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zsleep.png")));
+    JButton btnWake = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zeye.png")));
 	JPanel pnlGraphics = new JPanel();
 	JTextField txtInput = new JTextField();
-	JTextPane txtOutput = new JTextPane();
-	JScrollPane scrText = new JScrollPane();
-        Document docOutput;
+
+	// New components for the CardLayout-based tab system
+	public JPanel pnlSouth = new JPanel();
+	public CardLayout cardLayout = new CardLayout();
+	public JTextPane txtGossip = new JTextPane();
+	public JTextArea txtBattle = new JTextArea();
+	public JScrollPane scrGossip = new JScrollPane();
+	public JScrollPane scrBattle = new JScrollPane();
+	public JButton btnGossip = new JButton("Gossip");
+	public JButton btnBattle = new JButton("Battle");
+    public Document docGossip;
+
 	EquipmentFrame frmEquipment;
 	ConnectFrame frmConnect;
 	Dusk appParent;
@@ -355,16 +364,20 @@ public class MainFrame extends JFrame implements ItemListener
 		txtInput.setVisible(true);
 		txtInput.setSize(new java.awt.Dimension(640, 25));
 
-		txtOutput.setLocation(new java.awt.Point(1, 1));
-		txtOutput.setVisible(true);
-		txtOutput.setSize(new java.awt.Dimension(638, 118));
-		txtOutput.setEditable(false);
-                docOutput = txtOutput.getDocument();
+		// Set up the new CardLayout panel
+		pnlSouth.setLayout(cardLayout);
+		pnlSouth.setLocation(new java.awt.Point(0, 360));
+		pnlSouth.setSize(new java.awt.Dimension(640, 120));
 
-		scrText.setLocation(new java.awt.Point(0, 360));
-		scrText.setVisible(true);
-		scrText.setSize(new java.awt.Dimension(640, 120));
-		scrText.getViewport().add(txtOutput);
+		txtGossip.setEditable(false);
+		docGossip = txtGossip.getDocument();
+		scrGossip.getViewport().add(txtGossip);
+
+		txtBattle.setEditable(false);
+		scrBattle.getViewport().add(txtBattle);
+		
+		pnlSouth.add(scrGossip, "Gossip");
+		pnlSouth.add(scrBattle, "Battle");
 
 		setLocation(new java.awt.Point(0, 0));
 		setTitle("Dusk");
@@ -373,7 +386,9 @@ public class MainFrame extends JFrame implements ItemListener
 		getContentPane().add(pnlContents, BorderLayout.CENTER);
 		pnlContents.add(pnlGraphics);
 		pnlContents.add(txtInput);
-		pnlContents.add(scrText);
+		pnlContents.add(pnlSouth);
+		pnlContents.add(btnGossip);
+		pnlContents.add(btnBattle);
 		pnlContents.add(pnlStats);
                 
 		chcAttack.addItemListener(this);
@@ -381,6 +396,21 @@ public class MainFrame extends JFrame implements ItemListener
 		chcLook.addItemListener(this);
 		chcGet.addItemListener(this);
 		chcDrop.addItemListener(this);
+
+		// Add ActionListeners for the new tab buttons
+		btnGossip.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				cardLayout.show(pnlSouth, "Gossip");
+			}
+		});
+
+		btnBattle.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				cardLayout.show(pnlSouth, "Battle");
+			}
+		});
 
 		btnPotion.addActionListener(new java.awt.event.ActionListener() {
                         @Override
