@@ -9,7 +9,7 @@ Port=7474
 #WARNING: Make sure this address is followed by a slash!!
 RCAddress=http://127.0.0.1/dusk/rc/somedusk/
 #
-RCName=someduskz
+RCName=somedusk
 #
 #How many connections will you allow to your server (0=infinite):
 MaxConnections=0

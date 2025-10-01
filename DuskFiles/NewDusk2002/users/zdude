@@ -6,9 +6,9 @@ the newbie.
 clan
 none
 x
-100
+102
 y
-100
+113
 audiooff
 nofollow
 race
@@ -38,9 +38,9 @@ wisd
 condition
 nothirst
 1
-1140
+492
 condition
 nohunger
 1
-1140
+492
 .

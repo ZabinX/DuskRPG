@@ -1,84 +1,74 @@
 #To comment, use a pound symbol (#)
 #You cannot put comments in between a preference name and the value.
 #
-# NOTE: PREFS FILE DOES NOT SEEM TO LIKE BLANK LINES
-#              USE AN EMPTY COMMENT FOR SPACING
 #
 #What port will the server run on:
-port
-7474
+Port=7474
 #
 #Where have you stored the game resources:
 #WARNING: Make sure this address is followed by a slash!!
-rcaddress
-http://66.134.60.66/wesowin/newdusk/newrc/
+RCAddress=http://127.0.0.1/dusk/rc/somedusk/
 #
-rcname
-somedusk
+RCName=somedusk
 #
 #How many connections will you allow to your server (0=infinite):
-maxconnections
-0
+MaxConnections=0
 #
-tracker off
+Tracker=false
 #
-trackerport
-7475
+TrackerPort=7401
 #
-name
-New Dusk
+Name=Just Some Dusk
 #
-site
-http://darkstardusk.net/wesowin/newdusk/client.html
+Site=http://127.0.0.1/dusk/client.html
 #
 #How much gp should a pet cost:
-petcost
-100
+PetCost=100
 #
 #Should the game check use line-of-sight
-lineofsight on
+LineOfSight=true
 #
 #Should the game use AI (Artificial Intelligence)
-ai on
+Ai=true
 #
 #Only a player from a given IP address
-uniqueIPFilter on
+UniqueIPFilter=false
 #
 #Should the game tell the client to use music:
 #NOTE:Java applets do not currently support midi, so this feature is useless
-music off
+Music=true
 #
 #What is the image number of merchants and signs?
-merchantimage
-0
-signimage
-1
+merchantimage=0
+SignImage=216
 #
 #How much should it cost to train?
-traincost
-100
+TrainCost=100
 #
 #How much exp should a player win by defeating someone of the exact same strength?
-expgainmod
-15
+ExpGainMod=15
 #
 #How many seconds should it take for mobs to respawn?
-mobrespawnspeed
-300
+MobReSpawnSpeed=200
 #
 #How far should a player be allowed to see?
-viewrange
-5
+ViewRange=8
 #How large can player titles be?
-titlecap
-30
+TitleCap=100
 #How large can player messages be?
-messagecap
-120
+MessageCap=300
 #How fast are mobs allowed to move? (default is 1 second = 1000)
-mobticks
-1000
+MobTicks=200
 #How fast are players allowed to move? (default is 1/4 second = 250)
-playerticks
-250
+PlayerTicks=125
+#Log file name.  Comment out the line to have messages go to standard out.
+LogFileName=log/dusk.txt
+#Level of detail output by game (the higher the number, the more you see).
+#  0(ALWAYS messages)
+#  1(ALWAYS,INFO messages)
+#  2(ALWAYS,INFO,ERROR messages)
+#  3(ALWAYS,INFO,ERROR,VERBOSE messages)
+#  4(ALWAYS,INFO,ERROR,VERBOSE,DEBUG messages)
+#  The level can also be changed in-game with the "loglevel" command.
+LoggingLevel=4
 .

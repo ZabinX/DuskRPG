@@ -6,9 +6,9 @@ the newbie.
 clan
 none
 x
-17
+20
 y
-6
+43
 race
 human
 exp
@@ -36,7 +36,7 @@ wisd
 condition
 nothirst
 1
-442
+347
 condition
 nohunger
 1
