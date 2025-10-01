@@ -101,6 +101,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	Image imgPlayers;
 	Image imgMap;
 	Image imgDisplay;
+	Image imgArmorParticle;
 	
 	Socket sckConnection;
 	DataOutputStream stmOut;
@@ -234,8 +235,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				System.err.println("Error loading location music: " + e.toString());
 			}
 
+			try {
+				imgArmorParticle = new ImageIcon(Dusk.class.getResource("zmagiccarmor.png")).getImage();
+			} catch (Exception e) {
+				System.err.println("Error loading armor particle image: " + e.toString());
+			}
+
 			thrGraphics = new GraphicsThread(this);
-		}catch (Exception e) 
+		}catch (Exception e)
 		{
 		}
 	}
@@ -773,6 +780,22 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                         playerTicks = Long.parseLong(stmIn.readLine());
                     } catch (Exception e) {
                         System.err.println("Error reading playerTicks: " + e.getMessage());
+                    }
+                    break;
+                }
+                case (38):
+                {
+                    try {
+                        long targetID = Long.parseLong(stmIn.readLine());
+                        Entity target;
+                        synchronized(vctEntities) {
+                            target = hmpEntities.get(targetID);
+                        }
+                        if (target != null) {
+                            spawnArmorParticles(target);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error processing armor spell effect: " + e.getMessage());
                     }
                     break;
                 }
@@ -1419,6 +1442,54 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 		}
 	}
+
+	public void spawnArmorParticles(Entity target) {
+		if (target == null || imgArmorParticle == null) return;
+        int shieldWidth = imgArmorParticle.getWidth(null);
+        int shieldHeight = imgArmorParticle.getHeight(null);
+        if (shieldWidth <= 0 || shieldHeight <= 0) {
+            System.err.println("Armor particle image not loaded yet.");
+            return; 
+        }
+
+		synchronized (vctParticles) {
+			double startRadius = intImageSize * 3;
+			double speed = 2.5;
+            double centerX = target.pixelX + (intImageSize / 2.0);
+            double centerY = target.pixelY - (intImageSize / 2.0);
+	
+			int particleCount = 0;
+			for (int i = -1; i <= 1; i++) { // Corresponds to row in the grid
+				for (int j = -1; j <= 1; j++) { // Corresponds to column in the grid
+					double finalX = centerX + (j * shieldWidth);
+					double finalY = centerY + (i * shieldHeight);
+	
+					double angle = (2 * Math.PI / 9) * particleCount;
+					double startX = centerX + startRadius * Math.cos(angle);
+					double startY = centerY + startRadius * Math.sin(angle);
+	
+					double distance = Math.sqrt(Math.pow(finalX - startX, 2) + Math.pow(finalY - startY, 2));
+					int lifetime = (int)(distance / speed);
+					if (lifetime <= 0) lifetime = 1;
+	
+					double vx = (finalX - startX) / lifetime;
+					double vy = (finalY - startY) / lifetime;
+	
+					vctParticles.add(new Particle(
+						startX, startY, vx, vy, lifetime + 15,
+						null, 0, ParticleType.ARMOR, imgArmorParticle, false
+					));
+	
+					vctParticles.add(new Particle(
+						startX, startY, vx, vy, lifetime,
+						Color.YELLOW, 6, ParticleType.ARMOR, null, true
+					));
+	
+					particleCount++;
+				}
+			}
+		}
+	}
 	
 	private void startMove(Entity ent, int direction) {
 		if (direction < 0 || direction > 3) return;
@@ -1733,11 +1804,26 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						double screenX = p.x - cameraX;
 						double screenY = p.y - cameraY;
 						g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, p.alpha));
-						g2d.setColor(p.color);
-
-						// Draw a sparkle
-						int halfSize = p.size / 2;
-						g2d.fillRect((int)screenX - halfSize, (int)screenY - halfSize, p.size, p.size);
+						
+						if (p.image != null) {
+							int imgWidth = p.image.getWidth(null);
+							int imgHeight = p.image.getHeight(null);
+							g2d.drawImage(p.image, (int)screenX - (imgWidth / 2), (int)screenY - (imgHeight / 2), null);
+						} else {
+							g2d.setColor(p.color);
+							if (p.type == ParticleType.ARMOR) { // Electricity
+								int[] xPoints = {0, 4, 12, 6, 15, 9, 0, -9, -15, -6, -12, -4};
+								int[] yPoints = {-15, -6, -12, -4, 0, 4, 12, 6, 15, 9, 0, -6};
+								for(int j = 0; j < xPoints.length; j++) {
+									xPoints[j] += screenX;
+									yPoints[j] += screenY;
+								}
+								g2d.drawPolygon(xPoints, yPoints, xPoints.length);
+							} else { // Default drawing
+								int halfSize = p.size / 2;
+								g2d.fillRect((int)screenX - halfSize, (int)screenY - halfSize, p.size, p.size);
+							}
+						}
 					}
 				}
 				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f)); // Reset composite

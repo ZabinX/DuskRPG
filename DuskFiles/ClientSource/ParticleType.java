@@ -1,4 +1,7 @@
 public enum ParticleType {
     HEAL,
-    BLOOD
+    BLOOD,
+    ARMOR
 }
+
+

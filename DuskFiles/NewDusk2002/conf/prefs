@@ -40,7 +40,7 @@ Music=true
 #
 #What is the image number of merchants and signs?
 merchantimage=0
-SignImage=216
+SignImage=1
 #
 #How much should it cost to train?
 TrainCost=100
@@ -52,15 +52,15 @@ ExpGainMod=15
 MobReSpawnSpeed=200
 #
 #How far should a player be allowed to see?
-ViewRange=8
+ViewRange=5
 #How large can player titles be?
 TitleCap=100
 #How large can player messages be?
 MessageCap=300
 #How fast are mobs allowed to move? (default is 1 second = 1000)
-MobTicks=200
+MobTicks=1000
 #How fast are players allowed to move? (default is 1/4 second = 250)
-PlayerTicks=125
+PlayerTicks=250
 #Log file name.  Comment out the line to have messages go to standard out.
 LogFileName=log/dusk.txt
 #Level of detail output by game (the higher the number, the more you see).

@@ -6,15 +6,15 @@ the newbie.
 clan
 none
 x
-102
+100
 y
-113
+104
 audiooff
 nofollow
 race
 human
 exp
-0
+6
 hp
 20
 maxhp
@@ -38,9 +38,25 @@ wisd
 condition
 nothirst
 1
-492
+239
 condition
 nohunger
 1
-492
+239
+item2
+Cloth Shirt
+3000
+-1
+item2
+Cloth Shirt
+3000
+-1
+item2
+Wooden Dagger
+3000
+-1
+item2
+Wooden Dagger
+3000
+-1
 .

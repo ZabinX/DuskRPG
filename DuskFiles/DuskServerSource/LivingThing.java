@@ -2693,6 +2693,21 @@ public class LivingThing extends DuskObject implements Runnable
 
 	void castSpell(String spell)
 	{
+		if (spell.equalsIgnoreCase("armor")) {
+			int mpCost = 20;
+			if (mp >= mpCost) {
+				mp -= mpCost;
+				if (isPlayer()) {
+					updateInfo();
+					send("" + (char)38 + ID + "\n");
+				}
+				chatMessage("You feel a magical barrier surround you.");
+			} else {
+				chatMessage("You don't have enough mana to cast that spell.");
+			}
+			return;
+		}
+
 		String strStore = "",
 				strStore2 = "";
 		int intStore,
