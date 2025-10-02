@@ -37,10 +37,15 @@ import javax.swing.JScrollBar;
 import javax.swing.UIManager;
 import javax.swing.SwingUtilities;
 import java.awt.AlphaComposite;
+import java.awt.Stroke;
+import java.awt.BasicStroke;
+import java.util.List;
+import java.awt.geom.AffineTransform;
 
 public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListener, ImageObserver
 {
 	static String strVersion="2.7.1.Z47";
+	private int lightningTimer = 0;
 	
     private static final Comparator<Entity> ySortComparator = new Comparator<Entity>() {
         @Override
@@ -236,9 +241,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 
 			try {
-				imgArmorParticle = new ImageIcon(Dusk.class.getResource("zmagiccarmor.png")).getImage();
+				imgArmorParticle = new ImageIcon(Dusk.class.getResource("zmagiccarmor2.png")).getImage();
+				if (imgArmorParticle == null || imgArmorParticle.getWidth(null) <= 0) {
+					System.err.println("Failed to load or invalid armor particle image: zmagiccarmor.png. It might be missing or empty.");
+					imgArmorParticle = null;
+				}
 			} catch (Exception e) {
 				System.err.println("Error loading armor particle image: " + e.toString());
+				imgArmorParticle = null;
 			}
 
 			thrGraphics = new GraphicsThread(this);
@@ -1445,48 +1455,36 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 	public void spawnArmorParticles(Entity target) {
 		if (target == null || imgArmorParticle == null) return;
-        int shieldWidth = imgArmorParticle.getWidth(null);
-        int shieldHeight = imgArmorParticle.getHeight(null);
-        if (shieldWidth <= 0 || shieldHeight <= 0) {
-            System.err.println("Armor particle image not loaded yet.");
-            return; 
-        }
 
 		synchronized (vctParticles) {
-			double startRadius = intImageSize * 3;
+			double startRadius = intImageSize * 3.5;
 			double speed = 2.5;
-            double centerX = target.pixelX + (intImageSize / 2.0);
-            double centerY = target.pixelY - (intImageSize / 2.0);
+			double centerX = target.pixelX + (intImageSize / 2.0);
+			double centerY = target.pixelY - (intImageSize / 2.0);
 	
-			int particleCount = 0;
-			for (int i = -1; i <= 1; i++) { // Corresponds to row in the grid
-				for (int j = -1; j <= 1; j++) { // Corresponds to column in the grid
-					double finalX = centerX + (j * shieldWidth);
-					double finalY = centerY + (i * shieldHeight);
+			// 4 shields in a diamond formation
+			double[] angles = { 0, Math.PI / 2, Math.PI, 3 * Math.PI / 2 };
+			
+			for (int i = 0; i < 4; i++) {
+				double angle = angles[i];
+				double startX = centerX + startRadius * Math.cos(angle);
+				double startY = centerY + startRadius * Math.sin(angle);
 	
-					double angle = (2 * Math.PI / 9) * particleCount;
-					double startX = centerX + startRadius * Math.cos(angle);
-					double startY = centerY + startRadius * Math.sin(angle);
+				double finalX = centerX;
+				double finalY = centerY;
+
+				double distance = Math.sqrt(Math.pow(finalX - startX, 2) + Math.pow(finalY - startY, 2));
+				int lifetime = (int)(distance / speed);
+				if (lifetime <= 0) lifetime = 1;
 	
-					double distance = Math.sqrt(Math.pow(finalX - startX, 2) + Math.pow(finalY - startY, 2));
-					int lifetime = (int)(distance / speed);
-					if (lifetime <= 0) lifetime = 1;
+				double vx = (finalX - startX) / lifetime;
+				double vy = (finalY - startY) / lifetime;
 	
-					double vx = (finalX - startX) / lifetime;
-					double vy = (finalY - startY) / lifetime;
-	
-					vctParticles.add(new Particle(
-						startX, startY, vx, vy, lifetime + 15,
-						null, 0, ParticleType.ARMOR, imgArmorParticle, false
-					));
-	
-					vctParticles.add(new Particle(
-						startX, startY, vx, vy, lifetime,
-						Color.YELLOW, 6, ParticleType.ARMOR, null, true
-					));
-	
-					particleCount++;
-				}
+				Particle shield = new Particle(
+					startX, startY, vx, vy, lifetime + 20,
+					null, 0, ParticleType.ARMOR, imgArmorParticle, false, false, null, null
+				);
+				vctParticles.add(shield);
 			}
 		}
 	}
@@ -1811,15 +1809,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							g2d.drawImage(p.image, (int)screenX - (imgWidth / 2), (int)screenY - (imgHeight / 2), null);
 						} else {
 							g2d.setColor(p.color);
-							if (p.type == ParticleType.ARMOR) { // Electricity
-								int[] xPoints = {0, 4, 12, 6, 15, 9, 0, -9, -15, -6, -12, -4};
-								int[] yPoints = {-15, -6, -12, -4, 0, 4, 12, 6, 15, 9, 0, -6};
-								for(int j = 0; j < xPoints.length; j++) {
-									xPoints[j] += screenX;
-									yPoints[j] += screenY;
+							if (p.type == ParticleType.LIGHTNING) {
+								if (p.parent1 != null && p.parent2 != null) {
+									g2d.setStroke(new BasicStroke(p.size));
+									g2d.drawLine((int)(p.parent1.x - cameraX), (int)(p.parent1.y - cameraY), (int)(p.parent2.x - cameraX), (int)(p.parent2.y - cameraY));
 								}
-								g2d.drawPolygon(xPoints, yPoints, xPoints.length);
-							} else { // Default drawing
+							} else {
 								int halfSize = p.size / 2;
 								g2d.fillRect((int)screenX - halfSize, (int)screenY - halfSize, p.size, p.size);
 							}
@@ -1829,6 +1824,39 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f)); // Reset composite
 			}
 	    }
+
+		// Handle lightning effect for armor spell
+		List<Particle> newLightningParticles = new ArrayList<>();
+		lightningTimer++;
+		if (lightningTimer > 10) { // Every 10 frames, create new lightning
+			lightningTimer = 0;
+			List<Particle> shields = new ArrayList<>();
+			synchronized (vctParticles) {
+				for (Particle p : vctParticles) {
+					if (p.type == ParticleType.ARMOR && !p.isDead()) {
+						shields.add(p);
+					}
+				}
+			}
+
+			if (shields.size() == 4) {
+				// Connect adjacent shields
+				for (int i = 0; i < 4; i++) {
+					Particle p1 = shields.get(i);
+					Particle p2 = shields.get((i + 1) % 4);
+					newLightningParticles.addAll(LightningBolt.create(p1, p2, Color.YELLOW, 15));
+				}
+				// Add a cross connection for more visual flair
+				newLightningParticles.addAll(LightningBolt.create(shields.get(0), shields.get(2), Color.YELLOW, 15));
+				newLightningParticles.addAll(LightningBolt.create(shields.get(1), shields.get(3), Color.YELLOW, 15));
+			}
+		}
+
+		if (!newLightningParticles.isEmpty()) {
+			synchronized (vctParticles) {
+				vctParticles.addAll(newLightningParticles);
+			}
+		}
 	}
 }
 	
