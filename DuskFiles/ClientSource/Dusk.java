@@ -325,6 +325,63 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 		}
 	}
+
+	public void spawnRegenerateParticles(Entity target) {
+		if (target == null) return;
+
+		synchronized (vctParticles) {
+			double centerX = target.pixelX + (intImageSize / 2.0);
+			double feetY = target.pixelY + (intImageSize / 2.0);
+			int circleLifetime = 100;
+
+			// 1. Yellow circle at feet
+			int numCircleParticles = 30;
+			double radius = intImageSize * 0.6;
+			for (int i = 0; i < numCircleParticles; i++) {
+				double angle = (2 * Math.PI / numCircleParticles) * i;
+				double pX = centerX + radius * Math.cos(angle);
+				double pY = feetY + (radius/2) * Math.sin(angle);
+
+				Particle circleParticle = new Particle(
+					pX, pY, 0, 0, circleLifetime,
+					Color.YELLOW, 2, ParticleType.REGENERATE, null, false, false, null, null
+				);
+				vctParticles.add(circleParticle);
+			}
+
+			// 2. Rising orbs
+			int numOrbs = 20;
+			for (int i = 0; i < numOrbs; i++) {
+				double startX = centerX + (Math.random() - 0.5) * (radius * 1.5);
+				double startY = feetY - (Math.random() * 10);
+
+				double vx = (Math.random() - 0.5) * 0.5;
+				double vy = -0.7 - (Math.random() * 0.5);
+				
+				int lifetime = 80 + (int)(Math.random() * 40);
+
+				// Green pulsing particle
+				Particle greenPulse = new Particle(
+					startX, startY, vx, vy, lifetime,
+					new Color(0, 255, 0, 150),
+					6,
+					ParticleType.REGENERATE,
+					null, false, true, null, null
+				);
+				vctParticles.add(greenPulse);
+
+				// Yellow orb particle
+				Particle yellowOrb = new Particle(
+					startX, startY, vx, vy, lifetime,
+					Color.YELLOW,
+					3,
+					ParticleType.REGENERATE,
+					null, false, false, null, null
+				);
+				vctParticles.add(yellowOrb);
+			}
+		}
+	}
 	
 	synchronized void addText(String strAdd)
 	{
@@ -806,6 +863,22 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                         }
                     } catch (Exception e) {
                         System.err.println("Error processing armor spell effect: " + e.getMessage());
+                    }
+                    break;
+                }
+                case (39):
+                {
+                    try {
+                        long targetID = Long.parseLong(stmIn.readLine());
+                        Entity target;
+                        synchronized(vctEntities) {
+                            target = hmpEntities.get(targetID);
+                        }
+                        if (target != null) {
+                            spawnRegenerateParticles(target);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error processing regenerate spell effect: " + e.getMessage());
                     }
                     break;
                 }

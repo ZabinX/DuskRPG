@@ -1154,6 +1154,11 @@ public class Script
 			} else if (strStore.equalsIgnoreCase("stopmusic")) {
 				rafCompile.writeByte(61);
 				return true;
+			} else if (strStore.equalsIgnoreCase("particleeffect")) {
+				rafCompile.writeByte(62);
+				rafCompile.writeBytes(getStringForCompile());
+				rafCompile.writeBytes(parseValueForCompile());
+				return true;
 			}
     	rafCompile.writeBytes(strStore+" ");
         return true;
@@ -2033,6 +2038,16 @@ public class Script
 					}
 					return true;
 				}
+				case 62:
+				{
+					LivingThing thnStore = getLivingThing(getString());
+					int intEffectID = (int)parseValue();
+					if (thnStore != null && thnStore.isPlayer())
+					{
+						thnStore.send("" + (char)intEffectID + thnStore.ID + "\n");
+					}
+					return true;
+				}
 				case 54:
 				{
             		LivingThing thnStore = getLivingThing("trigger");
@@ -2231,4 +2246,3 @@ public class Script
 	    return 0;
 	}
 }
-

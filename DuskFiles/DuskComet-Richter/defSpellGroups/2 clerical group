@@ -8,6 +8,7 @@ if variableisstring param0 #If a target is specified
 		chat caster concat concat "You create a magic shield to surround " name target "."
 		chat target concat name caster "'s magical shield surrounds you."
 		addconditionwithduration target "armor" duration
+		particleeffect target 38
 		endscript
 	end
 	chat caster "You do not see them here."
@@ -17,4 +18,6 @@ end
 #Else no target is specified
 chat caster "Your surround yourself in a magical shield"
 addconditionwithduration caster "armor" duration
+particleeffect caster 38
 endscript
+

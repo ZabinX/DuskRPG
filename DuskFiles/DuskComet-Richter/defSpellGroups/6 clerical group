@@ -28,6 +28,7 @@ if < mp mpNeeded
 	number mpNeeded mp
 end
 inc target hp hpDif
+sendanimation target 2
 inc caster mp * -1 mpNeeded
 #
 # notify them of the change
