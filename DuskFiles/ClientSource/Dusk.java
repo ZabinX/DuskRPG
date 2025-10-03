@@ -1873,7 +1873,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			List<Particle> shields = new ArrayList<>();
 			synchronized (vctParticles) {
 				for (Particle p : vctParticles) {
-					if (p.type == ParticleType.ARMOR && !p.isDead(hmpEntities)) {
+					if (p.type == ParticleType.ARMOR && !p.isDead(hmpEntities, player != null ? player.ID : -1)) {
 						shields.add(p);
 					}
 				}
@@ -1902,6 +1902,11 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	void drawEntity(Entity entStore)
 	{
+		// Don't draw dead entities that are not the player.
+		if (entStore != player && entStore.maxhp > 0 && entStore.hp <= 0) {
+			return;
+		}
+
 		double screenX, screenY;
 		if (entStore == player) {
 			screenX = 10 * intImageSize;
@@ -1915,30 +1920,39 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		{
 			if (entStore.intFlag == 1)
 			{
-                double CurrentHPWidth = (double) intImageSize / intmaxhp;
-                double HPBarValue = CurrentHPWidth * inthp;
+				double CurrentHPWidth = (double) intImageSize / intmaxhp;
+				double HPBarValue = CurrentHPWidth * inthp;
 				gD.setColor(Color.green);
 				gD.drawRoundRect((int)screenX,(int)screenY,
 							intImageSize,intImageSize,intImageSize/3,intImageSize/3);
-			    gD.setColor(new Color(35, 35, 35));
-                gD.fillRect((int)screenX - 1, (int)screenY - 66, (int)(intImageSize) + 2, 12);
-                gD.setColor(new Color(255, 0, 30));
-                gD.fillRect((int)screenX, (int)screenY - 65, (int) HPBarValue, 10);
-            }else if (entStore.intFlag == 2)
+				gD.setColor(new Color(35, 35, 35));
+				gD.fillRect((int)screenX - 1, (int)screenY - 66, (int)(intImageSize) + 2, 7);
+				gD.setColor(new Color(255, 0, 30));
+				gD.fillRect((int)screenX, (int)screenY - 65, (int) HPBarValue, 5);
+			}else if (entStore.intFlag == 2)
 			{
-                if (entStore.maxhp > 0) {
-				double CurrentHPWidth2 = (double) intImageSize / entStore.maxhp;
-                double HPBarValue2 = CurrentHPWidth2 * entStore.hp;
-				gD.setColor(Color.red);
-				gD.drawRoundRect((int)screenX,(int)screenY,
-							intImageSize,intImageSize,intImageSize/3,intImageSize/3);
-			    gD.setColor(new Color(35, 35, 35));
-                gD.fillRect((int)screenX - 1, (int)screenY - 66, (int)(intImageSize) + 2, 12);
-                gD.setColor(new Color(255, 0, 30));
-                gD.fillRect((int)screenX, (int)screenY - 65, (int) HPBarValue2, 10);
-                }
-            }
+				if (entStore.maxhp > 0) {
+					double CurrentHPWidth2 = (double) intImageSize / entStore.maxhp;
+					double HPBarValue2 = CurrentHPWidth2 * entStore.hp;
+					gD.setColor(Color.red);
+					gD.drawRoundRect((int)screenX,(int)screenY,
+								intImageSize,intImageSize,intImageSize/3,intImageSize/3);
+					gD.setColor(new Color(35, 35, 35));
+					gD.fillRect((int)screenX - 1, (int)screenY - 56, (int)(intImageSize) + 2, 7);
+					gD.setColor(new Color(255, 0, 30));
+					gD.fillRect((int)screenX, (int)screenY - 55, (int) HPBarValue2, 5);
+				}
+			}
+		} else if (entStore != player && entStore.maxhp > 0) { // Mob in combat, not yet flagged
+			double CurrentHPWidth2 = (double) intImageSize / entStore.maxhp;
+			double HPBarValue2 = CurrentHPWidth2 * entStore.hp;
+			// No round rect, just HP bar
+			gD.setColor(new Color(35, 35, 35));
+			gD.fillRect((int)screenX - 1, (int)screenY - 16, (int)(intImageSize) + 2, 7);
+			gD.setColor(new Color(255, 0, 30));
+			gD.fillRect((int)screenX, (int)screenY - 15, (int) HPBarValue2, 5);
 		}
+
 
 		if (entStore.intStep == -1)
 		{
@@ -2042,7 +2056,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 	
 				p.update(hmpEntities);
-				if (p.isDead(hmpEntities)) {
+				if (p.isDead(hmpEntities, player != null ? player.ID : -1)) {
 					particleList.removeElementAt(i);
 				} else {
 					double screenX, screenY;

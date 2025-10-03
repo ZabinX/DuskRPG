@@ -41,6 +41,7 @@ public class Entity
     java.util.Queue<Integer> queuedMoves;
     boolean walkFrameToggle;
     int animCounter;
+    boolean inCombat;
     
     public Entity(String instrName, long inID, double inintLocX, double inintLocY,int inImage,int inStep,int inintType)
     {
@@ -53,6 +54,7 @@ public class Entity
     	intType = inintType;
         hp = 0;
         maxhp = 0;
+        inCombat = false;
         
         // Initialize smooth movement fields
         pixelX = intLocX;
@@ -68,4 +70,6 @@ public class Entity
         animCounter = 0;
     }
 }
+
+
 

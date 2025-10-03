@@ -112,14 +112,18 @@ public class Particle {
         }
     }
 
-    public boolean isDead(HashMap<Long, Entity> entities) {
+    public boolean isDead(HashMap<Long, Entity> entities, long playerID) {
         if (parentEntityID != -1 && !entities.containsKey(parentEntityID)) {
+            // If the parent is the player, don't kill the particle, as the
+            // player entity might just be temporarily missing during a map change.
+            if (parentEntityID != playerID) {
+                return true;
+            }
+        }
+        if (parent1 != null && parent1.isDead(entities, playerID)) {
             return true;
         }
-        if (parent1 != null && parent1.isDead(entities)) {
-            return true;
-        }
-        if (parent2 != null && parent2.isDead(entities)) {
+        if (parent2 != null && parent2.isDead(entities, playerID)) {
             return true;
         }
         return lifetime <= 0;
