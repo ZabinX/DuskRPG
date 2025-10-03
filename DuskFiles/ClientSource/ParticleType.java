@@ -3,5 +3,7 @@ public enum ParticleType {
     BLOOD,
     ARMOR,
     LIGHTNING,
-    REGENERATE
+    REGENERATE,
+    REGENERATE_SPAWNER,
+    REGENERATE_CIRCLE
 }

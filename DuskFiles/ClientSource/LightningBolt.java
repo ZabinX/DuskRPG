@@ -38,7 +38,7 @@ public class LightningBolt {
             Particle boltStart = new Particle(
                 start.x + diffX * fraction,
                 start.y + diffY * fraction,
-                0, 0, lifetime, null, 0, null, null, false, false, null, null
+                0, 0, lifetime, null, 0, null, null, false, false, null, null, 0, null
             );
 
             // Calculate the branch's end point, following the C# logic
@@ -57,7 +57,7 @@ public class LightningBolt {
             Particle branchEnd = new Particle(
                 boltStart.x + rotatedBranchVectorX,
                 boltStart.y + rotatedBranchVectorY,
-                0, 0, lifetime / 2, null, 0, ParticleType.LIGHTNING, null, false, false, null, null
+                0, 0, lifetime / 2, null, 0, ParticleType.LIGHTNING, null, false, false, null, null, 0, null
             );
             particleSystem.add(branchEnd);
 
@@ -85,18 +85,21 @@ public class LightningBolt {
                 newY += rand.nextDouble() * 10 - 5;
             }
 
-            Particle p = new Particle(newX, newY, 0, 0, lifetime, color, 1, ParticleType.LIGHTNING, null, false, true, prev, null);
+            Particle p = new Particle(newX, newY, 0, 0, lifetime, color, 1, ParticleType.LIGHTNING, null, false, true, prev, null, 0, null);
             particleSystem.add(p);
             
             // Anchor the middle of the segment
-            Particle mid = new Particle(0,0,0,0, lifetime, color, 1, ParticleType.LIGHTNING, null, true, true, prev, p);
+            Particle mid = new Particle(0,0,0,0, lifetime, color, 1, ParticleType.LIGHTNING, null, true, true, prev, p, 0, null);
             particleSystem.add(mid);
 
             prev = p;
         }
 
         // Connect the last segment to the actual end particle
-        Particle mid = new Particle(0,0,0,0, lifetime, color, 1, ParticleType.LIGHTNING, null, true, true, prev, end);
+        Particle mid = new Particle(0,0,0,0, lifetime, color, 1, ParticleType.LIGHTNING, null, true, true, prev, end, 0, null);
         particleSystem.add(mid);
     }
 }
+
+
+

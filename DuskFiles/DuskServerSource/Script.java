@@ -1159,6 +1159,12 @@ public class Script
 				rafCompile.writeBytes(getStringForCompile());
 				rafCompile.writeBytes(parseValueForCompile());
 				return true;
+			} else if (strStore.equalsIgnoreCase("particleeffectduration")) {
+				rafCompile.writeByte(63);
+				rafCompile.writeBytes(getStringForCompile());
+				rafCompile.writeBytes(parseValueForCompile());
+				rafCompile.writeBytes(parseValueForCompile());
+				return true;
 			}
     	rafCompile.writeBytes(strStore+" ");
         return true;
@@ -2035,6 +2041,17 @@ public class Script
 							engGame.scrOnDeath.varVariables.addVariable("trigger",thnStore);
 							engGame.scrOnDeath.runScript();
 						}
+					}
+					return true;
+				}
+				case 63:
+				{
+					LivingThing thnStore = getLivingThing(getString());
+					int intEffectID = (int)parseValue();
+					int duration = (int)parseValue();
+					if (thnStore != null && thnStore.isPlayer())
+					{
+						thnStore.send("" + (char)intEffectID + thnStore.ID + " " + duration + "\n");
 					}
 					return true;
 				}

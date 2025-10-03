@@ -326,60 +326,36 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 
-	public void spawnRegenerateParticles(Entity target) {
+	public void spawnRegenerateParticles(Entity target, int duration) {
 		if (target == null) return;
+
+		// Duration from script is in server ticks. A server tick is roughly 2 seconds.
+		// A client tick is 40ms. So 2000ms / 40ms = 50 client ticks per server tick.
+		int effectLifetime = duration * 50;
+		if (effectLifetime <= 0) {
+			effectLifetime = 100; // Default lifetime if duration is 0 or invalid
+		}
 
 		synchronized (vctParticles) {
 			double centerX = target.pixelX + (intImageSize / 2.0);
 			double feetY = target.pixelY + (intImageSize / 2.0);
-			int circleLifetime = 100;
+			double circleY = feetY + (intImageSize / 2.0); // Position the circle half a tile below
 
-			// 1. Yellow circle at feet
-			int numCircleParticles = 30;
-			double radius = intImageSize * 0.6;
-			for (int i = 0; i < numCircleParticles; i++) {
-				double angle = (2 * Math.PI / numCircleParticles) * i;
-				double pX = centerX + radius * Math.cos(angle);
-				double pY = feetY + (radius/2) * Math.sin(angle);
+			// 1. Create a single particle to represent the solid circle, parented to the target.
+			Particle circleParticle = new Particle(
+				centerX, circleY, 0, 0, effectLifetime,
+				null, 0, ParticleType.REGENERATE_CIRCLE,
+				null, false, false, null, null, 0, target
+			);
+			vctParticles.add(circleParticle);
 
-				Particle circleParticle = new Particle(
-					pX, pY, 0, 0, circleLifetime,
-					Color.YELLOW, 2, ParticleType.REGENERATE, null, false, false, null, null
-				);
-				vctParticles.add(circleParticle);
-			}
-
-			// 2. Rising orbs
-			int numOrbs = 20;
-			for (int i = 0; i < numOrbs; i++) {
-				double startX = centerX + (Math.random() - 0.5) * (radius * 1.5);
-				double startY = feetY - (Math.random() * 10);
-
-				double vx = (Math.random() - 0.5) * 0.5;
-				double vy = -0.7 - (Math.random() * 0.5);
-				
-				int lifetime = 80 + (int)(Math.random() * 40);
-
-				// Green pulsing particle
-				Particle greenPulse = new Particle(
-					startX, startY, vx, vy, lifetime,
-					new Color(0, 255, 0, 150),
-					6,
-					ParticleType.REGENERATE,
-					null, false, true, null, null
-				);
-				vctParticles.add(greenPulse);
-
-				// Yellow orb particle
-				Particle yellowOrb = new Particle(
-					startX, startY, vx, vy, lifetime,
-					Color.YELLOW,
-					3,
-					ParticleType.REGENERATE,
-					null, false, false, null, null
-				);
-				vctParticles.add(yellowOrb);
-			}
+			// 2. Create the orb spawner at the circle's center, parented to the target.
+			Particle spawner = new Particle(
+				centerX, circleY, 0, 0, effectLifetime,
+				null, 0, ParticleType.REGENERATE_SPAWNER,
+				null, false, false, null, null, 5, target
+			);
+			vctParticles.add(spawner);
 		}
 	}
 	
@@ -869,13 +845,19 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 case (39):
                 {
                     try {
-                        long targetID = Long.parseLong(stmIn.readLine());
+                        String[] parts = stmIn.readLine().split(" ");
+                        long targetID = Long.parseLong(parts[0]);
+                        int duration = 0;
+                        if (parts.length > 1) {
+                            duration = Integer.parseInt(parts[1]);
+                        }
+
                         Entity target;
                         synchronized(vctEntities) {
                             target = hmpEntities.get(targetID);
                         }
                         if (target != null) {
-                            spawnRegenerateParticles(target);
+                            spawnRegenerateParticles(target, duration);
                         }
                     } catch (Exception e) {
                         System.err.println("Error processing regenerate spell effect: " + e.getMessage());
@@ -1555,7 +1537,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 				Particle shield = new Particle(
 					startX, startY, vx, vy, lifetime + 20,
-					null, 0, ParticleType.ARMOR, imgArmorParticle, false, false, null, null
+					null, 0, ParticleType.ARMOR, imgArmorParticle, false, false, null, null, 0
 				);
 				vctParticles.add(shield);
 			}
@@ -1866,21 +1848,73 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 			synchronized (vctParticles) {
 				Graphics2D g2d = (Graphics2D) gD;
+				List<Particle> tempNewParticles = new ArrayList<>();
 				for (int i = vctParticles.size() - 1; i >= 0; i--) {
 					Particle p = vctParticles.elementAt(i);
-					p.update();
-					if (p.isDead()) {
+
+					// Handle regenerate spawner
+					if (p.type == ParticleType.REGENERATE_SPAWNER) {
+						p.timer--;
+						if (p.timer <= 0) {
+							double radius = intImageSize * 0.6;
+							double startX = p.x + (Math.random() - 0.5) * (radius * 1.5);
+							double startY = p.y - (Math.random() * 10);
+							double vx = (Math.random() - 0.5) * 0.5;
+							double vy = -0.7 - (Math.random() * 0.5);
+							int lifetime = 80 + (int)(Math.random() * 40);
+
+							Particle greenPulse = new Particle(
+								startX, startY, vx, vy, lifetime,
+								new Color(0, 255, 0, 150), 6, ParticleType.REGENERATE,
+								null, false, true, null, null, 0
+							);
+							tempNewParticles.add(greenPulse);
+
+							Particle yellowOrb = new Particle(
+								startX, startY, vx, vy, lifetime,
+								Color.YELLOW, 3, ParticleType.REGENERATE,
+								null, false, false, null, null, 0
+							);
+							tempNewParticles.add(yellowOrb);
+
+							p.timer = 5 + (int)(Math.random() * 10); // Next orb in 5-15 frames
+						}
+					}
+
+					p.update(hmpEntities);
+					if (p.isDead(hmpEntities)) {
 						vctParticles.removeElementAt(i);
 					} else {
 						double screenX = p.x - cameraX;
 						double screenY = p.y - cameraY;
 						g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, p.alpha));
-						
-						if (p.image != null) {
+
+						if (p.type == ParticleType.REGENERATE_CIRCLE) {
+							double radius = intImageSize * 0.6;
+							int ovalWidth = (int)(radius * 2);
+							int ovalHeight = (int)(radius);
+
+							int ovalX = (int)(screenX - radius);
+							int ovalY = (int)(screenY - radius / 2);
+
+							Stroke originalStroke = g2d.getStroke();
+							
+							// Draw the thicker green outline
+							g2d.setStroke(new BasicStroke(3));
+							g2d.setColor(Color.GREEN);
+							g2d.drawOval(ovalX, ovalY, ovalWidth, ovalHeight);
+
+							// Draw the thinner yellow inner line
+							g2d.setStroke(new BasicStroke(1));
+							g2d.setColor(Color.YELLOW);
+							g2d.drawOval(ovalX, ovalY, ovalWidth, ovalHeight);
+							
+							g2d.setStroke(originalStroke);
+						} else if (p.image != null) {
 							int imgWidth = p.image.getWidth(null);
 							int imgHeight = p.image.getHeight(null);
 							g2d.drawImage(p.image, (int)screenX - (imgWidth / 2), (int)screenY - (imgHeight / 2), null);
-						} else {
+						} else if (p.color != null) {
 							g2d.setColor(p.color);
 							if (p.type == ParticleType.LIGHTNING) {
 								if (p.parent1 != null && p.parent2 != null) {
@@ -1894,6 +1928,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						}
 					}
 				}
+				if (!tempNewParticles.isEmpty()) {
+					vctParticles.addAll(tempNewParticles);
+				}
 				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f)); // Reset composite
 			}
 	    }
@@ -1906,7 +1943,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			List<Particle> shields = new ArrayList<>();
 			synchronized (vctParticles) {
 				for (Particle p : vctParticles) {
-					if (p.type == ParticleType.ARMOR && !p.isDead()) {
+					if (p.type == ParticleType.ARMOR && !p.isDead(hmpEntities)) {
 						shields.add(p);
 					}
 				}
