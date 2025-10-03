@@ -20,6 +20,8 @@ public class Particle {
     long parentEntityID;
     private double offsetX;
     private double offsetY;
+    boolean renderBehind;
+    boolean lockToScreenCenter;
 
     public Particle(double x, double y, double vx, double vy, int lifetime, Color color, int size, ParticleType type) {
         this(x, y, vx, vy, lifetime, color, size, type, null, false, false, null, null, 0, null);
@@ -34,10 +36,14 @@ public class Particle {
     }
     
     public Particle(double x, double y, double vx, double vy, int lifetime, Color color, int size, ParticleType type, Image image, boolean canWiggle, boolean pulse, Particle p1, Particle p2, int timer) {
-        this(x, y, vx, vy, lifetime, color, size, type, image, canWiggle, pulse, p1, p2, timer, null);
+        this(x, y, vx, vy, lifetime, color, size, type, image, canWiggle, pulse, p1, p2, timer, null, false, false);
     }
 
     public Particle(double x, double y, double vx, double vy, int lifetime, Color color, int size, ParticleType type, Image image, boolean canWiggle, boolean pulse, Particle p1, Particle p2, int timer, Entity parent) {
+        this(x, y, vx, vy, lifetime, color, size, type, image, canWiggle, pulse, p1, p2, timer, parent, false, false);
+    }
+
+    public Particle(double x, double y, double vx, double vy, int lifetime, Color color, int size, ParticleType type, Image image, boolean canWiggle, boolean pulse, Particle p1, Particle p2, int timer, Entity parent, boolean renderBehind, boolean lockToScreenCenter) {
         this.vx = vx;
         this.vy = vy;
         this.lifetime = lifetime;
@@ -52,6 +58,8 @@ public class Particle {
         this.parent1 = p1;
         this.parent2 = p2;
         this.timer = timer;
+        this.renderBehind = renderBehind;
+        this.lockToScreenCenter = lockToScreenCenter;
         
         if (parent != null) {
             this.parentEntityID = parent.ID;
@@ -91,7 +99,12 @@ public class Particle {
 
         if (pulse) {
             float fade = (float)lifetime / initialLifetime;
-            alpha = fade * (0.5f + (float)Math.sin(lifetime * 0.5) * 0.5f);
+            // Combine two sine waves for a more natural, shimmering pulse
+            float sine1 = (float)Math.sin(lifetime * 0.2);  // Slower wave
+            float sine2 = (float)Math.sin(lifetime * 0.7);  // Faster wave
+            float combined = (sine1 + sine2) / 2.0f;      // Average them, result is in [-1, 1]
+            combined = (combined + 1.0f) / 2.0f;          // Normalize to [0, 1]
+            alpha = fade * (0.6f + combined * 0.4f);      // Final alpha between 0.6 and 1.0 (before fade)
         } else {
             if (lifetime < 50) {
                 alpha = lifetime / 50.0f;

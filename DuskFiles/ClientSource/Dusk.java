@@ -54,6 +54,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
         }
     };
     private ArrayList<Entity> sortedEntities;
+    private int regenerateOrbCounter = 0;
 
 	int numSpriteImages,
 	    numPlayerImages,
@@ -98,6 +99,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     Vector<DamageSplat> vctDamageSplats;
     Vector<CrossMarker> vctCrossMarkers;
     Vector<Particle> vctParticles;
+	Vector<Particle> vctParticlesBehind;
     
 	Image imgOriginalSprites;
 	Image imgOriginalPlayers;
@@ -284,6 +286,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
             vctDamageSplats = new Vector<DamageSplat>(0,3);
             vctCrossMarkers = new Vector<CrossMarker>(0,3);
             vctParticles = new Vector<Particle>(0,3);
+            vctParticlesBehind = new Vector<Particle>(0,3);
             sortedEntities = new ArrayList<Entity>();
 		}catch(Exception e)
 		{
@@ -336,25 +339,32 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			effectLifetime = 100; // Default lifetime if duration is 0 or invalid
 		}
 
+		double centerX = target.pixelX + (intImageSize / 2.0);
+		double feetY = target.pixelY + (intImageSize / 2.0);
+		double circleY = feetY; // Position the circle at the player's feet.
+
+		// 1. Create the circle particle and add it to the BEHIND list.
+		Particle circleParticle = new Particle(
+			centerX, circleY, 0, 0, effectLifetime,
+			null, 0, ParticleType.REGENERATE_CIRCLE,
+			null, false, true, null, null, 0, target, // pulse = true
+			true, // renderBehind
+			true  // lockToScreenCenter
+		);
+		synchronized (vctParticlesBehind) {
+			vctParticlesBehind.add(circleParticle);
+		}
+
+		// 2. Create the orb spawner, parented to the target. It will handle creating the orbs.
+		// We can add it to the front list, it's invisible anyway.
+		Particle spawner = new Particle(
+			centerX, circleY, 0, 0, effectLifetime,
+			null, 0, ParticleType.REGENERATE_SPAWNER,
+			null, false, false, null, null, 5, target,
+			false, // renderBehind
+			true   // lockToScreenCenter
+		);
 		synchronized (vctParticles) {
-			double centerX = target.pixelX + (intImageSize / 2.0);
-			double feetY = target.pixelY + (intImageSize / 2.0);
-			double circleY = feetY + (intImageSize / 2.0); // Position the circle half a tile below
-
-			// 1. Create a single particle to represent the solid circle, parented to the target.
-			Particle circleParticle = new Particle(
-				centerX, circleY, 0, 0, effectLifetime,
-				null, 0, ParticleType.REGENERATE_CIRCLE,
-				null, false, false, null, null, 0, target
-			);
-			vctParticles.add(circleParticle);
-
-			// 2. Create the orb spawner at the circle's center, parented to the target.
-			Particle spawner = new Particle(
-				centerX, circleY, 0, 0, effectLifetime,
-				null, 0, ParticleType.REGENERATE_SPAWNER,
-				null, false, false, null, null, 5, target
-			);
 			vctParticles.add(spawner);
 		}
 	}
@@ -516,7 +526,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						while (iter.hasNext())
 						{
 							entStore = iter.next();
-							if (Math.abs(entStore.intLocX - LocX) > viewRangeX || Math.abs(entStore.intLocY - LocY) > viewRangeY)
+							// Don't remove the player entity during a map refresh
+							if (entStore != player && (Math.abs(entStore.intLocX - LocX) > viewRangeX || Math.abs(entStore.intLocY - LocY) > viewRangeY))
 							{
 								iter.remove();
 								hmpEntities.remove(entStore.ID);
@@ -1769,6 +1780,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 			}
 	
+			// Update and draw BEHIND particles
+			updateAndDrawParticles(vctParticlesBehind, (Graphics2D)gD);
+	
                 sortedEntities.clear();
                 sortedEntities.addAll(vctEntities);
                 Collections.sort(sortedEntities, ySortComparator);
@@ -1802,6 +1816,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 			}
 		}
+
+		// Update and draw FRONT particles
+		updateAndDrawParticles(vctParticles, (Graphics2D)gD);
 	    
 	    	Font originalFont = gD.getFont();
 	    	Font boldFont = new Font(originalFont.getName(), Font.BOLD, 16);
@@ -1845,93 +1862,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 					g2d.setStroke(originalStroke); // Restore original stroke
 				}
-			}
-			synchronized (vctParticles) {
-				Graphics2D g2d = (Graphics2D) gD;
-				List<Particle> tempNewParticles = new ArrayList<>();
-				for (int i = vctParticles.size() - 1; i >= 0; i--) {
-					Particle p = vctParticles.elementAt(i);
-
-					// Handle regenerate spawner
-					if (p.type == ParticleType.REGENERATE_SPAWNER) {
-						p.timer--;
-						if (p.timer <= 0) {
-							double radius = intImageSize * 0.6;
-							double startX = p.x + (Math.random() - 0.5) * (radius * 1.5);
-							double startY = p.y - (Math.random() * 10);
-							double vx = (Math.random() - 0.5) * 0.5;
-							double vy = -0.7 - (Math.random() * 0.5);
-							int lifetime = 80 + (int)(Math.random() * 40);
-
-							Particle greenPulse = new Particle(
-								startX, startY, vx, vy, lifetime,
-								new Color(0, 255, 0, 150), 6, ParticleType.REGENERATE,
-								null, false, true, null, null, 0
-							);
-							tempNewParticles.add(greenPulse);
-
-							Particle yellowOrb = new Particle(
-								startX, startY, vx, vy, lifetime,
-								Color.YELLOW, 3, ParticleType.REGENERATE,
-								null, false, false, null, null, 0
-							);
-							tempNewParticles.add(yellowOrb);
-
-							p.timer = 5 + (int)(Math.random() * 10); // Next orb in 5-15 frames
-						}
-					}
-
-					p.update(hmpEntities);
-					if (p.isDead(hmpEntities)) {
-						vctParticles.removeElementAt(i);
-					} else {
-						double screenX = p.x - cameraX;
-						double screenY = p.y - cameraY;
-						g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, p.alpha));
-
-						if (p.type == ParticleType.REGENERATE_CIRCLE) {
-							double radius = intImageSize * 0.6;
-							int ovalWidth = (int)(radius * 2);
-							int ovalHeight = (int)(radius);
-
-							int ovalX = (int)(screenX - radius);
-							int ovalY = (int)(screenY - radius / 2);
-
-							Stroke originalStroke = g2d.getStroke();
-							
-							// Draw the thicker green outline
-							g2d.setStroke(new BasicStroke(3));
-							g2d.setColor(Color.GREEN);
-							g2d.drawOval(ovalX, ovalY, ovalWidth, ovalHeight);
-
-							// Draw the thinner yellow inner line
-							g2d.setStroke(new BasicStroke(1));
-							g2d.setColor(Color.YELLOW);
-							g2d.drawOval(ovalX, ovalY, ovalWidth, ovalHeight);
-							
-							g2d.setStroke(originalStroke);
-						} else if (p.image != null) {
-							int imgWidth = p.image.getWidth(null);
-							int imgHeight = p.image.getHeight(null);
-							g2d.drawImage(p.image, (int)screenX - (imgWidth / 2), (int)screenY - (imgHeight / 2), null);
-						} else if (p.color != null) {
-							g2d.setColor(p.color);
-							if (p.type == ParticleType.LIGHTNING) {
-								if (p.parent1 != null && p.parent2 != null) {
-									g2d.setStroke(new BasicStroke(p.size));
-									g2d.drawLine((int)(p.parent1.x - cameraX), (int)(p.parent1.y - cameraY), (int)(p.parent2.x - cameraX), (int)(p.parent2.y - cameraY));
-								}
-							} else {
-								int halfSize = p.size / 2;
-								g2d.fillRect((int)screenX - halfSize, (int)screenY - halfSize, p.size, p.size);
-							}
-						}
-					}
-				}
-				if (!tempNewParticles.isEmpty()) {
-					vctParticles.addAll(tempNewParticles);
-				}
-				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f)); // Reset composite
 			}
 	    }
 
@@ -2062,5 +1992,125 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	public void paint()
 	{
 		g.drawImage(imgDisplay,0,0,this);
+	}
+
+	private void updateAndDrawParticles(Vector<Particle> particleList, Graphics2D g2d) {
+		synchronized (particleList) {
+			List<Particle> tempNewParticlesFront = new ArrayList<>();
+			List<Particle> tempNewParticlesBehind = new ArrayList<>();
+	
+			for (int i = particleList.size() - 1; i >= 0; i--) {
+				Particle p = particleList.elementAt(i);
+	
+				// Handle regenerate spawner
+				if (p.type == ParticleType.REGENERATE_SPAWNER) {
+					p.timer--;
+					if (p.timer <= 0) {
+						double radius = intImageSize * 0.6;
+						double startX = p.x + (Math.random() - 0.5) * (radius * 1.5);
+						double startY = p.y - (Math.random() * 10);
+						double vx = (Math.random() - 0.5) * 0.5;
+						double vy = -0.7 - (Math.random() * 0.5);
+						int lifetime = 80 + (int)(Math.random() * 40);
+	
+						// Alternate between front and back using the dedicated counter
+						regenerateOrbCounter++;
+						boolean renderBehind = regenerateOrbCounter % 2 == 0;
+	
+						Particle greenPulse = new Particle(
+							startX, startY, vx, vy, lifetime,
+							new Color(0, 255, 0, 150), 8, ParticleType.REGENERATE, // Increased size
+							null, false, true, null, null, 0, null, renderBehind, true
+						);
+	
+						Particle yellowOrb = new Particle(
+							startX, startY, vx, vy, lifetime,
+							Color.YELLOW, 4, ParticleType.REGENERATE, // Increased size
+							null, false, false, null, null, 0, null, renderBehind, true
+						);
+						
+						if (renderBehind) {
+							tempNewParticlesBehind.add(greenPulse);
+							tempNewParticlesBehind.add(yellowOrb);
+						} else {
+							tempNewParticlesFront.add(greenPulse);
+							tempNewParticlesFront.add(yellowOrb);
+						}
+	
+						p.timer = 5 + (int)(Math.random() * 10);
+					}
+				}
+	
+				p.update(hmpEntities);
+				if (p.isDead(hmpEntities)) {
+					particleList.removeElementAt(i);
+				} else {
+					double screenX, screenY;
+					if (p.lockToScreenCenter) {
+						screenX = (frame.pnlGraphics.getWidth() / 2.0) + (p.x - (player.pixelX + intImageSize / 2.0));
+						screenY = (frame.pnlGraphics.getHeight() / 2.0) + (p.y - player.pixelY);
+					} else {
+						screenX = p.x - cameraX;
+						screenY = p.y - cameraY;
+					}
+
+					g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, p.alpha));
+	
+					if (p.type == ParticleType.REGENERATE_CIRCLE) {
+						double radius = intImageSize * 0.6;
+						int ovalWidth = (int)(radius * 2);
+						int ovalHeight = (int)(radius);
+	
+						int ovalX = (int)(screenX - radius);
+						int ovalY = (int)(screenY - radius / 2);
+	
+						Stroke originalStroke = g2d.getStroke();
+						
+						// Apply pulsing alpha to colors
+						Color green = new Color(0, 255, 0, (int)(p.alpha * 255));
+						Color yellow = new Color(255, 255, 0, (int)(p.alpha * 255));
+
+						g2d.setStroke(new BasicStroke(3));
+						g2d.setColor(green);
+						g2d.drawOval(ovalX, ovalY, ovalWidth, ovalHeight);
+						g2d.setStroke(new BasicStroke(1));
+						g2d.setColor(yellow);
+						g2d.drawOval(ovalX, ovalY, ovalWidth, ovalHeight);
+						g2d.setStroke(originalStroke);
+
+					} else if (p.image != null) {
+						int imgWidth = p.image.getWidth(null);
+						int imgHeight = p.image.getHeight(null);
+						g2d.drawImage(p.image, (int)screenX - (imgWidth / 2), (int)screenY - (imgHeight / 2), null);
+					} else if (p.color != null) {
+						g2d.setColor(p.color);
+						if (p.type == ParticleType.LIGHTNING) {
+							if (p.parent1 != null && p.parent2 != null) {
+								g2d.setStroke(new BasicStroke(p.size));
+								g2d.drawLine((int)(p.parent1.x - cameraX), (int)(p.parent1.y - cameraY), (int)(p.parent2.x - cameraX), (int)(p.parent2.y - cameraY));
+							}
+						} else if (p.type == ParticleType.REGENERATE) {
+							int halfSize = p.size / 2;
+							g2d.fillOval((int)screenX - halfSize, (int)screenY - halfSize, p.size, p.size);
+						} else {
+							int halfSize = p.size / 2;
+							g2d.fillRect((int)screenX - halfSize, (int)screenY - halfSize, p.size, p.size);
+						}
+					}
+				}
+			}
+	
+			if (!tempNewParticlesFront.isEmpty()) {
+				synchronized(vctParticles) {
+					vctParticles.addAll(tempNewParticlesFront);
+				}
+			}
+			if (!tempNewParticlesBehind.isEmpty()) {
+				synchronized(vctParticlesBehind) {
+					vctParticlesBehind.addAll(tempNewParticlesBehind);
+				}
+			}
+			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f)); // Reset composite
+		}
 	}
 }
