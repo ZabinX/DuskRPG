@@ -49,14 +49,14 @@ TrainCost=100
 ExpGainMod=15
 #
 #How many seconds should it take for mobs to respawn?
-MobReSpawnSpeed=200
+MobReSpawnSpeed=50
 #
 #How far should a player be allowed to see?
 ViewRangeX=12
 ViewRangeY=7
 #How far should a player be allowed to see entities?
-EntityViewRangeX=12
-EntityViewRangeY=7
+EntityViewRangeX=10
+EntityViewRangeY=5
 #How large can player titles be?
 TitleCap=100
 #How large can player messages be?

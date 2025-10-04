@@ -225,7 +225,7 @@ public class Battle
         {
             if(engGame.battlesound != -1)
                 engGame.playSound(engGame.battlesound, thnAttacked.intLocX,thnAttacked.intLocY);
-            int randomSound = (int)(Math.random() * 37);
+            int randomSound = (int)(Math.random() * 12);
             for (int j=0; j<vctSide1.size(); j++) {
                 LivingThing player = (LivingThing)vctSide1.elementAt(j);
                 if (player.isPlayer()) {
@@ -957,293 +957,287 @@ public class Battle
 			chatMessage("\t"+strStore);
 		}
 		
-		if (thnFront2.hp < 1 || !thnFront2.blnWorking)
-		{
-			vctSide2.removeElementAt(0);
-			thnFront2.clearFlags();
-			for (int i2=0;i2<vctSide1.size();i2++)
-			{
-				thnStore2 = (LivingThing)vctSide1.elementAt(i2);
-				thnStore2.updateFlag(thnFront2.ID,0);
-			}
-			for (int i2=0;i2<vctSide2.size();i2++)
-			{
-				thnStore2 = (LivingThing)vctSide2.elementAt(i2);
-				thnStore2.updateFlag(thnFront2.ID,0);
-			}
-			if (thnFront2.isPlayer())
-			{
-				thnFront2.removeFromGroup();
-				chatMessage("\t"+thnFront2.strName+" is killed.");
-				if (thnFront2.popup)
-				{
-					thnFront2.send(""+(char)33+"\tYou have died.\n");
-				} else
-				{
-					thnFront2.chatMessage("\tYou have died.");
+		// Check for deaths on side 2
+		for (int i2 = vctSide2.size() - 1; i2 >= 0; i2--) {
+			LivingThing thnMember = (LivingThing) vctSide2.elementAt(i2);
+			if (thnMember.hp < 1 || !thnMember.blnWorking) {
+				vctSide2.removeElementAt(i2);
+				thnMember.clearFlags();
+
+				for (int i3 = 0; i3 < vctSide1.size(); i3++) {
+					thnStore2 = (LivingThing) vctSide1.elementAt(i3);
+					thnStore2.updateFlag(thnMember.ID, 0);
 				}
-				splitMoney(thnFront2, (int)(thnFront2.cash*engGame.gplosemod));
-				splitExp(thnFront2, (int)(thnFront2.exp*engGame.explosemod));
-				thnFront2.batBattle = null;
-				thnFront2.bytSide = 0;
-				thnFront2.blnCanMove=true;
-            	thnFront2.updateInfo();
-            	thnFront2.updateStats();
-            	thnFront2.updateActions();
-            	thnFront2.playMusic(0);
-				engGame.chatMessage(thnFront2.strName+" has been killed by "+thnFront1.strName,"default");
-				if (engGame.scrOnDeath != null && thnFront2.blnWorking)
-				{
-					engGame.scrOnDeath.varVariables.clearVariables();
-					engGame.scrOnDeath.varVariables.addVariable("trigger",thnFront2);
-					engGame.scrOnDeath.varVariables.addVariable("killer",thnFront1);
-					engGame.scrOnDeath.runScript();
+				for (int i3 = 0; i3 < vctSide2.size(); i3++) {
+					thnStore2 = (LivingThing) vctSide2.elementAt(i3);
+					thnStore2.updateFlag(thnMember.ID, 0);
 				}
-				if (thnFront2.thnFollowing != null && thnFront2.thnFollowing.isPet())
-				{
-					vctSide2.removeElement(thnFront2.thnFollowing);
-					for (int i2=0;i2<vctSide1.size();i2++)
-					{
-						thnStore2 = (LivingThing)vctSide1.elementAt(i2);
-						thnStore2.updateFlag(thnFront2.thnFollowing.ID,0);
-					}
-					for (int i2=0;i2<vctSide2.size();i2++)
-					{
-						thnStore2 = (LivingThing)vctSide2.elementAt(i2);
-						thnStore2.updateFlag(thnFront2.thnFollowing.ID,0);
-					}
-					thnFront2.thnFollowing.batBattle = null;
-					thnFront2.thnFollowing.bytSide = 0;
-					thnFront2.blnCanMove=true;
-					thnFront2.thnFollowing.lngDamDone = 0;
-					thnFront2.thnFollowing.changeLocBypass(thnFront2.intLocX,thnFront2.intLocY); 
-				}
-			}else if (thnFront2.isMob())
-			{
-				Mob mobStore = (Mob)thnFront2;
-				chatMessage("\t"+thnFront2.strName+" is killed.");
-				splitMoney(thnFront2, (int)(thnFront2.cash));
-				splitExp(thnFront2, 0);
-				if (mobStore.blnOneUse)
-				{
-					engGame.vctMobs.removeElement(mobStore);
-					engGame.removeDuskObject(mobStore);
-				}else
-				{
-					engGame.removeDuskObject(mobStore);
-					mobStore.intLocX = -6;
-					mobStore.intLocY = -6;
-					mobStore.hp = engGame.mobrespawnspeed;//seconds till respawn
-					mobStore.batBattle = null;
-					mobStore.bytSide = 0;
-					mobStore.blnCanMove=true;
-				}
-				for (int i2=0;i2<vctSide1.size();i2++)
-				{
-					thnStore2 = (LivingThing)vctSide1.elementAt(i2);
-					if (!thnStore2.isPet())
-					{
-						try
-						{
-							mobStore.fctFaction.killedBy(mobStore,thnStore2);
-						}catch(Exception e)
-						{
-							engGame.log.printError("Battle.run():While updating faction for mob "+mobStore.strName, e);
+
+				LivingThing thnKiller = thnFront1;
+				if (thnKiller.hp < 1) {
+					for (int i3 = 0; i3 < vctSide1.size(); i3++) {
+						LivingThing thnPotentialKiller = (LivingThing)vctSide1.elementAt(i3);
+						if (thnPotentialKiller.hp >= 1) {
+							thnKiller = thnPotentialKiller;
+							break;
 						}
 					}
 				}
-				if (thnFront1.isPlayer())
-				{
-					GiveItem gitStore;
-					Item itmStore;
-					for (int i2=0;i2<mobStore.vctGiveItems.size();i2++)
-					{
-						gitStore = (GiveItem)mobStore.vctGiveItems.elementAt(i2);
-						if (Math.random() < gitStore.dblProbability)
-						{
-							itmStore = engGame.getItem(gitStore.strItemName);
-							if (itmStore != null)
-							{
-								thnFront1.chatMessage("You got a "+gitStore.strItemName+".");
-								thnFront1.vctItems.addElement(itmStore);
- 								if (itmStore.strOnGetScript != null)
+
+				if (thnMember.isPlayer()) {
+					thnMember.removeFromGroup();
+					chatMessage("\t" + thnMember.strName + " is killed.");
+					if (thnMember.popup) {
+						thnMember.send("" + (char) 33 + "\tYou have died.\n");
+					} else {
+						thnMember.chatMessage("\tYou have died.");
+					}
+					splitMoney(thnMember, (int) (thnMember.cash * engGame.gplosemod));
+					splitExp(thnMember, (int) (thnMember.exp * engGame.explosemod));
+					thnMember.batBattle = null;
+					thnMember.bytSide = 0;
+					thnMember.blnCanMove = true;
+					thnMember.updateInfo();
+					thnMember.updateStats();
+					thnMember.updateActions();
+					thnMember.playMusic(0);
+					if (thnKiller != null) {
+						engGame.chatMessage(thnMember.strName + " has been killed by " + thnKiller.strName, "default");
+						if (engGame.scrOnDeath != null && thnMember.blnWorking) {
+							engGame.scrOnDeath.varVariables.clearVariables();
+							engGame.scrOnDeath.varVariables.addVariable("trigger", thnMember);
+							engGame.scrOnDeath.varVariables.addVariable("killer", thnKiller);
+							engGame.scrOnDeath.runScript();
+						}
+					}
+					if (thnMember.thnFollowing != null && thnMember.thnFollowing.isPet()) {
+						vctSide2.removeElement(thnMember.thnFollowing);
+						for (int i3 = 0; i3 < vctSide1.size(); i3++) {
+							thnStore2 = (LivingThing) vctSide1.elementAt(i3);
+							thnStore2.updateFlag(thnMember.thnFollowing.ID, 0);
+						}
+						for (int i3 = 0; i3 < vctSide2.size(); i3++) {
+							thnStore2 = (LivingThing) vctSide2.elementAt(i3);
+							thnStore2.updateFlag(thnMember.thnFollowing.ID, 0);
+						}
+						thnMember.thnFollowing.batBattle = null;
+						thnMember.thnFollowing.bytSide = 0;
+						thnMember.thnFollowing.blnCanMove = true;
+						thnMember.thnFollowing.lngDamDone = 0;
+						thnMember.thnFollowing.changeLocBypass(thnMember.intLocX, thnMember.intLocY);
+					}
+				} else if (thnMember.isMob()) {
+					Mob mobStore = (Mob) thnMember;
+					chatMessage("\t" + thnMember.strName + " is killed.");
+					splitMoney(thnMember, (int) (thnMember.cash));
+					splitExp(thnMember, 0);
+					if (mobStore.blnOneUse) {
+						engGame.vctMobs.removeElement(mobStore);
+						engGame.removeDuskObject(mobStore);
+					} else {
+						engGame.removeDuskObject(mobStore);
+						mobStore.intLocX = -6;
+						mobStore.intLocY = -6;
+						mobStore.hp = engGame.mobrespawnspeed; //seconds till respawn
+						mobStore.batBattle = null;
+						mobStore.bytSide = 0;
+						mobStore.blnCanMove = true;
+					}
+					for (int i3 = 0; i3 < vctSide1.size(); i3++) {
+						thnStore2 = (LivingThing) vctSide1.elementAt(i3);
+						if (!thnStore2.isPet()) {
+							try {
+								if (mobStore.fctFaction != null)
 								{
-									try
-									{
-										Script scrStore = new Script("scripts/"+itmStore.strOnGetScript,engGame,false);
-										scrStore.varVariables.addVariable("trigger",thnFront1);
-										scrStore.varVariables.addVariable("itemname",itmStore.strName);
-										scrStore.varVariables.addVariable("mod",itmStore.intMod);
-										scrStore.runScript();
-										scrStore.close();
-									}catch(Exception e)
-									{
-										engGame.log.printError("Battle.run():While running onGet script("+itmStore.strOnGetScript+") for item \""+itmStore.strName+"\"", e);
-									}
+									mobStore.fctFaction.killedBy(mobStore, thnStore2);
 								}
-								thnFront1.updateItems();
+							} catch (Exception e) {
+								engGame.log.printError("Battle.run():While updating faction for mob " + mobStore.strName, e);
 							}
 						}
 					}
+					if (thnKiller != null && thnKiller.isPlayer()) {
+						GiveItem gitStore;
+						Item itmStore;
+						for (int i3 = 0; i3 < mobStore.vctGiveItems.size(); i3++) {
+							gitStore = (GiveItem) mobStore.vctGiveItems.elementAt(i3);
+							if (Math.random() < gitStore.dblProbability) {
+								itmStore = engGame.getItem(gitStore.strItemName);
+								if (itmStore != null) {
+									thnKiller.chatMessage("You got a " + gitStore.strItemName + ".");
+									thnKiller.vctItems.addElement(itmStore);
+									if (itmStore.strOnGetScript != null) {
+										try {
+											Script scrStore = new Script("scripts/" + itmStore.strOnGetScript, engGame, false);
+											scrStore.varVariables.addVariable("trigger", thnKiller);
+											scrStore.varVariables.addVariable("itemname", itmStore.strName);
+											scrStore.varVariables.addVariable("mod", itmStore.intMod);
+											scrStore.runScript();
+											scrStore.close();
+										} catch (Exception e) {
+											engGame.log.printError("Battle.run():While running onGet script(" + itmStore.strOnGetScript + ") for item \"" + itmStore.strName + "\"", e);
+										}
+									}
+									thnKiller.updateItems();
+								}
+							}
+						}
+					}
+				} else if (thnMember.isPet()) {
+					chatMessage("\t" + thnMember.strName + " is wounded.");
+					thnMember.chatMessage("\tYou have been wounded.");
+					splitMoney(thnMember, (int) (thnMember.cash * engGame.gplosemod));
+					splitExp(thnMember, (int) (thnMember.exp * engGame.explosemod));
+					thnMember.batBattle = null;
+					thnMember.bytSide = 0;
+					thnMember.blnCanMove = true;
 				}
-			}else if (thnFront2.isPet())
-			{
-				chatMessage("\t"+thnFront2.strName+" is wounded.");
-				thnFront2.chatMessage("\tYou have been wounded.");
-				splitMoney(thnFront2, (int)(thnFront2.cash*engGame.gplosemod));
-				splitExp(thnFront2, (int)(thnFront2.exp*engGame.explosemod));
-				thnFront2.batBattle = null;
-				thnFront2.bytSide = 0;
-				thnFront2.blnCanMove=true;
-			}
-			if (!vctSide2.isEmpty())
-			{
-				thnFront2 = (LivingThing)vctSide2.elementAt(0);
 			}
 		}
-		if (thnFront1.hp < 1 || !thnFront1.blnWorking)
-		{
-			vctSide1.removeElementAt(0);
-			thnFront1.clearFlags();
-			for (int i2=0;i2<vctSide1.size();i2++)
-			{
-				thnStore2 = (LivingThing)vctSide1.elementAt(i2);
-				thnStore2.updateFlag(thnFront1.ID,0);
-			}
-			for (int i2=0;i2<vctSide2.size();i2++)
-			{
-				thnStore2 = (LivingThing)vctSide2.elementAt(i2);
-				thnStore2.updateFlag(thnFront1.ID,0);
-			}
-			if (thnFront1.isPlayer())
-			{
-				thnFront1.removeFromGroup();
-				chatMessage("\t"+thnFront1.strName+" is killed.");
-				if (thnFront1.popup)
-				{
-					thnFront1.send(""+(char)33+"\tYou have died.\n");
-				} else
-				{
-					thnFront1.chatMessage("\tYou have died.");
+		if (!vctSide2.isEmpty()) {
+			thnFront2 = (LivingThing)vctSide2.elementAt(0);
+		}
+
+
+		// Check for deaths on side 1
+		for (int i2 = vctSide1.size() - 1; i2 >= 0; i2--) {
+			LivingThing thnMember = (LivingThing) vctSide1.elementAt(i2);
+			if (thnMember.hp < 1 || !thnMember.blnWorking) {
+				vctSide1.removeElementAt(i2);
+				thnMember.clearFlags();
+
+				for (int i3 = 0; i3 < vctSide1.size(); i3++) {
+					thnStore2 = (LivingThing) vctSide1.elementAt(i3);
+					thnStore2.updateFlag(thnMember.ID, 0);
 				}
-				splitMoney(thnFront1, (int)(thnFront1.cash*engGame.gplosemod));
-				splitExp(thnFront1, (int)(thnFront1.exp*engGame.explosemod));
-				thnFront1.batBattle = null;
-				thnFront1.bytSide = 0;
-				thnFront1.blnCanMove=true;
-            	thnFront1.updateInfo();
-            	thnFront1.updateStats();
-            	thnFront1.updateActions();
-            	thnFront1.playMusic(0);
-				engGame.chatMessage(thnFront1.strName+" has been killed by "+thnFront2.strName,"default");
-				if (engGame.scrOnDeath != null && thnFront1.blnWorking)
-				{
-					engGame.scrOnDeath.varVariables.clearVariables();
-					engGame.scrOnDeath.varVariables.addVariable("trigger",thnFront1);
-					engGame.scrOnDeath.varVariables.addVariable("killer",thnFront2);
-					engGame.scrOnDeath.runScript();
+				for (int i3 = 0; i3 < vctSide2.size(); i3++) {
+					thnStore2 = (LivingThing) vctSide2.elementAt(i3);
+					thnStore2.updateFlag(thnMember.ID, 0);
 				}
-				if (thnFront1.thnFollowing != null && thnFront1.thnFollowing.isPet())
-				{
-					vctSide1.removeElementAt(0);
-					for (int i2=0;i2<vctSide1.size();i2++)
-					{
-						thnStore2 = (LivingThing)vctSide1.elementAt(i2);
-						thnStore2.updateFlag(thnFront1.thnFollowing.ID,0);
-					}
-					for (int i2=0;i2<vctSide2.size();i2++)
-					{
-						thnStore2 = (LivingThing)vctSide2.elementAt(i2);
-						thnStore2.updateFlag(thnFront1.thnFollowing.ID,0);
-					}
-					thnFront1.thnFollowing.batBattle = null;
-					thnFront1.thnFollowing.bytSide = 0;
-					thnFront1.blnCanMove=true;
-					thnFront1.thnFollowing.lngDamDone = 0;
-					thnFront1.thnFollowing.changeLocBypass(thnFront1.intLocX,thnFront1.intLocY);
-				}
-			}else if (thnFront1.isMob())
-			{
-				Mob mobStore = (Mob)thnFront1;
-				chatMessage("\t"+mobStore.strName+" is killed.");
-				splitMoney(thnFront1, (int)(thnFront1.cash));
-				splitExp(thnFront1, 0);
-				if (mobStore.blnOneUse)
-				{
-					engGame.vctMobs.removeElement(mobStore);
-					engGame.removeDuskObject(mobStore);
-				}else
-				{
-					engGame.removeDuskObject(mobStore);
-					mobStore.intLocX = -6;
-					mobStore.intLocY = -6;
-					mobStore.hp = engGame.mobrespawnspeed;//seconds till respawn
-					mobStore.batBattle = null;
-					mobStore.bytSide = 0;
-					mobStore.blnCanMove=true;
-				}
-				for (int i2=0;i2<vctSide2.size();i2++)
-				{
-					thnStore2 = (LivingThing)vctSide2.elementAt(i2);
-					if (!thnStore2.isPet())
-					{
-						try
-						{
-							mobStore.fctFaction.killedBy(mobStore,thnStore2);
-						}catch(Exception e)
-						{
-							engGame.log.printError("Battle.run():While updating faction for mob "+mobStore.strName, e);
+
+				LivingThing thnKiller = thnFront2;
+				if (thnKiller.hp < 1) {
+					for (int i3 = 0; i3 < vctSide2.size(); i3++) {
+						LivingThing thnPotentialKiller = (LivingThing)vctSide2.elementAt(i3);
+						if (thnPotentialKiller.hp >= 1) {
+							thnKiller = thnPotentialKiller;
+							break;
 						}
 					}
 				}
-				if (thnFront2.isPlayer())
-				{
-					GiveItem gitStore;
-					Item itmStore;
-					for (int i2=0;i2<mobStore.vctGiveItems.size();i2++)
-					{
-						gitStore = (GiveItem)mobStore.vctGiveItems.elementAt(i2);
-						if (Math.random() < gitStore.dblProbability)
-						{
-							itmStore = engGame.getItem(gitStore.strItemName);
-							if (itmStore != null)
-							{
-								thnFront2.chatMessage("You got a "+gitStore.strItemName+".");
-								thnFront2.vctItems.addElement(itmStore);
- 								if (itmStore.strOnGetScript != null)
+
+				if (thnMember.isPlayer()) {
+					thnMember.removeFromGroup();
+					chatMessage("\t" + thnMember.strName + " is killed.");
+					if (thnMember.popup) {
+						thnMember.send("" + (char) 33 + "\tYou have died.\n");
+					} else {
+						thnMember.chatMessage("\tYou have died.");
+					}
+					splitMoney(thnMember, (int) (thnMember.cash * engGame.gplosemod));
+					splitExp(thnMember, (int) (thnMember.exp * engGame.explosemod));
+					thnMember.batBattle = null;
+					thnMember.bytSide = 0;
+					thnMember.blnCanMove = true;
+					thnMember.updateInfo();
+					thnMember.updateStats();
+					thnMember.updateActions();
+					thnMember.playMusic(0);
+					if (thnKiller != null) {
+						engGame.chatMessage(thnMember.strName + " has been killed by " + thnKiller.strName, "default");
+						if (engGame.scrOnDeath != null && thnMember.blnWorking) {
+							engGame.scrOnDeath.varVariables.clearVariables();
+							engGame.scrOnDeath.varVariables.addVariable("trigger", thnMember);
+							engGame.scrOnDeath.varVariables.addVariable("killer", thnKiller);
+							engGame.scrOnDeath.runScript();
+						}
+					}
+					if (thnMember.thnFollowing != null && thnMember.thnFollowing.isPet()) {
+						vctSide1.removeElement(thnMember.thnFollowing);
+						for (int i3 = 0; i3 < vctSide1.size(); i3++) {
+							thnStore2 = (LivingThing) vctSide1.elementAt(i3);
+							thnStore2.updateFlag(thnMember.thnFollowing.ID, 0);
+						}
+						for (int i3 = 0; i3 < vctSide2.size(); i3++) {
+							thnStore2 = (LivingThing) vctSide2.elementAt(i3);
+							thnStore2.updateFlag(thnMember.thnFollowing.ID, 0);
+						}
+						thnMember.thnFollowing.batBattle = null;
+						thnMember.thnFollowing.bytSide = 0;
+						thnMember.thnFollowing.blnCanMove = true;
+						thnMember.thnFollowing.lngDamDone = 0;
+						thnMember.thnFollowing.changeLocBypass(thnMember.intLocX, thnMember.intLocY);
+					}
+				} else if (thnMember.isMob()) {
+					Mob mobStore = (Mob) thnMember;
+					chatMessage("\t" + mobStore.strName + " is killed.");
+					splitMoney(thnMember, (int) (thnMember.cash));
+					splitExp(thnMember, 0);
+					if (mobStore.blnOneUse) {
+						engGame.vctMobs.removeElement(mobStore);
+						engGame.removeDuskObject(mobStore);
+					} else {
+						engGame.removeDuskObject(mobStore);
+						mobStore.intLocX = -6;
+						mobStore.intLocY = -6;
+						mobStore.hp = engGame.mobrespawnspeed; //seconds till respawn
+						mobStore.batBattle = null;
+						mobStore.bytSide = 0;
+						mobStore.blnCanMove = true;
+					}
+					for (int i3 = 0; i3 < vctSide2.size(); i3++) {
+						thnStore2 = (LivingThing) vctSide2.elementAt(i3);
+						if (!thnStore2.isPet()) {
+							try {
+								if (mobStore.fctFaction != null)
 								{
-									try
-									{
-										Script scrStore = new Script("scripts/"+itmStore.strOnGetScript,engGame,false);
-										scrStore.varVariables.addVariable("trigger",thnFront2);
-										scrStore.varVariables.addVariable("itemname",itmStore.strName);
-										scrStore.varVariables.addVariable("mod",itmStore.intMod);
-										scrStore.runScript();
-										scrStore.close();
-									}catch(Exception e)
-									{
-										engGame.log.printError("Battle.run():While running onGet script("+itmStore.strOnGetScript+") for item \""+itmStore.strName+"\"", e);
-									}
+									mobStore.fctFaction.killedBy(mobStore, thnStore2);
 								}
-								thnFront2.updateItems();
+							} catch (Exception e) {
+								engGame.log.printError("Battle.run():While updating faction for mob " + mobStore.strName, e);
 							}
 						}
 					}
+					if (thnKiller != null && thnKiller.isPlayer()) {
+						GiveItem gitStore;
+						Item itmStore;
+						for (int i3 = 0; i3 < mobStore.vctGiveItems.size(); i3++) {
+							gitStore = (GiveItem) mobStore.vctGiveItems.elementAt(i3);
+							if (Math.random() < gitStore.dblProbability) {
+								itmStore = engGame.getItem(gitStore.strItemName);
+								if (itmStore != null) {
+									thnKiller.chatMessage("You got a " + gitStore.strItemName + ".");
+									thnKiller.vctItems.addElement(itmStore);
+									if (itmStore.strOnGetScript != null) {
+										try {
+											Script scrStore = new Script("scripts/" + itmStore.strOnGetScript, engGame, false);
+											scrStore.varVariables.addVariable("trigger", thnKiller);
+											scrStore.varVariables.addVariable("itemname", itmStore.strName);
+											scrStore.varVariables.addVariable("mod", itmStore.intMod);
+											scrStore.runScript();
+											scrStore.close();
+										} catch (Exception e) {
+											engGame.log.printError("Battle.run():While running onGet script(" + itmStore.strOnGetScript + ") for item \"" + itmStore.strName + "\"", e);
+										}
+									}
+									thnKiller.updateItems();
+								}
+							}
+						}
+					}
+				} else if (thnMember.isPet()) {
+					chatMessage("\t" + thnMember.strName + " is wounded.");
+					thnMember.chatMessage("\tYou have been wounded.");
+					splitMoney(thnMember, (int) (thnMember.cash * engGame.gplosemod));
+					splitExp(thnMember, (int) (thnMember.exp * engGame.explosemod));
+					thnMember.batBattle = null;
+					thnMember.bytSide = 0;
+					thnMember.blnCanMove = true;
 				}
-			}else if (thnFront1.isPet())
-			{
-				chatMessage("\t"+thnFront1.strName+" is wounded.");
-				thnFront1.chatMessage("\tYou have been wounded.");
-				splitMoney(thnFront1, (int)(thnFront1.cash*engGame.gplosemod));
-				splitExp(thnFront1, (int)(thnFront1.exp*engGame.explosemod));
-				thnFront1.batBattle = null;
-				thnFront1.bytSide = 0;
-				thnFront1.blnCanMove=true;
 			}
-			if (!vctSide1.isEmpty())
-			{
-				thnFront1 = (LivingThing)vctSide1.elementAt(0);
-			}
+		}
+		if (!vctSide1.isEmpty()) {
+			thnFront1 = (LivingThing)vctSide1.elementAt(0);
 		}
 		
 		if (vctSide2.size() == 0 || vctSide1.size() == 0)
