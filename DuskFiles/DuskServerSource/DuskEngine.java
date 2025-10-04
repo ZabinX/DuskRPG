@@ -2940,7 +2940,7 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 				}
 				//End of code submitted by Randall Leeds
 				
-				if (tick%10 == 0)
+				if (tick%5 == 0)
 				{
 					for (i=0;i<vctBattles.size();i++)
 					{
