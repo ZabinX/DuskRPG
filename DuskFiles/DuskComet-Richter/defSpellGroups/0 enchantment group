@@ -8,6 +8,7 @@ if variableisstring param0 #If a target is specified
 		chat caster concat name target "'s eyes become sensitive to invisibility."
 		chat target "Your eyes become sensitive to invisibility."
 		addconditionwithduration target "detect invis" duration
+		particleeffectduration target 40 duration
 		endscript
 	end
 	chat caster "You do not see them here."
@@ -15,4 +16,6 @@ end
 #Else no target is specified
 chat caster "Your eyes become sensitive to invisibility."
 addconditionwithduration caster "detect invis" duration
+particleeffectduration caster 40 duration
 endscript
+

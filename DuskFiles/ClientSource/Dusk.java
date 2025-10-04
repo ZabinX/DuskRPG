@@ -259,6 +259,29 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 
+	public void spawnDetectInvisParticles(Entity target, int duration) {
+		if (target == null) return;
+	
+		int effectLifetime = duration * 50;
+		if (effectLifetime <= 0) {
+			effectLifetime = 100;
+		}
+	
+		double centerX = target.pixelX + (intImageSize / 2.0);
+		double headY = target.pixelY - intImageSize;
+	
+		Particle spawner = new Particle(
+			centerX, headY, 0, 0, effectLifetime,
+			null, 0, ParticleType.DETECT_INVIS_SPAWNER,
+			null, false, false, null, null, 10, target,
+			false,
+			true
+		);
+		synchronized (vctParticles) {
+			vctParticles.add(spawner);
+		}
+	}
+
 	static public void main(String[] args) 
 	{
 		new Dusk();
@@ -872,6 +895,28 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                         }
                     } catch (Exception e) {
                         System.err.println("Error processing regenerate spell effect: " + e.getMessage());
+                    }
+                    break;
+                }
+                case (40):
+                {
+                    try {
+                        String[] parts = stmIn.readLine().split(" ");
+                        long targetID = Long.parseLong(parts[0]);
+                        int duration = 0;
+                        if (parts.length > 1) {
+                            duration = Integer.parseInt(parts[1]);
+                        }
+
+                        Entity target;
+                        synchronized(vctEntities) {
+                            target = hmpEntities.get(targetID);
+                        }
+                        if (target != null) {
+                            spawnDetectInvisParticles(target, duration);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error processing detect invis spell effect: " + e.getMessage());
                     }
                     break;
                 }
@@ -2008,6 +2053,37 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		g.drawImage(imgDisplay,0,0,this);
 	}
 
+	private void createDetectInvisRay(Particle start, Particle end, Color color, int lifetime, List<Particle> particleSystem, boolean lockToCenter) {
+		double dx = end.x - start.x;
+		double dy = end.y - start.y;
+		double dist = Math.sqrt(dx * dx + dy * dy);
+		
+		int numSegments = (int)Math.max(1, dist / 10.0);
+		
+		Particle prev = start;
+		for (int i = 1; i < numSegments; i++) {
+			double fraction = (double)i / numSegments;
+			double newX = start.x + dx * fraction;
+			double newY = start.y + dy * fraction;
+	
+			if (i < numSegments - 1) {
+				newX += Math.random() * 8 - 4;
+				newY += Math.random() * 8 - 4;
+			}
+	
+			Particle p = new Particle(newX, newY, 0, 0, lifetime, color, 1, ParticleType.DETECT_INVIS_RAY, null, false, true, null, null, 0, null, false, lockToCenter);
+			particleSystem.add(p);
+			
+			Particle mid = new Particle(0,0,0,0, lifetime, color, 2, ParticleType.DETECT_INVIS_RAY, null, false, true, prev, p, 0, null, false, lockToCenter);
+			particleSystem.add(mid);
+	
+			prev = p;
+		}
+	
+		Particle mid = new Particle(0,0,0,0, lifetime, color, 2, ParticleType.DETECT_INVIS_RAY, null, false, true, prev, end, 0, null, false, lockToCenter);
+		particleSystem.add(mid);
+	}
+
 	private void updateAndDrawParticles(Vector<Particle> particleList, Graphics2D g2d) {
 		synchronized (particleList) {
 			List<Particle> tempNewParticlesFront = new ArrayList<>();
@@ -2052,6 +2128,36 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						}
 	
 						p.timer = 5 + (int)(Math.random() * 10);
+					}
+				}
+
+				if (p.type == ParticleType.DETECT_INVIS_SPAWNER) {
+					p.timer--;
+					if (p.timer <= 0) {
+						int numRays = 8;
+						float lifeRatio = 1.0f - ((float)p.lifetime / (float)p.initialLifetime);
+						float lengthPulse = (float)Math.sin(lifeRatio * Math.PI * 10);
+						float currentMaxLength = 40 + 30 * (lengthPulse + 1.0f) / 2.0f;
+						double emissionRadius = 12.0;
+				
+						for (int j = 0; j < numRays; j++) {
+							double angle = (j / (double)numRays) * 2 * Math.PI;
+							double rayLength = currentMaxLength * (0.8 + Math.random() * 0.4);
+				
+							double startX = p.x + emissionRadius * Math.cos(angle);
+							double startY = p.y + emissionRadius * Math.sin(angle);
+							Particle startPoint = new Particle(startX, startY, 0, 0, 20, null, 0, null, null, false, false, null, null, 0, null, false, true);
+				
+							Particle endPoint = new Particle(
+								startX + rayLength * Math.cos(angle),
+								startY + rayLength * Math.sin(angle),
+								0, 0, 20, null, 0, null, null, false, false, null, null, 0, null, false, true
+							);
+							tempNewParticlesFront.add(endPoint);
+				
+							createDetectInvisRay(startPoint, endPoint, new Color(255, 255, 100), 20, tempNewParticlesFront, true);
+						}
+						p.timer = 15;
 					}
 				}
 	
@@ -2102,6 +2208,23 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							if (p.parent1 != null && p.parent2 != null) {
 								g2d.setStroke(new BasicStroke(p.size));
 								g2d.drawLine((int)(p.parent1.x - cameraX), (int)(p.parent1.y - cameraY), (int)(p.parent2.x - cameraX), (int)(p.parent2.y - cameraY));
+							}
+						} else if (p.type == ParticleType.DETECT_INVIS_RAY) {
+							if (p.parent1 != null && p.parent2 != null) {
+								double p1sx, p1sy, p2sx, p2sy;
+								if (p.lockToScreenCenter && player != null) {
+									p1sx = (frame.pnlGraphics.getWidth() / 2.0) + (p.parent1.x - (player.pixelX + intImageSize / 2.0));
+									p1sy = (frame.pnlGraphics.getHeight() / 2.0) + (p.parent1.y - player.pixelY);
+									p2sx = (frame.pnlGraphics.getWidth() / 2.0) + (p.parent2.x - (player.pixelX + intImageSize / 2.0));
+									p2sy = (frame.pnlGraphics.getHeight() / 2.0) + (p.parent2.y - player.pixelY);
+								} else {
+									p1sx = p.parent1.x - cameraX;
+									p1sy = p.parent1.y - cameraY;
+									p2sx = p.parent2.x - cameraX;
+									p2sy = p.parent2.y - cameraY;
+								}
+								g2d.setStroke(new BasicStroke(p.size));
+								g2d.drawLine((int)p1sx, (int)p1sy, (int)p2sx, (int)p2sy);
 							}
 						} else if (p.type == ParticleType.REGENERATE) {
 							int halfSize = p.size / 2;
