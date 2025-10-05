@@ -2068,8 +2068,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 			if (i < numSegments - 1) {
 				// Increased deviation for a more erratic, zig-zagging appearance
-				newX += Math.random() * 24 - 12;
-				newY += Math.random() * 24 - 12;
+				newX += Math.random() * 3 - 1;
+				newY += Math.random() * 3 - 1;
 			}
 	
 			Particle p = new Particle(newX, newY, 0, 0, lifetime, color, 1, ParticleType.DETECT_INVIS_RAY, null, false, true, null, null, 0, null, false, lockToCenter);
@@ -2092,6 +2092,11 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 			for (int i = particleList.size() - 1; i >= 0; i--) {
 				Particle p = particleList.elementAt(i);
+	
+				// Always update the particle's position first.
+				// This ensures that any logic that spawns new particles (like the spawners below)
+				// will use the most up-to-date position of its parent, preventing visual detachment.
+				p.update(hmpEntities);
 	
 				// Handle regenerate spawner
 				if (p.type == ParticleType.REGENERATE_SPAWNER) {
@@ -2135,21 +2140,22 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				if (p.type == ParticleType.DETECT_INVIS_SPAWNER) {
 					p.timer--;
 					if (p.timer <= 0) {
-						int numRays = 12;
-						float lifeRatio = 1.0f - ((float)p.lifetime / (float)p.initialLifetime);
-						float lengthPulse = (float)Math.sin(lifeRatio * Math.PI * 10);
-						// Halved the length by changing the divisor from 3.0f to 6.0f
-						float currentMaxLength = (40 + 30 * (lengthPulse + 1.0f) / 2.0f) / 6.0f;
+						// New logic: Rapidly activate a random subset of the 12 fixed ray positions.
+						int numRayPositions = 16;
+						int numRaysToActivate = 12; // Activate 3 rays per tick for a shimmering effect
+						
 						double emissionRadius = 12.0;
-						int rayLifetime = 22; // Reduced lifetime for a faster fade-out
-				
-						for (int j = 0; j < numRays; j++) {
-							double angle = (j / (double)numRays) * 2 * Math.PI;
-							double rayLength = currentMaxLength * (0.8 + Math.random() * 0.4);
-				
+						int rayLifetime = 2 + (int)(Math.random() * 5); // Short, slightly varied lifetime
+						
+						for (int j = 0; j < numRaysToActivate; j++) {
+							// Pick a random ray position index
+							int rayIndex = (int)(Math.random() * numRayPositions);
+							double angle = (rayIndex / (double)numRayPositions) * 2 * Math.PI;
+							
+							double rayLength = 2 + Math.random() * 8; // Short, random length for shimmer
+
 							double startX = p.x + emissionRadius * Math.cos(angle);
 							double startY = p.y + emissionRadius * Math.sin(angle);
-							// The startPoint particle is just a handle, its lifetime doesn't matter much
 							Particle startPoint = new Particle(startX, startY, 0, 0, rayLifetime, null, 0, null);
 				
 							Particle endPoint = new Particle(
@@ -2157,17 +2163,15 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 								startY + rayLength * Math.sin(angle),
 								0, 0, rayLifetime, null, 0, null, null, false, false, null, null, 0, null, false, true
 							);
-							// We add the endpoint to the particle list so it can be tracked if needed, and to ensure it dies properly.
 							tempNewParticlesFront.add(endPoint);
 				
-							// Create the visible ray segments. They will be added to tempNewParticlesFront.
 							createDetectInvisRay(startPoint, endPoint, new Color(255, 255, 100), rayLifetime, tempNewParticlesFront, true);
 						}
-						p.timer = 15; // Respawn new rays every 15 ticks
+						
+						p.timer = 2; // Trigger very rapidly
 					}
 				}
 	
-				p.update(hmpEntities);
 				if (p.isDead(hmpEntities, player != null ? player.ID : -1)) {
 					particleList.removeElementAt(i);
 				} else {
