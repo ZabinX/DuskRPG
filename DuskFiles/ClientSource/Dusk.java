@@ -1963,39 +1963,43 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 		if (entStore.intFlag != 0)
 		{
-			if (entStore.intFlag == 1)
-			{
-				double CurrentHPWidth = (double) intImageSize / intmaxhp;
-				double HPBarValue = CurrentHPWidth * inthp;
-				gD.setColor(Color.green);
-				gD.drawRoundRect((int)screenX,(int)screenY,
-							intImageSize,intImageSize,intImageSize/3,intImageSize/3);
-				gD.setColor(new Color(35, 35, 35));
-				gD.fillRect((int)screenX - 1, (int)screenY - 66, (int)(intImageSize) + 2, 7);
-				gD.setColor(new Color(255, 0, 30));
-				gD.fillRect((int)screenX, (int)screenY - 65, (int) HPBarValue, 5);
-			}else if (entStore.intFlag == 2)
-			{
+			if (entStore.intFlag == 1) { // Ally in combat
 				if (entStore.maxhp > 0) {
-					double CurrentHPWidth2 = (double) intImageSize / entStore.maxhp;
-					double HPBarValue2 = CurrentHPWidth2 * entStore.hp;
+					double hpRatio = (double)entStore.hp / entStore.maxhp;
+					if (hpRatio < 0) hpRatio = 0;
+					if (hpRatio > 1) hpRatio = 1;
+					double hpBarWidth = hpRatio * intImageSize;
+					gD.setColor(Color.green);
+					gD.drawRoundRect((int)screenX, (int)screenY, intImageSize, intImageSize, intImageSize/3, intImageSize/3);
+					gD.setColor(new Color(35, 35, 35));
+					gD.fillRect((int)screenX - 1, (int)screenY - 66, (int)(intImageSize) + 2, 7);
+					gD.setColor(new Color(0, 255, 0));
+					gD.fillRect((int)screenX, (int)screenY - 65, (int)hpBarWidth, 5);
+				}
+			} else if (entStore.intFlag == 2) { // Enemy in combat
+				if (entStore.maxhp > 0) {
+					double hpRatio = (double)entStore.hp / entStore.maxhp;
+					if (hpRatio < 0) hpRatio = 0;
+					if (hpRatio > 1) hpRatio = 1;
+					double hpBarWidth = hpRatio * intImageSize;
 					gD.setColor(Color.red);
-					gD.drawRoundRect((int)screenX,(int)screenY,
-								intImageSize,intImageSize,intImageSize/3,intImageSize/3);
+					gD.drawRoundRect((int)screenX, (int)screenY, intImageSize, intImageSize, intImageSize/3, intImageSize/3);
 					gD.setColor(new Color(35, 35, 35));
 					gD.fillRect((int)screenX - 1, (int)screenY - 56, (int)(intImageSize) + 2, 7);
 					gD.setColor(new Color(255, 0, 30));
-					gD.fillRect((int)screenX, (int)screenY - 55, (int) HPBarValue2, 5);
+					gD.fillRect((int)screenX, (int)screenY - 55, (int)hpBarWidth, 5);
 				}
 			}
-		} else if (entStore != player && entStore.maxhp > 0) { // Mob in combat, not yet flagged
-			double CurrentHPWidth2 = (double) intImageSize / entStore.maxhp;
-			double HPBarValue2 = CurrentHPWidth2 * entStore.hp;
-			// No round rect, just HP bar
+		} else if (entStore != player && entStore.hp < entStore.maxhp && entStore.maxhp > 0) {
+			// Draw HP bar for any damaged entity not in the player's current battle
+			double hpRatio = (double)entStore.hp / entStore.maxhp;
+			if (hpRatio < 0) hpRatio = 0;
+			if (hpRatio > 1) hpRatio = 1;
+			double hpBarWidth = hpRatio * intImageSize;
 			gD.setColor(new Color(35, 35, 35));
 			gD.fillRect((int)screenX - 1, (int)screenY - 16, (int)(intImageSize) + 2, 7);
 			gD.setColor(new Color(255, 0, 30));
-			gD.fillRect((int)screenX, (int)screenY - 15, (int) HPBarValue2, 5);
+			gD.fillRect((int)screenX, (int)screenY - 15, (int)hpBarWidth, 5);
 		}
 
 

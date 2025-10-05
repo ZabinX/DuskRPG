@@ -896,6 +896,41 @@ public class DuskEngine implements Runnable
 			}
 		}
 	}
+
+	public Vector<LivingThing> getPlayersInArea(int intLocX, int intLocY)
+	{
+		Vector<LivingThing> players = new Vector<>();
+		LivingThing thnStore;
+		int i, i2, i3;
+		DuskObject objStore;
+		i = 0;
+		if (intLocX - entityViewrangeX < 0) {
+			i = -1 * (intLocX - entityViewrangeX);
+		}
+		i2 = 0;
+		if (intLocY - entityViewrangeY < 0) {
+			i2 = -1 * (intLocY - entityViewrangeY);
+		}
+		for (; i < 1 + (2 * entityViewrangeX); i++) {
+			if (intLocX + i - entityViewrangeX < MapColumns) {
+				for (i3 = i2; i3 < 1 + (2 * entityViewrangeY); i3++) {
+					if (intLocY + i3 - entityViewrangeY < MapRows) {
+						objStore = objEntities[intLocX + i - entityViewrangeX][intLocY + i3 - entityViewrangeY];
+						while (objStore != null) {
+							if (objStore.isLivingThing()) {
+								thnStore = (LivingThing) objStore;
+								if (thnStore.isPlayer()) {
+									players.addElement(thnStore);
+								}
+							}
+							objStore = objStore.objNext;
+						}
+					}
+				}
+			}
+		}
+		return players;
+	}
 	
 	void chatMessage(String inMessage, String strClan, String strFrom)
 	{
@@ -1078,6 +1113,9 @@ public class DuskEngine implements Runnable
 	        									strResult += thnStore.intImage+"\n";
 	        									strResult += thnStore.intStep+"\n";
 												thnRefresh.send(strResult);
+												if (thnStore.batBattle != null && thnRefresh.batBattle == null) {
+													thnRefresh.updateFlag(thnStore.ID, 2);
+												}
 											}else if (thnStore.isMob())
 											{
 												strResult=(char)4+"";
@@ -1096,6 +1134,9 @@ public class DuskEngine implements Runnable
 	        									strResult += thnStore.intLocY+"\n";
 	        									strResult += thnStore.intImage+"\n";
 												thnRefresh.send(strResult);
+												if (thnStore.batBattle != null && thnRefresh.batBattle == null) {
+													thnRefresh.updateFlag(thnStore.ID, 2);
+												}
 											}else if (thnStore.isPet())
 											{
 												strResult=(char)4+"";

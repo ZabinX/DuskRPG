@@ -2049,9 +2049,12 @@ public class Script
 					LivingThing thnStore = getLivingThing(getString());
 					int intEffectID = (int)parseValue();
 					int duration = (int)parseValue();
-					if (thnStore != null && thnStore.isPlayer())
+					if (thnStore != null)
 					{
-						thnStore.send("" + (char)intEffectID + thnStore.ID + " " + duration + "\n");
+						Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnStore.intLocX, thnStore.intLocY);
+						for (LivingThing player : playersInArea) {
+							player.send("" + (char)intEffectID + thnStore.ID + " " + duration + "\n");
+						}
 					}
 					return true;
 				}
@@ -2059,9 +2062,12 @@ public class Script
 				{
 					LivingThing thnStore = getLivingThing(getString());
 					int intEffectID = (int)parseValue();
-					if (thnStore != null && thnStore.isPlayer())
+					if (thnStore != null)
 					{
-						thnStore.send("" + (char)intEffectID + thnStore.ID + "\n");
+						Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnStore.intLocX, thnStore.intLocY);
+						for (LivingThing player : playersInArea) {
+							player.send("" + (char)intEffectID + thnStore.ID + "\n");
+						}
 					}
 					return true;
 				}

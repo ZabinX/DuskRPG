@@ -138,6 +138,12 @@ public class Battle
 					thnAdded.updateFlag(thnStore.ID,2);
 				}
 			}
+			Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnAdded.intLocX, thnAdded.intLocY);
+			for (LivingThing player : playersInArea) {
+				if (player.batBattle == null) { // If the player is a spectator
+					player.updateFlag(thnAdded.ID, 2);
+				}
+			}
 		}else
 		{
 			if (thnAdded.isPlayer())
@@ -197,6 +203,12 @@ public class Battle
 					thnAdded.updateFlag(thnStore.ID,2);
 				}
 			}
+			Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnAdded.intLocX, thnAdded.intLocY);
+			for (LivingThing player : playersInArea) {
+				if (player.batBattle == null) { // If the player is a spectator
+					player.updateFlag(thnAdded.ID, 2);
+				}
+			}
 		}
 	}
 
@@ -245,17 +257,9 @@ public class Battle
             thnAttacked.hp -= i;
             thnAttacking.lngDamDone += i;
             
-            for (int j=0; j<vctSide1.size(); j++) {
-                LivingThing player = (LivingThing)vctSide1.elementAt(j);
-                if (player.isPlayer()) {
-                    player.sendDamageSplat(thnAttacking.ID, thnAttacked.ID, i);
-                }
-            }
-            for (int j=0; j<vctSide2.size(); j++) {
-                LivingThing player = (LivingThing)vctSide2.elementAt(j);
-                if (player.isPlayer()) {
-                    player.sendDamageSplat(thnAttacking.ID, thnAttacked.ID, i);
-                }
+            Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnAttacked.intLocX, thnAttacked.intLocY);
+            for (LivingThing player : playersInArea) {
+                player.sendDamageSplat(thnAttacking.ID, thnAttacked.ID, i);
             }
 
             thnAttacking.weaponDam(i);
@@ -830,11 +834,9 @@ public class Battle
            			strStore = attack(thnStore,thnTarget, range, strStore);
 				}
 				strStore += ".";
-				for (int j=0; j<vctSide1.size(); j++) {
-					LivingThing player = (LivingThing)vctSide1.elementAt(j);
-					if (player.isPlayer()) {
-						player.updateOpponentHP(thnTarget);
-					}
+				Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnTarget.intLocX, thnTarget.intLocY);
+				for (LivingThing player : playersInArea) {
+					player.updateOpponentHP(thnTarget);
 				}
 			}
 			chatMessage("\t"+strStore);
@@ -947,11 +949,9 @@ public class Battle
            			strStore = attack(thnStore,thnTarget, range, strStore);
 				}
 				strStore += ".";
-				for (int j=0; j<vctSide2.size(); j++) {
-					LivingThing player = (LivingThing)vctSide2.elementAt(j);
-					if (player.isPlayer()) {
-						player.updateOpponentHP(thnTarget);
-					}
+				Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnTarget.intLocX, thnTarget.intLocY);
+				for (LivingThing player : playersInArea) {
+					player.updateOpponentHP(thnTarget);
 				}
 			}
 			chatMessage("\t"+strStore);
