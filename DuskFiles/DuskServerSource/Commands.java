@@ -2850,7 +2850,7 @@ public class Commands
 				lt.castSpell(strArgs);
 			}else
 			{
-				lt.vctCommands.addElement(strArgs);
+				lt.vctCommands.addElement("cast "+strArgs);
 			}
 			return null;
 		}
@@ -3482,5 +3482,3 @@ public class Commands
 		return null;
 	}
 }
-
-
