@@ -20,6 +20,7 @@ if variableisstring param0
             if > limit 9
                 chat target concat name caster "'s magical energies harden your defenses."
                 addconditionwithduration target "harden10" duration
+                particleeffect target 41
                 endscript
             end
             chat caster concat concat "You can improve " name target "'s defenses no more."
@@ -29,6 +30,7 @@ if variableisstring param0
             if > limit 8
                 chat target concat name caster "'s magical energies harden your defenses."
                 addconditionwithduration target "harden9" duration
+                particleeffect target 41
                 endscript
             end
             chat caster concat concat "You can improve " name target "'s defenses no more."
@@ -38,6 +40,7 @@ if variableisstring param0
             if > limit 7
                 chat target concat name caster "'s magical energies harden your defenses."
                 addconditionwithduration target "harden8" duration
+                particleeffect target 41
                 endscript
             end
             chat caster concat concat "You can improve " name target "'s defenses no more."
@@ -47,6 +50,7 @@ if variableisstring param0
             if > limit 6
                 chat target concat name caster "'s magical energies harden your defenses."
                 addconditionwithduration target "harden7" duration
+                particleeffect target 41
                 endscript
             end
             chat caster concat concat "You can improve " name target "'s defenses no more."
@@ -56,6 +60,7 @@ if variableisstring param0
             if > limit 5
                 chat target concat name caster "'s magical energies harden your defenses."
                 addconditionwithduration target "harden6" duration
+                particleeffect target 41
                 endscript
             end
             chat caster concat concat "You can improve " name target "'s defenses no more."
@@ -65,6 +70,7 @@ if variableisstring param0
             if > limit 4
                 chat target concat name caster "'s magical energies harden your defenses."
                 addconditionwithduration target "harden5" duration
+                particleeffect target 41
                 endscript
             end
             chat caster concat concat "You can improve " name target "'s defenses no more."
@@ -74,6 +80,7 @@ if variableisstring param0
             if > limit 3
                 chat target concat name caster "'s magical energies harden your defenses."
                 addconditionwithduration target "harden4" duration
+                particleeffect target 41
                 endscript
             end
             chat caster concat concat "You can improve " name target "'s defenses no more."
@@ -83,6 +90,7 @@ if variableisstring param0
             if > limit 2
                 chat target concat name caster "'s magical energies harden your defenses."
                 addconditionwithduration target "harden3" duration
+                particleeffect target 41
                 endscript
             end
             chat caster concat concat "You can improve " name target "'s defenses no more."
@@ -92,6 +100,7 @@ if variableisstring param0
             if > limit 1
                 chat target concat name caster "'s magical energies harden your defenses."
                 addconditionwithduration target "harden2" duration
+                particleeffect target 41
                 endscript
             end
             chat caster concat concat "You can improve " name target "'s defenses no more."
@@ -99,6 +108,7 @@ if variableisstring param0
         end
         chat target concat name caster "'s magical energies harden your defenses."
         addconditionwithduration target "harden" duration
+        particleeffect target 41
         endscript
     end
     chat caster "You do not see them here."
@@ -117,6 +127,7 @@ if hascondition caster "harden9"
     if > limit 10
         chat caster "You focus on hardening your defenses."
         addconditionwithduration caster "harden10" duration
+        particleeffect caster 41
         endscript
     end
     chat caster "You can harden your defenses no more."
@@ -126,6 +137,7 @@ if hascondition caster "harden8"
     if > limit 9
         chat caster "You focus on hardening your defenses."
         addconditionwithduration caster "harden9" duration
+        particleeffect caster 41
         endscript
     end
     chat caster "You can harden your defenses no more."
@@ -135,6 +147,7 @@ if hascondition caster "harden7"
     if > limit 8
         chat caster "You focus on hardening your defenses."
         addconditionwithduration caster "harden8" duration
+        particleeffect caster 41
         endscript
     end
     chat caster "You can harden your defenses no more."
@@ -144,6 +157,7 @@ if hascondition caster "harden6"
     if > limit 7
         chat caster "You focus on hardening your defenses."
         addconditionwithduration caster "harden7" duration
+        particleeffect caster 41
         endscript
     end
     chat caster "You can harden your defenses no more."
@@ -153,6 +167,7 @@ if hascondition caster "harden5"
     if > limit 6
         chat caster "You focus on hardening your defenses."
         addconditionwithduration caster "harden6" duration
+        particleeffect caster 41
         endscript
     end
     chat caster "You can harden your defenses no more."
@@ -162,6 +177,7 @@ if hascondition caster "harden4"
     if > limit 5
         chat caster "You focus on hardening your defenses."
         addconditionwithduration caster "harden5" duration
+        particleeffect caster 41
         endscript
     end
     chat caster "You can harden your defenses no more."
@@ -171,6 +187,7 @@ if hascondition caster "harden3"
     if > limit 4
         chat caster "You focus on hardening your defenses."
         addconditionwithduration caster "harden4" duration
+        particleeffect caster 41
         endscript
     end
     chat caster "You can harden your defenses no more."
@@ -180,6 +197,7 @@ if hascondition caster "harden2"
     if > limit 3
         chat caster "You focus on hardening your defenses."
         addconditionwithduration caster "harden3" duration
+        particleeffect caster 41
         endscript
     end
     chat caster "You can harden your defenses no more."
@@ -189,6 +207,7 @@ if hascondition caster "harden"
     if > limit 2
         chat caster "You focus on hardening your defenses."
         addconditionwithduration caster "harden2" duration
+        particleeffect caster 41
         endscript
     end
     chat caster "You can harden your defenses no more."
@@ -196,4 +215,5 @@ if hascondition caster "harden"
 end
 chat caster "You focus on hardening your defenses."
 addconditionwithduration caster "harden" duration
+particleeffect caster 41
 endscript

@@ -7,6 +7,7 @@ public class Particle {
     double vx, vy;
     float alpha;
     int lifetime;
+    public int maxLifetime;
     int initialLifetime;
     Color color;
     int size;
@@ -47,6 +48,7 @@ public class Particle {
         this.vx = vx;
         this.vy = vy;
         this.lifetime = lifetime;
+        this.maxLifetime = lifetime;
         this.initialLifetime = lifetime;
         this.color = color;
         this.alpha = 1.0f;
@@ -129,6 +131,3 @@ public class Particle {
         return lifetime <= 0;
     }
 }
-
-
-

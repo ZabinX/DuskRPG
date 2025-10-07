@@ -2,6 +2,7 @@ public enum ParticleType {
     HEAL,
     BLOOD,
     ARMOR,
+    HARDEN,
     LIGHTNING,
     REGENERATE,
     REGENERATE_SPAWNER,

@@ -109,6 +109,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	Image imgMap;
 	Image imgDisplay;
 	Image imgArmorParticle;
+	Image imgHardenParticle;
 	
 	Socket sckConnection;
 	DataOutputStream stmOut;
@@ -253,9 +254,51 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				imgArmorParticle = null;
 			}
 
+			try {
+				imgHardenParticle = new ImageIcon(Dusk.class.getResource("zmagicwharden.png")).getImage();
+				if (imgHardenParticle == null || imgHardenParticle.getWidth(null) <= 0) {
+					System.err.println("Failed to load or invalid harden particle image: zmagicwharden.png. It might be missing or empty.");
+					imgHardenParticle = null;
+				}
+			} catch (Exception e) {
+				System.err.println("Error loading harden particle image: " + e.toString());
+				imgHardenParticle = null;
+			}
+
 			thrGraphics = new GraphicsThread(this);
 		}catch (Exception e)
 		{
+		}
+	}
+
+	public void spawnHardenParticles(Entity target) {
+		if (target == null || imgHardenParticle == null) return;
+	
+		synchronized (vctParticles) {
+			int lifetime = 80; // Duration of the spiral in frames
+			
+			// Spawn two particles on opposite sides
+			for (int i = 0; i < 2; i++) {
+				// The particle's 'timer' field will be used to store its starting angle.
+				// This allows each particle to know its starting position in the circle.
+				int startAngleDeg = i * 180; // 0 and 180 degrees
+
+				// We don't need to set the initial position here, as the update loop
+				// will calculate it based on the angle and radius.
+				// We also set velocity to 0 as it's not used for this animation.
+				Particle shield = new Particle(
+					0, 0, // Initial position (will be updated immediately)
+					0, 0, // Initial velocity (not used)
+					lifetime,
+					null, 0, ParticleType.HARDEN, imgHardenParticle, 
+					false, false, null, null, 
+					startAngleDeg, // Store start angle in timer
+					target,        // Set parent entity
+					false,         // renderBehind
+					false          // lockToScreenCenter
+				);
+				vctParticles.add(shield);
+			}
 		}
 	}
 
@@ -917,6 +960,22 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                         }
                     } catch (Exception e) {
                         System.err.println("Error processing detect invis spell effect: " + e.getMessage());
+                    }
+                    break;
+                }
+                case (41): // Harden spell effect
+                {
+                    try {
+                        long targetID = Long.parseLong(stmIn.readLine());
+                        Entity target;
+                        synchronized(vctEntities) {
+                            target = hmpEntities.get(targetID);
+                        }
+                        if (target != null) {
+                            spawnHardenParticles(target);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error processing harden spell effect: " + e.getMessage());
                     }
                     break;
                 }
@@ -1942,6 +2001,34 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				vctParticles.addAll(newLightningParticles);
 			}
 		}
+
+		// Handle lightning effect for harden spell
+		List<Particle> newHardenLightning = new ArrayList<>();
+		if (lightningTimer > 5) { // Stagger the check slightly from armor
+			List<Particle> rocks = new ArrayList<>();
+			synchronized (vctParticles) {
+				for (Particle p : vctParticles) {
+					if (p.type == ParticleType.HARDEN && !p.isDead(hmpEntities, player != null ? player.ID : -1)) {
+						rocks.add(p);
+					}
+				}
+			}
+
+			if (rocks.size() > 1) {
+				// Connect adjacent rocks
+				for (int i = 0; i < rocks.size() - 1; i++) {
+					Particle p1 = rocks.get(i);
+					Particle p2 = rocks.get(i + 1);
+					newHardenLightning.addAll(LightningBolt.create(p1, p2, new Color(180, 180, 180), 20));
+				}
+			}
+		}
+
+		if (!newHardenLightning.isEmpty()) {
+			synchronized (vctParticles) {
+				vctParticles.addAll(newHardenLightning);
+			}
+		}
 	}
 }
 	
@@ -2101,6 +2188,28 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				// This ensures that any logic that spawns new particles (like the spawners below)
 				// will use the most up-to-date position of its parent, preventing visual detachment.
 				p.update(hmpEntities);
+
+				// Handle HARDEN spiral animation
+				if (p.type == ParticleType.HARDEN) {
+					Entity parent = hmpEntities.get(p.parentEntityID);
+					if (parent != null) {
+						float progress = (float)(p.maxLifetime - p.lifetime) / (float)p.maxLifetime;
+						
+						// Radius shrinks from a starting value to 0
+						double startRadius = intImageSize * 1.5;
+						double currentRadius = (1.0 - progress) * startRadius;
+
+						// Angle rotates a full 360 degrees over the lifetime, plus the initial offset
+						double startAngle = p.timer; // Stored in the timer field
+						double currentAngle = Math.toRadians(startAngle + (progress * 360));
+
+						// Calculate new position around the parent's center
+						double centerX = parent.pixelX + (intImageSize / 2.0);
+						double centerY = parent.pixelY; // Centered on the entity's y-pixel for better visuals
+						p.x = centerX + currentRadius * Math.cos(currentAngle);
+						p.y = centerY + currentRadius * Math.sin(currentAngle);
+					}
+				}
 	
 				// Handle regenerate spawner
 				if (p.type == ParticleType.REGENERATE_SPAWNER) {
