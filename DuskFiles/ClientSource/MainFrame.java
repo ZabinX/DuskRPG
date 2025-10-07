@@ -63,6 +63,15 @@ public class MainFrame extends JFrame implements ItemListener
     JButton btnRight = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zright.png")));
     JButton btnSoundOn = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zsoundOnWhite.png")));
     JButton btnSoundOff = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zsoundOffWhite.png")));
+    JButton btnLightning1 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zthunder1.png")));
+    JButton btnLightning2 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zthunder2.png")));
+    JButton btnLightning3 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zthunder3.png")));
+    JButton btnIce1 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zblizzard1.png")));
+    JButton btnIce2 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zblizzard2.png")));
+    JButton btnIce3 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zblizzard3.png")));
+    JButton btnFire1 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zexplosion1.png")));
+    JButton btnFire2 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zexplosion2.png")));
+    JButton btnFire3 = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zexplosion3.png")));
     JScrollPane scrTextOther = new JScrollPane();
 	JTextArea txtOther = new JTextArea();
 	JButton btnQuit = new JButton();
@@ -143,6 +152,15 @@ public class MainFrame extends JFrame implements ItemListener
                 pnlStats.add(btnRight);
                 pnlStats.add(btnSoundOn);
                 pnlStats.add(btnSoundOff);
+                pnlStats.add(btnLightning1);
+                pnlStats.add(btnLightning2);
+                pnlStats.add(btnLightning3);
+                pnlStats.add(btnIce1);
+                pnlStats.add(btnIce2);
+                pnlStats.add(btnIce3);
+                pnlStats.add(btnFire1);
+                pnlStats.add(btnFire2);
+                pnlStats.add(btnFire3);
 		pnlStats.add(scrTextOther);
 		pnlStats.add(btnQuit);
                 pnlStats.add(btnPopupon);
@@ -299,19 +317,19 @@ public class MainFrame extends JFrame implements ItemListener
 		btnScroll.setVisible(true);
 		btnScroll.setSize(new java.awt.Dimension(32, 32));
                 
-                btnUp.setLocation(new java.awt.Point(42, 466));
+                btnUp.setLocation(new java.awt.Point(242, 466));
 		btnUp.setVisible(true);
 		btnUp.setSize(new java.awt.Dimension(32, 32));
                 
-                btnDown.setLocation(new java.awt.Point(42, 530));
+                btnDown.setLocation(new java.awt.Point(242, 530));
 		btnDown.setVisible(true);
 		btnDown.setSize(new java.awt.Dimension(32, 32));
                 
-                btnLeft.setLocation(new java.awt.Point(10, 498));
+                btnLeft.setLocation(new java.awt.Point(210, 498));
 		btnLeft.setVisible(true);
 		btnLeft.setSize(new java.awt.Dimension(32, 32));
                 
-                btnRight.setLocation(new java.awt.Point(74, 498));
+                btnRight.setLocation(new java.awt.Point(274, 498));
 		btnRight.setVisible(true);
 		btnRight.setSize(new java.awt.Dimension(32, 32));
                 
@@ -323,9 +341,45 @@ public class MainFrame extends JFrame implements ItemListener
 		btnSoundOff.setVisible(true);
 		btnSoundOff.setSize(new java.awt.Dimension(30, 30));
                 
+                btnLightning1.setLocation(new java.awt.Point(42, 539));
+		btnLightning1.setVisible(true);
+		btnLightning1.setSize(new java.awt.Dimension(32, 32));
+                
+                btnLightning2.setLocation(new java.awt.Point(79, 539));
+		btnLightning2.setVisible(true);
+		btnLightning2.setSize(new java.awt.Dimension(32, 32));
+                
+                btnLightning3.setLocation(new java.awt.Point(116, 539));
+		btnLightning3.setVisible(true);
+		btnLightning3.setSize(new java.awt.Dimension(32, 32));
+                
+                btnIce1.setLocation(new java.awt.Point(42, 502));
+		btnIce1.setVisible(true);
+		btnIce1.setSize(new java.awt.Dimension(32, 32));
+                
+                btnIce2.setLocation(new java.awt.Point(79, 502));
+		btnIce2.setVisible(true);
+		btnIce2.setSize(new java.awt.Dimension(32, 32));
+                
+                btnIce3.setLocation(new java.awt.Point(116, 502));
+		btnIce3.setVisible(true);
+		btnIce3.setSize(new java.awt.Dimension(32, 32));
+                
+                btnFire1.setLocation(new java.awt.Point(42, 465));
+		btnFire1.setVisible(true);
+		btnFire1.setSize(new java.awt.Dimension(32, 32));
+                
+                btnFire2.setLocation(new java.awt.Point(79, 465));
+		btnFire2.setVisible(true);
+		btnFire2.setSize(new java.awt.Dimension(32, 32));
+                
+                btnFire3.setLocation(new java.awt.Point(116, 465));
+		btnFire3.setVisible(true);
+		btnFire3.setSize(new java.awt.Dimension(32, 32));
+                
 		scrTextOther.setLocation(new java.awt.Point(170, 60));
 		scrTextOther.setVisible(true);
-		scrTextOther.setSize(new java.awt.Dimension(150, 480));
+		scrTextOther.setSize(new java.awt.Dimension(150, 380));
 		scrTextOther.getViewport().add(txtOther);
 
 		txtOther.setVisible(true);
@@ -608,6 +662,60 @@ public class MainFrame extends JFrame implements ItemListener
                         @Override
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				btnSoundOffActionPerformed(e);
+			}
+		});
+                btnLightning1.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				btnLightning1ActionPerformed(e);
+			}
+		});
+                btnLightning2.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				btnLightning2ActionPerformed(e);
+			}
+		});
+                btnLightning3.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				btnLightning3ActionPerformed(e);
+			}
+		});
+                btnIce1.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				btnIce1ActionPerformed(e);
+			}
+		});
+                btnIce2.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				btnIce2ActionPerformed(e);
+			}
+		});
+                btnIce3.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				btnIce3ActionPerformed(e);
+			}
+		});
+                btnFire1.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				btnFire1ActionPerformed(e);
+			}
+		});
+                btnFire2.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				btnFire2ActionPerformed(e);
+			}
+		});
+                btnFire3.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				btnFire3ActionPerformed(e);
 			}
 		});
                 btnMerchant.addActionListener(new java.awt.event.ActionListener() {
@@ -937,6 +1045,78 @@ public class MainFrame extends JFrame implements ItemListener
 		{
 			if (appParent.blnConnected)
 				appParent.stmOut.writeBytes("audio off\n");
+                }catch(IOException exc){}
+        }
+        public void btnLightning1ActionPerformed(java.awt.event.ActionEvent e)
+	{
+		try
+		{
+			if (appParent.blnConnected)
+				appParent.stmOut.writeBytes("cast shock\n");
+                }catch(IOException exc){}
+        }
+        public void btnLightning2ActionPerformed(java.awt.event.ActionEvent e)
+	{
+		try
+		{
+			if (appParent.blnConnected)
+				appParent.stmOut.writeBytes("cast ball lightning\n");
+                }catch(IOException exc){}
+        }
+        public void btnLightning3ActionPerformed(java.awt.event.ActionEvent e)
+	{
+		try
+		{
+			if (appParent.blnConnected)
+				appParent.stmOut.writeBytes("cast thor\n");
+                }catch(IOException exc){}
+        }
+        public void btnIce1ActionPerformed(java.awt.event.ActionEvent e)
+	{
+		try
+		{
+			if (appParent.blnConnected)
+				appParent.stmOut.writeBytes("cast ice shield\n");
+                }catch(IOException exc){}
+        }
+        public void btnIce2ActionPerformed(java.awt.event.ActionEvent e)
+	{
+		try
+		{
+			if (appParent.blnConnected)
+				appParent.stmOut.writeBytes("cast freeze\n");
+                }catch(IOException exc){}
+        }
+        public void btnIce3ActionPerformed(java.awt.event.ActionEvent e)
+	{
+		try
+		{
+			if (appParent.blnConnected)
+				appParent.stmOut.writeBytes("cast ice bolt\n");
+                }catch(IOException exc){}
+        }
+        public void btnFire1ActionPerformed(java.awt.event.ActionEvent e)
+	{
+		try
+		{
+			if (appParent.blnConnected)
+				appParent.stmOut.writeBytes("cast fire shield\n");
+                }catch(IOException exc){}
+        }
+        public void btnFire2ActionPerformed(java.awt.event.ActionEvent e)
+	{
+		try
+		{
+			if (appParent.blnConnected)
+				appParent.stmOut.writeBytes("cast burn\n");
+                }catch(IOException exc){}
+        }
+        public void btnFire3ActionPerformed(java.awt.event.ActionEvent e)
+	{
+		try
+		{
+			if (appParent.blnConnected)
+				appParent.stmOut.writeBytes("cast fire bolt\n");
                 }catch(IOException exc){}
         }
 	public void btnMerchantActionPerformed(java.awt.event.ActionEvent e)
