@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dusk JS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="main-container">
+        <!-- Left Panel (Game and Logs) -->
+        <div id="left-panel">
+            <canvas id="game-canvas"></canvas>
+            <div id="bottom-panel">
+                <div id="log-tabs">
+                    <div class="tab active" id="tab-gossip">Gossip</div>
+                    <div class="tab" id="tab-battle">Battle</div>
+                </div>
+                <div id="log-container">
+                    <!-- Log messages will be appended here -->
+                </div>
+                <div id="input-area">
+                    <input type="text" id="text-input" placeholder="Enter command...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel (Stats and Actions) -->
+        <div id="right-panel">
+            <div class="stats-group">
+                <h3>Player Info</h3>
+                <div class="info-label" id="info-hp">HP: --/--</div>
+                <div class="info-label" id="info-mp">MP: --/--</div>
+                <div class="info-label" id="info-loc">Loc: --/--</div>
+            </div>
+
+            <div class="stats-group">
+                <h3>Actions</h3>
+                <select class="action-select" id="select-look">
+                    <option>Look</option>
+                </select>
+                <select class="action-select" id="select-get">
+                    <option>Get</option>
+                </select>
+                <select class="action-select" id="select-attack">
+                    <option>Attack</option>
+                </select>
+                <select class="action-select" id="select-action">
+                    <option>Action</option>
+                </select>
+                 <select class="action-select" id="select-drop">
+                    <option>Drop</option>
+                </select>
+            </div>
+
+            <div class="stats-group">
+                <h3>Controls</h3>
+                <div class="button-grid">
+                    <div class="action-button" id="btn-equipment">Equipment</div>
+                    <div class="action-button" id="btn-merchant">Merchant</div>
+                    <div class="action-button" id="btn-connect">Connect</div>
+                    <div class="action-button" id="btn-quit">Quit</div>
+                </div>
+            </div>
+            
+            <div class="stats-group">
+                <h3>Potions</h3>
+                 <div id="potion-buttons">
+                    <div class="potion-button" id="btn-potion1"></div>
+                    <div class="potion-button" id="btn-potion2"></div>
+                    <div class="potion-button" id="btn-potion3"></div>
+                    <div class="potion-button" id="btn-potion4"></div>
+                </div>
+            </div>
+            
+             <div class="stats-group">
+                <h3 id="target-label">Target: ---</h3>
+                <div id="other-stats-container" style="height: 150px; background: #333; border: 1px solid #444; overflow-y: auto; padding: 5px;">
+                    <!-- Other stats text goes here -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
