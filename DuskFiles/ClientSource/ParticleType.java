@@ -4,6 +4,7 @@ public enum ParticleType {
     ARMOR,
     HARDEN,
     LIGHTNING,
+    SHOCK,
     REGENERATE,
     REGENERATE_SPAWNER,
     REGENERATE_CIRCLE,

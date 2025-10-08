@@ -9,14 +9,18 @@ public class LightningBolt {
     private static final Random rand = new Random();
 
     public static List<Particle> create(Particle start, Particle end, Color color, int lifetime) {
+        return create(start, end, color, lifetime, ParticleType.LIGHTNING);
+    }
+
+    public static List<Particle> create(Particle start, Particle end, Color color, int lifetime, ParticleType type) {
         List<Particle> newParticles = new ArrayList<>();
-        createBranchingLightning(start, end, color, lifetime, newParticles);
+        createBranchingLightning(start, end, color, lifetime, newParticles, type);
         return newParticles;
     }
 
-    private static void createBranchingLightning(Particle start, Particle end, Color color, int lifetime, List<Particle> particleSystem) {
+    private static void createBranchingLightning(Particle start, Particle end, Color color, int lifetime, List<Particle> particleSystem, ParticleType type) {
         // Create the main bolt, which also adds its particles to the particleSystem
-        createBolt(start, end, color, lifetime, 10, particleSystem);
+        createBolt(start, end, color, lifetime, 10, particleSystem, type);
 
         double diffX = end.x - start.x;
         double diffY = end.y - start.y;
@@ -57,16 +61,16 @@ public class LightningBolt {
             Particle branchEnd = new Particle(
                 boltStart.x + rotatedBranchVectorX,
                 boltStart.y + rotatedBranchVectorY,
-                0, 0, lifetime / 2, null, 0, ParticleType.LIGHTNING, null, false, false, null, null, 0, null
+                0, 0, lifetime / 2, null, 0, type, null, false, false, null, null, 0, null
             );
             particleSystem.add(branchEnd);
 
             // Create the actual bolt for the branch
-            createBolt(boltStart, branchEnd, color, lifetime / 2, 5, particleSystem);
+            createBolt(boltStart, branchEnd, color, lifetime / 2, 5, particleSystem, type);
         }
     }
 
-    private static void createBolt(Particle start, Particle end, Color color, int lifetime, double maxSegmentLength, List<Particle> particleSystem) {
+    private static void createBolt(Particle start, Particle end, Color color, int lifetime, double maxSegmentLength, List<Particle> particleSystem, ParticleType type) {
         double dx = end.x - start.x;
         double dy = end.y - start.y;
         double dist = Math.sqrt(dx * dx + dy * dy);
@@ -85,21 +89,18 @@ public class LightningBolt {
                 newY += rand.nextDouble() * 10 - 5;
             }
 
-            Particle p = new Particle(newX, newY, 0, 0, lifetime, color, 1, ParticleType.LIGHTNING, null, false, true, prev, null, 0, null);
+            Particle p = new Particle(newX, newY, 0, 0, lifetime, color, 1, type, null, false, true, prev, null, 0, null);
             particleSystem.add(p);
             
             // Anchor the middle of the segment
-            Particle mid = new Particle(0,0,0,0, lifetime, color, 1, ParticleType.LIGHTNING, null, true, true, prev, p, 0, null);
+            Particle mid = new Particle(0,0,0,0, lifetime, color, 1, type, null, true, true, prev, p, 0, null);
             particleSystem.add(mid);
 
             prev = p;
         }
 
         // Connect the last segment to the actual end particle
-        Particle mid = new Particle(0,0,0,0, lifetime, color, 1, ParticleType.LIGHTNING, null, true, true, prev, end, 0, null);
+        Particle mid = new Particle(0,0,0,0, lifetime, color, 1, type, null, true, true, prev, end, 0, null);
         particleSystem.add(mid);
     }
 }
-
-
-

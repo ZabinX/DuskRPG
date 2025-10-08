@@ -302,6 +302,30 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 
+	public void spawnShockParticles(Entity target) {
+		if (target == null) return;
+	
+		synchronized (vctParticles) {
+			// The top of the bolt should be above the target, appearing to come from the sky.
+			double startX = target.pixelX + (intImageSize / 2.0);
+			double startY = target.pixelY - 250; // Start high above the target
+	
+			// The end of the bolt is the center of the target.
+			double endX = target.pixelX + (intImageSize / 2.0);
+			double endY = target.pixelY;
+	
+			// Create dummy particles to represent the start and end points for the lightning bolt.
+			Particle startPoint = new Particle(startX, startY, 0, 0, 1, null, 0, null);
+			Particle endPoint = new Particle(endX, endY, 0, 0, 1, null, 0, null);
+	
+			// Generate the lightning particles.
+			List<Particle> newParticles = LightningBolt.create(startPoint, endPoint, Color.YELLOW, 30, ParticleType.SHOCK);
+			
+			// Add the new particles to the main particle list to be rendered.
+			vctParticles.addAll(newParticles);
+		}
+	}
+
 	public void spawnDetectInvisParticles(Entity target, int duration) {
 		if (target == null) return;
 	
@@ -976,6 +1000,22 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                         }
                     } catch (Exception e) {
                         System.err.println("Error processing harden spell effect: " + e.getMessage());
+                    }
+                    break;
+                }
+                case (42): // Shock spell effect
+                {
+                    try {
+                        long targetID = Long.parseLong(stmIn.readLine());
+                        Entity target;
+                        synchronized(vctEntities) {
+                            target = hmpEntities.get(targetID);
+                        }
+                        if (target != null) {
+                            spawnShockParticles(target);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error processing shock spell effect: " + e.getMessage());
                     }
                     break;
                 }
@@ -2327,7 +2367,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						g2d.drawImage(p.image, (int)screenX - (imgWidth / 2), (int)screenY - (imgHeight / 2), null);
 					} else if (p.color != null) {
 						g2d.setColor(p.color);
-						if (p.type == ParticleType.LIGHTNING) {
+						if (p.type == ParticleType.LIGHTNING || p.type == ParticleType.SHOCK) {
 							if (p.parent1 != null && p.parent2 != null) {
 								g2d.setStroke(new BasicStroke(p.size));
 								g2d.drawLine((int)(p.parent1.x - cameraX), (int)(p.parent1.y - cameraY), (int)(p.parent2.x - cameraX), (int)(p.parent2.y - cameraY));

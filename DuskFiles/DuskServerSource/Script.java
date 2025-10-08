@@ -1157,7 +1157,7 @@ public class Script
 			} else if (strStore.equalsIgnoreCase("particleeffect")) {
 				rafCompile.writeByte(62);
 				rafCompile.writeBytes(getStringForCompile());
-				rafCompile.writeBytes(parseValueForCompile());
+				rafCompile.writeBytes(getStringForCompile());
 				return true;
 			} else if (strStore.equalsIgnoreCase("particleeffectduration")) {
 				rafCompile.writeByte(63);
@@ -2061,9 +2061,27 @@ public class Script
 				case 62:
 				{
 					LivingThing thnStore = getLivingThing(getString());
-					int intEffectID = (int)parseValue();
-					if (thnStore != null)
-					{
+					String strEffectName = getString();
+					int intEffectID = -1;
+					if (strEffectName.equalsIgnoreCase("armor")) {
+						intEffectID = 38;
+					} else if (strEffectName.equalsIgnoreCase("regenerate")) {
+						intEffectID = 39;
+					} else if (strEffectName.equalsIgnoreCase("detectinvis")) {
+						intEffectID = 40;
+					} else if (strEffectName.equalsIgnoreCase("harden")) {
+						intEffectID = 41;
+					} else if (strEffectName.equalsIgnoreCase("shock")) {
+						intEffectID = 42;
+					} else {
+						try {
+							intEffectID = Integer.parseInt(strEffectName);
+						} catch (NumberFormatException e) {
+							engGame.log.printMessage(Log.ERROR, "Unknown particle effect: " + strEffectName);
+							return true;
+						}
+					}
+					if (thnStore != null && intEffectID != -1) {
 						Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnStore.intLocX, thnStore.intLocY);
 						for (LivingThing player : playersInArea) {
 							player.send("" + (char)intEffectID + thnStore.ID + "\n");
