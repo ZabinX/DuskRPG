@@ -13,12 +13,13 @@ const TILE_SIZE = 32;
 const ORIGINAL_TILE_SIZE = 32;
 const ORIGINAL_SPRITE_SIZE = 64;
 const ORIGINAL_PLAYER_SIZE = 64;
-const MAP_VIEW_WIDTH = 21;
-const MAP_VIEW_HEIGHT = 11;
 
 // --- Game State ---
 let ws;
 let isConnected = false;
+let clientState = 'LOADING'; // LOADING, READY
+let dataBuffer = new ArrayBuffer(0);
+const packetBuffer = []; // Buffer for packets during the LOADING state.
 let images = {};
 let shrMap = [];
 let shrMapAlpha = [];
@@ -26,8 +27,8 @@ let entities = new Map();
 let vctParticles = [];
 let playerLocX = 0;
 let playerLocY = 0;
-let viewRangeX = 10;
-let viewRangeY = 5;
+let viewRangeX = 10; // Default, will be updated by server
+let viewRangeY = 5;  // Default, will be updated by server
 let cameraX = 0;
 let cameraY = 0;
 let targetCameraX = 0;
@@ -39,7 +40,7 @@ let playerTicks = 200;
 function resizeCanvas() {
     const leftPanel = document.getElementById('left-panel');
     const panelWidth = leftPanel.clientWidth;
-    const aspectRatio = MAP_VIEW_WIDTH / MAP_VIEW_HEIGHT;
+    const aspectRatio = (viewRangeX * 2 + 1) / (viewRangeY * 2 + 1);
     let newWidth = panelWidth;
     let newHeight = newWidth / aspectRatio;
     const bottomPanelHeight = document.getElementById('bottom-panel').clientHeight;
@@ -80,16 +81,12 @@ async function preloadAssets() {
         { name: 'sprites', src: 'img/sprites.gif' },
         { name: 'armor', src: 'img/zmagiccarmor.png' },
         { name: 'harden', src: 'img/zmagicwharden.png' }
-        // Temporarily removed map_alpha.png as it was failing
     ];
-
     for (const asset of assetsToLoad) {
         try {
-            log(`Loading asset: ${asset.name} (${asset.src})...`);
             await loadImage(asset.name, asset.src);
-            log(`...${asset.name} loaded successfully.`);
         } catch (error) {
-            log(`...Failed to load asset: ${asset.name} from ${asset.src}. Error: ${error}`);
+            log(`Failed to load asset: ${asset.name} from ${asset.src}.`);
         }
     }
     log("Asset loading complete.");
@@ -105,35 +102,56 @@ class Entity {
     }
 }
 
-class DataStream {
-    constructor(arrayBuffer) { this.dataView = new DataView(arrayBuffer); this.offset = 0; }
-    hasMoreData() { return this.offset < this.dataView.byteLength; }
-    readByte() { this.offset += 1; return this.dataView.getInt8(this.offset - 1); }
-    readShort() { this.offset += 2; return this.dataView.getInt16(this.offset - 2, false); }
-    readLong() { this.offset += 8; return this.dataView.getBigInt64(this.offset - 8, false); }
-    readUTF() {
-        const length = this.dataView.getUint16(this.offset, false);
-        this.offset += 2;
-        const stringBytes = new Uint8Array(this.dataView.buffer, this.offset, length);
-        this.offset += length;
-        return new TextDecoder('utf-8').decode(stringBytes);
+class DataReader {
+    constructor(arrayBuffer) {
+        this.dataView = new DataView(arrayBuffer);
+        this.uint8array = new Uint8Array(arrayBuffer);
+        this.offset = 0;
     }
+    hasMoreData(needed = 1) { return this.offset + needed <= this.dataView.byteLength; }
+    readByte() {
+        if (!this.hasMoreData(1)) throw new Error("Not enough data to read byte");
+        const byte = this.dataView.getUint8(this.offset);
+        this.offset += 1;
+        return byte;
+    }
+    readLine() {
+        const start = this.offset;
+        const end = this.uint8array.indexOf(10, start); // 10 = '\n'
+        if (end === -1) throw new Error("Not enough data for a full line");
+        const lineBytes = this.uint8array.subarray(start, end);
+        const line = new TextDecoder('iso-8859-1').decode(lineBytes);
+        this.offset = end + 1;
+        return line;
+    }
+}
+
+function _appendBuffer(buffer1, buffer2) {
+    const tmp = new Uint8Array(buffer1.byteLength + buffer2.byteLength);
+    tmp.set(new Uint8Array(buffer1), 0);
+    tmp.set(new Uint8Array(buffer2), buffer1.byteLength);
+    return tmp.buffer;
 }
 
 function connect() {
     log(`Attempting to connect...`);
     ws = new WebSocket('ws://localhost:7475');
     ws.binaryType = 'arraybuffer';
-    ws.onopen = () => { isConnected = true; log("Connection opened. Please enter your character name."); textInput.placeholder = "Enter your character name and press Enter"; };
-    ws.onmessage = (event) => handleServerMessage(new DataStream(event.data));
+    ws.onopen = () => {
+        isConnected = true;
+        log("Connection opened. Please enter your character name.");
+        textInput.placeholder = "Enter your character name and press Enter";
+    };
+    ws.onmessage = (event) => {
+        dataBuffer = _appendBuffer(dataBuffer, event.data);
+        processBuffer();
+    };
     ws.onerror = (error) => log("WebSocket Error: " + error);
     ws.onclose = () => { isConnected = false; log("Connection closed."); };
 }
 
 function sendString(str) {
     if (isConnected) {
-        // Encode the string into a UTF-8 byte array and send it as a binary frame.
-        // This is crucial for the Java server to process it correctly via its InputStream.
         const encoder = new TextEncoder();
         const data = encoder.encode(`${str}\n`);
         ws.send(data);
@@ -148,54 +166,192 @@ function startMove(ent, direction) {
     ent.isMoving = true; ent.intMoveDirection = direction;
 }
 
-function handleServerMessage(stream) {
-    while (stream.hasMoreData()) {
-        const opcode = stream.readByte();
-        switch (opcode) {
-            case 0: log("Server sent disconnect signal."); ws.close(); return;
-            case 2:
-                playerLocX = stream.readShort(); playerLocY = stream.readShort();
-                infoLoc.textContent = `Loc: ${playerLocX}/${playerLocY}`;
-                shrMap = Array.from({ length: MAP_VIEW_WIDTH }, () => new Array(MAP_VIEW_HEIGHT).fill(0));
-                for (let i = 0; i < MAP_VIEW_WIDTH; i++) for (let j = 0; j < MAP_VIEW_HEIGHT; j++) shrMap[i][j] = stream.readShort();
-                shrMapAlpha = Array.from({ length: MAP_VIEW_WIDTH }, () => new Array(MAP_VIEW_HEIGHT).fill(0));
-                for (let i = 0; i < MAP_VIEW_WIDTH; i++) for (let j = 0; j < MAP_VIEW_HEIGHT; j++) shrMapAlpha[i][j] = stream.readShort();
-                log(`Received map data. Player at ${playerLocX}, ${playerLocY}`);
-                break;
-            case 3: log(stream.readUTF()); break;
-            case 4: {
-                const name = stream.readUTF(), type = stream.readByte(), id = stream.readLong(), image = stream.readShort(), locX = stream.readShort(), locY = stream.readShort(), step = (type === 0) ? stream.readShort() : -1;
-                const entity = new Entity(name, id, image, type, locX, locY, step);
-                entities.set(id, entity);
-                if (type === 0 && locX === playerLocX && locY === playerLocY) player = entity;
+function processBuffer() {
+    while (dataBuffer.byteLength > 0) {
+        const reader = new DataReader(dataBuffer);
+        try {
+            const { opcode, lines, bytesRead } = parseSinglePacket(reader);
+            if (clientState === 'LOADING') {
+                packetBuffer.push({ opcode, lines });
+                const hasDim = packetBuffer.some(p => p.opcode === 19);
+                const hasEnd = packetBuffer.some(p => p.opcode === 14);
+                if (hasDim && hasEnd) {
+                    log("Map dimensions and end-of-stream received. Processing buffered packets...");
+                    clientState = 'READY';
+                    processBufferedPackets();
+                }
+            } else {
+                _processPacket(opcode, lines);
+            }
+            dataBuffer = dataBuffer.slice(bytesRead);
+        } catch (e) {
+            if (e.message.startsWith("Not enough data")) {
                 break;
             }
-            case 5: {
-                const hp = stream.readShort(), maxhp = stream.readShort(), sp = stream.readShort(), maxsp = stream.readShort();
-                infoHp.textContent = `HP: ${hp}/${maxhp}`; infoMp.textContent = `MP: ${sp}/${maxsp}`;
-                break;
-            }
-            case 6: while (stream.hasMoreData()) { const itemType = stream.readShort(); if (itemType === -1) break; stream.readUTF(); } break;
-            case 7: for(let i=0; i<9; i++) stream.readUTF(); break;
-            case 8: stream.readUTF(); break;
-            case 10: while(stream.hasMoreData()) if (stream.readUTF() === ".") break; break;
-            case 13: sendString("notdead"); break;
-            case 14: log("Server signaled end of initial data."); break;
-            case 16: entities.delete(stream.readLong()); break;
-            case 19: { const mapSizeX = stream.readShort(), mapSizeY = stream.readShort(); viewRangeX = (mapSizeX - 1) / 2; viewRangeY = (mapSizeY - 1) / 2; sendString("applicationimages"); break; }
-            case 23: log(`<span style="color: rgb(${stream.readShort()},${stream.readShort()},${stream.readShort()});">${stream.readUTF()}</span>`); break;
-            case 24: case 25: case 26: case 27: { const id = stream.readLong(), ent = entities.get(id); if (ent) ent.isMoving ? ent.queuedMoves.push(opcode - 24) : startMove(ent, opcode - 24); break; }
-            case 28: stream.readShort(); break;
-            case 35: while(stream.hasMoreData()) { if(stream.readShort() === -1) break; stream.readShort(); stream.readShort(); } break;
-            case 36: { const attacker = entities.get(stream.readLong()), defender = entities.get(stream.readLong()), damage = stream.readShort(); if (defender) spawnBloodParticles(attacker, defender, damage); break; }
-            case 37: playerTicks = Number(stream.readLong()); break;
-            case 38: spawnArmorParticles(entities.get(stream.readLong())); break;
-            case 39: spawnRegenerateParticles(entities.get(stream.readLong())); break;
-            case 40: spawnDetectInvisParticles(entities.get(stream.readLong())); break;
-            case 41: spawnHardenParticles(entities.get(stream.readLong())); break;
-            case 42: spawnShockParticles(entities.get(stream.readLong())); break;
-            default: return;
+            log(`Error in processBuffer, discarding one byte to prevent loop: ${e}`);
+            console.error(e);
+            dataBuffer = dataBuffer.slice(1);
         }
+    }
+}
+
+function processBufferedPackets() {
+    const dimPacketIndex = packetBuffer.findIndex(p => p.opcode === 19);
+    if (dimPacketIndex !== -1) {
+        const [dimPacket] = packetBuffer.splice(dimPacketIndex, 1);
+        _processPacket(dimPacket.opcode, dimPacket.lines);
+    } else {
+        log("CRITICAL: Map dimensions (opcode 19) not found in initial data stream.");
+    }
+    for (const packet of packetBuffer) {
+        if (packet.opcode !== 14) {
+            _processPacket(packet.opcode, packet.lines);
+        }
+    }
+    packetBuffer.length = 0;
+}
+
+function parseSinglePacket(reader) {
+    const opcode = reader.readByte();
+    const lines = [];
+    const lineReader = () => {
+        const line = reader.readLine();
+        lines.push(line);
+        return line;
+    };
+
+    switch (opcode) {
+        case 0: case 9: case 12: case 13: case 14: case 30: case 61: break;
+        case 1: case 3: case 15: case 16: case 21: case 28: case 31: case 32: case 33: case 37: case 38: case 39: case 40: case 41: case 42: case 60: lineReader(); break;
+        case 19: case 29: case 34: lineReader(); lineReader(); break;
+        case 36: lineReader(); lineReader(); lineReader(); break;
+        case 5: for(let i=0; i<4; i++) lineReader(); break;
+        case 23: for(let i=0; i<4; i++) lineReader(); break;
+        case 7: for(let i=0; i<9; i++) lineReader(); break;
+        case 24: case 25: case 26: case 27: lineReader(); break;
+        case 6: case 8: case 10: case 11: case 17: case 22: while (lineReader() !== "."); break;
+        case 18: case 20: lineReader(); while(lineReader() !== "--EOF--"); break;
+        case 35: while(lineReader() !== "-1"); break;
+        case 2: {
+            lineReader(); lineReader();
+            const mapWidth = viewRangeX * 2 + 1;
+            const mapHeight = viewRangeY * 2 + 1;
+            for (let i = 0; i < mapWidth * mapHeight * 2; i++) lineReader();
+            break;
+        }
+        case 4: {
+            lineReader();
+            const type = parseInt(lineReader(), 10);
+            for(let i=0; i<4; i++) lineReader();
+            if (type === 0) lineReader();
+            break;
+        }
+        default: throw new Error(`Unknown opcode: ${opcode}`);
+    }
+    return { opcode, lines, bytesRead: reader.offset };
+}
+
+function _processPacket(opcode, lines) {
+    let lineIndex = 0;
+    const readLine = () => lines[lineIndex++];
+
+    switch (opcode) {
+        case 0: log("Server sent disconnect signal."); ws.close(); return;
+        case 1: log(`RC Address: ${readLine()}`); break;
+        case 2: {
+            playerLocX = parseInt(readLine(), 10);
+            playerLocY = parseInt(readLine(), 10);
+            infoLoc.textContent = `Loc: ${playerLocX}/${playerLocY}`;
+            const mapWidth = viewRangeX * 2 + 1;
+            const mapHeight = viewRangeY * 2 + 1;
+            shrMap = Array.from({ length: mapWidth }, () => new Array(mapHeight).fill(0));
+            for (let i = 0; i < mapWidth; i++) {
+                for (let j = 0; j < mapHeight; j++) {
+                    shrMap[i][j] = parseInt(readLine(), 10);
+                }
+            }
+            shrMapAlpha = Array.from({ length: mapWidth }, () => new Array(mapHeight).fill(0));
+            for (let i = 0; i < mapWidth; i++) {
+                for (let j = 0; j < mapHeight; j++) {
+                    shrMapAlpha[i][j] = parseInt(readLine(), 10);
+                }
+            }
+            log(`Received and parsed map data. Player at ${playerLocX}, ${playerLocY}`);
+            break;
+        }
+        case 3: log(readLine()); break;
+        case 4: {
+            const name = readLine();
+            const type = parseInt(readLine(), 10);
+            const id = BigInt(readLine());
+            const locX = parseInt(readLine(), 10);
+            const locY = parseInt(readLine(), 10);
+            const image = parseInt(readLine(), 10);
+            const step = (type === 0) ? parseInt(readLine(), 10) : -1;
+            const entity = new Entity(name, id, image, type, locX, locY, step);
+            entities.set(id, entity);
+            if (type === 0 && name === textInput.placeholder) {
+                 player = entity;
+            }
+            break;
+        }
+        case 5: {
+            const hp = parseInt(readLine(), 10);
+            const maxhp = parseInt(readLine(), 10);
+            const sp = parseInt(readLine(), 10);
+            const maxsp = parseInt(readLine(), 10);
+            infoHp.textContent = `HP: ${hp}/${maxhp}`;
+            infoMp.textContent = `MP: ${sp}/${maxsp}`;
+            break;
+        }
+        case 13: sendString("notdead"); break;
+        case 16: entities.delete(BigInt(readLine())); break;
+        case 19: { 
+            const mapSizeX = parseInt(readLine(), 10);
+            const mapSizeY = parseInt(readLine(), 10);
+            viewRangeX = (mapSizeX - 1) / 2;
+            viewRangeY = (mapSizeY - 1) / 2;
+            log(`Received map dimensions: ${mapSizeX}x${mapSizeY}, view range: ${viewRangeX},${viewRangeY}`);
+            resizeCanvas();
+            sendString("applicationimages");
+            break;
+        }
+        case 21: log(`EXP: ${readLine()}`); break;
+        case 23: log(`<span style="color: rgb(${readLine()},${readLine()},${readLine()});">${readLine()}</span>`); break;
+        case 24: case 25: case 26: case 27: {
+            const id = BigInt(readLine());
+            const ent = entities.get(id);
+            if (ent) ent.isMoving ? ent.queuedMoves.push(opcode - 24) : startMove(ent, opcode - 24);
+            break;
+        }
+        case 29: {
+            const id = BigInt(readLine());
+            const flag = parseInt(readLine(), 10);
+            log(`Entity ${id} flag set to ${flag}`);
+            break;
+        }
+        case 31: case 32: case 33: log(readLine()); break;
+        case 34: {
+            const id = BigInt(readLine());
+            const hpData = readLine();
+            log(`Opponent ${id} HP: ${hpData}`);
+            break;
+        }
+        case 36: {
+            const attackerId = BigInt(readLine());
+            const defenderId = BigInt(readLine());
+            const damage = parseInt(readLine(), 10);
+            const attacker = entities.get(attackerId);
+            const defender = entities.get(defenderId);
+            if (defender) spawnBloodParticles(attacker, defender, damage);
+            break;
+        }
+        case 37: playerTicks = Number(readLine()); break;
+        case 38: spawnArmorParticles(entities.get(BigInt(readLine()))); break;
+        case 39: spawnRegenerateParticles(entities.get(BigInt(readLine()))); break;
+        case 40: spawnDetectInvisParticles(entities.get(BigInt(readLine()))); break;
+        case 41: spawnHardenParticles(entities.get(BigInt(readLine()))); break;
+        case 42: spawnShockParticles(entities.get(BigInt(readLine()))); break;
     }
 }
 
@@ -247,35 +403,43 @@ function updateAndDrawParticles() {
 
 function drawMap() {
     if (!images.map || shrMap.length === 0) return;
-    const tileRenderSize = canvas.width / MAP_VIEW_WIDTH;
-    for (let i = 0; i < MAP_VIEW_WIDTH; i++) for (let j = 0; j < MAP_VIEW_HEIGHT; j++) {
-        const tileID = shrMap[i][j]; if (tileID === 0) continue;
-        const worldX = (playerLocX - viewRangeX + i) * tileRenderSize, worldY = (playerLocY - viewRangeY + j) * tileRenderSize;
-        ctx.drawImage(images.map, tileID * ORIGINAL_TILE_SIZE, 0, ORIGINAL_TILE_SIZE, ORIGINAL_TILE_SIZE, worldX - cameraX, worldY - cameraY, tileRenderSize, tileRenderSize);
+    const mapWidth = viewRangeX * 2 + 1;
+    const tileRenderSize = canvas.width / mapWidth;
+    for (let i = 0; i < mapWidth; i++) {
+        for (let j = 0; j < (viewRangeY * 2 + 1); j++) {
+            if (!shrMap[i] || shrMap[i][j] === undefined) continue;
+            const tileID = shrMap[i][j];
+            if (tileID === 0) continue;
+            const screenX = i * tileRenderSize;
+            const screenY = j * tileRenderSize;
+            ctx.drawImage(images.map, (tileID-1) * ORIGINAL_TILE_SIZE, 0, ORIGINAL_TILE_SIZE, ORIGINAL_TILE_SIZE, screenX, screenY, tileRenderSize, tileRenderSize);
+        }
     }
 }
 
 function drawEntities() {
     if (!images.players || !images.sprites) return;
-    const tileRenderSize = canvas.width / MAP_VIEW_WIDTH;
+    const mapWidth = viewRangeX * 2 + 1;
+    const tileRenderSize = canvas.width / mapWidth;
     const sortedEntities = [...entities.values()].sort((a, b) => a.pixelY - b.pixelY);
-    for (const entity of sortedEntities) {
-        const screenX = entity.pixelX - cameraX, screenY = entity.pixelY - cameraY;
-        const spriteRenderSize = tileRenderSize * 2, drawX = screenX, drawY = screenY - tileRenderSize;
-        if (entity.step !== -1) ctx.drawImage(images.players, (entity.image * 8 + entity.step) * ORIGINAL_PLAYER_SIZE, 0, ORIGINAL_PLAYER_SIZE, ORIGINAL_PLAYER_SIZE, drawX, drawY, spriteRenderSize, spriteRenderSize);
-        else ctx.drawImage(images.sprites, entity.image * ORIGINAL_SPRITE_SIZE, 0, ORIGINAL_SPRITE_SIZE, ORIGINAL_SPRITE_SIZE, drawX, drawY, spriteRenderSize, spriteRenderSize);
-        ctx.fillStyle = "white"; ctx.font = "12px 'Verdana'";
-        ctx.fillText(entity.name, screenX + tileRenderSize/2 - ctx.measureText(entity.name).width / 2, screenY + tileRenderSize + 5);
-    }
-}
 
-function drawMapAlpha() {
-    if (!images.map_alpha || shrMapAlpha.length === 0) return;
-    const tileRenderSize = canvas.width / MAP_VIEW_WIDTH;
-    for (let i = 0; i < MAP_VIEW_WIDTH; i++) for (let j = 0; j < MAP_VIEW_HEIGHT; j++) {
-        const tileID = shrMapAlpha[i][j]; if (tileID === 0) continue;
-        const worldX = (playerLocX - viewRangeX + i) * tileRenderSize, worldY = (playerLocY - viewRangeY + j) * tileRenderSize;
-        ctx.drawImage(images.map_alpha, tileID * ORIGINAL_TILE_SIZE, 0, ORIGINAL_TILE_SIZE, ORIGINAL_TILE_SIZE, worldX - cameraX, worldY - cameraY, tileRenderSize, tileRenderSize);
+    for (const entity of sortedEntities) {
+        const relativeX = entity.locX - (playerLocX - viewRangeX);
+        const relativeY = entity.locY - (playerLocY - viewRangeY);
+        const screenX = relativeX * tileRenderSize;
+        const screenY = relativeY * tileRenderSize;
+        const spriteRenderSize = tileRenderSize * 2;
+        const drawX = screenX;
+        const drawY = screenY - tileRenderSize;
+
+        if (entity.step !== -1) {
+            ctx.drawImage(images.players, (entity.image * 8 + entity.step) * ORIGINAL_PLAYER_SIZE, 0, ORIGINAL_PLAYER_SIZE, ORIGINAL_PLAYER_SIZE, drawX, drawY, spriteRenderSize, spriteRenderSize);
+        } else {
+            ctx.drawImage(images.sprites, entity.image * ORIGINAL_SPRITE_SIZE, 0, ORIGINAL_SPRITE_SIZE, ORIGINAL_SPRITE_SIZE, drawX, drawY, spriteRenderSize, spriteRenderSize);
+        }
+        ctx.fillStyle = "white";
+        ctx.font = "12px 'Verdana'";
+        ctx.fillText(entity.name, screenX + tileRenderSize/2 - ctx.measureText(entity.name).width / 2, screenY + tileRenderSize + 5);
     }
 }
 
@@ -284,7 +448,8 @@ function gameLoop() {
     const entityMoveSpeed = TILE_SIZE / (playerTicks / 40.0);
     for (const ent of entities.values()) {
         if (ent.isMoving) {
-            const dx = ent.targetX - ent.pixelX, dy = ent.targetY - ent.pixelY, dist = Math.sqrt(dx * dx + dy * dy);
+            const dx = ent.targetX - ent.pixelX, dy = ent.targetY - ent.pixelY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
             if (dist < entityMoveSpeed) {
                 ent.pixelX = ent.targetX; ent.pixelY = ent.targetY; ent.isMoving = false;
                 ent.locX = Math.round(ent.pixelX / TILE_SIZE); ent.locY = Math.round(ent.pixelY / TILE_SIZE);
@@ -295,21 +460,72 @@ function gameLoop() {
             }
         }
     }
-    if (player) {
-        targetCameraX = player.pixelX - canvas.width / 2 + TILE_SIZE / 2;
-        targetCameraY = player.pixelY - canvas.height / 2;
-        cameraX += (targetCameraX - cameraX) * 0.1;
-        cameraY += (targetCameraY - cameraY) * 0.1;
+    
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    if (isConnected && clientState === 'READY') {
+        drawMap();
+        drawEntities();
+        updateAndDrawParticles();
     }
-    ctx.fillStyle = 'black'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-    if (isConnected) { drawMap(); drawEntities(); updateAndDrawParticles(); drawMapAlpha(); }
 }
 
 async function init() {
     log("Client initializing...");
     await preloadAssets();
     connectButton.addEventListener('click', connect);
-    textInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { sendString(textInput.value); textInput.value = ''; textInput.placeholder = 'Enter command...'; } });
+    textInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const text = textInput.value;
+            if (textInput.placeholder.includes("character name")) {
+                textInput.placeholder = text;
+            }
+            sendString(text);
+            textInput.value = '';
+            textInput.placeholder = 'Enter command...';
+        }
+    });
+
+    canvas.addEventListener('mousedown', (e) => {
+        if (!isConnected || clientState !== 'READY' || !player) return;
+        const rect = canvas.getBoundingClientRect();
+        const tileRenderSize = canvas.width / (viewRangeX * 2 + 1);
+        const clickedGridX = Math.floor((e.clientX - rect.left) / tileRenderSize);
+        const clickedGridY = Math.floor((e.clientY - rect.top) / tileRenderSize);
+        const destX = (playerLocX - viewRangeX) + clickedGridX;
+        const destY = (playerLocY - viewRangeY) + clickedGridY;
+
+        let targetEntity = null;
+        for (const entity of entities.values()) {
+            if (entity.locX === destX && entity.locY === destY && entity !== player) {
+                targetEntity = entity;
+                break;
+            }
+        }
+
+        if (e.button === 2) { // Right-click
+            e.preventDefault();
+            if (targetEntity) {
+                sendString(`attack ${targetEntity.name} #${targetEntity.id}`);
+                return;
+            }
+        }
+        sendString(`findpath ${destX} ${destY}`);
+    });
+    canvas.addEventListener('contextmenu', e => e.preventDefault());
+
+    window.addEventListener('keydown', (e) => {
+        if (!isConnected || clientState !== 'READY' || document.activeElement === textInput) return;
+        const command = {
+            'ArrowUp': 'n', 'ArrowDown': 's', 'ArrowLeft': 'w', 'ArrowRight': 'e'
+        }[e.key];
+        if (command) {
+            e.preventDefault();
+            sendString(command);
+        }
+    });
+
     window.addEventListener('resize', resizeCanvas);
     log("Client initialized. Press 'Connect' to begin.");
     resizeCanvas();
