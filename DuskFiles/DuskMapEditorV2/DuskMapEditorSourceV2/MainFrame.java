@@ -20,8 +20,12 @@ public class MainFrame extends JFrame {
     ButtonGroup grpTools = new ButtonGroup();
 
     // Other controls
-    JCheckBox chkAlphaLayer = new JCheckBox("Alpha Layer");
-    JCheckBox chkAlphaVisible = new JCheckBox("Alpha Visible", true);
+    JRadioButton rdoBaseLayer = new JRadioButton("Base Layer", true);
+    JRadioButton rdoAlphaLayer = new JRadioButton("Top Layer");
+    JRadioButton rdoAlphaLayer2 = new JRadioButton("Middle Layer 2");
+    ButtonGroup grpLayers = new ButtonGroup();
+    JCheckBox chkAlphaVisible = new JCheckBox("Top Visible", true);
+    JCheckBox chkAlpha2Visible = new JCheckBox("Middle Visible", true);
     JScrollBar scrollVert = new JScrollBar(JScrollBar.VERTICAL);
     JScrollBar scrollHorz = new JScrollBar(JScrollBar.HORIZONTAL);
     JLabel lblLocation = new JLabel();
@@ -90,8 +94,17 @@ public class MainFrame extends JFrame {
         pnlButtons.add(btnToolSelect);
         pnlButtons.add(btnToolZoom);
         pnlButtons.add(new JSeparator(SwingConstants.VERTICAL));
-        pnlButtons.add(chkAlphaLayer);
+        
+        grpLayers.add(rdoBaseLayer);
+        grpLayers.add(rdoAlphaLayer);
+        grpLayers.add(rdoAlphaLayer2);
+        pnlButtons.add(rdoBaseLayer);
+        pnlButtons.add(rdoAlphaLayer);
+        pnlButtons.add(rdoAlphaLayer2);
+        pnlButtons.add(new JSeparator(SwingConstants.VERTICAL));
+
         pnlButtons.add(chkAlphaVisible);
+        pnlButtons.add(chkAlpha2Visible);
         pnlButtons.add(new JSeparator(SwingConstants.VERTICAL));
 
         pnlForeground.setPreferredSize(new Dimension(appParent.intImageOriginalSize, appParent.intImageOriginalSize));
@@ -217,10 +230,11 @@ public class MainFrame extends JFrame {
         btnToolSelect.addActionListener(toolListener);
         btnToolZoom.addActionListener(toolListener);
 
-        chkAlphaLayer.addItemListener(e -> appParent.setDrawingLayer(e.getStateChange() == ItemEvent.SELECTED));
+        rdoBaseLayer.addActionListener(e -> appParent.setDrawingLayer(DuskMapEditor.Layer.BASE));
+        rdoAlphaLayer.addActionListener(e -> appParent.setDrawingLayer(DuskMapEditor.Layer.ALPHA));
+        rdoAlphaLayer2.addActionListener(e -> appParent.setDrawingLayer(DuskMapEditor.Layer.ALPHA2));
+
         chkAlphaVisible.addItemListener(e -> appParent.setAlphaVisible(e.getStateChange() == ItemEvent.SELECTED));
+        chkAlpha2Visible.addItemListener(e -> appParent.setAlpha2Visible(e.getStateChange() == ItemEvent.SELECTED));
     }
 }
-
-
-

@@ -16,6 +16,12 @@ import javax.swing.ImageIcon;
 public class DuskMapEditor implements MouseListener,ComponentListener,ActionListener,KeyListener/*,ImageObserver*/,MouseMotionListener,AdjustmentListener
 {
 	static String strVersion="1.0";
+
+	// Layer management
+	enum Layer { BASE, ALPHA, ALPHA2 }
+	Layer currentLayer = Layer.BASE;
+	boolean blnAlphaVisible = true;
+	boolean blnAlpha2Visible = true;
 	
 	int numMapImages,
         MapRows=25,
@@ -44,23 +50,21 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			blnFirstDrag=true,
 			blnActiveSelection=false,
 			blnActivePaste=false,
-			blnAlphaLayer=false,
-			blnAlphaVisible=true,
 			blnApplet;
     Applet appShell;
     
-	Image imgOriginalMap, imgOriginalMapAlpha;
-	Image imgMap = null, imgMapAlpha = null;
-	Image imgCursorMap = null, imgCursorMapAlpha = null;
-	Image imgMapPalette = null, imgMapPaletteAlpha = null;
+	Image imgOriginalMap, imgOriginalMapAlpha, imgOriginalMapAlpha2;
+	Image imgMap = null, imgMapAlpha = null, imgMapAlpha2 = null;
+	Image imgCursorMap = null, imgCursorMapAlpha = null, imgCursorMapAlpha2 = null;
+	Image imgMapPalette = null, imgMapPaletteAlpha = null, imgMapPaletteAlpha2 = null;
 	//VolatileImage imgDisplay;
 	Image imgDisplay;
 	Image imgPalette;
 	Image imgForeground;
 	
-	short shrMap[][], shrMapAlpha[][];
-	short shrUndo[][], shrUndoAlpha[][];
-	short shrRedo[][], shrRedoAlpha[][];
+	short shrMap[][], shrMapAlpha[][], shrMapAlpha2[][];
+	short shrUndo[][], shrUndoAlpha[][], shrUndoAlpha2[][];
+	short shrRedo[][], shrRedoAlpha[][], shrRedoAlpha2[][];
 	short shrCopy[][];
 	
     int intImageSize = 36;
@@ -102,10 +106,13 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 	{
 		shrMap = new short[MapColumns][MapRows];
 		shrMapAlpha = new short[MapColumns][MapRows];
+		shrMapAlpha2 = new short[MapColumns][MapRows];
 		shrUndo = new short[MapColumns][MapRows];
 		shrUndoAlpha = new short[MapColumns][MapRows];
+		shrUndoAlpha2 = new short[MapColumns][MapRows];
 		shrRedo = new short[MapColumns][MapRows];
 		shrRedoAlpha = new short[MapColumns][MapRows];
+		shrRedoAlpha2 = new short[MapColumns][MapRows];
 		try
 		{
 			//background = new Color(140,140,140);
@@ -147,13 +154,24 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 					e.printStackTrace();
 				}
 			}
+			File fAlpha2 = new File("mapalpha2.png");
+			if(!fAlpha2.exists()){
+				try {
+					File fOrig = new File("map.png");
+					java.nio.file.Files.copy(fOrig.toPath(), fAlpha2.toPath());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 			imgOriginalMap = Toolkit.getDefaultToolkit().getImage("map.png");
 			imgOriginalMapAlpha = Toolkit.getDefaultToolkit().getImage("mapalpha.png");
+			imgOriginalMapAlpha2 = Toolkit.getDefaultToolkit().getImage("mapalpha2.png");
 			try
 			{
 				MediaTracker mdtTracker = new MediaTracker(frame);
 				mdtTracker.addImage(imgOriginalMap,0);
 				mdtTracker.addImage(imgOriginalMapAlpha,1);
+				mdtTracker.addImage(imgOriginalMapAlpha2,2);
 				mdtTracker.waitForAll();
 			}catch(Exception e)
 			{
@@ -222,6 +240,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 		{
 			if (imgMap != null) imgMap.flush();
 			if (imgMapAlpha != null) imgMapAlpha.flush();
+			if (imgMapAlpha2 != null) imgMapAlpha2.flush();
 
 			intImageSize = intImageOriginalSize;
 //			imgMap = imgOriginalMap.getScaledInstance(intImageSize*(numMapImages+1),intImageSize,Image.SCALE_DEFAULT);
@@ -229,18 +248,22 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			{
 				imgMap = imgOriginalMap;
 				imgMapAlpha = imgOriginalMapAlpha;
+				imgMapAlpha2 = imgOriginalMapAlpha2;
 				imgCursorMap = ImageTools.makeImageTransparent(imgOriginalMap);
 				imgCursorMapAlpha = ImageTools.makeImageTransparent(imgOriginalMapAlpha);
+				imgCursorMapAlpha2 = ImageTools.makeImageTransparent(imgOriginalMapAlpha2);
 			}
 			if (imgMapPalette == null)
 			{
 				imgMapPalette = imgOriginalMap.getScaledInstance(-1,intImageSizePalette,Image.SCALE_DEFAULT);
 				imgMapPaletteAlpha = imgOriginalMapAlpha.getScaledInstance(-1, intImageSizePalette, Image.SCALE_DEFAULT);
+				imgMapPaletteAlpha2 = imgOriginalMapAlpha2.getScaledInstance(-1, intImageSizePalette, Image.SCALE_DEFAULT);
 				try
 				{
 					MediaTracker mdtTracker = new MediaTracker(frame);
 					mdtTracker.addImage(imgMapPalette,0);
 					mdtTracker.addImage(imgMapPaletteAlpha, 1);
+					mdtTracker.addImage(imgMapPaletteAlpha2, 2);
 //		mdtTracker.addImage(imgOriginalMap,0);
 					mdtTracker.waitForAll();
 				}catch(Exception e)
@@ -280,14 +303,20 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 		blnScaling = !blnScaling;
 	}
 
-	public void setDrawingLayer(boolean isAlpha) {
-        blnAlphaLayer = isAlpha;
+	public void setDrawingLayer(Layer layer) {
+        currentLayer = layer;
 		update();
 		paint();
     }
 
 	public void setAlphaVisible(boolean isVisible) {
 		blnAlphaVisible = isVisible;
+		update();
+		paint();
+	}
+
+	public void setAlpha2Visible(boolean isVisible) {
+		blnAlpha2Visible = isVisible;
 		update();
 		paint();
 	}
@@ -572,6 +601,9 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
             int lastMapY = LastMouseY + sy;
             if (lastMapX >= 0 && lastMapX < MapColumns && lastMapY >= 0 && lastMapY < MapRows) {
                 drawTile(imgMap, LastMouseX, LastMouseY, shrMap[lastMapX][lastMapY]);
+                if (shrMapAlpha2[lastMapX][lastMapY] != 0) {
+                    drawTile(imgMapAlpha2, LastMouseX, LastMouseY, shrMapAlpha2[lastMapX][lastMapY]);
+                }
                 if (shrMapAlpha[lastMapX][lastMapY] != 0) {
                     drawTile(imgMapAlpha, LastMouseX, LastMouseY, shrMapAlpha[lastMapX][lastMapY]);
                 }
@@ -589,6 +621,9 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			{
                 // Redraw the cell at the new location before drawing the cursor on top
                 drawTile(imgMap, destX, destY, shrMap[currentMapX][currentMapY]);
+                if (shrMapAlpha2[currentMapX][currentMapY] != 0) {
+                    drawTile(imgMapAlpha2, destX, destY, shrMapAlpha2[currentMapX][currentMapY]);
+                }
                 if (shrMapAlpha[currentMapX][currentMapY] != 0) {
                     drawTile(imgMapAlpha, destX, destY, shrMapAlpha[currentMapX][currentMapY]);
                 }
@@ -623,6 +658,9 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
                 int lastMapY = LastMouseY + sy;
                 if (lastMapX >= 0 && lastMapX < MapColumns && lastMapY >= 0 && lastMapY < MapRows) {
                     drawTile(imgMap, LastMouseX, LastMouseY, shrMap[lastMapX][lastMapY]);
+                    if (shrMapAlpha2[lastMapX][lastMapY] != 0) {
+                        drawTile(imgMapAlpha2, LastMouseX, LastMouseY, shrMapAlpha2[lastMapX][lastMapY]);
+                    }
                     if (shrMapAlpha[lastMapX][lastMapY] != 0) {
                         drawTile(imgMapAlpha, LastMouseX, LastMouseY, shrMapAlpha[lastMapX][lastMapY]);
                     }
@@ -646,6 +684,9 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
                 int currentMapY = destY + sy;
                 if (currentMapX >= 0 && currentMapX < MapColumns && currentMapY >= 0 && currentMapY < MapRows) {
                     drawTile(imgMap, destX, destY, shrMap[currentMapX][currentMapY]);
+                    if (shrMapAlpha2[currentMapX][currentMapY] != 0) {
+                        drawTile(imgMapAlpha2, destX, destY, shrMapAlpha2[currentMapX][currentMapY]);
+                    }
                     if (shrMapAlpha[currentMapX][currentMapY] != 0) {
                         drawTile(imgMapAlpha, destX, destY, shrMapAlpha[currentMapX][currentMapY]);
                     }
@@ -801,7 +842,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 				File deleteme = new File(strFileName);
 				deleteme.delete();
 				RandomAccessFile rafFile = new RandomAccessFile(strFileName, "rw");
-                rafFile.writeInt(0xD5D001); // Magic number for new format
+                rafFile.writeInt(0xD5D002); // Magic number for V3 format
 				rafFile.writeInt(MapColumns);
 				rafFile.writeInt(MapRows);
 				for (int i=0;i<MapColumns;i++)
@@ -818,6 +859,13 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
                         rafFile.writeShort(shrMapAlpha[i][i2]);
                     }
                 }
+				for (int i=0;i<MapColumns;i++)
+				{
+					for (int i2=0;i2<MapRows;i2++)
+					{
+						rafFile.writeShort(shrMapAlpha2[i][i2]);
+					}
+				}
 				rafFile.close();
 				strCurrentFile = strName;
 				strCurrentDirectory = strDir;
@@ -851,7 +899,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 				File deleteme = new File(strFileName);
 				deleteme.delete();
 				RandomAccessFile rafFile = new RandomAccessFile(strFileName, "rw");
-                rafFile.writeInt(0xD5D001); // Magic number for new format
+                rafFile.writeInt(0xD5D002); // Magic number for V3 format
 				rafFile.writeInt(MapColumns);
 				rafFile.writeInt(MapRows);
 				for (int i=0;i<MapColumns;i++)
@@ -868,6 +916,13 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
                         rafFile.writeShort(shrMapAlpha[i][i2]);
                     }
                 }
+				for (int i=0;i<MapColumns;i++)
+				{
+					for (int i2=0;i2<MapRows;i2++)
+					{
+						rafFile.writeShort(shrMapAlpha2[i][i2]);
+					}
+				}
 				rafFile.close();
 				strCurrentFile = strName;
 				strCurrentDirectory = strDir;
@@ -902,20 +957,26 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 				{
 					RandomAccessFile rafFile = new RandomAccessFile(strFileName, "r");
                     int magicNumber = rafFile.readInt();
-                    if (magicNumber == 0xD5D001) { // New format
+					if (magicNumber == 0xD5D002) { // V3 format
+						MapColumns = rafFile.readInt();
+						MapRows = rafFile.readInt();
+					} else if (magicNumber == 0xD5D001) { // V2 format
                         MapColumns = rafFile.readInt();
                         MapRows = rafFile.readInt();
-                    } else { // Old format, the first int was MapColumns
+                    } else { // V1 format, the first int was MapColumns
                         MapColumns = magicNumber;
                         MapRows = rafFile.readInt();
                     }
                     
 					shrMap = new short[MapColumns][MapRows];
                     shrMapAlpha = new short[MapColumns][MapRows];
+					shrMapAlpha2 = new short[MapColumns][MapRows];
 					shrUndo = new short[MapColumns][MapRows];
                     shrUndoAlpha = new short[MapColumns][MapRows];
+					shrUndoAlpha2 = new short[MapColumns][MapRows];
 					shrRedo = new short[MapColumns][MapRows];
                     shrRedoAlpha = new short[MapColumns][MapRows];
+					shrRedoAlpha2 = new short[MapColumns][MapRows];
 
 					strCurrentFile = strName;
 					strCurrentDirectory = strDir;
@@ -929,7 +990,9 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 							shrMap[i][i2] = rafFile.readShort();
 						}
 					}
-                    if (magicNumber == 0xD5D001) { // New format, read alpha layer
+
+					// Read alpha layer 1
+                    if (magicNumber == 0xD5D001 || magicNumber == 0xD5D002) {
                         for (int i=0;i<MapColumns;i++)
                         {
                             for (int i2=0;i2<MapRows;i2++)
@@ -938,14 +1001,22 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
                             }
                         }
                     } else { // Old format, initialize alpha layer to empty
-                        for (int i=0;i<MapColumns;i++)
-                        {
-                            for (int i2=0;i2<MapRows;i2++)
-                            {
-                                shrMapAlpha[i][i2] = 0;
-                            }
-                        }
+                        for (int i=0;i<MapColumns;i++) { for (int i2=0;i2<MapRows;i2++) { shrMapAlpha[i][i2] = 0; } }
                     }
+
+					// Read alpha layer 2
+					if (magicNumber == 0xD5D002) {
+						for (int i=0;i<MapColumns;i++)
+						{
+							for (int i2=0;i2<MapRows;i2++)
+							{
+								shrMapAlpha2[i][i2] = rafFile.readShort();
+							}
+						}
+					} else { // Old format, initialize alpha layer to empty
+						for (int i=0;i<MapColumns;i++) { for (int i2=0;i2<MapRows;i2++) { shrMapAlpha2[i][i2] = 0; } }
+					}
+
 					rafFile.close();
 					update();
 					paint();
@@ -1328,6 +1399,18 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 				drawTile(imgMap,i,i2,shrMap[i+sx][i2+sy]);
 			}
 		}
+		// Draw alpha layer 2
+		if (blnAlpha2Visible) {
+			for (i=0;i<=sx1;i++)
+			{
+				for (i2=0;i2<=sy1;i2++)
+				{
+					if (shrMapAlpha2[i+sx][i2+sy] != 0) { // Assuming tile 0 is transparent
+						drawTile(imgMapAlpha2,i,i2,shrMapAlpha2[i+sx][i2+sy]);
+					}
+				}
+			}
+		}
 		// Draw alpha layer
 		if (blnAlphaVisible) {
 			for (i=0;i<=sx1;i++)
@@ -1418,7 +1501,11 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 	}
 
 	public short[][] getCurrentMap() {
-		return blnAlphaLayer ? shrMapAlpha : shrMap;
+		switch (currentLayer) {
+			case ALPHA: return shrMapAlpha;
+			case ALPHA2: return shrMapAlpha2;
+			default: return shrMap;
+		}
 	}
 
 	public short getTile(int x, int y) {
@@ -1431,7 +1518,12 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 
 	public void backupUndo() {
 		short[][] currentMap = getCurrentMap();
-		short[][] currentUndo = blnAlphaLayer ? shrUndoAlpha : shrUndo;
+		short[][] currentUndo;
+		switch (currentLayer) {
+			case ALPHA: currentUndo = shrUndoAlpha; break;
+			case ALPHA2: currentUndo = shrUndoAlpha2; break;
+			default: currentUndo = shrUndo; break;
+		}
 		for (int x = 0; x < MapColumns; x++) {
 			for (int y = 0; y < MapRows; y++) {
 				currentUndo[x][y] = currentMap[x][y];
@@ -1441,7 +1533,12 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 
 	public void backupRedo() {
 		short[][] currentMap = getCurrentMap();
-		short[][] currentRedo = blnAlphaLayer ? shrRedoAlpha : shrRedo;
+		short[][] currentRedo;
+		switch (currentLayer) {
+			case ALPHA: currentRedo = shrRedoAlpha; break;
+			case ALPHA2: currentRedo = shrRedoAlpha2; break;
+			default: currentRedo = shrRedo; break;
+		}
 		for (int x = 0; x < MapColumns; x++) {
 			for (int y = 0; y < MapRows; y++) {
 				currentRedo[x][y] = currentMap[x][y];
@@ -1451,7 +1548,12 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
     
     public void restoreUndo() {
         short[][] currentMap = getCurrentMap();
-        short[][] currentUndo = blnAlphaLayer ? shrUndoAlpha : shrUndo;
+		short[][] currentUndo;
+		switch (currentLayer) {
+			case ALPHA: currentUndo = shrUndoAlpha; break;
+			case ALPHA2: currentUndo = shrUndoAlpha2; break;
+			default: currentUndo = shrUndo; break;
+		}
         for (int x = 0; x < MapColumns; x++) {
             for (int y = 0; y < MapRows; y++) {
                 currentMap[x][y] = currentUndo[x][y];
@@ -1461,7 +1563,12 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 
     public void restoreRedo() {
         short[][] currentMap = getCurrentMap();
-        short[][] currentRedo = blnAlphaLayer ? shrRedoAlpha : shrRedo;
+		short[][] currentRedo;
+		switch (currentLayer) {
+			case ALPHA: currentRedo = shrRedoAlpha; break;
+			case ALPHA2: currentRedo = shrRedoAlpha2; break;
+			default: currentRedo = shrRedo; break;
+		}
         for (int x = 0; x < MapColumns; x++) {
             for (int y = 0; y < MapRows; y++) {
                 currentMap[x][y] = currentRedo[x][y];
@@ -1470,14 +1577,26 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
     }
 
 	public Image getCurrentImage() {
-		return blnAlphaLayer ? imgMapAlpha : imgMap;
+		switch (currentLayer) {
+			case ALPHA: return imgMapAlpha;
+			case ALPHA2: return imgMapAlpha2;
+			default: return imgMap;
+		}
 	}
 
 	public Image getCurrentCursorImage() {
-		return blnAlphaLayer ? imgCursorMapAlpha : imgCursorMap;
+		switch (currentLayer) {
+			case ALPHA: return imgCursorMapAlpha;
+			case ALPHA2: return imgCursorMapAlpha2;
+			default: return imgCursorMap;
+		}
 	}
 
 	public Image getCurrentPaletteImage() {
-		return blnAlphaLayer ? imgMapPaletteAlpha : imgMapPalette;
+		switch (currentLayer) {
+			case ALPHA: return imgMapPaletteAlpha;
+			case ALPHA2: return imgMapPaletteAlpha2;
+			default: return imgMapPalette;
+		}
 	}
 }
