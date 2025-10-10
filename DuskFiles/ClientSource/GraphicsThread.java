@@ -41,6 +41,7 @@ public class GraphicsThread implements Runnable
 			{
 				appParent.imgOriginalMap = ImageIO.read(new URL(appParent.strWebAssetPath+"/images/map.gif"));
 				appParent.imgOriginalMapAlpha = ImageIO.read(new URL(appParent.strWebAssetPath+"/images/mapalpha.gif"));
+				appParent.imgOriginalMapAlpha2 = ImageIO.read(new URL(appParent.strWebAssetPath+"/images/mapalpha2.gif"));
 				appParent.imgOriginalPlayers = ImageIO.read(new URL(appParent.strWebAssetPath+"/images/players.gif"));
 				appParent.imgOriginalSprites = ImageIO.read(new URL(appParent.strWebAssetPath+"/images/sprites.gif"));
 			}
@@ -56,6 +57,7 @@ public class GraphicsThread implements Runnable
 			{
 				appParent.imgOriginalMap = ImageIO.read(new File(prefix+"somedusk/images/map.gif"));
 				appParent.imgOriginalMapAlpha = ImageIO.read(new File(prefix+"somedusk/images/mapalpha.gif"));
+				appParent.imgOriginalMapAlpha2 = ImageIO.read(new File(prefix+"somedusk/images/mapalpha2.gif"));
 				appParent.imgOriginalPlayers = ImageIO.read(new File(prefix+"somedusk/images/players.gif"));
 				appParent.imgOriginalSprites = ImageIO.read(new File(prefix+"somedusk/images/sprites.gif"));
 			}
@@ -69,6 +71,7 @@ public class GraphicsThread implements Runnable
 			MediaTracker mdtTracker = new MediaTracker(appParent.frame);
 			mdtTracker.addImage(appParent.imgOriginalMap,0);
 			mdtTracker.addImage(appParent.imgOriginalMapAlpha,0);
+			mdtTracker.addImage(appParent.imgOriginalMapAlpha2,0);
 			mdtTracker.addImage(appParent.imgOriginalPlayers,0);
 			mdtTracker.addImage(appParent.imgOriginalSprites,0);
 			mdtTracker.waitForAll();

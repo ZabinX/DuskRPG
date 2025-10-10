@@ -103,7 +103,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     
 	Image imgOriginalSprites;
 	Image imgOriginalPlayers;
-	Image imgOriginalMap, imgOriginalMapAlpha;
+	Image imgOriginalMap, imgOriginalMapAlpha, imgOriginalMapAlpha2;
 	Image imgSprites;
 	Image imgPlayers;
 	Image imgMap;
@@ -115,7 +115,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	DataOutputStream stmOut;
 	DataInputStream stmIn;
 	
-	short shrMap[][], shrMapAlpha[][];
+	short shrMap[][], shrMapAlpha[][], shrMapAlpha2[][];
 	int mapSizeX=21,
 		mapSizeY=11,
 		viewRangeX=10,
@@ -602,6 +602,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							for (int i2=0;i2<mapSizeY;i2++)
 							{
 								shrMap[i][i2] = Short.parseShort(stmIn.readLine());
+							}
+						}
+						for (int i=0;i<mapSizeX;i++)
+						{
+							for (int i2=0;i2<mapSizeY;i2++)
+							{
+								shrMapAlpha2[i][i2] = Short.parseShort(stmIn.readLine());
 							}
 						}
 						for (int i=0;i<mapSizeX;i++)
@@ -1101,6 +1108,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					viewRangeY = (mapSizeY-1)/2;
 					shrMap = new short[mapSizeX][mapSizeY];
 					shrMapAlpha = new short[mapSizeX][mapSizeY];
+					shrMapAlpha2 = new short[mapSizeX][mapSizeY];
 					if (blnApplet)
 					{
 						stmOut.writeBytes("appletimages\n");
@@ -1919,6 +1927,32 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 										(tileIDToDraw + 1) * intOriginalTileSize, intOriginalTileSize,
 										null);
 	
+						} catch(Exception e) {}
+					}
+				}
+			}
+	
+			// Draw middle alpha layer (alpha2)
+			for (int i=startTileX; i<endTileX; i++) {
+				for (int i2=startTileY; i2<endTileY; i2++) {
+					int mapGridX = i - (LocX - viewRangeX);
+					int mapGridY = i2 - (LocY - viewRangeY);
+
+					if (mapGridX >= 0 && mapGridX < mapSizeX && mapGridY >= 0 && mapGridY < mapSizeY) {
+						try {
+							int tileID = shrMapAlpha2[mapGridX][mapGridY];
+							if (tileID == 0) continue; // Skip transparent tile
+
+							double screenX = (i - startTileX) * intImageSize - offsetX;
+							double screenY = (i2 - startTileY) * intImageSize - offsetY;
+							
+							gD.drawImage(imgOriginalMapAlpha2,
+										(int)screenX, (int)screenY,
+										(int)(screenX + intImageSize), (int)(screenY + intImageSize),
+										tileID * intOriginalTileSize, 0,
+										(tileID + 1) * intOriginalTileSize, intOriginalTileSize,
+										null);
+
 						} catch(Exception e) {}
 					}
 				}

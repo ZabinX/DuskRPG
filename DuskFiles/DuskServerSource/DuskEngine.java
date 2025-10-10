@@ -87,6 +87,7 @@ public class DuskEngine implements Runnable
 		MapColumns;
 	protected short shrMap[][];
 	protected short shrMapAlpha[][];
+	protected short shrMapAlpha2[][];
 	protected short shrMapOwnerPrivs[][];
 	protected int intMapOwnerID[][];
 	protected Config IDtoName;
@@ -156,12 +157,13 @@ public class DuskEngine implements Runnable
 				rafFile = new RandomAccessFile("shortmap", "r");
 				log.printMessage(Log.INFO,"Loading Map...");
                 int magicNumber = rafFile.readInt();
-                if (magicNumber == 0xD5D001) { // V2 map
-                    log.printMessage(Log.INFO,"Loading V2 map...");
+                if (magicNumber == 0xD5D002) { // V3 map
+                    log.printMessage(Log.INFO,"Loading V3 map...");
                     MapColumns = rafFile.readInt();
                     MapRows = rafFile.readInt();
                     log.printMessage(Log.VERBOSE,MapColumns + "/" + MapRows);
                     shrMap = new short[MapColumns][MapRows];
+                    shrMapAlpha2 = new short[MapColumns][MapRows];
                     shrMapAlpha = new short[MapColumns][MapRows];
                     objEntities = new DuskObject[MapColumns][MapRows];
                     for (i=0;i<MapColumns;i++) {
@@ -171,7 +173,32 @@ public class DuskEngine implements Runnable
                     }
                     for (i=0;i<MapColumns;i++) {
                         for (i2=0;i2<MapRows;i2++) {
+                            shrMapAlpha2[i][i2] = rafFile.readShort();
+                        }
+                    }
+                    for (i=0;i<MapColumns;i++) {
+                        for (i2=0;i2<MapRows;i2++) {
                             shrMapAlpha[i][i2] = rafFile.readShort();
+                        }
+                    }
+                } else if (magicNumber == 0xD5D001) { // V2 map
+                    log.printMessage(Log.INFO,"Loading V2 map...");
+                    MapColumns = rafFile.readInt();
+                    MapRows = rafFile.readInt();
+                    log.printMessage(Log.VERBOSE,MapColumns + "/" + MapRows);
+                    shrMap = new short[MapColumns][MapRows];
+                    shrMapAlpha = new short[MapColumns][MapRows];
+                    shrMapAlpha2 = new short[MapColumns][MapRows]; // Initialize with zeros
+                    objEntities = new DuskObject[MapColumns][MapRows];
+                    for (i=0;i<MapColumns;i++) {
+                        for (i2=0;i2<MapRows;i2++) {
+                            shrMap[i][i2] = rafFile.readShort();
+                        }
+                    }
+                    for (i=0;i<MapColumns;i++) {
+                        for (i2=0;i2<MapRows;i2++) {
+                            shrMapAlpha[i][i2] = rafFile.readShort();
+                            shrMapAlpha2[i][i2] = 0;
                         }
                     }
                 } else { // V1 map
@@ -181,11 +208,13 @@ public class DuskEngine implements Runnable
                     log.printMessage(Log.VERBOSE,MapColumns + "/" + MapRows);
                     shrMap = new short[MapColumns][MapRows];
                     shrMapAlpha = new short[MapColumns][MapRows]; // Initialize with zeros
+                    shrMapAlpha2 = new short[MapColumns][MapRows]; // Initialize with zeros
                     objEntities = new DuskObject[MapColumns][MapRows];
                     for (i=0;i<MapColumns;i++) {
                         for (i2=0;i2<MapRows;i2++) {
                             shrMap[i][i2] = rafFile.readShort();
                             shrMapAlpha[i][i2] = 0;
+                            shrMapAlpha2[i][i2] = 0;
                         }
                     }
                 }
