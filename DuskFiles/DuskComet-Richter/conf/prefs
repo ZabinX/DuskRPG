@@ -52,8 +52,8 @@ ExpGainMod=15
 MobReSpawnSpeed=50
 #
 #How far should a player be allowed to see?
-ViewRangeX=12
-ViewRangeY=7
+ViewRangeX=10
+ViewRangeY=5
 #How far should a player be allowed to see entities?
 EntityViewRangeX=10
 EntityViewRangeY=5

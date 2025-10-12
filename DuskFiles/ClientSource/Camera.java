@@ -23,14 +23,13 @@ public class Camera {
             targetCameraX = target.pixelX - (screenWidth / 2.0);
             targetCameraY = target.pixelY - (screenHeight / 2.0);
 
-            int buffer = 2;
-            int displayViewRangeX = viewRangeX - buffer;
-            int displayViewRangeY = viewRangeY - buffer;
+            int displayViewRangeX = viewRangeX;
+            int displayViewRangeY = viewRangeY;
 
             double displayAreaLeft = (locX - displayViewRangeX) * intImageSize;
             double displayAreaTop = (locY - displayViewRangeY) * intImageSize;
-            double displayAreaRight = (locX + displayViewRangeX + 1) * intImageSize;
-            double displayAreaBottom = (locY + displayViewRangeY + 1) * intImageSize;
+            double displayAreaRight = (locX + displayViewRangeX) * intImageSize;
+            double displayAreaBottom = (locY + displayViewRangeY) * intImageSize;
 
             double minCameraX = displayAreaLeft;
             double maxCameraX = displayAreaRight - screenWidth;
