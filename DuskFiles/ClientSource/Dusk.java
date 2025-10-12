@@ -78,8 +78,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                         blnRefreshing,
 			blnMenuRefresh,
 			blnConnected=false,
-			blnApplet,
-			blnPlayerAnimationLock=false;
+			blnApplet;
 	int intMusicTypes;
 	int intNumSongs[];
     Clip audSFX[],
@@ -128,7 +127,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     Thread thrRun;
     
     Entity player;
-    double cameraX, cameraY, targetCameraX, targetCameraY;
     	
     int intImageSize = 36;
     
@@ -140,6 +138,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	Graphics g;
 	Graphics gD;
 	GraphicsThread thrGraphics;
+	MovementManager movementManager;
+	Camera camera;
 	
 	String address = "dusk.comet-richter.ts.net";
 	int port = 7474;
@@ -378,6 +378,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
             vctParticles = new Vector<Particle>(0,3);
             vctParticlesBehind = new Vector<Particle>(0,3);
             sortedEntities = new ArrayList<Entity>();
+			movementManager = new MovementManager();
+			camera = new Camera(null);
 		}catch(Exception e)
 		{
 			System.err.println("Error connecting to server: "+e.toString());
@@ -1170,7 +1172,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						entStore = hmpEntities.get(ID);
 						if (entStore != null) {
 							if (!entStore.isMoving) {
-								startMove(entStore, 0);
+								movementManager.startMove(entStore, 0, intImageSize);
 							} else {
 								entStore.queuedMoves.add(0);
 							}
@@ -1186,7 +1188,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						entStore = hmpEntities.get(ID);
 						if (entStore != null) {
 							if (!entStore.isMoving) {
-								startMove(entStore, 1);
+								movementManager.startMove(entStore, 1, intImageSize);
 							} else {
 								entStore.queuedMoves.add(1);
 							}
@@ -1202,7 +1204,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						entStore = hmpEntities.get(ID);
 						if (entStore != null) {
 							if (!entStore.isMoving) {
-								startMove(entStore, 2);
+								movementManager.startMove(entStore, 2, intImageSize);
 							} else {
 								entStore.queuedMoves.add(2);
 							}
@@ -1218,7 +1220,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						entStore = hmpEntities.get(ID);
 						if (entStore != null) {
 							if (!entStore.isMoving) {
-								startMove(entStore, 3);
+								movementManager.startMove(entStore, 3, intImageSize);
 							} else {
 								entStore.queuedMoves.add(3);
 							}
@@ -1451,10 +1453,11 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	            Entity ent = (Entity)vctEntities.elementAt(i);
 	            if (ent.intLocX == LocX && ent.intLocY == LocY && ent.intType == 0) {
 	                player = ent;
-	                if (cameraX == 0 && cameraY == 0) {
-						cameraX = player.pixelX - ((double)frame.pnlGraphics.getWidth() / 2.0);
-						cameraY = player.pixelY - ((double)frame.pnlGraphics.getHeight() / 2.0);
+	                if (camera.x == 0 && camera.y == 0) {
+						camera.x = player.pixelX - ((double)frame.pnlGraphics.getWidth() / 2.0);
+						camera.y = player.pixelY - ((double)frame.pnlGraphics.getHeight() / 2.0);
 	                }
+					camera.setTarget(player);
 	                return;
 	            }
 	        }
@@ -1534,8 +1537,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			int y = evt.getY();
  			if(!blnLoaded) return;
  	
- 			int destX = (int)( (x + cameraX) / intImageSize );
- 			int destY = (int)( (y + cameraY) / intImageSize );
+ 			int destX = (int)( (x + camera.x) / intImageSize );
+ 			int destY = (int)( (y + camera.y) / intImageSize );
  			
 			if (SwingUtilities.isLeftMouseButton(evt)) {
 				synchronized(vctCrossMarkers) {
@@ -1706,56 +1709,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 		}
 	}
-	
-	private void startMove(Entity ent, int direction) {
-		if (direction < 0 || direction > 3) return;
-
-		if (direction == 0) { // North
-			ent.intMoveDirection = 0;
-			ent.targetX = ent.pixelX;
-			ent.targetY = ent.pixelY - intImageSize;
-			ent.pendingLocX = (int)ent.intLocX;
-			ent.pendingLocY = (int)ent.intLocY - 1;
-		} else if (direction == 1) { // South
-			ent.intMoveDirection = 1;
-			ent.targetX = ent.pixelX;
-			ent.targetY = ent.pixelY + intImageSize;
-			ent.pendingLocX = (int)ent.intLocX;
-			ent.pendingLocY = (int)ent.intLocY + 1;
-		} else if (direction == 2) { // West
-			ent.intMoveDirection = 2;
-			ent.targetX = ent.pixelX - intImageSize;
-			ent.targetY = ent.pixelY;
-			ent.pendingLocX = (int)ent.intLocX - 1;
-			ent.pendingLocY = (int)ent.intLocY;
-		} else if (direction == 3) { // East
-			ent.intMoveDirection = 3;
-			ent.targetX = ent.pixelX + intImageSize;
-			ent.targetY = ent.pixelY;
-			ent.pendingLocX = (int)ent.intLocX + 1;
-			ent.pendingLocY = (int)ent.intLocY;
-		}
-		ent.hasPendingMove = true;
-		ent.isMoving = true;
-	}
 
 	public void update(int intAnimTick)
 	{
-		if (blnPlayerAnimationLock) {
-			double cameraStopThreshold = 0.5;
-			if (Math.abs(cameraX - targetCameraX) < cameraStopThreshold && Math.abs(cameraY - targetCameraY) < cameraStopThreshold) {
-				blnPlayerAnimationLock = false;
-				if (player != null && player.intStep != -1) {
-					switch (player.intMoveDirection) {
-						case 0: player.intStep = 0; break;
-						case 1: player.intStep = 2; break;
-						case 2: player.intStep = 4; break;
-						case 3: player.intStep = 6; break;
-					}
-					player.intMoveDirection = -1;
-				}
-			}
-		}
 		synchronized (vctCrossMarkers) {
 			for (int i = vctCrossMarkers.size() - 1; i >= 0; i--) {
 				CrossMarker marker = vctCrossMarkers.elementAt(i);
@@ -1766,7 +1722,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 		}
 		synchronized (vctEntities) {
-		final double entityMoveSpeed = (double)intImageSize / (playerTicks / 40.0);
+	    movementManager.update(vctEntities, playerTicks, player, camera);
+	    camera.update(frame.pnlGraphics.getWidth(), frame.pnlGraphics.getHeight(), LocX, LocY, viewRangeX, viewRangeY, intImageSize);
 
 	    synchronized (vctDamageSplats) {
 	        for (int i = vctDamageSplats.size() - 1; i >= 0; i--) {
@@ -1779,118 +1736,17 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	            }
 	        }
 	    }
-
-	    synchronized (vctEntities) {
-	        for (int i=0; i<vctEntities.size(); i++) {
-	            Entity ent = (Entity)vctEntities.elementAt(i);
-				boolean shouldAnimate = ent.isMoving || (ent == player && blnPlayerAnimationLock);
-
-				if (shouldAnimate) {
-					ent.animCounter++;
-					int animThreshold = 15;
-					if (ent.animCounter >= animThreshold) {
-						ent.walkFrameToggle = !ent.walkFrameToggle;
-						ent.animCounter = 0;
-					}
-					int frameOffset = ent.walkFrameToggle ? 1 : 0;
-					if (ent.intStep != -1) {
-						switch (ent.intMoveDirection) {
-							case 0: ent.intStep = 0 + frameOffset; break;
-							case 1: ent.intStep = 2 + frameOffset; break;
-							case 2: ent.intStep = 4 + frameOffset; break;
-							case 3: ent.intStep = 6 + frameOffset; break;
-						}
-					}
-				}
-
-	            if (ent.isMoving) {
-	                double dx = ent.targetX - ent.pixelX;
-	                double dy = ent.targetY - ent.pixelY;
-					double distance = Math.sqrt(dx*dx + dy*dy);
-	
-	                if (distance < entityMoveSpeed) {
-	                    ent.pixelX = ent.targetX;
-	                    ent.pixelY = ent.targetY;
-	                    ent.isMoving = false;
-	
-	                    if (ent == player) {
-	                        blnPlayerAnimationLock = true;
-	                    } else {
-							if (ent.intStep != -1) {
-								switch (ent.intMoveDirection) {
-									case 0: ent.intStep = 0; break;
-									case 1: ent.intStep = 2; break;
-									case 2: ent.intStep = 4; break;
-									case 3: ent.intStep = 6; break;
-								}
-							}
-	                        ent.intMoveDirection = -1;
-	                    }
-
-						if (ent.hasPendingMove) {
-							ent.intLocX = ent.pendingLocX;
-							ent.intLocY = ent.pendingLocY;
-							ent.hasPendingMove = false;
-						}
-
-						if (!ent.queuedMoves.isEmpty()) {
-							startMove(ent, ent.queuedMoves.poll());
-						}
-
-	                    if (ent == player) {
-	                        reloadJComboBoxAttack();
-	                    }
-	                } else { 
-						double angle = Math.atan2(dy, dx);
-						ent.pixelX += entityMoveSpeed * Math.cos(angle);
-						ent.pixelY += entityMoveSpeed * Math.sin(angle);
-	                }
-	            }
-	        }
-	    
-			int startTileX = 0, startTileY = 0, endTileX = 0, endTileY = 0;
-			double offsetX = 0, offsetY = 0;
-			if (player != null) {
-				if (frame.pnlGraphics.getWidth() == 0) return;
-	
-				targetCameraX = player.pixelX - (frame.pnlGraphics.getWidth() / 2.0);
-				targetCameraY = player.pixelY - (frame.pnlGraphics.getHeight() / 2.0);
-	
-				// Define the intended display area, including a buffer to prevent black bars.
-				int buffer = 2; // A 2-tile buffer.
-				int displayViewRangeX = viewRangeX - buffer;
-				int displayViewRangeY = viewRangeY - buffer;
-
-				// Calculate the boundaries of this display area in world coordinates.
-				double displayAreaLeft = (LocX - displayViewRangeX) * intImageSize;
-				double displayAreaTop = (LocY - displayViewRangeY) * intImageSize;
-				double displayAreaRight = (LocX + displayViewRangeX + 1) * intImageSize;
-				double displayAreaBottom = (LocY + displayViewRangeY + 1) * intImageSize;
-
-				// Clamp the camera's target to these boundaries.
-				double minCameraX = displayAreaLeft;
-				double maxCameraX = displayAreaRight - frame.pnlGraphics.getWidth();
-				double minCameraY = displayAreaTop;
-				double maxCameraY = displayAreaBottom - frame.pnlGraphics.getHeight();
-
-				targetCameraX = Math.max(minCameraX, Math.min(targetCameraX, maxCameraX));
-				targetCameraY = Math.max(minCameraY, Math.min(targetCameraY, maxCameraY));
-
-				double cameraSmoothing = 0.05;
-				cameraX += (targetCameraX - cameraX) * cameraSmoothing;
-				cameraY += (targetCameraY - cameraY) * cameraSmoothing;
-			}
 			
 			gD.setColor(Color.black);
 			gD.fillRect(0, 0, imgDisplay.getWidth(null), imgDisplay.getHeight(null));
-		
-			startTileX = (int)Math.floor(cameraX / intImageSize);
-			startTileY = (int)Math.floor(cameraY / intImageSize);
-			endTileX = (int)Math.floor((cameraX + frame.pnlGraphics.getWidth()) / intImageSize) + 1;
-			endTileY = (int)Math.floor((cameraY + frame.pnlGraphics.getHeight()) / intImageSize) + 1;
+
+			int startTileX = (int)Math.floor(camera.x / intImageSize);
+			int startTileY = (int)Math.floor(camera.y / intImageSize);
+			int endTileX = (int)Math.floor((camera.x + frame.pnlGraphics.getWidth()) / intImageSize) + 1;
+			int endTileY = (int)Math.floor((camera.y + frame.pnlGraphics.getHeight()) / intImageSize) + 1;
 	
-			offsetX = cameraX - (startTileX * intImageSize);
-			offsetY = cameraY - (startTileY * intImageSize);
+			double offsetX = camera.x - (startTileX * intImageSize);
+			double offsetY = camera.y - (startTileY * intImageSize);
 	
 			for (int i=startTileX; i<endTileX; i++) {
 				for (int i2=startTileY; i2<endTileY; i2++) {
@@ -2002,8 +1858,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	    	Font boldFont = new Font(originalFont.getName(), Font.BOLD, 16);
 	    	gD.setFont(boldFont);
 	        for (DamageSplat splat : vctDamageSplats) {
-	            double screenX = splat.x - cameraX;
-	            double screenY = splat.y - cameraY;
+	            double screenX = splat.x - camera.x;
+	            double screenY = splat.y - camera.y;
 	            gD.setColor(Color.BLACK);
 	            gD.drawString(splat.text, (int)screenX + 1, (int)screenY + 1);
 	            gD.setColor(splat.color);
@@ -2018,8 +1874,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					g2d.setStroke(new BasicStroke(3)); // Make the "X" thicker
 			
 					for (CrossMarker marker : vctCrossMarkers) {
-						double screenX = marker.mapX * intImageSize - cameraX;
-						double screenY = marker.mapY * intImageSize - cameraY;
+						double screenX = marker.mapX * intImageSize - camera.x;
+						double screenY = marker.mapY * intImageSize - camera.y;
 			
 						// Calculate alpha for fade-out effect
 						float alpha = (float) marker.lifetime / (float) marker.maxLifetime;
@@ -2104,7 +1960,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 		}
 	}
-}
 	
 	void drawEntity(Entity entStore)
 	{
@@ -2118,8 +1973,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			screenX = 10 * intImageSize;
 			screenY = 5 * intImageSize;
 		} else {
-			screenX = entStore.pixelX - cameraX;
-			screenY = entStore.pixelY - cameraY;
+			screenX = entStore.pixelX - camera.x;
+			screenY = entStore.pixelY - camera.y;
 		}
 
 		if (entStore.intFlag != 0)
@@ -2367,8 +2222,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						screenX = (frame.pnlGraphics.getWidth() / 2.0) + (p.x - (player.pixelX + intImageSize / 2.0));
 						screenY = (frame.pnlGraphics.getHeight() / 2.0) + (p.y - player.pixelY);
 					} else {
-						screenX = p.x - cameraX;
-						screenY = p.y - cameraY;
+						screenX = p.x - camera.x;
+						screenY = p.y - camera.y;
 					}
 
 					g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, p.alpha));
@@ -2404,7 +2259,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						if (p.type == ParticleType.LIGHTNING || p.type == ParticleType.SHOCK) {
 							if (p.parent1 != null && p.parent2 != null) {
 								g2d.setStroke(new BasicStroke(p.size));
-								g2d.drawLine((int)(p.parent1.x - cameraX), (int)(p.parent1.y - cameraY), (int)(p.parent2.x - cameraX), (int)(p.parent2.y - cameraY));
+								g2d.drawLine((int)(p.parent1.x - camera.x), (int)(p.parent1.y - camera.y), (int)(p.parent2.x - camera.x), (int)(p.parent2.y - camera.y));
 							}
 						} else if (p.type == ParticleType.DETECT_INVIS_RAY) {
 							if (p.parent1 != null && p.parent2 != null) {
@@ -2415,10 +2270,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 									p2sx = (frame.pnlGraphics.getWidth() / 2.0) + (p.parent2.x - (player.pixelX + intImageSize / 2.0));
 									p2sy = (frame.pnlGraphics.getHeight() / 2.0) + (p.parent2.y - player.pixelY);
 								} else {
-									p1sx = p.parent1.x - cameraX;
-									p1sy = p.parent1.y - cameraY;
-									p2sx = p.parent2.x - cameraX;
-									p2sy = p.parent2.y - cameraY;
+									p1sx = p.parent1.x - camera.x;
+									p1sy = p.parent1.y - camera.y;
+									p2sx = p.parent2.x - camera.x;
+									p2sy = p.parent2.y - camera.y;
 								}
 								g2d.setStroke(new BasicStroke(p.size));
 								g2d.drawLine((int)p1sx, (int)p1sy, (int)p2sx, (int)p2sy);

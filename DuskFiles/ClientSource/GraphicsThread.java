@@ -107,6 +107,12 @@ public class GraphicsThread implements Runnable
 						intAnimTick = 0;
 					}
 
+					if (appParent.movementManager != null) {
+						appParent.movementManager.update(appParent.vctEntities, appParent.playerTicks, appParent.player, appParent.camera);
+					}
+					if (appParent.camera != null) {
+						appParent.camera.update(appParent.frame.pnlGraphics.getWidth(), appParent.frame.pnlGraphics.getHeight(), appParent.LocX, appParent.LocY, appParent.viewRangeX, appParent.viewRangeY, appParent.intImageSize);
+					}
 					appParent.update(intAnimTick);
 					appParent.paint();
 
