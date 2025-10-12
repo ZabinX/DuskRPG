@@ -99,6 +99,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     Vector<CrossMarker> vctCrossMarkers;
     Vector<Particle> vctParticles;
 	Vector<Particle> vctParticlesBehind;
+	List<Particle> tempNewParticlesFront;
+	List<Particle> tempNewParticlesBehind;
     
 	Image imgOriginalSprites;
 	Image imgOriginalPlayers;
@@ -378,6 +380,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
             vctParticles = new Vector<Particle>(0,3);
             vctParticlesBehind = new Vector<Particle>(0,3);
             sortedEntities = new ArrayList<Entity>();
+			tempNewParticlesFront = new ArrayList<Particle>();
+			tempNewParticlesBehind = new ArrayList<Particle>();
 			movementManager = new MovementManager();
 			camera = new Camera(null);
 		}catch(Exception e)
@@ -528,6 +532,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 			hmpEntities.put(entStore.ID, entStore);
 			vctEntities.addElement(entStore);
+			sortedEntities.add(entStore);
 			
 			entStore.pixelX = entStore.intLocX * intImageSize;
 			entStore.pixelY = entStore.intLocY * intImageSize;
@@ -544,6 +549,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			if (entStore != null) {
 				hmpEntities.remove(lngStore);
 				vctEntities.removeElement(entStore);
+				sortedEntities.remove(entStore);
 			}
 		}
 	}
@@ -1740,10 +1746,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			double offsetX = camera.x - (startTileX * intImageSize);
 			double offsetY = camera.y - (startTileY * intImageSize);
 	
+			int mapStartX = LocX - viewRangeX;
+			int mapStartY = LocY - viewRangeY;
 			for (int i=startTileX; i<endTileX; i++) {
 				for (int i2=startTileY; i2<endTileY; i2++) {
-					int mapGridX = i - (LocX - viewRangeX);
-					int mapGridY = i2 - (LocY - viewRangeY);
+					int mapGridX = i - mapStartX;
+					int mapGridY = i2 - mapStartY;
 	
 					if (mapGridX >= 0 && mapGridX < mapSizeX && mapGridY >= 0 && mapGridY < mapSizeY) {
 						try {
@@ -1783,8 +1791,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			// Draw middle alpha layer (alpha2)
 			for (int i=startTileX; i<endTileX; i++) {
 				for (int i2=startTileY; i2<endTileY; i2++) {
-					int mapGridX = i - (LocX - viewRangeX);
-					int mapGridY = i2 - (LocY - viewRangeY);
+					int mapGridX = i - mapStartX;
+					int mapGridY = i2 - mapStartY;
 
 					if (mapGridX >= 0 && mapGridX < mapSizeX && mapGridY >= 0 && mapGridY < mapSizeY) {
 						try {
@@ -1809,8 +1817,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			// Update and draw BEHIND particles
 			updateAndDrawParticles(vctParticlesBehind, (Graphics2D)gD);
 	
-                sortedEntities.clear();
-                sortedEntities.addAll(vctEntities);
                 Collections.sort(sortedEntities, ySortComparator);
 
 	        for (Entity entStore : sortedEntities) {
@@ -1820,8 +1826,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		    // Draw alpha layer
 		    for (int i=startTileX; i<endTileX; i++) {
 			for (int i2=startTileY; i2<endTileY; i2++) {
-				int mapGridX = i - (LocX - viewRangeX);
-				int mapGridY = i2 - (LocY - viewRangeY);
+				int mapGridX = i - mapStartX;
+				int mapGridY = i2 - mapStartY;
 
 				if (mapGridX >= 0 && mapGridX < mapSizeX && mapGridY >= 0 && mapGridY < mapSizeY) {
 					try {
@@ -2099,8 +2105,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 	private void updateAndDrawParticles(Vector<Particle> particleList, Graphics2D g2d) {
 		synchronized (particleList) {
-			List<Particle> tempNewParticlesFront = new ArrayList<>();
-			List<Particle> tempNewParticlesBehind = new ArrayList<>();
+			tempNewParticlesFront.clear();
+			tempNewParticlesBehind.clear();
 	
 			for (int i = particleList.size() - 1; i >= 0; i--) {
 				Particle p = particleList.elementAt(i);
