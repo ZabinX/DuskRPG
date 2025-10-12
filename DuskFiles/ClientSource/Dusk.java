@@ -436,16 +436,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		double circleY = feetY; // Position the circle at the player's feet.
 
 		// 1. Create the circle particle and add it to the BEHIND list.
-		Particle circleParticle = new Particle(
+		vctParticlesBehind.add(new RegenerateParticle(
 			centerX, circleY, 0, 0, effectLifetime,
-			null, 0, ParticleType.REGENERATE_CIRCLE,
-			null, false, true, null, null, 0, target, // pulse = true
-			true, // renderBehind
-			true  // lockToScreenCenter
-		);
-		synchronized (vctParticlesBehind) {
-			vctParticlesBehind.add(circleParticle);
-		}
+			null, 0, false, target
+		));
 
 		// 2. Create the orb spawner, parented to the target. It will handle creating the orbs.
 		// We can add it to the front list, it's invisible anyway.
@@ -1660,15 +1654,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				double vy = -speed;
 				int lifetime = 40 + (int)(Math.random() * 30);
 				Color color = Color.GREEN;
-				vctParticles.add(new Particle(
+				vctParticles.add(new HealParticle(
 					target.pixelX + (intImageSize / 2.0) + (Math.random() - 0.5) * intImageSize,
 					target.pixelY - (intImageSize / 2.0),
 					vx,
 					vy,
 					lifetime,
 					color,
-					2,
-					ParticleType.HEAL
+					2
 				));
 			}
 		}
@@ -1701,11 +1694,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				double vx = (finalX - startX) / lifetime;
 				double vy = (finalY - startY) / lifetime;
 	
-				Particle shield = new Particle(
+				vctParticles.add(new ArmorParticle(
 					startX, startY, vx, vy, lifetime + 20,
-					null, 0, ParticleType.ARMOR, imgArmorParticle, false, false, null, null, 0
-				);
-				vctParticles.add(shield);
+					imgArmorParticle
+				));
 			}
 		}
 	}
@@ -2250,6 +2242,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						g2d.drawOval(ovalX, ovalY, ovalWidth, ovalHeight);
 						g2d.setStroke(originalStroke);
 
+					} else if (p instanceof HealParticle) {
+						((HealParticle) p).draw(g2d, camera.x, camera.y);
+					} else if (p instanceof ArmorParticle) {
+						((ArmorParticle) p).draw(g2d, camera.x, camera.y);
+					} else if (p instanceof RegenerateParticle) {
+						((RegenerateParticle) p).draw(g2d, camera.x, camera.y, intImageSize);
 					} else if (p.image != null) {
 						int imgWidth = p.image.getWidth(null);
 						int imgHeight = p.image.getHeight(null);

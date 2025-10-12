@@ -21,6 +21,7 @@ public class MovementManager {
         }
 
         final double entityMoveSpeed = 36.0 / (playerTicks / 40.0);
+        final double squaredEntityMoveSpeed = entityMoveSpeed * entityMoveSpeed;
 
         for (int i = 0; i < entities.size(); i++) {
             Entity ent = entities.elementAt(i);
@@ -47,9 +48,9 @@ public class MovementManager {
             if (ent.isMoving) {
                 double dx = ent.targetX - ent.pixelX;
                 double dy = ent.targetY - ent.pixelY;
-                double distance = Math.sqrt(dx * dx + dy * dy);
+                double squaredDistance = dx * dx + dy * dy;
 
-                if (distance < entityMoveSpeed) {
+                if (squaredDistance < squaredEntityMoveSpeed) {
                     ent.pixelX = ent.targetX;
                     ent.pixelY = ent.targetY;
                     ent.isMoving = false;
@@ -118,4 +119,5 @@ public class MovementManager {
         ent.isMoving = true;
     }
 }
+
 
