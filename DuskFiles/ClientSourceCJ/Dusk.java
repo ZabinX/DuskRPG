@@ -98,6 +98,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	Entity entEntities[][],
 			entBuffer[][];
 	
+	Entity player;
 	boolean intStep,
 			blnMusic=true;
     Thread thrRun;
@@ -257,6 +258,32 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			System.err.println("Error connecting to server: "+e.toString());
 			addText("Error connecting to server: "+e.toString()+"\n");
 		}
+	}
+
+	void findPlayer() {
+	    synchronized(vctEntities) {
+	        for(int i=0; i<vctEntities.size(); i++) {
+	            Entity ent = (Entity)vctEntities.elementAt(i);
+	            if (ent.intLocX == LocX && ent.intLocY == LocY && ent.intType == 0) {
+	                player = ent;
+	                return;
+	            }
+	        }
+	    }
+	}
+
+	Entity findMobAt(int x, int y) {
+		synchronized (vctEntities) {
+			for (int i = 0; i < vctEntities.size(); i++) {
+				Entity ent = (Entity) vctEntities.elementAt(i);
+				if (ent.intLocX == x && ent.intLocY == y && (ent.intType == 0 || ent.intType == 1 || ent.intType == 4)) {
+					if (ent != player) {
+						return ent;
+					}
+				}
+			}
+		}
+		return null;
 	}
 	
 	void addText(String strAdd)
@@ -750,6 +777,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					reloadJComboBoxLook();
 					reloadJComboBoxGet();
 					reloadJComboBoxAttack();
+					findPlayer();
 		        	update(0);
 		        	paint();
 					}
@@ -800,6 +828,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		            if (entStore != null)
 		            {
 		          		addEntity(entStore);
+		          		if (entStore.intLocX == LocX && entStore.intLocY == LocY && entStore.intType == 0) {
+		          			findPlayer();
+		          		}
 		            }
 					reloadJComboBoxLook();
 					reloadJComboBoxGet();
@@ -1666,14 +1697,30 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
  			int destX = (x / intImageSize) + LocX - viewRangeX;
  			int destY = (y / intImageSize) + LocY - viewRangeY;
  			
- 			//Move to location
- 			try
- 			{
- 	 			stmOut.writeBytes("goto " + destX + " " + destY + "\n");
- 			}catch(IOException e)
- 			{
- 	 			addText("Error at mouseDown(): "+e.toString()+"\n");
- 			}
+ 			if (evt.getButton() == MouseEvent.BUTTON1) {
+				try {
+					stmOut.writeBytes("findpath " + destX + " " + destY + "\n");
+				} catch (IOException e) {
+					addText("Error at mouseClicked(): " + e.toString() + "\n");
+				}
+			} else if (evt.getButton() == MouseEvent.BUTTON3) {
+				Entity mob = findMobAt(destX, destY);
+				if (mob != null) {
+					try {
+						// Send the correct attack command: "attack <name> #<ID>"
+						stmOut.writeBytes("attack " + mob.strName + "\n");
+					} catch (IOException e) {
+						addText("Error at mouseClicked() for attack: " + e.toString() + "\n");
+					}
+				} else {
+					// If no mob, just pathfind
+					try {
+						stmOut.writeBytes("findpath " + destX + " " + destY + "\n");
+					} catch (IOException e) {
+						addText("Error at mouseClicked() for findpath: " + e.toString() + "\n");
+					}
+				}
+			}
 		}
 		frame.txtInput.requestFocus();
 	}

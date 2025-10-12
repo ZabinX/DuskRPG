@@ -1774,6 +1774,42 @@ public class LivingThing extends DuskObject implements Runnable
    		//End of block by Randall Leeds and Tom Weingarten
 	}
 
+	public String findpath(int destX, int destY) {
+		if (thnMaster != null) {
+			if (!isPet() || thnMaster.thnFollowing == this) {
+				return "You can't move while you're following someone.";
+			}
+		}
+		if (Math.abs(destX - intLocX) > engGame.viewrangeX || Math.abs(destY - intLocY) > engGame.viewrangeY) {
+			return null;
+		}
+
+		Pathfinder pathfinder = new Pathfinder(engGame, this);
+		java.util.List<PathNode> path = pathfinder.findPath(intLocX, intLocY, destX, destY);
+
+		if (path == null) {
+			return "No path found.";
+		}
+
+		synchronized(vctMovement) {
+			vctMovement.removeAllElements();
+			for (int i = 1; i < path.size(); i++) {
+				PathNode from = path.get(i-1);
+				PathNode to = path.get(i);
+				if (to.x < from.x) {
+					vctMovement.addElement("w");
+				} else if (to.x > from.x) {
+					vctMovement.addElement("e");
+				} else if (to.y < from.y) {
+					vctMovement.addElement("n");
+				} else if (to.y > from.y) {
+					vctMovement.addElement("s");
+				}
+			}
+		}
+		return null;
+	}
+
 	protected synchronized void moveTo(int newLocX,int newLocY, int intSendByte, int intNewStep)
 	{
 		if (privs < 5 && (newLocX >= (engGame.MapColumns-1) ||
@@ -4192,5 +4228,7 @@ public class LivingThing extends DuskObject implements Runnable
 		}
 	}
  }
+
+
 
 
