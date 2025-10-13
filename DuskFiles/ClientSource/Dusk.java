@@ -629,6 +629,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							if (entStore != player && (Math.abs(entStore.intLocX - LocX) > viewRangeX || Math.abs(entStore.intLocY - LocY) > viewRangeY))
 							{
 								iter.remove();
+                                                                sortedEntities.remove(entStore);
 								hmpEntities.remove(entStore.ID);
 							}
 						}

@@ -20,7 +20,7 @@ public class MovementManager {
             }
         }
 
-        final double entityMoveSpeed = 36.0 / (playerTicks / 40.0);
+        final double entityMoveSpeed = 40.0 / (playerTicks / 40.0);
         final double squaredEntityMoveSpeed = entityMoveSpeed * entityMoveSpeed;
 
         for (int i = 0; i < entities.size(); i++) {
