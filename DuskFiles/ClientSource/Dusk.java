@@ -143,7 +143,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	MovementManager movementManager;
 	Camera camera;
 	
-	String address = "dusk.comet-richter.ts.net";
+	String address = "127.0.0.1";
 	int port = 7474;
     
     public Dusk(Applet parent)
@@ -204,11 +204,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		   		address = appShell.getParameter("address");
 		   		port = Integer.parseInt(appShell.getParameter("port"));
 		   		strWebAssetPath = appShell.getParameter("webAssetPath");
-		   		connect();
-		    }else
-			{
-				addText("<RGB 255 0 0>Click \"connect\" to connect to a server and begin playing.</RGB>\n");
-			}
+		    }
+			connect();
 			try {
 				audSFX = new Clip[12];
 				for (int i = 0; i < 12; i++) {

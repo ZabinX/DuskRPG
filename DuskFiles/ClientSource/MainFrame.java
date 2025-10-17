@@ -96,7 +96,6 @@ public class MainFrame extends JFrame implements ItemListener
     public Document docGossip;
 
 	EquipmentFrame frmEquipment;
-	ConnectFrame frmConnect;
 	Dusk appParent;
 	
 	public MainFrame(Dusk inParent)
@@ -168,8 +167,6 @@ public class MainFrame extends JFrame implements ItemListener
                 pnlStats.add(btnSleep);
                 pnlStats.add(btnWake);
 		pnlStats.add(btnEquipment);
-		if (!appParent.blnApplet)
-		pnlStats.add(btnConnect);
 		
 		pnlContents.setLayout(null);
 		pnlContents.setVisible(true);
@@ -760,12 +757,6 @@ public class MainFrame extends JFrame implements ItemListener
 				btnEquipmentActionPerformed(e);
 			}
 		});
-		btnConnect.addActionListener(new java.awt.event.ActionListener() {
-                        @Override
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				btnConnectActionPerformed(e);
-			}
-		});
 		addWindowListener(new java.awt.event.WindowAdapter() {
                         @Override
 			public void windowClosing(java.awt.event.WindowEvent e) {
@@ -773,7 +764,6 @@ public class MainFrame extends JFrame implements ItemListener
 			}
 		});
 		frmEquipment = new EquipmentFrame(appParent);
-		frmConnect = new ConnectFrame(appParent);
 	}
   
   	private boolean mShown = false;
@@ -1129,12 +1119,6 @@ public class MainFrame extends JFrame implements ItemListener
 	{
 		frmEquipment.show();
 		frmEquipment.setSize(300, 440);
-	}
-	
-	public void btnConnectActionPerformed(java.awt.event.ActionEvent e)
-	{
-		frmConnect.show();
-		frmConnect.setSize(350, 200);
 	}
 	
 	public void btnQuitActionPerformed(java.awt.event.ActionEvent e)

@@ -69,10 +69,9 @@ public class Commands
 				{
 					destX = Integer.parseInt(strArgs.substring(0, strArgs.lastIndexOf(' ')));
 					destY = Integer.parseInt(strArgs.substring(strArgs.lastIndexOf(' ') + 1));
-				}catch(Exception e)
+				}catch(NumberFormatException e)
 				{
-					engGame.log.printError("parseCommand():"+lt.strName+" tried to "+strStore, e);
-					return null;
+					return "Invalid coordinates for findpath.";
 				}
 				return lt.findpath(destX, destY);
 			}
@@ -151,10 +150,9 @@ public class Commands
 			{
    				destX = Integer.parseInt(strArgs.substring(0, strArgs.lastIndexOf(' ')));
     			destY = Integer.parseInt(strArgs.substring(strArgs.lastIndexOf(' ') + 1));
-    		}catch(Exception e)
+    		}catch(NumberFormatException e)
     		{
-				engGame.log.printError("parseCommand():"+lt.strName+" tried to "+strStore, e);
-    			return null;
+    			return "Invalid coordinates for goto.";
     		}
 			return lt.goTo(destX, destY);
 		}
@@ -255,7 +253,12 @@ public class Commands
 						return "Make them what level of a god?";
 					}
 					String sName = strArgs.substring(0,iSPloc).trim();
-					int level = Integer.parseInt(strArgs.substring(iSPloc).trim());
+				int level;
+				try {
+					level = Integer.parseInt(strArgs.substring(iSPloc).trim());
+				} catch (NumberFormatException e) {
+					return "Invalid privilege level.";
+				}
 
 					LivingThing thnStore = engGame.getPlayer(sName);
 					if (thnStore == null)
@@ -340,9 +343,8 @@ public class Commands
 					{
 						engGame.floodLimit = (long)Integer.parseInt(strArgs);
 						return "Set floodlimit to "+strArgs+" milliseconds.";
-					} catch (Exception e)
+					} catch (NumberFormatException e)
 					{
-						engGame.log.printError("parseCommand():Invalid value \""+strArgs+"\" for floodlimit.", e);
 						return "Invalid value \""+strArgs+"\" for floodlimit.";
 					}
 				}else if (strCommand.equals("ipban"))
@@ -396,9 +398,8 @@ public class Commands
 						int level = Integer.parseInt(strArgs);
 						engGame.log.setLogLevel(level);
 						return "Logging level is now "+engGame.log.getLogLevel();
-					} catch (Exception e)
+					} catch (NumberFormatException e)
 					{
-						engGame.log.printError("parseCommand():Invalid value \""+strArgs+"\" for loglevel.", e);
 						return "Invalid value \""+strArgs+"\" for loglevel.";
 					}
 				}else if (strCommand.equals("gc"))
@@ -1087,7 +1088,6 @@ public class Commands
 					duration = Integer.parseInt(strArgs.substring(strArgs.indexOf(" ")+1));
 				}catch(Exception e)
 				{
-					engGame.log.printError("parseCommand():When "+lt.strName+" tried to nochannel "+strArgs, e);
 					return "nochannel who for how long?";
 				}
 				if (thnStore == null)
@@ -1157,7 +1157,7 @@ public class Commands
 					if (destY < 0)
 						destY = 0;
     				lt.changeLocBypass(destX,destY);
-    			}catch (Exception e)
+    			}catch (NumberFormatException e)
     			{
     				LivingThing thnStore = engGame.getPlayer(strArgs);
     				if (thnStore == null)
@@ -2521,7 +2521,7 @@ public class Commands
 					{
 						lt.chatMessage("You don't have that much gp");
 					}
-				}catch (Exception e)
+				}catch (NumberFormatException e)
 				{
 					return "That is not a valid amount of gp to give.";
 				}
@@ -2618,7 +2618,7 @@ public class Commands
 				int i = strArgs.indexOf(" ");
 				quantity = Integer.parseInt(strArgs.substring(0,i));
 				strArgs = strArgs.substring(i+1);
-			}catch(Exception e)
+			}catch(NumberFormatException e)
 			{
 				return "How many of what do you want to buy?";
 			}
@@ -2798,7 +2798,7 @@ public class Commands
 				int i = strArgs.indexOf(" ");
 				quantity = Integer.parseInt(strArgs.substring(0,i));
 				strArgs = strArgs.substring(i+1);
-			}catch(Exception e)
+			}catch(NumberFormatException e)
 			{
 				return "How many of what do you want to sell?";
 			}
@@ -3247,7 +3247,12 @@ public class Commands
 			{
 				return null;
 			}
-			long lngID = Long.parseLong(strArgs);
+			long lngID;
+			try {
+				lngID = Long.parseLong(strArgs);
+			} catch (NumberFormatException e) {
+				return null; // Silently fail if ID is not a number
+			}
 			DuskObject objStore;
 			synchronized(lt.vctEntities)
 			{

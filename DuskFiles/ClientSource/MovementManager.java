@@ -20,7 +20,7 @@ public class MovementManager {
             }
         }
 
-        final double entityMoveSpeed = 40.0 / (playerTicks / 40.0);
+        final double entityMoveSpeed = 50.0 / (playerTicks / 50.0);
         final double squaredEntityMoveSpeed = entityMoveSpeed * entityMoveSpeed;
 
         for (int i = 0; i < entities.size(); i++) {
@@ -29,7 +29,7 @@ public class MovementManager {
             boolean shouldAnimate = ent.isMoving || (ent == player && blnPlayerAnimationLock);
             if (shouldAnimate) {
                 ent.animCounter++;
-                int animThreshold = 15;
+                int animThreshold = 7;
                 if (ent.animCounter >= animThreshold) {
                     ent.walkFrameToggle = !ent.walkFrameToggle;
                     ent.animCounter = 0;

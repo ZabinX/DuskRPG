@@ -111,7 +111,7 @@ public class GraphicsThread implements Runnable
 					appParent.paint();
 
 					// Sleep to control frame rate, aiming for ~50 FPS.
-					Thread.sleep(10);
+					Thread.sleep(30);
 				}catch(Exception e){
 					System.err.println("Error in graphics thread: " + e.toString());
 				}
@@ -121,7 +121,7 @@ public class GraphicsThread implements Runnable
 				// If not loaded or connected, sleep longer to avoid burning CPU.
 				try
 				{
-					Thread.sleep(100);
+					Thread.sleep(2);
 				}catch(Exception e){}
 			}
 		}

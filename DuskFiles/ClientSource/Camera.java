@@ -4,7 +4,7 @@ public class Camera {
     public double targetCameraX = 0;
     public double targetCameraY = 0;
     private Entity target;
-    private double cameraSmoothing = 0.05;
+    private double cameraSmoothing = 0.1;
 
     public Camera(Entity target) {
         this.target = target;
