@@ -43,24 +43,36 @@ public class Script
 	throws Exception
 	{
 		engGame = inEngine;
-		strName = strIn;
+		int lastSlash = strIn.lastIndexOf('/');
+		String path = ".";
+		String fileName = strIn;
+		if (lastSlash != -1) {
+			path = strIn.substring(0, lastSlash);
+			fileName = strIn.substring(lastSlash + 1);
+		}
+		String correctedFileName = inEngine.getCaseInsensitiveFile(path, fileName);
+		if (lastSlash != -1) {
+			strName = path + "/" + correctedFileName;
+		} else {
+			strName = correctedFileName;
+		}
+
 		if (forcecompile)
 		{
-			File filDelete = new File(strIn+".dsko");
+			File filDelete = new File(strName+".dsko");
 			if (filDelete.exists())
 				filDelete.delete();
-			compileScript(strIn);
+			compileScript(strName);
 		}else
 		{
-			File filCompileCheck = new File(strIn+".dsko");
+			File filCompileCheck = new File(strName+".dsko");
 			if (!filCompileCheck.exists())
 			{
-				compileScript(strIn);
+				compileScript(strName);
 			}
 		}
 		varVariables = new VariableSet();
-//		rafScript = new RandomAccessFile(strIn+".dsko","r");
-		rafScript = new RandomAccessString(strIn+".dsko");
+		rafScript = new RandomAccessString(strName+".dsko");
         intLine=0;
 	}
 	

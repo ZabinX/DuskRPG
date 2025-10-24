@@ -47,7 +47,8 @@ public class Mob extends LivingThing
 		Type = 1;
 		strRace = strType;
 		strName = strType;
-		rafFile = new RandomAccessFile("defMobs/"+strType,"r");
+		String mobFileName = engGame.getCaseInsensitiveFile("defMobs", strType);
+		rafFile = new RandomAccessFile("defMobs/"+mobFileName,"r");
 		intLocX = locx;
 		intLocY = locy;
 		originalX = intLocX;
@@ -91,7 +92,8 @@ public class Mob extends LivingThing
 		Type = 1;
 		strRace = strType;
 		strName = strType;
-		rafFile = new RandomAccessFile("defMobs/"+strType,"r");
+		String mobFileName = engGame.getCaseInsensitiveFile("defMobs", strType);
+		rafFile = new RandomAccessFile("defMobs/"+mobFileName,"r");
 		intLocX = locx;
 		intLocY = locy;
 		originalX = intLocX;
@@ -380,3 +382,5 @@ public class Mob extends LivingThing
 		}
 	}
 }
+
+

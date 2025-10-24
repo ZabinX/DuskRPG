@@ -1732,7 +1732,8 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		Prop prpStore=null;
 		try
 		{
-			RandomAccessFile rafPropDef = new RandomAccessFile("defProps/"+strName, "r");
+			String fileName = getCaseInsensitiveFile("defProps", strName);
+			RandomAccessFile rafPropDef = new RandomAccessFile("defProps/"+fileName, "r");
 			prpStore = new Prop(getID());
 			prpStore.strName = strName;
 			String strStore = rafPropDef.readLine();
@@ -1806,7 +1807,8 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		String strStore="Error opening file";
 		try
 		{
-			RandomAccessFile rafConditionDef = new RandomAccessFile("defConditions/"+inName.toLowerCase(), "r");
+			String fileName = getCaseInsensitiveFile("defConditions", inName.toLowerCase());
+			RandomAccessFile rafConditionDef = new RandomAccessFile("defConditions/"+fileName, "r");
 			Condition cndStore = new Condition();
 			cndStore.strName = inName;
 			strStore = rafConditionDef.readLine();
@@ -1841,12 +1843,25 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		}
 		return null;
 	}
+
+	String getCaseInsensitiveFile(String path, String fileName) {
+		File dir = new File(path);
+		if (dir.isDirectory()) {
+			for (File file : dir.listFiles()) {
+				if (file.getName().equalsIgnoreCase(fileName)) {
+					return file.getName();
+				}
+			}
+		}
+		return fileName;
+	}
 	
 	int getSpellPercent(String strName)
 	{
 		try
 		{
-			RandomAccessFile rafSpell = new RandomAccessFile("defSpells/"+strName,"r");
+			String fileName = getCaseInsensitiveFile("defSpells", strName);
+			RandomAccessFile rafSpell = new RandomAccessFile("defSpells/"+fileName,"r");
 			SpellGroup grpStore = getSpellGroup(rafSpell.readLine());
 			rafSpell.close();
 			return grpStore.getSpellPercent(strName);
@@ -1871,7 +1886,8 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		try
 		{
 			grpStore = new SpellGroup(strName);
-			RandomAccessFile rafSpellGroup = new RandomAccessFile("defSpellGroups/"+strName,"r");
+			String fileName = getCaseInsensitiveFile("defSpellGroups", strName);
+			RandomAccessFile rafSpellGroup = new RandomAccessFile("defSpellGroups/"+fileName,"r");
 			try
 			{
 				String strStore = rafSpellGroup.readLine();
@@ -1901,12 +1917,13 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		String strStore = "Error reading file";
 		try
 		{
-			File fileTest = new File("defItems/"+inName.toLowerCase());
+			String fileName = getCaseInsensitiveFile("defItems", inName.toLowerCase());
+			File fileTest = new File("defItems/"+fileName);
 			if (!fileTest.exists())
 			{
 				return null;
 			}
-			rafItemDef = new RandomAccessFile("defItems/"+inName.toLowerCase(), "r");
+			rafItemDef = new RandomAccessFile("defItems/"+fileName, "r");
 			//itmStore = new Item(this);
 			itmStore = new Item(getID());
 			itmStore.strName = inName;
@@ -3010,7 +3027,7 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 				}
 				//End of code submitted by Randall Leeds
 				
-				if (tick%5 == 0)
+				if (tick%10 == 0)
 				{
 					for (i=0;i<vctBattles.size();i++)
 					{

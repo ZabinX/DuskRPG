@@ -404,7 +404,8 @@ public class LivingThing extends DuskObject implements Runnable
 			}
 			if (strRace != null)
 			{
-				RandomAccessFile rafRaceFile = new RandomAccessFile("defPets/"+strRace.toLowerCase(),"r");
+				String fileName = engGame.getCaseInsensitiveFile("defPets", strRace.toLowerCase());
+				RandomAccessFile rafRaceFile = new RandomAccessFile("defPets/"+fileName,"r");
 				strStore = rafRaceFile.readLine();
 				while (!(strStore == null || strStore.equals(".")))
 				{
@@ -2762,7 +2763,8 @@ public class LivingThing extends DuskObject implements Runnable
 			RandomAccessFile rafSpell = null;
 			try
 			{
-				rafSpell = new RandomAccessFile("defSpells/"+strStore2.toLowerCase(),"r");
+				String fileName = engGame.getCaseInsensitiveFile("defSpells", strStore2.toLowerCase());
+				rafSpell = new RandomAccessFile("defSpells/"+fileName,"r");
 			}catch (Exception e)
 			{
 				chatMessage("You don't know that spell.");
@@ -3642,7 +3644,8 @@ public class LivingThing extends DuskObject implements Runnable
 				}
 				strRace = strStore;
 			}
-			rafFile2 = new RandomAccessFile(strRaceDir+"/"+strRace,"r");
+			String fileName = engGame.getCaseInsensitiveFile(strRaceDir, strRace);
+			rafFile2 = new RandomAccessFile(strRaceDir+"/"+fileName,"r");
 			strStore = rafFile2.readLine();
 			while (!(strStore == null || strStore.equals(".")))
 			{
@@ -3676,7 +3679,8 @@ public class LivingThing extends DuskObject implements Runnable
 				strRace = null;
 				return;
 			}
-			rafFile2 = new RandomAccessFile(strRaceDir+"/"+strRace,"r");
+			String fileName = engGame.getCaseInsensitiveFile(strRaceDir, strRace);
+			rafFile2 = new RandomAccessFile(strRaceDir+"/"+fileName,"r");
 			strStore = rafFile2.readLine();
 			while (!(strStore == null || strStore.equals(".")))
 			{

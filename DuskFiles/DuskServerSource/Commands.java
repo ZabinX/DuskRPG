@@ -591,61 +591,79 @@ public class Commands
 				if (strArgs.startsWith("item "))
 				{
 					strArgs = strArgs.toLowerCase();
-					strFileName = "defItems/"+strArgs.substring(5);
+					String fileName = engGame.getCaseInsensitiveFile("defItems", strArgs.substring(5));
+					strFileName = "defItems/"+fileName;
 				}else if (strArgs.startsWith("conf "))
 				{
-					strFileName = "conf/"+strArgs.substring(5);
+					String fileName = engGame.getCaseInsensitiveFile("conf", strArgs.substring(5));
+					strFileName = "conf/"+fileName;
 				}else if (strArgs.startsWith("mob "))
 				{
-					strFileName = "defMobs/"+strArgs.substring(4);
+					String fileName = engGame.getCaseInsensitiveFile("defMobs", strArgs.substring(4));
+					strFileName = "defMobs/"+fileName;
 				}else if (strArgs.startsWith("command "))
 				{
-					strFileName = "commands/"+strArgs.substring(8);
+					String fileName = engGame.getCaseInsensitiveFile("commands", strArgs.substring(8));
+					strFileName = "commands/"+fileName;
 				}else if (strArgs.startsWith("race "))
 				{
-					strFileName = "defRaces/"+strArgs.substring(5);
+					String fileName = engGame.getCaseInsensitiveFile("defRaces", strArgs.substring(5));
+					strFileName = "defRaces/"+fileName;
 				}else if (strArgs.startsWith("pet "))
 				{
-					strFileName = "defPets/"+strArgs.substring(5);
+					String fileName = engGame.getCaseInsensitiveFile("defPets", strArgs.substring(5));
+					strFileName = "defPets/"+fileName;
 				}else if (strArgs.startsWith("faction"))
 				{
 					return "You cannot view faction files.";
 				}else if (strArgs.startsWith("condition "))
 				{
-					strFileName = "defConditions/"+strArgs.substring(10);
+					String fileName = engGame.getCaseInsensitiveFile("defConditions", strArgs.substring(10));
+					strFileName = "defConditions/"+fileName;
 				}else if (strArgs.startsWith("help "))
 				{
-					strFileName = "helpFiles/"+strArgs.substring(5);
+					String fileName = engGame.getCaseInsensitiveFile("helpFiles", strArgs.substring(5));
+					strFileName = "helpFiles/"+fileName;
 				}else if (strArgs.startsWith("script "))
 				{
-					strFileName = "scripts/"+strArgs.substring(7);
+					String fileName = engGame.getCaseInsensitiveFile("scripts", strArgs.substring(7));
+					strFileName = "scripts/"+fileName;
 				}else if (strArgs.startsWith("spell group "))
 				{
-					strFileName = "defSpellGroups/"+strArgs.substring(12);
+					String fileName = engGame.getCaseInsensitiveFile("defSpellGroups", strArgs.substring(12));
+					strFileName = "defSpellGroups/"+fileName;
 				}else if (strArgs.startsWith("spell "))
 				{
-					strFileName = "defSpells/"+strArgs.substring(6);
+					String fileName = engGame.getCaseInsensitiveFile("defSpells", strArgs.substring(6));
+					strFileName = "defSpells/"+fileName;
 				}else if (strArgs.startsWith("prop "))
 				{
-					strFileName = "defProps/"+strArgs.substring(5);
+					String fileName = engGame.getCaseInsensitiveFile("defProps", strArgs.substring(5));
+					strFileName = "defProps/"+fileName;
 				}else if (strArgs.startsWith("move action "))
 				{
-					strFileName = "defMoveActions/"+strArgs.substring(12);
+					String fileName = engGame.getCaseInsensitiveFile("defMoveActions", strArgs.substring(12));
+					strFileName = "defMoveActions/"+fileName;
 				}else if (strArgs.startsWith("can move "))
 				{
-					strFileName = "defCanMoveScripts/"+strArgs.substring(9);
+					String fileName = engGame.getCaseInsensitiveFile("defCanMoveScripts", strArgs.substring(9));
+					strFileName = "defCanMoveScripts/"+fileName;
 				}else if (strArgs.startsWith("can see "))
 				{
-					strFileName = "defCanSeeScripts/"+strArgs.substring(8);
+					String fileName = engGame.getCaseInsensitiveFile("defCanSeeScripts", strArgs.substring(8));
+					strFileName = "defCanSeeScripts/"+fileName;
 				}else if (strArgs.startsWith("tile action "))
 				{
-					strFileName = "defTileActions/"+strArgs.substring(12);
+					String fileName = engGame.getCaseInsensitiveFile("defTileActions", strArgs.substring(12));
+					strFileName = "defTileActions/"+fileName;
 				}else if (strArgs.startsWith("tile move "))
 				{
-					strFileName = "defTileScripts/"+strArgs.substring(10);
+					String fileName = engGame.getCaseInsensitiveFile("defTileScripts", strArgs.substring(10));
+					strFileName = "defTileScripts/"+fileName;
 				}else if (strArgs.startsWith("tile see "))
 				{
-					strFileName = "defTileSeeScripts/"+strArgs.substring(9);
+					String fileName = engGame.getCaseInsensitiveFile("defTileSeeScripts", strArgs.substring(9));
+					strFileName = "defTileSeeScripts/"+fileName;
 				}else if (strArgs.startsWith("user "))
 				{
 					if (lt.privs < 5)
@@ -2239,7 +2257,13 @@ public class Commands
 						{
 							return "There is no help on that subject";
 						}
-						rafHelp = new RandomAccessFile("helpFiles/"+strArgs,"r");
+						String fileName = engGame.getCaseInsensitiveFile("helpFiles", strArgs);
+						File fileHelp = new File("helpFiles/"+fileName);
+						if (!fileHelp.exists())
+						{
+							return "There is no help on that subject";
+						}
+						rafHelp = new RandomAccessFile("helpFiles/"+fileName,"r");
 						if (lt.popup)
 						{
 							lt.send((char)20+"Help on "+strArgs+"\n");
