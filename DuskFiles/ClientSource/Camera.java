@@ -18,7 +18,7 @@ public class Camera {
         }
     }
 
-    public void update(int screenWidth, int screenHeight, int locX, int locY, int viewRangeX, int viewRangeY, int intImageSize) {
+    public void update(int screenWidth, int screenHeight, int locX, int locY, int viewRangeX, int viewRangeY, int intImageSize, double deltaTime) {
         if (target != null) {
             targetCameraX = target.pixelX - (screenWidth / 2.0);
             targetCameraY = target.pixelY - (screenHeight / 2.0);
@@ -39,8 +39,9 @@ public class Camera {
             targetCameraX = Math.max(minCameraX, Math.min(targetCameraX, maxCameraX));
             targetCameraY = Math.max(minCameraY, Math.min(targetCameraY, maxCameraY));
 
-            x += (targetCameraX - x) * cameraSmoothing;
-            y += (targetCameraY - y) * cameraSmoothing;
+            double smoothingFactor = 1.0 - Math.pow(1.0 - cameraSmoothing, deltaTime * 33.3);
+            x += (targetCameraX - x) * smoothingFactor;
+            y += (targetCameraY - y) * smoothingFactor;
         }
     }
 }

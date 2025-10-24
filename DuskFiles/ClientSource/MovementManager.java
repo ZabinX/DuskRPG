@@ -3,7 +3,7 @@ import java.util.Vector;
 public class MovementManager {
     public boolean blnPlayerAnimationLock = false;
 
-    public void update(Vector<Entity> entities, long playerTicks, Entity player, Camera camera) {
+    public void update(Vector<Entity> entities, long playerTicks, Entity player, Camera camera, double deltaTime) {
         if (blnPlayerAnimationLock) {
             double cameraStopThreshold = 0.5;
             if (Math.abs(camera.x - camera.targetCameraX) < cameraStopThreshold && Math.abs(camera.y - camera.targetCameraY) < cameraStopThreshold) {
@@ -20,7 +20,7 @@ public class MovementManager {
             }
         }
 
-        final double entityMoveSpeed = 50.0 / (playerTicks / 50.0);
+        final double entityMoveSpeed = 70.0 / (playerTicks / 70.0);
         final double squaredEntityMoveSpeed = entityMoveSpeed * entityMoveSpeed;
 
         for (int i = 0; i < entities.size(); i++) {

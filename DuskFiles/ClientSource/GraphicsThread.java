@@ -23,7 +23,6 @@ public class GraphicsThread implements Runnable
 {
 	Dusk appParent;
 	Thread thread;
-    int intAnimTick = 0;
 
 	GraphicsThread(Dusk inParent)
 	{
@@ -52,7 +51,7 @@ public class GraphicsThread implements Runnable
 		}
 		else
 		{
-			prefix = "rc/";
+			prefix = "/app/rc/";
 			try
 			{
 				appParent.imgOriginalMap = ImageIO.read(new File(prefix+"somedusk/images/map.gif"));
@@ -91,27 +90,31 @@ public class GraphicsThread implements Runnable
 		{
 			prefix = "file:"+System.getProperty("user.dir")+prefix;
 		}
-        appParent.update(intAnimTick);
+        appParent.update(0.016); // Initial update with a small delta to avoid large initial jump
 		appParent.paint();
 
 		// The main game loop.
+		long lastTime = System.nanoTime();
 		while (true)
 		{
 			if (appParent.blnConnected && appParent.blnLoaded)
 			{
 				try
 				{
-					// Increment animation tick. Reset to avoid overflow.
-					intAnimTick++;
-					if (intAnimTick > 10000) {
-						intAnimTick = 0;
-					}
+					long currentTime = System.nanoTime();
+					double deltaTime = (currentTime - lastTime) / 1_000_000_000.0;
+					lastTime = currentTime;
 
-					appParent.update(intAnimTick);
+					// Clamp delta time to avoid large jumps if the game hangs
+					if (deltaTime > 0.1) {
+						deltaTime = 0.1;
+					}
+					
+					appParent.update(deltaTime);
 					appParent.paint();
 
-					// Sleep to control frame rate, aiming for ~50 FPS.
-					Thread.sleep(30);
+					// A minimal sleep to prevent the loop from running at max speed and to allow other threads to run.
+					Thread.sleep(30); 
 				}catch(Exception e){
 					System.err.println("Error in graphics thread: " + e.toString());
 				}
@@ -121,7 +124,7 @@ public class GraphicsThread implements Runnable
 				// If not loaded or connected, sleep longer to avoid burning CPU.
 				try
 				{
-					Thread.sleep(2);
+					Thread.sleep(90);
 				}catch(Exception e){}
 			}
 		}

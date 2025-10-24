@@ -143,7 +143,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	MovementManager movementManager;
 	Camera camera;
 	
-	String address = "127.0.0.1";
+	String address = "z.comet-richter.ts.net";
 	int port = 7474;
     
     public Dusk(Applet parent)
@@ -204,8 +204,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		   		address = appShell.getParameter("address");
 		   		port = Integer.parseInt(appShell.getParameter("port"));
 		   		strWebAssetPath = appShell.getParameter("webAssetPath");
-		    }
-			connect();
+		   		connect();
+
+
+		    }else
+                    {
+				addText("<RGB 255 0 0>Click \"connect\" to connect to a server and begin playing.</RGB>\n");
+			}
 			try {
 				audSFX = new Clip[12];
 				for (int i = 0; i < 12; i++) {
@@ -1632,7 +1637,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		scaleWindow();
 		scaleImages();
 		if (thrGraphics != null) {
-			update(thrGraphics.intAnimTick);
+			update(0.016);
 			paint();
 		}
 	}
@@ -1706,7 +1711,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 
-	public void update(int intAnimTick)
+	public void update(double deltaTime)
 	{
 		synchronized (vctCrossMarkers) {
 			for (int i = vctCrossMarkers.size() - 1; i >= 0; i--) {
@@ -1718,8 +1723,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 		}
 		synchronized (vctEntities) {
-	    movementManager.update(vctEntities, playerTicks, player, camera);
-	    camera.update(frame.pnlGraphics.getWidth(), frame.pnlGraphics.getHeight(), LocX, LocY, viewRangeX, viewRangeY, intImageSize);
+	    movementManager.update(vctEntities, playerTicks, player, camera, deltaTime);
+	    camera.update(frame.pnlGraphics.getWidth(), frame.pnlGraphics.getHeight(), LocX, LocY, viewRangeX, viewRangeY, intImageSize, deltaTime);
 
 	    synchronized (vctDamageSplats) {
 	        for (int i = vctDamageSplats.size() - 1; i >= 0; i--) {
@@ -1770,7 +1775,11 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							double screenY = (i2 - startTileY) * intImageSize - offsetY;
 			
 							if (anim != null) {
-								int frame = (intAnimTick / anim.delay) % anim.frameCount;
+								anim.progress += deltaTime;
+								if (anim.progress > anim.delay * anim.frameCount) {
+									anim.progress = 0;
+								}
+								int frame = (int)(anim.progress / anim.delay);
 								tileIDToDraw = tileID + frame;
 							}
 							
@@ -1813,7 +1822,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 	
 			// Update and draw BEHIND particles
-			updateAndDrawParticles(vctParticlesBehind, (Graphics2D)gD);
+			updateAndDrawParticles(vctParticlesBehind, (Graphics2D)gD, deltaTime);
 	
                 Collections.sort(sortedEntities, ySortComparator);
 
@@ -1848,7 +1857,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 
 		// Update and draw FRONT particles
-		updateAndDrawParticles(vctParticles, (Graphics2D)gD);
+		updateAndDrawParticles(vctParticles, (Graphics2D)gD, deltaTime);
 	    
 	    	Font originalFont = gD.getFont();
 	    	Font boldFont = new Font(originalFont.getName(), Font.BOLD, 16);
@@ -2101,7 +2110,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		particleSystem.add(mid);
 	}
 
-	private void updateAndDrawParticles(Vector<Particle> particleList, Graphics2D g2d) {
+	private void updateAndDrawParticles(Vector<Particle> particleList, Graphics2D g2d, double deltaTime) {
 		synchronized (particleList) {
 			tempNewParticlesFront.clear();
 			tempNewParticlesBehind.clear();
@@ -2112,7 +2121,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				// Always update the particle's position first.
 				// This ensures that any logic that spawns new particles (like the spawners below)
 				// will use the most up-to-date position of its parent, preventing visual detachment.
-				p.update(hmpEntities);
+				p.update(hmpEntities, deltaTime);
 
 				// Handle HARDEN spiral animation
 				if (p.type == ParticleType.HARDEN) {
@@ -2138,7 +2147,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 				// Handle regenerate spawner
 				if (p.type == ParticleType.REGENERATE_SPAWNER) {
-					p.timer--;
+					p.timer -= deltaTime;
 					if (p.timer <= 0) {
 						double radius = intImageSize * 0.6;
 						double startX = p.x + (Math.random() - 0.5) * (radius * 1.5);
@@ -2176,7 +2185,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 
 				if (p.type == ParticleType.DETECT_INVIS_SPAWNER) {
-					p.timer--;
+					p.timer -= deltaTime;
 					if (p.timer <= 0) {
 						// New logic: Rapidly activate a random subset of the 12 fixed ray positions.
 						int numRayPositions = 16;
