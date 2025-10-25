@@ -214,13 +214,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			try {
 				audSFX = new Clip[12];
 				for (int i = 0; i < 12; i++) {
-					String fileName = String.format("/rc/somedusk/audio/sfx/hit%02d.wav", i + 1);
-					InputStream audioSrc = Dusk.class.getResourceAsStream(fileName);
-					if (audioSrc == null) {
+					String fileName = String.format("/app/rc/somedusk/audio/sfx/hit%02d.wav", i + 1);
+					File audioFile = new File(fileName);
+					if (!audioFile.exists()) {
+						System.err.println("Sound effect not found: " + fileName);
 						continue;
 					}
-					InputStream bufferedIn = new BufferedInputStream(audioSrc);
-					AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedIn);
+					AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
 					audSFX[i] = AudioSystem.getClip();
 					audSFX[i].open(audioInputStream);
 				}
@@ -228,24 +228,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				System.err.println("Error loading sound effects: " + e.toString());
 			}
 			
-			try {
-				audLocationMusic = new Clip[2];
-				String[] musicFiles = {"a_better_world-orch.wav", "The_9th_Circle_V2.wav"};
-				for (int i = 0; i < musicFiles.length; i++) {
-					String fileName = "/rc/somedusk/audio/sfx/" + musicFiles[i];
-					InputStream audioSrc = Dusk.class.getResourceAsStream(fileName);
-					if (audioSrc == null) {
-						System.err.println("Error: Music resource not found: " + fileName);
-						continue;
-					}
-					InputStream bufferedIn = new BufferedInputStream(audioSrc);
-					AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedIn);
-					audLocationMusic[i] = AudioSystem.getClip();
-					audLocationMusic[i].open(audioInputStream);
-				}
-			} catch (Exception e) {
-				System.err.println("Error loading location music: " + e.toString());
-			}
 
 			try {
 				imgArmorParticle = new ImageIcon(Dusk.class.getResource("zmagiccarmor2.png")).getImage();
@@ -832,7 +814,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 								strStore = stmIn.readLine();
 								try
 								{
-									AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(strStore).getAbsoluteFile());
+									File audioFile = new File("/app/" + strStore);
+									if (!audioFile.exists()) {
+										System.err.println("Dynamic music not found: " + audioFile.getPath());
+										continue;
+									}
+									AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
 									audMusic[intStore][intStore2] = AudioSystem.getClip();
 									audMusic[intStore][intStore2].open(audioInputStream);
 									audioInputStream.close();
@@ -852,19 +839,34 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				{
 					if (blnMusic) {
 						try {
-							int songIndex = Integer.parseInt(stmIn.readLine());
-							if (audMusicPlaying != null) {
-								audMusicPlaying.stop();
-							}
-							if (audLocationMusic != null && songIndex >= 0 && songIndex < audLocationMusic.length) {
-								audMusicPlaying = audLocationMusic[songIndex];
-								if (audMusicPlaying != null) {
-									audMusicPlaying.setFramePosition(0);
-									audMusicPlaying.loop(Clip.LOOP_CONTINUOUSLY);
+							final int songIndex = Integer.parseInt(stmIn.readLine());
+							new Thread(() -> {
+								try {
+									if (audMusicPlaying != null) {
+										audMusicPlaying.stop();
+										audMusicPlaying.close();
+									}
+									String[] musicFiles = {"a_better_world-orch.wav", "The_9th_Circle_V2.wav"};
+									if (songIndex >= 0 && songIndex < musicFiles.length) {
+										String fileName = "/app/rc/somedusk/audio/sfx/" + musicFiles[songIndex];
+										File audioFile = new File(fileName);
+										if (audioFile.exists()) {
+											AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+											Clip clip = AudioSystem.getClip();
+											clip.open(audioInputStream);
+											audMusicPlaying = clip;
+											audMusicPlaying.setFramePosition(0);
+											audMusicPlaying.loop(Clip.LOOP_CONTINUOUSLY);
+										} else {
+											System.err.println("Location music file not found: " + fileName);
+										}
+									}
+								} catch (Exception e) {
+									System.err.println("Error playing location music: " + e.toString());
 								}
-							}
+							}).start();
 						} catch (Exception e) {
-							System.err.println("Error playing location music: " + e.toString());
+							System.err.println("Error reading song index for location music: " + e.toString());
 						}
 					}
 					break;
@@ -1033,15 +1035,41 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 }
 				case(12):
 				{
-					if (blnMusic)
-					{
-					try
-					{
-						intStore = Integer.parseInt(stmIn.readLine());
-						if (audMusicPlaying != null) audMusicPlaying.stop();
-						audMusicPlaying = audMusic[intStore][(int)(Math.random()*intNumSongs[intStore])];
-						audMusicPlaying.loop(Clip.LOOP_CONTINUOUSLY);
-					}catch(IOException | NumberFormatException e) { System.err.println("Error while trying to play music file:" + e.toString()); }
+					if (blnMusic) {
+						try {
+							final int musicType = Integer.parseInt(stmIn.readLine());
+							new Thread(() -> {
+								try {
+									if (audMusicPlaying != null) {
+										audMusicPlaying.stop();
+									}
+									if (audMusic != null && musicType >= 0 && musicType < audMusic.length) {
+										int songIndex = (int)(Math.random() * intNumSongs[musicType]);
+										Clip clipToPlay = audMusic[musicType][songIndex];
+										if (clipToPlay != null && !clipToPlay.isOpen()) {
+											// This assumes the file path was stored in the Clip's object, which it isn't.
+											// The original design pre-loaded everything. Let's adapt by re-fetching the path.
+											// This is inefficient but necessary without a larger refactor to store paths.
+											// We need to re-read the server stream, which we can't do here.
+											// So, we have to assume the clip is open or we can't play it.
+											// The logic for opcode 11 already loads them. Let's just use that.
+										}
+										
+										if (clipToPlay != null && clipToPlay.isOpen()) {
+											audMusicPlaying = clipToPlay;
+											audMusicPlaying.setFramePosition(0);
+											audMusicPlaying.loop(Clip.LOOP_CONTINUOUSLY);
+										} else {
+											System.err.println("Music clip is not loaded or open, cannot play.");
+										}
+									}
+								} catch (Exception e) {
+									System.err.println("Error playing dynamic music: " + e.toString());
+								}
+							}).start();
+						} catch (IOException | NumberFormatException e) {
+							System.err.println("Error reading music type: " + e.toString());
+						}
 					}
 					break;
 				}
