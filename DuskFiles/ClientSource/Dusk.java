@@ -1741,6 +1741,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 	public void update(double deltaTime)
 	{
+		TileAnim.update(deltaTime);
 		synchronized (vctCrossMarkers) {
 			for (int i = vctCrossMarkers.size() - 1; i >= 0; i--) {
 				CrossMarker marker = vctCrossMarkers.elementAt(i);
@@ -1803,12 +1804,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							double screenY = (i2 - startTileY) * intImageSize - offsetY;
 			
 							if (anim != null) {
-								anim.progress += deltaTime;
-								if (anim.progress > anim.delay * anim.frameCount) {
-									anim.progress = 0;
-								}
-								int frame = (int)(anim.progress / anim.delay);
-								tileIDToDraw = tileID + frame;
+								tileIDToDraw = tileID + anim.getFrame();
 							}
 							
 							gD.drawImage(imgOriginalMap,
