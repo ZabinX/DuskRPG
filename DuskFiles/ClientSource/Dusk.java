@@ -2204,7 +2204,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							tempNewParticlesFront.add(yellowOrb);
 						}
 	
-						p.timer = 5 + (int)(Math.random() * 10);
+						p.timer = 0.5 + (Math.random() * 0.1);
 					}
 				}
 
