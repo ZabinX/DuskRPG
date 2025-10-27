@@ -201,16 +201,6 @@ public class PalletteFrame extends JFrame implements MouseListener, MouseMotionL
 			cbmi50.setSelected(false);
 			cbmi25.setSelected(true);
 		}
-		appParent.imgMapPalette = appParent.imgOriginalMap.getScaledInstance(-1,appParent.intImageSizePalette,Image.SCALE_DEFAULT);
-		try
-		{
-			MediaTracker mdtTracker = new MediaTracker(appParent.frame);
-			mdtTracker.addImage(appParent.imgMapPalette,0);
-			mdtTracker.waitForAll();
-		}catch(Exception e)
-		{
-			System.err.println("Error while waiting for images: "+e.toString());
-		}
 		int intX = 25 * appParent.intImageSizePalette;
 		int intY = ((appParent.numMapImages / 25) + 1) * appParent.intImageSizePalette;
 		setSize(new java.awt.Dimension(intX+(getInsets().left+getInsets().right), intY+(getInsets().top+getInsets().bottom)));
@@ -231,14 +221,10 @@ public class PalletteFrame extends JFrame implements MouseListener, MouseMotionL
 						y*appParent.intImageSizePalette,
 						(x+1)*appParent.intImageSizePalette,
 						(y+1)*appParent.intImageSizePalette,
-						tile*appParent.intImageSizePalette,
+						tile*appParent.intImageOriginalSize,
 						0,
-						(tile+1)*appParent.intImageSizePalette,
-						appParent.intImageSizePalette,
+						(tile+1)*appParent.intImageOriginalSize,
+						appParent.intImageOriginalSize,
 						null);
 	}
 }
-
-
-
-

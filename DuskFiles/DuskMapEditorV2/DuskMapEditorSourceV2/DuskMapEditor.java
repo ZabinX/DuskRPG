@@ -56,7 +56,6 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 	Image imgOriginalMap, imgOriginalMapAlpha, imgOriginalMapAlpha2;
 	Image imgMap = null, imgMapAlpha = null, imgMapAlpha2 = null;
 	Image imgCursorMap = null, imgCursorMapAlpha = null, imgCursorMapAlpha2 = null;
-	Image imgMapPalette = null, imgMapPaletteAlpha = null, imgMapPaletteAlpha2 = null;
 	//VolatileImage imgDisplay;
 	Image imgDisplay;
 	Image imgPalette;
@@ -252,24 +251,6 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 				imgCursorMap = ImageTools.makeImageTransparent(imgOriginalMap);
 				imgCursorMapAlpha = ImageTools.makeImageTransparent(imgOriginalMapAlpha);
 				imgCursorMapAlpha2 = ImageTools.makeImageTransparent(imgOriginalMapAlpha2);
-			}
-			if (imgMapPalette == null)
-			{
-				imgMapPalette = imgOriginalMap.getScaledInstance(-1,intImageSizePalette,Image.SCALE_DEFAULT);
-				imgMapPaletteAlpha = imgOriginalMapAlpha.getScaledInstance(-1, intImageSizePalette, Image.SCALE_DEFAULT);
-				imgMapPaletteAlpha2 = imgOriginalMapAlpha2.getScaledInstance(-1, intImageSizePalette, Image.SCALE_DEFAULT);
-				try
-				{
-					MediaTracker mdtTracker = new MediaTracker(frame);
-					mdtTracker.addImage(imgMapPalette,0);
-					mdtTracker.addImage(imgMapPaletteAlpha, 1);
-					mdtTracker.addImage(imgMapPaletteAlpha2, 2);
-//		mdtTracker.addImage(imgOriginalMap,0);
-					mdtTracker.waitForAll();
-				}catch(Exception e)
-				{
-					System.err.println("Error while waiting for images: "+e.toString());
-				}
 			}
 		}catch (Exception e){}
 	}
@@ -1110,12 +1091,10 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 					frmPalette.show();
 
 					imgMap = imgOriginalMap.getScaledInstance(-1,intImageSize,Image.SCALE_DEFAULT);
-					imgMapPalette = imgOriginalMap.getScaledInstance(-1,intImageSizePalette,Image.SCALE_DEFAULT);
 					try
 					{
 						MediaTracker mdtTracker = new MediaTracker(frame);
 						mdtTracker.addImage(imgMap,0);
-						mdtTracker.addImage(imgMapPalette,0);
 						mdtTracker.waitForAll();
 					}catch(Exception e)
 					{
@@ -1160,7 +1139,6 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			{
 				imgOriginalMap.flush();
 				imgMap.flush();
-				imgMapPalette.flush();
 				imgDisplay.flush();
 				imgPalette.flush();
 				imgForeground.flush();
@@ -1357,8 +1335,8 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			gD_p.drawImage(currentPalette,
 							x*intImageSizePalette,y*intImageSizePalette,
 							(x+1)*intImageSizePalette,(y+1)*intImageSizePalette,
-							i*intImageSizePalette,0,
-							(i+1)*intImageSizePalette,intImageSizePalette,
+							i*intImageOriginalSize,0,
+							(i+1)*intImageOriginalSize,intImageOriginalSize,
 							null);
 			x++;
 			if (x > 24)
@@ -1594,9 +1572,9 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 
 	public Image getCurrentPaletteImage() {
 		switch (currentLayer) {
-			case ALPHA: return imgMapPaletteAlpha;
-			case ALPHA2: return imgMapPaletteAlpha2;
-			default: return imgMapPalette;
+			case ALPHA: return imgOriginalMapAlpha;
+			case ALPHA2: return imgOriginalMapAlpha2;
+			default: return imgOriginalMap;
 		}
 	}
 }
