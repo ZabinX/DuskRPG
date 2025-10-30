@@ -13,7 +13,7 @@ import javax.swing.text.*;
 import javax.swing.JScrollBar;
 import javax.swing.ImageIcon;
 
-public class DuskMapEditor implements MouseListener,ComponentListener,ActionListener,KeyListener/*,ImageObserver*/,MouseMotionListener,AdjustmentListener
+public class DuskMapEditor implements MouseListener,ComponentListener,ActionListener,KeyListener/*,ImageObserver*/,MouseMotionListener,AdjustmentListener, java.awt.event.MouseWheelListener
 {
 	static String strVersion="1.0";
 
@@ -124,6 +124,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			frame.pnlGraphics.addMouseMotionListener(this);
 			frame.pnlGraphics.addKeyListener(this);
 			frame.pnlForeground.addMouseListener(this);
+			frame.scrollPane.addMouseWheelListener(this);
 			frame.scrollPane.getVerticalScrollBar().addAdjustmentListener(this);
 			frame.scrollPane.getHorizontalScrollBar().addAdjustmentListener(this);
 			frame.scrollPane.getVerticalScrollBar().setUnitIncrement(intImageSize);
@@ -1444,4 +1445,14 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			default: return imgOriginalMap;
 		}
 	}
+
+	public void mouseWheelMoved(MouseWheelEvent e) {
+        if (e.isShiftDown()) {
+            int notches = e.getWheelRotation();
+            int currentValue = frame.scrollPane.getHorizontalScrollBar().getValue();
+            int increment = frame.scrollPane.getHorizontalScrollBar().getUnitIncrement();
+            frame.scrollPane.getHorizontalScrollBar().setValue(currentValue + (notches * increment));
+        }
+        // Let the scroll pane handle vertical scrolling by default
+    }
 }

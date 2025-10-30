@@ -154,16 +154,12 @@ public class PalletteFrame extends JFrame implements MouseListener, MouseMotionL
  			int destX = (x / appParent.intImageSizePalette);
  			int destY = (y / appParent.intImageSizePalette);
 
-			drawTile(lastMouseX,lastMouseY,((lastMouseY*25) + lastMouseX));
-			Color highlight = new Color(255,255,255,128);
-			appParent.gD_p.setColor(highlight);
-			appParent.gD_p.fillRect(((destX)*appParent.intImageSizePalette),
-						((destY)*appParent.intImageSizePalette),
-						appParent.intImageSizePalette,
-						appParent.intImageSizePalette);
-			lastMouseX = destX;
-			lastMouseY = destY;
-			appParent.frame.pnlGraphics.repaint();
+			if (destX != appParent.pfX || destY != appParent.pfY) {
+				appParent.pfX = destX;
+				appParent.pfY = destY;
+				appParent.update();
+				pnlGraphics.repaint();
+			}
 		}
 	}
 	
