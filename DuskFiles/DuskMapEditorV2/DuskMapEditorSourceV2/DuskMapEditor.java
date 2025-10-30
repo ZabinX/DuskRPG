@@ -57,7 +57,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 	Image imgMap = null, imgMapAlpha = null, imgMapAlpha2 = null;
 	Image imgCursorMap = null, imgCursorMapAlpha = null, imgCursorMapAlpha2 = null;
 	//VolatileImage imgDisplay;
-	Image imgDisplay;
+	// Image imgDisplay;
 	Image imgPalette;
 	Image imgForeground;
 	
@@ -80,14 +80,12 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 	
 	//Color background;
 	//Graphics g;
-	Graphics gD;
+	// Graphics gD;
 	//Graphics g_p;
 	Graphics gD_p;
 	//Graphics g_f;
 	Graphics gD_f;
 	//GraphicsThread thrGraphics;
-
-	boolean blnScaling=false;
 
     public DuskMapEditor(Applet parent)
     {
@@ -118,6 +116,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 
 			frame = new MainFrame(this);
 			frame.initComponents();
+			frame.pnlGraphics.setPreferredSize(new Dimension(MapColumns * intImageSize, MapRows * intImageSize));
 			frame.setVisible(true);
 			frame.pnlGraphics.addComponentListener(this);
 			frame.addComponentListener(this);
@@ -125,8 +124,10 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			frame.pnlGraphics.addMouseMotionListener(this);
 			frame.pnlGraphics.addKeyListener(this);
 			frame.pnlForeground.addMouseListener(this);
-			frame.scrollVert.addAdjustmentListener(this);
-			frame.scrollHorz.addAdjustmentListener(this);
+			frame.scrollPane.getVerticalScrollBar().addAdjustmentListener(this);
+			frame.scrollPane.getHorizontalScrollBar().addAdjustmentListener(this);
+			frame.scrollPane.getVerticalScrollBar().setUnitIncrement(intImageSize);
+			frame.scrollPane.getHorizontalScrollBar().setUnitIncrement(intImageSize);
 
 			frame.btnToolDraw.setIcon(new ImageIcon(getClass().getResource("drawUp.png")));
 			frame.btnToolDraw.setSelectedIcon(new ImageIcon(getClass().getResource("drawDown.png")));
@@ -180,8 +181,8 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			intImageOriginalSize = imgOriginalMap.getHeight(null);
 			intImageSizePalette = (intImageOriginalSize * 3)/4;
 //			imgDisplay = frame.pnlGraphics.createVolatileImage((MapColumns*intImageOriginalSize),(MapRows*intImageOriginalSize));
-			imgDisplay = frame.pnlGraphics.createImage((MapColumns*intImageOriginalSize),(MapRows*intImageOriginalSize));
-			gD = imgDisplay.getGraphics();
+			// imgDisplay = frame.pnlGraphics.createImage((MapColumns*intImageOriginalSize),(MapRows*intImageOriginalSize));
+			// gD = imgDisplay.getGraphics();
 			//g = frame.pnlGraphics.getGraphics();
 
 			imgForeground = frame.pnlForeground.createImage(intImageOriginalSize,intImageOriginalSize);
@@ -214,7 +215,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			blnLoaded = true;
 			scaleImages();
 			update();
-			paint();
+			frame.pnlGraphics.repaint();
 			frmPalette.pnlGraphics.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			frame.pnlGraphics.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
@@ -257,49 +258,44 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 	
 	public void scaleWindow()
 	{
-		int Ymod = frame.pnlButtons.getBounds().height+frame.scrollHorz.getBounds().height+(frame.getInsets().top+frame.getInsets().bottom);
-		int Xmod = frame.scrollVert.getBounds().width+(frame.getInsets().left+frame.getInsets().right);
+		int Ymod = frame.pnlButtons.getBounds().height+frame.scrollPane.getHorizontalScrollBar().getBounds().height+(frame.getInsets().top+frame.getInsets().bottom);
+		int Xmod = frame.scrollPane.getVerticalScrollBar().getBounds().width+(frame.getInsets().left+frame.getInsets().right);
 		int intX = (frame.pnlGraphics.getBounds().width)/intImageSize;
 		int intY = (frame.pnlGraphics.getBounds().height)/intImageSize;
 		if (intX < 1)
 			intX = 1;
 		if (intY < 1)
 			intY = 1;
-		frame.scrollVert.setVisibleAmount(intY);
-		frame.scrollHorz.setVisibleAmount(intX);
+		frame.scrollPane.getVerticalScrollBar().setVisibleAmount(intY);
+		frame.scrollPane.getHorizontalScrollBar().setVisibleAmount(intX);
 		intX = intX * intImageSize;
 		intY = intY * intImageSize;
-		if (!blnScaling)
-		{
-			frame.setSize(new java.awt.Dimension(intX+Xmod, intY+Ymod));
-		}
 		frame.pnlGraphics.setSize(new java.awt.Dimension(intX+Xmod, intY+Ymod));
-		if (imgDisplay != null)
-			imgDisplay.flush();
+		// if (imgDisplay != null)
+		// 	imgDisplay.flush();
 //		imgDisplay = frame.pnlGraphics.createVolatileImage(intX, intY);
-		imgDisplay = frame.pnlGraphics.createImage(intX, intY);
-		gD = imgDisplay.getGraphics();
+		// imgDisplay = frame.pnlGraphics.createImage(intX, intY);
+		// gD = imgDisplay.getGraphics();
 		//g = frame.pnlGraphics.getGraphics();
 		System.gc();
-		blnScaling = !blnScaling;
 	}
 
 	public void setDrawingLayer(Layer layer) {
         currentLayer = layer;
 		update();
-		paint();
+		frame.pnlGraphics.repaint();
     }
 
 	public void setAlphaVisible(boolean isVisible) {
 		blnAlphaVisible = isVisible;
 		update();
-		paint();
+		frame.pnlGraphics.repaint();
 	}
 
 	public void setAlpha2Visible(boolean isVisible) {
 		blnAlpha2Visible = isVisible;
 		update();
-		paint();
+		frame.pnlGraphics.repaint();
 	}
 	
 	//Accept mouse input
@@ -339,11 +335,11 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 				frame.miUndo.setEnabled(true);
 
 				//Find coordinates of click on map
-				int sx = frame.scrollHorz.getValue();
-				int sy = frame.scrollVert.getValue();
-				int destX = (x / intImageSize);
-				int destY = (y / intImageSize);
-				frame.lblLocation.setText("Loc: "+(destX+sx)+","+(destY+sy));
+				int mapX = x / intImageSize;
+				int mapY = y / intImageSize;
+				frame.lblLocation.setText("Loc: "+mapX+","+mapY);
+
+				if (mapX < 0 || mapX >= MapColumns || mapY < 0 || mapY >= MapRows) return;
 
 				if (evt.getButton() == MouseEvent.BUTTON1)
 				{
@@ -354,21 +350,19 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 						int startY = min(selectStartY,selectStopY);
 						int stopY = max(selectStartY,selectStopY);
 
-						if (((destX + sx) >= startX) && ((destX + sx) <= stopX) &&
-							((destY + sy) >= startY) && ((destY + sy) <= stopY))
+						if ((mapX >= startX) && (mapX <= stopX) &&
+							(mapY >= startY) && (mapY <= stopY))
 						{
-							setTile(destX + sx, destY + sy, ForeGroundTile);
-							drawTile(getCurrentImage(),destX,destY,getTile(destX+sx, destY+sy));
-							paint();
+							setTile(mapX, mapY, ForeGroundTile);
+							frame.pnlGraphics.repaint();
 						}
 					} else {
-						setTile(destX + sx, destY + sy, ForeGroundTile);
-						drawTile(getCurrentImage(),destX,destY,getTile(destX+sx, destY+sy));
-						paint();
+						setTile(mapX, mapY, ForeGroundTile);
+						frame.pnlGraphics.repaint();
 					}
 				} else if (evt.getButton() == MouseEvent.BUTTON3)
 				{
-					short replaceMe = getTile(destX + sx, destY + sy);
+					short replaceMe = getTile(mapX, mapY);
 					if (blnActiveSelection)
 					{
 						int startX = min(selectStartX,selectStopX);
@@ -399,7 +393,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 						}
 					}
 					update();
-					paint();
+					frame.pnlGraphics.repaint();
 				}
 				backupRedo();
 			} else if(frame.btnToolSelect.isSelected())
@@ -410,7 +404,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 					frame.miCopy.setEnabled(false);
 					frame.miClear.setEnabled(false);
 					update();
-					paint();
+					frame.pnlGraphics.repaint();
 				}
 				return;
 			} else if (frame.btnToolZoom.isSelected())
@@ -419,8 +413,8 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 				{
 					if (blnActiveSelection)
 					{
-						int Ymod = frame.pnlButtons.getBounds().height+frame.scrollHorz.getBounds().height+(frame.getInsets().top+frame.getInsets().bottom);
-						int Xmod = frame.scrollVert.getBounds().width+(frame.getInsets().left+frame.getInsets().right);
+						int Ymod = frame.pnlButtons.getBounds().height+frame.scrollPane.getHorizontalScrollBar().getBounds().height+(frame.getInsets().top+frame.getInsets().bottom);
+						int Xmod = frame.scrollPane.getVerticalScrollBar().getBounds().width+(frame.getInsets().left+frame.getInsets().right);
 
 						int currentWidth = (frame.pnlGraphics.getBounds().width - Xmod)/intImageSize;
 						int currentHeight = (frame.pnlGraphics.getBounds().height - Ymod)/intImageSize;
@@ -444,8 +438,8 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 							intImageSize = (int)(scaleY * intImageSize);
 						}
 
-						frame.scrollHorz.setValue(startX);
-						frame.scrollVert.setValue(startY);
+						frame.scrollPane.getHorizontalScrollBar().setValue(startX);
+						frame.scrollPane.getVerticalScrollBar().setValue(startY);
 						frame.cbmi100.setSelected(false);
 						frame.cbmi75.setSelected(false);
 						frame.cbmi50.setSelected(false);
@@ -487,36 +481,30 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 						boolean blnResize = false;
 						if (intX > MapColumns)
 						{
-							frame.scrollHorz.setValue(0);
+							frame.scrollPane.getHorizontalScrollBar().setValue(0);
 							intX = MapColumns;
 							blnResize = true;
 						}
 						if (intY > MapRows)
 						{
-							frame.scrollVert.setValue(0);
+							frame.scrollPane.getVerticalScrollBar().setValue(0);
 							intY = MapRows;
 							blnResize = true;
 						}
-						frame.scrollVert.setVisibleAmount(intY);
-						frame.scrollHorz.setVisibleAmount(intX);
+						frame.scrollPane.getVerticalScrollBar().setVisibleAmount(intY);
+						frame.scrollPane.getHorizontalScrollBar().setVisibleAmount(intX);
 						if (blnResize)
 						{
-//							Ymod = frame.pnlButtons.getBounds().height+frame.scrollHorz.getBounds().height+(frame.getInsets().top+frame.getInsets().bottom);
-//							Xmod = frame.scrollVert.getBounds().width+(frame.getInsets().left+frame.getInsets().right);
+//							Ymod = frame.pnlButtons.getBounds().height+frame.scrollPane.getHorizontalScrollBar().getBounds().height+(frame.getInsets().top+frame.getInsets().bottom);
+//							Xmod = frame.scrollPane.getVerticalScrollBar().getBounds().width+(frame.getInsets().left+frame.getInsets().right);
 							frame.setSize(((intImageSize*intX)+Xmod),((intImageSize*intY)+Ymod));
 						}
 
 						intX = intX * intImageSize;
 						intY = intY * intImageSize;
-						if (imgDisplay != null)
-							imgDisplay.flush();
-//						imgDisplay = frame.pnlGraphics.createVolatileImage(intX, intY);
-						imgDisplay = frame.pnlGraphics.createImage(intX, intY);
-						gD = imgDisplay.getGraphics();
-						//g = frame.pnlGraphics.getGraphics();
 
 						update();
-						paint();
+						frame.pnlGraphics.repaint();
 
 					} else
 					{
@@ -544,17 +532,12 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 		{
 			if (frame.btnToolDraw.isSelected())
 			{
-				int sx = frame.scrollHorz.getValue();
-				int sy = frame.scrollVert.getValue();
+				int mapX = LastMouseX / intImageSize;
+				int mapY = LastMouseY / intImageSize;
 
-				drawTile(getCurrentImage(),LastMouseX,LastMouseY,getTile(LastMouseX+sx,LastMouseY+sy));
-				if (blnActiveSelection && isInSelection(LastMouseX+sx,LastMouseY+sy))
-				{
-					Color highlight = new Color(255,255,255,128);
-					gD.setColor(highlight);
-					gD.fillRect(((LastMouseX)*intImageSize),((LastMouseY)*intImageSize),intImageSize,intImageSize);
+				if (mapX >= 0 && mapX < MapColumns && mapY >= 0 && mapY < MapRows) {
+					frame.pnlGraphics.repaint(mapX * intImageSize, mapY * intImageSize, intImageSize, intImageSize);
 				}
-				paint();
 			}
 		}
 	}
@@ -569,51 +552,29 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			int x = evt.getX();
 			int y = evt.getY();
 
-			int sx = frame.scrollHorz.getValue();
-			int sy = frame.scrollVert.getValue();
- 			int destX = (x / intImageSize);
- 			int destY = (y / intImageSize);
-			frame.lblLocation.setText("Loc: "+(destX+sx)+","+(destY+sy));
+			int mapX = x / intImageSize;
+			int mapY = y / intImageSize;
+			frame.lblLocation.setText("Loc: "+mapX+","+mapY);
 
 			if (!frame.btnToolDraw.isSelected()) { return; }
 
-            // Erase old cursor preview by redrawing the cell completely
-            int lastMapX = LastMouseX + sx;
-            int lastMapY = LastMouseY + sy;
-            if (lastMapX >= 0 && lastMapX < MapColumns && lastMapY >= 0 && lastMapY < MapRows) {
-                drawTile(imgMap, LastMouseX, LastMouseY, shrMap[lastMapX][lastMapY]);
-                if (shrMapAlpha2[lastMapX][lastMapY] != 0) {
-                    drawTile(imgMapAlpha2, LastMouseX, LastMouseY, shrMapAlpha2[lastMapX][lastMapY]);
-                }
-                if (shrMapAlpha[lastMapX][lastMapY] != 0) {
-                    drawTile(imgMapAlpha, LastMouseX, LastMouseY, shrMapAlpha[lastMapX][lastMapY]);
-                }
-                if (blnActiveSelection && isInSelection(lastMapX, lastMapY)) {
-                    Color highlight = new Color(255, 255, 255, 128);
-                    gD.setColor(highlight);
-                    gD.fillRect((LastMouseX * intImageSize), (LastMouseY * intImageSize), intImageSize, intImageSize);
-                }
-            }
+			if (mapX != LastMouseX || mapY != LastMouseY) {
+				// Erase old cursor preview
+				int oldX = LastMouseX;
+				int oldY = LastMouseY;
+				if (oldX >= 0 && oldX < MapColumns && oldY >= 0 && oldY < MapRows) {
+					frame.pnlGraphics.repaint(oldX * intImageSize, oldY * intImageSize, intImageSize, intImageSize);
+				}
 
-			// Draw new cursor preview
-			int currentMapX = destX + sx;
-			int currentMapY = destY + sy;
-			if (currentMapX >= 0 && currentMapX < MapColumns && currentMapY >= 0 && currentMapY < MapRows)
-			{
-                // Redraw the cell at the new location before drawing the cursor on top
-                drawTile(imgMap, destX, destY, shrMap[currentMapX][currentMapY]);
-                if (shrMapAlpha2[currentMapX][currentMapY] != 0) {
-                    drawTile(imgMapAlpha2, destX, destY, shrMapAlpha2[currentMapX][currentMapY]);
-                }
-                if (shrMapAlpha[currentMapX][currentMapY] != 0) {
-                    drawTile(imgMapAlpha, destX, destY, shrMapAlpha[currentMapX][currentMapY]);
-                }
-				drawTile(getCurrentCursorImage(),destX,destY,ForeGroundTile);
+				// Store new coordinates
+				LastMouseX = mapX;
+				LastMouseY = mapY;
+
+				// Draw new cursor preview
+				if (mapX >= 0 && mapX < MapColumns && mapY >= 0 && mapY < MapRows) {
+					frame.pnlGraphics.repaint(mapX * intImageSize, mapY * intImageSize, intImageSize, intImageSize);
+				}
 			}
-
-			LastMouseX = destX;
-			LastMouseY = destY;
-			paint();
 		}
 	}
 	
@@ -626,58 +587,22 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			int y = evt.getY();
 
 			//Find coordinates of click on map
-			int sx = frame.scrollHorz.getValue();
-			int sy = frame.scrollVert.getValue();
-			int destX = (x / intImageSize);
-			int destY = (y / intImageSize);
-			frame.lblLocation.setText("Loc: "+(destX+sx)+","+(destY+sy));
+			int mapX = x / intImageSize;
+			int mapY = y / intImageSize;
+			frame.lblLocation.setText("Loc: "+mapX+","+mapY);
+
+			if (mapX < 0 || mapX >= MapColumns || mapY < 0 || mapY >= MapRows) return;
 
 			if (frame.btnToolDraw.isSelected())
 			{
-                // Erase old cursor preview by redrawing the cell completely
-                int lastMapX = LastMouseX + sx;
-                int lastMapY = LastMouseY + sy;
-                if (lastMapX >= 0 && lastMapX < MapColumns && lastMapY >= 0 && lastMapY < MapRows) {
-                    drawTile(imgMap, LastMouseX, LastMouseY, shrMap[lastMapX][lastMapY]);
-                    if (shrMapAlpha2[lastMapX][lastMapY] != 0) {
-                        drawTile(imgMapAlpha2, LastMouseX, LastMouseY, shrMapAlpha2[lastMapX][lastMapY]);
-                    }
-                    if (shrMapAlpha[lastMapX][lastMapY] != 0) {
-                        drawTile(imgMapAlpha, LastMouseX, LastMouseY, shrMapAlpha[lastMapX][lastMapY]);
-                    }
-                    if (blnActiveSelection && isInSelection(lastMapX, lastMapY)) {
-                        Color highlight = new Color(255, 255, 255, 128);
-                        gD.setColor(highlight);
-                        gD.fillRect((LastMouseX * intImageSize), (LastMouseY * intImageSize), intImageSize, intImageSize);
-                    }
-                }
-
 				if (intButton == MouseEvent.BUTTON1)
 				{
-					if (isInSelection(destX+sx,destY+sy))
+					if (isInSelection(mapX,mapY))
 					{
-						setTile(destX + sx, destY + sy, ForeGroundTile);
+						setTile(mapX, mapY, ForeGroundTile);
 					}
 				}
-
-                // Redraw the current cell completely to show the new tile
-                int currentMapX = destX + sx;
-                int currentMapY = destY + sy;
-                if (currentMapX >= 0 && currentMapX < MapColumns && currentMapY >= 0 && currentMapY < MapRows) {
-                    drawTile(imgMap, destX, destY, shrMap[currentMapX][currentMapY]);
-                    if (shrMapAlpha2[currentMapX][currentMapY] != 0) {
-                        drawTile(imgMapAlpha2, destX, destY, shrMapAlpha2[currentMapX][currentMapY]);
-                    }
-                    if (shrMapAlpha[currentMapX][currentMapY] != 0) {
-                        drawTile(imgMapAlpha, destX, destY, shrMapAlpha[currentMapX][currentMapY]);
-                    }
-                    if (blnActiveSelection && isInSelection(currentMapX, currentMapY)) {
-                        Color highlight = new Color(255, 255, 255, 128);
-                        gD.setColor(highlight);
-                        gD.fillRect((destX * intImageSize), (destY * intImageSize), intImageSize, intImageSize);
-                    }
-                }
-				paint();
+				frame.pnlGraphics.repaint();
 			} else if (frame.btnToolSelect.isSelected())
 			{
 				if (intButton != MouseEvent.BUTTON1)
@@ -686,21 +611,11 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 				}
 				int oldStartX = min(selectStartX,selectStopX);
 				int oldStopX = max(selectStartX,selectStopX);
-				int oldStartY = min(selectStartY,selectStopY);
-				int oldStopY = max(selectStartY,selectStopY);
-				for (int x1=oldStartX; x1 <= oldStopX; x1++)
-				{
-					for (int y1=oldStartY; y1 <= oldStopY; y1++)
-					{
-						drawTile(getCurrentImage(),(x1-sx),(y1-sy),getTile(x1,y1));
-					}
-				}
-
 				if (blnFirstDrag)
 				{
-					paint();
-					selectStartX = destX + sx;
-					selectStartY = destY + sy;
+					frame.pnlGraphics.repaint();
+					selectStartX = mapX;
+					selectStartY = mapY;
 					if (selectStartX >= MapColumns)
 					{
 						selectStartX = MapColumns - 1;
@@ -722,8 +637,8 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 					frame.miCopy.setEnabled(true);
 					frame.miClear.setEnabled(true);
 				}
-				selectStopX = destX + sx;
-				selectStopY = destY + sy;
+				selectStopX = mapX;
+				selectStopY = mapY;
 
 				if (selectStopX >= MapColumns)
 				{
@@ -747,18 +662,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 				int startY = min(selectStartY,selectStopY);
 				int stopY = max(selectStartY,selectStopY);
 
-				Color highlight = new Color(255,255,255,128);
-				gD.setColor(highlight);
-				int rx,
-					ry,
-					width,
-					height;
-				rx = (startX-sx)*intImageSize;
-				width = ((stopX-sx+1)*intImageSize) - rx;
-				ry = (startY-sy)*intImageSize;
-				height = ((stopY-sy+1)*intImageSize) - ry;
-				gD.fillRect(rx,ry,width,height);
-				paint();
+				frame.pnlGraphics.repaint();
 			}
 		}
     }
@@ -778,7 +682,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 		}
 		scaleWindow();
 		update();
-		paint();
+		frame.pnlGraphics.repaint();
 	}
 	public void componentMoved(ComponentEvent evt){}
 	public void componentShown(ComponentEvent evt){}
@@ -962,8 +866,9 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 					strCurrentFile = strName;
 					strCurrentDirectory = strDir;
 					frame.setTitle("Dusk Map Editor: "+strCurrentFile+" "+MapColumns+"x"+MapRows);
-					frame.scrollVert.setMaximum(MapRows);
-					frame.scrollHorz.setMaximum(MapColumns);
+					frame.pnlGraphics.setPreferredSize(new Dimension(MapColumns * intImageSize, MapRows * intImageSize));
+					frame.scrollPane.getVerticalScrollBar().setMaximum(MapRows);
+					frame.scrollPane.getHorizontalScrollBar().setMaximum(MapColumns);
 					for (int i=0;i<MapColumns;i++)
 					{
 						for (int i2=0;i2<MapRows;i2++)
@@ -1000,7 +905,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 
 					rafFile.close();
 					update();
-					paint();
+					frame.pnlGraphics.repaint();
 				}
 				catch (Exception e) {}
 				frame.pnlGraphics.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -1055,34 +960,26 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 					boolean blnResize = false;
 					if (intX > MapColumns)
 					{
-						frame.scrollHorz.setValue(0);
+						frame.scrollPane.getHorizontalScrollBar().setValue(0);
 						intX = MapColumns;
 						blnResize = true;
 					}
 					if (intY > MapRows)
 					{
-						frame.scrollVert.setValue(0);
+						frame.scrollPane.getVerticalScrollBar().setValue(0);
 						intY = MapRows;
 						blnResize = true;
 					}
-					frame.scrollVert.setVisibleAmount(intY);
-					frame.scrollHorz.setVisibleAmount(intX);
+					frame.scrollPane.getVerticalScrollBar().setVisibleAmount(intY);
+					frame.scrollPane.getHorizontalScrollBar().setVisibleAmount(intX);
 					if (blnResize)
 					{
-						int Ymod = frame.pnlButtons.getBounds().height+frame.scrollHorz.getBounds().height+(frame.getInsets().top+frame.getInsets().bottom);
-						int Xmod = frame.scrollVert.getBounds().width+(frame.getInsets().left+frame.getInsets().right);
+						int Ymod = frame.pnlButtons.getBounds().height+frame.scrollPane.getHorizontalScrollBar().getBounds().height+(frame.getInsets().top+frame.getInsets().bottom);
+						int Xmod = frame.scrollPane.getVerticalScrollBar().getBounds().width+(frame.getInsets().left+frame.getInsets().right);
 						frame.setSize(((intImageSize*intX)+Xmod),((intImageSize*intY)+Ymod));
 					}
 					intX = intX * intImageSize;
 					intY = intY * intImageSize;
-
-					if (imgDisplay != null)
-						imgDisplay.flush();
-
-//					imgDisplay = frame.pnlGraphics.createVolatileImage(intX,intY);
-					imgDisplay = frame.pnlGraphics.createImage((MapColumns*intImageOriginalSize),(MapRows*intImageOriginalSize));
-					gD = imgDisplay.getGraphics();
-					//g = frame.pnlGraphics.getGraphics();
 
 					imgForeground = frame.pnlForeground.createImage(intImageOriginalSize,intImageOriginalSize);
 					frame.pnlForeground.setSize(new java.awt.Dimension(intImageOriginalSize,intImageOriginalSize));
@@ -1123,7 +1020,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 					}
 
 					update();
-					paint();
+					frame.pnlGraphics.repaint();
 					blnLoaded = true;
 				}
 				catch (Exception e)
@@ -1139,7 +1036,6 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			{
 				imgOriginalMap.flush();
 				imgMap.flush();
-				imgDisplay.flush();
 				imgPalette.flush();
 				imgForeground.flush();
 			}catch(Exception exc) {}
@@ -1172,8 +1068,8 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 		}else if (evt.getSource() == frame.miPaste)
 		{
 			backupUndo();
-			int sx = frame.scrollHorz.getValue();
-			int sy = frame.scrollVert.getValue();
+			int sx = frame.scrollPane.getHorizontalScrollBar().getValue();
+			int sy = frame.scrollPane.getVerticalScrollBar().getValue();
 
 			int startX = sx;
 			int startY = sy;
@@ -1197,7 +1093,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			frame.miUndo.setEnabled(true);
 			frame.miRedo.setEnabled(false);
 			update();
-			paint();
+			frame.pnlGraphics.repaint();
 		}else if (evt.getSource() == frame.miClear)
 		{
 			backupUndo();
@@ -1216,21 +1112,21 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			frame.miUndo.setEnabled(true);
 			frame.miRedo.setEnabled(false);
 			update();
-			paint();
+			frame.pnlGraphics.repaint();
 		}else if (evt.getSource() == frame.miUndo)
 		{
 			restoreUndo();
 			frame.miUndo.setEnabled(false);
 			frame.miRedo.setEnabled(true);
 			update();
-			paint();
+			frame.pnlGraphics.repaint();
 		}else if (evt.getSource() == frame.miRedo)
 		{
 			restoreRedo();
 			frame.miUndo.setEnabled(true);
 			frame.miRedo.setEnabled(false);
 			update();
-			paint();
+			frame.pnlGraphics.repaint();
 		}else if (evt.getSource() == frame.miHelpHowTo)
 		{
 			frmHelp.setSize(500,600);
@@ -1288,7 +1184,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 		if (!evt.getValueIsAdjusting())
 		{
 			update();
-			paint();
+			frame.pnlGraphics.repaint();
 		}
 	}
 
@@ -1355,101 +1251,72 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 							(ForeGroundTile+1)*intImageOriginalSize,intImageOriginalSize,
 							null);
 
-		int sx = frame.scrollHorz.getValue();
-		int sy = frame.scrollVert.getValue();
-		int sx1 = sx + frame.scrollHorz.getVisibleAmount();
-		int sy1 = sy + frame.scrollVert.getVisibleAmount();
+	}
 
-		if ((sx1+sx) >= MapColumns)
-		{
-			sx1 = MapColumns - sx - 1;
-		}
-		if ((sy1+sy) >= MapRows)
-		{
-			sy1 = MapRows - sy - 1;
-		}
-
-		// Draw base layer
-		for (i=0;i<=sx1;i++)
-		{
-			for (i2=0;i2<=sy1;i2++)
-			{
-				drawTile(imgMap,i,i2,shrMap[i+sx][i2+sy]);
+	public void paint(Graphics g) {
+		if (blnLoaded && g != null) {
+			int sx = frame.scrollPane.getHorizontalScrollBar().getValue();
+			int sy = frame.scrollPane.getVerticalScrollBar().getValue();
+	
+			// Get the visible area of the panel
+			Rectangle clip = g.getClipBounds();
+	
+			// Calculate the range of tiles to draw
+			int startX = clip.x / intImageSize;
+			int startY = clip.y / intImageSize;
+			int endX = (clip.x + clip.width) / intImageSize;
+			int endY = (clip.y + clip.height) / intImageSize;
+	
+			// Constrain to map boundaries
+			endX = Math.min(endX, MapColumns - 1);
+			endY = Math.min(endY, MapRows - 1);
+	
+			// Draw the visible tiles
+			for (int i = startX; i <= endX; i++) {
+				for (int i2 = startY; i2 <= endY; i2++) {
+					drawTile(imgMap, g, i, i2, shrMap[i][i2]);
+					if (blnAlpha2Visible)
+						drawTile(imgMapAlpha2, g, i, i2, shrMapAlpha2[i][i2]);
+					if (blnAlphaVisible)
+						drawTile(imgMapAlpha, g, i, i2, shrMapAlpha[i][i2]);
+				}
 			}
-		}
-		// Draw alpha layer 2
-		if (blnAlpha2Visible) {
-			for (i=0;i<=sx1;i++)
-			{
-				for (i2=0;i2<=sy1;i2++)
-				{
-					if (shrMapAlpha2[i+sx][i2+sy] != 0) { // Assuming tile 0 is transparent
-						drawTile(imgMapAlpha2,i,i2,shrMapAlpha2[i+sx][i2+sy]);
-					}
+	
+			if (blnActiveSelection) {
+				Color highlight = new Color(255, 255, 255, 128);
+				g.setColor(highlight);
+				int startDrawX = min(selectStartX, selectStopX);
+				int stopDrawX = max(selectStartX, selectStopX);
+				int startDrawY = min(selectStartY, selectStopY);
+				int stopDrawY = max(selectStartY, selectStopY);
+				g.fillRect(startDrawX * intImageSize, startDrawY * intImageSize,
+						(stopDrawX - startDrawX + 1) * intImageSize,
+						(stopDrawY - startDrawY + 1) * intImageSize);
+			}
+			
+			// Draw cursor preview
+			if (frame.btnToolDraw.isSelected()) {
+				int mapX = LastMouseX;
+				int mapY = LastMouseY;
+
+				if (mapX >= 0 && mapX < MapColumns && mapY >= 0 && mapY < MapRows) {
+					drawTile(getCurrentCursorImage(), g, mapX, mapY, ForeGroundTile);
 				}
 			}
 		}
-		// Draw alpha layer
-		if (blnAlphaVisible) {
-			for (i=0;i<=sx1;i++)
-			{
-				for (i2=0;i2<=sy1;i2++)
-				{
-					if (shrMapAlpha[i+sx][i2+sy] != 0) { // Assuming tile 0 is transparent
-						drawTile(imgMapAlpha,i,i2,shrMapAlpha[i+sx][i2+sy]);
-					}
-				}
-			}
-		}
-		if (blnActiveSelection)
-		{
-			Color highlight = new Color(255,255,255,128);
-			gD.setColor(highlight);
-			int rx,
-				ry,
-				startX,
-				startY,
-				stopX,
-				stopY,
-				width,
-				height;
-			startX = min(selectStartX,selectStopX);
-			stopX = max(selectStartX,selectStopX);
-			startY = min(selectStartY,selectStopY);
-			stopY = max(selectStartY,selectStopY);
-			rx = (startX-sx)*intImageSize;
-			width = ((stopX-sx+1)*intImageSize) - rx;
-			ry = (startY-sy)*intImageSize;
-			height = ((stopY-sy+1)*intImageSize) - ry;
-			gD.fillRect(rx,ry,width,height);
-		}
 	}
-
-	public void drawTile(Image img,int x, int y, int tile)
-	{
-		if ((x >= 0) && (x < MapColumns) && (y >= 0) && (y < MapRows))
-		{
-			gD.drawImage(img,
-						x*intImageSize,y*intImageSize,
-						(x+1)*intImageSize,(y+1)*intImageSize,
-						tile*intImageSize,0,
-						(tile+1)*intImageSize,intImageSize,
-						null);
-		}
-	}
-
-	public void paint()
-	{
-		if (blnLoaded)
-		{
-			frame.pnlGraphics.repaint();
-			frmPalette.pnlGraphics.repaint();
-			frame.pnlForeground.repaint();
-		}
+	
+	public void drawTile(Image img, Graphics g, int x, int y, int tile) {
+		g.drawImage(img,
+				x * intImageSize, y * intImageSize,
+				(x + 1) * intImageSize, (y + 1) * intImageSize,
+				tile * intImageSize, 0,
+				(tile + 1) * intImageSize, intImageSize,
+				null);
 	}
 
 	public Image getDisplayImage() {
-		return imgDisplay;
+		return null;
 	}
 
 	public Image getPaletteImage() {

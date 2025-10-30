@@ -29,9 +29,10 @@ public class GraphicsThread implements Runnable
 			timer++;
 			if (timer == 20)
 			{
-				appParent.paint();
+				appParent.frame.pnlGraphics.repaint();
 				timer = 0;
 			}
 		}
 	}
 }
+

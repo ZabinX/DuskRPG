@@ -103,11 +103,12 @@ public class SizeFrame extends JFrame implements ActionListener {
                     }
                 }
                 appParent.frame.setTitle("Dusk Map Editor: " + appParent.strCurrentFile + " " + appParent.MapColumns + "x" + appParent.MapRows);
-                appParent.frame.scrollVert.setMaximum(appParent.MapRows);
-                appParent.frame.scrollHorz.setMaximum(appParent.MapColumns);
+                appParent.frame.pnlGraphics.setPreferredSize(new Dimension(appParent.MapColumns * appParent.intImageSize, appParent.MapRows * appParent.intImageSize));
+                appParent.frame.scrollPane.getVerticalScrollBar().setMaximum(appParent.MapRows);
+                appParent.frame.scrollPane.getHorizontalScrollBar().setMaximum(appParent.MapColumns);
                 appParent.frame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 appParent.update();
-                appParent.paint();
+                appParent.frame.pnlGraphics.repaint();
             } else if (evt.getSource() == btnCancel) {
                 setVisible(false);
             }

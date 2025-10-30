@@ -26,8 +26,7 @@ public class MainFrame extends JFrame {
     ButtonGroup grpLayers = new ButtonGroup();
     JCheckBox chkAlphaVisible = new JCheckBox("Top Visible", true);
     JCheckBox chkAlpha2Visible = new JCheckBox("Middle Visible", true);
-    JScrollBar scrollVert = new JScrollBar(JScrollBar.VERTICAL);
-    JScrollBar scrollHorz = new JScrollBar(JScrollBar.HORIZONTAL);
+    JScrollPane scrollPane;
     JLabel lblLocation = new JLabel();
 
     // Menu Bar
@@ -75,9 +74,7 @@ public class MainFrame extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                if (appParent != null && appParent.imgDisplay != null) {
-                    g.drawImage(appParent.imgDisplay, 0, 0, this);
-                }
+                appParent.paint(g);
             }
         };
         pnlGraphics.setBackground(new Color(140, 140, 140));
@@ -164,9 +161,11 @@ public class MainFrame extends JFrame {
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
         contentPane.add(pnlButtons, BorderLayout.NORTH);
-        contentPane.add(scrollVert, BorderLayout.EAST);
-        contentPane.add(scrollHorz, BorderLayout.SOUTH);
-        contentPane.add(pnlGraphics, BorderLayout.CENTER);
+        // contentPane.add(scrollVert, BorderLayout.EAST);
+        // contentPane.add(scrollHorz, BorderLayout.SOUTH);
+        // contentPane.add(pnlGraphics, BorderLayout.CENTER);
+        scrollPane = new JScrollPane(pnlGraphics);
+        contentPane.add(scrollPane, BorderLayout.CENTER);
 
         addListeners();
 
@@ -203,7 +202,7 @@ public class MainFrame extends JFrame {
                 appParent.scaleImages();
                 appParent.scaleWindow();
                 appParent.update();
-                appParent.paint();
+                appParent.frame.pnlGraphics.repaint();
             }
         };
         cbmi100.addActionListener(scaleListener);
@@ -224,7 +223,7 @@ public class MainFrame extends JFrame {
                 miCopy.setEnabled(false);
             }
             appParent.update();
-            appParent.paint();
+            appParent.frame.pnlGraphics.repaint();
         };
         btnToolDraw.addActionListener(toolListener);
         btnToolSelect.addActionListener(toolListener);

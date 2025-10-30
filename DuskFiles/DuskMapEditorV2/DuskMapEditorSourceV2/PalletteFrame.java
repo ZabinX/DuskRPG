@@ -94,7 +94,7 @@ public class PalletteFrame extends JFrame implements MouseListener, MouseMotionL
 			appParent.ForeGroundTile = (short)((newY*25) + newX);
 
 			appParent.update();
-			appParent.paint();
+			appParent.frame.pnlGraphics.repaint();
 			hide();
 		}
 	}
@@ -118,7 +118,7 @@ public class PalletteFrame extends JFrame implements MouseListener, MouseMotionL
 			appParent.ForeGroundTile = (short)((newY*25) + newX);
 
 			appParent.update();
-			appParent.paint();
+			appParent.frame.pnlGraphics.repaint();
 			hide();
 		}
 	}
@@ -135,7 +135,7 @@ public class PalletteFrame extends JFrame implements MouseListener, MouseMotionL
 		{
 			drawTile(lastMouseX,lastMouseY,((lastMouseY*25) + lastMouseX));
 			appParent.update();
-			appParent.paint();
+			appParent.frame.pnlGraphics.repaint();
 		}
 	}
 
@@ -163,7 +163,7 @@ public class PalletteFrame extends JFrame implements MouseListener, MouseMotionL
 						appParent.intImageSizePalette);
 			lastMouseX = destX;
 			lastMouseY = destY;
-			appParent.paint();
+			appParent.frame.pnlGraphics.repaint();
 		}
 	}
 	
@@ -211,7 +211,7 @@ public class PalletteFrame extends JFrame implements MouseListener, MouseMotionL
 		appParent.gD_p = appParent.imgPalette.getGraphics();
 		//appParent.g_p = appParent.frmPalette.pnlGraphics.getGraphics();
 		appParent.update();
-		appParent.paint();
+		appParent.frame.pnlGraphics.repaint();
 	}
 
 	public void drawTile(int x, int y, int tile)
