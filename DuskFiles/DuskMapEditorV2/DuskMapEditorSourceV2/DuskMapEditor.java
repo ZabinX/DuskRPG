@@ -259,25 +259,8 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 	
 	public void scaleWindow()
 	{
-		int Ymod = frame.pnlButtons.getBounds().height+frame.scrollPane.getHorizontalScrollBar().getBounds().height+(frame.getInsets().top+frame.getInsets().bottom);
-		int Xmod = frame.scrollPane.getVerticalScrollBar().getBounds().width+(frame.getInsets().left+frame.getInsets().right);
-		int intX = (frame.pnlGraphics.getBounds().width)/intImageSize;
-		int intY = (frame.pnlGraphics.getBounds().height)/intImageSize;
-		if (intX < 1)
-			intX = 1;
-		if (intY < 1)
-			intY = 1;
-		frame.scrollPane.getVerticalScrollBar().setVisibleAmount(intY);
-		frame.scrollPane.getHorizontalScrollBar().setVisibleAmount(intX);
-		intX = intX * intImageSize;
-		intY = intY * intImageSize;
-		frame.pnlGraphics.setSize(new java.awt.Dimension(intX+Xmod, intY+Ymod));
-		// if (imgDisplay != null)
-		// 	imgDisplay.flush();
-//		imgDisplay = frame.pnlGraphics.createVolatileImage(intX, intY);
-		// imgDisplay = frame.pnlGraphics.createImage(intX, intY);
-		// gD = imgDisplay.getGraphics();
-		//g = frame.pnlGraphics.getGraphics();
+		frame.pnlGraphics.setPreferredSize(new Dimension(MapColumns * intImageSize, MapRows * intImageSize));
+		frame.pnlGraphics.revalidate();
 		System.gc();
 	}
 
@@ -514,6 +497,7 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 			}
   		} else if (evt.getComponent() == frame.pnlForeground)
 		{
+			updatePalette();
 			frmPalette.show();
   		}
 	}
@@ -1212,6 +1196,35 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 	}
 	
 	//Display graphics
+	public void updatePalette() {
+		Image currentPaletteImage = getCurrentPaletteImage();
+		numMapImages = (currentPaletteImage.getWidth(null) / currentPaletteImage.getHeight(null)) - 1;
+		frmPalette.setTitle("Palette: " + numMapImages + " images");
+
+		int intX = 25 * intImageSizePalette;
+		int intY = ((numMapImages / 25) + 1) * intImageSizePalette;
+
+		// Set the preferred size for the panel so the scroll pane knows the content size
+		frmPalette.pnlGraphics.setPreferredSize(new java.awt.Dimension(intX, intY));
+
+		// Revalidate the panel to trigger the scroll pane to update its layout
+		frmPalette.pnlGraphics.revalidate();
+
+		// Create the off-screen image for drawing
+		if (imgPalette != null) {
+			imgPalette.flush();
+		}
+		imgPalette = frmPalette.pnlGraphics.createImage(intX, intY);
+		if (imgPalette != null) {
+			gD_p = imgPalette.getGraphics();
+		}
+
+		// Now call the original update to redraw the content
+		update();
+		frmPalette.pnlGraphics.repaint();
+	}
+
+	//Display graphics
 	public void update()
 	{
 		if (!blnLoaded)
@@ -1245,13 +1258,14 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 		gD_p.setColor(Color.green);
 		gD_p.drawRoundRect((int)(pfX*intImageSizePalette),(int)(pfY*intImageSizePalette),
 					intImageSizePalette-1,intImageSizePalette-1,intImageSizePalette/3,intImageSizePalette/3);
+		gD_f.clearRect(0, 0, intImageOriginalSize, intImageOriginalSize);
 		gD_f.drawImage(getCurrentImage(),
 							0,0,
 							intImageOriginalSize,intImageOriginalSize,
 							ForeGroundTile*intImageOriginalSize,0,
 							(ForeGroundTile+1)*intImageOriginalSize,intImageOriginalSize,
 							null);
-
+		frame.pnlForeground.repaint();
 	}
 
 	public void paint(Graphics g) {
@@ -1311,8 +1325,8 @@ public class DuskMapEditor implements MouseListener,ComponentListener,ActionList
 		g.drawImage(img,
 				x * intImageSize, y * intImageSize,
 				(x + 1) * intImageSize, (y + 1) * intImageSize,
-				tile * intImageSize, 0,
-				(tile + 1) * intImageSize, intImageSize,
+				tile * intImageOriginalSize, 0,
+				(tile + 1) * intImageOriginalSize, intImageOriginalSize,
 				null);
 	}
 

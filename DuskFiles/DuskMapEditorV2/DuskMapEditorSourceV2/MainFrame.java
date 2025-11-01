@@ -11,7 +11,7 @@ public class MainFrame extends JFrame {
     // Panels
     JPanel pnlButtons = new JPanel();
     JPanel pnlGraphics; // Will be a custom inner class to override paintComponent
-    JPanel pnlForeground = new JPanel();
+    JPanel pnlForeground;
 
     // Buttons
     CustomButton btnToolDraw = new CustomButton();
@@ -75,6 +75,15 @@ public class MainFrame extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 appParent.paint(g);
+            }
+        };
+        pnlForeground = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if (appParent != null && appParent.getForegroundImage() != null) {
+                    g.drawImage(appParent.getForegroundImage(), 0, 0, this);
+                }
             }
         };
         pnlGraphics.setBackground(new Color(140, 140, 140));

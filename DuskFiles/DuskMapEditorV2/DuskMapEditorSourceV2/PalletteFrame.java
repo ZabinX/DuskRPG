@@ -7,10 +7,10 @@ public class PalletteFrame extends JFrame implements MouseListener, MouseMotionL
     JPanel pnlGraphics;
     JMenuBar menuBar = new JMenuBar();
     JMenu mScale = new JMenu("Scale");
-    JCheckBoxMenuItem cbmi100 = new JCheckBoxMenuItem("100%");
-    JCheckBoxMenuItem cbmi75 = new JCheckBoxMenuItem("75%");
-    JCheckBoxMenuItem cbmi50 = new JCheckBoxMenuItem("50%");
-    JCheckBoxMenuItem cbmi25 = new JCheckBoxMenuItem("25%");
+    JRadioButtonMenuItem cbmi100 = new JRadioButtonMenuItem("100%");
+    JRadioButtonMenuItem cbmi75 = new JRadioButtonMenuItem("75%");
+    JRadioButtonMenuItem cbmi50 = new JRadioButtonMenuItem("50%");
+    JRadioButtonMenuItem cbmi25 = new JRadioButtonMenuItem("25%");
     int lastX = 0,
             lastY = 0,
             lastMouseX = 0,
@@ -31,6 +31,11 @@ public class PalletteFrame extends JFrame implements MouseListener, MouseMotionL
             }
         };
 
+        ButtonGroup scaleGroup = new ButtonGroup();
+        scaleGroup.add(cbmi100);
+        scaleGroup.add(cbmi75);
+        scaleGroup.add(cbmi50);
+        scaleGroup.add(cbmi25);
         mScale.add(cbmi100);
         mScale.add(cbmi75);
         mScale.add(cbmi50);
@@ -50,6 +55,7 @@ public class PalletteFrame extends JFrame implements MouseListener, MouseMotionL
         setLayout(new BorderLayout());
 
         JScrollPane scrollPane = new JScrollPane(pnlGraphics);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(appParent.intImageSizePalette);
         add(scrollPane, BorderLayout.CENTER);
 
 
@@ -168,46 +174,25 @@ public class PalletteFrame extends JFrame implements MouseListener, MouseMotionL
 
 	public void itemStateChanged (ItemEvent evt)
 	{
-		if (evt.getSource() == cbmi100)
+		JRadioButtonMenuItem source = (JRadioButtonMenuItem) evt.getSource();
+		if (!source.isSelected()) {
+			return;
+		}
+
+		if (source == cbmi100)
 		{
 			appParent.intImageSizePalette = appParent.intImageOriginalSize;
-			cbmi100.setSelected(true);
-			cbmi75.setSelected(false);
-			cbmi50.setSelected(false);
-			cbmi25.setSelected(false);
-		} else if (evt.getSource() == cbmi75)
+		} else if (source == cbmi75)
 		{
 			appParent.intImageSizePalette = (appParent.intImageOriginalSize * 3)/4;
-			cbmi100.setSelected(false);
-			cbmi75.setSelected(true);
-			cbmi50.setSelected(false);
-			cbmi25.setSelected(false);
-		} else if (evt.getSource() == cbmi50)
+		} else if (source == cbmi50)
 		{
 			appParent.intImageSizePalette = appParent.intImageOriginalSize/2;
-			cbmi100.setSelected(false);
-			cbmi75.setSelected(false);
-			cbmi50.setSelected(true);
-			cbmi25.setSelected(false);
-		} else if (evt.getSource() == cbmi25)
+		} else if (source == cbmi25)
 		{
 			appParent.intImageSizePalette = appParent.intImageOriginalSize/4;
-			cbmi100.setSelected(false);
-			cbmi75.setSelected(false);
-			cbmi50.setSelected(false);
-			cbmi25.setSelected(true);
 		}
-		int intX = 25 * appParent.intImageSizePalette;
-		int intY = ((appParent.numMapImages / 25) + 1) * appParent.intImageSizePalette;
-		setSize(new java.awt.Dimension(intX+(getInsets().left+getInsets().right), intY+(getInsets().top+getInsets().bottom)));
-		pnlGraphics.setSize(new java.awt.Dimension(intX, intY));
-		if (appParent.imgPalette != null)
-			appParent.imgPalette.flush();
-		appParent.imgPalette = appParent.frmPalette.pnlGraphics.createImage(intX, intY);
-		appParent.gD_p = appParent.imgPalette.getGraphics();
-		//appParent.g_p = appParent.frmPalette.pnlGraphics.getGraphics();
-		appParent.update();
-		appParent.frame.pnlGraphics.repaint();
+		appParent.updatePalette();
 	}
 
 	public void drawTile(int x, int y, int tile)
