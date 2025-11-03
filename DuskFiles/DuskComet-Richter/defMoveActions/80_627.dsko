@@ -1,1 +1,0 @@
-trigger blackbeardquest *trigger "*You look in the room and feel bad about all the blood splatters everywhere, and decide not to enter." ,trigger 1 trigger crown trigger blackbeardquest ,trigger 1  

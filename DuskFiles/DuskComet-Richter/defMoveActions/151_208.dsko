@@ -1,1 +1,0 @@
-trigger checktreasure1 *trigger "The treasure chest is still empty." ,trigger 1 ,trigger 200 trigger checktreasure1 *trigger "Sweet!  You found 200gp!."  

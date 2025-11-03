@@ -5,3 +5,7 @@ if hascondition trigger "ballswarning"
     removecondition trigger "ballswarning"
 end
 endscript
+
+
+
+

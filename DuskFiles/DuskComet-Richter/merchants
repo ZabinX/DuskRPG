@@ -134,10 +134,6 @@ God Shield template
 God Suit template
 God Helmet template
 end
-101
-594
-train:warrior group
-end
 77
 568
 Apple
@@ -147,4 +143,9 @@ end
 640
 542
 train:Quadruple Attack
+end
+101
+594
+train:warrior group
+train:elemental lightning group
 end

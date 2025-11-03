@@ -1,1 +1,0 @@
-(trigger trigger cp 39 trigger exp 100 -trigger 100 *trigger "You now have 100 experience points.  Go visit the Skill Trainer to spend it." trigger cp 39 trigger exp 99 *trigger "Go visit the merchant and buy some Strength training."  

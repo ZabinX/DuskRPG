@@ -3,11 +3,6 @@
 # Does damage from 3 times caster int+wis
 #
 #
-if ! hasitem caster "Lightning Dragon Tooth"
-    chat caster "You cannot cast this spell without a Lightning Dragon Tooth."
-    endscript
-end
-removeitem caster "Lightning Dragon Tooth"
 number baseDamage * 3 + caster inte caster wisd
 number addDamage * 3 + caster inte caster wisd
 number damage + baseDamage * addDamage rand
