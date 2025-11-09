@@ -130,7 +130,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
     
     Entity player;
     	
-    int intImageSize = 36;
+    int intImageSize = 32;
     
     String strSet = null;
     
@@ -1752,7 +1752,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 		}
 		synchronized (vctEntities) {
-	    movementManager.update(vctEntities, playerTicks, player, camera, deltaTime);
+	    movementManager.update(vctEntities, playerTicks, player, camera, deltaTime, intImageSize);
 	    camera.update(frame.pnlGraphics.getWidth(), frame.pnlGraphics.getHeight(), LocX, LocY, viewRangeX, viewRangeY, intImageSize, deltaTime);
 
 	    synchronized (vctDamageSplats) {

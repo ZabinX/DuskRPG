@@ -3,7 +3,7 @@ import java.util.Vector;
 public class MovementManager {
     public boolean blnPlayerAnimationLock = false;
 
-    public void update(Vector<Entity> entities, long playerTicks, Entity player, Camera camera, double deltaTime) {
+    public void update(Vector<Entity> entities, long playerTicks, Entity player, Camera camera, double deltaTime, int intImageSize) {
         if (blnPlayerAnimationLock) {
             double cameraStopThreshold = 0.5;
             if (Math.abs(camera.x - camera.targetCameraX) < cameraStopThreshold && Math.abs(camera.y - camera.targetCameraY) < cameraStopThreshold) {
@@ -76,7 +76,7 @@ public class MovementManager {
                     }
 
                     if (!ent.queuedMoves.isEmpty()) {
-                        startMove(ent, ent.queuedMoves.poll(), 36);
+                        startMove(ent, ent.queuedMoves.poll(), intImageSize);
                     }
                 } else {
                     double angle = Math.atan2(dy, dx);
@@ -119,5 +119,3 @@ public class MovementManager {
         ent.isMoving = true;
     }
 }
-
-
