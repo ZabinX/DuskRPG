@@ -18,15 +18,18 @@ import java.util.StringTokenizer;
 import java.applet.*;
 import java.net.*;
 import javax.imageio.ImageIO;
+import java.util.concurrent.CountDownLatch;
 
 public class GraphicsThread implements Runnable
 {
 	Dusk appParent;
 	Thread thread;
+	private CountDownLatch imageLatch;
 
-	GraphicsThread(Dusk inParent)
+	GraphicsThread(Dusk inParent, CountDownLatch latch)
 	{
 		appParent = inParent;
+		imageLatch = latch;
 	}
 	
 	public void run()
@@ -77,6 +80,10 @@ public class GraphicsThread implements Runnable
 		}catch(Exception e)
 		{
 			System.err.println("Error while waiting for images: "+e.toString());
+		} finally {
+			if (imageLatch != null) {
+				imageLatch.countDown();
+			}
 		}
 		appParent.numMapImages = (appParent.imgOriginalMap.getWidth(null)/appParent.imgOriginalMap.getHeight(null))-1;
 		appParent.intOriginalTileSize = appParent.imgOriginalMap.getHeight(null);
