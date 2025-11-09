@@ -74,7 +74,7 @@ public class ConnectFrame extends JFrame
 		txtName.setVisible(true);
 		txtName.setSize(new java.awt.Dimension(140, 20));
 		
-		txtAddress.setText("100.x.x.47");
+		txtAddress.setText("100.64.17.13");
 		txtAddress.setLocation(new java.awt.Point(10, 30));
 		txtAddress.setVisible(true);
 		txtAddress.setSize(new java.awt.Dimension(140, 20));
@@ -84,7 +84,7 @@ public class ConnectFrame extends JFrame
 		lblAddress.setVisible(true);
 		lblAddress.setSize(new java.awt.Dimension(120, 20));
 
-		txtPort.setText("4769");
+		txtPort.setText("2222");
 		txtPort.setLocation(new java.awt.Point(10, 70));
 		txtPort.setVisible(true);
 		txtPort.setSize(new java.awt.Dimension(60, 20));

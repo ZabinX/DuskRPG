@@ -64,11 +64,11 @@ public class Battle
 			engGame.chatMessage("-"+inpla1.strName+" has attacked "+inpla2.strName,inpla1.intLocX,inpla1.intLocY,"default");
 			if (inpla1.popup)
 			{
-				inpla1.send(""+(char)31+inpla2.strName);
+				inpla1.send(""+(char)31+inpla2.strName+"\n");
 			}
 			if (inpla2.popup)
 			{
-				inpla2.send(""+(char)31+inpla1.strName);
+				inpla2.send(""+(char)31+inpla1.strName+"\n");
 			}
 		}catch (Exception e)
 		{
@@ -538,13 +538,11 @@ public class Battle
 		int i;
 		LivingThing thnStore=null;
 		String strStore2=null;
-                String strStore3=null;
 		if (!vctSide2.isEmpty())
 		{
 			thnStore = (LivingThing)vctSide2.elementAt(0);
 			strStore2 = thnStore.strName+" has "+thnStore.getCharacterPoints()+"cp and "+thnStore.hp+"/"+thnStore.maxhp+"hp.";
-                        strStore3 = thnStore.hp+" "+thnStore.maxhp;
-                }
+		}
 		for (i=0;i<vctSide1.size();i++)
 		{
 			thnStore = (LivingThing)vctSide1.elementAt(i);
@@ -556,7 +554,6 @@ public class Battle
 					{
                                                 thnStore.send(""+(char)32+strStore2+"\n");
 						thnStore.send(""+(char)33+strStore+"\n");
-                                                thnStore.send(""+(char)34+strStore3+"\n");
 					}
 				} else
 				{

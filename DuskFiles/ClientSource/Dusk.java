@@ -1315,14 +1315,16 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                         String HpData = stmIn.readLine();
                         if (HpData != null) {
                             String[] hpValues = HpData.trim().split(" ");
-                            int newHp = Integer.parseInt(hpValues[0]);
-                            int newMaxHp = Integer.parseInt(hpValues[1]);
+                            if (hpValues.length >= 2) {
+                                int newHp = Integer.parseInt(hpValues[0]);
+                                int newMaxHp = Integer.parseInt(hpValues[1]);
 
-                            synchronized(vctEntities) {
-                                entStore = hmpEntities.get(opponentID);
-                                if (entStore != null) {
-                                    entStore.hp = newHp;
-                                    entStore.maxhp = newMaxHp;
+                                synchronized(vctEntities) {
+                                    entStore = hmpEntities.get(opponentID);
+                                    if (entStore != null) {
+                                        entStore.hp = newHp;
+                                        entStore.maxhp = newMaxHp;
+                                    }
                                 }
                             }
                         }
