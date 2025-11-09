@@ -1402,6 +1402,7 @@ public class Script
             		Item itmStore = engGame.getItem(getString());
             		itmStore.intLocX = (int)parseValue();
             		itmStore.intLocY = (int)parseValue();
+					engGame.vctItems.addElement(itmStore);
             		engGame.addDuskObject(itmStore);
             	    return true;
             	}
