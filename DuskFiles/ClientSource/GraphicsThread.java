@@ -25,6 +25,7 @@ public class GraphicsThread implements Runnable
 	Dusk appParent;
 	Thread thread;
 	private CountDownLatch imageLatch;
+	boolean blnAudioLoaded = false;
 
 	GraphicsThread(Dusk inParent, CountDownLatch latch)
 	{
@@ -97,7 +98,7 @@ public class GraphicsThread implements Runnable
 		{
 			prefix = "file:"+System.getProperty("user.dir")+prefix;
 		}
-        appParent.update(0.016); // Initial update with a small delta to avoid large initial jump
+        appParent.update(0.0008); // Initial update with a small delta to avoid large initial jump
 		appParent.paint();
 
 		// The main game loop.
@@ -106,6 +107,12 @@ public class GraphicsThread implements Runnable
 		{
 			if (appParent.blnConnected && appParent.blnLoaded)
 			{
+				if (!blnAudioLoaded) {
+					blnAudioLoaded = true;
+					if (appParent.blnMusic) {
+						appParent.preloadAudioInBackground();
+					}
+				}
 				try
 				{
 					long currentTime = System.nanoTime();
@@ -121,7 +128,7 @@ public class GraphicsThread implements Runnable
 					appParent.paint();
 
 					// A minimal sleep to prevent the loop from running at max speed and to allow other threads to run.
-					Thread.sleep(30); 
+					Thread.sleep(33); 
 				}catch(Exception e){
 					System.err.println("Error in graphics thread: " + e.toString());
 				}

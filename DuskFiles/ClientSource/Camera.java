@@ -4,7 +4,7 @@ public class Camera {
     public double targetCameraX = 0;
     public double targetCameraY = 0;
     private Entity target;
-    private double cameraSmoothing = 0.1;
+    private double cameraSmoothing = 0.05;
 
     public Camera(Entity target) {
         this.target = target;
@@ -39,7 +39,7 @@ public class Camera {
             targetCameraX = Math.max(minCameraX, Math.min(targetCameraX, maxCameraX));
             targetCameraY = Math.max(minCameraY, Math.min(targetCameraY, maxCameraY));
 
-            double smoothingFactor = 1.0 - Math.pow(1.0 - cameraSmoothing, deltaTime * 33.3);
+            double smoothingFactor = 1.0 - Math.pow(1.0 - cameraSmoothing, deltaTime * 66.6);
             x += (targetCameraX - x) * smoothingFactor;
             y += (targetCameraY - y) * smoothingFactor;
         }

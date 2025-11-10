@@ -802,7 +802,9 @@ public class Battle
 					synchronized(thnStore.vctMovement)
 					{
 						// Don't move onto the player's tile
-	        			thnStore.vctMovement.removeElement(thnStore.vctMovement.lastElement());
+						if (!thnStore.vctMovement.isEmpty()) {
+	        				thnStore.vctMovement.removeElement(thnStore.vctMovement.lastElement());
+						}
 					}
         		}
         	}else
@@ -917,7 +919,9 @@ public class Battle
 					synchronized(thnStore.vctMovement)
 					{
 						// Don't move onto the player's tile
-	        			thnStore.vctMovement.removeElement(thnStore.vctMovement.lastElement());
+						if (!thnStore.vctMovement.isEmpty()) {
+	        				thnStore.vctMovement.removeElement(thnStore.vctMovement.lastElement());
+						}
 					}
         		}
         	}else

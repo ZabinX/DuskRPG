@@ -82,9 +82,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			blnApplet;
 	int intMusicTypes;
 	int intNumSongs[];
-    Clip audSFX[],
-    			audMusic[][],
-				audLocationMusic[];
+    volatile Clip audSFX[];
+    Clip audMusic[][];
+	volatile Clip audLocationMusic[];
     Clip audMusicPlaying;
     Applet appShell;
     String strRCAddress;
@@ -360,6 +360,73 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 
+	public void preloadAudioInBackground() {
+		new Thread(() -> {
+			SwingUtilities.invokeLater(() -> addText("Loading audio...!!!FREEZE WARNING!!! CLICK THE SLEEP AND WAKE BUTTON TO START PLAYING!!!\n"));
+			final int numSoundEffects = 12;
+			final String[] locationMusicFiles = {"a_better_world-orch.wav", "The_9th_Circle_V2.wav"};
+
+			audSFX = new Clip[numSoundEffects];
+			audLocationMusic = new Clip[locationMusicFiles.length];
+
+			// Preload sound effects sequentially
+			for (int i = 0; i < numSoundEffects; i++) {
+				String fileName = String.format("/app/rc/somedusk/audio/sfx/hit%02d.wav", i + 1);
+				AudioInputStream audioInputStream = null;
+				try {
+					File audioFile = new File(fileName);
+					if (audioFile.exists()) {
+						audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+						Clip clip = AudioSystem.getClip();
+						clip.open(audioInputStream);
+						audSFX[i] = clip;
+					} else {
+						System.err.println("Sound effect not found for preloading: " + fileName);
+					}
+				} catch (Exception e) {
+					System.err.println("Error preloading sound effect " + fileName + ": " + e.toString());
+				} finally {
+					if (audioInputStream != null) {
+						try {
+							audioInputStream.close();
+						} catch (IOException e) {
+							System.err.println("Error closing audio stream for " + fileName + ":" + e.toString());
+						}
+					}
+				}
+			}
+
+			// Preload location-specific music sequentially
+			for (int i = 0; i < locationMusicFiles.length; i++) {
+				String fName = locationMusicFiles[i];
+				String fileName = "/app/rc/somedusk/audio/sfx/" + fName;
+				AudioInputStream audioInputStream = null;
+				try {
+					File audioFile = new File(fileName);
+					if (audioFile.exists()) {
+						audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+						Clip clip = AudioSystem.getClip();
+						clip.open(audioInputStream);
+						audLocationMusic[i] = clip;
+					} else {
+						System.err.println("Location music file not found for preloading: " + fileName);
+					}
+				} catch (Exception e) {
+					System.err.println("Error preloading location music " + fileName + ": " + e.toString());
+				} finally {
+					if (audioInputStream != null) {
+						try {
+							audioInputStream.close();
+						} catch (IOException e) {
+							System.err.println("Error closing audio stream for " + fileName + ":" + e.toString());
+						}
+					}
+				}
+			}
+			SwingUtilities.invokeLater(() -> addText("Audio finished loading.\n"));
+		}).start();
+	}
+
 	public void spawnBloodParticles(Entity attacker, Entity defender, int damage) {
 		if (defender == null) return;
 		double angle = 0;
@@ -568,89 +635,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					} catch (InterruptedException e) {
 						System.err.println("Image loading interrupted: " + e.toString());
 					}
-				
-					addText("Loading audio...\n");
-					// Preload all audio assets
-					final int numSoundEffects = 12;
-					final String[] locationMusicFiles = {"a_better_world-orch.wav", "The_9th_Circle_V2.wav"};
-					final int totalAudioFiles = numSoundEffects + locationMusicFiles.length;
-					final CountDownLatch audioLatch = new CountDownLatch(totalAudioFiles);
-				
-					audSFX = new Clip[numSoundEffects];
-					audLocationMusic = new Clip[locationMusicFiles.length];
-				
-					// Preload sound effects
-					for (int i = 0; i < numSoundEffects; i++) {
-						final int index = i;
-						new Thread(() -> {
-							String fileName = String.format("/app/rc/somedusk/audio/sfx/hit%02d.wav", index + 1);
-							AudioInputStream audioInputStream = null;
-							try {
-								File audioFile = new File(fileName);
-								if (audioFile.exists()) {
-									audioInputStream = AudioSystem.getAudioInputStream(audioFile);
-									Clip clip = AudioSystem.getClip();
-									clip.open(audioInputStream);
-									audSFX[index] = clip;
-								} else {
-									System.err.println("Sound effect not found for preloading: " + fileName);
-								}
-							} catch (Exception e) {
-								System.err.println("Error preloading sound effect " + fileName + ": " + e.toString());
-							} finally {
-								if (audioInputStream != null) {
-									try {
-										audioInputStream.close();
-									} catch (IOException e) {
-										System.err.println("Error closing audio stream for " + fileName + ":" + e.toString());
-									}
-								}
-								audioLatch.countDown();
-							}
-						}).start();
-					}
-				
-					// Preload location-specific music
-					for (int i = 0; i < locationMusicFiles.length; i++) {
-						final int index = i;
-						final String fName = locationMusicFiles[i];
-						new Thread(() -> {
-							String fileName = "/app/rc/somedusk/audio/sfx/" + fName;
-							AudioInputStream audioInputStream = null;
-							try {
-								File audioFile = new File(fileName);
-								if (audioFile.exists()) {
-									audioInputStream = AudioSystem.getAudioInputStream(audioFile);
-									Clip clip = AudioSystem.getClip();
-									clip.open(audioInputStream);
-									audLocationMusic[index] = clip;
-								} else {
-									System.err.println("Location music file not found for preloading: " + fileName);
-								}
-							} catch (Exception e) {
-								System.err.println("Error preloading location music " + fileName + ": " + e.toString());
-							} finally {
-								if (audioInputStream != null) {
-									try {
-										audioInputStream.close();
-									} catch (IOException e) {
-										System.err.println("Error closing audio stream for " + fileName + ":" + e.toString());
-									}
-								}
-								audioLatch.countDown();
-							}
-						}).start();
-					}
-				
-					// Wait for all audio to load in a separate thread to not block the network thread
-					new Thread(() -> {
-						try {
-							audioLatch.await();
-							addText("Audio finished loading.\n");
-						} catch (InterruptedException e) {
-							System.err.println("Audio preloading interrupted: " + e.toString());
-						}
-					}).start();
 					break;
 				}
 		        case (2):
@@ -938,7 +922,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 										audMusicPlaying.stop();
 									}
 									
-									if (songIndex >= 0 && songIndex < audLocationMusic.length) {
+									if (audLocationMusic != null && songIndex >= 0 && songIndex < audLocationMusic.length) {
 										Clip clipToPlay = audLocationMusic[songIndex];
 										if (clipToPlay != null && clipToPlay.isOpen()) {
 											audMusicPlaying = clipToPlay;
