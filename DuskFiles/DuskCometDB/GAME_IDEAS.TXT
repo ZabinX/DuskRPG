@@ -1,0 +1,97 @@
+-convert map to layers...
+	ground layer
+	wall/tree layer
+	item layer
+	mob layer
+	player ownership layer
+	god ownership layer
+	etc...
+-add pet name and cp to who for gods
+-add an automated way to buy land or settle on undeveloped land
+	The owner can build on it (maybe limit the tile set available)
+	Gods would need to "buy" the area they were working on
+		This would allow other gods to know who is doing what and where
+	Areas that players are not allowed to build, would be purchased by
+		game/gods
+	This would allow players to potentially settle new towns, elect mayors,
+		start wars, etc.
+-add changename command
+	Allow newbies the ability to switch names up to a certain cp/exp level
+*DONE*-add changerace command
+	Allow newbies the ability to switch races up to a certain cp/exp level
+-add visibility
+	different races can see farther than others
+	perhaps grey out tiles that are not visible
+*DONE*-max stats
+	Make it so race can determine maximum values for stats
+		including, perhaps HP and MP
+-new condition definition system
+	Display name is stored in the definition file
+		this would allow for different conditions to appear to be the same
+		condition to the player
+*DONE* (indirectly with kill scipt function)-allow conditions to cause death
+	Check for death after all the condition scripts
+	The display name from previous change would allow an onOccurance script
+		to global chat a death from the condition visible to the player
+-New merchant.
+	merchant directory, file names match player names.
+	could have more than one merchant using .number (wildern.0 wildern.1 ...)
+	merchant file would contain all the items the merchant has to sell
+		merchant can only sell these items, when they are gone it is an empty
+		merchant.
+	merchant file would also have the gp total that merchant is storing
+-New conditions.
+	Want conditions that can affect tiles and items
+	Would allow for spells to enhance normal weapons
+	Would allow spells to affect tiles (summoning a wall, for instance)
+	Would also allow for swimming skill, forest walk skill, digging skill, etc.
+-Damage type
+	Damage done being of type slice, pierce, blunt, heat, cold, electric
+	Weapons and spells could do the various types of damage
+	Amor more/less effective against the various damage types
+-ItemLife parameter
+	Determines how long an item will stay on the map once it has been dropped
+		after that time, the item disappears
+	Could allow item persistance from player houses
+-Item persistance
+	Items on the map would get saved with a save game command
+-Combine multiple items on same tile
+	Generic "stuff" item that when looked at lists what is there
+	Player would "get stuff" and pick up all that was there
+		need to allow just getting a single item as well
+-New combat system
+	Switch to single round combat.
+	Mob would have to keep track of who has damaged it and by how much
+		This would get cleared whenever the mob healed to full
+	Items given by mob would need to be created on the map instead of
+		in the player's inventory
+	Exp would get divvied out when mob died, to all those that damaged it
+		with exp being based on the amount of damage done
+*DONE*-scripted commands need to override built-in commands
+	Need to be able to call built-in commands from scripted commands
+	Need to be able to call scripted commands from sctipted commands
+		Need to prevent infinite loops
+-script includes
+	Would be nice to be able to include one script in another
+		should endscripts from included scripts end the script?
+	Maybe calling a script from within script would be enough and better?
+-make stat names configurable
+	have it so stat names can be set in a conf file
+		ie: darkstar Strength, Spell Power, Stamina, Regeneration, Mana Regen
+					Weapon Pwr, Armor
+	possibly even make it so gossip, say, emote, etc... can all be in a file
+-improve movement
+	Only scan 1 row of map tiles in direction of movement
+	Keep a list of local things and adjacent things
+-make stats work differently for different races/classes
+	dex 2-10 dex = 1 ac
+	wis alter mp regen rate
+	con alter hp regen rate
+-"tile" items that players can purchase and drop on land they own, thus
+	tiling the map themselves.
+-professions/classes ...
+	one could study skills like herbology and get exp for finding herbs
+		and mixing them into potions
+	one could get exp for mining ore for use in weapons/jewelry/tiles
+	one could get exp for forging weapons/armor
+	etc...
