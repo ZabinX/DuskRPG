@@ -14,7 +14,7 @@ remove this license, and accompany it with all redistributions.
 *@author Tom Weingarten
 */
 
-public class GiveItem
+public class GiveItem implements java.io.Serializable
 {
 	String strItemName;
 	double dblProbability;

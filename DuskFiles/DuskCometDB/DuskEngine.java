@@ -15,6 +15,8 @@ import java.util.Vector;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -24,6 +26,8 @@ import java.util.Date;
 */
 public class DuskEngine implements Runnable
 {
+	public static final int CHUNK_SIZE = 32;
+	private Map<String, Integer> loadedChunks = new HashMap<>();
 	//Database
 	DatabaseManager dbManager;
 
@@ -259,50 +263,39 @@ public class DuskEngine implements Runnable
 			log.printMessage(Log.INFO,"Map Loaded...");
 
 			// All other data types will follow this pattern: try to load from DB, if it fails, load from file and then save to DB.
-
-			vctMerchants = (Vector)dbManager.get("data/merchants");
-			if (vctMerchants == null) {
-				log.printMessage(Log.INFO,"Merchants not in database, loading from file...");
-				vctMerchants = new Vector(0,10);
+			if (dbManager.get("data/migrated") == null) {
+				log.printMessage(Log.INFO, "Performing one-time data migration to chunk format...");
+				// Merchants
 				try {
 					rafFile = new RandomAccessFile("../DuskComet-Richter/merchants", "r");
+					Map<String, Vector<Merchant>> chunkedMerchants = new HashMap<>();
 					Merchant mrcStore;
 					strStore = rafFile.readLine();
-					while (!(strStore == null || strStore.equals("")))
-					{
+					while (!(strStore == null || strStore.equals(""))) {
 						mrcStore = new Merchant(this);
 						mrcStore.vctItems = new Vector(0);
 						mrcStore.intLocX = Integer.parseInt(strStore);
 						mrcStore.intLocY = Integer.parseInt(rafFile.readLine());
 						strStore = rafFile.readLine();
-						while (strStore != null && !strStore.equals("") && !strStore.equalsIgnoreCase("end"))
-						{
+						while (strStore != null && !strStore.equals("") && !strStore.equalsIgnoreCase("end")) {
 							mrcStore.vctItems.addElement(strStore);
 							strStore = rafFile.readLine();
 						}
-						vctMerchants.addElement(mrcStore);
+						String chunkKey = "chunk/" + (mrcStore.intLocX / CHUNK_SIZE) + "_" + (mrcStore.intLocY / CHUNK_SIZE) + "/merchants";
+						chunkedMerchants.computeIfAbsent(chunkKey, k -> new Vector<>()).add(mrcStore);
 						strStore = rafFile.readLine();
 					}
 					rafFile.close();
-					dbManager.put("data/merchants", vctMerchants);
+					for (Map.Entry<String, Vector<Merchant>> entry : chunkedMerchants.entrySet()) {
+						dbManager.put(entry.getKey(), entry.getValue());
+					}
 				} catch (Exception e) {
-					log.printError("DuskEngine():While loading merchants from file", e);
+					log.printError("DuskEngine():While migrating merchants", e);
 				}
-			}
-			for (i=0;i<vctMerchants.size();i++) {
-				Merchant mrcStore = (Merchant)vctMerchants.elementAt(i);
-				if (mrcStore.intLocX > MapColumns || mrcStore.intLocY > MapRows || mrcStore.intLocX < 0 || mrcStore.intLocY < 0) {
-					log.printMessage(Log.VERBOSE,"Merchant is off of the map, ignoring");
-				} else {
-					addDuskObject(mrcStore);
-				}
-			}
 
-			vctMobs = (Vector)dbManager.get("data/mobs");
-			if (vctMobs == null) {
-				log.printMessage(Log.INFO,"Mobs not in database, loading from file...");
-				vctMobs = new Vector(0,10);
+				// Mobs
 				try {
+					Map<String, Vector<LivingThing>> chunkedMobs = new HashMap<>();
 					LivingThing thnStore;
 					rafFile = new RandomAccessFile("../DuskComet-Richter/mobs", "r");
 					strStore = rafFile.readLine();
@@ -316,57 +309,41 @@ public class DuskEngine implements Runnable
 						} else {
 							thnStore = new Mob(strStore, Integer.parseInt(rafFile.readLine()), Integer.parseInt(rafFile.readLine()), Integer.parseInt(rafFile.readLine()), this);
 						}
-						vctMobs.addElement(thnStore);
+						String chunkKey = "chunk/" + (thnStore.intLocX / CHUNK_SIZE) + "_" + (thnStore.intLocY / CHUNK_SIZE) + "/mobs";
+						chunkedMobs.computeIfAbsent(chunkKey, k -> new Vector<>()).add(thnStore);
 						strStore = rafFile.readLine();
 					}
 					rafFile.close();
-					dbManager.put("data/mobs", vctMobs);
+					for (Map.Entry<String, Vector<LivingThing>> entry : chunkedMobs.entrySet()) {
+						dbManager.put(entry.getKey(), entry.getValue());
+					}
 				} catch (Exception e) {
-					log.printError("DuskEngine():While loading mobs from file", e);
+					log.printError("DuskEngine():While migrating mobs", e);
 				}
-			}
-			for (i=0;i<vctMobs.size();i++) {
-				LivingThing thnStore = (LivingThing)vctMobs.elementAt(i);
-				if (thnStore.intLocX > MapColumns || thnStore.intLocY > MapRows || thnStore.intLocX < 0 || thnStore.intLocY < 0) {
-					log.printMessage(Log.VERBOSE,"Mob is off of the map, ignoring");
-				} else {
-					addDuskObject(thnStore);
-				}
-			}
 
-			vctSigns = (Vector)dbManager.get("data/signs");
-			if (vctSigns == null) {
-				log.printMessage(Log.INFO,"Signs not in database, loading from file...");
-				vctSigns = new Vector(0,10);
+				// Signs
 				try {
+					Map<String, Vector<Sign>> chunkedSigns = new HashMap<>();
 					rafFile = new RandomAccessFile("../DuskComet-Richter/signs", "r");
 					strStore = rafFile.readLine();
 					while (!(strStore == null || strStore.equals("")))
 					{
 						Sign sgnStore = new Sign("sign",strStore,Integer.parseInt(rafFile.readLine()),Integer.parseInt(rafFile.readLine()),getID());
-						vctSigns.addElement(sgnStore);
+						String chunkKey = "chunk/" + (sgnStore.intLocX / CHUNK_SIZE) + "_" + (sgnStore.intLocY / CHUNK_SIZE) + "/signs";
+						chunkedSigns.computeIfAbsent(chunkKey, k -> new Vector<>()).add(sgnStore);
 						strStore = rafFile.readLine();
 					}
 					rafFile.close();
-					dbManager.put("data/signs", vctSigns);
+					for (Map.Entry<String, Vector<Sign>> entry : chunkedSigns.entrySet()) {
+						dbManager.put(entry.getKey(), entry.getValue());
+					}
 				} catch (Exception e) {
-					log.printError("DuskEngine():While loading signs from file", e);
+					log.printError("DuskEngine():While migrating signs", e);
 				}
-			}
-			for (i=0;i<vctSigns.size();i++) {
-				Sign sgnStore = (Sign)vctSigns.elementAt(i);
-				if (sgnStore.intLocX > MapColumns || sgnStore.intLocY > MapRows || sgnStore.intLocX < 0 || sgnStore.intLocY < 0) {
-					log.printMessage(Log.VERBOSE,"Sign is off of the map, ignoring");
-				} else {
-					addDuskObject(sgnStore);
-				}
-			}
 
-			vctProps = (Vector)dbManager.get("data/props");
-			if (vctProps == null) {
-				log.printMessage(Log.INFO,"Props not in database, loading from file...");
-				vctProps = new Vector(0,10);
+				// Props
 				try {
+					Map<String, Vector<Prop>> chunkedProps = new HashMap<>();
 					rafFile = new RandomAccessFile("../DuskComet-Richter/props","r");
 					strStore = rafFile.readLine();
 					while (!(strStore == null || strStore.equals("")))
@@ -376,23 +353,21 @@ public class DuskEngine implements Runnable
 						{
 							prpStore.intLocX = Integer.parseInt(rafFile.readLine());
 							prpStore.intLocY = Integer.parseInt(rafFile.readLine());
-							vctProps.addElement(prpStore);
+							String chunkKey = "chunk/" + (prpStore.intLocX / CHUNK_SIZE) + "_" + (prpStore.intLocY / CHUNK_SIZE) + "/props";
+							chunkedProps.computeIfAbsent(chunkKey, k -> new Vector<>()).add(prpStore);
 						}
 						strStore = rafFile.readLine();
 					}
 					rafFile.close();
-					dbManager.put("data/props", vctProps);
+					for (Map.Entry<String, Vector<Prop>> entry : chunkedProps.entrySet()) {
+						dbManager.put(entry.getKey(), entry.getValue());
+					}
 				} catch (Exception e) {
-					log.printError("DuskEngine():While loading props from file", e);
+					log.printError("DuskEngine():While migrating props", e);
 				}
-			}
-			for (i=0;i<vctProps.size();i++) {
-				Prop prpStore = (Prop)vctProps.elementAt(i);
-				if (prpStore.intLocX > MapColumns || prpStore.intLocY > MapRows || prpStore.intLocX < 0 || prpStore.intLocY < 0) {
-					log.printMessage(Log.VERBOSE,"Prop is off of the map, ignoring");
-				} else {
-					addDuskObject(prpStore);
-				}
+
+				dbManager.put("data/migrated", true);
+				log.printMessage(Log.INFO, "Data migration complete.");
 			}
 
 			varVariables = (VariableSet)dbManager.get("data/globals");
@@ -438,6 +413,45 @@ public class DuskEngine implements Runnable
 		}catch(Exception e)
 		{
 			log.printError("DuskEngine()", e);
+		}
+
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			blnShuttingDown = true;
+			log.printMessage(Log.ALWAYS, "Shutdown hook initiated. Saving all loaded chunks...");
+			saveAllChunks();
+			log.printMessage(Log.ALWAYS, "All chunks saved. Shutdown complete.");
+		}));
+	}
+
+	synchronized void saveAllChunks() {
+		for (String chunkKey : loadedChunks.keySet()) {
+			String[] parts = chunkKey.split("_");
+			int chunkX = Integer.parseInt(parts[0]);
+			int chunkY = Integer.parseInt(parts[1]);
+	
+			// Save merchants
+			Vector<Merchant> merchantsInChunk = new Vector<>();
+			for (Iterator<Merchant> it = vctMerchants.iterator(); it.hasNext();) {
+				Merchant m = it.next();
+				if (m.intLocX / CHUNK_SIZE == chunkX && m.intLocY / CHUNK_SIZE == chunkY) {
+					merchantsInChunk.add(m);
+				}
+			}
+			if (!merchantsInChunk.isEmpty()) {
+				dbManager.put("chunk/" + chunkKey + "/merchants", merchantsInChunk);
+			}
+	
+			// Save mobs
+			Vector<LivingThing> mobsInChunk = new Vector<>();
+			for (Iterator<LivingThing> it = vctMobs.iterator(); it.hasNext();) {
+				LivingThing m = it.next();
+				if (m.intLocX / CHUNK_SIZE == chunkX && m.intLocY / CHUNK_SIZE == chunkY) {
+					mobsInChunk.add(m);
+				}
+			}
+			if (!mobsInChunk.isEmpty()) {
+				dbManager.put("chunk/" + chunkKey + "/mobs", mobsInChunk);
+			}
 		}
 	}
 
@@ -909,6 +923,133 @@ public class DuskEngine implements Runnable
 			}
 		}
 		return players;
+	}
+
+	public synchronized void updatePlayerChunks(int oldChunkX, int oldChunkY, int newChunkX, int newChunkY) {
+		// Unload old chunks
+		for (int x = oldChunkX - 1; x <= oldChunkX + 1; x++) {
+			for (int y = oldChunkY - 1; y <= oldChunkY + 1; y++) {
+				unloadChunk(x, y);
+			}
+		}
+	
+		// Load new chunks
+		for (int x = newChunkX - 1; x <= newChunkX + 1; x++) {
+			for (int y = newChunkY - 1; y <= newChunkY + 1; y++) {
+				loadChunk(x, y);
+			}
+		}
+	}
+
+	synchronized void loadChunk(int chunkX, int chunkY) {
+		String chunkKey = chunkX + "_" + chunkY;
+		if (loadedChunks.containsKey(chunkKey)) {
+			loadedChunks.put(chunkKey, loadedChunks.get(chunkKey) + 1);
+			return;
+		}
+
+		log.printMessage(Log.INFO, "Loading chunk " + chunkKey);
+
+		// Load merchants
+		Vector<Merchant> merchants = (Vector<Merchant>) dbManager.get("chunk/" + chunkKey + "/merchants");
+		if (merchants != null) {
+			for (Merchant m : merchants) {
+				vctMerchants.add(m);
+				addDuskObject(m);
+			}
+		}
+
+		// Load mobs
+		Vector<LivingThing> mobs = (Vector<LivingThing>) dbManager.get("chunk/" + chunkKey + "/mobs");
+		if (mobs != null) {
+			for (LivingThing m : mobs) {
+				vctMobs.add(m);
+				addDuskObject(m);
+			}
+		}
+
+		// Load signs
+		Vector<Sign> signs = (Vector<Sign>) dbManager.get("chunk/" + chunkKey + "/signs");
+		if (signs != null) {
+			for (Sign s : signs) {
+				vctSigns.add(s);
+				addDuskObject(s);
+			}
+		}
+
+		// Load props
+		Vector<Prop> props = (Vector<Prop>) dbManager.get("chunk/" + chunkKey + "/props");
+		if (props != null) {
+			for (Prop p : props) {
+				vctProps.add(p);
+				addDuskObject(p);
+			}
+		}
+
+		loadedChunks.put(chunkKey, 1);
+	}
+
+	synchronized void unloadChunk(int chunkX, int chunkY) {
+		String chunkKey = chunkX + "_" + chunkY;
+		if (!loadedChunks.containsKey(chunkKey)) {
+			return;
+		}
+
+		int refCount = loadedChunks.get(chunkKey) - 1;
+		if (refCount > 0) {
+			loadedChunks.put(chunkKey, refCount);
+			return;
+		}
+
+		log.printMessage(Log.INFO, "Unloading chunk " + chunkKey);
+
+		// Unload and save merchants
+		Vector<Merchant> merchantsInChunk = new Vector<>();
+		for (Iterator<Merchant> it = vctMerchants.iterator(); it.hasNext();) {
+			Merchant m = it.next();
+			if (m.intLocX / CHUNK_SIZE == chunkX && m.intLocY / CHUNK_SIZE == chunkY) {
+				merchantsInChunk.add(m);
+				removeDuskObject(m);
+				it.remove();
+			}
+		}
+		if (!merchantsInChunk.isEmpty()) {
+			dbManager.put("chunk/" + chunkKey + "/merchants", merchantsInChunk);
+		}
+
+		// Unload and save mobs
+		Vector<LivingThing> mobsInChunk = new Vector<>();
+		for (Iterator<LivingThing> it = vctMobs.iterator(); it.hasNext();) {
+			LivingThing m = it.next();
+			if (m.intLocX / CHUNK_SIZE == chunkX && m.intLocY / CHUNK_SIZE == chunkY) {
+				mobsInChunk.add(m);
+				removeDuskObject(m);
+				it.remove();
+			}
+		}
+		if (!mobsInChunk.isEmpty()) {
+			dbManager.put("chunk/" + chunkKey + "/mobs", mobsInChunk);
+		}
+
+		// Unload signs (Signs are static and don't need to be saved back)
+		for (Iterator<Sign> it = vctSigns.iterator(); it.hasNext();) {
+			Sign s = it.next();
+			if (s.intLocX / CHUNK_SIZE == chunkX && s.intLocY / CHUNK_SIZE == chunkY) {
+				removeDuskObject(s);
+				it.remove();
+			}
+		}
+		
+		// Unload props (Props are static and don't need to be saved back)
+		for (Iterator<Prop> it = vctProps.iterator(); it.hasNext();) {
+			Prop p = it.next();
+			if (p.intLocX / CHUNK_SIZE == chunkX && p.intLocY / CHUNK_SIZE == chunkY) {
+				removeDuskObject(p);
+				it.remove();
+			}
+		}
+
+		loadedChunks.remove(chunkKey);
 	}
 
 	void chatMessage(String inMessage, String strClan, String strFrom)
