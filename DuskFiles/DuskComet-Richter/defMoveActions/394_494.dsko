@@ -1,0 +1,14 @@
+ trigger shenville_0 trigger shenville_pq_0 
+trigger shenville_0 -trigger 72 623  trigger killedpirate trigger shenville_pq_0 
+trigger killedpirate -trigger 72 623  trigger killedpirateguard trigger shenville_pq_0 
+trigger killedpirateguard -trigger 72 623  trigger killedpirateassassin trigger shenville_pq_0 
+trigger killedpirateassassin -trigger 72 623  trigger excaliburquest .199 191 56 
+trigger excaliburquest trigger excaliburquest1 
+trigger piratebattle 
+trigger piratebattle1 
+trigger pirateguardbattle 
+trigger pirateguardbattle1 
+trigger pirateassassinbattle 
+trigger pirateassassinbattle1 
+trigger blackbeardbattle 
+trigger blackbeardbattle1 <1  

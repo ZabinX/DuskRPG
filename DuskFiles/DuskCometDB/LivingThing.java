@@ -1247,6 +1247,15 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		blnIsClosing = true;
 		blnWorking = false;
 		blnShouldSave = true;
+		if (isPlayer()) {
+			int chunkX = intLocX / DuskEngine.CHUNK_SIZE;
+			int chunkY = intLocY / DuskEngine.CHUNK_SIZE;
+			for (int x = chunkX - 1; x <= chunkX + 1; x++) {
+				for (int y = chunkY - 1; y <= chunkY + 1; y++) {
+					engGame.unloadChunk(x, y);
+				}
+			}
+		}
 		if (!vctConditions.isEmpty() && engGame.vctCheckConditions.contains(this))
 		{
 			engGame.vctCheckConditions.removeElement(this);
@@ -1752,6 +1761,8 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			return;
 		int oldLocX = intLocX;
 		int oldLocY = intLocY;
+		int oldChunkX = oldLocX / DuskEngine.CHUNK_SIZE;
+		int oldChunkY = oldLocY / DuskEngine.CHUNK_SIZE;
 		DuskObject objStore;
 		boolean blnCanSee;
 		int x, x1, y, y1, y2;
@@ -1810,6 +1821,11 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			intStep = intNewStep;
 			if (isPlayer())
 			{
+				int newChunkX = intLocX / DuskEngine.CHUNK_SIZE;
+				int newChunkY = intLocY / DuskEngine.CHUNK_SIZE;
+				if (oldChunkX != newChunkX || oldChunkY != newChunkY) {
+					engGame.updatePlayerChunks(oldChunkX, oldChunkY, newChunkX, newChunkY);
+				}
 				if (engGame.overMerchant(oldLocX,oldLocY) != null)
 					offMerchant();
 				if (engGame.overPlayerMerchant(oldLocX,oldLocY) != null)
@@ -2002,6 +2018,8 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	{
 		int oldLocX = intLocX;
 		int oldLocY = intLocY;
+		int oldChunkX = oldLocX / DuskEngine.CHUNK_SIZE;
+		int oldChunkY = oldLocY / DuskEngine.CHUNK_SIZE;
 		engGame.removeDuskObject(this);
 		intLocX = newLocX;
 		intLocY = newLocY;
@@ -2009,6 +2027,11 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		{
 			if (isPlayer())
 			{
+				int newChunkX = intLocX / DuskEngine.CHUNK_SIZE;
+				int newChunkY = intLocY / DuskEngine.CHUNK_SIZE;
+				if (oldChunkX != newChunkX || oldChunkY != newChunkY) {
+					engGame.updatePlayerChunks(oldChunkX, oldChunkY, newChunkX, newChunkY);
+				}
 				updateMap();
 				if (engGame.overMerchant(oldLocX,oldLocY) != null)
 					offMerchant();
@@ -3245,6 +3268,18 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				strStore;
 		blnCanSave=true;
 		blnReadyForTheWorld=true;
+
+		// Load initial chunks
+		if (isPlayer()) {
+			int chunkX = intLocX / DuskEngine.CHUNK_SIZE;
+			int chunkY = intLocY / DuskEngine.CHUNK_SIZE;
+			for (int x = chunkX - 1; x <= chunkX + 1; x++) {
+				for (int y = chunkY - 1; y <= chunkY + 1; y++) {
+					engGame.loadChunk(x, y);
+				}
+			}
+		}
+
 		while(true)
 		{
 			if (blnStopThread) {

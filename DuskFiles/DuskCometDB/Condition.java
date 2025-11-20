@@ -14,7 +14,7 @@ remove this license, and accompany it with all redistributions.
 *
 *@author Tom Weingarten
 */
-public class Condition
+public class Condition implements java.io.Serializable
 {
 	String strName;
 	int intDuration=-1, //number of occurances till end. -1 = infinity

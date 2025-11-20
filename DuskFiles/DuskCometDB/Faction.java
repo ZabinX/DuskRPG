@@ -19,11 +19,11 @@ import java.lang.Math;
 *
 *@author Tom Weingarten
 */
-public class Faction
+public class Faction implements java.io.Serializable
 {
 	String strName;
 	Vector vctRelations;
-	DuskEngine engGame;
+	transient DuskEngine engGame;
 	boolean blnHasChanged=false;
 
 	public Faction(String inName, DuskEngine inGame)
@@ -403,7 +403,7 @@ public class Faction
 *
 *@author Tom Weingarten
 */
-class Relation
+class Relation implements java.io.Serializable
 {
 	String strName;
 	double dblLevel=0; //-1 to 1
@@ -414,3 +414,4 @@ class Relation
 		dblLevel = inLevel;
 	}
 }
+

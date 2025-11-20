@@ -64,7 +64,7 @@ MessageCap=300
 #How fast are mobs allowed to move? (default is 1 second = 1000)
 MobTicks=500
 #How fast are players allowed to move? (default is 1/4 second = 250)
-PlayerTicks=250
+PlayerTicks=140
 #Log file name.  Comment out the line to have messages go to standard out.
 LogFileName=log/dusk.txt
 #Level of detail output by game (the higher the number, the more you see).
