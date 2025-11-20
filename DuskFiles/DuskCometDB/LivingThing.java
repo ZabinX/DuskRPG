@@ -3334,9 +3334,36 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				this.strClan = loadedPlayer.strClan;
 				this.intLocX = loadedPlayer.intLocX;
 				this.intLocY = loadedPlayer.intLocY;
-				// ... copy all other relevant fields
+				this.hp = loadedPlayer.hp;
+				this.maxhp = loadedPlayer.maxhp;
+				this.mp = loadedPlayer.mp;
+				this.maxmp = loadedPlayer.maxmp;
+				this.stre = loadedPlayer.stre;
+				this.inte = loadedPlayer.inte;
+				this.dext = loadedPlayer.dext;
+				this.cons = loadedPlayer.cons;
+				this.wisd = loadedPlayer.wisd;
+				this.exp = loadedPlayer.exp;
+				this.cash = loadedPlayer.cash;
+				this.strRace = loadedPlayer.strRace;
+				this.equWorn = loadedPlayer.equWorn;
+				this.vctItems = loadedPlayer.vctItems;
+				this.vctSkills = loadedPlayer.vctSkills;
+				this.vctSpells = loadedPlayer.vctSpells;
+				this.vctConditions = loadedPlayer.vctConditions;
+				this.vctEntities = new Vector(0,10);
+				this.vctFlags = new Vector(0,1);
+				this.vctCommands = new Vector(0,3);
+				this.vctMovement = new Vector(0,5);
+				this.vctIgnore = loadedPlayer.vctIgnore;
 			} else {
 				// New player
+				// Check if player already exists in flat files
+				File filPlayer = new File("users/"+strName.toLowerCase());
+				if (filPlayer.exists()) {
+					chatMessage("Player already exists. Please login.");
+					return false;
+				}
 				chatMessage(strName+", Is that correct? (yes/no)");
 				if (!bfrSocketIn.readLine().equalsIgnoreCase("yes"))
 				{
@@ -3353,6 +3380,8 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 					chatMessage("Confirm that password:");
 				}
 				// Initialize new player fields
+				intLocX = 200;
+				intLocY = 200;
 				equWorn = new Equipment();
 				vctItems = new ItemList();
 				vctSkills = new Vector(0,5);
@@ -3363,6 +3392,21 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				vctCommands = new Vector(0,3);
 				vctMovement = new Vector(0,5);
 				vctIgnore = new Vector(0);
+				hp = 10;
+				maxhp = 10;
+				mp = 10;
+				maxmp = 10;
+				stre = 10;
+				inte = 10;
+				dext = 10;
+				cons = 10;
+				wisd = 10;
+			}
+
+			// check for multiple logins
+			if (engGame.getPlayer(strName.toLowerCase()) != null) {
+				chatMessage("That player is already logged in.");
+				return false;
 			}
 
 			chatMessage("Login Accepted.");
@@ -4084,3 +4128,4 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		}
 	}
  }
+

@@ -954,6 +954,7 @@ public class DuskEngine implements Runnable
 		Vector<Merchant> merchants = (Vector<Merchant>) dbManager.get("chunk/" + chunkKey + "/merchants");
 		if (merchants != null) {
 			for (Merchant m : merchants) {
+				m.engGame = this;
 				vctMerchants.add(m);
 				addDuskObject(m);
 			}
@@ -963,6 +964,7 @@ public class DuskEngine implements Runnable
 		Vector<LivingThing> mobs = (Vector<LivingThing>) dbManager.get("chunk/" + chunkKey + "/mobs");
 		if (mobs != null) {
 			for (LivingThing m : mobs) {
+				m.engGame = this;
 				vctMobs.add(m);
 				addDuskObject(m);
 			}
@@ -972,6 +974,7 @@ public class DuskEngine implements Runnable
 		Vector<Sign> signs = (Vector<Sign>) dbManager.get("chunk/" + chunkKey + "/signs");
 		if (signs != null) {
 			for (Sign s : signs) {
+				s.engGame = this;
 				vctSigns.add(s);
 				addDuskObject(s);
 			}
@@ -981,6 +984,7 @@ public class DuskEngine implements Runnable
 		Vector<Prop> props = (Vector<Prop>) dbManager.get("chunk/" + chunkKey + "/props");
 		if (props != null) {
 			for (Prop p : props) {
+				p.engGame = this;
 				vctProps.add(p);
 				addDuskObject(p);
 			}
@@ -2780,7 +2784,7 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		if (objIn.isLivingThing())
 		{
 			LivingThing thnStore = (LivingThing)objIn;
-			if (!thnStore.blnIsLoaded)
+			if (thnStore.isPlayer() && !thnStore.blnIsLoaded)
 				return;
 		}
 		synchronized(objEntities)
@@ -3094,3 +3098,4 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		}
 	}
 }
+

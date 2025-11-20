@@ -16,6 +16,7 @@ remove this license, and accompany it with all redistributions.
 */
 public class Sign extends DuskObject implements java.io.Serializable
 {
+	transient DuskEngine engGame;
 	String strMessage;
 
 	public Sign(String name,String msg,int locx,int locy,long lngID)
@@ -28,3 +29,4 @@ public class Sign extends DuskObject implements java.io.Serializable
 		ID = lngID;
 	}
 }
+

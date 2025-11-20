@@ -16,9 +16,12 @@ remove this license, and accompany it with all redistributions.
 */
 public class Prop extends DuskObject implements java.io.Serializable
 {
+	transient DuskEngine engGame;
+	
     public Prop(long lngID)
     {
 		bytObjType = (byte)2;
 		ID = lngID;
     }
 }
+
