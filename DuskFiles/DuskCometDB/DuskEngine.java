@@ -965,6 +965,18 @@ public class DuskEngine implements Runnable
 		if (mobs != null) {
 			for (LivingThing m : mobs) {
 				m.engGame = this;
+				if (m.isMob()) {
+					Mob mob = (Mob)m;
+					if (mob.fctFaction != null) {
+						mob.fctFaction.engGame = this;
+					}
+				}
+				if (m.vctConditions != null && !m.vctConditions.isEmpty()) {
+					for (int i = 0; i < m.vctConditions.size(); i++) {
+						Condition c = (Condition)m.vctConditions.elementAt(i);
+						c.engGame = this;
+					}
+				}
 				vctMobs.add(m);
 				addDuskObject(m);
 			}

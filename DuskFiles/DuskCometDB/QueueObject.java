@@ -1,4 +1,6 @@
-class QueueObject extends Object
+import java.io.Serializable;
+
+class QueueObject extends Object implements Serializable
 {
 	private QueueObject next;
 	private Object object;

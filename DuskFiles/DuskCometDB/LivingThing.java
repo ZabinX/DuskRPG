@@ -117,7 +117,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	boolean blnHalted=false;
 
 	//Battle
-	Battle batBattle=null;
+	transient Battle batBattle=null;
 	byte bytSide;
 	long lngDamDone;
 
@@ -3311,14 +3311,14 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	boolean getPlayer()
 	{
-		if (!engGame.isGoodName(strName)) {
-			chatMessage("Not a valid name. This may because you left it blank, used invalid symbols, or made it too long. Please try again.");
-			return false;
-		}
-
 		try {
+			if (!engGame.isGoodName(strName)) {
+				chatMessage("Not a valid name. This may because you left it blank, used invalid symbols, or made it too long. Please try again.");
+				return false;
+			}
+	
 			LivingThing loadedPlayer = (LivingThing)engGame.dbManager.get("player/" + strName.toLowerCase());
-
+	
 			if (loadedPlayer != null) {
 				// Player exists, check password
 				chatMessage("enter your password:");
@@ -3351,64 +3351,105 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				this.vctSkills = loadedPlayer.vctSkills;
 				this.vctSpells = loadedPlayer.vctSpells;
 				this.vctConditions = loadedPlayer.vctConditions;
+				if (this.vctConditions != null && !this.vctConditions.isEmpty()) {
+					engGame.vctCheckConditions.addElement(this);
+					for (int i = 0; i < this.vctConditions.size(); i++) {
+						Condition c = (Condition)this.vctConditions.elementAt(i);
+						c.engGame = engGame;
+						if (c.strOnStart != null) {
+							try {
+								Script scrStore = new Script("scripts/" + c.strOnStart, engGame, false);
+								scrStore.varVariables.addVariable("trigger", this);
+								scrStore.varVariables.addVariable("condition", c.strName);
+								scrStore.runScript();
+								scrStore.close();
+							} catch (Exception e) {
+								engGame.log.printError("LivingThing.getPlayer():While running onStart script for condition \"" + c.strName + "\"", e);
+							}
+						}
+					}
+				}
+				updateStats();
 				this.vctEntities = new Vector(0,10);
 				this.vctFlags = new Vector(0,1);
 				this.vctCommands = new Vector(0,3);
 				this.vctMovement = new Vector(0,5);
-				this.vctIgnore = loadedPlayer.vctIgnore;
+				this.vctIgnore = loadedPlayer.vctIgnore != null ? loadedPlayer.vctIgnore : new Vector(0);
 			} else {
-				// New player
-				// Check if player already exists in flat files
-				File filPlayer = new File("users/"+strName.toLowerCase());
+				// Player not found in DB, try to load from flat file
+				File filPlayer = new File("../DuskComet-Richter/users/"+strName.toLowerCase());
 				if (filPlayer.exists()) {
-					chatMessage("Player already exists. Please login.");
-					return false;
-				}
-				chatMessage(strName+", Is that correct? (yes/no)");
-				if (!bfrSocketIn.readLine().equalsIgnoreCase("yes"))
-				{
-					chatMessage("Then what IS your name?");
-					return false;
-				}
-				chatMessage("Enter a new password:");
-				strPWord = bfrSocketIn.readLine();
-				chatMessage("Confirm that password:");
-				while (!strPWord.equals(bfrSocketIn.readLine()))
-				{
-					chatMessage("Passwords did not match, enter a new password:");
+					chatMessage("Player found in flat file, migrating to database...");
+					rafFile = new RandomAccessFile(filPlayer,"r");
+					strPWord = rafFile.readLine();
+					chatMessage("enter your password:");
+					if (!bfrSocketIn.readLine().equals(strPWord)) {
+						chatMessage("Incorrect Password.");
+						return false;
+					}
+					// Initialize new player fields before parsing
+					equWorn = new Equipment();
+					vctItems = new ItemList();
+					vctSkills = new Vector(0,5);
+					vctSpells = new Vector(0,5);
+					vctConditions = new Vector(0,5);
+					vctEntities = new Vector(0,10);
+					vctFlags = new Vector(0,1);
+					vctCommands = new Vector(0,3);
+					vctMovement = new Vector(0,5);
+					vctIgnore = new Vector(0);
+					String strStore = rafFile.readLine();
+					while (strStore != null && !strStore.equals(".")) {
+						parseUserFile(strStore);
+						strStore = rafFile.readLine();
+					}
+					rafFile.close();
+				} else {
+					// New player
+					chatMessage(strName+", Is that correct? (yes/no)");
+					if (!bfrSocketIn.readLine().equalsIgnoreCase("yes")) {
+						chatMessage("Then what IS your name?");
+						return false;
+					}
+					chatMessage("Enter a new password:");
 					strPWord = bfrSocketIn.readLine();
 					chatMessage("Confirm that password:");
+					while (!strPWord.equals(bfrSocketIn.readLine())) {
+						chatMessage("Passwords did not match, enter a new password:");
+						strPWord = bfrSocketIn.readLine();
+						chatMessage("Confirm that password:");
+					}
+					// Initialize new player fields
+					intLocX = 200;
+					intLocY = 200;
+					equWorn = new Equipment();
+					vctItems = new ItemList();
+					vctSkills = new Vector(0,5);
+					vctSpells = new Vector(0,5);
+					vctConditions = new Vector(0,5);
+					vctEntities = new Vector(0,10);
+					vctFlags = new Vector(0,1);
+					vctCommands = new Vector(0,3);
+					vctMovement = new Vector(0,5);
+					vctIgnore = new Vector(0);
+					hp = 40;
+					maxhp = 40;
+					mp = 10;
+					maxmp = 10;
+					stre = 10;
+					inte = 10;
+					dext = 10;
+					cons = 10;
+					wisd = 10;
 				}
-				// Initialize new player fields
-				intLocX = 200;
-				intLocY = 200;
-				equWorn = new Equipment();
-				vctItems = new ItemList();
-				vctSkills = new Vector(0,5);
-				vctSpells = new Vector(0,5);
-				vctConditions = new Vector(0,5);
-				vctEntities = new Vector(0,10);
-				vctFlags = new Vector(0,1);
-				vctCommands = new Vector(0,3);
-				vctMovement = new Vector(0,5);
-				vctIgnore = new Vector(0);
-				hp = 10;
-				maxhp = 10;
-				mp = 10;
-				maxmp = 10;
-				stre = 10;
-				inte = 10;
-				dext = 10;
-				cons = 10;
-				wisd = 10;
 			}
-
+	
 			// check for multiple logins
 			if (engGame.getPlayer(strName.toLowerCase()) != null) {
 				chatMessage("That player is already logged in.");
 				return false;
 			}
-
+	
 			chatMessage("Login Accepted.");
 			proceed();
 			engGame.vctSockets.addElement(this);
@@ -3418,7 +3459,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		} catch (Exception e) {
 			engGame.log.printError("getPlayer(): " + strName, e);
 			closeNosavePlayer();
-			return true;
+			return true; // Should be true to stop the login loop
 		}
 	}
 

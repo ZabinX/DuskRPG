@@ -16,6 +16,8 @@ remove this license, and accompany it with all redistributions.
 */
 public class Condition implements java.io.Serializable
 {
+	transient DuskEngine engGame;
+
 	String strName;
 	int intDuration=-1, //number of occurances till end. -1 = infinity
 		intOccurance=1, //number of ticks per occurance
@@ -27,3 +29,4 @@ public class Condition implements java.io.Serializable
 			strOnOccurance=null,
 			strOnEnd=null;
 }
+

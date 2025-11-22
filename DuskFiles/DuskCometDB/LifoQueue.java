@@ -1,4 +1,6 @@
-public class LifoQueue extends Object
+import java.io.Serializable;
+
+public class LifoQueue extends Object implements Serializable
 {
 	private long lNumEntries;
 	private QueueObject head = null;
@@ -58,3 +60,4 @@ public class LifoQueue extends Object
 		return qo.getObject();
 	}
 }
+
