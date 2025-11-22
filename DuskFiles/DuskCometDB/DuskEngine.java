@@ -99,6 +99,7 @@ public class DuskEngine implements Runnable
 	protected int intMapOwnerID[][];
 	protected Config IDtoName;
 	protected DuskObject objEntities[][];
+	byte[] tileData;
 	Vector vctSockets,
 		vctMerchants,
 		vctMobs,
@@ -723,72 +724,47 @@ public class DuskEngine implements Runnable
 		{
 			scrOnLogOut = null;
 		}
-		// Load Tile Scripts
-		synchronized(vctTiles)
-		{
-			try
-			{
-				int i;
-				for (i=0;i<vctTiles.size();i++)
-				{
-					((Script)vctTiles.elementAt(i)).close();
-				}
-				vctTiles = new Vector(0);
-				for (i=0;true;i++)
-				{
-					try
-					{
-						vctTiles.addElement(new Script("defTileScripts/"+i,this,true));
-					}catch(Exception e)
-					{
-						break;
-					}
-				}
-			}catch (Exception e) { }
+		// Load Tile Data
+		try (RandomAccessFile raf = new RandomAccessFile("tiledata.bin", "r")) {
+			int dataLength = raf.readInt();
+			tileData = new byte[dataLength];
+			raf.readFully(tileData);
+			log.printMessage(Log.INFO, "Loaded " + dataLength + " tile data entries from tiledata.bin");
+		} catch (IOException e) {
+			log.printError("loadPrefs(): Error loading tiledata.bin", e);
+			tileData = new byte[0]; // Ensure it's not null
 		}
+
+		// Load action scripts
 		synchronized(vctTileActions)
 		{
 			try
 			{
-				int i;
-				for (i=0;i<vctTileActions.size();i++)
-				{
-					((Script)vctTileActions.elementAt(i)).close();
+				// First, clear out old scripts if any
+				for (int i=0; i<vctTileActions.size(); i++) {
+					Script s = (Script)vctTileActions.elementAt(i);
+					if (s != null) s.close();
 				}
-				vctTileActions = new Vector(0);
-				for (i=0;true;i++)
+				vctTileActions = new Vector(tileData.length);
+				vctTileActions.setSize(tileData.length); // Pre-size the vector
+
+				for (int i=0; i < tileData.length; i++)
 				{
-					try
-					{
-						vctTileActions.addElement(new Script("defTileActions/"+i,this,true));
-					}catch(Exception e)
-					{
-						break;
+				// Check if the tile has an action script from our pre-compiled data
+					if ((tileData[i] & 4) != 0) {
+						try {
+							vctTileActions.setElementAt(new Script("defTileActions/"+i,this,true), i);
+						} catch (Exception e) {
+							log.printError("loadPrefs(): Could not load action script for tile " + i, e);
+							vctTileActions.setElementAt(null, i);
+				}
+					} else {
+						vctTileActions.setElementAt(null, i);
 					}
 				}
-			}catch (Exception e) { }
-		}
-		synchronized(vctSeeTiles)
-		{
-			try
-			{
-				int i;
-				for (i=0;i<vctSeeTiles.size();i++)
-				{
-					((Script)vctSeeTiles.elementAt(i)).close();
-				}
-				vctSeeTiles = new Vector(0);
-				for (i=0;true;i++)
-				{
-					try
-					{
-						vctSeeTiles.addElement(new Script("defTileSeeScripts/"+i,this,true));
-					}catch(Exception e)
-					{
-						break;
-					}
-				}
-			}catch (Exception e) { }
+			} catch (Exception e) {
+				log.printError("loadPrefs(): Error initializing vctTileActions", e);
+			}
 		}
 			synchronized(vctTileAnims)
 		{
@@ -2273,23 +2249,18 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		}catch (Exception e){}
 		try
 		{
-			scrStore = (Script)vctTiles.elementAt(shrMap[inLocX][inLocY]);
-			synchronized(scrStore)
-			{
-				scrStore.varVariables.clearVariables();
-				scrStore.varVariables.addVariable("trigger",thnStore);
-				blnStore = scrStore.rewindAndParseScript();
+			short tileID = shrMap[inLocX][inLocY];
+			if (tileID >= 0 && tileID < tileData.length) {
+				return (tileData[tileID] & 1) != 0;
 			}
-			return blnStore;
-		}catch (Exception e){}
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// This can happen if the map has invalid tile IDs
+		}
 		return false;
 	}
 
 	boolean canSee(int inLocX, int inLocY,LivingThing thnStore)
 	{
-		int i;
-		LivingThing thnStore2;
-		DuskObject objStore=null;
 		Script scrStore;
 		boolean blnStore;
 		try
@@ -2302,15 +2273,13 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		}catch (Exception e){}
 		try
 		{
-			scrStore = (Script)vctSeeTiles.elementAt(shrMap[inLocX][inLocY]);
-			synchronized(scrStore)
-			{
-				scrStore.varVariables.clearVariables();
-				scrStore.varVariables.addVariable("trigger",thnStore);
-				blnStore = scrStore.rewindAndParseScript();
+			short tileID = shrMap[inLocX][inLocY];
+			if (tileID >= 0 && tileID < tileData.length) {
+				return (tileData[tileID] & 2) != 0;
 			}
-			return blnStore;
-		}catch (Exception e){}
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// This can happen if the map has invalid tile IDs
+		}
 		return false;
 	}
 
