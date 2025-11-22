@@ -1652,6 +1652,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				try {
 					stmOut.writeBytes("findpath " + destX + " " + destY + "\n");
+				} catch (SocketException se) {
+					addText("Connection to the server has been lost.\n");
 				} catch (IOException e) {
 					addText("Error at mouseClicked(): " + e.toString() + "\n");
 				}
@@ -1664,6 +1666,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					try {
 						// Send the correct attack command: "attack <name> #<ID>"
 						stmOut.writeBytes("attack " + mob.strName + " #" + mob.ID + "\n");
+					} catch (SocketException se) {
+						addText("Connection to the server has been lost.\n");
 					} catch (IOException e) {
 						addText("Error at mouseClicked() for attack: " + e.toString() + "\n");
 					}
@@ -1671,6 +1675,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					// If no mob, just pathfind
 					try {
 						stmOut.writeBytes("findpath " + destX + " " + destY + "\n");
+					} catch (SocketException se) {
+						addText("Connection to the server has been lost.\n");
 					} catch (IOException e) {
 						addText("Error at mouseClicked() for findpath: " + e.toString() + "\n");
 					}
