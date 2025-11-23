@@ -44,13 +44,13 @@ public class DuskEngine implements Runnable
 		battlesound=-1,
 		mobrespawnspeed,
 		viewrangeX=10,
-		viewrangeY=5,
+		viewrangeY=7,
 		entityViewrangeX=10,
-		entityViewrangeY=5,
+		entityViewrangeY=7,
 		oldviewrangeX=0,
 		oldviewrangeY=0,
 		mapsizeX=21,
-		mapsizeY=11,
+		mapsizeY=15,
 		titlecap=0,
 		noChannelMax=600,  // defalut 600=10 minutes
 		namecap=20,  //default 20
@@ -3089,6 +3089,7 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		}
 	}
 }
+
 
 
 

@@ -119,9 +119,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	short shrMap[][], shrMapAlpha[][], shrMapAlpha2[][];
 	int mapSizeX=21,
-		mapSizeY=11,
+		mapSizeY=15,
 		viewRangeX=10,
-		viewRangeY=5;
+		viewRangeY=7;
 	
 	HashMap<Long, Entity> hmpEntities;
 	
@@ -539,7 +539,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			
 			// Append any remaining text after the last match (default color)
 			if (lastIndex < strAdd.length()) {
-				frame.docGossip.insertString(frame.docGossip.getLength(), strAdd.substring(lastIndex), null);
+				SimpleAttributeSet style = new SimpleAttributeSet();
+				StyleConstants.setForeground(style, new Color(255, 255, 240));
+				frame.docGossip.insertString(frame.docGossip.getLength(), strAdd.substring(lastIndex), style);
 			}
 
 		} catch (BadLocationException e) {
@@ -1599,41 +1601,37 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	public void scaleWindow()
 	{
-		int width = frame.pnlContents.getBounds().width-310;
-		intImageSize = width/21;
+		int width = frame.pnlContents.getBounds().width - 310;
+		intImageSize = width / 21;
 		if (intImageSize < 1)
 			intImageSize = 1;
-		
-		width = intImageSize * 21;
-		int height = intImageSize * 11;
-		
-		if (height > frame.pnlContents.getBounds().height-100) {
-			height = frame.pnlContents.getBounds().height-100;
-			intImageSize = height / 11;
-			if (intImageSize < 1)
-				intImageSize = 1;
-			width = intImageSize * 21;
-			height = intImageSize * 11;
-		}
 
-		frame.pnlGraphics.setSize(width,height); 
+		width = intImageSize * 21;
+		int height = intImageSize * 15;
+
+		// The graphics panel now takes up the entire space of the main content area
+		frame.pnlGraphics.setBounds(0, 0, width, height);
 		imgDisplay = frame.pnlGraphics.createImage(width, height);
 		gD = imgDisplay.getGraphics();
 		g = frame.pnlGraphics.getGraphics();
-		frame.txtInput.setLocation(0,frame.pnlGraphics.getBounds().height);
-		frame.pnlSouth.setLocation(0,frame.pnlGraphics.getBounds().height+25);
-		frame.pnlSouth.setSize(frame.pnlGraphics.getBounds().width,frame.pnlContents.getBounds().height-frame.pnlGraphics.getBounds().height-25);
-		frame.txtInput.setSize(frame.pnlGraphics.getBounds().width - 160,25);
-		frame.btnGossip.setSize(80, 25);
-		frame.btnBattle.setSize(80, 25);
-		frame.btnGossip.setLocation(frame.pnlGraphics.getBounds().width - 160, frame.pnlGraphics.getBounds().height);
-		frame.btnBattle.setLocation(frame.pnlGraphics.getBounds().width - 80, frame.pnlGraphics.getBounds().height);
-		frame.pnlStats.setSize(frame.pnlContents.getBounds().width-frame.pnlGraphics.getBounds().width,frame.pnlContents.getBounds().height);
-		frame.pnlStats.setLocation(frame.pnlGraphics.getBounds().width,0);
+
+		// Position the chat and input fields at the bottom, overlaying the graphics
+		int southPanelHeight = 120; // Or calculate based on content
+		frame.pnlSouth.setBounds(0, height - southPanelHeight - 25, width, southPanelHeight);
+		frame.txtInput.setBounds(0, height - 25, width - 160, 25);
+		frame.btnGossip.setBounds(width - 160, height - 25, 80, 25);
+		frame.btnBattle.setBounds(width - 80, height - 25, 80, 25);
+
+		// Adjust the stats panel
+		frame.pnlStats.setBounds(width, 0, frame.pnlContents.getBounds().width - width, height);
+		frame.pnlStats.setSize(frame.pnlContents.getBounds().width - frame.pnlGraphics.getBounds().width,frame.pnlContents.getBounds().height);
 		frame.txtOther.setSize(frame.pnlStats.getBounds().width-140,frame.pnlStats.getBounds().height-60);
-        frame.lblTarget.setSize(frame.pnlStats.getBounds().width, 20);
+		frame.lblTarget.setSize(frame.pnlStats.getBounds().width, 20);
 		frame.lblInfo.setSize(frame.pnlContents.getBounds().width,20);
-		frame.scrGossip.getVerticalScrollBar().setValue(frame.scrGossip.getVerticalScrollBar().getMaximum());
+
+		if (frame.scrGossip.getVerticalScrollBar() != null) {
+			frame.scrGossip.getVerticalScrollBar().setValue(frame.scrGossip.getVerticalScrollBar().getMaximum());
+		}
 		System.gc();
 	}
 	
@@ -2089,8 +2087,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 		double screenX, screenY;
 		if (entStore == player) {
-			screenX = 10 * intImageSize;
-			screenY = 5 * intImageSize;
+			screenX = viewRangeX * intImageSize;
+			screenY = viewRangeY * intImageSize;
 		} else {
 			screenX = entStore.pixelX - camera.x;
 			screenY = entStore.pixelY - camera.y;
@@ -2189,7 +2187,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	public void paint()
 	{
-		g.drawImage(imgDisplay,0,0,this);
+		frame.pnlGraphics.img = imgDisplay;
+		frame.pnlGraphics.repaint();
 	}
 
 	private void createDetectInvisRay(Particle start, Particle end, Color color, int lifetime, List<Particle> particleSystem, boolean lockToCenter) {

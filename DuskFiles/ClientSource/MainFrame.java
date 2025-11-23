@@ -17,9 +17,11 @@ import java.util.StringTokenizer;
 import javax.swing.text.Document;
 
 
+import javax.swing.JLayeredPane;
+
 public class MainFrame extends JFrame implements ItemListener
 {
-	JPanel pnlContents = new JPanel();
+	JLayeredPane pnlContents = new JLayeredPane();
 	JPanel pnlStats = new JPanel();
 	JButton btnMerchant = new JButton();
 	JLabel lblInfo = new JLabel();
@@ -81,7 +83,18 @@ public class MainFrame extends JFrame implements ItemListener
     JButton btnPopupoff = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zcancel.png")));
     JButton btnSleep = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zsleep.png")));
     JButton btnWake = new JButton(new ImageIcon(getClass().getClassLoader().getResource("zeye.png")));
-	JPanel pnlGraphics = new JPanel();
+	public class GamePanel extends JPanel {
+		public Image img;
+
+		@Override
+		protected void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			if (img != null) {
+				g.drawImage(img, 0, 0, this);
+			}
+		}
+	}
+	GamePanel pnlGraphics = new GamePanel();
 	JTextField txtInput = new JTextField();
 
 	// New components for the CardLayout-based tab system
@@ -435,13 +448,25 @@ public class MainFrame extends JFrame implements ItemListener
 		pnlSouth.setLayout(cardLayout);
 		pnlSouth.setLocation(new java.awt.Point(0, 360));
 		pnlSouth.setSize(new java.awt.Dimension(640, 120));
+		pnlSouth.setOpaque(false);
 
 		txtGossip.setEditable(false);
 		docGossip = txtGossip.getDocument();
 		scrGossip.getViewport().add(txtGossip);
+		scrGossip.setOpaque(false);
+		scrGossip.getViewport().setOpaque(false);
+		txtGossip.setOpaque(true);
+		txtGossip.setBackground(new Color(0, 0, 0, 128));
+		txtGossip.setCaretColor(Color.WHITE);
 
 		txtBattle.setEditable(false);
 		scrBattle.getViewport().add(txtBattle);
+		scrBattle.setOpaque(false);
+		scrBattle.getViewport().setOpaque(false);
+		txtBattle.setOpaque(true);
+		txtBattle.setBackground(new Color(0, 0, 0, 128));
+		txtBattle.setForeground(new Color(255, 255, 240));
+		txtBattle.setCaretColor(Color.WHITE);
 		
 		pnlSouth.add(scrGossip, "Gossip");
 		pnlSouth.add(scrBattle, "Battle");
@@ -451,12 +476,14 @@ public class MainFrame extends JFrame implements ItemListener
 		getContentPane().setLayout(new BorderLayout());
 		setSize(new java.awt.Dimension(1280, 720));
 		getContentPane().add(pnlContents, BorderLayout.CENTER);
-		pnlContents.add(pnlGraphics);
-		pnlContents.add(txtInput);
-		pnlContents.add(pnlSouth);
-		pnlContents.add(btnGossip);
-		pnlContents.add(btnBattle);
-		pnlContents.add(pnlStats);
+
+		pnlContents.setLayout(null);
+		pnlContents.add(pnlGraphics, JLayeredPane.DEFAULT_LAYER);
+		pnlContents.add(txtInput, JLayeredPane.MODAL_LAYER);
+		pnlContents.add(pnlSouth, JLayeredPane.MODAL_LAYER);
+		pnlContents.add(btnGossip, JLayeredPane.MODAL_LAYER);
+		pnlContents.add(btnBattle, JLayeredPane.MODAL_LAYER);
+		pnlContents.add(pnlStats, JLayeredPane.DEFAULT_LAYER);
                 
 		chcAttack.addItemListener(this);
 		chcAction.addItemListener(this);
@@ -1263,4 +1290,3 @@ public class MainFrame extends JFrame implements ItemListener
 		}
 	}
 }
-
