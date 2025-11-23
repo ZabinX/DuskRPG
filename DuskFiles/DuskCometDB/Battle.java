@@ -833,10 +833,7 @@ public class Battle
 				strStore = attack(thnStore,thnTarget, range, strStore);
 				}
 				strStore += ".";
-				Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnTarget.intLocX, thnTarget.intLocY);
-				for (LivingThing player : playersInArea) {
-					player.updateOpponentHP(thnTarget);
-				}
+				engGame.updateEntityHP(thnTarget);
 			}
 			chatMessage("\t"+strStore);
 		}
@@ -950,10 +947,7 @@ public class Battle
 				strStore = attack(thnStore,thnTarget, range, strStore);
 				}
 				strStore += ".";
-				Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnTarget.intLocX, thnTarget.intLocY);
-				for (LivingThing player : playersInArea) {
-					player.updateOpponentHP(thnTarget);
-				}
+				engGame.updateEntityHP(thnTarget);
 			}
 			chatMessage("\t"+strStore);
 		}
@@ -962,6 +956,7 @@ public class Battle
 		for (int i2 = vctSide2.size() - 1; i2 >= 0; i2--) {
 			LivingThing thnMember = (LivingThing) vctSide2.elementAt(i2);
 			if (thnMember.hp < 1 || !thnMember.blnWorking) {
+				engGame.updateEntityHP(thnMember);
 				vctSide2.removeElementAt(i2);
 				thnMember.clearFlags();
 
@@ -1104,6 +1099,7 @@ public class Battle
 		for (int i2 = vctSide1.size() - 1; i2 >= 0; i2--) {
 			LivingThing thnMember = (LivingThing) vctSide1.elementAt(i2);
 			if (thnMember.hp < 1 || !thnMember.blnWorking) {
+				engGame.updateEntityHP(thnMember);
 				vctSide1.removeElementAt(i2);
 				thnMember.clearFlags();
 

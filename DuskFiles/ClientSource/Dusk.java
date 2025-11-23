@@ -1399,6 +1399,15 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                                         entStore.maxhp = newMaxHp;
                                     }
                                 }
+                            } else if (hpValues.length == 1 && Integer.parseInt(hpValues[0]) <= 0) {
+                                // This is a death notification, but the entity might already be removed.
+                                // We can safely ignore this if the entity is not found.
+                                synchronized(vctEntities) {
+                                    entStore = hmpEntities.get(opponentID);
+                                    if (entStore != null) {
+                                        entStore.hp = 0;
+                                    }
+                                }
                             }
                         }
                     } catch (Exception e) {
@@ -2090,7 +2099,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		if (entStore.intFlag != 0)
 		{
 			if (entStore.intFlag == 1) { // Ally in combat
-				if (entStore.maxhp > 0) {
+				if (entStore.maxhp > 0 && entStore.hp > 0) {
 					double hpRatio = (double)entStore.hp / entStore.maxhp;
 					if (hpRatio < 0) hpRatio = 0;
 					if (hpRatio > 1) hpRatio = 1;
@@ -2103,7 +2112,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					gD.fillRect((int)screenX, (int)screenY - 65, (int)hpBarWidth, 5);
 				}
 			} else if (entStore.intFlag == 2) { // Enemy in combat
-				if (entStore.maxhp > 0) {
+				if (entStore.maxhp > 0 && entStore.hp > 0) {
 					double hpRatio = (double)entStore.hp / entStore.maxhp;
 					if (hpRatio < 0) hpRatio = 0;
 					if (hpRatio > 1) hpRatio = 1;
@@ -2116,7 +2125,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					gD.fillRect((int)screenX, (int)screenY - 55, (int)hpBarWidth, 5);
 				}
 			}
-		} else if (entStore != player && entStore.hp < entStore.maxhp && entStore.maxhp > 0) {
+		} else if (entStore != player && entStore.hp < entStore.maxhp && entStore.maxhp > 0 && entStore.hp > 0) {
 			// Draw HP bar for any damaged entity not in the player's current battle
 			double hpRatio = (double)entStore.hp / entStore.maxhp;
 			if (hpRatio < 0) hpRatio = 0;

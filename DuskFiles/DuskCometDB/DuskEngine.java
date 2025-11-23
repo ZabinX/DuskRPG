@@ -901,6 +901,16 @@ public class DuskEngine implements Runnable
 		return players;
 	}
 
+	public void updateEntityHP(LivingThing entity) {
+		if (entity == null) {
+			return;
+		}
+		Vector<LivingThing> playersInArea = getPlayersInArea(entity.intLocX, entity.intLocY);
+		for (LivingThing player : playersInArea) {
+			player.updateOpponentHP(entity);
+		}
+	}
+
 	public synchronized void updatePlayerChunks(int oldChunkX, int oldChunkY, int newChunkX, int newChunkY) {
 		// Load new chunks FIRST
 		for (int x = newChunkX - 1; x <= newChunkX + 1; x++) {
@@ -3079,5 +3089,6 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		}
 	}
 }
+
 
 
