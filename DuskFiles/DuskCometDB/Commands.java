@@ -1973,19 +1973,7 @@ public class Commands
 			{
 				return "You can't do that while you're sleeping";
 			}
-			DuskObject objStore = null;
-			int lastHash = strArgs.lastIndexOf(" #");
-			if (lastHash != -1) {
-				try {
-					long id = Long.parseLong(strArgs.substring(lastHash + 2));
-					objStore = getObjectByID(engGame, id);
-				} catch (NumberFormatException e) {
-					objStore = null;
-				}
-			} else {
-				objStore = lt.getLocalObject(strArgs);
-			}
-
+			DuskObject objStore = getObjectFromArgs(engGame, lt, strArgs);
 			if (objStore == null)
 			{
 				return "You don't see that here.";
@@ -2044,19 +2032,7 @@ public class Commands
 			{
 				return "You can't do that while you're sleeping";
 			}
-			DuskObject objStore = null;
-			int lastHash = strArgs.lastIndexOf(" #");
-			if (lastHash != -1) {
-				try {
-					long id = Long.parseLong(strArgs.substring(lastHash + 2));
-					objStore = getObjectByID(engGame, id);
-				} catch (NumberFormatException e) {
-					objStore = null;
-				}
-			} else {
-				objStore = lt.getLocalObject(strArgs);
-			}
-
+			DuskObject objStore = getObjectFromArgs(engGame, lt, strArgs);
 			if (objStore != null)
 			{
 				if (objStore.isLivingThing())
@@ -2314,19 +2290,7 @@ public class Commands
 			{
 				return "Get what?";
 			}
-			DuskObject objStore = null;
-			int lastHash = strArgs.lastIndexOf(" #");
-			if (lastHash != -1) {
-				try {
-					long id = Long.parseLong(strArgs.substring(lastHash + 2));
-					objStore = getObjectByID(engGame, id);
-				} catch (NumberFormatException e) {
-					objStore = null;
-				}
-			} else {
-				objStore = lt.getLocalObject(strArgs);
-			}
-
+			DuskObject objStore = getObjectFromArgs(engGame, lt, strArgs);
 			if (objStore == null)
 			{
 				return "You don't see that here.";
@@ -2451,6 +2415,8 @@ public class Commands
 			}
 			if (lt.batBattle == null)
 			{
+				// We don't need to parse the object here, as `useItem` does it.
+				// This command is safe as-is.
 				lt.useItem(strArgs,-1);
 			}else
 			{
@@ -2889,7 +2855,7 @@ public class Commands
 			{
 				return "You can't do that while you're sleeping";
 			}
-			DuskObject objStore = lt.getLocalObject(strArgs);
+			DuskObject objStore = getObjectFromArgs(engGame, lt, strArgs);
 			if (objStore == null)
 			{
 				return "You don't see that here.";
@@ -3466,6 +3432,26 @@ public class Commands
 			return "huh?";
 		}
 		return null;
+	}
+
+	private static DuskObject getObjectFromArgs(DuskEngine engGame, LivingThing lt, String strArgs)
+	{
+		DuskObject objStore = null;
+		int lastHash = strArgs.lastIndexOf(" #");
+		if (lastHash != -1) {
+			String idString = strArgs.substring(lastHash + 2);
+			if (!idString.isEmpty()) {
+				try {
+					long id = Long.parseLong(idString);
+					objStore = getObjectByID(engGame, id);
+				} catch (NumberFormatException e) {
+					objStore = null; // Keep objStore null if parsing fails
+				}
+			}
+		} else {
+			objStore = lt.getLocalObject(strArgs);
+		}
+		return objStore;
 	}
 
 	private static DuskObject getObjectByID(DuskEngine engGame, long id)

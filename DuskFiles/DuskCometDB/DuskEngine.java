@@ -902,17 +902,17 @@ public class DuskEngine implements Runnable
 	}
 
 	public synchronized void updatePlayerChunks(int oldChunkX, int oldChunkY, int newChunkX, int newChunkY) {
-		// Unload old chunks
-		for (int x = oldChunkX - 1; x <= oldChunkX + 1; x++) {
-			for (int y = oldChunkY - 1; y <= oldChunkY + 1; y++) {
-				unloadChunk(x, y);
-			}
-		}
-	
-		// Load new chunks
+		// Load new chunks FIRST
 		for (int x = newChunkX - 1; x <= newChunkX + 1; x++) {
 			for (int y = newChunkY - 1; y <= newChunkY + 1; y++) {
 				loadChunk(x, y);
+			}
+		}
+
+		// Unload old chunks SECOND
+		for (int x = oldChunkX - 1; x <= oldChunkX + 1; x++) {
+			for (int y = oldChunkY - 1; y <= oldChunkY + 1; y++) {
+				unloadChunk(x, y);
 			}
 		}
 	}
@@ -3079,4 +3079,5 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		}
 	}
 }
+
 

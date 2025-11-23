@@ -329,7 +329,7 @@ public class Faction implements java.io.Serializable
 					}
 					try
 					{
-						Commands.parseCommand(thnStore, engGame, "a "+thnEnemy.strName);
+						Commands.parseCommand(thnStore, engGame, "a "+thnEnemy.strName + " #" + thnEnemy.ID);
 					} catch (Exception e)
 					{
 						engGame.log.printError("runAI():"+thnStore.strName + " had an error attacking "+thnEnemy.strName, e);
@@ -414,4 +414,5 @@ class Relation implements java.io.Serializable
 		dblLevel = inLevel;
 	}
 }
+
 

@@ -16,7 +16,13 @@ public class CreateTileData {
             byte[] tileData = new byte[maxTileId + 1];
 
             for (int i = 0; i <= maxTileId; i++) {
-                boolean isWalkable = isPropertyTrue(BASE_PATH + "defTileScripts/" + i);
+                boolean isWalkable;
+                File canMoveFile = new File(BASE_PATH + "defCanMoveScripts/" + i);
+                if (canMoveFile.exists()) {
+                    isWalkable = isPropertyTrue(BASE_PATH + "defCanMoveScripts/" + i);
+                } else {
+                    isWalkable = isPropertyTrue(BASE_PATH + "defTileScripts/" + i);
+                }
                 boolean isSeeThrough = isPropertyTrue(BASE_PATH + "defTileSeeScripts/" + i);
                 boolean hasAction = hasActionScript(BASE_PATH + "defTileActions/" + i);
 
@@ -41,6 +47,7 @@ public class CreateTileData {
         maxId = Math.max(maxId, findMaxIdInDirectory(new File(BASE_PATH + "defTileScripts")));
         maxId = Math.max(maxId, findMaxIdInDirectory(new File(BASE_PATH + "defTileSeeScripts")));
         maxId = Math.max(maxId, findMaxIdInDirectory(new File(BASE_PATH + "defTileActions")));
+        maxId = Math.max(maxId, findMaxIdInDirectory(new File(BASE_PATH + "defCanMoveScripts")));
         return maxId;
     }
 
