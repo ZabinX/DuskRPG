@@ -1,0 +1,136 @@
+
+This documents the JavaScript api and mechanisms.
+
+
+Public interfaces
++++++++++++++++++
+
+Game {
+  Item createItem(String type);
+  void removeItem(Item item);
+  Mobile createMob(String type);
+}
+
+Active {
+  // send dialogue to the player
+  chat(String v);
+  // emote an action
+  emote(String v);
+  setCondition(String name, int duration);
+  // get or change an attribute, XXX = INT, DEX, etc.
+  int getXXX();
+  int addXXX(int amount);
+  // Remove an item from inventory
+  removeItem(Item item);
+  // Add an item to inventory
+  addItem(Item item);
+
+  // Variable functions - persistent per-active state
+  int getInteger(String name, int def);
+  int getString(String name, String def);
+  int getDouble(String name, double def);
+
+  void setInteger(String name, int val);
+  void setString(String name, String val);
+  void setDouble(String name, double val);
+}
+
+Item {
+  // Name of item
+  String getName();
+  // How many uses left
+  int getUses();
+  // Alter uses
+  int addUses(int count);
+}
+
+// TODO: do i want conditions to have arbitrary persistent variables too?
+// possibly
+Condition {
+}
+
+Items
+=====
+
+onGet
+-----
+
+Scripts are stored at
+ onItem/itemname.drop
+
+Parameters
+  game - global game object
+  owner - current Active holding the object
+  item - item being dropped
+
+If provided, the script is executed after the object is taken from
+the map and added to the inventory.
+
+onDrop
+------
+
+Scripts are stored at
+ onItem/itemname.drop
+
+Parameters
+  game - global game object
+  owner - current Active holding the object
+  item - item being dropped
+
+If provided, the script OVERRIDES the default drop behaviour which is
+to leave the item at the current location.  This is different from
+Dusk where the script was run after the default drop behaviour.
+
+onUse
+-----
+
+Scripts are stored at
+ onItem/itemname.use
+
+Parameters
+  game - global game object
+  owner - current Active holding the object
+  item - item being used
+
+If provided the script provides the on-use behaviour for the item in
+question.  The script will only be called if Item.getUses() is
+infinite (-1) or greater than 0.
+
+Conditions
+==========
+
+onStart
+-------
+
+Scripts are stored at
+ onCondition/condition.start
+
+Parameters
+ game - global game object
+ owner - Active to which condition applies
+ condition - Condition object
+
+
+onOccurance
+-----------
+
+Scripts are stored at
+ onCondition/condition.tick
+
+Parameters
+ game - global game object
+ owner - Active to which condition applies
+ condition - Condition object
+
+
+onEnd
+-------
+
+Scripts are stored at
+ onCondition/condition.end
+
+Parameters
+ game - global game object
+ owner - Active to which condition applies
+ condition - Condition object
+

@@ -1,0 +1,5 @@
+/build/
+/dist/
+/bin/
+/.lib/
+/nbproject/private/

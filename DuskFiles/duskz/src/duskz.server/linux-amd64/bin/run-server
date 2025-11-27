@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export JAVA_HOME=$(dirname $(readlink -f $0))/..
+exec ${JAVA_HOME}/bin/java -m duskz.server/duskz.server.entityz.GameServer $@

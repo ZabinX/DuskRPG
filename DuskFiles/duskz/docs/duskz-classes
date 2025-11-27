@@ -1,0 +1,163 @@
+
+Existing class structure
+
+DuskObject
+  LivingThing (type=0)
+    *Pet (type=2)
+    Mob (type=1)
+    
+  Item
+  Merchant
+  PlayerMerchant
+  Prop
+  Sign
+
+
+PlayerMerchant
+--------------
+
+Basically a cache that the owner can store things to for zero cost of transaction.
+
+
+State fields
+------------
+
+Fields and values that are saved and restored as part of the game state.
+
+Mob
+ name
+ originalX
+ originalY
+
+Sign
+ message
+ x
+ y
+
+Merchant
+ x
+ y
+ names of items
+ end (end marker)
+
+PlayerMerchant - is not saved.  This appears to be a bug because items
+are removed from the player when they put them in the store.
+
+Props
+ x
+ y
+ name
+
+
+Global variables
+ name
+ type code
+ value
+
+
+Players are saved separately.  TODO: document
+ 
+
+Engine Startup
+--------------
+
+Actions in the following order
+
+0. load preferences
+
+0.1 comple event scripts
+0.2 compile per-tile scripts
+
+1. load map(s)
+
+2. load map privs(*1)
+
+3. load map owner(*1)
+
+4. load merchants and the items each sells
+
+5. load mobs.  First load the mob prototype by name and set the
+   location from the state file.
+
+6. load sign.  State file includes full sign definition.
+
+7. load props.  First load prop prototype and set the prop location.
+
+8. load global variables.
+
+9. trigger the onBoot script.
+
+10. start the engine thread.
+
+1 - I commented that out so need to study it further, seems to be
+    ownership of rectangular regions of the map.  I think this can be
+    stored in memory more efficiently since it isn't needed very
+    often.
+
+Player Startup
+--------------
+
+0. init sockets and stream instances
+
+1. perform a bunch of global policy checks - maximum connections,
+   server shutting down, and blocked address checking.  Doesn't belong
+   here.
+
+2. Start the player thread, which does more initialisation.
+
+Player thread
++++++++++++++
+
+0. Perform login/create authentication/checks.  New code.
+
+1. Greet user
+
+2. Invoke onStart script for living thing.
+
+3. Initialise with prototype 'default' user.
+
+4. If it is an existing user, load user state.
+
+5. Load the pet for the user if not already set.  Pets are stored
+   indexed by the owner name.  This seems to be a cross-check of the
+   player state file because when that is loaded pets are also loaded.
+
+6. Load race which modifies base stats.
+
+7. Set pet location if set.
+
+8. If creating user, save now.
+
+9. Initialise client with:
+9.1 New map
+9.2 Set location (add player to game map)
+9.3 Updated player info
+9.4 Updated player stats
+9.5 Updated player items
+9.6 Updated player worn information
+9.7 Updated player actions
+
+10. Enter the command loop.
+
+Pet Startup
+-----------
+
+Pets are only added from the player load or by buying one.
+
+0. Load default pet as a prototype
+
+1. Load pet information
+
+2. If the pet has a race, load race modifiers
+
+3. Link to master.
+
+Mob Startup
+-----------
+
+Mobs are loaded at startup, scripts and gods can also create them.
+
+0. Load the mob prototype by name
+
+1. Override location
+

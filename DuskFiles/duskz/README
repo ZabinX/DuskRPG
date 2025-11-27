@@ -1,0 +1,105 @@
+
+CODE STATUS Feburary 2023
+-------------------------
+
+Well I can't believe it's been 10 years ... but Xyphoid asked me if i
+still had the source around so i dug it out and did a bit of work to
+make it build with the latest OpenJDK and JavaFX.  I also decided to
+modularise it, it wasn't much work and it simplifies building,
+particulalry inside Netbeans.
+
+This version builds with OpenJDK 19, JavaFX 19, and Netbeans 17,
+although it should work with earlier versions (OpenJDK 11 or 17
+perhaps).
+
+This branch is before the berkeleydb work although that was never
+implemented anyway and isn't hard to merge in.
+
+CODE STATUS September 2013
+--------------------------
+
+After a very active development period the work simply stopped - so it
+is in a bit of a half-way state as you'd imagine.  Other time
+pressures and interests meant I haven't had time to work on this for
+months but I hope to again one day in some shape or form.
+
+Essentially the code in duskz/server and duskz/server/entity is the
+original Dusk code which has been refactored a bit (badly), updated to
+newer Java and a new protocol (I think), but more or less shares the
+original features and data format.  It's basically a dead branch.
+
+The code in dusk/server/entityz is mostly a complete re-write of the
+object class hierarchy, data i/o, map handling and a few other things.
+Unfortunately as it was in active development when it stopped it too
+isn't entirely in a good state either.
+
+I think the object heirarchy is pretty good, and the script system was
+"upgraded" to javascript but there is a ton of work left to make it
+usable.  In hindsight i should've gone straight to a database
+(berkeleydb) backend as too much of the entity code is dealing with
+i/o.
+
+INTRODUCTION
+------------
+
+This is a fork and major overhaul of the Dusk 2.7.3 source code,
+released circa 2000.  The main changes are updating for 20 years of
+Java progress, a new binary network protocol, and a (rudimentary)
+JavaFX client.
+
+A compatible game is required - each server implementation uses
+slightly different game formats.
+
+This is currently in an alpha state.
+
+ ... to be completed ...
+
+BUIDING
+-------
+
+Copy config.make.in to config.make and configure for your local setup.
+
+Then get the 3rd party libraries from maven:
+
+$ make maven-init
+
+Then build everything:
+
+$ make
+
+TODO: make a jlink target
+TODO: Netbeans
+
+INSTALLATION
+------------
+
+TODO: depends on jlink thing
+TODO: where to put game files
+
+RUNNING
+-------
+
+See the Makefile targets run-server, run-server-old, and run-client.
+
+LICENSE
+-------
+  DuskZ is free software, see COPYING for your rights.
+
+  Some files are under other compatible licenses.
+
+  Copyright (C) 2000 Tom Weingarten <captaint@home.com>
+  Copyright (C) 2013 Michael Zucchi <notzed@gmail.com>
+
+   DuskZ is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License
+   as published by the Free Software Foundation; either version 2
+   of the License, or (at your option) any later version.
+
+   DuskZ is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with DuskZ; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.

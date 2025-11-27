@@ -1,0 +1,69 @@
+
+This lists some changes to files to support multiple maps.
+
+Map files
+---------
+
+Maps are encoded in a binary format and stored in multiple files under
+defMaps/
+
+The filename of the map is the name as referenced elsewhere.
+
+LivingThing
+-----------
+
+New parameter 'map' supplies the name of the map the thing is on.
+
+mobs
+----
+
+Added the map name to the mob entries.  Changed the header name from
+'mob2.3' to 'mob'.
+
+mob
+Ent
+mainmap
+100
+100
+
+merchants
+---------
+
+Each entry in the merchants file now starts with
+
+mapname
+xlocation
+ylocation
+
+rather than xlocation.
+
+TODO: it needs more structure/consistency
+
+mainmap
+100
+100
+Wooden boots
+end
+
+
+signs
+-----
+
+Added map to location
+
+TODO: it needs more structure/consistency
+
+some sign text
+mapname
+100
+100
+
+props
+-----
+
+Added map to location
+
+prop type
+mapname
+100
+100

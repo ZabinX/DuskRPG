@@ -1,0 +1,211 @@
+
+This is a planning document for the new 'duskz' scripting system.
+
+Overview
+========
+
+The new scripting system will be using the ScriptEngine framework
+included in Java 6+.
+
+The goal will be to provide a super-set of the features previously
+available, with a more modern language.
+
+Security
+========
+
+JavaScript has far more facilities available than one would expect
+from a scripting language such as the ability to reflect into the
+system and access any public state.
+
+Whilst this allows for powerful scripts it is also an issue of
+security.
+
+Unfortunately fully securing the sandbox will be difficult, but the
+initial basic approach will be to rely on the security manager for
+high level control (files, network), and scripts will only have access
+to wrapper interfaces rather than the live game objects.
+
+Dessign
+=======
+
+The design has to take into account the way the script system works.
+For example in javascript object definitions within scripts persist
+between script invocations.
+
+For efficiency reasons it may be desirable to preload all scripts in
+some manner.  Precompilation is also an option but has restircted use.
+
+Some obvious possibilities for the design:
+
+0. all behaviour of all objects loaded together
+1. all behaviour of one object in one file using toplevel functions
+2. behaviour in separate scripts using toplevel logic (as current
+script system)
+3. all behaviour of one object in one file using arguments (like a
+shell script)
+
+0. All behaviour global
+-----------------------
+
+Implemented by having a separate 'object' for each type of script.
+The object would follow some convention to implement class (no need
+for class inheritence), e.g. Mob's would have an onBattle function,
+Items would not (or perhaps they could?).
+
+Each item is loaded (on demand?) into the ScriptEngine, and methods
+invoked via an object of the same name as the script.
+
+Example
++++++++
+items/absinthe_brain
+var absinthe = {
+    onUse: function(thing) {
+    	   thing.emote('wails', 'oh, my head!');
+	   if (thing.getInte() > 10)
+	      thing.incrInte(-1);
+          thing.remove('absinthe');
+    },
+    onDrop: function(thing) {
+    	    thing.order("get absinthe");
+	    thing.remove('absinthe');
+    }
+};
+
+Pros:
+o Everything is only compiled once
+o Can replace scripts when they are changed
+o Behaviour is all together in one place
+o Member variables can be used for session-persistent state.
+o Argument counts are checked at runtime.
+
+Cons:
+o Entire game logic is loaded into script engine at once - memory?
+o Can replace a different script when it is changed - security.
+o Member variables can be abused for session-persistent state.
+o Fair bit of scaffolding.
+o Arguments must be deined.
+
+Another possibility is to go even further and replace all object
+definitions with javascript objects instead:
+
+var absinthe = {
+    type: drink,
+    description: "a mug of green liquer flavoured with wormwood",
+    cost: 1,
+    image: 6,
+    ... etc
+};
+
+However, accessing field values is clumsy from Java.
+
+1. Behaviour in top-level functions
+-----------------------------------
+
+Example
++++++++
+items/absinthe_brain
+onUse = function(thing) {
+    thing.emote('wails: oh, my head!');
+    if (thing.getInte() > 10)
+        thing.incrInte(-1);
+    thing.remove('absinthe');
+};
+
+onDrop = function(thing) {
+    thing.order("get absinthe");
+    thing.remove('absinthe');
+};
+
+Pros:
+o Simpler syntax
+o Function names can be checked at runtime
+o Argument count is checked at runtime.
+
+Cons:
+o Requires running the script every time before use even if
+precompiled.  Or many engines.
+o Arguments must be defined
+
+2. Behaviour in separate scripts
+---------------------------------
+
+This is like the existing system, a master file indicates which script
+is executed for every event on a given type of object.
+
+Example
++++++++
+script/getabsinthe:
+thing.emote('wails: oh, my head!');
+if (thing.getInte() > 10)
+    thing.incrInte(-1);
+    thing.remove('absinthe');
+}
+
+script/dropabsinthe:
+thing.order("get absinthe");
+thing.remove('absinthe');
+
+Pros:
+o Apart from syntax, identical to existing system
+o Can be precompiled
+o Small scripts faster to parse if passing every time
+o Requires no scaffolding in script
+
+Cons:
+o Unwieldly number of files to manage and setting to correlate
+o Logic spread across multiple files
+
+3. Object behaviour in single top-level script
+----------------------------------------------
+
+Here global variables are used to pass which behaviour is desired.
+
+Example
++++++++
+items/absinthe_brain:
+switch (script) {
+case 'onUse':
+     thing.emote('wails: oh, my head!');
+     if (thing.getInte() > 10)
+     	thing.incrInte(-1);
+        thing.remove('absinthe');
+    }
+    break;
+case 'onDrop':
+    thing.order("get absinthe");
+    thing.remove('absinthe');
+    break;
+}
+
+Pros:
+o Scripts can be precompiled
+o Script execution relatively isolated and cannot be overriden by another script
+
+Cons:
+o Typos in case strings wont be detected at runtime
+o Requires some scaffolding.
+o Very little automatic checking.
+
+Conclusions
+-----------
+
+Although the object and pre-compiled nature of proposal 0 has some
+appeal, it relies too much on the implementation of the
+ScriptingEngine, and is the most memory intensive solution.
+
+Proposal 1 is appealing from the player perspective but seems a little
+clumsy to use in the host.
+
+Proposal 2 benefits from being "how the game already does it", but
+that probably doesn't mean too much.  It's main drawback is the number
+of files and settings required.
+
+Proposal 3 seems a little too complicated and error prone although it
+tries to combine the benefits of a single-file behaviour and lower
+scaffolding of the individual script files.
+
+One thing I find odd is that the JavaScript script engine ... doesn't
+let you add new script functions!  You can only add objects, which
+makes their use clumsy - i.e. there is no way to remove 'thing.'
+inside the scripts.  It's probably worth supporting java language
+scripts too.

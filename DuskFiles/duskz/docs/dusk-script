@@ -1,0 +1,663 @@
+
+This documents the previous 'dusk' scripting system.  It is a
+pre-cursor to being able to replace it with JavaScript so I know what
+to impelement.  i.e. a requirements specification plus some notes.
+
+Thoughts
+========
+
+Certain game state is tracked by changing tiles!  I think this
+facility should be removed entirely and alternative mechanisms
+provided.
+
+Scripts
+=======
+
+This section documents where scripts are used and their arguments.
+
+Each script is defined as:
+
+Name
+----
+comments
+
+location
+ parametername=what
+ .
+
+description
+where it's used in the example game/engine
+what it's for (for tests)
+
+Global per-game scripts
+-----------------------
+
+Most of the global scripts are very simple and define global game
+policies.  Some need to run very often.
+
+It is quite possible they could be removed - either provide fixed game policies,
+or converted into Java and loaded at runtime.
+
+
+OnBoot
+------
+
+conf/onBoot
+
+Run once when the game is booted for the first time.
+
+CanSeeLivingThing
+-----------------
+This is executed a lot so should be fast.  Candidate for implementing in java instead.
+
+conf/canSeeLivingThing
+ seeing=thing that is looking
+ seen=thing trying to be seen
+
+Tests to see if one thing can see another thing.
+
+Used to update the player map if a thing moves into the viewport
+Used to search for items a thing can interact with
+
+Implements global visibility
+
+CanMoveThroughLivingThing
+-------------------------
+This is executed a lot so should be fast.  Candidate for implementing in java instead.
+
+conf/canMoveThroughLivingThing
+ moving=thing that is moving
+ blocking=thing on target location
+
+Tests to see if one thing can move over another thing.
+
+Used to test whether a thing can move to a location (moveto).
+
+Implements whether mobs and pets can be moved on (if they're moving or not).
+
+CanAttack
+---------
+Candiate for implementing in java, and if so replacing some of the fixed game
+policy already provided by the game.
+
+conf/canAttack
+ attacking=thing doing the attacking
+ attacked=thing being attacked
+
+Tests whether one thing can attack another.
+
+Used to test whether a new battle is allowed to commence.
+
+Dissallows attacks on safe players.
+
+Commands
+========
+New commands can be added as scripts.  These are callable by the user directly.
+
+The arguments are split using shell-like rules and passed to the
+script using numbered values.  An array could be used in javascript.
+
+commands/name
+ trigger=thing
+ param0=arg0
+ param1=arg1
+ etc.
+
+Used to implement custom emotes/communication.
+Used to implement custom attacks and fatalities.
+Used to implement custom interactivity like betting or banks.
+Used to implement custom teleports/etc.
+Used to implement custom map editing.
+
+i.e. used to implement most of the command-line game.
+
+Scripts for thing
+=================
+
+OnStart
+-------
+
+conf/onStart
+ trigger=thing
+
+Executed whenever a new player object enters the game after they have
+been successfully logged in/created.
+
+It implements the login issue notice.
+
+It is currently executed before the player is loaded but would
+probably more useful afterwards.
+
+OnDeath
+-------
+
+This only implements part of the game policy on dying.  It could possibly
+also implement the gp/exp loss mechanic (battle mode is different).
+
+It also implements all the per-item death logic - this should be moved
+to per-item scripts.
+
+conf/onDeath
+ trigger=thing that died
+ killer=thing that killed it (if from battle)
+
+Executed when a player dies from battle or is killed by a script.
+
+Implements tracking of items which cannot leave the game.
+Implements a bunch of game policy on conditions.
+Implements game policy on clans.
+
+OnLogOut
+--------
+Quests and items should probably be tracked separately and this
+reserved for the goodbye message.
+
+conf/OnLogOut
+ trigger=thing logging out
+
+Executed when a player logs out normally from the game.
+
+Implements tracking of items which cannot leave the game.
+Implements resetting of certain quests.
+
+OnBattle
+--------
+
+Only used for mobs.  The script to run is defined by the mob file.
+These tweak the mob AI.
+
+scripts/name
+ trigger=mob
+
+Executed when a mob attacks an enemy.
+
+Implements mob ai.
+
+Scripts for Conditions
+======================
+
+Setting a condition when it is already present removes the old one first and triggers
+the appropriate conditions.
+
+OnStart
+-------
+
+scripts/[condition.onstart value]
+ trigger=thing with condition
+ condition=name of condition
+
+Executed when a condition is added to a thing.
+
+OnOccurance
+-----------
+
+scripts/[condition.onoccurance value]
+ trigger=thing with condition
+ condition=name of condition
+
+Executed while a condition is active, based on the condition
+parameters.
+
+OnStop
+------
+
+scripts/[condition.onoccurance value]
+ trigger=thing with condition
+ condition=name of condition
+
+Executed when a condition is removed.
+Executed when a condition duration is exceeded.
+
+Scripts for Items
+=================
+
+Rather than the item name, the item could be used from javascript.  Perhaps.
+
+GetItem
+---------
+
+scripts/[item.onget value]
+ trigger=thing that received item
+ itemname=item received
+ mod=item mod
+
+Executed when a player gives an item to another (the receiver).
+Executed when a player receives battle winnings.
+Executed when a player takes an item.
+
+DropItem
+--------
+
+scripts/[item.ondrop value]
+ trigger=thing that lost item
+ itemname=item received
+ mod=item mod
+
+Executed when a player gives an item to another (the giver).
+Executed when a player sells an item.
+Executed when a player drops an item.
+Executed when a playermerchant sells an item.
+
+OnUse
+-----
+
+scripts/[item.onuse value]
+ trigger=thing that received item
+ itemname=item received
+ mod=item mod
+
+Executed after an item is used.
+
+Implements eat, drink, use commands.
+
+OnWear
+------
+
+scripts/[item.onwear value]
+ trigger=thing that received item
+ itemname=item received
+ mod=item mod
+
+Executed after an item is worn.
+
+OnUnwear
+--------
+
+scripts/[item.onunwear value]
+ trigger=thing that received item
+ itemname=item received
+ mod=item mod
+
+Executed after an item is unworn.
+
+Scripts for Location
+====================
+
+In general these are unwiledy, every location can have a single script
+associated to it by location, it makes editing maps difficult.
+Probably each location could have a property which defined what script
+to run, if any.  And allow for hard-coded constants true/false.
+
+Below, X_Y is the x/y location of interest in decimal integers.
+
+LocationCanMove
+---------------
+
+defCanMoveScripts/X_Y
+ trigger=thing to move
+
+Executed to test if a thing can move onto a location.  Executed before
+TileCanMove.
+
+Implements movable game area tweaks beyond tiles.
+Implements invisible barriers.
+Implements insubstantial barriers.
+
+LocationCanSee
+--------------
+
+defCanSeeScripts/X_Y
+ trigger=thing looking
+
+Executed during line-of-sight testing before the per-tile TileCanSee script.
+
+Used to find things visible to player and player client
+Used to find things visible to mob ai (for attacking)
+
+LocationAction
+--------------
+
+defMoveActions/X_Y
+ trigger=thing moved
+
+Executed after a thing moves onto a given location.  Executed after
+TileAction script (why after?)
+
+Used to implement quests
+Used to implement doorways
+Basically used to implement most of the game.
+
+Scripts for Tiles
+=================
+
+In general the tile scripting mechanism is unwieldy.  Each tile has
+it's own script, although most are either simply true or false.
+
+A level of indirection should be added so that tiles instead indicate
+which script to run, with true/false being short-cuts for efficiency reasons.
+
+Below, N is the id of the tile on the map.
+
+TileCanMove
+-----------
+
+defTileScripts/N
+ trigger=thing moving
+
+Executed to test if a thing can move onto a given tile.  Executed
+immediately after CanMoveThroughLivingThing.
+
+Implements movable game area.
+Implements motion triggered actions for quests and so on.
+
+TileCanSee
+----------
+
+defTileCanSee/N
+ trigger=thing looking
+
+Executed during line-of-sight testing after the per-location
+LocationCanSee script.
+
+Used to find things visible to player and player client
+Used to find things visible to mob ai (for attacking)
+
+TileAction
+----------
+
+defTileActions/N
+ trigger=thing moved
+
+Executed after an item moves onto a given tile.  Executed before
+LocationAction script.
+
+Implements per-tile sounds but nothing else.
+
+Spells
+======
+
+Spells are linked in a strange way, I'm sure it made sense to someone
+at the time, but it seems more complex than it needs to be.  It seems
+to be a way to distribute the spell abilities across the 100% of skill
+level.
+
+I think the same can be implemented by simply having the spell itself,
+and a spell group which lists the spells in the group.  No need for
+the third file.
+
+defSpells/spell-name
+
+Defines the "group" which the spell belongs to and the name of the spell
+as per the user.
+
+defSpellGroups/spell-group-name
+
+Contains a list of spell-name values, in order of caster level in that
+group.  The skill level of the given spell group is a percentage value
+which defines the caster level.
+
+defSpellGroups/N spell-group-name
+ caster=thing casting
+ param0=...
+
+Defines the actuall spell script for spell-name at index position N.
+Spells may have arguments.
+
+Grammar and syntax
+==================
+
+Essentially every script is a function.  The basic although not strict
+grammar is:
+
+script := command
+ | variable;
+
+command := name
+ | name args;
+
+args := script
+ | args script;
+
+Each command does it's own parsing so determines the argument count.
+
+This means expressions are implemented in prefix notation, e.g.
+equals: = var1 var2
+
+Keywords
+--------
+
+"!" "not" expr
+ Logical not of expr
+
+"if" expr
+ If not expr, then skip to the next end.
+
+"end"
+ Marker for if
+
+"(" ")"
+ Grouping expressions
+
+"t" "true"
+"f" "false"
+  Constants.
+
+"playsound" soundid x y
+ Play sound around locality x/y
+
+"order" thing what
+ run command as another thing
+
+"hascondition" thing condition
+"addcondition" thing condition
+"addconditionwithduration" thing condition duration
+"removecondition" thing condition
+ Condition management.  Conditions are per-user state, usually
+ displayed to the user.  Scripts can also abuse them and use them as a
+ sort of hidden state management.  Rather just make that explicit.
+
+"addflag" thing flag
+"hasflag" thing flag
+"removeflag" thing flag
+"global"
+ "livingthing" 
+ "number"
+ "string"
+Set a global varialbe of the type?  Doesn't appear used.
+
+"livingthing" name func
+ sets thing variable name to func
+
+"number" name what
+ set number variable name to func
+
+"string" name what
+ set string variable name to what
+
+"or" func func
+"and" func func
+"<" func func
+">" func func
+"=" func func
+ binary logical and comparison operations
+
+"isinbattle" thing
+"isclan" thing clan
+"israce" thing race
+"hasitem" thing item
+"iswearing" thing what
+  thing attribute testing
+
+"isplayer" thig
+"ispet" thing
+"ismob" thing
+  thing type testing
+
+"createmob" type x y
+ Create a new mob instance.  Unused in demo game.
+
+"createoneusemob" type x y
+ Create a new mob instance.
+
+"createitem" type x y
+ Create a new item.  Unused in demo game.
+
+"giveitem" thing what
+  what can be "number.name" or just "name".  The number version
+  doesn't appear used.
+
+"removeitem" thing what
+  Remove an item from a thing
+
+"unwear" thing what
+  Remove something
+
+"variableisnumber"
+  "global"
+"variableisstring"
+  "global"
+"variableislivingthing"
+  "global"
+ type testing - only 'variableisstring' is implemented and it's just
+ used for argument testing
+ 
+"chat" thing what
+"chatc" thing red green blue what
+  send chat messages to thing, one line at a time.
+
+"inc" thing field [field args]
+ Add a value to the given field
+
+ fields are:
+ "hp" delta
+ "maxhp" delta
+ "hpbonus" delta
+ "mp" delta
+ "maxmp" delta
+ "mpbonus" delta
+ "damdone" delta
+ "strength" delta
+ "intelligence" delta
+ "dexterity" delta
+ "wisdom" delta
+ "constitution" delta
+ "strengthbonus" delta
+ "intelligencebonus" delta
+ "dexteritybonus" delta
+ "wisdombonus" delta
+ "constitutionbonus" delta
+ "acbonus" delta
+ "dammodbonus" delta
+ "locx" delta
+ "locy" delta
+ "locxy" deltax deltay
+ "exp" delta
+ "cash" delta
+ "skill" name delta
+"set" thing field [field args]
+ Set the field to a specific value.
+ "hp" value
+ "maxhp" value
+ "hpbonus" value
+ "mp" value
+ "maxmp" value
+ "mpbonus" value
+ "damdone" value
+ "strength" value
+ "intelligence" value
+ "dexterity" value
+ "wisdom" value
+ "constitution" value
+ "strengthbonus" value
+ "intelligencebonus" value
+ "dexteritybonus" value
+ "wisdombonus" value
+ "constitutionbonus" value
+ "acbonus" value
+ "dammodbonus" value
+ "locx" value
+ "locy" value
+ "locxy" valuex valuey
+ "exp" value
+ "cash" value
+ "skill" name value
+"changeTile" x y tile
+ Change the tileid at location xy.
+
+"strequals" a b
+  case-insensitive string comparison
+
+"input" thing variable
+  retrieve a line of input from user and set variable to it.  Unused
+  in example game.
+
+"checkviewable" thing
+  Appears to force a reset to the client for the thing.  Not used in
+  example game, wont be needed.
+
+"log" thing what
+  dump something to game log, formatted with 'thing' identity
+
+"gecho" what
+  send a message to all players.  Unused in example game.
+
+"endscript"
+  terminate
+
+"chatwindow"
+ unused
+
+"kill" thing reason
+ Kills someone, and if it is a player takes some cash/exp from them if
+ it is set on the game (inside the script engine ...).  If it is a
+ player it also runs the game.onDeath script.
+
+"endcommand"
+  Stops the command being run by the main engine.  i.e. allows a
+  script to override a built-in.  unused.
+
+"clanleader" thing clan
+  Put someonein a clan and set their privs to 1.  unused.
+
+"changeclan" thing clan
+  Set the clan
+
+"floodoff"
+  Clear last output time to avoid flooding control in script.
+  unused/dangerous.
+
+"battlechat"
+  Send a message to battle chat window.  unused.
+
+Values
+------
+
+Apart from constants and variables there are also a number of
+pre-defined values available to scripts.  These are also used to
+implement arithmetic expressions.
+
++ value value
+- value value
+* value value
+/ value value
+ Binary arithmetic operators.
+
+rand
+ Return a random number between zero and 1.0 (Math.random()).
+
+thing attribute
+ Read accessor for an attribute of thing, as below.
+
+  cp
+  tp
+  cash
+  exp
+  locx
+  locy
+  hp
+  maxhp
+  mp
+  maxmp
+  stre
+  dext
+  inte
+  wisd
+  cons
+  dammod
+  ac
+  privs
+  skill name
+   Retrieve skill level
+  count name
+   Count of items named name in thing's inventory
+

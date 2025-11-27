@@ -1,0 +1,35 @@
+
+Online game state is stored in state files which are semi-serialised
+versions of things.
+
+Format
+------
+
+The format is the same as other object files - pseudo-properties format,
+but each object is wrapped in a container.
+
+type=Class,objectname
+properties
+=end
+
+Class is the name of the class (relative to duskz.server.entity) this
+object represents.
+
+objectname is the name of the object prototype, e.g. name of the mob,
+item, etc.
+
+Saving process
+--------------
+
+1. Write envelope header (class,name)
+2. Write volatile state variables, by calling Thing.writeState()
+3. Write envelope footer
+
+Loading process
+---------------
+
+1. Read envelope header.
+2. Instantiate object of type
+3. Load object prototype using Thing.load(name)
+4. Read volatile state variables and set them via setProperty()
+5. Until envelope footer is encountered.
