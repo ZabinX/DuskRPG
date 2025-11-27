@@ -79,7 +79,7 @@ public class VariableSet implements java.io.Serializable
 		}
 		varStore = new Variable();
 		varStore.strName = strName;
-		varStore.objData = new Double(objIn);
+		varStore.objData = Double.valueOf(objIn);
 		varStore.bytType = 0;
 		vctVariables.addElement(varStore);
 	}
@@ -229,3 +229,4 @@ class Variable implements java.io.Serializable
 		return false;
 	}
 }
+

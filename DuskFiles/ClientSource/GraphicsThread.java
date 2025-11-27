@@ -110,7 +110,7 @@ public class GraphicsThread implements Runnable
 				if (!blnAudioLoaded) {
 					blnAudioLoaded = true;
 					if (appParent.blnMusic) {
-						appParent.preloadAudioInBackground();
+//						appParent.preloadAudioInBackground();
 					}
 				}
 				try

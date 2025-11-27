@@ -828,326 +828,206 @@ public class MainFrame extends JFrame implements ItemListener
 	
         public void btnPotionActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("use minormend\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("use minormend");
         }
         
         public void btnPotion2ActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("use mendpotion\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("use mendpotion");
         }
         
         public void btnPotion3ActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("use minormana\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("use minormana");
         }
         
         public void btnPotion4ActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("use manapotion\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("use manapotion");
         }
         public void btnMendActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast mend\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast mend");
         }
         public void btnPoisonActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast antipoison\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast antipoison");
         }
         public void btnArmorActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast armor\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast armor");
         }
         public void btnBlessActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast bless\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast bless");
         }
         public void btnDrinkActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast create_drink\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast create_drink");
         }
         public void btnFoodActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast create_food\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast create_food");
         }
         public void btnHealActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast heal\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast heal");
         }
         public void btnDetectinvisActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast detect_invis\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast detect_invis");
         }
         public void btnInvisActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast invis\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast invis");
         }
         public void btnRegenerateActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast regenerate\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast regenerate");
         }
         public void btnTerrorActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast terror\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast terror");
         }
         public void btnHardenActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast harden\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast harden");
         }
         public void btnEnduranceActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast endurance\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast endurance");
         }
         public void btnCourageActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast courage\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast courage");
         }
         public void btnFearActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast fear\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast fear");
         }
         public void btnStrengthActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast strength\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast strength");
         }
         public void btnWeakenActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast weaken\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast weaken");
         }
         public void btnAppleActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("use apple\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("use apple");
         } 
         public void btnBeerActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("use ale\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("use ale");
         }
         public void btnSandwichActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("use sandwich\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("use sandwich");
         }
         public void btnScrollActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("use recall\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("use recall");
         }
         public void btnUpActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("n\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("n");
         }
         public void btnDownActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("s\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("s");
         }
         public void btnLeftActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("w\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("w");
         }
         public void btnRightActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("e\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("e");
         }
         public void btnSoundOnActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("audio on\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("audio on");
         }
         public void btnSoundOffActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("audio off\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("audio off");
         }
         public void btnLightning1ActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast shock\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast shock");
         }
         public void btnLightning2ActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast ball lightning\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast ball lightning");
         }
         public void btnLightning3ActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast thor\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast thor");
         }
         public void btnIce1ActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast ice shield\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast ice shield");
         }
         public void btnIce2ActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast freeze\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast freeze");
         }
         public void btnIce3ActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast ice bolt\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast ice bolt");
         }
         public void btnFire1ActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast fire shield\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast fire shield");
         }
         public void btnFire2ActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast burn\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast burn");
         }
         public void btnFire3ActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("cast fire bolt\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("cast fire bolt");
         }
 	public void btnMerchantActionPerformed(java.awt.event.ActionEvent e)
 	{
@@ -1172,7 +1052,7 @@ public class MainFrame extends JFrame implements ItemListener
 		try
 		{
 			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("quit\n");
+				appParent.sendMessage("quit");
 		}catch(Exception exc){}
 		try
 		{
@@ -1199,94 +1079,76 @@ public class MainFrame extends JFrame implements ItemListener
         
         public void btnPopuponActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("popup on\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("popup on");
         }
         
         public void btnPopupoffActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("popup off\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("popup off");
         }
                 
         public void btnSleepActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("sleep\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("sleep");
         }
         
         public void btnWakeActionPerformed(java.awt.event.ActionEvent e)
 	{
-		try
-		{
-			if (appParent.blnConnected)
-				appParent.stmOut.writeBytes("wake\n");
-                }catch(IOException exc){}
+		if (appParent.blnConnected)
+			appParent.sendMessage("wake");
         }
 	
 	public void itemStateChanged (ItemEvent evt)
 	{
 		if (appParent.blnMenuRefresh || evt.getStateChange() == ItemEvent.SELECTED)
 			return;
-		try
+		if (evt.getSource() == chcAttack)
 		{
-			if (evt.getSource() == chcAttack)
+			String strStore = (String)chcAttack.getSelectedItem();
+			int i = strStore.lastIndexOf(">");
+			if (i>0)
 			{
-				String strStore = (String)chcAttack.getSelectedItem();
-				int i = strStore.lastIndexOf(">");
-				if (i>0)
-				{
-					strStore = strStore.substring(i+1,strStore.length());
-				}
-				appParent.stmOut.writeBytes("a "+strStore +"\n");
-				appParent.blnMenuRefresh = true;
-				chcAttack.setSelectedIndex(0);
-				appParent.blnMenuRefresh = false;
-			}else if (evt.getSource() == chcAction)
-			{
-				appParent.stmOut.writeBytes((String)chcAction.getSelectedItem()+"\n");
-				appParent.blnMenuRefresh = true;
-				chcAction.setSelectedIndex(0);
-				appParent.blnMenuRefresh = false;
-			}else if (evt.getSource() == chcLook)
-			{
-				String strStore = (String)chcLook.getSelectedItem();
-				StringTokenizer tknStore = new StringTokenizer(strStore, ">");
-				while(tknStore.countTokens() > 0)
-				{
-					strStore = tknStore.nextToken();
-				}
-				appParent.stmOut.writeBytes("look "+strStore+"\n");
-				appParent.blnMenuRefresh = true;
-				chcLook.setSelectedIndex(0);
-				appParent.blnMenuRefresh = false;
-			}else if (evt.getSource() == chcGet)
-			{
-				String strStore = (String)chcGet.getSelectedItem();
-				appParent.stmOut.writeBytes("get "+strStore+"\n");
-				appParent.blnMenuRefresh = true;
-				chcGet.setSelectedIndex(0);
-				appParent.blnMenuRefresh = false;
-			}else if (evt.getSource() == chcDrop)
-			{
-				String strStore = (String)chcDrop.getSelectedItem();
-				appParent.stmOut.writeBytes("drop "+strStore+"\n");
-				appParent.blnMenuRefresh = true;
-				chcDrop.setSelectedIndex(0);
-				appParent.blnMenuRefresh = false;
+				strStore = strStore.substring(i+1,strStore.length());
 			}
-		}catch (Exception e)
+			appParent.sendMessage("a "+strStore);
+			appParent.blnMenuRefresh = true;
+			chcAttack.setSelectedIndex(0);
+			appParent.blnMenuRefresh = false;
+		}else if (evt.getSource() == chcAction)
 		{
-			System.out.println("Error at MainFrame.actionPerformed(): " + e.toString());
+			appParent.sendMessage((String)chcAction.getSelectedItem());
+			appParent.blnMenuRefresh = true;
+			chcAction.setSelectedIndex(0);
+			appParent.blnMenuRefresh = false;
+		}else if (evt.getSource() == chcLook)
+		{
+			String strStore = (String)chcLook.getSelectedItem();
+			StringTokenizer tknStore = new StringTokenizer(strStore, ">");
+			while(tknStore.countTokens() > 0)
+			{
+				strStore = tknStore.nextToken();
+			}
+			appParent.sendMessage("look "+strStore);
+			appParent.blnMenuRefresh = true;
+			chcLook.setSelectedIndex(0);
+			appParent.blnMenuRefresh = false;
+		}else if (evt.getSource() == chcGet)
+		{
+			String strStore = (String)chcGet.getSelectedItem();
+			appParent.sendMessage("get "+strStore);
+			appParent.blnMenuRefresh = true;
+			chcGet.setSelectedIndex(0);
+			appParent.blnMenuRefresh = false;
+		}else if (evt.getSource() == chcDrop)
+		{
+			String strStore = (String)chcDrop.getSelectedItem();
+			appParent.sendMessage("drop "+strStore);
+			appParent.blnMenuRefresh = true;
+			chcDrop.setSelectedIndex(0);
+			appParent.blnMenuRefresh = false;
 		}
 	}
 }

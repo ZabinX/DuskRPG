@@ -181,22 +181,10 @@ public class Commands
 				}
 				lt.chatMessage("You have invited "+thnStore.strName+" to join the clan "+lt.strClan+".");
 				thnStore.halt();
-				thnStore.stillThere();  // This puts something in the buffer
-				thnStore.stillThere();  // Have to do this twice to ensure that thnStore is out of
-										// its read loop
-				lt.thrConnection.sleep(500);  // wait for the "notdead" response to get back from client.
-				try
-				{
-					// Empty out the BufferedReader for the answer
-					while (thnStore.bfrSocketIn.ready()) thnStore.bfrSocketIn.read();
-				} catch (Exception e)
-				{
-					engGame.log.printError("parseCommand():While "+lt.strName+" was trying to addmember "+thnStore.strName, e);
-				}
 				thnStore.chatMessage(lt.strName+" has invited you to join the clan "+lt.strClan+". If you accept, type yes.");
 				try
 				{
-					if (thnStore.bfrSocketIn.readLine().equalsIgnoreCase("yes"))
+					if (thnStore.getNextInput().equalsIgnoreCase("yes"))
 					{
 						thnStore.strClan = lt.strClan;
 						if (thnStore.privs == 1)
@@ -569,7 +557,6 @@ public class Commands
 							strBuff.append(strResult[i]+"\n");
 						}
 					}
-					strBuff.append("--EOF--\n");
 					lt.send(strBuff.toString());
 					return null;
 				}
@@ -692,7 +679,7 @@ public class Commands
 					{
 						return "The player named \""+filView.getName()+"\" does not have a pet.";
 					}
-					lt.send((char)18+strArgs+"\n--EOF--\n");
+					lt.send((char)18+strArgs+"\n");
 					return null;
 				}
 				RandomAccessFile rafView=null;
@@ -871,11 +858,11 @@ public class Commands
 						*/
 						rafView.writeBytes(strStore+"\n");
 					}
-					strStore = lt.bfrSocketIn.readLine();
+					strStore = lt.getNextInput();
 					while (!strStore.equals("--EOF--"))
 					{
 						rafView.writeBytes(strStore+"\n");
-						strStore = lt.bfrSocketIn.readLine();
+						strStore = lt.getNextInput();
 					}
 					rafView.close();
 					if (compile)
@@ -1562,27 +1549,13 @@ public class Commands
 					lt.thnMaster.halt();
 	//					lt.thnMaster.stillThere();  // This puts something in the buffer
 	//					lt.thnMaster.thrConnection.sleep(750);  // wait for it...
-					try
-					{
-						// Empty out the BufferedReader for the answer
-						while (lt.thnMaster.bfrSocketIn.ready()) lt.thnMaster.bfrSocketIn.readLine();
-					} catch (Exception e)
-					{
-						engGame.log.printError("parseCommand():Trying to empty ready buffer of pet's master for change race.",e);
-					}
+					// Buffer clearing is no longer necessary with the new protocol.
 				} else
 				{
 					lt.halt();
 	//					lt.stillThere();  // This puts something in the buffer
 	//					lt.thrConnection.sleep(750);  // wait for it...
-					try
-					{
-						// Empty out the BufferedReader for the answer
-						while (lt.bfrSocketIn.ready()) lt.bfrSocketIn.readLine();
-					} catch (Exception e)
-					{
-						engGame.log.printError("parseCommand():Trying to empty ready buffer of player for change race.",e);
-					}
+					// Buffer clearing is no longer necessary with the new protocol.
 				}
 				lt.loadRace();
 				if (lt.isPet())
@@ -1946,7 +1919,7 @@ public class Commands
 				String strStore2 = strBuff.toString();
 				if (lt.popup)
 				{
-					lt.send((char)20+"There are "+nPlayers+" players online:\n"+strStore2+"\n--EOF--\n");
+					lt.send((char)20+"There are "+nPlayers+" players online:\n"+strStore2+"\n");
 				} else
 				{
 					lt.chatMessage("\tThere are "+nPlayers+" players online:");
@@ -2933,7 +2906,7 @@ public class Commands
 					lt.chatMessage("Do you really want to permanently erase your pet?");
 					try
 					{
-						if (lt.bfrSocketIn.readLine().equalsIgnoreCase("yes"))
+						if (lt.getNextInput().equalsIgnoreCase("yes"))
 						{
 							lt.thnFollowing.close();
 							File deleteme = new File("pets/"+lt.strName.toLowerCase());
@@ -3004,7 +2977,7 @@ public class Commands
 			{
 				lt.halt();
 				lt.chatMessage("Are you sure you want to drop out of your clan? If so type yes.");
-				if (lt.bfrSocketIn.readLine().equalsIgnoreCase("yes"))
+				if (lt.getNextInput().equalsIgnoreCase("yes"))
 				{
 					lt.strClan = "none";
 					if (lt.privs==1)
@@ -3060,16 +3033,16 @@ public class Commands
 			{
 				lt.halt();
 				lt.chatMessage("Enter your current password.");
-				String strOldPass = lt.bfrSocketIn.readLine();
+				String strOldPass = lt.getNextInput();
 				if (!strOldPass.equals(lt.strPWord))
 				{
 					lt.proceed();
 					return "Sorry, that is not your password.";
 				}
 				lt.chatMessage("Enter a new password.");
-				String strNewPass = lt.bfrSocketIn.readLine();
+				String strNewPass = lt.getNextInput();
 				lt.chatMessage("Repeat that password.");
-				String strNewPassRepeat = lt.bfrSocketIn.readLine();
+				String strNewPassRepeat = lt.getNextInput();
 				if (strNewPass == null)
 				{
 					lt.proceed();
@@ -3497,3 +3470,4 @@ public class Commands
 		return null;
 	}
 }
+

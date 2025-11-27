@@ -126,7 +126,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	HashMap<Long, Entity> hmpEntities;
 	
 	boolean intStep,
-			blnMusic=true;
+			blnMusic=false;
     Thread thrRun;
     
     Entity player;
@@ -360,7 +360,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 
-	public void preloadAudioInBackground() {
+	/* public void preloadAudioInBackground() {
 		new Thread(() -> {
 			SwingUtilities.invokeLater(() -> addText("Loading audio...!!!FREEZE WARNING!!! CLICK THE SLEEP AND WAKE BUTTON TO START PLAYING!!!\n"));
 			final int numSoundEffects = 12;
@@ -425,7 +425,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 			SwingUtilities.invokeLater(() -> addText("Audio finished loading.\n"));
 		}).start();
-	}
+	} */
 
 	public void spawnBloodParticles(Entity attacker, Entity defender, int damage) {
 		if (defender == null) return;
@@ -592,24 +592,36 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 
-	@Override
+	private byte[] readFramedMessage() throws IOException {
+		int length = stmIn.readShort();
+		if (length < 0 || length > 32768) { // Max message size of 32KB
+			throw new IOException("Invalid message length received: " + length);
+		}
+		byte[] buffer = new byte[length];
+		stmIn.readFully(buffer);
+		return buffer;
+	}
+
 	public void	run()
 	{
 		int intStore,
 			intStore2;
-		String strStore,
-				strStore2;
-		Entity entStore=null,
-				entStore2;
+		String message,
+				token;
+		Entity entStore=null;
 		intStore = 0;
 		long lngStore;
 		int incoming = 0;
 		boolean blnBreak=false;
-		while(incoming != -1)
+		while(blnConnected)
 		{
 		try
 		{
-		    incoming = stmIn.read();
+			byte[] messageFrame = readFramedMessage();
+			incoming = messageFrame[0] & 0xFF;
+			message = new String(messageFrame, 1, messageFrame.length - 1, "UTF-8");
+			StringTokenizer st = new StringTokenizer(message, "\n");
+
 		    switch (incoming)
 		    {
 		    	case(0):
@@ -621,7 +633,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		    	}
 				case(1):
 				{
-					strRCAddress = stmIn.readLine();
+					strRCAddress = st.nextToken();
 					CountDownLatch imageLatch = new CountDownLatch(1);
 					try
 					{
@@ -643,28 +655,28 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		        {
 					synchronized(vctEntities)
 					{
-						LocX = Integer.parseInt(stmIn.readLine());
-						LocY = Integer.parseInt(stmIn.readLine());
+						LocX = Integer.parseInt(st.nextToken());
+						LocY = Integer.parseInt(st.nextToken());
 
 						for (int i=0;i<mapSizeX;i++)
 						{
 							for (int i2=0;i2<mapSizeY;i2++)
 							{
-								shrMap[i][i2] = Short.parseShort(stmIn.readLine());
+								shrMap[i][i2] = Short.parseShort(st.nextToken());
 							}
 						}
 						for (int i=0;i<mapSizeX;i++)
 						{
 							for (int i2=0;i2<mapSizeY;i2++)
 							{
-								shrMapAlpha2[i][i2] = Short.parseShort(stmIn.readLine());
+								shrMapAlpha2[i][i2] = Short.parseShort(st.nextToken());
 							}
 						}
 						for (int i=0;i<mapSizeX;i++)
 						{
 							for (int i2=0;i2<mapSizeY;i2++)
 							{
-								shrMapAlpha[i][i2] = Short.parseShort(stmIn.readLine());
+								shrMapAlpha[i][i2] = Short.parseShort(st.nextToken());
 							}
 						}
 						
@@ -692,25 +704,25 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		        }
 		        case (3):
 		        {
-		        	addText(stmIn.readLine()+"\n");
+		        	addText(st.nextToken()+"\n");
 		            break;
 		        }
 		        case (4):
 		        {
 		        	synchronized(vctEntities)
 		        	{
-		            strStore = stmIn.readLine();
-					intStore = Byte.parseByte(stmIn.readLine());
+		            token = st.nextToken();
+					intStore = Byte.parseByte(st.nextToken());
 					if (intStore == 0)
 		            {
 		                try
 		                {
-		                	entStore = new Entity(strStore,
-		                						Long.parseLong(stmIn.readLine()),
-												Integer.parseInt(stmIn.readLine()),
-												Integer.parseInt(stmIn.readLine()),
-												Integer.parseInt(stmIn.readLine()),
-												Integer.parseInt(stmIn.readLine()),
+		                	entStore = new Entity(token,
+		                						Long.parseLong(st.nextToken()),
+												Integer.parseInt(st.nextToken()),
+												Integer.parseInt(st.nextToken()),
+												Integer.parseInt(st.nextToken()),
+												Integer.parseInt(st.nextToken()),
 												intStore);
 						}catch(NullPointerException e)
 						{
@@ -720,11 +732,11 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		            {
 		            	try
 		                {
-		                	entStore = new Entity(strStore,
-		                						Long.parseLong(stmIn.readLine()),
-												Integer.parseInt(stmIn.readLine()),
-												Integer.parseInt(stmIn.readLine()),
-												Integer.parseInt(stmIn.readLine()),
+		                	entStore = new Entity(token,
+		                						Long.parseLong(st.nextToken()),
+												Integer.parseInt(st.nextToken()),
+												Integer.parseInt(st.nextToken()),
+												Integer.parseInt(st.nextToken()),
 												-1,
 												intStore);
 						}catch(NullPointerException e)
@@ -748,10 +760,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		        case (5):
 		        {
 					int oldhp = inthp;
-					inthp = Integer.parseInt(stmIn.readLine());
-					intmaxhp = Integer.parseInt(stmIn.readLine());
-					intsp = Integer.parseInt(stmIn.readLine());
-					intmaxsp = Integer.parseInt(stmIn.readLine());
+					inthp = Integer.parseInt(st.nextToken());
+					intmaxhp = Integer.parseInt(st.nextToken());
+					intsp = Integer.parseInt(st.nextToken());
+					intmaxsp = Integer.parseInt(st.nextToken());
 					if (inthp > oldhp) {
 						int hpHealed = inthp - oldhp;
 						int numStars = hpHealed;
@@ -778,27 +790,27 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		            }catch(Exception e){}
 		            try
 		            {
-					intStore = Integer.parseInt(stmIn.readLine());
-					while (true)
+					while (st.hasMoreTokens())
 					{
-						strStore = stmIn.readLine();
+						intStore = Integer.parseInt(st.nextToken());
+						if (!st.hasMoreTokens()) break; // Ensure there's a matching value
+						token = st.nextToken();
 						switch (intStore)
 						{
-						case (0): vctChoiceDropItems.addElement(strStore); break;
-						case (1): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcWield.addItem(strStore); break;
-						case (2): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcArms.addItem(strStore); break;
-						case (3): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcLegs.addItem(strStore); break;
-						case (4): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcTorso.addItem(strStore); break;
-						case (5): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcWaist.addItem(strStore); break;
-						case (6): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcNeck.addItem(strStore); break;
-						case (7): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcSkull.addItem(strStore); break;
-						case (8): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcEyes.addItem(strStore); break;
-						case (9): vctChoiceDropItems.addElement(strStore); frame.frmEquipment.chcHands.addItem(strStore); break;
+						case (0): vctChoiceDropItems.addElement(token); break;
+						case (1): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcWield.addItem(token); break;
+						case (2): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcArms.addItem(token); break;
+						case (3): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcLegs.addItem(token); break;
+						case (4): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcTorso.addItem(token); break;
+						case (5): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcWaist.addItem(token); break;
+						case (6): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcNeck.addItem(token); break;
+						case (7): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcSkull.addItem(token); break;
+						case (8): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcEyes.addItem(token); break;
+						case (9): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcHands.addItem(token); break;
 						}
-						intStore = Integer.parseInt(stmIn.readLine());
 					}	
 					} 
-					catch (IOException | NumberFormatException e) {}
+					catch (NumberFormatException e) {}
 		            frame.frmEquipment.chcWield.addItem("none");
 		            frame.frmEquipment.chcArms.addItem("none");
 		            frame.frmEquipment.chcLegs.addItem("none");
@@ -816,31 +828,29 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		        {
 					try
 					{
-						frame.frmEquipment.JLabel9.setText("Wielded: "+stmIn.readLine()); 
-						frame.frmEquipment.JLabel2.setText("Arms: "+stmIn.readLine()); 
-						frame.frmEquipment.JLabel3.setText("Legs: "+stmIn.readLine()); 
-						frame.frmEquipment.JLabel1.setText("Torso: "+stmIn.readLine()); 
-						frame.frmEquipment.JLabel6.setText("Waist: "+stmIn.readLine()); 
-						frame.frmEquipment.JLabel4.setText("Neck: "+stmIn.readLine()); 
-						frame.frmEquipment.lblSkull.setText("Skull: "+stmIn.readLine()); 
-						frame.frmEquipment.JLabel5.setText("Eyes: "+stmIn.readLine()); 
-						frame.frmEquipment.JLabel7.setText("Hands: "+stmIn.readLine());
-					}catch (IOException e) { System.err.println("Error loading equipment" + e.toString()); }
+						frame.frmEquipment.JLabel9.setText("Wielded: "+st.nextToken()); 
+						frame.frmEquipment.JLabel2.setText("Arms: "+st.nextToken()); 
+						frame.frmEquipment.JLabel3.setText("Legs: "+st.nextToken()); 
+						frame.frmEquipment.JLabel1.setText("Torso: "+st.nextToken()); 
+						frame.frmEquipment.JLabel6.setText("Waist: "+st.nextToken()); 
+						frame.frmEquipment.JLabel4.setText("Neck: "+st.nextToken()); 
+						frame.frmEquipment.lblSkull.setText("Skull: "+st.nextToken()); 
+						frame.frmEquipment.JLabel5.setText("Eyes: "+st.nextToken()); 
+						frame.frmEquipment.JLabel7.setText("Hands: "+st.nextToken());
+					}catch (Exception e) { System.err.println("Error loading equipment" + e.toString()); }
 					break;
 				}
 				case (8):
 				{
 					try
 					{
-		                strStore2 = "";
-		                strStore = stmIn.readLine();
-		                while (!strStore.equals("."))
+		                token = "";
+		                while (st.hasMoreTokens())
 		                {
-		                	strStore2 += strStore+"\n";
-		               	 	strStore = stmIn.readLine();
+		                	token += st.nextToken()+"\n";
 		                }
-						frame.txtOther.setText(strStore2);
-					}catch (IOException e) { System.err.println("Error loading stats" + e.toString()); }
+						frame.txtOther.setText(token);
+					}catch (Exception e) { System.err.println("Error loading stats" + e.toString()); }
 					break;
 				}
 				case (9):
@@ -850,12 +860,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (10):
 				{
-	            	strStore = stmIn.readLine();
 	            	vctChoiceActionItems = new Vector(0,5);
-	            	while (!strStore.equals("."))
+	            	while (st.hasMoreTokens())
 	            	{
-	            		vctChoiceActionItems.addElement(strStore);
-	            		strStore = stmIn.readLine();
+	            		vctChoiceActionItems.addElement(st.nextToken());
 	            	}
 					reloadJComboBoxAction();
 	            	break;
@@ -864,19 +872,16 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				{
 					try {
 						addText("Loading music.\n");
-						intMusicTypes = Integer.parseInt(stmIn.readLine());
+						intMusicTypes = Integer.parseInt(st.nextToken());
 						audMusic = new Clip[intMusicTypes][];
 						intNumSongs = new int[intMusicTypes];
 
 						final String[] musicPaths = new String[intMusicTypes];
 						for (int i = 0; i < intMusicTypes; i++) {
-							intNumSongs[i] = Integer.parseInt(stmIn.readLine());
+							intNumSongs[i] = Integer.parseInt(st.nextToken());
 							audMusic[i] = new Clip[intNumSongs[i]];
-							// Read all paths for this type
 							for (int j = 0; j < intNumSongs[i]; j++) {
-								// For simplicity, we'll assume one song per type for now in this async model.
-								// A more complex implementation would handle multiple songs per type.
-								final String path = stmIn.readLine();
+								final String path = st.nextToken();
 								final int typeIndex = i;
 								final int songIndex = j;
 
@@ -906,7 +911,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 								}).start();
 							}
 						}
-					} catch (IOException | NumberFormatException e) {
+					} catch (Exception e) {
 						blnMusic = false;
 						addText("Your java virtual machine does not support midi music\n");
 						System.err.println("Error while trying to load music files:" + e.toString());
@@ -915,9 +920,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (60): // playLocationMusic
 				{
-					if (blnMusic) {
+					/* if (blnMusic) {
 						try {
-							final int songIndex = Integer.parseInt(stmIn.readLine());
+							final int songIndex = Integer.parseInt(st.nextToken());
 							new Thread(() -> {
 								try {
 									if (audMusicPlaying != null) {
@@ -941,22 +946,22 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						} catch (Exception e) {
 							System.err.println("Error reading song index for location music: " + e.toString());
 						}
-					}
+					} */
 					break;
 				}
 				case (61): // stopLocationMusic
 				{
-					if (blnMusic && audMusicPlaying != null) {
+					/* if (blnMusic && audMusicPlaying != null) {
 						audMusicPlaying.stop();
-					}
+					} */
 					break;
 				}
                 case (36):
                 {
                     try {
-                        long attackerID = Long.parseLong(stmIn.readLine());
-                        long defenderID = Long.parseLong(stmIn.readLine());
-                        int damage = Integer.parseInt(stmIn.readLine());
+                        long attackerID = Long.parseLong(st.nextToken());
+                        long defenderID = Long.parseLong(st.nextToken());
+                        int damage = Integer.parseInt(st.nextToken());
 
                         Entity attacker;
                         Entity defender;
@@ -967,7 +972,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
                         if (attacker != null && defender != null) {
                             spawnBloodParticles(attacker, defender, damage);
-                            // Check for an existing splat to aggregate
                             synchronized(vctDamageSplats) {
                                 DamageSplat existingSplat = null;
                                 for (DamageSplat splat : vctDamageSplats) {
@@ -1008,7 +1012,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 case (37):
                 {
                     try {
-                        playerTicks = Long.parseLong(stmIn.readLine());
+                        playerTicks = Long.parseLong(st.nextToken());
                     } catch (Exception e) {
                         System.err.println("Error reading playerTicks: " + e.getMessage());
                     }
@@ -1017,7 +1021,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 case (38):
                 {
                     try {
-                        long targetID = Long.parseLong(stmIn.readLine());
+                        long targetID = Long.parseLong(st.nextToken());
                         Entity target;
                         synchronized(vctEntities) {
                             target = hmpEntities.get(targetID);
@@ -1033,7 +1037,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 case (39):
                 {
                     try {
-                        String[] parts = stmIn.readLine().split(" ");
+                        String[] parts = st.nextToken().split(" ");
                         long targetID = Long.parseLong(parts[0]);
                         int duration = 0;
                         if (parts.length > 1) {
@@ -1055,7 +1059,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 case (40):
                 {
                     try {
-                        String[] parts = stmIn.readLine().split(" ");
+                        String[] parts = st.nextToken().split(" ");
                         long targetID = Long.parseLong(parts[0]);
                         int duration = 0;
                         if (parts.length > 1) {
@@ -1077,7 +1081,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 case (41): // Harden spell effect
                 {
                     try {
-                        long targetID = Long.parseLong(stmIn.readLine());
+                        long targetID = Long.parseLong(st.nextToken());
                         Entity target;
                         synchronized(vctEntities) {
                             target = hmpEntities.get(targetID);
@@ -1093,7 +1097,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 case (42): // Shock spell effect
                 {
                     try {
-                        long targetID = Long.parseLong(stmIn.readLine());
+                        long targetID = Long.parseLong(st.nextToken());
                         Entity target;
                         synchronized(vctEntities) {
                             target = hmpEntities.get(targetID);
@@ -1110,8 +1114,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				{
 					if (blnMusic) {
 						try {
-							final int musicType = Integer.parseInt(stmIn.readLine());
-							// The waiting logic is now on a background thread, preventing the network thread from blocking.
+							final int musicType = Integer.parseInt(st.nextToken());
 							new Thread(() -> {
 								try {
 									if (audMusicPlaying != null) {
@@ -1122,7 +1125,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 										int songIndex = (int)(Math.random() * intNumSongs[musicType]);
 										Clip clipToPlay = audMusic[musicType][songIndex];
 										
-										// Wait for the clip to be loaded by the async thread from opcode 11
 										int waitCounter = 0;
 										while (clipToPlay == null && waitCounter < 100) { // Wait up to 10 seconds
 											Thread.sleep(100);
@@ -1142,7 +1144,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 									System.err.println("Error playing dynamic music: " + e.toString());
 								}
 							}).start();
-						} catch (IOException | NumberFormatException e) {
+						} catch (Exception e) {
 							System.err.println("Error reading music type: " + e.toString());
 						}
 					}
@@ -1150,7 +1152,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case(13):
 				{
-					stmOut.writeBytes("notdead\n");
+					sendMessage("notdead");
 					break;
 				}
 				case (14):
@@ -1160,21 +1162,21 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (15):
 				{
-					try
+					/* try
 					{
-						int sfxIndex = Integer.parseInt(stmIn.readLine());
+						int sfxIndex = Integer.parseInt(st.nextToken());
 						if (audSFX != null && sfxIndex >= 0 && sfxIndex < audSFX.length && audSFX[sfxIndex] != null) {
 							audSFX[sfxIndex].setFramePosition(0);
 							audSFX[sfxIndex].start();
 						}
-					}catch(Exception e){}
+					}catch(Exception e){} */
 					break;
 				}
 				case (16):
 				{
 					synchronized(vctEntities)
 					{
-					lngStore = Long.parseLong(stmIn.readLine());
+					lngStore = Long.parseLong(st.nextToken());
 					removeEntity(lngStore);
 					reloadJComboBoxLook();
 					reloadJComboBoxGet();
@@ -1184,11 +1186,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (17):
 				{
-					strStore = stmIn.readLine();
-					while (!strStore.equals("."))
+					while (st.hasMoreTokens())
 					{
-						vctMerchantItems.addElement(strStore);
-						strStore = stmIn.readLine();
+						vctMerchantItems.addElement(st.nextToken());
 					}
 					frame.btnMerchant.setEnabled(true);
 					reloadJComboBoxBuy();
@@ -1196,13 +1196,11 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (18):
 				{
-					EditFrame frmEdit = new EditFrame(stmIn.readLine(),this,true);
+					EditFrame frmEdit = new EditFrame(st.nextToken(),this,true);
 					frmEdit.show();
-					strStore = stmIn.readLine();
-					while (!strStore.equals("--EOF--"))
+					while (st.hasMoreTokens())
 					{
-						frmEdit.txtEdit.append(strStore+"\n");
-						strStore = stmIn.readLine();
+						frmEdit.txtEdit.append(st.nextToken()+"\n");
 					}
 					break;
 				}
@@ -1210,8 +1208,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				{
 		        	synchronized(vctEntities)
 		        	{
-					mapSizeX = Integer.parseInt(stmIn.readLine());
-					mapSizeY = Integer.parseInt(stmIn.readLine());
+					mapSizeX = Integer.parseInt(st.nextToken());
+					mapSizeY = Integer.parseInt(st.nextToken());
 					viewRangeX = (mapSizeX-1)/2;
 					viewRangeY = (mapSizeY-1)/2;
 					shrMap = new short[mapSizeX][mapSizeY];
@@ -1219,10 +1217,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					shrMapAlpha2 = new short[mapSizeX][mapSizeY];
 					if (blnApplet)
 					{
-						stmOut.writeBytes("appletimages\n");
+						sendMessage("appletimages");
 					}else
 					{
-						stmOut.writeBytes("applicationimages\n");
+						sendMessage("applicationimages");
 					}
 					scaleWindow();
 					}
@@ -1230,13 +1228,11 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (20):
 				{
-					EditFrame frmEdit = new EditFrame(stmIn.readLine(),this,false);
+					EditFrame frmEdit = new EditFrame(st.nextToken(),this,false);
 					frmEdit.show();
-					strStore = stmIn.readLine();
-					while (!strStore.equals("--EOF--"))
+					while (st.hasMoreTokens())
 					{
-						frmEdit.txtEdit.append(strStore+"\n");
-						strStore = stmIn.readLine();
+						frmEdit.txtEdit.append(st.nextToken()+"\n");
 					}
 					break;
 				}
@@ -1251,28 +1247,26 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				case (22):
 				{
 					vctSell = new Vector(0,5);
-					strStore = stmIn.readLine();
-					while (!strStore.equals("."))
+					while (st.hasMoreTokens())
 					{
-						vctSell.addElement(strStore);
-						strStore = stmIn.readLine();
+						vctSell.addElement(st.nextToken());
 					}
 					reloadJComboBoxSell();
 					break;
 				}
 				case (23):
 				{
-                    int red = Integer.parseInt(stmIn.readLine());
-                    int green = Integer.parseInt(stmIn.readLine());
-                    int blue = Integer.parseInt(stmIn.readLine());
-                    String text = stmIn.readLine();
+                    int red = Integer.parseInt(st.nextToken());
+                    int green = Integer.parseInt(st.nextToken());
+                    int blue = Integer.parseInt(st.nextToken());
+                    String text = st.nextToken();
                     String formattedText = "<RGB " + red + " " + green + " " + blue + ">" + text + "</RGB>\n";
                     addText(formattedText);
 		            break;
 				}
 				case (24):
 				{
-					long ID = Long.parseLong(stmIn.readLine());
+					long ID = Long.parseLong(st.nextToken());
 					synchronized(vctEntities)
     				{
 						entStore = hmpEntities.get(ID);
@@ -1288,7 +1282,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (25):
 				{
-					long ID = Long.parseLong(stmIn.readLine());
+					long ID = Long.parseLong(st.nextToken());
 					synchronized(vctEntities)
     				{
 						entStore = hmpEntities.get(ID);
@@ -1304,7 +1298,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (26):
 				{
-					long ID = Long.parseLong(stmIn.readLine());
+					long ID = Long.parseLong(st.nextToken());
 					synchronized(vctEntities)
     				{
 						entStore = hmpEntities.get(ID);
@@ -1320,7 +1314,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (27):
 				{
-					long ID = Long.parseLong(stmIn.readLine());
+					long ID = Long.parseLong(st.nextToken());
 					synchronized(vctEntities)
     				{
 						entStore = hmpEntities.get(ID);
@@ -1336,13 +1330,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (28):
 				{
-					range = Integer.parseInt(stmIn.readLine());
+					range = Integer.parseInt(st.nextToken());
 					break;
 				}
 				case (29):
 				{
-					lngStore = Long.parseLong(stmIn.readLine());
-					intStore = Integer.parseInt(stmIn.readLine());
+					lngStore = Long.parseLong(st.nextToken());
+					intStore = Integer.parseInt(st.nextToken());
 					synchronized(vctEntities)
 					{
 						entStore = hmpEntities.get(lngStore);
@@ -1366,28 +1360,25 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 				case (31):
 				{
-					strStore = stmIn.readLine();
 					frame.txtBattle.setText("");
                     frame.lblTarget.setText("");
                     break;
 				}
 				case (32):
 				{
-					strStore = stmIn.readLine();
-                    frame.lblTarget.setText(strStore);
+                    frame.lblTarget.setText(st.nextToken());
 					break;
 				}
 				case (33):
 				{
-					strStore = stmIn.readLine();
-					frame.txtBattle.append(strStore+"\n");
+					frame.txtBattle.append(st.nextToken()+"\n");
                     break;
 				}
                 case (34):
                 {
                     try {
-                        long opponentID = Long.parseLong(stmIn.readLine());
-                        String HpData = stmIn.readLine();
+                        long opponentID = Long.parseLong(st.nextToken());
+                        String HpData = st.nextToken();
                         if (HpData != null) {
                             String[] hpValues = HpData.trim().split(" ");
                             if (hpValues.length >= 2) {
@@ -1402,8 +1393,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                                     }
                                 }
                             } else if (hpValues.length == 1 && Integer.parseInt(hpValues[0]) <= 0) {
-                                // This is a death notification, but the entity might already be removed.
-                                // We can safely ignore this if the entity is not found.
                                 synchronized(vctEntities) {
                                     entStore = hmpEntities.get(opponentID);
                                     if (entStore != null) {
@@ -1420,13 +1409,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 case (35):
 				{
 					vctTileAnims = new Vector<TileAnim>(0,5);
-					int tileID = Integer.parseInt(stmIn.readLine());
+					int tileID = Integer.parseInt(st.nextToken());
 					while (tileID != -1)
 					{
-						int frameCount = Integer.parseInt(stmIn.readLine());
-						int delay = Integer.parseInt(stmIn.readLine());
+						int frameCount = Integer.parseInt(st.nextToken());
+						int delay = Integer.parseInt(st.nextToken());
 						vctTileAnims.addElement(new TileAnim(tileID, frameCount, delay));
-						tileID = Integer.parseInt(stmIn.readLine());
+						tileID = Integer.parseInt(st.nextToken());
 					}
 					break;
 				}
@@ -1435,17 +1424,19 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					System.err.println("Lost incoming byte: " + incoming);	
 				}
 			}
-		}catch(IOException | NumberFormatException e)
+		} catch (EOFException eofe) {
+			addText("Connection to the server has been lost.\n");
+			blnConnected = false;
+		} catch(IOException | NumberFormatException e)
 		{
 			System.err.println("Error at run() with value " + incoming +" : "+e.toString());
 			e.printStackTrace(System.out);
 
 			addText("Error at run() with value " + incoming +" : "+e.toString()+"\n");
 			blnConnected = false;
-			return;
 		}
 		}
-		System.err.println("Error at run() with value " + incoming);
+		System.err.println("Client network thread stopped.");
 	}
 	
 	public void reloadJComboBoxLook()
@@ -1657,36 +1648,17 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				synchronized(vctCrossMarkers) {
 					vctCrossMarkers.add(new CrossMarker(destX, destY, Color.GREEN, 50));
 				}
-				try {
-					stmOut.writeBytes("findpath " + destX + " " + destY + "\n");
-				} catch (SocketException se) {
-					addText("Connection to the server has been lost.\n");
-				} catch (IOException e) {
-					addText("Error at mouseClicked(): " + e.toString() + "\n");
-				}
+				sendMessage("findpath " + destX + " " + destY);
 			} else if (SwingUtilities.isRightMouseButton(evt)) {
 				synchronized(vctCrossMarkers) {
 					vctCrossMarkers.add(new CrossMarker(destX, destY, Color.RED, 50));
 				}
 				Entity mob = findMobAt(destX, destY);
 				if (mob != null) {
-					try {
-						// Send the correct attack command: "attack <name> #<ID>"
-						stmOut.writeBytes("attack " + mob.strName + " #" + mob.ID + "\n");
-					} catch (SocketException se) {
-						addText("Connection to the server has been lost.\n");
-					} catch (IOException e) {
-						addText("Error at mouseClicked() for attack: " + e.toString() + "\n");
-					}
+					sendMessage("attack " + mob.strName + " #" + mob.ID);
 				} else {
 					// If no mob, just pathfind
-					try {
-						stmOut.writeBytes("findpath " + destX + " " + destY + "\n");
-					} catch (SocketException se) {
-						addText("Connection to the server has been lost.\n");
-					} catch (IOException e) {
-						addText("Error at mouseClicked() for findpath: " + e.toString() + "\n");
-					}
+					sendMessage("findpath " + destX + " " + destY);
 				}
 			}
 		}
@@ -1696,6 +1668,20 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	public void mouseEntered(MouseEvent evt){}
         @Override
 	public void mouseExited(MouseEvent evt){}
+
+    public void sendMessage(String message) {
+        try {
+            if (stmOut != null) {
+                byte[] messageBytes = message.getBytes("UTF-8");
+                stmOut.writeShort(messageBytes.length);
+                stmOut.write(messageBytes);
+            }
+        } catch (SocketException se) {
+            addText("Connection to the server has been lost.\n");
+        } catch (IOException e) {
+            addText("Error sending message: " + e.toString() + "\n");
+        }
+    }
 
         @Override
 	public void keyPressed(KeyEvent evt)
@@ -1721,7 +1707,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 				}else
 				{
-	    			stmOut.writeBytes(strStore+"\n");
+	    			sendMessage(strStore);
 				}
 	    		frame.txtInput.setText("");
 	    	}
@@ -1730,14 +1716,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				if (player != null && !player.isMoving) {
 					switch (nkey)
 					{
-						case 38: stmOut.writeBytes("n\n"); if (strSet != null) stmOut.writeBytes(strSet+"\n"); break;
-						case 40: stmOut.writeBytes("s\n"); if (strSet != null) stmOut.writeBytes(strSet+"\n"); break;
-						case 37: stmOut.writeBytes("w\n"); if (strSet != null) stmOut.writeBytes(strSet+"\n"); break;
-						case 39: stmOut.writeBytes("e\n"); if (strSet != null) stmOut.writeBytes(strSet+"\n"); break;
+						case 38: sendMessage("n"); if (strSet != null) sendMessage(strSet); break;
+						case 40: sendMessage("s"); if (strSet != null) sendMessage(strSet); break;
+						case 37: sendMessage("w"); if (strSet != null) sendMessage(strSet); break;
+						case 39: sendMessage("e"); if (strSet != null) sendMessage(strSet); break;
 					}
 				}
 			}
-	    }catch(IOException e)
+	    }catch(Exception e)
 	    {
 	        addText("Error at keyPressed(): "+e.toString()+"\n");
 	    }

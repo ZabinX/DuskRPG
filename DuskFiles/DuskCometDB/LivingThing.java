@@ -157,7 +157,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	//Socket connection
 	transient Socket sckConnection;
-	transient BufferedReader bfrSocketIn;
+	transient DataInputStream stmIn;
 	transient DataOutputStream stmOut;
 	transient Thread thrConnection,
 			thrSend;
@@ -233,7 +233,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			sckConnection = inSocket;
 			sckConnection.setSoTimeout(600000); //10 minute timeout
 			sckConnection.setSoLinger(false,0); //Do not linger on disconnect
-			bfrSocketIn = new BufferedReader(new InputStreamReader(sckConnection.getInputStream()));
+			stmIn = new DataInputStream(sckConnection.getInputStream());
 			stmOut = new DataOutputStream(sckConnection.getOutputStream());
 			engGame.log.printMessage(Log.INFO, sckConnection.toString());
 			batBattle = null;
@@ -1280,7 +1280,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				}catch(Exception e){}
 				try
 				{
-					stmOut.writeBytes((char)3+"Goodbye.\n"+(char)0);
+					send(""+(char)0);
 				}catch (Exception e) {}
 				synchronized (engGame.vctSockets)
 				{
@@ -1314,7 +1314,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				}catch (Exception e) {}
 				try
 				{
-					bfrSocketIn.close();
+					stmIn.close();
 				}catch(Exception e) {}
 				try
 				{
@@ -1386,7 +1386,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		}catch(Exception e){}
 		try
 		{
-			bfrSocketIn.close();
+			stmIn.close();
 		}catch(Exception e){}
 		savePlayer();
 		try
@@ -1419,7 +1419,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			blnStopThread = true;
 			try
 			{
-				bfrSocketIn.close();
+				stmIn.close();
 			}catch(Exception e) {}
 			try
 			{
@@ -1463,7 +1463,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				}catch(Exception e){}
 				try
 				{
-					stmOut.writeBytes((char)3+"Goodbye.\n"+(char)0);
+					send(""+(char)0);
 				}catch (Exception e) {}
 				try
 				{
@@ -1473,7 +1473,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				engGame.vctSockets.removeElement(this);
 				try
 				{
-					bfrSocketIn.close();
+					stmIn.close();
 				}catch(Exception e) {}
 				try
 				{
@@ -3228,9 +3228,10 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		{
 			do
 			{
-				strName = bfrSocketIn.readLine();
-				if (strName != null)
-					strName = strName.trim();
+				short length = stmIn.readShort();
+				byte[] buffer = new byte[length];
+				stmIn.readFully(buffer);
+				strName = new String(buffer, "UTF-8");
 			}while (!getPlayer());
 			if (!blnWorking)
 				return;
@@ -3289,11 +3290,10 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			{
 				if (!blnHalted)
 				{
-					strInput = bfrSocketIn.readLine();
-					if (strInput != null)
-					{
-						strInput = strInput.trim();
-					}
+					short length = stmIn.readShort();
+					byte[] buffer = new byte[length];
+					stmIn.readFully(buffer);
+					strInput = new String(buffer, "UTF-8");
 					strStore = Commands.parseCommand(this, engGame, strInput);
 					if (strStore != null)
 					{
@@ -3322,7 +3322,10 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			if (loadedPlayer != null) {
 				// Player exists, check password
 				chatMessage("enter your password:");
-				String enteredPassword = bfrSocketIn.readLine();
+				short length = stmIn.readShort();
+				byte[] buffer = new byte[length];
+				stmIn.readFully(buffer);
+				String enteredPassword = new String(buffer, "UTF-8");
 				if (!enteredPassword.equals(loadedPlayer.strPWord)) {
 					chatMessage("Incorrect Password.");
 					return false;
@@ -3383,7 +3386,10 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 					rafFile = new RandomAccessFile(filPlayer,"r");
 					strPWord = rafFile.readLine();
 					chatMessage("enter your password:");
-					if (!bfrSocketIn.readLine().equals(strPWord)) {
+					short length = stmIn.readShort();
+					byte[] buffer = new byte[length];
+					stmIn.readFully(buffer);
+					if (!new String(buffer, "UTF-8").equals(strPWord)) {
 						chatMessage("Incorrect Password.");
 						return false;
 					}
@@ -3407,17 +3413,32 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				} else {
 					// New player
 					chatMessage(strName+", Is that correct? (yes/no)");
-					if (!bfrSocketIn.readLine().equalsIgnoreCase("yes")) {
+					short length = stmIn.readShort();
+					byte[] buffer = new byte[length];
+					stmIn.readFully(buffer);
+					if (!new String(buffer, "UTF-8").equalsIgnoreCase("yes")) {
 						chatMessage("Then what IS your name?");
 						return false;
 					}
 					chatMessage("Enter a new password:");
-					strPWord = bfrSocketIn.readLine();
+					length = stmIn.readShort();
+					buffer = new byte[length];
+					stmIn.readFully(buffer);
+					strPWord = new String(buffer, "UTF-8");
 					chatMessage("Confirm that password:");
-					while (!strPWord.equals(bfrSocketIn.readLine())) {
+					length = stmIn.readShort();
+					buffer = new byte[length];
+					stmIn.readFully(buffer);
+					while (!strPWord.equals(new String(buffer, "UTF-8"))) {
 						chatMessage("Passwords did not match, enter a new password:");
-						strPWord = bfrSocketIn.readLine();
+						length = stmIn.readShort();
+						buffer = new byte[length];
+						stmIn.readFully(buffer);
+						strPWord = new String(buffer, "UTF-8");
 						chatMessage("Confirm that password:");
+						length = stmIn.readShort();
+						buffer = new byte[length];
+						stmIn.readFully(buffer);
 					}
 					// Initialize new player fields
 					intLocX = 200;
@@ -3489,10 +3510,16 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				}
 				if (isPet())
 				{
-					strStore = thnMaster.bfrSocketIn.readLine().toLowerCase();
+					short length = thnMaster.stmIn.readShort();
+					byte[] buffer = new byte[length];
+					thnMaster.stmIn.readFully(buffer);
+					strStore = new String(buffer, "UTF-8").toLowerCase();
 				} else
 				{
-					strStore = bfrSocketIn.readLine().toLowerCase();
+					short length = stmIn.readShort();
+					byte[] buffer = new byte[length];
+					stmIn.readFully(buffer);
+					strStore = new String(buffer, "UTF-8").toLowerCase();
 				}
 				File filCheck = new File(strRaceDir+"/"+strStore);
 				while (strStore.equals("") || !filCheck.exists())
@@ -3506,10 +3533,16 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 					}
 					if (isPet())
 					{
-						strStore = thnMaster.bfrSocketIn.readLine().toLowerCase();
+						short length = thnMaster.stmIn.readShort();
+						byte[] buffer = new byte[length];
+						thnMaster.stmIn.readFully(buffer);
+						strStore = new String(buffer, "UTF-8").toLowerCase();
 					} else
 					{
-						strStore = bfrSocketIn.readLine().toLowerCase();
+						short length = stmIn.readShort();
+						byte[] buffer = new byte[length];
+						stmIn.readFully(buffer);
+						strStore = new String(buffer, "UTF-8").toLowerCase();
 					}
 					filCheck = new File(strRaceDir+"/"+strStore);
 				}
@@ -3695,7 +3728,6 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 						strResult += "sleep\n";
 					}
 				}
-				strResult += ".\n";
 				send(strResult);
 			}
 		}catch (Exception e)
@@ -3867,7 +3899,6 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 					strResult += itmStore.strName+"\n";
 				}
 			}
-			strResult += ".\n";
 			send(strResult);
 			if (engGame.overMerchant(intLocX,intLocY)!= null)
 				updateSell();
@@ -4059,7 +4090,6 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 					}
 				}
 			}
-			strResult += ".\n";
 			send(strResult);
 		}catch (Exception e)
 		{
@@ -4137,7 +4167,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				qoStore = qoStore.next();
 		    }
 		}
-		send(strResult+".\n");
+		send(strResult);
 	}
 
 	void offMerchant()
@@ -4168,5 +4198,16 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			blnStopThread = true;
 		}
 	}
+
+	public String getNextInput() throws IOException {
+		short length = stmIn.readShort();
+		if (length < 0 || length > 32768) {
+			throw new IOException("Invalid message length received: " + length);
+		}
+		byte[] buffer = new byte[length];
+		stmIn.readFully(buffer);
+		return new String(buffer, "UTF-8");
+	}
  }
+
 

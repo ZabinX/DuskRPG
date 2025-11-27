@@ -82,7 +82,7 @@ public class Merchant extends DuskObject implements java.io.Serializable
 			}
 			thnMaster.halt();
 			thnMaster.chatMessage("Enter a name for your pet:");
-			String strName = thnMaster.bfrSocketIn.readLine().trim();
+			String strName = thnMaster.getNextInput().trim();
 			File filCheck = new File("pets/"+strName.toLowerCase());
 			File filCheck2 = new File("users/"+strName.toLowerCase());
 			while (filCheck.exists() || filCheck2.exists()
@@ -90,7 +90,7 @@ public class Merchant extends DuskObject implements java.io.Serializable
 					)
 			{
 				thnMaster.chatMessage("That name is already taken or has invalid characters, please enter another:");
-				strName = thnMaster.bfrSocketIn.readLine().trim();
+				strName = thnMaster.getNextInput().trim();
 				filCheck = new File("pets/"+strName.toLowerCase());
 				filCheck2 = new File("users/"+strName.toLowerCase());
 			}
@@ -101,12 +101,12 @@ public class Merchant extends DuskObject implements java.io.Serializable
 			{
 				thnMaster.chatMessage(strList[i]);
 			}
-			String strStore = thnMaster.bfrSocketIn.readLine().trim();
+			String strStore = thnMaster.getNextInput().trim();
 			filCheck = new File("defPets/"+strStore);
 			while (strStore.equals("") || !filCheck.exists())
 			{
 				thnMaster.chatMessage("That is not a valid pet type:");
-				strStore = thnMaster.bfrSocketIn.readLine().trim();
+				strStore = thnMaster.getNextInput().trim();
 				filCheck = new File("defPets/"+strStore);
 			}
 			thnMaster.thnFollowing = new LivingThing(strName,strStore,thnMaster,engGame);
@@ -202,3 +202,4 @@ public class Merchant extends DuskObject implements java.io.Serializable
 		}
 	}
 }
+

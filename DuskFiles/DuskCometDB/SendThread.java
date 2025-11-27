@@ -21,7 +21,9 @@ public class SendThread implements Runnable
 				{
 					case SendData.STRING:
 					{
-						thnPlayer.stmOut.writeBytes(sndData.strData);
+						byte[] messageBytes = sndData.strData.getBytes("UTF-8");
+						thnPlayer.stmOut.writeShort(messageBytes.length);
+						thnPlayer.stmOut.write(messageBytes);
 						break;
 					}
 					case SendData.BYTE:
@@ -45,3 +47,4 @@ public class SendThread implements Runnable
 		}
     }
 }
+

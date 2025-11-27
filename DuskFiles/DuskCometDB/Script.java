@@ -1959,19 +1959,15 @@ public class Script
 						return false;
 					}
 					thnStore.halt();
-					thnStore.stillThere();  // This puts something in the buffer
-					thnStore.stillThere();  // Need to do this twice to ensure thnStore out of read loop
-					thnStore.thrConnection.sleep(750);  // wait for it...
+					thnStore.chatMessage(getString());
 					try
 					{
-					// Empty out the BufferedReader for the answer
-						while (thnStore.bfrSocketIn.ready()) thnStore.bfrSocketIn.read();
-					} catch (Exception e)
+						strInput = thnStore.getNextInput();
+						varVariables.addVariable(getString(),strInput);
+					}catch(Exception e)
 					{
-						engGame.log.printError("parseScript():While trying to empty read buffer to get player input", e);
+						engGame.log.printError("Script input", e);
 					}
-					strInput = thnStore.bfrSocketIn.readLine();
-					varVariables.addVariable(getString(), strInput);
 					thnStore.proceed();
 					return true;
 				}
