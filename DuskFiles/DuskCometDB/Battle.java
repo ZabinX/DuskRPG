@@ -532,7 +532,6 @@ public class Battle
 
 	void chatMessage(String strStore)
 	{
-		int i;
 		LivingThing thnStore=null;
 		for (int i=0;i<vctSide1.size();i++)
 		{

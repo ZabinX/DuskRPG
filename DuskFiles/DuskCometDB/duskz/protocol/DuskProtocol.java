@@ -536,6 +536,7 @@ public interface DuskProtocol {
 
 	public final static int MSG_PLAY_MUSIC = 38;
 	public final static int MSG_STOP_MUSIC = 39;
+	public final static int MSG_HALT = 40;
 
 	public final static int FIELD_FX_DURATION = 1;
 }

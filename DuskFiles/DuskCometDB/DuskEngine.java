@@ -13,6 +13,8 @@ import java.io.PrintStream;
 import java.io.FileOutputStream;
 import java.util.Vector;
 import java.util.Iterator;
+import duskz.protocol.*;
+import duskz.protocol.DuskMessage.*;
 import java.util.StringTokenizer;
 import java.util.Date;
 import java.util.HashMap;
@@ -1165,11 +1167,11 @@ public class DuskEngine implements Runnable
 													msg.add(itmStore.getWearLocation(), strStore, 0, itmStore.intCost, "gp");
 												}else if (strStore.equals("pet"))
 												{
-													msg.add(Item.WEAR_NONE, strStore, 0, petcost, "gp");
+													msg.add(0, strStore, 0, petcost, "gp");
 												}else
 												{
-													msg.add(Item.WEAR_NONE, strStore, 0, traincost, "exp");
-													msg.add(Item.WEAR_NONE, thnRefresh.thnFollowing.strName+":"+strStore, 0, traincost, "exp");
+													msg.add(0, strStore, 0, traincost, "exp");
+													msg.add(0, thnRefresh.thnFollowing.strName+":"+strStore, 0, traincost, "exp");
 												}
 											}
 										}else
@@ -1183,10 +1185,10 @@ public class DuskEngine implements Runnable
 													msg.add(itmStore.getWearLocation(), strStore, 0, itmStore.intCost, "gp");
 												}else if (strStore.equals("pet"))
 												{
-													msg.add(Item.WEAR_NONE, strStore, 0, petcost, "gp");
+													msg.add(0, strStore, 0, petcost, "gp");
 												}else
 												{
-													msg.add(Item.WEAR_NONE, strStore, 0, traincost, "exp");
+													msg.add(0, strStore, 0, traincost, "exp");
 												}
 											}
 										}

@@ -1509,7 +1509,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	void clearFlags()
 	{
-		send(new DuskMessage(DuskProtocol.MSG_BATTLE_CLEAR_FLAGS));
+		send(new DuskMessage(DuskProtocol.MSG_CLEAR_FLAGS));
 	}
 
 	String goTo(int destX, int destY)
@@ -3194,7 +3194,6 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			return;
 		}
 		thrConnection.setName("LivingThing("+strName+")");
-		thrSend.setName("LivingThing("+strName+").send");
 		resizeMap();
 		changeLocBypass(intLocX,intLocY);
 		updateInfo();
@@ -3245,7 +3244,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 					switch (msg.name) {
 						case DuskProtocol.MSG_COMMAND: {
 							StringMessage sm = (StringMessage) msg;
-							String strStore = Commands.parseCommand(this, engGame, sm.value);
+							strStore = Commands.parseCommand(this, engGame, sm.value);
 							if (strStore != null)
 							{
 								chatMessage(strStore);
@@ -3749,7 +3748,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			msg.add(new IntegerMessage(DuskProtocol.FIELD_INFO_INT, inte + intebon));
 			msg.add(new IntegerMessage(DuskProtocol.FIELD_INFO_DEX, dext + dextbon));
 			msg.add(new IntegerMessage(DuskProtocol.FIELD_INFO_CON, cons + consbon));
-			msg.add(new IntegerMessage(DuskProtocol.FIELD_INFO_WIS, wisd + wisbon));
+			msg.add(new IntegerMessage(DuskProtocol.FIELD_INFO_WIS, wisd + wisdbon));
 
 			String[] conditions = new String[vctConditions.size()];
 			for (int i = 0; i < vctConditions.size(); i++) {
@@ -3807,7 +3806,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				if (qStore.size() > 0)
 				{
 					Item itmStore = (Item)qStore.firstElement();
-					msg.add(itmStore.getWearLocation(), itmStore.strName, qStore.size(), 0, "gp");
+					msg.add(itmStore.getWearLocation(), itmStore.strName, (int)qStore.size(), 0, "gp");
 				}
 			}
 			send(msg);
@@ -3881,7 +3880,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			if (qStore.size() > 0)
 			{
 				Item itmStore = (Item)qStore.firstElement();
-				msg.add(itmStore.getWearLocation(), itmStore.strName, qStore.size(), itmStore.intCost / 2, "gp");
+				msg.add(itmStore.getWearLocation(), itmStore.strName, (int)qStore.size(), itmStore.intCost / 2, "gp");
 			}
 		}
 		send(msg);
