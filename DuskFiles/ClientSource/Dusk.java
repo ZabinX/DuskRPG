@@ -10,6 +10,7 @@ Joe Alloway for shadowed text and the !set command */
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import static DuskProtocol.*;
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -36,6 +37,11 @@ import javax.swing.text.*;
 import javax.swing.JScrollBar;
 import javax.swing.UIManager;
 import javax.swing.SwingUtilities;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 import java.awt.AlphaComposite;
 import java.awt.Stroke;
 import java.awt.BasicStroke;
@@ -332,10 +338,32 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			sckConnection = new Socket(address,port);
 			stmOut = new DataOutputStream(sckConnection.getOutputStream());
 			stmIn = new DataInputStream(sckConnection.getInputStream());
-			addText("Please enter your character name or the name of a new character: \n");
 			thrRun = new Thread(this);
 			thrRun.start();
 			blnConnected = true;
+
+			JPanel panel = new JPanel(new GridLayout(0, 1));
+			panel.add(new JLabel("Username:"));
+			JTextField usernameField = new JTextField();
+			panel.add(usernameField);
+			panel.add(new JLabel("Password:"));
+			JPasswordField passwordField = new JPasswordField();
+			panel.add(passwordField);
+
+			int result = JOptionPane.showConfirmDialog(frame, panel, "Login", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+			if (result == JOptionPane.OK_OPTION) {
+				String username = usernameField.getText();
+				String password = new String(passwordField.getPassword());
+				if (username.length() > 0 && password.length() > 0) {
+					// Check if the user wants to create a new character
+					int newCharResult = JOptionPane.showConfirmDialog(frame, "Create a new character?", "New Character", JOptionPane.YES_NO_OPTION);
+					if (newCharResult == JOptionPane.YES_OPTION) {
+						sendMessage(new DuskMessage.StringMessage(MSG_COMMAND, "new " + username + " " + password));
+					} else {
+						sendMessage(new DuskMessage.StringMessage(MSG_COMMAND, "login " + username + " " + password));
+					}
+				}
+			}
 			hmpEntities = new HashMap<Long, Entity>();
 			frmMerchant = new MerchantFrame(this);
 			vctEntities = new Vector(0,3);
@@ -343,16 +371,19 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			vctSell = new Vector(0,3);
 			vctChoiceDropItems = new Vector(0,3);
 			vctChoiceActionItems = new Vector(0,3);
-            vctTileAnims = new Vector<TileAnim>(0,3);
-            vctDamageSplats = new Vector<DamageSplat>(0,3);
-            vctCrossMarkers = new Vector<CrossMarker>(0,3);
-            vctParticles = new Vector<Particle>(0,3);
-            vctParticlesBehind = new Vector<Particle>(0,3);
-            sortedEntities = new ArrayList<Entity>();
+			vctTileAnims = new Vector<TileAnim>(0,3);
+			vctDamageSplats = new Vector<DamageSplat>(0,3);
+			vctCrossMarkers = new Vector<CrossMarker>(0,3);
+			vctParticles = new Vector<Particle>(0,3);
+			vctParticlesBehind = new Vector<Particle>(0,3);
+			sortedEntities = new ArrayList<Entity>();
 			tempNewParticlesFront = new ArrayList<Particle>();
 			tempNewParticlesBehind = new ArrayList<Particle>();
 			movementManager = new MovementManager();
 			camera = new Camera(null);
+
+			// Example of sending a login message. The UI should handle this.
+			// sendMessage("login username password");
 		}catch(Exception e)
 		{
 			System.err.println("Error connecting to server: "+e.toString());
@@ -592,849 +623,321 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 
-	private byte[] readFramedMessage() throws IOException {
-		int length = stmIn.readShort();
-		if (length < 0 || length > 32768) { // Max message size of 32KB
-			throw new IOException("Invalid message length received: " + length);
-		}
-		byte[] buffer = new byte[length];
-		stmIn.readFully(buffer);
-		return buffer;
-	}
-
 	public void	run()
 	{
-		int intStore,
-			intStore2;
-		String message,
-				token;
+		DuskMessage msg = null;
 		Entity entStore=null;
-		intStore = 0;
-		long lngStore;
-		int incoming = 0;
-		boolean blnBreak=false;
 		while(blnConnected)
 		{
-		try
-		{
-			byte[] messageFrame = readFramedMessage();
-			incoming = messageFrame[0] & 0xFF;
-			message = new String(messageFrame, 1, messageFrame.length - 1, "UTF-8");
-			StringTokenizer st = new StringTokenizer(message, "\n");
-
-		    switch (incoming)
-		    {
-		    	case(0):
-		    	{
-		    		blnLoaded = false;
-					blnConnected = false;
-					sckConnection.close();
-					return;
-		    	}
-				case(1):
+			try
+			{
+				msg = DuskMessage.receiveMessage(stmIn);
+				switch (msg.name)
 				{
-					strRCAddress = st.nextToken();
-					CountDownLatch imageLatch = new CountDownLatch(1);
-					try
+					case(MSG_QUIT):
 					{
-						thrGraphics.thread.stop();
-					}catch (Exception e) {}
-					thrGraphics = new GraphicsThread(this, imageLatch);
-					thrGraphics.thread = new Thread(thrGraphics);
-					thrGraphics.thread.start();
-				
-					// Wait for images to finish loading before starting audio
-					try {
-						imageLatch.await();
-					} catch (InterruptedException e) {
-						System.err.println("Image loading interrupted: " + e.toString());
+						blnLoaded = false;
+						blnConnected = false;
+						sckConnection.close();
+						return;
 					}
-					break;
-				}
-		        case (2):
-		        {
-					synchronized(vctEntities)
+					case(MSG_INIT_RESOURCES):
 					{
-						LocX = Integer.parseInt(st.nextToken());
-						LocY = Integer.parseInt(st.nextToken());
+						strRCAddress = ((DuskMessage.StringMessage)msg).value;
+						CountDownLatch imageLatch = new CountDownLatch(1);
+						try
+						{
+							thrGraphics.thread.stop();
+						}catch (Exception e) {}
+						thrGraphics = new GraphicsThread(this, imageLatch);
+						thrGraphics.thread = new Thread(thrGraphics);
+						thrGraphics.thread.start();
 
-						for (int i=0;i<mapSizeX;i++)
-						{
-							for (int i2=0;i2<mapSizeY;i2++)
-							{
-								shrMap[i][i2] = Short.parseShort(st.nextToken());
-							}
+						// Wait for images to finish loading before starting audio
+						try {
+							imageLatch.await();
+						} catch (InterruptedException e) {
+							System.err.println("Image loading interrupted: " + e.toString());
 						}
-						for (int i=0;i<mapSizeX;i++)
+						break;
+					}
+					case (MSG_UPDATE_MAP):
+					{
+						synchronized(vctEntities)
 						{
-							for (int i2=0;i2<mapSizeY;i2++)
-							{
-								shrMapAlpha2[i][i2] = Short.parseShort(st.nextToken());
-							}
-						}
-						for (int i=0;i<mapSizeX;i++)
-						{
-							for (int i2=0;i2<mapSizeY;i2++)
-							{
-								shrMapAlpha[i][i2] = Short.parseShort(st.nextToken());
-							}
-						}
-						
-						Iterator<Entity> iter = vctEntities.iterator();
-						while (iter.hasNext())
-						{
-							entStore = iter.next();
-							// Don't remove the player entity during a map refresh
-							if (entStore != player && (Math.abs(entStore.intLocX - LocX) > viewRangeX || Math.abs(entStore.intLocY - LocY) > viewRangeY))
-							{
-								iter.remove();
-                                                                sortedEntities.remove(entStore);
-								hmpEntities.remove(entStore.ID);
-							}
-						}
+							MapMessage mapMsg = (MapMessage)msg;
+							LocX = mapMsg.x;
+							LocY = mapMsg.y;
+							shrMap = mapMsg.tiles;
+							shrMapAlpha = mapMsg.tilesAlpha;
+							shrMapAlpha2 = mapMsg.tilesAlpha2;
 
+							Iterator<Entity> iter = vctEntities.iterator();
+							while (iter.hasNext())
+							{
+								entStore = iter.next();
+								// Don't remove the player entity during a map refresh
+								if (entStore != player && (Math.abs(entStore.intLocX - LocX) > viewRangeX || Math.abs(entStore.intLocY - LocY) > viewRangeY))
+								{
+									iter.remove();
+									sortedEntities.remove(entStore);
+									hmpEntities.remove(entStore.ID);
+								}
+							}
+
+							frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
+							vctMerchantItems = new Vector(0,5);
+							reloadJComboBoxLook();
+							reloadJComboBoxGet();
+							reloadJComboBoxAttack();
+							findPlayer();
+						}
+						break;
+					}
+					case (MSG_CHAT):
+					{
+						addText(((DuskMessage.StringMessage)msg).value+"\n");
+						break;
+					}
+					case (MSG_ADD_ENTITY):
+					{
+						synchronized(vctEntities)
+						{
+							ListMessage list = (ListMessage)msg;
+							entStore = new Entity(
+								list.getString(FIELD_ENTITY_NAME),
+								list.getLong(FIELD_ENTITY_ID),
+								list.getInteger(FIELD_ENTITY_IMAGE),
+								list.getInteger(FIELD_ENTITY_X),
+								list.getInteger(FIELD_ENTITY_Y),
+								list.getInteger(FIELD_ENTITY_STEP),
+								list.getInteger(FIELD_ENTITY_TYPE)
+							);
+
+							if (entStore != null)
+							{
+								addEntity(entStore);
+								if (entStore.intLocX == LocX && entStore.intLocY == LocY && entStore.intType == 0) {
+									findPlayer();
+								}
+							}
+							reloadJComboBoxLook();
+							reloadJComboBoxGet();
+							reloadJComboBoxAttack();
+						}
+						break;
+					}
+					case (MSG_UPDATE_PLAYER):
+					{
+						ListMessage list = (ListMessage)msg;
+						int oldhp = inthp;
+						inthp = list.getInteger(FIELD_HP);
+						intmaxhp = list.getInteger(FIELD_MAXHP);
+						intsp = list.getInteger(FIELD_MP);
+						intmaxsp = list.getInteger(FIELD_MAXMP);
+						if (inthp > oldhp) {
+							int hpHealed = inthp - oldhp;
+							int numStars = hpHealed;
+							spawnHealingParticles(player, numStars);
+						}
 						frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
-						vctMerchantItems = new Vector(0,5);
+						break;
+					}
+					case (MSG_UPDATE_INVENTORY):
+					{
+						ListMessage list = (ListMessage)msg;
+						vctChoiceDropItems = new Vector(0,5);
+						frame.frmEquipment.blnRefreshMenus = true;
+						try
+						{
+							frame.frmEquipment.chcWield.removeAllItems();
+							frame.frmEquipment.chcArms.removeAllItems();
+							frame.frmEquipment.chcLegs.removeAllItems();
+							frame.frmEquipment.chcTorso.removeAllItems();
+							frame.frmEquipment.chcWaist.removeAllItems();
+							frame.frmEquipment.chcNeck.removeAllItems();
+							frame.frmEquipment.chcSkull.removeAllItems();
+							frame.frmEquipment.chcEyes.removeAllItems();
+							frame.frmEquipment.chcHands.removeAllItems();
+						}catch(Exception e){}
+						try
+						{
+							for (DuskMessage itemMsg : list.value) {
+								ListMessage item = (ListMessage)itemMsg;
+								int type = item.getInteger(FIELD_ENTITY_TYPE);
+								String name = item.getString(FIELD_ENTITY_NAME);
+								switch (type)
+								{
+								case (0): vctChoiceDropItems.addElement(name); break;
+								case (1): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcWield.addItem(name); break;
+								case (2): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcArms.addItem(name); break;
+								case (3): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcLegs.addItem(name); break;
+								case (4): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcTorso.addItem(name); break;
+								case (5): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcWaist.addItem(name); break;
+								case (6): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcNeck.addItem(name); break;
+								case (7): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcSkull.addItem(name); break;
+								case (8): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcEyes.addItem(name); break;
+								case (9): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcHands.addItem(name); break;
+								}
+							}
+						}
+						catch (NumberFormatException e) {}
+						frame.frmEquipment.chcWield.addItem("none");
+						frame.frmEquipment.chcArms.addItem("none");
+						frame.frmEquipment.chcLegs.addItem("none");
+						frame.frmEquipment.chcTorso.addItem("none");
+						frame.frmEquipment.chcWaist.addItem("none");
+						frame.frmEquipment.chcNeck.addItem("none");
+						frame.frmEquipment.chcSkull.addItem("none");
+						frame.frmEquipment.chcEyes.addItem("none");
+						frame.frmEquipment.chcHands.addItem("none");
+						frame.frmEquipment.blnRefreshMenus = false;
+						reloadJComboBoxDrop();
+						break;
+					}
+					case (MSG_UPDATE_WORN):
+					{
+						ListMessage list = (ListMessage)msg;
+						frame.frmEquipment.blnRefreshMenus = true;
+						frame.frmEquipment.chcWield.setSelectedItem(list.getString(FIELD_WIELD));
+						frame.frmEquipment.chcArms.setSelectedItem(list.getString(FIELD_ARMS));
+						frame.frmEquipment.chcLegs.setSelectedItem(list.getString(FIELD_LEGS));
+						frame.frmEquipment.chcTorso.setSelectedItem(list.getString(FIELD_TORSO));
+						frame.frmEquipment.chcWaist.setSelectedItem(list.getString(FIELD_WAIST));
+						frame.frmEquipment.chcNeck.setSelectedItem(list.getString(FIELD_NECK));
+						frame.frmEquipment.chcSkull.setSelectedItem(list.getString(FIELD_SKULL));
+						frame.frmEquipment.chcEyes.setSelectedItem(list.getString(FIELD_EYES));
+						frame.frmEquipment.chcHands.setSelectedItem(list.getString(FIELD_HANDS));
+						frame.frmEquipment.blnRefreshMenus = false;
+						break;
+					}
+					case (MSG_UPDATE_STATS):
+					{
+						ListMessage list = (ListMessage)msg;
+						loncash = list.getLong(FIELD_CASH);
+						frame.txtOther.setText("Cash: "+loncash+"\n");
+						frame.txtOther.append("Experience: "+list.getLong(FIELD_EXP)+"\n");
+						frame.txtOther.append("Strength: "+list.getInteger(FIELD_STRENGTH)+" + "+list.getInteger(FIELD_STRENGTH_BONUS)+"\n");
+						frame.txtOther.append("Intelligence: "+list.getInteger(FIELD_INTELLIGENCE)+" + "+list.getInteger(FIELD_INTELLIGENCE_BONUS)+"\n");
+						frame.txtOther.append("Dexterity: "+list.getInteger(FIELD_DEXTERITY)+" + "+list.getInteger(FIELD_DEXTERITY_BONUS)+"\n");
+						frame.txtOther.append("Constitution: "+list.getInteger(FIELD_CONSTITUTION)+" + "+list.getInteger(FIELD_CONSTITUTION_BONUS)+"\n");
+						frame.txtOther.append("Wisdom: "+list.getInteger(FIELD_WISDOM)+" + "+list.getInteger(FIELD_WISDOM_BONUS)+"\n");
+						frame.txtOther.append("Damage Modifier: "+list.getInteger(FIELD_DAMMOD)+"% + "+list.getInteger(FIELD_DAMMOD_BONUS)+"%\n");
+						frame.txtOther.append("Armor Class: "+list.getInteger(FIELD_AC)+" + "+list.getInteger(FIELD_AC_BONUS)+"\n");
+						// TODO: Conditions, Skills, Spells, Following
+						break;
+					}
+					case (MSG_REMOVE_ENTITY):
+					{
+						removeEntity(((DuskMessage.LongMessage)msg).value);
 						reloadJComboBoxLook();
 						reloadJComboBoxGet();
 						reloadJComboBoxAttack();
-						findPlayer();
+						break;
 					}
-		            break;
-		        }
-		        case (3):
-		        {
-		        	addText(st.nextToken()+"\n");
-		            break;
-		        }
-		        case (4):
-		        {
-		        	synchronized(vctEntities)
-		        	{
-		            token = st.nextToken();
-					intStore = Byte.parseByte(st.nextToken());
-					if (intStore == 0)
-		            {
-		                try
-		                {
-		                	entStore = new Entity(token,
-		                						Long.parseLong(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												intStore);
-						}catch(NullPointerException e)
-						{
-							entStore = null;
-						}
-					}else
-		            {
-		            	try
-		                {
-		                	entStore = new Entity(token,
-		                						Long.parseLong(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												-1,
-												intStore);
-						}catch(NullPointerException e)
-						{
-							entStore = null;
-						}
-					}
-		            if (entStore != null)
-		            {
-		          		addEntity(entStore);
-		          		if (entStore.intLocX == LocX && entStore.intLocY == LocY && entStore.intType == 0) {
-		          			findPlayer();
-		          		}
-		            }
-					reloadJComboBoxLook();
-					reloadJComboBoxGet();
-					reloadJComboBoxAttack();
-					}
-		            break;
-		        }
-		        case (5):
-		        {
-					int oldhp = inthp;
-					inthp = Integer.parseInt(st.nextToken());
-					intmaxhp = Integer.parseInt(st.nextToken());
-					intsp = Integer.parseInt(st.nextToken());
-					intmaxsp = Integer.parseInt(st.nextToken());
-					if (inthp > oldhp) {
-						int hpHealed = inthp - oldhp;
-						int numStars = hpHealed;
-						spawnHealingParticles(player, numStars);
-					}
-					frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
-		            break;
-		        }
-		        case (6):
-		        {
-		        	vctChoiceDropItems = new Vector(0,5);
-		        	frame.frmEquipment.blnRefreshMenus = true;
-		        	try
-		        	{
-		            	frame.frmEquipment.chcWield.removeAllItems();
-		            	frame.frmEquipment.chcArms.removeAllItems();
-		            	frame.frmEquipment.chcLegs.removeAllItems();
-		            	frame.frmEquipment.chcTorso.removeAllItems();
-		            	frame.frmEquipment.chcWaist.removeAllItems();
-		            	frame.frmEquipment.chcNeck.removeAllItems();
-		            	frame.frmEquipment.chcSkull.removeAllItems();
-		            	frame.frmEquipment.chcEyes.removeAllItems();
-		            	frame.frmEquipment.chcHands.removeAllItems();
-		            }catch(Exception e){}
-		            try
-		            {
-					while (st.hasMoreTokens())
+					case (MSG_MOVE_N):
+					case (MSG_MOVE_S):
+					case (MSG_MOVE_W):
+					case (MSG_MOVE_E):
 					{
-						intStore = Integer.parseInt(st.nextToken());
-						if (!st.hasMoreTokens()) break; // Ensure there's a matching value
-						token = st.nextToken();
-						switch (intStore)
-						{
-						case (0): vctChoiceDropItems.addElement(token); break;
-						case (1): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcWield.addItem(token); break;
-						case (2): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcArms.addItem(token); break;
-						case (3): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcLegs.addItem(token); break;
-						case (4): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcTorso.addItem(token); break;
-						case (5): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcWaist.addItem(token); break;
-						case (6): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcNeck.addItem(token); break;
-						case (7): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcSkull.addItem(token); break;
-						case (8): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcEyes.addItem(token); break;
-						case (9): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcHands.addItem(token); break;
-						}
-					}	
-					} 
-					catch (NumberFormatException e) {}
-		            frame.frmEquipment.chcWield.addItem("none");
-		            frame.frmEquipment.chcArms.addItem("none");
-		            frame.frmEquipment.chcLegs.addItem("none");
-		            frame.frmEquipment.chcTorso.addItem("none");
-		            frame.frmEquipment.chcWaist.addItem("none");
-		            frame.frmEquipment.chcNeck.addItem("none");
-		            frame.frmEquipment.chcSkull.addItem("none");
-		            frame.frmEquipment.chcEyes.addItem("none");
-		            frame.frmEquipment.chcHands.addItem("none");
-		        	frame.frmEquipment.blnRefreshMenus = false;
-					reloadJComboBoxDrop();
-		            break;
-		        }
-		        case (7):
-		        {
-					try
-					{
-						frame.frmEquipment.JLabel9.setText("Wielded: "+st.nextToken()); 
-						frame.frmEquipment.JLabel2.setText("Arms: "+st.nextToken()); 
-						frame.frmEquipment.JLabel3.setText("Legs: "+st.nextToken()); 
-						frame.frmEquipment.JLabel1.setText("Torso: "+st.nextToken()); 
-						frame.frmEquipment.JLabel6.setText("Waist: "+st.nextToken()); 
-						frame.frmEquipment.JLabel4.setText("Neck: "+st.nextToken()); 
-						frame.frmEquipment.lblSkull.setText("Skull: "+st.nextToken()); 
-						frame.frmEquipment.JLabel5.setText("Eyes: "+st.nextToken()); 
-						frame.frmEquipment.JLabel7.setText("Hands: "+st.nextToken());
-					}catch (Exception e) { System.err.println("Error loading equipment" + e.toString()); }
-					break;
-				}
-				case (8):
-				{
-					try
-					{
-		                token = "";
-		                while (st.hasMoreTokens())
-		                {
-		                	token += st.nextToken()+"\n";
-		                }
-						frame.txtOther.setText(token);
-					}catch (Exception e) { System.err.println("Error loading stats" + e.toString()); }
-					break;
-				}
-				case (9):
-				{
-			    	blnLoaded = false;
-			    	break;
-				}
-				case (10):
-				{
-	            	vctChoiceActionItems = new Vector(0,5);
-	            	while (st.hasMoreTokens())
-	            	{
-	            		vctChoiceActionItems.addElement(st.nextToken());
-	            	}
-					reloadJComboBoxAction();
-	            	break;
-				}
-				case(11):
-				{
-					try {
-						addText("Loading music.\n");
-						intMusicTypes = Integer.parseInt(st.nextToken());
-						audMusic = new Clip[intMusicTypes][];
-						intNumSongs = new int[intMusicTypes];
-
-						final String[] musicPaths = new String[intMusicTypes];
-						for (int i = 0; i < intMusicTypes; i++) {
-							intNumSongs[i] = Integer.parseInt(st.nextToken());
-							audMusic[i] = new Clip[intNumSongs[i]];
-							for (int j = 0; j < intNumSongs[i]; j++) {
-								final String path = st.nextToken();
-								final int typeIndex = i;
-								final int songIndex = j;
-
-								new Thread(() -> {
-									AudioInputStream audioInputStream = null;
-									try {
-										File audioFile = new File("/app/" + path);
-										if (!audioFile.exists()) {
-											System.err.println("Dynamic music not found: " + audioFile.getPath());
-											return;
-										}
-										audioInputStream = AudioSystem.getAudioInputStream(audioFile);
-										Clip clip = AudioSystem.getClip();
-										clip.open(audioInputStream);
-										audMusic[typeIndex][songIndex] = clip;
-									} catch (Exception e) {
-										System.err.println("Error while trying to load music file " + path + ":" + e.toString());
-									} finally {
-										if (audioInputStream != null) {
-											try {
-												audioInputStream.close();
-											} catch (IOException e) {
-												System.err.println("Error closing audio stream for " + path + ":" + e.toString());
-											}
-										}
-									}
-								}).start();
-							}
-						}
-					} catch (Exception e) {
-						blnMusic = false;
-						addText("Your java virtual machine does not support midi music\n");
-						System.err.println("Error while trying to load music files:" + e.toString());
-					}
-					break;
-				}
-				case (60): // playLocationMusic
-				{
-					/* if (blnMusic) {
-						try {
-							final int songIndex = Integer.parseInt(st.nextToken());
-							new Thread(() -> {
-								try {
-									if (audMusicPlaying != null) {
-										audMusicPlaying.stop();
-									}
-									
-									if (audLocationMusic != null && songIndex >= 0 && songIndex < audLocationMusic.length) {
-										Clip clipToPlay = audLocationMusic[songIndex];
-										if (clipToPlay != null && clipToPlay.isOpen()) {
-											audMusicPlaying = clipToPlay;
-											audMusicPlaying.setFramePosition(0);
-											audMusicPlaying.loop(Clip.LOOP_CONTINUOUSLY);
-										} else {
-											System.err.println("Location music clip is not loaded or open for index: " + songIndex);
-										}
-									}
-								} catch (Exception e) {
-									System.err.println("Error playing location music: " + e.toString());
-								}
-							}).start();
-						} catch (Exception e) {
-							System.err.println("Error reading song index for location music: " + e.toString());
-						}
-					} */
-					break;
-				}
-				case (61): // stopLocationMusic
-				{
-					/* if (blnMusic && audMusicPlaying != null) {
-						audMusicPlaying.stop();
-					} */
-					break;
-				}
-                case (36):
-                {
-                    try {
-                        long attackerID = Long.parseLong(st.nextToken());
-                        long defenderID = Long.parseLong(st.nextToken());
-                        int damage = Integer.parseInt(st.nextToken());
-
-                        Entity attacker;
-                        Entity defender;
-                        synchronized(vctEntities) {
-                            attacker = hmpEntities.get(attackerID);
-                            defender = hmpEntities.get(defenderID);
-                        }
-
-                        if (attacker != null && defender != null) {
-                            spawnBloodParticles(attacker, defender, damage);
-                            synchronized(vctDamageSplats) {
-                                DamageSplat existingSplat = null;
-                                for (DamageSplat splat : vctDamageSplats) {
-                                    if (splat.defenderID == defenderID && splat.lifetime > 50) {
-                                        existingSplat = splat;
-                                        break;
-                                    }
-                                }
-
-                                if (existingSplat != null) {
-                                    existingSplat.damage += damage;
-                                    existingSplat.text = String.valueOf(existingSplat.damage);
-                                    existingSplat.lifetime = 60; // Reset lifetime
-                                } else {
-                                    DamageSplat splat = new DamageSplat(
-                                        damage,
-                                        attackerID,
-                                        defenderID,
-                                        defender == player ? Color.CYAN : Color.RED
-                                    );
-                                    
-                                    double angle = Math.atan2(defender.pixelY - attacker.pixelY, defender.pixelX - attacker.pixelX);
-                                    angle += (Math.random() - 0.5) * 1.0; // Increased randomness
-                                    splat.vx = Math.cos(angle) * 0.75; // Halved speed
-                                    splat.vy = Math.sin(angle) * 0.75; // Halved speed
-                                    splat.x = defender.pixelX + intImageSize / 2;
-                                    splat.y = defender.pixelY;
-
-                                    vctDamageSplats.add(splat);
-                                }
-                            }
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error creating damage splat: " + e.getMessage());
-                    }
-                    break;
-                }
-                case (37):
-                {
-                    try {
-                        playerTicks = Long.parseLong(st.nextToken());
-                    } catch (Exception e) {
-                        System.err.println("Error reading playerTicks: " + e.getMessage());
-                    }
-                    break;
-                }
-                case (38):
-                {
-                    try {
-                        long targetID = Long.parseLong(st.nextToken());
-                        Entity target;
-                        synchronized(vctEntities) {
-                            target = hmpEntities.get(targetID);
-                        }
-                        if (target != null) {
-                            spawnArmorParticles(target);
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error processing armor spell effect: " + e.getMessage());
-                    }
-                    break;
-                }
-                case (39):
-                {
-                    try {
-                        String[] parts = st.nextToken().split(" ");
-                        long targetID = Long.parseLong(parts[0]);
-                        int duration = 0;
-                        if (parts.length > 1) {
-                            duration = Integer.parseInt(parts[1]);
-                        }
-
-                        Entity target;
-                        synchronized(vctEntities) {
-                            target = hmpEntities.get(targetID);
-                        }
-                        if (target != null) {
-                            spawnRegenerateParticles(target, duration);
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error processing regenerate spell effect: " + e.getMessage());
-                    }
-                    break;
-                }
-                case (40):
-                {
-                    try {
-                        String[] parts = st.nextToken().split(" ");
-                        long targetID = Long.parseLong(parts[0]);
-                        int duration = 0;
-                        if (parts.length > 1) {
-                            duration = Integer.parseInt(parts[1]);
-                        }
-
-                        Entity target;
-                        synchronized(vctEntities) {
-                            target = hmpEntities.get(targetID);
-                        }
-                        if (target != null) {
-                            spawnDetectInvisParticles(target, duration);
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error processing detect invis spell effect: " + e.getMessage());
-                    }
-                    break;
-                }
-                case (41): // Harden spell effect
-                {
-                    try {
-                        long targetID = Long.parseLong(st.nextToken());
-                        Entity target;
-                        synchronized(vctEntities) {
-                            target = hmpEntities.get(targetID);
-                        }
-                        if (target != null) {
-                            spawnHardenParticles(target);
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error processing harden spell effect: " + e.getMessage());
-                    }
-                    break;
-                }
-                case (42): // Shock spell effect
-                {
-                    try {
-                        long targetID = Long.parseLong(st.nextToken());
-                        Entity target;
-                        synchronized(vctEntities) {
-                            target = hmpEntities.get(targetID);
-                        }
-                        if (target != null) {
-                            spawnShockParticles(target);
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error processing shock spell effect: " + e.getMessage());
-                    }
-                    break;
-                }
-				case(12):
-				{
-					if (blnMusic) {
-						try {
-							final int musicType = Integer.parseInt(st.nextToken());
-							new Thread(() -> {
-								try {
-									if (audMusicPlaying != null) {
-										audMusicPlaying.stop();
-									}
-									
-									if (audMusic != null && musicType >= 0 && musicType < audMusic.length) {
-										int songIndex = (int)(Math.random() * intNumSongs[musicType]);
-										Clip clipToPlay = audMusic[musicType][songIndex];
-										
-										int waitCounter = 0;
-										while (clipToPlay == null && waitCounter < 100) { // Wait up to 10 seconds
-											Thread.sleep(100);
-											clipToPlay = audMusic[musicType][songIndex];
-											waitCounter++;
-										}
-										
-										if (clipToPlay != null && clipToPlay.isOpen()) {
-											audMusicPlaying = clipToPlay;
-											audMusicPlaying.setFramePosition(0);
-											audMusicPlaying.loop(Clip.LOOP_CONTINUOUSLY);
-										} else {
-											System.err.println("Dynamic music clip is not loaded or open for type: " + musicType);
-										}
-									}
-								} catch (Exception e) {
-									System.err.println("Error playing dynamic music: " + e.toString());
-								}
-							}).start();
-						} catch (Exception e) {
-							System.err.println("Error reading music type: " + e.toString());
-						}
-					}
-					break;
-				}
-				case(13):
-				{
-					sendMessage("notdead");
-					break;
-				}
-				case (14):
-				{
-			    	blnLoaded = true;
-			    	break;
-				}
-				case (15):
-				{
-					/* try
-					{
-						int sfxIndex = Integer.parseInt(st.nextToken());
-						if (audSFX != null && sfxIndex >= 0 && sfxIndex < audSFX.length && audSFX[sfxIndex] != null) {
-							audSFX[sfxIndex].setFramePosition(0);
-							audSFX[sfxIndex].start();
-						}
-					}catch(Exception e){} */
-					break;
-				}
-				case (16):
-				{
-					synchronized(vctEntities)
-					{
-					lngStore = Long.parseLong(st.nextToken());
-					removeEntity(lngStore);
-					reloadJComboBoxLook();
-					reloadJComboBoxGet();
-					reloadJComboBoxAttack();
-					}
-					break;
-				}
-				case (17):
-				{
-					while (st.hasMoreTokens())
-					{
-						vctMerchantItems.addElement(st.nextToken());
-					}
-					frame.btnMerchant.setEnabled(true);
-					reloadJComboBoxBuy();
-					break;
-				}
-				case (18):
-				{
-					EditFrame frmEdit = new EditFrame(st.nextToken(),this,true);
-					frmEdit.show();
-					while (st.hasMoreTokens())
-					{
-						frmEdit.txtEdit.append(st.nextToken()+"\n");
-					}
-					break;
-				}
-				case (19):
-				{
-		        	synchronized(vctEntities)
-		        	{
-					mapSizeX = Integer.parseInt(st.nextToken());
-					mapSizeY = Integer.parseInt(st.nextToken());
-					viewRangeX = (mapSizeX-1)/2;
-					viewRangeY = (mapSizeY-1)/2;
-					shrMap = new short[mapSizeX][mapSizeY];
-					shrMapAlpha = new short[mapSizeX][mapSizeY];
-					shrMapAlpha2 = new short[mapSizeX][mapSizeY];
-					if (blnApplet)
-					{
-						sendMessage("appletimages");
-					}else
-					{
-						sendMessage("applicationimages");
-					}
-					scaleWindow();
-					}
-					break;
-				}
-				case (20):
-				{
-					EditFrame frmEdit = new EditFrame(st.nextToken(),this,false);
-					frmEdit.show();
-					while (st.hasMoreTokens())
-					{
-						frmEdit.txtEdit.append(st.nextToken()+"\n");
-					}
-					break;
-				}
-				case (21):
-				{
-					frmMerchant.hide();
-					vctMerchantItems = new Vector(0,5);
-					vctSell = new Vector(0,5);
-					frame.btnMerchant.setEnabled(false);
-					break;
-				}
-				case (22):
-				{
-					vctSell = new Vector(0,5);
-					while (st.hasMoreTokens())
-					{
-						vctSell.addElement(st.nextToken());
-					}
-					reloadJComboBoxSell();
-					break;
-				}
-				case (23):
-				{
-                    int red = Integer.parseInt(st.nextToken());
-                    int green = Integer.parseInt(st.nextToken());
-                    int blue = Integer.parseInt(st.nextToken());
-                    String text = st.nextToken();
-                    String formattedText = "<RGB " + red + " " + green + " " + blue + ">" + text + "</RGB>\n";
-                    addText(formattedText);
-		            break;
-				}
-				case (24):
-				{
-					long ID = Long.parseLong(st.nextToken());
-					synchronized(vctEntities)
-    				{
-						entStore = hmpEntities.get(ID);
-						if (entStore != null) {
-							if (!entStore.isMoving) {
-								movementManager.startMove(entStore, 0, intImageSize);
-							} else {
-								entStore.queuedMoves.add(0);
-							}
-						}
-                    }
-		            break;
-				}
-				case (25):
-				{
-					long ID = Long.parseLong(st.nextToken());
-					synchronized(vctEntities)
-    				{
-						entStore = hmpEntities.get(ID);
-						if (entStore != null) {
-							if (!entStore.isMoving) {
-								movementManager.startMove(entStore, 1, intImageSize);
-							} else {
-								entStore.queuedMoves.add(1);
-							}
-						}
-                    }
-		            break;
-				}
-				case (26):
-				{
-					long ID = Long.parseLong(st.nextToken());
-					synchronized(vctEntities)
-    				{
-						entStore = hmpEntities.get(ID);
-						if (entStore != null) {
-							if (!entStore.isMoving) {
-								movementManager.startMove(entStore, 2, intImageSize);
-							} else {
-								entStore.queuedMoves.add(2);
-							}
-						}
-                    }
-		            break;
-				}
-				case (27):
-				{
-					long ID = Long.parseLong(st.nextToken());
-					synchronized(vctEntities)
-    				{
-						entStore = hmpEntities.get(ID);
-						if (entStore != null) {
-							if (!entStore.isMoving) {
-								movementManager.startMove(entStore, 3, intImageSize);
-							} else {
-								entStore.queuedMoves.add(3);
-							}
-						}
-                    }
-		            break;
-				}
-				case (28):
-				{
-					range = Integer.parseInt(st.nextToken());
-					break;
-				}
-				case (29):
-				{
-					lngStore = Long.parseLong(st.nextToken());
-					intStore = Integer.parseInt(st.nextToken());
-					synchronized(vctEntities)
-					{
-						entStore = hmpEntities.get(lngStore);
+						long entityId = ((DuskMessage.LongMessage)msg).value;
+						entStore = hmpEntities.get(entityId);
 						if (entStore != null)
 						{
-							entStore.intFlag = intStore;
+							int direction = 0;
+							switch (msg.name)
+							{
+								case MSG_MOVE_N: direction = 0; break;
+								case MSG_MOVE_S: direction = 1; break;
+								case MSG_MOVE_W: direction = 2; break;
+								case MSG_MOVE_E: direction = 3; break;
+							}
+							entStore.queuedMoves.add(direction);
+							if (!entStore.isMoving) {
+								movementManager.startMove(entStore, entStore.queuedMoves.poll(), intImageSize);
+							}
 						}
+						break;
 					}
-					break;
-				}
-				case (30):
-				{
-					synchronized(vctEntities)
+					case (MSG_UPDATE_RANGE):
 					{
-						for (int i=0; i<vctEntities.size(); i++) {
-							entStore = (Entity)vctEntities.elementAt(i);
-							entStore.intFlag = 0;
-						}
+						range = ((DuskMessage.IntegerMessage)msg).value;
+						reloadJComboBoxAttack();
+						break;
 					}
-					break;	
+					case (MSG_PROMPT_HALT):
+					{
+						frame.txtInput.setEnabled(false);
+						break;
+					}
+					case (MSG_PROMPT_PROCEED):
+					{
+						frame.txtInput.setEnabled(true);
+						break;
+					}
+					case (MSG_PING):
+					{
+						sendMessage(new DuskMessage(MSG_PING));
+						break;
+					}
+					case (MSG_POPUP_EDIT):
+					{
+						String text = ((DuskMessage.StringMessage)msg).value;
+						new EditFrame(this,text);
+						break;
+					}
+					case (MSG_POPUP_VIEW):
+					{
+						String text = ((DuskMessage.StringMessage)msg).value;
+						new ViewFrame(this,text);
+						break;
+					}
+					case (MSG_INIT_MAP):
+					{
+						ListMessage list = (ListMessage)msg;
+						mapSizeX = list.getInteger(FIELD_MAP_SIZE_X);
+						mapSizeY = list.getInteger(FIELD_MAP_SIZE_Y);
+						viewRangeX = list.getInteger(FIELD_VIEW_RANGE_X);
+						viewRangeY = list.getInteger(FIELD_VIEW_RANGE_Y);
+						shrMap = new short[mapSizeX][mapSizeY];
+						shrMapAlpha = new short[mapSizeX][mapSizeY];
+						shrMapAlpha2 = new short[mapSizeX][mapSizeY];
+						scaleWindow();
+						break;
+					}
+					case (MSG_UPDATE_PLAYER_TICKS):
+					{
+						playerTicks = ((DuskMessage.LongMessage)msg).value;
+						break;
+					}
+					case (MSG_BATTLE_CLEAR):
+					{
+						frame.lblTarget.setText("");
+						break;
+					}
+					case (MSG_BATTLE_TARGET):
+					{
+						frame.lblTarget.setText("Target: " + ((DuskMessage.StringMessage)msg).value);
+						break;
+					}
+					case (MSG_UPDATE_OPPONENT_HP):
+					{
+						ListMessage list = (ListMessage)msg;
+						frame.lblTarget.setText("Target: "+list.getString(FIELD_TARGET_ID)+" HP: "+list.getInteger(FIELD_HP)+"/"+list.getInteger(FIELD_MAXHP));
+						break;
+					}
 				}
-				case (31):
-				{
-					frame.txtBattle.setText("");
-                    frame.lblTarget.setText("");
-                    break;
-				}
-				case (32):
-				{
-                    frame.lblTarget.setText(st.nextToken());
-					break;
-				}
-				case (33):
-				{
-					frame.txtBattle.append(st.nextToken()+"\n");
-                    break;
-				}
-                case (34):
-                {
-                    try {
-                        long opponentID = Long.parseLong(st.nextToken());
-                        String HpData = st.nextToken();
-                        if (HpData != null) {
-                            String[] hpValues = HpData.trim().split(" ");
-                            if (hpValues.length >= 2) {
-                                int newHp = Integer.parseInt(hpValues[0]);
-                                int newMaxHp = Integer.parseInt(hpValues[1]);
+			} catch (EOFException eofe) {
+				addText("Connection to the server has been lost.\n");
+				blnConnected = false;
+			} catch(IOException | NumberFormatException e)
+			{
+				System.err.println("Error at run() with value " + msg.name +" : "+e.toString());
+				e.printStackTrace(System.out);
 
-                                synchronized(vctEntities) {
-                                    entStore = hmpEntities.get(opponentID);
-                                    if (entStore != null) {
-                                        entStore.hp = newHp;
-                                        entStore.maxhp = newMaxHp;
-                                    }
-                                }
-                            } else if (hpValues.length == 1 && Integer.parseInt(hpValues[0]) <= 0) {
-                                synchronized(vctEntities) {
-                                    entStore = hmpEntities.get(opponentID);
-                                    if (entStore != null) {
-                                        entStore.hp = 0;
-                                    }
-                                }
-                            }
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error updating opponent HP: " + e.getMessage());
-                    }
-                    break;
-                }
-                case (35):
-				{
-					vctTileAnims = new Vector<TileAnim>(0,5);
-					int tileID = Integer.parseInt(st.nextToken());
-					while (tileID != -1)
-					{
-						int frameCount = Integer.parseInt(st.nextToken());
-						int delay = Integer.parseInt(st.nextToken());
-						vctTileAnims.addElement(new TileAnim(tileID, frameCount, delay));
-						tileID = Integer.parseInt(st.nextToken());
-					}
-					break;
-				}
-				default:
-				{
-					System.err.println("Lost incoming byte: " + incoming);	
-				}
+				addText("Error at run() with value " + msg.name +" : "+e.toString()+"\n");
+				blnConnected = false;
 			}
-		} catch (EOFException eofe) {
-			addText("Connection to the server has been lost.\n");
-			blnConnected = false;
-		} catch(IOException | NumberFormatException e)
-		{
-			System.err.println("Error at run() with value " + incoming +" : "+e.toString());
-			e.printStackTrace(System.out);
-
-			addText("Error at run() with value " + incoming +" : "+e.toString()+"\n");
-			blnConnected = false;
-		}
 		}
 		System.err.println("Client network thread stopped.");
 	}
@@ -1648,17 +1151,17 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				synchronized(vctCrossMarkers) {
 					vctCrossMarkers.add(new CrossMarker(destX, destY, Color.GREEN, 50));
 				}
-				sendMessage("findpath " + destX + " " + destY);
+				sendMessage(new DuskMessage.StringMessage(MSG_COMMAND, "findpath " + destX + " " + destY));
 			} else if (SwingUtilities.isRightMouseButton(evt)) {
 				synchronized(vctCrossMarkers) {
 					vctCrossMarkers.add(new CrossMarker(destX, destY, Color.RED, 50));
 				}
 				Entity mob = findMobAt(destX, destY);
 				if (mob != null) {
-					sendMessage("attack " + mob.strName + " #" + mob.ID);
+					sendMessage(new DuskMessage.StringMessage(MSG_COMMAND, "attack " + mob.strName + " #" + mob.ID));
 				} else {
 					// If no mob, just pathfind
-					sendMessage("findpath " + destX + " " + destY);
+					sendMessage(new DuskMessage.StringMessage(MSG_COMMAND, "findpath " + destX + " " + destY));
 				}
 			}
 		}
@@ -1669,19 +1172,27 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
         @Override
 	public void mouseExited(MouseEvent evt){}
 
-    public void sendMessage(String message) {
-        try {
-            if (stmOut != null) {
-                byte[] messageBytes = message.getBytes("UTF-8");
-                stmOut.writeShort(messageBytes.length);
-                stmOut.write(messageBytes);
-            }
-        } catch (SocketException se) {
-            addText("Connection to the server has been lost.\n");
-        } catch (IOException e) {
-            addText("Error sending message: " + e.toString() + "\n");
-        }
-    }
+	public void sendMessage(DuskMessage msg)
+	{
+		try
+		{
+			if (stmOut != null)
+			{
+				msg.sendMessage(stmOut);
+			}
+		}catch (SocketException se)
+		{
+			addText("Connection to the server has been lost.\n");
+		}catch (IOException e)
+		{
+			addText("Error sending message: " + e.toString() + "\n");
+		}
+	}
+
+	public void sendMessage(String command)
+	{
+		sendMessage(new DuskMessage.StringMessage(MSG_COMMAND, command));
+	}
 
         @Override
 	public void keyPressed(KeyEvent evt)

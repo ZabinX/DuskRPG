@@ -24,7 +24,7 @@ public class FifoQueue extends Object
 		return head;
 	}
 
-	public synchronized Object firstElement()
+	public synchronized DuskMessage firstElement()
 	{
 		if (head == null)
 		{
@@ -33,7 +33,7 @@ public class FifoQueue extends Object
 		return head.getObject();
 	}
 
-	public synchronized void push(Object o)
+	public synchronized void push(DuskMessage o)
 	{
 		QueueObject qo = new QueueObject(o);
 
@@ -50,7 +50,7 @@ public class FifoQueue extends Object
 		notify();
 	}
 
-	public synchronized Object pop()
+	public synchronized DuskMessage pop()
 	{
 		while (head==null)
 		{

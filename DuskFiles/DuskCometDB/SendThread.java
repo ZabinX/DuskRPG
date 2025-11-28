@@ -11,35 +11,16 @@ public class SendThread implements Runnable
 
     public void run()
     {
-		SendData sndData;
+		DuskMessage msg;
 		while (!thnPlayer.blnStopThread)
 		{
-			sndData = (SendData)thnPlayer.qMessage.pop();
+			msg = thnPlayer.qMessage.pop();
 			try
 			{
-				switch (sndData.nDataType)
-				{
-					case SendData.STRING:
-					{
-						byte[] messageBytes = sndData.strData.getBytes("UTF-8");
-						thnPlayer.stmOut.writeShort(messageBytes.length);
-						thnPlayer.stmOut.write(messageBytes);
-						break;
-					}
-					case SendData.BYTE:
-					{
-						thnPlayer.stmOut.writeByte(sndData.bytData);
-						break;
-					}
-					case SendData.LONG:
-					{
-						thnPlayer.stmOut.writeLong(sndData.lngData);
-						break;
-					}
-				}
+				msg.sendMessage(thnPlayer.stmOut);
 			} catch(Exception e)
 			{
-				thnPlayer.engGame.log.printError("SendThread.run():"+sndData.nDataType+" to "+thnPlayer.strName, e);
+				thnPlayer.engGame.log.printError("SendThread.run(): to "+thnPlayer.strName, e);
 				thnPlayer.blnWorking = false;
 				thnPlayer.blnStopThread = true;
 				thnPlayer.close();
