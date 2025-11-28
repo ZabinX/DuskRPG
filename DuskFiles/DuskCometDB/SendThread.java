@@ -36,6 +36,11 @@ public class SendThread implements Runnable
 						thnPlayer.stmOut.writeLong(sndData.lngData);
 						break;
 					}
+					case SendData.MESSAGE:
+					{
+						sndData.msgData.sendMessage(thnPlayer.stmOut);
+						break;
+					}
 				}
 			} catch(Exception e)
 			{

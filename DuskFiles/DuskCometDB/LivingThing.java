@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.net.Socket;
 
-
 /**
 *LivingThing defines the base class for all moving objects.
 *This includes Players, Pets, and Mobs.
@@ -283,6 +282,15 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		}catch(Exception e)
 		{
 			engGame.log.printError("LivingThing():Creating player", e);
+		}
+	}
+
+	public void sendMessage(DuskMessage data)
+	{
+		if (isPlayer() && blnWorking && !blnIsClosing)
+		{
+			SendData sd = new SendData(data);
+			qMessage.push(sd);
 		}
 	}
 
@@ -1504,12 +1512,14 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	void updateFlag(long ID, int Value)
 	{
-		send((char)29+""+ID+"\n"+Value+"\n");
+		EntityListMessage msg = new EntityListMessage(ID, DuskProtocol.MSG_UPDATE_ENTITY);
+		msg.add(DuskProtocol.FIELD_ENTITY_FLAGS, Value);
+		sendMessage(msg);
 	}
 
 	void clearFlags()
 	{
-		send((char)30+"");
+		sendMessage(new DuskMessage(DuskProtocol.MSG_CLEAR_FLAGS));
 	}
 
 	String goTo(int destX, int destY)
@@ -1803,7 +1813,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 								blnCanSee = true;
 							if (blnCanSee && engGame.canSeeTo(this,objStore.intLocX,objStore.intLocY))
 							{
-								thnStore.send(""+(char)intSendByte+""+ID+"\n");
+								thnStore.sendMessage(new DuskMessage.EntityByteMessage(ID, DuskProtocol.MSG_MOVE, (byte) intSendByte));
 							}
 						} else if (thnStore.isMob())
 						{
@@ -1898,22 +1908,22 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	void moveN()
 	{
-		moveTo(intLocX, intLocY-1, 24, 0);
+		moveTo(intLocX, intLocY-1, 'n', 0);
 	}
 
 	void moveS()
 	{
-		moveTo(intLocX, intLocY+1, 25, 2);
+		moveTo(intLocX, intLocY+1, 's', 2);
 	}
 
 	void moveW()
 	{
-		moveTo(intLocX-1, intLocY, 26, 4);
+		moveTo(intLocX-1, intLocY, 'w', 4);
 	}
 
 	void moveE()
 	{
-		moveTo(intLocX+1, intLocY, 27, 6);
+		moveTo(intLocX+1, intLocY, 'e', 6);
 	}
 
 	/**
@@ -1973,8 +1983,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 										synchronized (objStore)
 										{
 											thnStore.vctEntities.removeElement(this);
-											strResult=(char)16+""+ID+"\n";
-											thnStore.send(strResult);
+											thnStore.sendMessage(new DuskMessage.EntityMessage(ID, DuskProtocol.MSG_REMOVE_ENTITY));
 										}
 									}
 								}
@@ -2072,73 +2081,44 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	public void updateOpponentHP(LivingThing opponent)
 	{
-	    if (isPlayer() && blnWorking && !blnIsClosing)
-	    {
-	        String strResult = "" + (char)34;
-	        strResult += opponent.ID + "\n";
-	        strResult += opponent.hp + " " + opponent.maxhp + "\n";
-	        send(strResult);
-	    }
+		if (isPlayer() && blnWorking && !blnIsClosing) {
+			ListMessage lm = new ListMessage(DuskProtocol.MSG_BATTLE_UPDATE);
+			lm.add(DuskProtocol.FIELD_BATTLE_TARGET, opponent.ID);
+			lm.add(DuskProtocol.FIELD_BATTLE_HP, opponent.hp);
+			lm.add(DuskProtocol.FIELD_BATTLE_MAXHP, opponent.maxhp);
+			sendMessage(lm);
+		}
 	}
 
 	public void sendDamageSplat(long attackerID, long defenderID, int damage)
 	{
-		if (isPlayer() && blnWorking && !blnIsClosing)
-		{
-			String strResult = "" + (char)36;
-			strResult += attackerID + "\n";
-			strResult += defenderID + "\n";
-			strResult += damage + "\n";
-			send(strResult);
-		}
+		// TODO: convert to a proper battle message
 	}
 
 	public void updateMap()
 	{
-		//update map:
-	    String strResult = ""+(char)2;
-		strResult += intLocX+"\n";
-		strResult += intLocY+"\n";
-	    for (int i=0;i<engGame.mapsizeX;i++)
-	    {
-		for (int i2=0;i2<engGame.mapsizeY;i2++)
+		MapMessage mm = new MapMessage();
+		mm.name = DuskProtocol.MSG_UPDATE_MAP;
+		mm.x = (short)intLocX;
+		mm.y = (short)intLocY;
+		mm.map = new short[engGame.mapsizeX][engGame.mapsizeY];
+		// TODO: alpha maps
+
+		for (int i=0;i<engGame.mapsizeX;i++)
 		{
-			try
+			for (int i2=0;i2<engGame.mapsizeY;i2++)
 			{
-				strResult += engGame.shrMap[intLocX-engGame.viewrangeX+i][intLocY-engGame.viewrangeY+i2]+"\n";
-			}catch (Exception e)
-			{
-				strResult += "0\n";
+				try
+				{
+					mm.map[i][i2] = engGame.shrMap[intLocX-engGame.viewrangeX+i][intLocY-engGame.viewrangeY+i2];
+				}catch (Exception e)
+				{
+					mm.map[i][i2] = 0;
+				}
 			}
 		}
-	    }
-        for (int i=0;i<engGame.mapsizeX;i++)
-        {
-            for (int i2=0;i2<engGame.mapsizeY;i2++)
-            {
-                try
-                {
-                    strResult += engGame.shrMapAlpha2[intLocX-engGame.viewrangeX+i][intLocY-engGame.viewrangeY+i2]+"\n";
-                }catch (Exception e)
-                {
-                    strResult += "0\n";
-                }
-            }
-        }
-        for (int i=0;i<engGame.mapsizeX;i++)
-        {
-            for (int i2=0;i2<engGame.mapsizeY;i2++)
-            {
-                try
-                {
-                    strResult += engGame.shrMapAlpha[intLocX-engGame.viewrangeX+i][intLocY-engGame.viewrangeY+i2]+"\n";
-                }catch (Exception e)
-                {
-                    strResult += "0\n";
-                }
-            }
-        }
-		send(strResult);
+
+		sendMessage(mm);
 	}
 
 	public void chatMessage(String inMessage)
@@ -2147,9 +2127,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			return;
 	    if (isPlayer())
 	    {
-		String strResult = ""+(char)3;
-		strResult += inMessage+"\n";
-		send(strResult);
+			sendMessage(new DuskMessage.StringMessage(DuskProtocol.MSG_CHAT, inMessage));
 	    }
 	    if (thnCharmer != null)
 	    {
@@ -2169,9 +2147,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				chatMessage(inMessage);
 				return;
 			}
-		String strResult = ""+(char)23;
-		strResult += red + "\n" + green + "\n" + blue + "\n" + inMessage + "\n";
-		send(strResult);
+			chatMessage("<RGB " + red + " " + green + " " + blue + ">" + inMessage + "</RGB>");
 		}
 	    if (thnCharmer != null)
 	    {
@@ -3226,15 +3202,11 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		thrConnection = Thread.currentThread();
 		try
 		{
-			do
-			{
-				short length = stmIn.readShort();
-				byte[] buffer = new byte[length];
-				stmIn.readFully(buffer);
-				strName = new String(buffer, "UTF-8");
-			}while (!getPlayer());
-			if (!blnWorking)
+			if (!getPlayer()) {
+				// TODO: send error
+				closeNosavePlayer();
 				return;
+			}
 		}catch(Exception e)
 		{
 			engGame.log.printError("LivingThing.run():start", e);
@@ -3265,8 +3237,6 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			chatMessage("You have entered the world hidden from players.");
 			engGame.log.printMessage(Log.INFO, sckConnection.getInetAddress().toString()+":"+strName+" has entered the world hidden from players");
 		}
-		String strInput,
-				strStore;
 		blnCanSave=true;
 		blnReadyForTheWorld=true;
 
@@ -3288,17 +3258,18 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			}
 			try
 			{
-				if (!blnHalted)
-				{
-					short length = stmIn.readShort();
-					byte[] buffer = new byte[length];
-					stmIn.readFully(buffer);
-					strInput = new String(buffer, "UTF-8");
-					strStore = Commands.parseCommand(this, engGame, strInput);
-					if (strStore != null)
-					{
-						chatMessage(strStore);
-					}
+				DuskMessage msg = DuskMessage.receiveMessage(stmIn);
+				switch (msg.name) {
+					case DuskProtocol.MSG_COMMAND:
+						String strStore = Commands.parseCommand(this, engGame, ((DuskMessage.StringMessage) msg).value);
+						if (strStore != null)
+						{
+							chatMessage(strStore);
+						}
+						break;
+					case DuskProtocol.MSG_QUERY:
+						// TODO: client is responding to a query
+						break;
 				}
 			}catch(Exception e)
 			{
@@ -3312,26 +3283,37 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	boolean getPlayer()
 	{
 		try {
-			if (!engGame.isGoodName(strName)) {
-				chatMessage("Not a valid name. This may because you left it blank, used invalid symbols, or made it too long. Please try again.");
+			DuskMessage msg = DuskMessage.receiveMessage(stmIn);
+
+			if (!(msg instanceof ListMessage) || msg.name != DuskProtocol.MSG_AUTH) {
+				// TODO: send an error and close
 				return false;
 			}
-	
+
+			ListMessage auth = (ListMessage) msg;
+			strName = auth.getString(DuskProtocol.FIELD_AUTH_PLAYER);
+			strPWord = auth.getString(DuskProtocol.FIELD_AUTH_PASS);
+
+			if (!engGame.isGoodName(strName)) {
+				// TODO: send an error
+				return false;
+			}
+
+			// check for multiple logins
+			if (engGame.getPlayer(strName.toLowerCase()) != null) {
+				// TODO: send an error
+				return false;
+			}
+
 			LivingThing loadedPlayer = (LivingThing)engGame.dbManager.get("player/" + strName.toLowerCase());
-	
+
 			if (loadedPlayer != null) {
 				// Player exists, check password
-				chatMessage("enter your password:");
-				short length = stmIn.readShort();
-				byte[] buffer = new byte[length];
-				stmIn.readFully(buffer);
-				String enteredPassword = new String(buffer, "UTF-8");
-				if (!enteredPassword.equals(loadedPlayer.strPWord)) {
-					chatMessage("Incorrect Password.");
+				if (!strPWord.equals(loadedPlayer.strPWord)) {
+					// TODO: send an error
 					return false;
 				}
 				// Copy data from loaded player
-				this.strPWord = loadedPlayer.strPWord;
 				this.privs = loadedPlayer.privs;
 				this.strTitle = loadedPlayer.strTitle;
 				this.strClan = loadedPlayer.strClan;
@@ -3379,100 +3361,75 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				this.vctMovement = new Vector(0,5);
 				this.vctIgnore = loadedPlayer.vctIgnore != null ? loadedPlayer.vctIgnore : new Vector(0);
 			} else {
-				// Player not found in DB, try to load from flat file
-				File filPlayer = new File("../DuskComet-Richter/users/"+strName.toLowerCase());
-				if (filPlayer.exists()) {
-					chatMessage("Player found in flat file, migrating to database...");
-					rafFile = new RandomAccessFile(filPlayer,"r");
-					strPWord = rafFile.readLine();
-					chatMessage("enter your password:");
-					short length = stmIn.readShort();
-					byte[] buffer = new byte[length];
-					stmIn.readFully(buffer);
-					if (!new String(buffer, "UTF-8").equals(strPWord)) {
-						chatMessage("Incorrect Password.");
-						return false;
+				// New player
+				ListMessage response = new ListMessage(DuskProtocol.MSG_AUTH);
+				response.add(new DuskMessage.EntityIntegerMessage(ID, DuskProtocol.FIELD_AUTH_RESULT, DuskProtocol.AUTH_LOGIN_INCOMPLETE));
+				response.add(new DuskMessage.StringMessage(DuskProtocol.FIELD_AUTH_REASON, "Welcome, new player. Please create your character."));
+
+				// Add race query
+				ListMessage queries = new ListMessage(DuskProtocol.FIELD_AUTH_NEWPLAYER);
+				ListMessage raceQuery = new ListMessage(0); // Query for race
+				raceQuery.add(new DuskMessage.StringMessage(DuskProtocol.FIELD_QUERY_PROMPT, "Choose a race:"));
+
+				// Get races from filesystem
+				File racesDir = new File("defRaces");
+				String[] raceList = racesDir.list();
+				DuskMessage.StringListMessage options = new DuskMessage.StringListMessage(DuskProtocol.FIELD_QUERY_OPTIONS);
+				if (raceList != null) {
+					for (String race : raceList) {
+						options.value.add(race);
 					}
-					// Initialize new player fields before parsing
-					equWorn = new Equipment();
-					vctItems = new ItemList();
-					vctSkills = new Vector(0,5);
-					vctSpells = new Vector(0,5);
-					vctConditions = new Vector(0,5);
-					vctEntities = new Vector(0,10);
-					vctFlags = new Vector(0,1);
-					vctCommands = new Vector(0,3);
-					vctMovement = new Vector(0,5);
-					vctIgnore = new Vector(0);
-					String strStore = rafFile.readLine();
-					while (strStore != null && !strStore.equals(".")) {
-						parseUserFile(strStore);
-						strStore = rafFile.readLine();
-					}
-					rafFile.close();
-				} else {
-					// New player
-					chatMessage(strName+", Is that correct? (yes/no)");
-					short length = stmIn.readShort();
-					byte[] buffer = new byte[length];
-					stmIn.readFully(buffer);
-					if (!new String(buffer, "UTF-8").equalsIgnoreCase("yes")) {
-						chatMessage("Then what IS your name?");
-						return false;
-					}
-					chatMessage("Enter a new password:");
-					length = stmIn.readShort();
-					buffer = new byte[length];
-					stmIn.readFully(buffer);
-					strPWord = new String(buffer, "UTF-8");
-					chatMessage("Confirm that password:");
-					length = stmIn.readShort();
-					buffer = new byte[length];
-					stmIn.readFully(buffer);
-					while (!strPWord.equals(new String(buffer, "UTF-8"))) {
-						chatMessage("Passwords did not match, enter a new password:");
-						length = stmIn.readShort();
-						buffer = new byte[length];
-						stmIn.readFully(buffer);
-						strPWord = new String(buffer, "UTF-8");
-						chatMessage("Confirm that password:");
-						length = stmIn.readShort();
-						buffer = new byte[length];
-						stmIn.readFully(buffer);
-					}
-					// Initialize new player fields
-					intLocX = 200;
-					intLocY = 200;
-					equWorn = new Equipment();
-					vctItems = new ItemList();
-					vctSkills = new Vector(0,5);
-					vctSpells = new Vector(0,5);
-					vctConditions = new Vector(0,5);
-					vctEntities = new Vector(0,10);
-					vctFlags = new Vector(0,1);
-					vctCommands = new Vector(0,3);
-					vctMovement = new Vector(0,5);
-					vctIgnore = new Vector(0);
-					hp = 40;
-					maxhp = 40;
-					mp = 10;
-					maxmp = 10;
-					stre = 10;
-					inte = 10;
-					dext = 10;
-					cons = 10;
-					wisd = 10;
 				}
+				raceQuery.add(options);
+				queries.add(raceQuery);
+				response.add(queries);
+				sendMessage(response);
+
+				// Now wait for the client's response
+				DuskMessage creationMsg = DuskMessage.receiveMessage(stmIn);
+				if (!(creationMsg instanceof ListMessage) || creationMsg.name != DuskProtocol.MSG_AUTH) {
+					// TODO: send an error and close
+					return false;
+				}
+
+				ListMessage creationAuth = (ListMessage) creationMsg;
+				ListMessage fields = (ListMessage) creationAuth.get(DuskProtocol.FIELD_AUTH_NEWPLAYER);
+				if (fields == null) {
+					// TODO: error
+					return false;
+				}
+
+				// For now we only have one query, for race.
+				strRace = fields.getString(0);
+
+				// Initialize new player fields
+				intLocX = 200;
+				intLocY = 200;
+				equWorn = new Equipment();
+				vctItems = new ItemList();
+				vctSkills = new Vector(0,5);
+				vctSpells = new Vector(0,5);
+				vctConditions = new Vector(0,5);
+				vctEntities = new Vector(0,10);
+				vctFlags = new Vector(0,1);
+				vctCommands = new Vector(0,3);
+				vctMovement = new Vector(0,5);
+				vctIgnore = new Vector(0);
+				hp = 40;
+				maxhp = 40;
+				mp = 10;
+				maxmp = 10;
+				stre = 10;
+				inte = 10;
+				dext = 10;
+				cons = 10;
+				wisd = 10;
 			}
-	
-			// check for multiple logins
-			if (engGame.getPlayer(strName.toLowerCase()) != null) {
-				chatMessage("That player is already logged in.");
-				return false;
-			}
-	
-			chatMessage("Login Accepted.");
-			proceed();
+
+			ListMessage response = new ListMessage(DuskProtocol.MSG_AUTH);
+			response.add(new DuskMessage.EntityIntegerMessage(ID, DuskProtocol.FIELD_AUTH_RESULT, DuskProtocol.AUTH_LOGIN_OK));
+			response.add(new DuskMessage.StringMessage(DuskProtocol.FIELD_AUTH_REASON, "Login Accepted."));
+			sendMessage(response);
 			engGame.vctSockets.addElement(this);
 			loadRace();
 			blnIsLoaded = true;
@@ -3740,71 +3697,17 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	{
 		try
 		{
-			String strResult =""+(char)7;
-				try
-			{
-				strResult += equWorn.wield.strName+"\n";
-			}catch (Exception e)
-			{
-				strResult += "none\n";
-			}
-			try
-			{
-				strResult += equWorn.arms.strName+"\n";
-			}catch (Exception e)
-			{
-				strResult += "none\n";
-			}
-			try
-			{
-				strResult += equWorn.legs.strName+"\n";
-			}catch (Exception e)
-			{
-				strResult += "none\n";
-			}
-			try
-			{
-				strResult += equWorn.torso.strName+"\n";
-			}catch (Exception e)
-			{
-				strResult += "none\n";
-			}
-			try
-			{
-				strResult += equWorn.waist.strName+"\n";
-			}catch (Exception e)
-			{
-				strResult += "none\n";
-			}
-			try
-			{
-				strResult += equWorn.neck.strName+"\n";
-			}catch (Exception e)
-			{
-				strResult += "none\n";
-			}
-			try
-			{
-				strResult += equWorn.skull.strName+"\n";
-			}catch (Exception e)
-			{
-				strResult += "none\n";
-			}
-			try
-			{
-				strResult += equWorn.eyes.strName+"\n";
-			}catch (Exception e)
-			{
-				strResult += "none\n";
-			}
-			try
-			{
-				strResult += equWorn.hands.strName+"\n";
-			}catch (Exception e)
-			{
-				strResult += "none\n";
-			}
-		send(strResult);
+			ListMessage lm = new ListMessage(DuskProtocol.MSG_EQUIPMENT);
+			if (equWorn.wield != null) lm.add(DuskProtocol.FIELD_WEARING_WIELD, equWorn.wield.strName);
+			if (equWorn.arms != null) lm.add(DuskProtocol.FIELD_WEARING_ARMS, equWorn.arms.strName);
+			if (equWorn.legs != null) lm.add(DuskProtocol.FIELD_WEARING_LEGS, equWorn.legs.strName);
+			if (equWorn.torso != null) lm.add(DuskProtocol.FIELD_WEARING_TORSO, equWorn.torso.strName);
+			if (equWorn.waist != null) lm.add(DuskProtocol.FIELD_WEARING_WAIST, equWorn.waist.strName);
+			if (equWorn.neck != null) lm.add(DuskProtocol.FIELD_WEARING_NECK, equWorn.neck.strName);
+			if (equWorn.skull != null) lm.add(DuskProtocol.FIELD_WEARING_SKULL, equWorn.skull.strName);
+			if (equWorn.eyes != null) lm.add(DuskProtocol.FIELD_WEARING_EYES, equWorn.eyes.strName);
+			if (equWorn.hands != null) lm.add(DuskProtocol.FIELD_WEARING_HANDS, equWorn.hands.strName);
+			sendMessage(lm);
 		}catch (Exception e)
 		{
 		    engGame.log.printError("updateEquipment():"+strName+" disconnected", e);
@@ -3844,12 +3747,12 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	{
 		try
 		{
-			String strResult = ""+(char)5;
-			strResult += hp+"\n";
-			strResult += (maxhp+hpbon)+"\n";
-			strResult += mp+"\n";
-			strResult += (maxmp+mpbon)+"\n";
-		send(strResult);
+			ListMessage lm = new ListMessage(DuskProtocol.MSG_INFO_PLAYER);
+			lm.add(DuskProtocol.FIELD_INFO_HP, hp);
+			lm.add(DuskProtocol.FIELD_INFO_MAXHP, maxhp+hpbon);
+			lm.add(DuskProtocol.FIELD_INFO_MP, mp);
+			lm.add(DuskProtocol.FIELD_INFO_MAXMP, maxmp+mpbon);
+			sendMessage(lm);
 		}catch(Exception e)
 		{
 		    engGame.log.printError("updateInfo():"+strName+" disconnected", e);
@@ -3874,10 +3777,8 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	{
 		try
 		{
-			String strResult = ""+(char)6,
-					strStore;
-			int i;
-			Item itmStore;
+			TransactionMessage tm = new TransactionMessage(DuskProtocol.MSG_INVENTORY);
+
 			LifoQueue qStore;
 			Iterator iter=vctItems.keySet().iterator();
 			while(iter.hasNext())
@@ -3885,21 +3786,21 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				qStore = (LifoQueue)vctItems.get(iter.next());
 				if (qStore.size() > 0)
 				{
-					itmStore = (Item)qStore.firstElement();
+					Item itmStore = (Item)qStore.firstElement();
+					int type = 0;
 					if(itmStore.isArmor())
 					{
-						strResult += (2+itmStore.intKind)+"\n";
+						type = 2 + itmStore.intKind;
 					}else if (itmStore.isWeapon())
 					{
-						strResult += "1\n";
-					}else
-					{
-						strResult += "0\n";
+						type = 1;
 					}
-					strResult += itmStore.strName+"\n";
+					tm.add(type, itmStore.strName, (int)qStore.size(), itmStore.intCost / 2, "gp");
 				}
 			}
-			send(strResult);
+
+			sendMessage(tm);
+
 			if (engGame.overMerchant(intLocX,intLocY)!= null)
 				updateSell();
 			if (engGame.overPlayerMerchant(intLocX,intLocY)!= null)
@@ -3914,183 +3815,48 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	public void updateStats()
 	{
-		Skill sklStore;
-		Spell splStore;
-		SpellGroup grpStore;
-		int i,
-			i2;
 		try
 		{
-			String strResult = ""+(char)8;
-			strResult += cash+" gp\n";
-			strResult += exp+" exp\n";
-			if (strebon == 0)
+			ListMessage lm = new ListMessage(DuskProtocol.MSG_INFO_PLAYER);
+
+			lm.add(DuskProtocol.FIELD_INFO_CASH, (int)cash);
+			lm.add(DuskProtocol.FIELD_INFO_EXP, exp);
+			lm.add(DuskProtocol.FIELD_INFO_STRENGTH, stre);
+			lm.add(DuskProtocol.FIELD_INFO_STRENGTH_BONUS, strebon);
+			lm.add(DuskProtocol.FIELD_INFO_INTELLIGENCE, inte);
+			lm.add(DuskProtocol.FIELD_INFO_INTELLIGENCE_BONUS, intebon);
+			lm.add(DuskProtocol.FIELD_INFO_DEXTERITY, dext);
+			lm.add(DuskProtocol.FIELD_INFO_DEXTERITY_BONUS, dextbon);
+			lm.add(DuskProtocol.FIELD_INFO_CONSTITUTION, cons);
+			lm.add(DuskProtocol.FIELD_INFO_CONSTITUTION_BONUS, consbon);
+			lm.add(DuskProtocol.FIELD_INFO_WISDOM, wisd);
+			lm.add(DuskProtocol.FIELD_INFO_WISDOM_BONUS, wisdbon);
+			lm.add(DuskProtocol.FIELD_INFO_DAMMOD, getDamMod());
+			lm.add(DuskProtocol.FIELD_INFO_DAMMOD_BONUS, dammodbon);
+			lm.add(DuskProtocol.FIELD_INFO_AC, getArmorMod());
+			lm.add(DuskProtocol.FIELD_INFO_AC_BONUS, acbon);
+
+			DuskMessage.StringListMessage slm = new DuskMessage.StringListMessage(DuskProtocol.FIELD_INFO_CONDITIONS);
+			for (int i=0;i<vctConditions.size();i++)
 			{
-				strResult += "str: "+stre+"\n";
-			}else
-			{
-				strResult += "str: "+stre+" + "+strebon+"\n";
-			}
-			if (intebon == 0)
-			{
-				strResult += "int: "+inte+"\n";
-			}else
-			{
-				strResult += "int: "+inte+" + "+intebon+"\n";
-			}
-			if (dextbon == 0)
-			{
-				strResult += "dex: "+dext+"\n";
-			}else
-			{
-				strResult += "dex: "+dext+" + "+dextbon+"\n";
-			}
-			if (consbon == 0)
-			{
-				strResult += "con: "+cons+"\n";
-			}else
-			{
-				strResult += "con: "+cons+" + "+consbon+"\n";
-			}
-			if (wisdbon == 0)
-			{
-				strResult += "wis: "+wisd+"\n";
-			}else
-			{
-				strResult += "wis: "+wisd+" + "+wisdbon+"\n";
-			}
-			if (dammodbon == 0)
-			{
-				strResult += "DamMod: "+getDamMod()+"\n";
-			}else
-			{
-				strResult += "DamMod: "+getDamMod()+" + "+dammodbon+"\n";
-			}
-			if (acbon == 0)
-			{
-				strResult += "AC: "+getArmorMod()+"\n\n";
-			}else
-			{
-				strResult += "AC: "+getArmorMod()+" + "+acbon+"\n";
-			}
-			Condition cndStore;
-			strResult += "-Affected by-\n";
-			for (i=0;i<vctConditions.size();i++)
-			{
-				cndStore = (Condition)vctConditions.elementAt(i);
+				Condition cndStore = (Condition)vctConditions.elementAt(i);
 				if (cndStore.blnDisplay)
 				{
-					strResult += cndStore.strName+"\n";
+					slm.value.add(cndStore.strName);
 				}
 			}
-			strResult += "-Skills-\n";
-			for (i=0;i<vctSkills.size();i++)
-			{
-				sklStore = (Skill)vctSkills.elementAt(i);
-				strResult += sklStore.strName+": "+sklStore.value+"\n";
+			lm.add(slm);
+
+			// TODO: skills and spells
+
+			sendMessage(lm);
+
+			if (thnFollowing != null && thnFollowing.isPet()) {
+				ListMessage petlm = new ListMessage(DuskProtocol.MSG_INFO_PET);
+				// TODO: pet stats
+				sendMessage(petlm);
 			}
-			strResult += "-Spells-\n";
-			for (i=0;i<vctSpells.size();i++)
-			{
-				splStore = (Spell)vctSpells.elementAt(i);
-				grpStore = engGame.getSpellGroup(splStore.strName);
-				if (grpStore != null)
-				{
-					strResult += splStore.strName+": "+splStore.value+"\n";
-					strResult += grpStore.spellList(splStore.value);
-				}
-			}
-			if (thnMaster != null)
-			{
-				strResult +="\nFollowing: "+thnMaster.strName+"\n";
-			}
-			if (thnFollowing != null)
-			{
-				strResult +="\nFollowed By: "+thnFollowing.strName+"\n";
-				if (thnFollowing.isPet())
-				{
-					strResult += thnFollowing.hp+"/"+thnFollowing.maxhp+" hp\n";
-					strResult += thnFollowing.mp+"/"+thnFollowing.maxmp+" mp\n";
-					strResult += thnFollowing.cash+" gp\n";
-					strResult += thnFollowing.exp+" exp\n";
-					if (thnFollowing.strebon == 0)
-					{
-						strResult += "str: "+thnFollowing.stre+"\n";
-					}else
-					{
-						strResult += "str: "+thnFollowing.stre+" + "+thnFollowing.strebon+"\n";
-					}
-					if (thnFollowing.intebon == 0)
-					{
-						strResult += "int: "+thnFollowing.inte+"\n";
-					}else
-					{
-						strResult += "int: "+thnFollowing.inte+" + "+thnFollowing.intebon+"\n";
-					}
-					if (thnFollowing.dextbon == 0)
-					{
-						strResult += "dex: "+thnFollowing.dext+"\n";
-					}else
-					{
-						strResult += "dex: "+thnFollowing.dext+" + "+thnFollowing.dextbon+"\n";
-					}
-					if (thnFollowing.consbon == 0)
-					{
-						strResult += "con: "+thnFollowing.cons+"\n";
-					}else
-					{
-						strResult += "con: "+thnFollowing.cons+" + "+thnFollowing.consbon+"\n";
-					}
-					if (thnFollowing.wisdbon == 0)
-					{
-						strResult += "wis: "+thnFollowing.wisd+"\n";
-					}else
-					{
-						strResult += "wis: "+thnFollowing.wisd+" + "+thnFollowing.wisdbon+"\n";
-					}
-					if (thnFollowing.dammodbon == 0)
-					{
-						strResult += "DamMod: "+thnFollowing.getDamMod()+"\n";
-					}else
-					{
-						strResult += "DamMod: "+thnFollowing.getDamMod()+" + "+thnFollowing.dammodbon+"\n";
-					}
-					if (thnFollowing.acbon == 0)
-					{
-						strResult += "AC: "+thnFollowing.getArmorMod()+"\n\n";
-					}else
-					{
-						strResult += "AC: "+thnFollowing.getArmorMod()+" + "+thnFollowing.acbon+"\n";
-					}
-					strResult += "-Affected by-\n";
-					for (i=0;i<thnFollowing.vctConditions.size();i++)
-					{
-						cndStore = (Condition)thnFollowing.vctConditions.elementAt(i);
-						if (cndStore.blnDisplay)
-						{
-							strResult += cndStore.strName+"\n";
-						}
-					}
-					strResult += "-Skills-\n";
-					for (i=0;i<thnFollowing.vctSkills.size();i++)
-					{
-						sklStore = (Skill)thnFollowing.vctSkills.elementAt(i);
-						strResult += sklStore.strName+": "+sklStore.value+"\n";
-					}
-					strResult += "-Spells-\n";
-					for (i=0;i<thnFollowing.vctSpells.size();i++)
-					{
-						splStore = (Spell)thnFollowing.vctSpells.elementAt(i);
-						grpStore = engGame.getSpellGroup(splStore.strName);
-						if (grpStore != null)
-						{
-							strResult += splStore.strName+": "+splStore.value+"\n";
-							strResult += grpStore.spellList(splStore.value);
-						}
-					}
-				}
-			}
-			send(strResult);
+
 		}catch (Exception e)
 		{
 		    engGame.log.printError("updateStats():"+strName+" disconnected", e);
@@ -4138,65 +3904,29 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	void resizeMap()
 	{
-		int i,i2;
-		String strResult = (char)19+"";
-		strResult += engGame.mapsizeX+"\n";
-		strResult += engGame.mapsizeY+"\n";
-		send(strResult);
-                send((char)37 + "" + engGame.lngPlayerTicks + "\n");
+		ListMessage lm = new ListMessage(DuskProtocol.MSG_INIT_MAP);
+		lm.add(DuskProtocol.FIELD_MAP_WIDTH, engGame.mapsizeX);
+		lm.add(DuskProtocol.FIELD_MAP_HEIGHT, engGame.mapsizeY);
+		lm.add(DuskProtocol.FIELD_MAP_ASSETLOCATION, engGame.strRCAddress);
+		sendMessage(lm);
 	}
 
 	void updateSell()
 	{
-		String strResult=(char)22+"";
-		Item itmStore;
-		LifoQueue qStore;
-		QueueObject qoStore;
-		Iterator iter = vctItems.keySet().iterator();
-		while(iter.hasNext())
-		{
-			qStore = (LifoQueue)vctItems.get(iter.next());
-			qoStore = qStore.head();
-			while (qoStore != null)
-			{
-				itmStore = (Item)qoStore.getObject();
-			if (itmStore != null)
-			{
-				strResult += (itmStore.intCost/2) + "gp)" + itmStore.strName + "\n";
-				}
-				qoStore = qoStore.next();
-		    }
-		}
-		send(strResult);
+		TransactionMessage tm = new TransactionMessage(DuskProtocol.MSG_UPDATE_MERCHANT);
+		// TODO?
+		sendMessage(tm);
 	}
 
 	void offMerchant()
 	{
-		send((char)21+"");
+		sendMessage(new DuskMessage(DuskProtocol.MSG_EXIT_MERCHANT));
 	}
 
 
 	public void sendTileAnims()
 	{
-		try
-		{
-			String strResult = ""+(char)35;
-			TileAnim anim;
-			for (int i=0; i<engGame.vctTileAnims.size(); i++)
-			{
-				anim = (TileAnim)engGame.vctTileAnims.elementAt(i);
-				strResult += anim.tileID + "\n";
-				strResult += anim.frameCount + "\n";
-				strResult += anim.delay + "\n";
-			}
-			strResult += "-1\n";
-			send(strResult);
-                        engGame.log.printMessage(Log.INFO, "Sent tile animations to " + strName);
-		}catch(Exception e)
-		{
-		    engGame.log.printError("sendTileAnims():"+strName+" disconnected", e);
-			blnStopThread = true;
-		}
+		// TODO
 	}
 
 	public String getNextInput() throws IOException {

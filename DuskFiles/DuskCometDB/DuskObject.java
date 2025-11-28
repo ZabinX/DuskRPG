@@ -75,4 +75,19 @@ public class DuskObject implements java.io.Serializable
 			return true;
 		return false;
 	}
+
+	public int getType() {
+		if (isPlayerMerchant()) return DuskProtocol.TYPE_PLAYER_MERCHANT;
+		if (isMerchant()) return DuskProtocol.TYPE_MERCHANT;
+		if (isSign()) return DuskProtocol.TYPE_SIGN;
+		if (isProp()) return DuskProtocol.TYPE_PROP;
+		if (isItem()) return DuskProtocol.TYPE_ITEM;
+		if (isLivingThing()) {
+			LivingThing l = (LivingThing) this;
+			if (l.isPlayer()) return DuskProtocol.TYPE_PLAYER;
+			if (l.isMob()) return DuskProtocol.TYPE_MOB;
+			if (l.isPet()) return DuskProtocol.TYPE_PET;
+		}
+		return 0;
+	}
 }

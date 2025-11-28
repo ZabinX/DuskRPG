@@ -90,12 +90,12 @@ class MerchantFrame extends JFrame implements MouseListener
 		{
 			String strStore = (String)chcBuy.getSelectedItem();
 			strStore = strStore.substring(strStore.indexOf(")")+1);
-			appParent.sendMessage("buy "+txtQuantity.getText()+" "+strStore);
+			appParent.command("buy "+txtQuantity.getText()+" "+strStore);
 		}else if (evt.getComponent() == btnSell)
 		{
 			String strStore = (String)chcSell.getSelectedItem();
 			strStore = strStore.substring(strStore.indexOf(")")+1);
-			appParent.sendMessage("sell "+txtQuantity.getText()+" "+strStore);
+			appParent.command("sell "+txtQuantity.getText()+" "+strStore);
 		}
 	}
 	public void mouseEntered(MouseEvent evt) {}
