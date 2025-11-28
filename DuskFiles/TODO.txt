@@ -1,0 +1,5 @@
+TODO:
+
+1.  **Implement Map Alpha Layers:** The network protocol has been upgraded, but the logic for sending and rendering the map's two alpha layers (`shrMapAlpha`, `shrMapAlpha2`) has not been implemented. The server needs to be updated to send this data, and the client needs to be updated to parse and render it.
+
+2.  **Restore Server Source Code:** The `.java` source files for the `DuskCometDB` server are missing. Only the compiled `.class` files are present. The source code needs to be recovered (e.g., via decompilation or from a backup) to allow for future development and maintenance of the server.

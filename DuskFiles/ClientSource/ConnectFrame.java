@@ -28,6 +28,7 @@ public class ConnectFrame extends JFrame
 	javax.swing.JLabel lblAddress = new javax.swing.JLabel();
 	javax.swing.JTextField txtPort = new javax.swing.JTextField();
 	javax.swing.JLabel lblPort = new javax.swing.JLabel();
+	javax.swing.JTextField txtPass = new javax.swing.JTextField();
 
 	public ConnectFrame(Dusk inParent)
 	{
@@ -94,6 +95,10 @@ public class ConnectFrame extends JFrame
 		lblPort.setVisible(true);
 		lblPort.setSize(new java.awt.Dimension(50, 20));
 
+		txtPass.setLocation(new java.awt.Point(10, 70));
+		txtPass.setSize(new java.awt.Dimension(140, 20));
+		txtPass.setVisible(true);
+
 		setLocation(new java.awt.Point(0, 0));
 		setTitle("frmConnect");
 		getContentPane().setLayout(null);
@@ -105,6 +110,8 @@ public class ConnectFrame extends JFrame
 		getContentPane().add(lblAddress);
 		getContentPane().add(txtPort);
 		getContentPane().add(lblPort);
+		getContentPane().add(txtName);
+		getContentPane().add(txtPass);
 
 		lstBookmarks.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -188,7 +195,8 @@ public class ConnectFrame extends JFrame
 			return;
 		appParent.address = txtAddress.getText();
 		appParent.port = Integer.parseInt(txtPort.getText());
-		appParent.connect();
+		appParent.connect(txtAddress.getText(), Integer.parseInt(txtPort.getText()), txtName.getText(), txtPass.getText());
+		this.hide();
 	}
 	
 	public void lstBookmarksActionPerformed(ListSelectionEvent e)

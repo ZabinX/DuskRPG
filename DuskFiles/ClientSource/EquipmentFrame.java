@@ -255,10 +255,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcWield.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage("unwear wielded");
+						appParent.command("unwear wielded");
 					}else
 					{
-						appParent.sendMessage("wear "+strStore);
+						appParent.command("wear "+strStore);
 					}
 					break;
 				}
@@ -267,10 +267,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcArms.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage("unwear arms");
+						appParent.command("unwear arms");
 					}else
 					{
-						appParent.sendMessage("wear "+strStore);
+						appParent.command("wear "+strStore);
 					}
 					break;
 				}
@@ -279,10 +279,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcLegs.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage("unwear legs");
+						appParent.command("unwear legs");
 					}else
 					{
-						appParent.sendMessage("wear "+strStore);
+						appParent.command("wear "+strStore);
 					}
 					break;
 				}
@@ -291,10 +291,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcTorso.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage("unwear torso");
+						appParent.command("unwear torso");
 					}else
 					{
-						appParent.sendMessage("wear "+strStore);
+						appParent.command("wear "+strStore);
 					}
 					break;
 				}
@@ -303,10 +303,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcWaist.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage("unwear waist");
+						appParent.command("unwear waist");
 					}else
 					{
-						appParent.sendMessage("wear "+strStore);
+						appParent.command("wear "+strStore);
 					}
 					break;
 				}
@@ -315,10 +315,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcNeck.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage("unwear neck");
+						appParent.command("unwear neck");
 					}else
 					{
-						appParent.sendMessage("wear "+strStore);
+						appParent.command("wear "+strStore);
 					}
 					break;
 				}
@@ -327,10 +327,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcSkull.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage("unwear skull");
+						appParent.command("unwear skull");
 					}else
 					{
-						appParent.sendMessage("wear "+strStore);
+						appParent.command("wear "+strStore);
 					}
 					break;
 				}
@@ -339,10 +339,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcEyes.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage("unwear eyes");
+						appParent.command("unwear eyes");
 					}else
 					{
-						appParent.sendMessage("wear "+strStore);
+						appParent.command("wear "+strStore);
 					}
 					break;
 				}
@@ -351,10 +351,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcHands.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage("unwear hands");
+						appParent.command("unwear hands");
 					}else
 					{
-						appParent.sendMessage("wear "+strStore);
+						appParent.command("wear "+strStore);
 					}
 					break;
 				}

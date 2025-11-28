@@ -67,8 +67,8 @@ class EditFrame extends JFrame implements MouseListener
 	{
 		if (evt.getComponent() == btnSubmit)
 		{
-			appParent.sendMessage("submit " + strName);
-			appParent.sendMessage(txtEdit.getText());
+			appParent.command("submit " + strName);
+			appParent.command(txtEdit.getText());
 			setVisible(false);
 		}
 	}

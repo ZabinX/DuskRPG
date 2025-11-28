@@ -1130,7 +1130,7 @@ public class DuskEngine implements Runnable
 									PlayerMerchant pmrStore = (PlayerMerchant)objStore;
 									if (thnRefresh.intLocX == pmrStore.intLocX && thnRefresh.intLocY == pmrStore.intLocY)
 									{
-									strResult = (char)17+"";
+									TransactionMessage tm = new TransactionMessage(DuskProtocol.MSG_UPDATE_MERCHANT);
 										Iterator iter = pmrStore.vctItems.keySet().iterator();
 										Vector vctStore;
 									while(iter.hasNext())
@@ -1142,9 +1142,9 @@ public class DuskEngine implements Runnable
 											{
 												intCost = 0;
 											}
-										strResult += intCost+"gp)" +strStore+"\n";
+										tm.add(0, itmStore.strName, vctStore.size(), intCost, "gp");
 									}
-									thnRefresh.send(strResult+".\n");
+									thnRefresh.sendMessage(tm);
 									thnRefresh.updateSell();
 								}
 								}
@@ -1153,7 +1153,7 @@ public class DuskEngine implements Runnable
 									mrcStore = (Merchant)objStore;
 									if (thnRefresh.intLocX == mrcStore.intLocX && thnRefresh.intLocY == mrcStore.intLocY)
 									{
-									strResult = (char)17+"";
+									TransactionMessage tm = new TransactionMessage(DuskProtocol.MSG_UPDATE_MERCHANT);
 										if (thnRefresh.thnFollowing != null && thnRefresh.thnFollowing.isPet())
 										{
 										for (int i5=0;i5<mrcStore.vctItems.size();i5++)
@@ -1162,14 +1162,14 @@ public class DuskEngine implements Runnable
 											itmStore = getItem(strStore);
 											if (itmStore != null)
 											{
-												strResult += itmStore.intCost+"gp)" +strStore+"\n";
+												tm.add(0, itmStore.strName, 1, itmStore.intCost, "gp");
 											}else if (strStore.equals("pet"))
 											{
-												strResult += petcost+"gp)" +strStore+"\n";
+												tm.add(0, "pet", 1, petcost, "gp");
 											}else
 												{
-												strResult += traincost+"exp)"+strStore+"\n";
-												strResult += traincost+"exp)"+thnRefresh.thnFollowing.strName+":"+strStore+"\n";
+												tm.add(0, strStore, 1, traincost, "exp");
+												tm.add(0, thnRefresh.thnFollowing.strName+":"+strStore, 1, traincost, "exp");
 												}
 										}
 									}else
@@ -1180,164 +1180,29 @@ public class DuskEngine implements Runnable
 											itmStore = getItem(strStore);
 											if (itmStore != null)
 											{
-												strResult += itmStore.intCost+"gp)" +strStore+"\n";
+												tm.add(0, itmStore.strName, 1, itmStore.intCost, "gp");
 											}else if (strStore.equals("pet"))
 											{
-												strResult += +petcost+"gp)" +strStore+"\n";
+												tm.add(0, "pet", 1, petcost, "gp");
 											}else
 												{
-												strResult += traincost+"exp)"+strStore+"\n";
+												tm.add(0, strStore, 1, traincost, "exp");
 												}
 										}
 									}
-									thnRefresh.send(strResult+".\n");
+									thnRefresh.sendMessage(tm);
 									thnRefresh.updateSell();
 								}
 								}
 								if (i4 != -1)
 								{
+									thnRefresh.sendMessage(new EntityUpdateMessage(objStore));
 									if (objStore.isLivingThing())
 									{
 										thnStore = (LivingThing)objStore;
-										if (scrCanSeeLivingThing != null)
-										{
-											synchronized(scrCanSeeLivingThing)
-											{
-												scrCanSeeLivingThing.varVariables.clearVariables();
-												scrCanSeeLivingThing.varVariables.addVariable("seeing",thnRefresh);
-												scrCanSeeLivingThing.varVariables.addVariable("seen",thnStore);
-												blnCanSee = scrCanSeeLivingThing.rewindAndParseScript();
-											}
-										}else
-											blnCanSee=true;
-										if (blnCanSee)
-										{
-											if (thnStore.isPlayer())
-											{
-												strResult=(char)4+"";
-												if (thnStore.blnSleep)
-												{
-													strResult += "<sleeping>";
-												}
-												if (!thnStore.strClan.equals("none"))
-												{
-													strResult += "<" + thnStore.strClan + ">";
-												}
-												for (i4=0;i4<thnStore.vctFlags.size();i4++)
-												{
-													strResult += "<" + (String)thnStore.vctFlags.elementAt(i4) + ">";
-												}
-											strResult += thnStore.strName+"\n";
-											strResult += 0+"\n";
-											strResult += thnStore.ID+"\n";
-											strResult += thnStore.intLocX+"\n";
-											strResult += thnStore.intLocY+"\n";
-											strResult += thnStore.intImage+"\n";
-											strResult += thnStore.intStep+"\n";
-												thnRefresh.send(strResult);
-												if (thnStore.batBattle != null && thnRefresh.batBattle == null) {
-													thnRefresh.updateFlag(thnStore.ID, 2);
-												}
-											}else if (thnStore.isMob())
-											{
-												strResult=(char)4+"";
-												if (thnStore.blnSleep)
-												{
-													strResult += "<sleeping>";
-												}
-												for (i4=0;i4<thnStore.vctFlags.size();i4++)
-												{
-													strResult += "<" + (String)thnStore.vctFlags.elementAt(i4) + ">";
-												}
-											strResult += thnStore.strName+"\n";
-											strResult += 4+"\n";
-											strResult += thnStore.ID+"\n";
-											strResult += thnStore.intLocX+"\n";
-											strResult += thnStore.intLocY+"\n";
-											strResult += thnStore.intImage+"\n";
-												thnRefresh.send(strResult);
-												if (thnStore.batBattle != null && thnRefresh.batBattle == null) {
-													thnRefresh.updateFlag(thnStore.ID, 2);
-												}
-											}else if (thnStore.isPet())
-											{
-												strResult=(char)4+"";
-												if (thnStore.blnSleep)
-												{
-													strResult += "<sleeping>";
-												}
-												if (thnStore.hp < 0)
-												{
-													strResult += "<wounded>";
-												}
-												for (i4=0;i4<thnStore.vctFlags.size();i4++)
-												{
-													strResult += "<" + (String)thnStore.vctFlags.elementAt(i4) + ">";
-												}
-											strResult += thnStore.strName+"\n";
-											strResult += 4+"\n";
-											strResult += thnStore.ID+"\n";
-											strResult += thnStore.intLocX+"\n";
-											strResult += thnStore.intLocY+"\n";
-											strResult += thnStore.intImage+"\n";
-												thnRefresh.send(strResult);
-											}
+										if (thnStore.batBattle != null && thnRefresh.batBattle == null) {
+											thnRefresh.updateFlag(thnStore.ID, 2);
 										}
-									}else if (objStore.isItem())
-									{
-										strResult=(char)4+"";
-										itmStore = (Item)objStore;
-										strResult += itmStore.strName+"\n";
-									strResult += 1+"\n";
-									strResult += itmStore.ID+"\n";
-									strResult += itmStore.intLocX+"\n";
-									strResult += itmStore.intLocY+"\n";
-									strResult += itmStore.intImage+"\n";
-										thnRefresh.send(strResult);
-									}else if (objStore.isProp())
-									{
-										strResult=(char)4+"";
-										prpStore = (Prop)objStore;
-									strResult += prpStore.strName+"\n";
-									strResult += 3+"\n";
-									strResult += prpStore.ID+"\n";
-									strResult += prpStore.intLocX+"\n";
-									strResult += prpStore.intLocY+"\n";
-									strResult += prpStore.intImage+"\n";
-										thnRefresh.send(strResult);
-									}else if (objStore.isSign())
-									{
-										strResult=(char)4+"";
-										sgnStore = (Sign)objStore;
-									strResult += sgnStore.strName+"\n";
-									strResult += 3+"\n";
-									strResult += sgnStore.ID+"\n";
-									strResult += sgnStore.intLocX+"\n";
-									strResult += sgnStore.intLocY+"\n";
-									strResult += signimage+"\n";
-										thnRefresh.send(strResult);
-									}else if (objStore.isMerchant())
-									{
-										strResult=(char)4+"";
-										mrcStore = (Merchant)objStore;
-									strResult += "Merchant\n";
-									strResult += 2+"\n";
-									strResult += mrcStore.ID+"\n";
-									strResult += mrcStore.intLocX+"\n";
-									strResult += mrcStore.intLocY+"\n";
-									strResult += merchantimage+"\n";
-										thnRefresh.send(strResult);
-									}else if (objStore.isPlayerMerchant())
-									{
-										strResult=(char)4+"";
-										PlayerMerchant pmrStore = (PlayerMerchant)objStore;
-									strResult += pmrStore.strOwner+"'s Merchant\n";
-									strResult += 2+"\n";
-									strResult += pmrStore.ID+"\n";
-									strResult += pmrStore.intLocX+"\n";
-									strResult += pmrStore.intLocY+"\n";
-									strResult += merchantimage+"\n";
-										thnRefresh.send(strResult);
 									}
 								}
 								objStore = objStore.objNext;
@@ -1351,8 +1216,7 @@ public class DuskEngine implements Runnable
 		for (i=0;i<thnRefresh.vctEntities.size();i++)
 		{
 			objStore = (DuskObject)thnRefresh.vctEntities.elementAt(i);
-			strResult=(char)16+""+objStore.ID+"\n";
-			thnRefresh.send(strResult);
+			thnRefresh.sendMessage(new DuskMessage.EntityMessage(objStore.ID, DuskProtocol.MSG_REMOVE_ENTITY));
 		}
 		thnRefresh.vctEntities = vctNewEntities;
 	}
@@ -1419,114 +1283,7 @@ public class DuskEngine implements Runnable
 									{
 										strResult=(char)4+"";
 										thnStore.vctEntities.addElement(objRefresh);
-										if (objRefresh.isLivingThing())
-										{
-											thnStore2 = (LivingThing)objRefresh;
-											if (thnStore2.isPlayer())
-											{
-												if (thnStore2.blnSleep)
-												{
-													strResult += "<sleeping>";
-												}
-												if (!thnStore2.strClan.equals("none"))
-												{
-													strResult += "<" + thnStore2.strClan + ">";
-												}
-												for (i4=0;i4<thnStore2.vctFlags.size();i4++)
-												{
-													strResult += "<" + (String)thnStore2.vctFlags.elementAt(i4) + ">";
-												}
-											strResult += thnStore2.strName+"\n";
-											strResult += 0+"\n";
-											strResult += thnStore2.ID+"\n";
-											strResult += thnStore2.intLocX+"\n";
-											strResult += thnStore2.intLocY+"\n";
-											strResult += thnStore2.intImage+"\n";
-											strResult += thnStore2.intStep+"\n";
-											}else if (thnStore2.isMob())
-											{
-												if (thnStore2.blnSleep)
-												{
-													strResult += "<sleeping>";
-												}
-												for (i4=0;i4<thnStore2.vctFlags.size();i4++)
-												{
-													strResult += "<" + (String)thnStore2.vctFlags.elementAt(i4) + ">";
-												}
-											strResult += thnStore2.strName+"\n";
-											strResult += 4+"\n";
-											strResult += thnStore2.ID+"\n";
-											strResult += thnStore2.intLocX+"\n";
-											strResult += thnStore2.intLocY+"\n";
-											strResult += thnStore2.intImage+"\n";
-											}else if (thnStore2.isPet())
-											{
-												if (thnStore2.blnSleep)
-												{
-													strResult += "<sleeping>";
-												}
-												if (thnStore2.hp<0)
-												{
-													strResult += "<wounded>";
-												}
-												for (i4=0;i4<thnStore2.vctFlags.size();i4++)
-												{
-													strResult += "<" + (String)thnStore2.vctFlags.elementAt(i4) + ">";
-												}
-											strResult += thnStore2.strName+"\n";
-											strResult += 4+"\n";
-											strResult += thnStore2.ID+"\n";
-											strResult += thnStore2.intLocX+"\n";
-											strResult += thnStore2.intLocY+"\n";
-											strResult += thnStore2.intImage+"\n";
-											}
-										}else if (objRefresh.isItem())
-										{
-											itmStore = (Item)objRefresh;
-											strResult += itmStore.strName+"\n";
-										strResult += 1+"\n";
-										strResult += itmStore.ID+"\n";
-										strResult += itmStore.intLocX+"\n";
-										strResult += itmStore.intLocY+"\n";
-										strResult += itmStore.intImage+"\n";
-										}else if (objRefresh.isProp())
-										{
-											prpStore = (Prop)objRefresh;
-										strResult += prpStore.strName+"\n";
-										strResult += 3+"\n";
-										strResult += prpStore.ID+"\n";
-										strResult += prpStore.intLocX+"\n";
-										strResult += prpStore.intLocY+"\n";
-										strResult += prpStore.intImage+"\n";
-										}else if (objRefresh.isSign())
-										{
-											sgnStore = (Sign)objRefresh;
-										strResult += sgnStore.strName+"\n";
-										strResult += 3+"\n";
-										strResult += sgnStore.ID+"\n";
-										strResult += sgnStore.intLocX+"\n";
-										strResult += sgnStore.intLocY+"\n";
-										strResult += signimage+"\n";
-										}else if (objRefresh.isMerchant())
-										{
-											mrcStore = (Merchant)objRefresh;
-										strResult += "Merchant\n";
-										strResult += 2+"\n";
-										strResult += mrcStore.ID+"\n";
-										strResult += mrcStore.intLocX+"\n";
-										strResult += mrcStore.intLocY+"\n";
-										strResult += merchantimage+"\n";
-										}else if (objRefresh.isPlayerMerchant())
-										{
-											PlayerMerchant pmrStore = (PlayerMerchant)objRefresh;
-										strResult += pmrStore.strOwner+"'s Merchant\n";
-										strResult += 2+"\n";
-										strResult += pmrStore.ID+"\n";
-										strResult += pmrStore.intLocX+"\n";
-										strResult += pmrStore.intLocY+"\n";
-										strResult += merchantimage+"\n";
-										}
-										thnStore.send(strResult);
+										thnStore.sendMessage(new EntityUpdateMessage(objRefresh));
 									}
 									}
 									}
@@ -1578,8 +1335,7 @@ public class DuskEngine implements Runnable
 									if (canSeeTo(thnStore,objRefresh.intLocX,objRefresh.intLocY))
 									{
 										thnStore.vctEntities.removeElement(objRefresh);
-										strResult=(char)16+""+objRefresh.ID+"\n";
-										thnStore.send(strResult);
+										thnStore.sendMessage(new DuskMessage.EntityMessage(objRefresh.ID, DuskProtocol.MSG_REMOVE_ENTITY));
 									}
 								}
 							}

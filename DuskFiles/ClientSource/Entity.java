@@ -2,6 +2,10 @@
 
 You are free to edit or redistribute this code or any portion at your wish, under the condition that you do not edit or remove this license, and accompany it with all redistributions. */
 
+import java.util.List;
+import duskz.protocol.*;
+import duskz.protocol.DuskMessage.*;
+
 public class Entity
 {
     String strName;
@@ -42,6 +46,7 @@ public class Entity
     boolean walkFrameToggle;
     int animCounter;
     boolean inCombat;
+	public List<String> conditions;
     
     public Entity(String instrName, long inID, double inintLocX, double inintLocY,int inImage,int inStep,int inintType)
     {
@@ -68,8 +73,14 @@ public class Entity
         queuedMoves = new java.util.LinkedList<>();
         walkFrameToggle = false;
         animCounter = 0;
+		conditions = new java.util.ArrayList<String>();
     }
+
+	public Entity(EntityUpdateMessage eum) {
+		strName = eum.entityName;
+		ID = eum.id;
+		intLocX = eum.x;
+		intLocY = eum.y;
+		intImage = eum.image;
+	}
 }
-
-
-
