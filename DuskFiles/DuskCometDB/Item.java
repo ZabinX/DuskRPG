@@ -54,6 +54,28 @@ public class Item extends DuskObject implements java.io.Serializable
 
 	long lngDurability=-1;
 
+	int getWearLocation()
+	{
+		if (isWeapon())
+		{
+			return duskz.protocol.Wearing.WIELD;
+		} else if (isArmor())
+		{
+			switch (intKind)
+			{
+				case 0: return duskz.protocol.Wearing.ARMS;
+				case 1: return duskz.protocol.Wearing.LEGS;
+				case 2: return duskz.protocol.Wearing.TORSO;
+				case 3: return duskz.protocol.Wearing.WAIST;
+				case 4: return duskz.protocol.Wearing.NECK;
+				case 5: return duskz.protocol.Wearing.SKULL;
+				case 6: return duskz.protocol.Wearing.EYES;
+				case 7: return duskz.protocol.Wearing.HANDS;
+			}
+		}
+		return duskz.protocol.Wearing.INVENTORY;
+	}
+
 	Item itmNext=null;
 
     public Item(long lngID)

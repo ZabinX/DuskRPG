@@ -3,6 +3,8 @@ import java.util.Date;
 import java.util.Vector;
 import java.util.Iterator;
 import java.util.StringTokenizer;
+import duskz.protocol.*;
+import duskz.protocol.DuskMessage.*;
 
 
 public class Commands
@@ -3408,6 +3410,19 @@ public class Commands
 	private static DuskObject getObjectFromArgs(DuskEngine engGame, LivingThing lt, String strArgs)
 	{
 		DuskObject objStore = null;
+
+		// Try parsing the argument as a direct ID first for commands like "attack 12345"
+		try {
+			long id = Long.parseLong(strArgs);
+			objStore = getObjectByID(engGame, id);
+			if (objStore != null) {
+				return objStore;
+			}
+		} catch (NumberFormatException e) {
+			// Not a raw ID, proceed to name-based lookup below.
+		}
+
+		// Fallback for name-based lookups like "attack goblin" or "look goblin #12345"
 		int lastHash = strArgs.lastIndexOf(" #");
 		if (lastHash != -1) {
 			String idString = strArgs.substring(lastHash + 2);
