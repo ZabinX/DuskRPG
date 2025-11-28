@@ -11,6 +11,8 @@ remove this license, and accompany it with all redistributions.
 import java.io.*;
 import java.util.Vector;
 import java.lang.Math;
+import duskz.protocol.*;
+import duskz.protocol.DuskMessage.*;
 
 /**
 *Battle represents a fight between two sides comprised of LivingThings.
@@ -62,14 +64,12 @@ public class Battle
 			}
 			thnFront1 = inpla1;
 			engGame.chatMessage("-"+inpla1.strName+" has attacked "+inpla2.strName,inpla1.intLocX,inpla1.intLocY,"default");
-			if (inpla1.popup)
-			{
-				inpla1.send(""+(char)31+inpla2.strName+"\n");
-			}
-			if (inpla2.popup)
-			{
-				inpla2.send(""+(char)31+inpla1.strName+"\n");
-			}
+			ListMessage msg = new ListMessage(DuskProtocol.MSG_BATTLE_START);
+			msg.add(new StringMessage(DuskProtocol.FIELD_BATTLE_OPPONENT, inpla2.strName));
+			inpla1.send(msg);
+			msg = new ListMessage(DuskProtocol.MSG_BATTLE_START);
+			msg.add(new StringMessage(DuskProtocol.FIELD_BATTLE_OPPONENT, inpla1.strName));
+			inpla2.send(msg);
 		}catch (Exception e)
 		{
 			blnRunning = false;
@@ -537,83 +537,20 @@ public class Battle
 	{
 		int i;
 		LivingThing thnStore=null;
-		String strStore2=null;
-		if (!vctSide2.isEmpty())
-		{
-			thnStore = (LivingThing)vctSide2.elementAt(0);
-			strStore2 = thnStore.strName+" has "+thnStore.getCharacterPoints()+"cp and "+thnStore.hp+"/"+thnStore.maxhp+"hp.";
-		}
-		for (i=0;i<vctSide1.size();i++)
+		for (int i=0;i<vctSide1.size();i++)
 		{
 			thnStore = (LivingThing)vctSide1.elementAt(i);
 			if (thnStore.isPlayer())
 			{
-				if (thnStore.popup)
-				{
-					if (strStore2 != null)
-					{
-                                                thnStore.send(""+(char)32+strStore2+"\n");
-						thnStore.send(""+(char)33+strStore+"\n");
-					}
-				} else
-				{
-					thnStore.chatMessage(strStore);
-				}
-			}else if (thnStore.isPet())
-			{
-				if (thnStore.thnMaster.batBattle != thnStore.batBattle)
-				{
-					if (thnStore.thnMaster.popup)
-					{
-						if (strStore2 != null)
-						{
-							thnStore.thnMaster.send(""+(char)32+"From "+thnStore.strName+": "+strStore2+"\n");
-							thnStore.thnMaster.send(""+(char)33+"From "+thnStore.strName+": "+strStore+"\n");
-						}
-					} else
-					{
-						thnStore.chatMessage(strStore);
-					}
-				}
+				thnStore.send(new StringMessage(DuskProtocol.MSG_BATTLE_CHAT, strStore));
 			}
 		}
-		if (!vctSide1.isEmpty())
-		{
-			thnStore = (LivingThing)vctSide1.elementAt(0);
-			strStore2 = thnStore.strName+" has "+thnStore.getCharacterPoints()+"cp and "+thnStore.hp+"/"+thnStore.maxhp+"hp.";
-		}
-		for (i=0;i<vctSide2.size();i++)
+		for (int i=0;i<vctSide2.size();i++)
 		{
 			thnStore = (LivingThing)vctSide2.elementAt(i);
 			if (thnStore.isPlayer())
 			{
-				if (thnStore.popup)
-				{
-					if (strStore2 != null)
-					{
-						thnStore.send(""+(char)32+strStore2+"\n");
-						thnStore.send(""+(char)33+strStore+"\n");
-					}
-				} else
-				{
-					thnStore.chatMessage(strStore);
-				}
-			}else if (thnStore.isPet())
-			{
-				if (thnStore.thnMaster.batBattle != thnStore.batBattle)
-				{
-					if (thnStore.thnMaster.popup)
-					{
-						if (strStore2 != null)
-						{
-							thnStore.thnMaster.send(""+(char)32+"From "+thnStore.strName+": "+strStore2+"\n");
-							thnStore.thnMaster.send(""+(char)33+"From "+thnStore.strName+": "+strStore+"\n");
-						}
-					} else
-					{
-						thnStore.chatMessage(strStore);
-					}
-				}
+				thnStore.send(new StringMessage(DuskProtocol.MSG_BATTLE_CHAT, strStore));
 			}
 		}
 	}
