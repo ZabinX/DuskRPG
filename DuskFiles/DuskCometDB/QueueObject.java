@@ -3,15 +3,15 @@ import java.io.Serializable;
 class QueueObject extends Object implements Serializable
 {
 	private QueueObject next;
-	private Object object;
+	private DuskMessage object;
 
-	QueueObject(Object o)
+	QueueObject(DuskMessage o)
 	{
         object = o;
 		next = null;
 	}
 
-	Object getObject()
+	DuskMessage getObject()
 	{
         return object;
 	}
