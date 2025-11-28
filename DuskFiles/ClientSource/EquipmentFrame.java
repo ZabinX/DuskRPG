@@ -247,8 +247,6 @@ class EquipmentFrame extends JFrame implements ActionListener
 	
 	public void Equip(int intStore)
 	{
-		try
-		{
 		String strStore;
 		switch (intStore)
 		{
@@ -257,10 +255,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcWield.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.stmOut.writeBytes("unwear wielded\n");
+						appParent.sendMessage("unwear wielded");
 					}else
 					{
-						appParent.stmOut.writeBytes("wear "+strStore+"\n");
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -269,10 +267,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcArms.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.stmOut.writeBytes("unwear arms\n");
+						appParent.sendMessage("unwear arms");
 					}else
 					{
-						appParent.stmOut.writeBytes("wear "+strStore+"\n");
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -281,10 +279,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcLegs.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.stmOut.writeBytes("unwear legs\n");
+						appParent.sendMessage("unwear legs");
 					}else
 					{
-						appParent.stmOut.writeBytes("wear "+strStore+"\n");
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -293,10 +291,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcTorso.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.stmOut.writeBytes("unwear torso\n");
+						appParent.sendMessage("unwear torso");
 					}else
 					{
-						appParent.stmOut.writeBytes("wear "+strStore+"\n");
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -305,10 +303,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcWaist.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.stmOut.writeBytes("unwear waist\n");
+						appParent.sendMessage("unwear waist");
 					}else
 					{
-						appParent.stmOut.writeBytes("wear "+strStore+"\n");
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -317,10 +315,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcNeck.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.stmOut.writeBytes("unwear neck\n");
+						appParent.sendMessage("unwear neck");
 					}else
 					{
-						appParent.stmOut.writeBytes("wear "+strStore+"\n");
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -329,10 +327,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcSkull.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.stmOut.writeBytes("unwear skull\n");
+						appParent.sendMessage("unwear skull");
 					}else
 					{
-						appParent.stmOut.writeBytes("wear "+strStore+"\n");
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -341,10 +339,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcEyes.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.stmOut.writeBytes("unwear eyes\n");
+						appParent.sendMessage("unwear eyes");
 					}else
 					{
-						appParent.stmOut.writeBytes("wear "+strStore+"\n");
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -353,17 +351,13 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcHands.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.stmOut.writeBytes("unwear hands\n");
+						appParent.sendMessage("unwear hands");
 					}else
 					{
-						appParent.stmOut.writeBytes("wear "+strStore+"\n");
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
-		}
-		}catch(Exception e)
-		{
-			appParent.addText("Error at Equip(): "+e.toString()+"\n");
 		}
 	}
 }

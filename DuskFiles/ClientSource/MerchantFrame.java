@@ -86,20 +86,17 @@ class MerchantFrame extends JFrame implements MouseListener
 	public void mouseReleased(MouseEvent evt){}
 	public void mouseClicked(MouseEvent evt)
 	{
-		try
+		if (evt.getComponent() == btnBuy)
 		{
-			if (evt.getComponent() == btnBuy)
-			{
-				String strStore = (String)chcBuy.getSelectedItem();
-				strStore = strStore.substring(strStore.indexOf(")")+1);
-				appParent.stmOut.writeBytes("buy "+txtQuantity.getText()+" "+strStore+"\n");
-			}else if (evt.getComponent() == btnSell)
-			{
-				String strStore = (String)chcSell.getSelectedItem();
-				strStore = strStore.substring(strStore.indexOf(")")+1);
-				appParent.stmOut.writeBytes("sell "+txtQuantity.getText()+" "+strStore+"\n");
-			}
-		}catch(Exception e){}
+			String strStore = (String)chcBuy.getSelectedItem();
+			strStore = strStore.substring(strStore.indexOf(")")+1);
+			appParent.sendMessage("buy "+txtQuantity.getText()+" "+strStore);
+		}else if (evt.getComponent() == btnSell)
+		{
+			String strStore = (String)chcSell.getSelectedItem();
+			strStore = strStore.substring(strStore.indexOf(")")+1);
+			appParent.sendMessage("sell "+txtQuantity.getText()+" "+strStore);
+		}
 	}
 	public void mouseEntered(MouseEvent evt) {}
 	public void mouseExited(MouseEvent evt) {}

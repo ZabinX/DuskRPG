@@ -859,11 +859,9 @@ public class Commands
 						rafView.writeBytes(strStore+"\n");
 					}
 					strStore = lt.getNextInput();
-					while (!strStore.equals("--EOF--"))
-					{
-						rafView.writeBytes(strStore+"\n");
-						strStore = lt.getNextInput();
-					}
+					// The client now sends the entire content in a single framed message.
+					// The "--EOF--" delimiter is no longer used for this command.
+					rafView.writeBytes(strStore);
 					rafView.close();
 					if (compile)
 					{

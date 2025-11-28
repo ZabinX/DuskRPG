@@ -67,14 +67,9 @@ class EditFrame extends JFrame implements MouseListener
 	{
 		if (evt.getComponent() == btnSubmit)
 		{
-			try
-			{
-				appParent.stmOut.writeBytes("submit "+strName+"\n");
-				appParent.stmOut.writeBytes(txtEdit.getText()+"\n--EOF--\n");
-			}catch(Exception e)
-			{
-				appParent.addText("Error while submitting file: "+e.toString()+"\n");
-			}
+			appParent.sendMessage("submit " + strName);
+			appParent.sendMessage(txtEdit.getText());
+			setVisible(false);
 		}
 	}
 	public void mouseEntered(MouseEvent evt) {}
@@ -85,7 +80,3 @@ class EditFrame extends JFrame implements MouseListener
 		setVisible(false);
 	}
 }
-
-
-
-
