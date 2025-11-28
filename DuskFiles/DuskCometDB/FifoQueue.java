@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 public class FifoQueue extends Object
 {
 	private long lNumEntries;
@@ -24,7 +26,7 @@ public class FifoQueue extends Object
 		return head;
 	}
 
-	public synchronized Object firstElement()
+	public synchronized Serializable firstElement()
 	{
 		if (head == null)
 		{
@@ -33,7 +35,7 @@ public class FifoQueue extends Object
 		return head.getObject();
 	}
 
-	public synchronized void push(Object o)
+	public synchronized void push(Serializable o)
 	{
 		QueueObject qo = new QueueObject(o);
 
@@ -50,7 +52,7 @@ public class FifoQueue extends Object
 		notify();
 	}
 
-	public synchronized Object pop()
+	public synchronized Serializable pop()
 	{
 		while (head==null)
 		{

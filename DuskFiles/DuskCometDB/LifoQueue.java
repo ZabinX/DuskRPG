@@ -34,7 +34,7 @@ public class LifoQueue extends Object implements Serializable
 		return head.getObject();
 	}
 
-	public synchronized void push(Object o)
+	public synchronized void push(Serializable o)
 	{
 		QueueObject qo = new QueueObject(o);
 

@@ -2007,18 +2007,7 @@ public class Script
 				LivingThing thnStore = getLivingThing(getString());
 				String strTitle = getString();
 				String strStore2 = getString();
-				String strLine = null;
-				int intIndex = strStore2.indexOf("\n");
-					thnStore.send((char)20+strTitle+"\n");
-				while (intIndex != -1)
-				{
-						strLine = strStore2.substring(0,intIndex);
-					thnStore.send(strLine+"\n");
-					strStore2 = strStore2.substring(intIndex+1);
-					intIndex = strStore2.indexOf("\n");
-				}
-				thnStore.send(strStore2+"\n");
-				thnStore.send("--EOF--\n");
+				thnStore.send(DuskMessage.create(DuskProtocol.MSG_POPUP, strTitle + "\n" + strStore2));
 				return true;
 			}
 				case 53:
@@ -2062,7 +2051,7 @@ public class Script
 					{
 						Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnStore.intLocX, thnStore.intLocY);
 						for (LivingThing player : playersInArea) {
-							player.send("" + (char)intEffectID + thnStore.ID + " " + duration + "\n");
+							player.send(DuskMessage.create(intEffectID, thnStore.ID + " " + duration));
 						}
 					}
 					return true;
@@ -2093,7 +2082,7 @@ public class Script
 					if (thnStore != null && intEffectID != -1) {
 						Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnStore.intLocX, thnStore.intLocY);
 						for (LivingThing player : playersInArea) {
-							player.send("" + (char)intEffectID + thnStore.ID + "\n");
+							player.send(DuskMessage.create(intEffectID, "" + thnStore.ID));
 						}
 					}
 					return true;
@@ -2148,7 +2137,7 @@ public class Script
 				{
 				if(thnStore.batBattle != null && thnStore.popup)
 						{
-						thnStore.send(""+(char)33+strStore2.substring(0,intIndex+1));
+						thnStore.send(DuskMessage.create(DuskProtocol.MSG_BATTLE_CHAT, strStore2.substring(0,intIndex+1)));
 						} else
 						{
 						thnStore.chatMessage(strStore2.substring(0,intIndex));
@@ -2158,7 +2147,7 @@ public class Script
 				}
 				if(thnStore.batBattle != null && thnStore.popup)
 					{
-					thnStore.send(""+(char)33+strStore2+"\n");
+					thnStore.send(DuskMessage.create(DuskProtocol.MSG_BATTLE_CHAT, strStore2));
 					} else
 					{
 					thnStore.chatMessage(strStore2);
