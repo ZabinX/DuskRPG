@@ -23,12 +23,12 @@ import duskz.protocol.DuskMessage;
 class SendThread implements Runnable
 {
 	LivingThing thnPlayer;
-	FifoQueue queStore;
+	NetQueue queStore;
 	DuskEngine engGame;
 	DataOutputStream stmOut;
 	boolean blnStop = false;
 	
-	public SendThread(LivingThing inPlayer, FifoQueue inQueue, DuskEngine inEngine, DataOutputStream inStream)
+	public SendThread(LivingThing inPlayer, NetQueue inQueue, DuskEngine inEngine, DataOutputStream inStream)
 	{
 		thnPlayer = inPlayer;
 		queStore = inQueue;

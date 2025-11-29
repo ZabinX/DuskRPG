@@ -162,7 +162,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	transient DataInputStream stmIn;
 	transient DataOutputStream stmOut;
 	transient Thread thrConnection;
-	transient FifoQueue queOut;
+	transient NetQueue queOut;
 	transient SendThread thrOut;
 
 	//Prefs
@@ -234,7 +234,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			sckConnection.setSoLinger(false,0); //Do not linger on disconnect
 			stmIn = new DataInputStream(sckConnection.getInputStream());
 			stmOut = new DataOutputStream(sckConnection.getOutputStream());
-			queOut = new FifoQueue();
+			queOut = new NetQueue();
 			thrOut = new SendThread(this, queOut, engGame, stmOut);
 			new Thread(thrOut).start();
 			engGame.log.printMessage(Log.INFO, sckConnection.toString());
@@ -1812,7 +1812,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 								blnCanSee = true;
 							if (blnCanSee && engGame.canSeeTo(this,objStore.intLocX,objStore.intLocY))
 							{
-								thnStore.send(new EntityByteMessage(DuskProtocol.MSG_MOVE, ID, (byte)intSendByte));
+								thnStore.send(new EntityByteMessage(DuskProtocol.MSG_MOVE, (int)ID, (byte)intSendByte));
 							}
 						} else if (thnStore.isMob())
 						{

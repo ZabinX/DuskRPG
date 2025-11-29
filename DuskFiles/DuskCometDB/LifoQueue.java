@@ -60,4 +60,3 @@ public class LifoQueue extends Object implements Serializable
 		return qo.getObject();
 	}
 }
-
