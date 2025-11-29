@@ -28,6 +28,8 @@ import java.lang.reflect.Array;
 import java.util.StringTokenizer;
 import java.applet.*;
 import java.net.*;
+import duskz.protocol.*;
+import duskz.protocol.DuskMessage.*;
 
 class EditFrame extends JFrame implements MouseListener
 {
@@ -67,8 +69,8 @@ class EditFrame extends JFrame implements MouseListener
 	{
 		if (evt.getComponent() == btnSubmit)
 		{
-			appParent.sendMessage("submit " + strName);
-			appParent.sendMessage(txtEdit.getText());
+			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "submit " + strName));
+			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, txtEdit.getText()));
 			setVisible(false);
 		}
 	}
