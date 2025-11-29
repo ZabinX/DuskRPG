@@ -1,92 +1,117 @@
 import java.util.Hashtable;
+import java.io.Serializable;
 import java.util.Iterator;
 
-public class ItemList extends Hashtable
+public class ItemList extends Hashtable<String, LifoQueue<Item>> implements Serializable
 {
-	public boolean contains(String strItemName)
+	public synchronized void addElement(Item o)
 	{
-		return super.containsKey(strItemName.toLowerCase());
-	}
-
-	public Object get(String strItemName)
-	{
-		return super.get(strItemName.toLowerCase());
-	}
-
-	public void addElement(Item itmStore)
-	{
-		LifoQueue qTemp;
-		if (contains(itmStore.strName))
+		String strName = o.strName.toLowerCase();
+		LifoQueue<Item> qStore;
+		qStore = (LifoQueue<Item>)super.get(strName);
+		if (qStore == null)
 		{
-			qTemp = (LifoQueue)get(itmStore.strName);
-			qTemp.push(itmStore);
+			qStore = new LifoQueue<Item>();
+			qStore.push(o);
+			super.put(strName, qStore);
 		} else
 		{
-			qTemp = new LifoQueue();
-			qTemp.push(itmStore);
-			super.put(itmStore.strName.toLowerCase(), qTemp);
+			qStore.push(o);
 		}
 	}
 
-	public Item removeElement(String strItemName)
+	public synchronized int getElementCount(String strName)
 	{
-		LifoQueue qTemp;
-		Item itmStore;
-		if (contains(strItemName))
+		try
 		{
-			qTemp = (LifoQueue)get(strItemName);
-			itmStore = (Item)qTemp.pop();
-			if (itmStore == null || qTemp.size() < 1)
+			return (int)((LifoQueue)super.get(strName.toLowerCase())).size();
+		}catch(NullPointerException e)
+		{
+			return 0;
+		}
+	}
+
+	public synchronized int getElementCount()
+	{
+		return super.size();
+	}
+
+	public synchronized boolean removeElement(String strName)
+	{
+		try
+		{
+			LifoQueue<Item> qStore;
+			qStore = (LifoQueue<Item>)super.get(strName.toLowerCase());
+			qStore.pop();
+			if (qStore.size() < 1)
 			{
-				super.remove(strItemName);
+				super.remove(strName.toLowerCase());
 			}
-			return itmStore;
-		}
-		return null;
-	}
-
-	/*
-	**	This method formats the ItemList for sending to the client
-	**	for display of the player's inventory to the player.
-	*/
-	public String print()
-	{
-		StringBuffer invBuffer = new StringBuffer();
-		Iterator iter = keySet().iterator();
-		Item itmStore;
-		LifoQueue qStore;
-		while(iter.hasNext())
+			return true;
+		}catch(NullPointerException e)
 		{
-			qStore = (LifoQueue)get(iter.next());
-			itmStore = (Item)qStore.firstElement();
-			invBuffer.append(""+(char)3).append(qStore.size()).append(" ").append(itmStore.strName).append("\n");
+			return false;
 		}
-		return invBuffer.toString();
 	}
 
-	/*
-	**	This method formats the ItemList for saving.
-	**	It generates a String that can later be passed
-	**	to fromString for populating a new ItemList.
-	*/
+	public synchronized Item getElement(String strName)
+	{
+		try
+		{
+			LifoQueue<Item> qStore;
+			qStore = (LifoQueue<Item>)super.get(strName.toLowerCase());
+			Item itmStore = (Item)qStore.firstElement();
+			return itmStore;
+		}catch(NullPointerException e)
+		{
+			return null;
+		}
+	}
+
 	public String toString()
 	{
-		StringBuffer invBuffer = new StringBuffer();
-		Iterator iter = keySet().iterator();
+		String strStore = "";
+		Iterator iter = super.keySet().iterator();
+		LifoQueue<Item> qStore;
+		QueueObject<Item> qoStore;
 		Item itmStore;
-		LifoQueue qStore;
-		QueueObject qoStore;
-		while(iter.hasNext())
+		while (iter.hasNext())
 		{
-			qStore = (LifoQueue)get(iter.next());
+			qStore = (LifoQueue<Item>)super.get(iter.next());
 			qoStore = qStore.head();
-			while(qoStore.next() != null)
+			while (qoStore != null)
 			{
 				itmStore = (Item)qoStore.getObject();
-				invBuffer.append(itmStore.toString()).append("/\n");
+				if (itmStore != null)
+				{
+					strStore += "item2\n"+itmStore.strName+"\n"+itmStore.lngDurability+"\n"+itmStore.intUses+"\n";
+				}
 				qoStore = qoStore.next();
 			}
 		}
-		return invBuffer.toString();
+		return strStore;
+	}
+
+	public String print()
+	{
+		String strStore = "";
+		Iterator iter = super.keySet().iterator();
+		LifoQueue<Item> qStore;
+		QueueObject<Item> qoStore;
+		Item itmStore;
+		while (iter.hasNext())
+		{
+			qStore = (LifoQueue<Item>)super.get(iter.next());
+			qoStore = qStore.head();
+			if (qoStore != null)
+			{
+				itmStore = (Item)qoStore.getObject();
+				if (itmStore != null)
+				{
+					strStore += qStore.size()+" "+itmStore.strName+"\n";
+				}
+			}
+		}
+		return strStore;
 	}
 }
