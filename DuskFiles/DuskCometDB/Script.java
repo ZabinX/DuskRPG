@@ -17,6 +17,8 @@ import java.io.*;
 import java.util.Vector;
 import java.util.Random;
 import java.lang.Math;
+import duskz.protocol.*;
+import duskz.protocol.DuskMessage.*;
 
 
 /**
@@ -162,7 +164,7 @@ public class Script
 					return null;
 			}else if (strName.equalsIgnoreCase("global"))
 			{
-				Variable varStore = engGame.varVariables.getVariable(readScriptForCompile());
+				Variable varStore = engGame.varVariables.getVariable(getString());
 				if (varStore != null && varStore.isLivingThing())
 					return (LivingThing)varStore.objData;
 			}
@@ -195,7 +197,7 @@ public class Script
 		{
 			try
 			{
-				Variable varStore = engGame.varVariables.getVariable(readScriptForCompile());
+				Variable varStore = engGame.varVariables.getVariable(getString());
 				if (varStore != null && varStore.isNumber())
 				{
 					return (Double)varStore.objData;
@@ -236,7 +238,7 @@ public class Script
 		for (int i=0;i<vctUpdate.size();i++)
 		{
 			thnStore = (LivingThing)vctUpdate.elementAt(i);
-			thnStore.updateStats();
+			thnStore.updateInfo();
 		}
 		for (int i=0;i<vctVisibleUpdate.size();i++)
 		{
@@ -2006,19 +2008,11 @@ public class Script
 			{
 				LivingThing thnStore = getLivingThing(getString());
 				String strTitle = getString();
-				String strStore2 = getString();
-				String strLine = null;
-				int intIndex = strStore2.indexOf("\n");
-					thnStore.send((char)20+strTitle+"\n");
-				while (intIndex != -1)
-				{
-						strLine = strStore2.substring(0,intIndex);
-					thnStore.send(strLine+"\n");
-					strStore2 = strStore2.substring(intIndex+1);
-					intIndex = strStore2.indexOf("\n");
-				}
-				thnStore.send(strStore2+"\n");
-				thnStore.send("--EOF--\n");
+				String strContent = getString();
+				ListMessage msg = new ListMessage(DuskProtocol.MSG_POPUP_VIEW);
+				msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_TITLE, strTitle));
+				msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_CONTENT, strContent));
+				thnStore.send(msg);
 				return true;
 			}
 				case 53:
@@ -2058,11 +2052,13 @@ public class Script
 					LivingThing thnStore = getLivingThing(getString());
 					int intEffectID = (int)parseValue();
 					int duration = (int)parseValue();
-					if (thnStore != null)
-					{
+					if (thnStore != null) {
 						Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnStore.intLocX, thnStore.intLocY);
 						for (LivingThing player : playersInArea) {
-							player.send("" + (char)intEffectID + thnStore.ID + " " + duration + "\n");
+							ListMessage msg = new ListMessage((byte)intEffectID);
+							msg.add(new LongMessage(DuskProtocol.FIELD_ENT_ID, thnStore.ID));
+							msg.add(new IntegerMessage(DuskProtocol.FIELD_FX_DURATION, duration));
+							player.send(msg);
 						}
 					}
 					return true;
@@ -2093,7 +2089,7 @@ public class Script
 					if (thnStore != null && intEffectID != -1) {
 						Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnStore.intLocX, thnStore.intLocY);
 						for (LivingThing player : playersInArea) {
-							player.send("" + (char)intEffectID + thnStore.ID + "\n");
+							player.send(new LongMessage((byte)intEffectID, thnStore.ID));
 						}
 					}
 					return true;
@@ -2143,26 +2139,13 @@ public class Script
 			{
 				LivingThing thnStore = getLivingThing(getString());
 				String strStore2 = getString();
-				int intIndex = strStore2.indexOf("\n");
-				while (intIndex != -1)
+				if(thnStore.batBattle != null && thnStore.popup)
 				{
-				if(thnStore.batBattle != null && thnStore.popup)
-						{
-						thnStore.send(""+(char)33+strStore2.substring(0,intIndex+1));
-						} else
-						{
-						thnStore.chatMessage(strStore2.substring(0,intIndex));
-						}
-					strStore2 = strStore2.substring(intIndex+1);
-					intIndex = strStore2.indexOf("\n");
-				}
-				if(thnStore.batBattle != null && thnStore.popup)
-					{
-					thnStore.send(""+(char)33+strStore2+"\n");
-					} else
-					{
+					thnStore.send(new StringMessage(DuskProtocol.MSG_POPUP, strStore2));
+				} else
+				{
 					thnStore.chatMessage(strStore2);
-					}
+				}
 				return true;
 			}
 				case 60:
@@ -2296,3 +2279,4 @@ public class Script
 	    return 0;
 	}
 }
+

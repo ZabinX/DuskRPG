@@ -3,6 +3,8 @@ import java.util.Date;
 import java.util.Vector;
 import java.util.Iterator;
 import java.util.StringTokenizer;
+import duskz.protocol.*;
+import duskz.protocol.DuskMessage.*;
 
 
 public class Commands
@@ -359,16 +361,16 @@ public class Commands
 						{
 							if (strIP.indexOf(strBlockedIP) != -1)
 							{
-								lt.rafFile.close();
+								rafBannedIP.close();
 								return "Already blocked.";
 							}
-							strBlockedIP = lt.rafFile.readLine();
+							strBlockedIP = rafBannedIP.readLine();
 						}
-						lt.rafFile.close();
+						rafBannedIP.close();
 						rafBannedIP = new RandomAccessFile("conf/blockedIP","rw");
 						rafBannedIP.seek(rafBannedIP.length());
 						rafBannedIP.writeBytes(strIP+"\n");
-						lt.rafFile.close();
+						rafBannedIP.close();
 						return thnStore.strName+"'s IP address has been blocked.";
 					} catch (Exception e)
 					{
@@ -548,7 +550,6 @@ public class Commands
 					File filList = new File(strFileName);
 					String strResult[] = filList.list();
 					StringBuffer strBuff = new StringBuffer();
-					strBuff.append(""+(char)20+strTitle+"\n");
 					for (int i=0;i<strResult.length;i++)
 					{
 						// Only output files that do not end in .dsko
@@ -557,7 +558,10 @@ public class Commands
 							strBuff.append(strResult[i]+"\n");
 						}
 					}
-					lt.send(strBuff.toString());
+					ListMessage msg = new ListMessage(DuskProtocol.MSG_POPUP_VIEW);
+					msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_TITLE, strTitle));
+					msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_CONTENT, strBuff.toString()));
+					lt.send(msg);
 					return null;
 				}
 				return "You can't list that.";
@@ -679,7 +683,10 @@ public class Commands
 					{
 						return "The player named \""+filView.getName()+"\" does not have a pet.";
 					}
-					lt.send((char)18+strArgs+"\n");
+					ListMessage msg = new ListMessage(DuskProtocol.MSG_EDIT_FILE);
+					msg.add(new StringMessage(DuskProtocol.FIELD_EDIT_NAME, strArgs));
+					msg.add(new StringMessage(DuskProtocol.FIELD_EDIT_CONTENT, ""));
+					lt.send(msg);
 					return null;
 				}
 				RandomAccessFile rafView=null;
@@ -692,14 +699,15 @@ public class Commands
 						rafView.readLine();  //Skip over users' password
 					}
 					String strStore2 = rafView.readLine();
-					strBuff.append((char)18+strArgs+"\n");
 					while (strStore2 != null)
 					{
 						strBuff.append(strStore2+"\n");
 						strStore2 = rafView.readLine();
 					}
-					strBuff.append("--EOF--\n");
-					lt.send(strBuff.toString());
+					ListMessage msg = new ListMessage(DuskProtocol.MSG_EDIT_FILE);
+					msg.add(new StringMessage(DuskProtocol.FIELD_EDIT_NAME, strArgs));
+					msg.add(new StringMessage(DuskProtocol.FIELD_EDIT_CONTENT, strBuff.toString()));
+					lt.send(msg);
 				}catch(Exception e)
 				{
 					engGame.log.printError("parseCommand():Reading file for "+filView.getName(), e);
@@ -1559,14 +1567,14 @@ public class Commands
 				if (lt.isPet())
 				{
 					lt.thnMaster.proceed();
-					lt.thnMaster.updateStats();
+					lt.thnMaster.updateInfo();
 				} else
 				{
 					lt.proceed();
 				}
 				engGame.removeDuskObject(lt);
 				engGame.addDuskObject(lt);
-				lt.updateStats();
+				lt.updateInfo();
 				return "Your race has been changed.";
 			}
 		}
@@ -1917,7 +1925,10 @@ public class Commands
 				String strStore2 = strBuff.toString();
 				if (lt.popup)
 				{
-					lt.send((char)20+"There are "+nPlayers+" players online:\n"+strStore2+"\n");
+					ListMessage msg = new ListMessage(DuskProtocol.MSG_POPUP_VIEW);
+					msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_TITLE, "There are "+nPlayers+" players online:"));
+					msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_CONTENT, strStore2));
+					lt.send(msg);
 				} else
 				{
 					lt.chatMessage("\tThere are "+nPlayers+" players online:");
@@ -2188,16 +2199,11 @@ public class Commands
 			{
 				try
 				{
+					String title;
 					if (strArgs == null)
 					{
 						rafHelp = new RandomAccessFile("help","r");
-						if (lt.popup)
-						{
-							lt.send((char)20+"Help\n");
-						} else
-						{
-							lt.chatMessage("Help");
-						}
+						title = "Help";
 					}else
 					{
 						if (strArgs.indexOf("..") != -1)
@@ -2211,13 +2217,10 @@ public class Commands
 							return "There is no help on that subject";
 						}
 						rafHelp = new RandomAccessFile("helpFiles/"+fileName,"r");
-						if (lt.popup)
-						{
-							lt.send((char)20+"Help on "+strArgs+"\n");
-						} else
-						{
-							lt.chatMessage("Help on "+strArgs);
-						}
+						title = "Help on "+strArgs;
+					}
+					if (!lt.popup) {
+						lt.chatMessage(title);
 					}
 				}catch(Exception e)
 				{
@@ -2226,20 +2229,25 @@ public class Commands
 				}
 				try
 				{
+					StringBuffer content = new StringBuffer();
 					strStore = rafHelp.readLine();
 					while (strStore != null)
 					{
 						if (lt.popup)
 						{
-							lt.send(strStore+"\n");
+							content.append(strStore).append("\n");
 						} else
 						{
 							lt.chatMessage(strStore);
 						}
 						strStore = rafHelp.readLine();
 					}
-					if (lt.popup)
-						lt.send("--EOF--\n");
+					if (lt.popup) {
+						ListMessage msg = new ListMessage(DuskProtocol.MSG_POPUP_VIEW);
+						msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_TITLE, "Help"));
+						msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_CONTENT, content.toString()));
+						lt.send(msg);
+					}
 				}catch(Exception e)
 				{
 					engGame.log.printError("parseCommand():While showing "+lt.strName+" help on "+strArgs, e);
@@ -2403,7 +2411,7 @@ public class Commands
 			}
 			if (lt.batBattle == null)
 			{
-				lt.useItem(strArgs,Item.FOOD);
+				lt.useItem(strArgs,3); // 3 = FOOD
 			}else
 			{
 				lt.vctCommands.addElement("eat "+strArgs);
@@ -2418,7 +2426,7 @@ public class Commands
 			}
 			if (lt.batBattle == null)
 			{
-				lt.useItem(strArgs,Item.DRINK);
+				lt.useItem(strArgs,4); // 4 = DRINK
 			}else
 			{
 				lt.vctCommands.addElement("drink "+strArgs);
@@ -2474,8 +2482,8 @@ public class Commands
 					{
 						lt.cash -= intStore;
 						thnStore.cash += intStore;
-						lt.updateStats();
-						thnStore.updateStats();
+						lt.updateInfo();
+						thnStore.updateInfo();
 						thnStore.chatMessage(lt.strName+" gives you "+intStore+"gp.");
 						return "You give "+thnStore.strName+" "+intStore+"gp.";
 					}else
@@ -2622,7 +2630,7 @@ public class Commands
 								lt.vctItems.addElement(itmStore);
 							}
 							lt.updateItems();
-							lt.updateStats();
+							lt.updateInfo();
 						}
 					}
 				}
@@ -2644,7 +2652,7 @@ public class Commands
 						{
 							strArgs = strArgs.substring(6);
 							mrcStore.train(strArgs,quantity,lt.thnFollowing);
-							lt.updateStats();
+							lt.updateInfo();
 						}
 					}
 					return null;
@@ -2656,13 +2664,13 @@ public class Commands
 				{
 					strArgs = strArgs.substring(6);
 					mrcStore.train(strArgs,quantity,lt);
-					lt.updateStats();
+					lt.updateInfo();
 				}else
 				{
 					if (strArgs.startsWith("pet"))
 					{
 						mrcStore.pet(lt);
-						lt.updateStats();
+						lt.updateInfo();
 					}else
 					{
 						Item itmStore = engGame.getItem(strArgs);
@@ -2680,7 +2688,7 @@ public class Commands
 									lt.vctItems.addElement(engGame.getItem(strArgs));
 								}
 								lt.updateItems();
-								lt.updateStats();
+								lt.updateInfo();
 							}
 						}
 					}
@@ -2742,7 +2750,7 @@ public class Commands
 						}
 					}
 					lt.updateItems();
-					lt.updateStats();
+					lt.updateInfo();
 					return null;
 				}
 				return "You cannot sell items to this merchant.";
@@ -2796,7 +2804,7 @@ public class Commands
 				}
 			}
 			lt.updateItems();
-			lt.updateStats();
+				lt.updateInfo();
 			return null;
 		}
 
@@ -2862,8 +2870,8 @@ public class Commands
 				{
 					thnStore.thnFollowing = lt;
 					lt.thnMaster = thnStore;
-					thnStore.updateStats();
-					lt.updateStats();
+					thnStore.updateInfo();
+					lt.updateInfo();
 					return "You are now following "+lt.thnMaster.strName+".";
 				}
 				LivingThing thnStore2 = thnStore;
@@ -2882,8 +2890,8 @@ public class Commands
 				}
 				thnStore.thnFollowing = lt;
 				lt.thnMaster = thnStore;
-				thnStore.updateStats();
-				lt.updateStats();
+				thnStore.updateInfo();
+				lt.updateInfo();
 				return "You are now following "+lt.thnMaster.strName+".";
 			}
 			return "That's not something you can follow.";
@@ -3184,9 +3192,9 @@ public class Commands
 				}
 				lt.vctItems.removeElement(itmStore.strName);
 				if (lt.isPet())
-					lt.thnMaster.updateStats();
+					lt.thnMaster.updateInfo();
 				if (lt.isPlayer())
-					lt.updateStats();
+					lt.updateInfo();
 				lt.updateEquipment();
 				lt.updateItems();
 				return null;
@@ -3408,6 +3416,19 @@ public class Commands
 	private static DuskObject getObjectFromArgs(DuskEngine engGame, LivingThing lt, String strArgs)
 	{
 		DuskObject objStore = null;
+
+		// Try parsing the argument as a direct ID first for commands like "attack 12345"
+		try {
+			long id = Long.parseLong(strArgs);
+			objStore = getObjectByID(engGame, id);
+			if (objStore != null) {
+				return objStore;
+			}
+		} catch (NumberFormatException e) {
+			// Not a raw ID, proceed to name-based lookup below.
+		}
+
+		// Fallback for name-based lookups like "attack goblin" or "look goblin #12345"
 		int lastHash = strArgs.lastIndexOf(" #");
 		if (lastHash != -1) {
 			String idString = strArgs.substring(lastHash + 2);
@@ -3468,4 +3489,5 @@ public class Commands
 		return null;
 	}
 }
+
 

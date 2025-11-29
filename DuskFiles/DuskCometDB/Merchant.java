@@ -134,14 +134,12 @@ public class Merchant extends DuskObject implements java.io.Serializable
 			thnTrainee.maxhp+=10*quantity;
 			thnTrainee.hp+=10*quantity;
 			thnTrainee.updateInfo();
-			thnTrainee.updateStats();
 		}else if (strStore.equalsIgnoreCase("mp"))
 		{
 			thnTrainee.exp -= engGame.traincost*quantity;
 			thnTrainee.maxmp+=10*quantity;
 			thnTrainee.mp+=10*quantity;
 			thnTrainee.updateInfo();
-			thnTrainee.updateStats();
 		}else if (strStore.equalsIgnoreCase("strength"))
 		{
 			if (thnTrainee.stre + quantity > thnTrainee.stre_limit)
@@ -150,7 +148,7 @@ public class Merchant extends DuskObject implements java.io.Serializable
 			}
 			thnTrainee.exp -= engGame.traincost*quantity;
 			thnTrainee.stre+=quantity;
-			thnTrainee.updateStats();
+			thnTrainee.updateInfo();
 		}else if (strStore.equalsIgnoreCase("intelligence"))
 		{
 			if (thnTrainee.inte + quantity > thnTrainee.inte_limit)
@@ -159,7 +157,7 @@ public class Merchant extends DuskObject implements java.io.Serializable
 			}
 			thnTrainee.exp -= engGame.traincost*quantity;
 			thnTrainee.inte+=quantity;
-			thnTrainee.updateStats();
+			thnTrainee.updateInfo();
 		}else if (strStore.equalsIgnoreCase("wisdom"))
 		{
 			if (thnTrainee.wisd + quantity > thnTrainee.wisd_limit)
@@ -168,7 +166,7 @@ public class Merchant extends DuskObject implements java.io.Serializable
 			}
 			thnTrainee.exp -= engGame.traincost*quantity;
 			thnTrainee.wisd+=quantity;
-			thnTrainee.updateStats();
+			thnTrainee.updateInfo();
 		}else if (strStore.equalsIgnoreCase("constitution"))
 		{
 			if (thnTrainee.cons + quantity > thnTrainee.cons_limit)
@@ -177,7 +175,7 @@ public class Merchant extends DuskObject implements java.io.Serializable
 			}
 			thnTrainee.exp -= engGame.traincost*quantity;
 			thnTrainee.cons+=quantity;
-			thnTrainee.updateStats();
+			thnTrainee.updateInfo();
 		}else if (strStore.equalsIgnoreCase("dexterity"))
 		{
 			if (thnTrainee.dext + quantity > thnTrainee.dext_limit)
@@ -186,7 +184,7 @@ public class Merchant extends DuskObject implements java.io.Serializable
 			}
 			thnTrainee.exp -= engGame.traincost*quantity;
 			thnTrainee.dext+=quantity;
-			thnTrainee.updateStats();
+			thnTrainee.updateInfo();
 		}else
 		{
 			int skillLeft = 100 - thnTrainee.getSkill(strStore);
@@ -197,9 +195,10 @@ public class Merchant extends DuskObject implements java.io.Serializable
 			if (thnTrainee.addToSkill(strStore,(byte)quantity))
 			{
 				thnTrainee.exp -= quantity * engGame.traincost;
-				thnTrainee.updateStats();
+				thnTrainee.updateInfo();
 			}
 		}
 	}
 }
+
 

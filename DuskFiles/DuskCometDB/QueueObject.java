@@ -1,42 +1,37 @@
-import java.io.Serializable;
+/*
+All code copyright Tom Weingarten (captaint@home.com) 2000
+Tom Weingarten makes no assurances as to the reliability or
+functionality of this code. Use at your own risk.
 
-class QueueObject extends Object implements Serializable
+You are free to edit or redistribute this code or any portion
+at your wish, under the condition that you do not edit or
+remove this license, and accompany it with all redistributions.
+*/
+import duskz.protocol.DuskMessage;
+
+class QueueObject
 {
-	private QueueObject next;
-	private Object object;
+	DuskMessage o;
+	QueueObject nextObject;
 
-	QueueObject(Object o)
+	public QueueObject(DuskMessage o)
 	{
-        object = o;
-		next = null;
+		this.o = o;
 	}
 
-	Object getObject()
+	public void setNext(QueueObject o)
 	{
-        return object;
+		nextObject = o;
 	}
 
-	synchronized QueueObject next()
+	public DuskMessage getObject()
 	{
-        return next;
+		return o;
 	}
-
-	synchronized void append(QueueObject qo)
+	
+	public QueueObject next()
 	{
-        next = qo;
+		return nextObject;
 	}
-
-	synchronized QueueObject prepend(QueueObject qo)
-	{
-		qo.next = this;
-        return qo;
-	}
-
-	synchronized QueueObject remove()
-	{
-		QueueObject qo = next;
-		next = null;
-        return qo;
-	}
-
 }
+

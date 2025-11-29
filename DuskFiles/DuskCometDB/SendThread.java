@@ -1,50 +1,66 @@
-import java.io.*;
+/*
+All code copyright Tom Weingarten (captaint@home.com) 2000
+Tom Weingarten makes no assurances as to the reliability or
+functionality of this code. Use at your own risk.
 
-public class SendThread implements Runnable
+You are free to edit or redistribute this code or any portion
+at your wish, under the condition that you do not edit or
+remove this license, and accompany it with all redistributions.
+*/
+
+import java.io.DataOutputStream;
+import duskz.protocol.DuskMessage;
+
+
+/**
+* SendThread is a thread that takes any commands off of the player's FifoQueue
+* and sends them to the client.  This frees up the main thread from having to
+* wait on network sends, which can sometimes be slow, especially on dialup
+* connections.
+*
+* @author Tom Weingarten
+*/
+class SendThread implements Runnable
 {
 	LivingThing thnPlayer;
-
-	public SendThread(LivingThing thnStore)
+	FifoQueue queStore;
+	DuskEngine engGame;
+	DataOutputStream stmOut;
+	boolean blnStop = false;
+	
+	public SendThread(LivingThing inPlayer, FifoQueue inQueue, DuskEngine inEngine, DataOutputStream inStream)
 	{
-		thnPlayer = thnStore;
+		thnPlayer = inPlayer;
+		queStore = inQueue;
+		engGame = inEngine;
+		stmOut = inStream;
 	}
-
-    public void run()
-    {
-		SendData sndData;
-		while (!thnPlayer.blnStopThread)
+	
+	public void run()
+	{
+		while(!blnStop)
 		{
-			sndData = (SendData)thnPlayer.qMessage.pop();
 			try
 			{
-				switch (sndData.nDataType)
+				if (!queStore.isEmpty())
 				{
-					case SendData.STRING:
+					DuskMessage msg = queStore.pop();
+					if (msg != null)
 					{
-						byte[] messageBytes = sndData.strData.getBytes("UTF-8");
-						thnPlayer.stmOut.writeShort(messageBytes.length);
-						thnPlayer.stmOut.write(messageBytes);
-						break;
-					}
-					case SendData.BYTE:
-					{
-						thnPlayer.stmOut.writeByte(sndData.bytData);
-						break;
-					}
-					case SendData.LONG:
-					{
-						thnPlayer.stmOut.writeLong(sndData.lngData);
-						break;
+						synchronized(stmOut)
+						{
+							msg.sendMessage(stmOut);
+						}
 					}
 				}
-			} catch(Exception e)
+				Thread.sleep(100);
+			}catch(Exception e)
 			{
-				thnPlayer.engGame.log.printError("SendThread.run():"+sndData.nDataType+" to "+thnPlayer.strName, e);
-				thnPlayer.blnWorking = false;
-				thnPlayer.blnStopThread = true;
+				engGame.log.printError("at SendThread.run()",e);
 				thnPlayer.close();
+				blnStop = true;
 			}
 		}
-    }
+	}
 }
 
