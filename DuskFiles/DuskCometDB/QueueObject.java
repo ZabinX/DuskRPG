@@ -1,22 +1,14 @@
-/*
-All code copyright Tom Weingarten (captaint@home.com) 2000
-Tom Weingarten makes no assurances as to the reliability or
-functionality of this code. Use at your own risk.
-
-You are free to edit or redistribute this code or any portion
-at your wish, under the condition that you do not edit or
-remove this license, and accompany it with all redistributions.
-*/
-import duskz.protocol.DuskMessage;
-
-class QueueObject
+class QueueObject extends Object
 {
-	DuskMessage o;
+	Object o;
 	QueueObject nextObject;
+	QueueObject prevObject;
 
-	public QueueObject(DuskMessage o)
+	public QueueObject(Object o)
 	{
 		this.o = o;
+		nextObject = null;
+		prevObject = null;
 	}
 
 	public void setNext(QueueObject o)
@@ -24,7 +16,12 @@ class QueueObject
 		nextObject = o;
 	}
 
-	public DuskMessage getObject()
+	public void setPrev(QueueObject o)
+	{
+		prevObject = o;
+	}
+
+	public Object getObject()
 	{
 		return o;
 	}
@@ -33,5 +30,20 @@ class QueueObject
 	{
 		return nextObject;
 	}
-}
 
+	public QueueObject prepend(QueueObject qo)
+	{
+		qo.setNext(this);
+		this.setPrev(qo);
+		return qo;
+	}
+
+	public QueueObject remove()
+	{
+		if (prevObject != null)
+			prevObject.setNext(nextObject);
+		if (nextObject != null)
+			nextObject.setPrev(prevObject);
+		return nextObject;
+	}
+}
