@@ -1,71 +1,47 @@
-public class FifoQueue extends Object
+/*
+All code copyright Tom Weingarten (captaint@home.com) 2000
+Tom Weingarten makes no assurances as to the reliability or
+functionality of this code. Use at your own risk.
+
+You are free to edit or redistribute this code or any portion
+at your wish, under the condition that you do not edit or
+remove this license, and accompany it with all redistributions.
+*/
+import duskz.protocol.DuskMessage;
+
+
+class FifoQueue
 {
-	private long lNumEntries;
-	private QueueObject head = null;
-	private QueueObject tail = null;
+	QueueObject qHead;
+	QueueObject qTail;
 
-	public FifoQueue()
+	public synchronized void push(DuskMessage o)
 	{
-		lNumEntries = 0;
+		QueueObject qTemp = new QueueObject(o);
+		if (qTail != null)
+			qTail.setNext(qTemp);
+		qTail = qTemp;
+		if (qHead == null)
+			qHead = qTail;
 	}
 
-	public synchronized boolean isEmpty()
+	public synchronized DuskMessage pop()
 	{
-		return (head==null);
-	}
-
-	public synchronized long size()
-	{
-		return lNumEntries;
-	}
-
-	public synchronized QueueObject head()
-	{
-		return head;
-	}
-
-	public synchronized Object firstElement()
-	{
-		if (head == null)
+		DuskMessage o = null;
+		if (qHead != null)
 		{
-			return null;
+			o = qHead.getObject();
+			qHead = qHead.next();
+			if (qHead == null)
+				qTail = null;
 		}
-		return head.getObject();
+		return o;
 	}
 
-	public synchronized void push(Object o)
+	public boolean isEmpty()
 	{
-		QueueObject qo = new QueueObject(o);
-
-		if (head == null)
-		{
-			head = qo;
-			tail = qo;
-		} else
-		{
-			tail.append(qo);
-			tail = qo;
-		}
-		lNumEntries++;
-		notify();
-	}
-
-	public synchronized Object pop()
-	{
-		while (head==null)
-		{
-			try
-			{
-				wait();
-			} catch (InterruptedException e) { }
-		}
-		QueueObject qo = head;
-		head = head.remove();
-		if (head == null)
-		{
-			tail = null;
-		}
-		lNumEntries--;
-		return qo.getObject();
+		if (qHead == null)
+			return true;
+		return false;
 	}
 }

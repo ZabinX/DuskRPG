@@ -191,7 +191,6 @@ public interface DuskProtocol {
 	 */
 	public final static int MSG_COMMAND = 23;
 	public final static int MSG_BATTLE_EFFECT = 24;
-	public final static int MSG_UPDATE_ACTIONS = 25;
 	public final static int MSG_PLAY_SOUND = 26;
 	public final static int MSG_TILE_ANIMS = 27;
 	public final static int MSG_COLORED_CHAT = 28;
@@ -509,4 +508,35 @@ public interface DuskProtocol {
 	 * Name of opponent
 	 */
 	public final static int FIELD_BATTLE_OPPONENT = 6;
+
+	public final static int MSG_POPUP = 32;
+	public final static int MSG_POPUP_VIEW = 33;
+	public final static int FIELD_POPUP_TITLE = 0;
+	public final static int FIELD_POPUP_CONTENT = 1;
+
+	public final static int MSG_EDIT_FILE = 34;
+	public final static int FIELD_EDIT_NAME = 0;
+	public final static int FIELD_EDIT_CONTENT = 1;
+
+	public final static int FIELD_ENT_NAME = 0;
+	public final static int FIELD_ENT_TYPE = 1;
+	public final static int FIELD_ENT_ID = 2;
+	public final static int FIELD_ENT_X = 3;
+	public final static int FIELD_ENT_Y = 4;
+	public final static int FIELD_ENT_IMG = 5;
+	public final static int FIELD_ENT_STEP = 6;
+
+	public final static int MSG_MERCHANT_BUY = 35;
+	public final static int MSG_BATTLE_FLAG = 36;
+	public final static int FIELD_BATTLE_FLAG = 1;
+
+	public final static int MSG_INIT_MUSIC = 37;
+	public final static int FIELD_MUSIC_COUNT = 0;
+	public final static int FIELD_MUSIC_LIST = 1;
+
+	public final static int MSG_PLAY_MUSIC = 38;
+	public final static int MSG_STOP_MUSIC = 39;
+	public final static int MSG_HALT = 40;
+
+	public final static int FIELD_FX_DURATION = 1;
 }

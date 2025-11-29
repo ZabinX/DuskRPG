@@ -303,7 +303,6 @@ public class Battle
 			thnStore.bytSide = 0;
 			thnStore.blnCanMove=true;
             thnStore.updateInfo();
-            thnStore.updateStats();
             thnStore.updateActions();
             thnStore.playMusic(0);
 		}
@@ -315,7 +314,6 @@ public class Battle
 			thnStore.bytSide = 0;
 			thnStore.blnCanMove=true;
             thnStore.updateInfo();
-            thnStore.updateStats();
             thnStore.updateActions();
             thnStore.playMusic(0);
 		}
@@ -365,18 +363,18 @@ public class Battle
 		}
 		if (thnStore.popup)
 		{
-			thnStore.send(""+(char)33+"You have fled from battle\n");
+			thnStore.send(new StringMessage(DuskProtocol.MSG_POPUP, "You have fled from battle"));
 		} else
 		{
 			thnStore.chatMessage("You have fled from battle");
 		}
 		splitMoney(thnStore, (int)(thnStore.cash*engGame.gpfleemod));
 		splitExp(thnStore, (int)(thnStore.exp*engGame.expfleemod));
+		thnStore.updateInfo();
 		thnStore.batBattle = null;
 		thnStore.bytSide = 0;
 		thnStore.blnCanMove=true;
 		thnStore.updateInfo();
-		thnStore.updateStats();
 		thnStore.updateActions();
 		thnStore.playMusic(0);
 		if (thnStore.thnFollowing != null && thnStore.thnFollowing.isPet())
@@ -418,7 +416,7 @@ public class Battle
 		}
 		if (thnStore.popup)
 		{
-			thnStore.send(""+(char)33+"You have lost "+money+" gp.\n");
+			thnStore.send(new StringMessage(DuskProtocol.MSG_POPUP, "You have lost "+money+" gp."));
 		} else
 		{
 			thnStore.chatMessage("You have lost "+money+" gp.");
@@ -457,6 +455,7 @@ public class Battle
 				if (thnStore2.isPlayer() && i2 != 0)
 				{
 					thnStore2.chatMessage("\tYou get "+i2+" gp.");
+					thnStore2.updateInfo();
 				}
 			}
 		}catch(Exception e)
@@ -469,7 +468,7 @@ public class Battle
 	{
 		if (thnStore.popup)
 		{
-			thnStore.send(""+(char)33+"You have lost "+exp+" exp.\n");
+			thnStore.send(new StringMessage(DuskProtocol.MSG_POPUP, "You have lost "+exp+" exp."));
 		} else
 		{
 			thnStore.chatMessage("You have lost "+exp+" exp.");
@@ -524,6 +523,7 @@ public class Battle
 					)/3));
 					thnStore2.chatMessage("You get "+i2+" exp.");
 					thnStore2.exp += i2;
+					thnStore2.updateInfo();
 				}
 				thnStore2.lngDamDone = 0;
 			}
@@ -535,7 +535,6 @@ public class Battle
 
 	void chatMessage(String strStore)
 	{
-		int i;
 		LivingThing thnStore=null;
 		for (int i=0;i<vctSide1.size();i++)
 		{
@@ -545,9 +544,9 @@ public class Battle
 				thnStore.send(new StringMessage(DuskProtocol.MSG_BATTLE_CHAT, strStore));
 			}
 		}
-		for (int i=0;i<vctSide2.size();i++)
+		for (int j=0;j<vctSide2.size();j++)
 		{
-			thnStore = (LivingThing)vctSide2.elementAt(i);
+			thnStore = (LivingThing)vctSide2.elementAt(j);
 			if (thnStore.isPlayer())
 			{
 				thnStore.send(new StringMessage(DuskProtocol.MSG_BATTLE_CHAT, strStore));
@@ -637,7 +636,6 @@ public class Battle
 			if (thnStore.isPlayer())
 			{
 		thnStore.updateInfo();
-		thnStore.updateStats();
 			}
 		}
 		for (i=0;i<vctSide2.size();i++)
@@ -646,7 +644,6 @@ public class Battle
 			if (thnStore.isPlayer())
 			{
 		thnStore.updateInfo();
-		thnStore.updateStats();
 			}
 		}
 	}
@@ -921,17 +918,17 @@ public class Battle
 					thnMember.removeFromGroup();
 					chatMessage("\t" + thnMember.strName + " is killed.");
 					if (thnMember.popup) {
-						thnMember.send("" + (char) 33 + "\tYou have died.\n");
+						thnMember.send(new StringMessage(DuskProtocol.MSG_POPUP, "\tYou have died."));
 					} else {
 						thnMember.chatMessage("\tYou have died.");
 					}
 					splitMoney(thnMember, (int) (thnMember.cash * engGame.gplosemod));
 					splitExp(thnMember, (int) (thnMember.exp * engGame.explosemod));
+					thnMember.updateInfo();
 					thnMember.batBattle = null;
 					thnMember.bytSide = 0;
 					thnMember.blnCanMove = true;
 					thnMember.updateInfo();
-					thnMember.updateStats();
 					thnMember.updateActions();
 					thnMember.playMusic(0);
 					if (thnKiller != null) {
@@ -1021,6 +1018,7 @@ public class Battle
 					thnMember.chatMessage("\tYou have been wounded.");
 					splitMoney(thnMember, (int) (thnMember.cash * engGame.gplosemod));
 					splitExp(thnMember, (int) (thnMember.exp * engGame.explosemod));
+					thnMember.updateInfo();
 					thnMember.batBattle = null;
 					thnMember.bytSide = 0;
 					thnMember.blnCanMove = true;
@@ -1064,7 +1062,7 @@ public class Battle
 					thnMember.removeFromGroup();
 					chatMessage("\t" + thnMember.strName + " is killed.");
 					if (thnMember.popup) {
-						thnMember.send("" + (char) 33 + "\tYou have died.\n");
+						thnMember.send(new StringMessage(DuskProtocol.MSG_POPUP, "\tYou have died."));
 					} else {
 						thnMember.chatMessage("\tYou have died.");
 					}
@@ -1074,7 +1072,6 @@ public class Battle
 					thnMember.bytSide = 0;
 					thnMember.blnCanMove = true;
 					thnMember.updateInfo();
-					thnMember.updateStats();
 					thnMember.updateActions();
 					thnMember.playMusic(0);
 					if (thnKiller != null) {

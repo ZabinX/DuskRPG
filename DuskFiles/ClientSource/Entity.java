@@ -78,8 +78,8 @@ public class Entity
              eum.x,
              eum.y,
              eum.image,
-             eum.step,
-             eum.type);
+             eum.imageStep,
+             eum.entityType);
     }
 }
 

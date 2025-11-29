@@ -14,6 +14,7 @@ remove this license, and accompany it with all redistributions.
 //3-Food
 //4-Drink
 
+import duskz.protocol.Wearing;
 
 /**
 *An Item is an object that can be picked up,

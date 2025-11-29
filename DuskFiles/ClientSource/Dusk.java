@@ -368,7 +368,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 
-	/* public void preloadAudioInBackground() {
+	public void preloadAudioInBackground() {
 		new Thread(() -> {
 			SwingUtilities.invokeLater(() -> addText("Loading audio...!!!FREEZE WARNING!!! CLICK THE SLEEP AND WAKE BUTTON TO START PLAYING!!!\n"));
 			final int numSoundEffects = 12;
@@ -433,7 +433,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 			SwingUtilities.invokeLater(() -> addText("Audio finished loading.\n"));
 		}).start();
-	} */
+	}
 
 	public void spawnBloodParticles(Entity attacker, Entity defender, int damage) {
 		if (defender == null) return;
@@ -654,13 +654,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				case(DuskProtocol.MSG_PLAY_SOUND):
 				{
 					IntegerMessage im = (IntegerMessage)msg;
-					/* try
+					try
 					{
 						if (audSFX != null && im.value >= 0 && im.value < audSFX.length && audSFX[im.value] != null) {
 							audSFX[im.value].setFramePosition(0);
 							audSFX[im.value].start();
 						}
-					}catch(Exception e){} */
+					}catch(Exception e){}
 					break;
 				}
 				case(DuskProtocol.MSG_TILE_ANIMS):
@@ -727,7 +727,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				case(DuskProtocol.MSG_UPDATE_ENTITY):
 				{
 					EntityListMessage elm = (EntityListMessage)msg;
-					Entity entStore = hmpEntities.get(elm.id);
+					entStore = hmpEntities.get(elm.id);
 					if (entStore != null) {
 						for (DuskMessage m : elm.value) {
 							if (m.name == DuskProtocol.FIELD_ENTITY_FLAGS) {
@@ -920,8 +920,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						stats.append("Con: ").append(cons).append("\n");
 						stats.append("Wis: ").append(wisd).append("\n\n");
 
-						String[] conditions = lm.getStringList(DuskProtocol.FIELD_INFO_CONDITIONS);
-						if (conditions != null && conditions.length > 0) {
+						List<String> conditions = lm.getStringList(DuskProtocol.FIELD_INFO_CONDITIONS);
+						if (conditions != null && !conditions.isEmpty()) {
 							stats.append("Conditions:\n");
 							for (String s : conditions) {
 								stats.append("  ").append(s).append("\n");
@@ -959,7 +959,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							vctSell.addElement(item.cost + "gp)" + item.name);
 						}
 
-						switch (item.wearLocation)
+						switch (item.type)
 						{
 						case (0): vctChoiceDropItems.addElement(item.name); break;
 						case (1): vctChoiceDropItems.addElement(item.name); frame.frmEquipment.chcWield.addItem(item.name); break;
@@ -1340,8 +1340,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					{
 						strSet = strStore.substring(1);
 					}
-				}else
-				{
+				} else {
 				sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, strStore));
 				}
 	    		frame.txtInput.setText("");
