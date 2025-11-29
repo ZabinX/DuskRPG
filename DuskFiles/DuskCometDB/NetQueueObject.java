@@ -7,40 +7,29 @@ You are free to edit or redistribute this code or any portion
 at your wish, under the condition that you do not edit or
 remove this license, and accompany it with all redistributions.
 */
-import java.io.Serializable;
+import duskz.protocol.DuskMessage;
 
-class QueueObject implements Serializable
+class NetQueueObject
 {
-	Object o;
-	QueueObject nextObject;
+	DuskMessage o;
+	NetQueueObject nextObject;
 
-	public QueueObject(Object o)
+	public NetQueueObject(DuskMessage o)
 	{
 		this.o = o;
 	}
 
-	public void setNext(QueueObject o)
+	public void setNext(NetQueueObject o)
 	{
 		nextObject = o;
 	}
 
-	public Object getObject()
+	public DuskMessage getObject()
 	{
 		return o;
 	}
 
-	public QueueObject next()
-	{
-		return nextObject;
-	}
-
-	public QueueObject prepend(QueueObject qo)
-	{
-		qo.setNext(this);
-		return qo;
-	}
-
-	public QueueObject remove()
+	public NetQueueObject next()
 	{
 		return nextObject;
 	}

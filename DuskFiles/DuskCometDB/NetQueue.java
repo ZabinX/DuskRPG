@@ -7,27 +7,27 @@ You are free to edit or redistribute this code or any portion
 at your wish, under the condition that you do not edit or
 remove this license, and accompany it with all redistributions.
 */
+import duskz.protocol.DuskMessage;
 
-class FifoQueue
+
+class NetQueue
 {
-	QueueObject qHead;
-	QueueObject qTail;
-	int intSize=0;
+	NetQueueObject qHead;
+	NetQueueObject qTail;
 
-	public synchronized void push(Object o)
+	public synchronized void push(DuskMessage o)
 	{
-		QueueObject qTemp = new QueueObject(o);
+		NetQueueObject qTemp = new NetQueueObject(o);
 		if (qTail != null)
 			qTail.setNext(qTemp);
 		qTail = qTemp;
 		if (qHead == null)
 			qHead = qTail;
-		intSize++;
 	}
 
-	public synchronized Object pop()
+	public synchronized DuskMessage pop()
 	{
-		Object o = null;
+		DuskMessage o = null;
 		if (qHead != null)
 		{
 			o = qHead.getObject();
@@ -35,7 +35,6 @@ class FifoQueue
 			if (qHead == null)
 				qTail = null;
 		}
-		intSize--;
 		return o;
 	}
 
@@ -44,10 +43,5 @@ class FifoQueue
 		if (qHead == null)
 			return true;
 		return false;
-	}
-
-	public int size()
-	{
-		return intSize;
 	}
 }
