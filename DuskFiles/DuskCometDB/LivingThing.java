@@ -3199,39 +3199,17 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		}
 	}
 
-	public String getNextInput()
-	{
-		engGame.log.printMessage(Log.INFO, "Waiting for next input...");
-		try {
-			short len = stmIn.readShort();
-			engGame.log.printMessage(Log.INFO, "Received message length: " + len);
-			if (len < 0) throw new IOException("Invalid message length: " + len);
-			byte[] buffer = new byte[len];
-			stmIn.readFully(buffer);
-			engGame.log.printMessage(Log.INFO, "Read message data, length: " + buffer.length);
-			ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
-			DataInputStream dis = new DataInputStream(bais);
-			DuskMessage msg = DuskMessage.receiveMessage(dis);
-			engGame.log.printMessage(Log.INFO, "Deserialized message of type: " + msg.getClass().getSimpleName());
-			if (msg.name == DuskProtocol.MSG_COMMAND) {
-				StringMessage sm = (StringMessage) msg;
-				engGame.log.printMessage(Log.INFO, "Received command: " + sm.value);
-				return sm.value;
-			}
-		} catch (Exception e) {
-			engGame.log.printError("getNextInput() caught exception", e);
-			close();
-		}
-		engGame.log.printMessage(Log.INFO, "getNextInput() received non-command message or error, returning empty.");
-		return "";
-	}
-
 	public void run()
 	{
 		thrConnection = Thread.currentThread();
 		try
 		{
-			if (!getPlayer())
+			do
+			{
+				chatMessage("enter your name:");
+				strName = getNextStringMessageInput();
+			} while (!getPlayer());
+			if (!blnWorking)
 				return;
 		}catch(Exception e)
 		{
@@ -3321,23 +3299,36 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		}
 	}
 
+	public String getNextStringMessageInput() throws IOException {
+		short length = stmIn.readShort();
+		if (length < 0 || length > 32768) {
+			throw new IOException("Invalid message length received: " + length);
+		}
+		byte[] buffer = new byte[length];
+		stmIn.readFully(buffer);
+		ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
+		DataInputStream dis = new DataInputStream(bais);
+		try {
+			StringMessage msg = (StringMessage)DuskMessage.receiveMessage(dis);
+			return msg.value;
+		} catch (Exception e) {
+			throw new IOException("Failed to deserialize StringMessage", e);
+		}
+	}
 	boolean getPlayer()
 	{
 		try {
-			chatMessage("enter your name:");
-			strName = getNextInput();
-			while (!engGame.isGoodName(strName)) {
+			if (!engGame.isGoodName(strName)) {
 				chatMessage("Not a valid name. This may because you left it blank, used invalid symbols, or made it too long. Please try again.");
-				strName = getNextInput();
+				return false;
 			}
 	
 			LivingThing loadedPlayer = (LivingThing)engGame.dbManager.get("player/" + strName.toLowerCase());
-			File filPlayer = new File("../DuskComet-Richter/users/"+strName.toLowerCase());
 	
 			if (loadedPlayer != null) {
-				// Player exists in DB, check password
+				// Player exists, check password
 				chatMessage("enter your password:");
-				if (!getNextInput().equals(loadedPlayer.strPWord)) {
+				if (!getNextStringMessageInput().equals(loadedPlayer.strPWord)) {
 					chatMessage("Incorrect Password.");
 					return false;
 				}
@@ -3383,75 +3374,79 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 						}
 					}
 				}
+				updateInfo();
 				this.vctEntities = new Vector(0,10);
 				this.vctFlags = new Vector(0,1);
 				this.vctCommands = new Vector(0,3);
 				this.vctMovement = new Vector(0,5);
 				this.vctIgnore = loadedPlayer.vctIgnore != null ? loadedPlayer.vctIgnore : new Vector(0);
-			} else if (filPlayer.exists()) {
-				// Player not in DB, but exists in flat file
-				chatMessage("Player found in flat file, migrating to database...");
-				rafFile = new RandomAccessFile(filPlayer,"r");
-				strPWord = rafFile.readLine();
-				chatMessage("enter your password:");
-				if (!getNextInput().equals(strPWord)) {
-					chatMessage("Incorrect Password.");
-					return false;
-				}
-				// Initialize new player fields before parsing
-				equWorn = new Equipment();
-				vctItems = new ItemList();
-				vctSkills = new Vector(0,5);
-				vctSpells = new Vector(0,5);
-				vctConditions = new Vector(0,5);
-				vctEntities = new Vector(0,10);
-				vctFlags = new Vector(0,1);
-				vctCommands = new Vector(0,3);
-				vctMovement = new Vector(0,5);
-				vctIgnore = new Vector(0);
-				String strStore = rafFile.readLine();
-				while (strStore != null && !strStore.equals(".")) {
-					parseUserFile(strStore);
-					strStore = rafFile.readLine();
-				}
-				rafFile.close();
 			} else {
-				// New player, confirm name first
-				chatMessage(strName+", Is that correct? (yes/no)");
-				if (!getNextInput().equalsIgnoreCase("yes")) {
-					chatMessage("Then what IS your name?");
-					return false;
-				}
-				chatMessage("Enter a new password:");
-				strPWord = getNextInput();
-				chatMessage("Confirm that password:");
-				while (!strPWord.equals(getNextInput())) {
-					chatMessage("Passwords did not match, enter a new password:");
-					strPWord = getNextInput();
+				// Player not found in DB, try to load from flat file
+				File filPlayer = new File("../DuskComet-Richter/users/"+strName.toLowerCase());
+				if (filPlayer.exists()) {
+					chatMessage("Player found in flat file, migrating to database...");
+					rafFile = new RandomAccessFile(filPlayer,"r");
+					strPWord = rafFile.readLine();
+					chatMessage("enter your password:");
+					if (!getNextStringMessageInput().equals(strPWord)) {
+						chatMessage("Incorrect Password.");
+						return false;
+					}
+					// Initialize new player fields before parsing
+					equWorn = new Equipment();
+					vctItems = new ItemList();
+					vctSkills = new Vector(0,5);
+					vctSpells = new Vector(0,5);
+					vctConditions = new Vector(0,5);
+					vctEntities = new Vector(0,10);
+					vctFlags = new Vector(0,1);
+					vctCommands = new Vector(0,3);
+					vctMovement = new Vector(0,5);
+					vctIgnore = new Vector(0);
+					String strStore = rafFile.readLine();
+					while (strStore != null && !strStore.equals(".")) {
+						parseUserFile(strStore);
+						strStore = rafFile.readLine();
+					}
+					rafFile.close();
+				} else {
+					// New player
+					chatMessage(strName+", Is that correct? (yes/no)");
+					if (!getNextStringMessageInput().equalsIgnoreCase("yes")) {
+						chatMessage("Then what IS your name?");
+						return false;
+					}
+					chatMessage("Enter a new password:");
+					strPWord = getNextStringMessageInput();
 					chatMessage("Confirm that password:");
+					while (!strPWord.equals(getNextStringMessageInput())) {
+						chatMessage("Passwords did not match, enter a new password:");
+						strPWord = getNextStringMessageInput();
+						chatMessage("Confirm that password:");
+					}
+					// Initialize new player fields
+					intLocX = 200;
+					intLocY = 200;
+					equWorn = new Equipment();
+					vctItems = new ItemList();
+					vctSkills = new Vector(0,5);
+					vctSpells = new Vector(0,5);
+					vctConditions = new Vector(0,5);
+					vctEntities = new Vector(0,10);
+					vctFlags = new Vector(0,1);
+					vctCommands = new Vector(0,3);
+					vctMovement = new Vector(0,5);
+					vctIgnore = new Vector(0);
+					hp = 40;
+					maxhp = 40;
+					mp = 10;
+					maxmp = 10;
+					stre = 10;
+					inte = 10;
+					dext = 10;
+					cons = 10;
+					wisd = 10;
 				}
-				// Initialize new player fields
-				intLocX = 100;
-				intLocY = 100;
-				equWorn = new Equipment();
-				vctItems = new ItemList();
-				vctSkills = new Vector(0,5);
-				vctSpells = new Vector(0,5);
-				vctConditions = new Vector(0,5);
-				vctEntities = new Vector(0,10);
-				vctFlags = new Vector(0,1);
-				vctCommands = new Vector(0,3);
-				vctMovement = new Vector(0,5);
-				vctIgnore = new Vector(0);
-				hp = 40;
-				maxhp = 40;
-				mp = 10;
-				maxmp = 10;
-				stre = 10;
-				inte = 10;
-				dext = 10;
-				cons = 10;
-				wisd = 10;
 			}
 	
 			// check for multiple logins
@@ -3499,10 +3494,10 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				}
 				if (isPet())
 				{
-					strStore = thnMaster.getNextInput().toLowerCase();
+					strStore = thnMaster.getNextStringMessageInput().toLowerCase();
 				} else
 				{
-					strStore = getNextInput().toLowerCase();
+					strStore = getNextStringMessageInput().toLowerCase();
 				}
 				File filCheck = new File(strRaceDir+"/"+strStore);
 				while (strStore.equals("") || !filCheck.exists())
@@ -3516,10 +3511,10 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 					}
 					if (isPet())
 					{
-						strStore = thnMaster.getNextInput().toLowerCase();
+						strStore = thnMaster.getNextStringMessageInput().toLowerCase();
 					} else
 					{
-						strStore = getNextInput().toLowerCase();
+						strStore = getNextStringMessageInput().toLowerCase();
 					}
 					filCheck = new File(strRaceDir+"/"+strStore);
 				}
