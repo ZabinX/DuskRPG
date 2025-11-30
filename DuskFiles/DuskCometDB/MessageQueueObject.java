@@ -9,17 +9,17 @@ remove this license, and accompany it with all redistributions.
 */
 import duskz.protocol.DuskMessage;
 
-class QueueObject
+class MessageQueueObject
 {
 	DuskMessage o;
-	QueueObject nextObject;
+	MessageQueueObject nextObject;
 
-	public QueueObject(DuskMessage o)
+	public MessageQueueObject(DuskMessage o)
 	{
 		this.o = o;
 	}
 
-	public void setNext(QueueObject o)
+	public void setNext(MessageQueueObject o)
 	{
 		nextObject = o;
 	}

@@ -10,14 +10,14 @@ remove this license, and accompany it with all redistributions.
 import duskz.protocol.DuskMessage;
 
 
-class FifoQueue
+class MessageFifoQueue
 {
-	QueueObject qHead;
-	QueueObject qTail;
+	MessageQueueObject qHead;
+	MessageQueueObject qTail;
 
 	public synchronized void push(DuskMessage o)
 	{
-		QueueObject qTemp = new QueueObject(o);
+		MessageQueueObject qTemp = new MessageQueueObject(o);
 		if (qTail != null)
 			qTail.setNext(qTemp);
 		qTail = qTemp;

@@ -2263,9 +2263,9 @@ public class Script
 			if (strStore.equalsIgnoreCase("count"))
 			{
 				String strStore2 = getString();
-				FifoQueue qStore;
+				ItemLifoQueue qStore;
 				long total=0;
-				qStore = (FifoQueue)target.vctItems.get(strStore2);
+				qStore = (ItemLifoQueue)target.vctItems.get(strStore2);
 				if (qStore != null)
 				{
 					total = qStore.size();

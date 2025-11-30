@@ -15,14 +15,14 @@ public class ItemList extends Hashtable
 
 	public void addElement(Item itmStore)
 	{
-		LifoQueue qTemp;
+		ItemLifoQueue qTemp;
 		if (contains(itmStore.strName))
 		{
-			qTemp = (LifoQueue)get(itmStore.strName);
+			qTemp = (ItemLifoQueue)get(itmStore.strName);
 			qTemp.push(itmStore);
 		} else
 		{
-			qTemp = new LifoQueue();
+			qTemp = new ItemLifoQueue();
 			qTemp.push(itmStore);
 			super.put(itmStore.strName.toLowerCase(), qTemp);
 		}
@@ -30,11 +30,11 @@ public class ItemList extends Hashtable
 
 	public Item removeElement(String strItemName)
 	{
-		LifoQueue qTemp;
+		ItemLifoQueue qTemp;
 		Item itmStore;
 		if (contains(strItemName))
 		{
-			qTemp = (LifoQueue)get(strItemName);
+			qTemp = (ItemLifoQueue)get(strItemName);
 			itmStore = (Item)qTemp.pop();
 			if (itmStore == null || qTemp.size() < 1)
 			{
@@ -54,10 +54,10 @@ public class ItemList extends Hashtable
 		StringBuffer invBuffer = new StringBuffer();
 		Iterator iter = keySet().iterator();
 		Item itmStore;
-		LifoQueue qStore;
+		ItemLifoQueue qStore;
 		while(iter.hasNext())
 		{
-			qStore = (LifoQueue)get(iter.next());
+			qStore = (ItemLifoQueue)get(iter.next());
 			itmStore = (Item)qStore.firstElement();
 			invBuffer.append(""+(char)3).append(qStore.size()).append(" ").append(itmStore.strName).append("\n");
 		}
@@ -74,11 +74,11 @@ public class ItemList extends Hashtable
 		StringBuffer invBuffer = new StringBuffer();
 		Iterator iter = keySet().iterator();
 		Item itmStore;
-		LifoQueue qStore;
-		QueueObject qoStore;
+		ItemLifoQueue qStore;
+		ItemQueueObject qoStore;
 		while(iter.hasNext())
 		{
-			qStore = (LifoQueue)get(iter.next());
+			qStore = (ItemLifoQueue)get(iter.next());
 			qoStore = qStore.head();
 			while(qoStore.next() != null)
 			{
