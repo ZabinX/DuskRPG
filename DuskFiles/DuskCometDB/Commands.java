@@ -186,7 +186,7 @@ public class Commands
 				thnStore.chatMessage(lt.strName+" has invited you to join the clan "+lt.strClan+". If you accept, type yes.");
 				try
 				{
-					if (thnStore.getNextInput().equalsIgnoreCase("yes"))
+					if (thnStore.getNextStringMessageInput().equalsIgnoreCase("yes"))
 					{
 						thnStore.strClan = lt.strClan;
 						if (thnStore.privs == 1)
@@ -866,7 +866,7 @@ public class Commands
 						*/
 						rafView.writeBytes(strStore+"\n");
 					}
-					strStore = lt.getNextInput();
+					strStore = lt.getNextStringMessageInput();
 					// The client now sends the entire content in a single framed message.
 					// The "--EOF--" delimiter is no longer used for this command.
 					rafView.writeBytes(strStore);
@@ -2912,7 +2912,7 @@ public class Commands
 					lt.chatMessage("Do you really want to permanently erase your pet?");
 					try
 					{
-						if (lt.getNextInput().equalsIgnoreCase("yes"))
+					if (lt.getNextStringMessageInput().equalsIgnoreCase("yes"))
 						{
 							lt.thnFollowing.close();
 							File deleteme = new File("pets/"+lt.strName.toLowerCase());
@@ -2983,7 +2983,7 @@ public class Commands
 			{
 				lt.halt();
 				lt.chatMessage("Are you sure you want to drop out of your clan? If so type yes.");
-				if (lt.getNextInput().equalsIgnoreCase("yes"))
+				if (lt.getNextStringMessageInput().equalsIgnoreCase("yes"))
 				{
 					lt.strClan = "none";
 					if (lt.privs==1)
@@ -3039,16 +3039,16 @@ public class Commands
 			{
 				lt.halt();
 				lt.chatMessage("Enter your current password.");
-				String strOldPass = lt.getNextInput();
+				String strOldPass = lt.getNextStringMessageInput();
 				if (!strOldPass.equals(lt.strPWord))
 				{
 					lt.proceed();
 					return "Sorry, that is not your password.";
 				}
 				lt.chatMessage("Enter a new password.");
-				String strNewPass = lt.getNextInput();
+				String strNewPass = lt.getNextStringMessageInput();
 				lt.chatMessage("Repeat that password.");
-				String strNewPassRepeat = lt.getNextInput();
+				String strNewPassRepeat = lt.getNextStringMessageInput();
 				if (strNewPass == null)
 				{
 					lt.proceed();

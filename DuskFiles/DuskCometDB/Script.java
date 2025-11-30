@@ -1964,7 +1964,7 @@ public class Script
 					thnStore.chatMessage(getString());
 					try
 					{
-						strInput = thnStore.getNextInput();
+						strInput = thnStore.getNextStringMessageInput();
 						varVariables.addVariable(getString(),strInput);
 					}catch(Exception e)
 					{
