@@ -2079,13 +2079,13 @@ public class Commands
 					PlayerMerchant pmrStore = (PlayerMerchant)objStore;
 					boolean blnEmptyMerchant = true;
 					Iterator iter = pmrStore.vctItems.keySet().iterator();
-					Vector vctStore;
+					LifoQueue<Item> qStore;
 					String strSpacer;
 					Item itmStore;
 					while(iter.hasNext())
 					{
-						vctStore = (Vector)(pmrStore.vctItems.get(iter.next()));
-						itmStore = (Item)vctStore.firstElement();
+						qStore = (LifoQueue<Item>)(pmrStore.vctItems.get(iter.next()));
+						itmStore = qStore.firstElement();
 						strStore = itmStore.strName;
 						strSpacer = "\t";
 						if (strStore.length() < 11)
@@ -3489,5 +3489,6 @@ public class Commands
 		return null;
 	}
 }
+
 
 

@@ -23,91 +23,84 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/**
- * DuskMessage for a client view map update.
- *
- * @author Michael Zucchi <notzed@gmail.com>
- */
 public class MapMessage extends DuskMessage {
-
-	public short x;
-	public short y;
-	public short width;
-	public short height;
-	// TODO: decide whether i want a ground layer, or entities to contain the layer they're rendered on
-	// Latter is more flexible.
-	public short groundLayer;
-	public short layerCount;
-	public short[][] map;
+	public int x;
+	public int y;
+	public int width;
+	public int height;
+	public short[][][] map;
 
 	public MapMessage() {
 	}
 
-	public MapMessage(int name, int x, int y, int width, int height) {
+	public MapMessage(byte name, int x, int y, int width, int height) {
 		super(name);
-		this.x = (short) x;
-		this.y = (short) y;
-		this.width = (short) width;
-		this.height = (short) height;
-	}
-
-	public void readMap(short[][][] layers) {
-		for (int l = 0; l < layers.length; l++) {
-			short[][] layer = layers[l];
-			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++) {
-					layer[i][j] = map[l][i * height + j];
-				}
-			}
-		}
-	}
-
-	public MapMessage(int name, int width, int height, int locx, int locy, int groundLayer, int layerCount, short[][] map) {
-		super(name);
-
-		this.x = (short) locx;
-		this.y = (short) locy;
-		this.width = (short) width;
-		this.height = (short) height;
-		this.groundLayer = (short)groundLayer;
-		this.layerCount = (short)layerCount;
-		this.map = map;
-	}
-
-	@Override
-	public void send(DataOutputStream ostream) throws IOException {
-		super.send(ostream);
-		ostream.writeShort(x);
-		ostream.writeShort(y);
-		ostream.writeShort(width);
-		ostream.writeShort(height);
-		ostream.writeShort(groundLayer);
-		ostream.writeShort(layerCount);
-		for (int l = 0; l < layerCount; l++) {
-			short[] layer = map[l];
-			for (int i = 0; i < width * height; i++)
-				ostream.writeShort(layer[i]);
-		}
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.map = new short[3][width][height];
 	}
 
 	@Override
 	public void receive(DataInputStream istream) throws IOException {
-		int len;
-
 		super.receive(istream);
 		x = istream.readShort();
 		y = istream.readShort();
 		width = istream.readShort();
 		height = istream.readShort();
-		groundLayer = istream.readShort();
-		layerCount = istream.readShort();
-		len = width * height;
-		map = new short[layerCount][];
-		for (int l = 0; l < layerCount; l++) {
-			short[] layer = new short[width * height];
-			map[l] = layer;
-			for (int i = 0; i < len; i++) {
-				layer[i] = istream.readShort();
+		map = new short[3][width][height];
+		for (int l = 0; l < 3; l++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
+					map[l][i][j] = istream.readShort();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void send(DataOutputStream out) throws IOException {
+		super.send(out);
+		out.writeShort(x);
+		out.writeShort(y);
+		out.writeShort(width);
+		out.writeShort(height);
+		for (int l = 0; l < 3; l++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
+					out.writeShort(map[l][i][j]);
+				}
+			}
+		}
+	}
+
+	public void writeMap(short[][][] layers, int x, int y) {
+		int mapWidth = layers[0].length;
+		int mapHeight = layers[0][0].length;
+	
+		for (int l = 0; l < 3; l++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
+					int sourceX = x + i;
+					int sourceY = y + j;
+	
+					if (sourceX >= 0 && sourceX < mapWidth && sourceY >= 0 && sourceY < mapHeight) {
+						map[l][i][j] = layers[l][sourceX][sourceY];
+					} else {
+						map[l][i][j] = 0; // Or some other default/empty tile value
+					}
+				}
+			}
+		}
+	}
+
+	public void readMap(short[][][] layers) {
+		for (int l = 0; l < 3; l++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
+					layers[l][i][j] = map[l][i][j];
+				}
 			}
 		}
 	}
@@ -117,4 +110,5 @@ public class MapMessage extends DuskMessage {
 		return TC_MAP;
 	}
 }
+
 

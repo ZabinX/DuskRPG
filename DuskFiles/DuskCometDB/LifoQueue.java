@@ -1,9 +1,9 @@
 import java.io.Serializable;
 
-public class LifoQueue extends Object implements Serializable
+public class LifoQueue<T> extends Object implements Serializable
 {
 	private long lNumEntries;
-	private QueueObject head = null;
+	private QueueObject<T> head = null;
 
 	public LifoQueue()
 	{
@@ -20,12 +20,12 @@ public class LifoQueue extends Object implements Serializable
 		return lNumEntries;
 	}
 
-	public synchronized QueueObject head()
+	public synchronized QueueObject<T> head()
 	{
 		return head;
 	}
 
-	public synchronized Object firstElement()
+	public synchronized T firstElement()
 	{
 		if (head == null)
 		{
@@ -34,9 +34,9 @@ public class LifoQueue extends Object implements Serializable
 		return head.getObject();
 	}
 
-	public synchronized void push(Object o)
+	public synchronized void push(T o)
 	{
-		QueueObject qo = new QueueObject(o);
+		QueueObject<T> qo = new QueueObject<T>(o);
 
 		if (head == null)
 		{
@@ -48,13 +48,13 @@ public class LifoQueue extends Object implements Serializable
 		lNumEntries++;
 	}
 
-	public synchronized Object pop()
+	public synchronized T pop()
 	{
 		if (head == null)
 		{
 			return null;
 		}
-		QueueObject qo = head;
+		QueueObject<T> qo = head;
 		head = head.remove();
 		lNumEntries--;
 		return qo.getObject();

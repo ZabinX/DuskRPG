@@ -1134,17 +1134,17 @@ public class DuskEngine implements Runnable
 									{
 									TransactionMessage msg = new TransactionMessage(DuskProtocol.MSG_MERCHANT_BUY);
 									Iterator iter = pmrStore.vctItems.keySet().iterator();
-									Vector vctStore;
+									LifoQueue<Item> qStore;
 									while(iter.hasNext())
 									{
-										vctStore = (Vector)pmrStore.vctItems.get(iter.next());
-										itmStore = (Item)vctStore.firstElement();
+										qStore = (LifoQueue<Item>)pmrStore.vctItems.get(iter.next());
+										itmStore = qStore.firstElement();
 										int intCost = (itmStore.intCost * 3) / 4;
 										if (thnRefresh.strName.equalsIgnoreCase(pmrStore.strOwner))
 										{
 											intCost = 0;
 										}
-										msg.add(itmStore.getWearLocation(), itmStore.strName, vctStore.size(), intCost, "gp");
+										msg.add(itmStore.getWearLocation(), itmStore.strName, (int)qStore.size(), intCost, "gp");
 									}
 									thnRefresh.send(msg);
 									thnRefresh.updateSell();
@@ -3020,6 +3020,7 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		}
 	}
 }
+
 
 
 

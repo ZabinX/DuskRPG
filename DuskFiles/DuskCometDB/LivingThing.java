@@ -162,7 +162,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	transient DataInputStream stmIn;
 	transient DataOutputStream stmOut;
 	transient Thread thrConnection;
-	transient FifoQueue queOut;
+	transient FifoQueue<DuskMessage> queOut;
 	transient SendThread thrOut;
 
 	//Prefs
@@ -229,12 +229,22 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			Type = 0;
 			engGame = inEngine;
 			ID = engGame.getID();
+			vctItems = new ItemList();
+			equWorn = new Equipment();
+			vctSkills = new Vector(0,5);
+			vctSpells = new Vector(0,5);
+			vctConditions = new Vector(0,1);
+			vctFlags = new Vector(0,1);
+			vctCommands = new Vector(0,3);
+			vctMovement = new Vector(0,5);
+			vctEntities = new Vector(0,10);
+			vctIgnore = new Vector(0);
 			sckConnection = inSocket;
 			sckConnection.setSoTimeout(600000); //10 minute timeout
 			sckConnection.setSoLinger(false,0); //Do not linger on disconnect
 			stmIn = new DataInputStream(sckConnection.getInputStream());
 			stmOut = new DataOutputStream(sckConnection.getOutputStream());
-			queOut = new FifoQueue();
+			queOut = new FifoQueue<DuskMessage>();
 			thrOut = new SendThread(this, queOut, engGame, stmOut);
 			new Thread(thrOut).start();
 			engGame.log.printMessage(Log.INFO, sckConnection.toString());
@@ -1187,15 +1197,15 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				}
 				Item itmStore;
 				Iterator iter = vctItems.keySet().iterator();
-				LifoQueue qStore;
-				QueueObject qoStore;
+				LifoQueue<Item> qStore;
+				QueueObject<Item> qoStore;
 				while (iter.hasNext())
 				{
-					qStore = (LifoQueue)vctItems.get(iter.next());
+					qStore = (LifoQueue<Item>)vctItems.get(iter.next());
 					qoStore = qStore.head();
 					while (qoStore != null)
 					{
-						itmStore = (Item)qoStore.getObject();
+						itmStore = qoStore.getObject();
 						if (itmStore != null)
 						{
 							rafPlayerFile.writeBytes("item2\n"+itmStore.strName+"\n"+itmStore.lngDurability+"\n"+itmStore.intUses+"\n");
@@ -1812,7 +1822,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 								blnCanSee = true;
 							if (blnCanSee && engGame.canSeeTo(this,objStore.intLocX,objStore.intLocY))
 							{
-								thnStore.send(new EntityByteMessage(DuskProtocol.MSG_MOVE, ID, (byte)intSendByte));
+								thnStore.send(new EntityByteMessage(ID, DuskProtocol.MSG_MOVE, (byte)intSendByte));
 							}
 						} else if (thnStore.isMob())
 						{
@@ -2081,7 +2091,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	public void updateMap()
 	{
-		MapMessage msg = new MapMessage(DuskProtocol.MSG_UPDATE_MAP, intLocX, intLocY, engGame.mapsizeX, engGame.mapsizeY);
+		MapMessage msg = new MapMessage((byte)DuskProtocol.MSG_UPDATE_MAP, intLocX, intLocY, engGame.viewrangeX*2, engGame.viewrangeY*2);
 		short[][][] layers = {engGame.shrMap, engGame.shrMapAlpha, engGame.shrMapAlpha2};
 		msg.writeMap(layers, intLocX - engGame.viewrangeX, intLocY - engGame.viewrangeY);
 		send(msg);
@@ -2241,13 +2251,13 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			}
 		}
 		Item itmStore;
-		LifoQueue qStore;
-		qStore = (LifoQueue)vctItems.get(strStore);
+		LifoQueue<Item> qStore;
+		qStore = (LifoQueue<Item>)vctItems.get(strStore);
 		if (qStore != null)
 		{
 			if (qStore.size() >= intNumber)
 			{
-				itmStore = (Item)qStore.firstElement();
+				itmStore = qStore.firstElement();
 				return itmStore;
 			}
 		}
@@ -2276,13 +2286,13 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		}
 		Item itmStore;
 		Item itmFound=null;
-		LifoQueue qStore;
-		qStore = (LifoQueue)vctItems.get(strStore);
+		LifoQueue<Item> qStore;
+		qStore = (LifoQueue<Item>)vctItems.get(strStore);
 		if (qStore != null)
 		{
 			if (!qStore.isEmpty())
 			{
-				itmStore = (Item)qStore.firstElement();
+				itmStore = qStore.firstElement();
 				itmFound = itmStore;
 				while (intNumber != 0 && itmStore != null)
 				{
@@ -3191,16 +3201,28 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	public String getNextInput()
 	{
+		engGame.log.printMessage(Log.INFO, "Waiting for next input...");
 		try {
-			DuskMessage msg = DuskMessage.receiveMessage(stmIn);
+			short len = stmIn.readShort();
+			engGame.log.printMessage(Log.INFO, "Received message length: " + len);
+			if (len < 0) throw new IOException("Invalid message length: " + len);
+			byte[] buffer = new byte[len];
+			stmIn.readFully(buffer);
+			engGame.log.printMessage(Log.INFO, "Read message data, length: " + buffer.length);
+			ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
+			DataInputStream dis = new DataInputStream(bais);
+			DuskMessage msg = DuskMessage.receiveMessage(dis);
+			engGame.log.printMessage(Log.INFO, "Deserialized message of type: " + msg.getClass().getSimpleName());
 			if (msg.name == DuskProtocol.MSG_COMMAND) {
 				StringMessage sm = (StringMessage) msg;
+				engGame.log.printMessage(Log.INFO, "Received command: " + sm.value);
 				return sm.value;
 			}
-		} catch (IOException e) {
-			engGame.log.printError("getNextInput()", e);
+		} catch (Exception e) {
+			engGame.log.printError("getNextInput() caught exception", e);
 			close();
 		}
+		engGame.log.printMessage(Log.INFO, "getNextInput() received non-command message or error, returning empty.");
 		return "";
 	}
 
@@ -3264,7 +3286,15 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			{
 				if (!blnHalted)
 				{
-					DuskMessage msg = DuskMessage.receiveMessage(stmIn);
+					// Read length-prefixed message
+					short len = stmIn.readShort();
+					if (len < 0) throw new IOException("Invalid message length: " + len);
+					byte[] buffer = new byte[len];
+					stmIn.readFully(buffer);
+					ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
+					DataInputStream dis = new DataInputStream(bais);
+					DuskMessage msg = DuskMessage.receiveMessage(dis);
+
 					switch (msg.name) {
 						case DuskProtocol.MSG_COMMAND: {
 							StringMessage sm = (StringMessage) msg;
@@ -3783,10 +3813,10 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			Iterator iter = vctItems.keySet().iterator();
 			while(iter.hasNext())
 			{
-				LifoQueue qStore = (LifoQueue)vctItems.get(iter.next());
+				LifoQueue<Item> qStore = (LifoQueue<Item>)vctItems.get(iter.next());
 				if (qStore.size() > 0)
 				{
-					Item itmStore = (Item)qStore.firstElement();
+					Item itmStore = qStore.firstElement();
 					msg.add(itmStore.getWearLocation(), itmStore.strName, (int)qStore.size(), 0, "gp");
 				}
 			}
@@ -3857,10 +3887,10 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		Iterator iter = vctItems.keySet().iterator();
 		while(iter.hasNext())
 		{
-			LifoQueue qStore = (LifoQueue)vctItems.get(iter.next());
+			LifoQueue<Item> qStore = (LifoQueue<Item>)vctItems.get(iter.next());
 			if (qStore.size() > 0)
 			{
-				Item itmStore = (Item)qStore.firstElement();
+				Item itmStore = qStore.firstElement();
 				msg.add(itmStore.getWearLocation(), itmStore.strName, (int)qStore.size(), itmStore.intCost / 2, "gp");
 			}
 		}
@@ -3895,6 +3925,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	}
 
  }
+
 
 
 

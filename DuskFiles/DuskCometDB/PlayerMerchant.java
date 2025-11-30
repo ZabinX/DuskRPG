@@ -36,17 +36,12 @@ public class PlayerMerchant extends DuskObject
 		bytObjType = 5;
 		engGame = inGame;
 		ID = engGame.getID();
+		vctItems = new ItemList();
 	}
 
 	long contains(String strStore)
 	{
-		Vector vctTemp;
-		if (vctItems.contains(strStore))
-		{
-			vctTemp = (Vector)vctItems.get(strStore);
-			return vctTemp.size();
-		}
-		return 0;
+		return vctItems.getElementCount(strStore);
 	}
 
 	void add(Item itmStore)
@@ -56,6 +51,11 @@ public class PlayerMerchant extends DuskObject
 
 	Item remove(String strStore)
 	{
-		return vctItems.removeElement(strStore);
+		Item itmStore = vctItems.getElement(strStore);
+		if (itmStore != null) {
+			vctItems.removeElement(strStore);
+		}
+		return itmStore;
 	}
 }
+
