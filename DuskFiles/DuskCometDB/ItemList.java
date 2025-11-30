@@ -1,115 +1,83 @@
 import java.util.Hashtable;
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.Map;
 
-public class ItemList extends Hashtable<String, LifoQueue<Item>> implements Serializable
-{
-	public synchronized void addElement(Item o)
-	{
+public class ItemList extends Hashtable<String, LifoQueue<Item>> implements Serializable {
+	public synchronized void addElement(Item o) {
 		String strName = o.strName.toLowerCase();
-		LifoQueue<Item> qStore;
-		qStore = (LifoQueue<Item>)super.get(strName);
-		if (qStore == null)
-		{
+		LifoQueue<Item> qStore = super.get(strName);
+		if (qStore == null) {
 			qStore = new LifoQueue<Item>();
-			qStore.push(o);
 			super.put(strName, qStore);
-		} else
-		{
-			qStore.push(o);
 		}
+		qStore.push(o);
 	}
 
-	public synchronized int getElementCount(String strName)
-	{
-		try
-		{
-			return (int)((LifoQueue)super.get(strName.toLowerCase())).size();
-		}catch(NullPointerException e)
-		{
+	public synchronized int getElementCount(String strName) {
+		try {
+			return (int) super.get(strName.toLowerCase()).size();
+		} catch (NullPointerException e) {
 			return 0;
 		}
 	}
 
-	public synchronized int getElementCount()
-	{
+	public synchronized int getElementCount() {
 		return super.size();
 	}
 
-	public synchronized boolean removeElement(String strName)
-	{
-		try
-		{
-			LifoQueue<Item> qStore;
-			qStore = (LifoQueue<Item>)super.get(strName.toLowerCase());
-			qStore.pop();
-			if (qStore.size() < 1)
-			{
+	public synchronized Item removeElement(String strName) {
+		try {
+			LifoQueue<Item> qStore = super.get(strName.toLowerCase());
+			Item itmStore = qStore.pop();
+			if (qStore.size() < 1) {
 				super.remove(strName.toLowerCase());
 			}
-			return true;
-		}catch(NullPointerException e)
-		{
-			return false;
-		}
-	}
-
-	public synchronized Item getElement(String strName)
-	{
-		try
-		{
-			LifoQueue<Item> qStore;
-			qStore = (LifoQueue<Item>)super.get(strName.toLowerCase());
-			Item itmStore = (Item)qStore.firstElement();
 			return itmStore;
-		}catch(NullPointerException e)
-		{
+		} catch (NullPointerException e) {
 			return null;
 		}
 	}
 
-	public String toString()
-	{
-		String strStore = "";
-		Iterator iter = super.keySet().iterator();
-		LifoQueue<Item> qStore;
-		QueueObject<Item> qoStore;
-		Item itmStore;
-		while (iter.hasNext())
-		{
-			qStore = (LifoQueue<Item>)super.get(iter.next());
-			qoStore = qStore.head();
-			while (qoStore != null)
-			{
-				itmStore = qoStore.getObject();
-				if (itmStore != null)
-				{
-					strStore += "item2\n"+itmStore.strName+"\n"+itmStore.lngDurability+"\n"+itmStore.intUses+"\n";
-				}
-				qoStore = qoStore.next();
-			}
+	public synchronized Item getElement(String strName) {
+		try {
+			LifoQueue<Item> qStore = super.get(strName.toLowerCase());
+			return qStore.firstElement();
+		} catch (NullPointerException e) {
+			return null;
 		}
-		return strStore;
 	}
 
-	public String print()
-	{
-		String strStore = "";
-		Iterator iter = super.keySet().iterator();
-		LifoQueue<Item> qStore;
-		Item itmStore;
-		while (iter.hasNext())
-		{
-			qStore = (LifoQueue<Item>)super.get(iter.next());
-			if (qStore != null && qStore.size() > 0)
-			{
-				itmStore = qStore.firstElement();
-				if (itmStore != null)
-				{
-					strStore += (char)3 + itmStore.strName + "\n" + qStore.size() + "\n";
+	public String print() {
+		StringBuffer invBuffer = new StringBuffer();
+		for (Map.Entry<String, LifoQueue<Item>> entry : entrySet()) {
+			LifoQueue<Item> qStore = entry.getValue();
+			if (qStore != null && qStore.size() > 0) {
+				Item itmStore = qStore.firstElement();
+				if (itmStore != null) {
+					invBuffer.append("" + (char) 3).append(qStore.size()).append(" ").append(itmStore.strName)
+							.append("\n");
 				}
 			}
 		}
-		return strStore;
+		return invBuffer.toString();
+	}
+
+	public String toString() {
+		StringBuffer invBuffer = new StringBuffer();
+		for (Map.Entry<String, LifoQueue<Item>> entry : entrySet()) {
+			LifoQueue<Item> qStore = entry.getValue();
+			if (qStore != null) {
+				QueueObject<Item> qoStore = qStore.head();
+				while (qoStore != null) {
+					Item itmStore = qoStore.getObject();
+					if (itmStore != null) {
+						invBuffer.append(itmStore.toString()).append("/\n");
+					}
+					qoStore = qoStore.next();
+				}
+			}
+		}
+		return invBuffer.toString();
 	}
 }

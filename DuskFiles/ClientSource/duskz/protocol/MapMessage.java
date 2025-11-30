@@ -11,6 +11,9 @@ public class MapMessage extends DuskMessage {
 	public int height;
 	public short[][][] map;
 
+	public MapMessage() {
+	}
+
 	public MapMessage(byte name, int x, int y, int width, int height) {
 		super(name);
 		this.x = x;
@@ -20,17 +23,18 @@ public class MapMessage extends DuskMessage {
 		this.map = new short[3][width][height];
 	}
 
-	public MapMessage(byte name, DataInputStream in) throws IOException {
-		super(name);
-		x = in.readShort();
-		y = in.readShort();
-		width = in.readShort();
-		height = in.readShort();
+	@Override
+	public void receive(DataInputStream istream) throws IOException {
+		super.receive(istream);
+		x = istream.readShort();
+		y = istream.readShort();
+		width = istream.readShort();
+		height = istream.readShort();
 		map = new short[3][width][height];
 		for (int l = 0; l < 3; l++) {
 			for (int j = 0; j < height; j++) {
 				for (int i = 0; i < width; i++) {
-					map[l][i][j] = in.readShort();
+					map[l][i][j] = istream.readShort();
 				}
 			}
 		}
@@ -70,5 +74,10 @@ public class MapMessage extends DuskMessage {
 				}
 			}
 		}
+	}
+
+	@Override
+	public byte getType() {
+		return TC_MAP;
 	}
 }
