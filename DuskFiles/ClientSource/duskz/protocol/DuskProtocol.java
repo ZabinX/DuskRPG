@@ -541,4 +541,3 @@ public interface DuskProtocol {
 	public final static int FIELD_FX_DURATION = 1;
 }
 
-
