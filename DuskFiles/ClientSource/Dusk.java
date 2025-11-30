@@ -625,7 +625,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		{
 		try
 		{
-			DuskMessage msg = DuskMessage.receiveMessage(stmIn);
+			short len = stmIn.readShort();
+			if (len < 0) throw new IOException("Invalid message length: " + len);
+			byte[] buffer = new byte[len];
+			stmIn.readFully(buffer);
+			ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
+			DataInputStream dis = new DataInputStream(bais);
+			DuskMessage msg = DuskMessage.receiveMessage(dis);
 
 		    switch (msg.name)
 		    {
