@@ -162,7 +162,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	transient DataInputStream stmIn;
 	transient DataOutputStream stmOut;
 	transient Thread thrConnection;
-	transient FifoQueue queOut;
+	transient FifoQueue<DuskMessage> queOut;
 	transient SendThread thrOut;
 
 	//Prefs
@@ -234,7 +234,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			sckConnection.setSoLinger(false,0); //Do not linger on disconnect
 			stmIn = new DataInputStream(sckConnection.getInputStream());
 			stmOut = new DataOutputStream(sckConnection.getOutputStream());
-			queOut = new FifoQueue();
+			queOut = new FifoQueue<DuskMessage>();
 			thrOut = new SendThread(this, queOut, engGame, stmOut);
 			new Thread(thrOut).start();
 			engGame.log.printMessage(Log.INFO, sckConnection.toString());
@@ -1187,15 +1187,15 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				}
 				Item itmStore;
 				Iterator iter = vctItems.keySet().iterator();
-				LifoQueue qStore;
-				QueueObject qoStore;
+				LifoQueue<Item> qStore;
+				QueueObject<Item> qoStore;
 				while (iter.hasNext())
 				{
-					qStore = (LifoQueue)vctItems.get(iter.next());
+					qStore = (LifoQueue<Item>)vctItems.get(iter.next());
 					qoStore = qStore.head();
 					while (qoStore != null)
 					{
-						itmStore = (Item)qoStore.getObject();
+						itmStore = qoStore.getObject();
 						if (itmStore != null)
 						{
 							rafPlayerFile.writeBytes("item2\n"+itmStore.strName+"\n"+itmStore.lngDurability+"\n"+itmStore.intUses+"\n");
@@ -1812,7 +1812,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 								blnCanSee = true;
 							if (blnCanSee && engGame.canSeeTo(this,objStore.intLocX,objStore.intLocY))
 							{
-								thnStore.send(new EntityByteMessage(DuskProtocol.MSG_MOVE, ID, (byte)intSendByte));
+								thnStore.send(new EntityByteMessage(ID, DuskProtocol.MSG_MOVE, (byte)intSendByte));
 							}
 						} else if (thnStore.isMob())
 						{
@@ -2241,13 +2241,13 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			}
 		}
 		Item itmStore;
-		LifoQueue qStore;
-		qStore = (LifoQueue)vctItems.get(strStore);
+		LifoQueue<Item> qStore;
+		qStore = (LifoQueue<Item>)vctItems.get(strStore);
 		if (qStore != null)
 		{
 			if (qStore.size() >= intNumber)
 			{
-				itmStore = (Item)qStore.firstElement();
+				itmStore = qStore.firstElement();
 				return itmStore;
 			}
 		}
@@ -2276,13 +2276,13 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		}
 		Item itmStore;
 		Item itmFound=null;
-		LifoQueue qStore;
-		qStore = (LifoQueue)vctItems.get(strStore);
+		LifoQueue<Item> qStore;
+		qStore = (LifoQueue<Item>)vctItems.get(strStore);
 		if (qStore != null)
 		{
 			if (!qStore.isEmpty())
 			{
-				itmStore = (Item)qStore.firstElement();
+				itmStore = qStore.firstElement();
 				itmFound = itmStore;
 				while (intNumber != 0 && itmStore != null)
 				{
@@ -3783,10 +3783,10 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			Iterator iter = vctItems.keySet().iterator();
 			while(iter.hasNext())
 			{
-				LifoQueue qStore = (LifoQueue)vctItems.get(iter.next());
+				LifoQueue<Item> qStore = (LifoQueue<Item>)vctItems.get(iter.next());
 				if (qStore.size() > 0)
 				{
-					Item itmStore = (Item)qStore.firstElement();
+					Item itmStore = qStore.firstElement();
 					msg.add(itmStore.getWearLocation(), itmStore.strName, (int)qStore.size(), 0, "gp");
 				}
 			}
@@ -3857,10 +3857,10 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		Iterator iter = vctItems.keySet().iterator();
 		while(iter.hasNext())
 		{
-			LifoQueue qStore = (LifoQueue)vctItems.get(iter.next());
+			LifoQueue<Item> qStore = (LifoQueue<Item>)vctItems.get(iter.next());
 			if (qStore.size() > 0)
 			{
-				Item itmStore = (Item)qStore.firstElement();
+				Item itmStore = qStore.firstElement();
 				msg.add(itmStore.getWearLocation(), itmStore.strName, (int)qStore.size(), itmStore.intCost / 2, "gp");
 			}
 		}
