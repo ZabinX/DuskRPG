@@ -625,7 +625,13 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		{
 		try
 		{
-			DuskMessage msg = DuskMessage.receiveMessage(stmIn);
+			short len = stmIn.readShort();
+			if (len < 0) throw new IOException("Invalid message length: " + len);
+			byte[] buffer = new byte[len];
+			stmIn.readFully(buffer);
+			ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
+			DataInputStream dis = new DataInputStream(bais);
+			DuskMessage msg = DuskMessage.receiveMessage(dis);
 
 		    switch (msg.name)
 		    {
@@ -1309,7 +1315,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	public void sendMessage(DuskMessage msg) {
 		try {
 			if (stmOut != null) {
-				msg.sendMessage(stmOut);
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				DataOutputStream dos = new DataOutputStream(baos);
+				msg.sendMessage(dos);
+				byte[] data = baos.toByteArray();
+				stmOut.writeShort(data.length);
+				stmOut.write(data);
 			}
 		} catch (SocketException se) {
 			addText("Connection to the server has been lost.\n");
