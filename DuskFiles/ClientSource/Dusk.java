@@ -1312,6 +1312,11 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
         @Override
 	public void mouseExited(MouseEvent evt){}
 
+	public void sendMessage(String str)
+	{
+		sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, str));
+	}
+
 	public void sendMessage(DuskMessage msg) {
 		try {
 			if (stmOut != null) {
@@ -1359,7 +1364,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						strSet = strStore.substring(1);
 					}
 				} else {
-	    			sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, strStore));
+				sendMessage(strStore);
 				}
 	    		frame.txtInput.setText("");
 	    	}
@@ -1368,10 +1373,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				if (player != null && !player.isMoving) {
 					switch (nkey)
 					{
-						case 38: sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "n")); if (strSet != null) sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, strSet)); break;
-						case 40: sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "s")); if (strSet != null) sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, strSet)); break;
-						case 37: sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "w")); if (strSet != null) sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, strSet)); break;
-						case 39: sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "e")); if (strSet != null) sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, strSet)); break;
+						case 38: sendMessage("n"); if (strSet != null) sendMessage(strSet); break;
+						case 40: sendMessage("s"); if (strSet != null) sendMessage(strSet); break;
+						case 37: sendMessage("w"); if (strSet != null) sendMessage(strSet); break;
+						case 39: sendMessage("e"); if (strSet != null) sendMessage(strSet); break;
 					}
 				}
 			}

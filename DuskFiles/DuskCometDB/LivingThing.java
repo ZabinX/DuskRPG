@@ -3231,7 +3231,12 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		thrConnection = Thread.currentThread();
 		try
 		{
-			if (!getPlayer())
+			do {
+				chatMessage("enter your name:");
+				strName = getNextInput();
+			} while (!getPlayer());
+
+			if (!blnWorking)
 				return;
 		}catch(Exception e)
 		{
@@ -3324,11 +3329,9 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	boolean getPlayer()
 	{
 		try {
-			chatMessage("enter your name:");
-			strName = getNextInput();
-			while (!engGame.isGoodName(strName)) {
+			if (!engGame.isGoodName(strName)) {
 				chatMessage("Not a valid name. This may because you left it blank, used invalid symbols, or made it too long. Please try again.");
-				strName = getNextInput();
+				return false;
 			}
 	
 			LivingThing loadedPlayer = (LivingThing)engGame.dbManager.get("player/" + strName.toLowerCase());
