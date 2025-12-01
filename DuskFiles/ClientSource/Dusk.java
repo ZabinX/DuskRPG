@@ -1316,6 +1316,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		try {
 			if (stmOut != null) {
 				msg.sendMessage(stmOut);
+				stmOut.flush();
 			}
 		} catch (SocketException se) {
 			addText("Connection to the server has been lost.\n");
@@ -1325,9 +1326,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 
-    public void sendMessage(String message) {
+	public void sendMessage(String message) {
 		sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, message));
-    }
+	}
 
         @Override
 	public void keyPressed(KeyEvent evt)

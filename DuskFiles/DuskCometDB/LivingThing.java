@@ -3264,14 +3264,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			{
 				if (!blnHalted)
 				{
-					// Read length-prefixed message
-					short len = stmIn.readShort();
-					if (len < 0) throw new IOException("Invalid message length: " + len);
-					byte[] buffer = new byte[len];
-					stmIn.readFully(buffer);
-					ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
-					DataInputStream dis = new DataInputStream(bais);
-					DuskMessage msg = DuskMessage.receiveMessage(dis);
+					DuskMessage msg = DuskMessage.receiveMessage(stmIn);
 
 					switch (msg.name) {
 						case DuskProtocol.MSG_COMMAND: {
@@ -3300,16 +3293,8 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	}
 
 	public String getNextStringMessageInput() throws IOException {
-		short length = stmIn.readShort();
-		if (length < 0 || length > 32768) {
-			throw new IOException("Invalid message length received: " + length);
-		}
-		byte[] buffer = new byte[length];
-		stmIn.readFully(buffer);
-		ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
-		DataInputStream dis = new DataInputStream(bais);
 		try {
-			StringMessage msg = (StringMessage)DuskMessage.receiveMessage(dis);
+			StringMessage msg = (StringMessage)DuskMessage.receiveMessage(stmIn);
 			return msg.value;
 		} catch (Exception e) {
 			throw new IOException("Failed to deserialize StringMessage", e);
