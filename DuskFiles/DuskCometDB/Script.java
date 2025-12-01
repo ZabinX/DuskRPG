@@ -17,8 +17,6 @@ import java.io.*;
 import java.util.Vector;
 import java.util.Random;
 import java.lang.Math;
-import duskz.protocol.*;
-import duskz.protocol.DuskMessage.*;
 
 
 /**
@@ -164,7 +162,7 @@ public class Script
 					return null;
 			}else if (strName.equalsIgnoreCase("global"))
 			{
-				Variable varStore = engGame.varVariables.getVariable(getString());
+				Variable varStore = engGame.varVariables.getVariable(readScriptForCompile());
 				if (varStore != null && varStore.isLivingThing())
 					return (LivingThing)varStore.objData;
 			}
@@ -197,7 +195,7 @@ public class Script
 		{
 			try
 			{
-				Variable varStore = engGame.varVariables.getVariable(getString());
+				Variable varStore = engGame.varVariables.getVariable(readScriptForCompile());
 				if (varStore != null && varStore.isNumber())
 				{
 					return (Double)varStore.objData;
@@ -238,7 +236,7 @@ public class Script
 		for (int i=0;i<vctUpdate.size();i++)
 		{
 			thnStore = (LivingThing)vctUpdate.elementAt(i);
-			thnStore.updateInfo();
+			thnStore.updateStats();
 		}
 		for (int i=0;i<vctVisibleUpdate.size();i++)
 		{
@@ -2008,11 +2006,8 @@ public class Script
 			{
 				LivingThing thnStore = getLivingThing(getString());
 				String strTitle = getString();
-				String strContent = getString();
-				ListMessage msg = new ListMessage(DuskProtocol.MSG_POPUP_VIEW);
-				msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_TITLE, strTitle));
-				msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_CONTENT, strContent));
-				thnStore.send(msg);
+				String strStore2 = getString();
+				thnStore.send(DuskMessage.create(DuskProtocol.MSG_POPUP, strTitle + "\n" + strStore2));
 				return true;
 			}
 				case 53:
@@ -2052,13 +2047,11 @@ public class Script
 					LivingThing thnStore = getLivingThing(getString());
 					int intEffectID = (int)parseValue();
 					int duration = (int)parseValue();
-					if (thnStore != null) {
+					if (thnStore != null)
+					{
 						Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnStore.intLocX, thnStore.intLocY);
 						for (LivingThing player : playersInArea) {
-							ListMessage msg = new ListMessage((byte)intEffectID);
-							msg.add(new LongMessage(DuskProtocol.FIELD_ENT_ID, thnStore.ID));
-							msg.add(new IntegerMessage(DuskProtocol.FIELD_FX_DURATION, duration));
-							player.send(msg);
+							player.send(DuskMessage.create(intEffectID, thnStore.ID + " " + duration));
 						}
 					}
 					return true;
@@ -2089,7 +2082,7 @@ public class Script
 					if (thnStore != null && intEffectID != -1) {
 						Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnStore.intLocX, thnStore.intLocY);
 						for (LivingThing player : playersInArea) {
-							player.send(new LongMessage((byte)intEffectID, thnStore.ID));
+							player.send(DuskMessage.create(intEffectID, "" + thnStore.ID));
 						}
 					}
 					return true;
@@ -2139,13 +2132,26 @@ public class Script
 			{
 				LivingThing thnStore = getLivingThing(getString());
 				String strStore2 = getString();
+				int intIndex = strStore2.indexOf("\n");
+				while (intIndex != -1)
+				{
 				if(thnStore.batBattle != null && thnStore.popup)
-				{
-					thnStore.send(new StringMessage(DuskProtocol.MSG_POPUP, strStore2));
-				} else
-				{
-					thnStore.chatMessage(strStore2);
+						{
+						thnStore.send(DuskMessage.create(DuskProtocol.MSG_BATTLE_CHAT, strStore2.substring(0,intIndex+1)));
+						} else
+						{
+						thnStore.chatMessage(strStore2.substring(0,intIndex));
+						}
+					strStore2 = strStore2.substring(intIndex+1);
+					intIndex = strStore2.indexOf("\n");
 				}
+				if(thnStore.batBattle != null && thnStore.popup)
+					{
+					thnStore.send(DuskMessage.create(DuskProtocol.MSG_BATTLE_CHAT, strStore2));
+					} else
+					{
+					thnStore.chatMessage(strStore2);
+					}
 				return true;
 			}
 				case 60:

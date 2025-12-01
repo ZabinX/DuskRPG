@@ -1,53 +1,73 @@
-/*
-All code copyright Tom Weingarten (captaint@home.com) 2000
-Tom Weingarten makes no assurances as to the reliability or
-functionality of this code. Use at your own risk.
+import java.io.Serializable;
 
-You are free to edit or redistribute this code or any portion
-at your wish, under the condition that you do not edit or
-remove this license, and accompany it with all redistributions.
-*/
-
-class FifoQueue
+public class FifoQueue extends Object
 {
-	QueueObject qHead;
-	QueueObject qTail;
-	int intSize=0;
+	private long lNumEntries;
+	private QueueObject head = null;
+	private QueueObject tail = null;
 
-	public synchronized void push(Object o)
+	public FifoQueue()
 	{
-		QueueObject qTemp = new QueueObject(o);
-		if (qTail != null)
-			qTail.setNext(qTemp);
-		qTail = qTemp;
-		if (qHead == null)
-			qHead = qTail;
-		intSize++;
+		lNumEntries = 0;
 	}
 
-	public synchronized Object pop()
+	public synchronized boolean isEmpty()
 	{
-		Object o = null;
-		if (qHead != null)
+		return (head==null);
+	}
+
+	public synchronized long size()
+	{
+		return lNumEntries;
+	}
+
+	public synchronized QueueObject head()
+	{
+		return head;
+	}
+
+	public synchronized Serializable firstElement()
+	{
+		if (head == null)
 		{
-			o = qHead.getObject();
-			qHead = qHead.next();
-			if (qHead == null)
-				qTail = null;
+			return null;
 		}
-		intSize--;
-		return o;
+		return head.getObject();
 	}
 
-	public boolean isEmpty()
+	public synchronized void push(Serializable o)
 	{
-		if (qHead == null)
-			return true;
-		return false;
+		QueueObject qo = new QueueObject(o);
+
+		if (head == null)
+		{
+			head = qo;
+			tail = qo;
+		} else
+		{
+			tail.append(qo);
+			tail = qo;
+		}
+		lNumEntries++;
+		notify();
 	}
 
-	public int size()
+	public synchronized Serializable pop()
 	{
-		return intSize;
+		while (head==null)
+		{
+			try
+			{
+				wait();
+			} catch (InterruptedException e) { }
+		}
+		QueueObject qo = head;
+		head = head.remove();
+		if (head == null)
+		{
+			tail = null;
+		}
+		lNumEntries--;
+		return qo.getObject();
 	}
 }

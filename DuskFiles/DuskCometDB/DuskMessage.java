@@ -17,7 +17,6 @@
  * along with DuskZ; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package duskz.protocol;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -39,7 +38,7 @@ import java.util.List;
  *
  * @author Michael Zucchi <notzed@gmail.com>
  */
-public class DuskMessage {
+public class DuskMessage implements java.io.Serializable {
 
 	// A list of any type of message including another list.
 	protected static final byte TC_LIST = 0;
@@ -137,28 +136,8 @@ public class DuskMessage {
 				return new DuskMessage.StringMessage();
 			case TC_STRING_LIST:
 				return new DuskMessage.StringListMessage();
-			case TC_ENTITY_LIST:
-				return new EntityListMessage();
-			case TC_ENTITY_NOTIFY:
-				return new EntityMessage();
-			case TC_ENTITY_BYTE:
-				return new EntityByteMessage();
-			case TC_ENTITY_INTEGER:
-				return new EntityIntegerMessage();
-			case TC_ENTITY_LONG:
-				return new EntityLongMessage();
-			case TC_ENTITY_FLOAT:
-				return new EntityFloatMessage();
-			case TC_ENTITY_STRING:
-				return new EntityStringMessage();
-			case TC_ENTITY_STRING_LIST:
-				return new EntityStringListMessage();
 			case TC_MAP:
 				return new MapMessage();
-			case TC_ENTITY_UPDATE:
-				return new EntityUpdateMessage();
-			case TC_TRANSACTION:
-				return new TransactionMessage();
 			default:
 				return null;
 		}
@@ -207,34 +186,6 @@ public class DuskMessage {
 		return new StringListMessage(name, value);
 	}
 
-	static public EntityMessage create(long id, int name) {
-		return new EntityMessage(id, name);
-	}
-
-	static public EntityByteMessage create(long id, int name, byte value) {
-		return new EntityByteMessage(id, name, value);
-	}
-
-	static public EntityIntegerMessage create(long id, int name, int value) {
-		return new EntityIntegerMessage(id, name, value);
-	}
-
-	static public EntityLongMessage create(long id, int name, long value) {
-		return new EntityLongMessage(id, name, value);
-	}
-
-	static public EntityFloatMessage create(long id, int name, float value) {
-		return new EntityFloatMessage(id, name, value);
-	}
-
-	static public EntityStringMessage create(long id, int name, String value) {
-		return new EntityStringMessage(id, name, value);
-	}
-
-	static public EntityStringListMessage create(long id, int name, List<String> value) {
-		return new EntityStringListMessage(id, name, value);
-	}
-
 	public static class ByteMessage extends DuskMessage {
 
 		public byte value;
@@ -274,7 +225,7 @@ public class DuskMessage {
 		}
 	}
 
-	public static class IntegerMessage extends DuskMessage {
+	public static class IntegerMessage extends DuskMessage implements java.io.Serializable {
 
 		public int value;
 
@@ -313,7 +264,7 @@ public class DuskMessage {
 		}
 	}
 
-	public static class LongMessage extends DuskMessage {
+	public static class LongMessage extends DuskMessage implements java.io.Serializable {
 
 		public long value;
 
@@ -352,7 +303,7 @@ public class DuskMessage {
 		}
 	}
 
-	public static class FloatMessage extends DuskMessage {
+	public static class FloatMessage extends DuskMessage implements java.io.Serializable {
 
 		public float value;
 
@@ -391,7 +342,7 @@ public class DuskMessage {
 		}
 	}
 
-	public static class StringMessage extends DuskMessage {
+	public static class StringMessage extends DuskMessage implements java.io.Serializable {
 
 		public String value;
 
@@ -435,7 +386,7 @@ public class DuskMessage {
 		}
 	}
 
-	public static class StringListMessage extends DuskMessage {
+	public static class StringListMessage extends DuskMessage implements java.io.Serializable {
 
 		public final List<String> value;
 
@@ -483,290 +434,6 @@ public class DuskMessage {
 		@Override
 		protected void format(PrintStream out, String s) {
 			out.printf("%s%s name=%d value= {\n", s, getClass().getSimpleName(), name);
-			for (String v : value) {
-				out.printf("%s  '%s'\n", s, v);
-			}
-			out.printf("%s}\n", s);
-		}
-	}
-
-	public static class EntityMessage extends DuskMessage {
-
-		/**
-		 * Id of entity this attribute applies to
-		 */
-		public long id;
-
-		public EntityMessage() {
-		}
-
-		public EntityMessage(long id, int name) {
-			this.id = id;
-			this.name = name;
-		}
-
-		@Override
-		public void send(DataOutputStream ostream) throws IOException {
-			super.send(ostream);
-			ostream.writeLong(id);
-		}
-
-		@Override
-		public void receive(DataInputStream istream) throws IOException {
-			super.receive(istream);
-			id = istream.readLong();
-		}
-
-		@Override
-		public byte getType() {
-			return TC_ENTITY_NOTIFY;
-		}
-
-		@Override
-		protected void format(PrintStream out, String s) {
-			out.printf("%s%s id=%d name=%d\n", s, getClass().getSimpleName(), id, name);
-		}
-	}
-
-	public static class EntityByteMessage extends EntityMessage {
-
-		public byte value;
-
-		public EntityByteMessage() {
-		}
-
-		public EntityByteMessage(long id, int name) {
-			super(id, name);
-		}
-
-		public EntityByteMessage(long id, int name, byte value) {
-			super(id, name);
-			this.value = value;
-		}
-
-		@Override
-		public void send(DataOutputStream ostream) throws IOException {
-			super.send(ostream);
-			ostream.writeByte(value);
-		}
-
-		@Override
-		public void receive(DataInputStream istream) throws IOException {
-			super.receive(istream);
-			value = istream.readByte();
-		}
-
-		@Override
-		public byte getType() {
-			return TC_ENTITY_BYTE;
-		}
-
-		@Override
-		protected void format(PrintStream out, String s) {
-			out.printf("%s%s id=%d name=%d value=%d\n", s, getClass().getSimpleName(), id, name, value);
-		}
-	}
-
-	public static class EntityIntegerMessage extends EntityMessage {
-
-		public int value;
-
-		public EntityIntegerMessage() {
-		}
-
-		public EntityIntegerMessage(long id, int name) {
-			super(id, name);
-		}
-
-		public EntityIntegerMessage(long id, int name, int value) {
-			super(id, name);
-			this.value = value;
-		}
-
-		@Override
-		public void send(DataOutputStream ostream) throws IOException {
-			super.send(ostream);
-			ostream.writeInt(value);
-		}
-
-		@Override
-		public void receive(DataInputStream istream) throws IOException {
-			super.receive(istream);
-			value = istream.readInt();
-		}
-
-		@Override
-		public byte getType() {
-			return TC_ENTITY_INTEGER;
-		}
-
-		@Override
-		protected void format(PrintStream out, String s) {
-			out.printf("%s%s id=%d name=%d value=%d\n", s, getClass().getSimpleName(), id, name, value);
-		}
-	}
-
-	public static class EntityLongMessage extends EntityMessage {
-
-		public long value;
-
-		public EntityLongMessage() {
-		}
-
-		public EntityLongMessage(long id, int name) {
-			super(id, name);
-		}
-
-		public EntityLongMessage(long id, int name, long value) {
-			super(id, name);
-			this.value = value;
-		}
-
-		@Override
-		public void send(DataOutputStream ostream) throws IOException {
-			super.send(ostream);
-			ostream.writeLong(value);
-		}
-
-		@Override
-		public void receive(DataInputStream istream) throws IOException {
-			super.receive(istream);
-			value = istream.readLong();
-		}
-
-		@Override
-		public byte getType() {
-			return TC_ENTITY_LONG;
-		}
-
-		@Override
-		protected void format(PrintStream out, String s) {
-			out.printf("%s%s id=%d name=%d value=%d\n", s, getClass().getSimpleName(), id, name, value);
-		}
-	}
-
-	public static class EntityFloatMessage extends EntityMessage {
-
-		public float value;
-
-		public EntityFloatMessage() {
-		}
-
-		public EntityFloatMessage(long id, int name) {
-			super(id, name);
-		}
-
-		public EntityFloatMessage(long id, int name, float value) {
-			super(id, name);
-			this.value = value;
-		}
-
-		@Override
-		public void send(DataOutputStream ostream) throws IOException {
-			super.send(ostream);
-			ostream.writeFloat(value);
-		}
-
-		@Override
-		public void receive(DataInputStream istream) throws IOException {
-			super.receive(istream);
-			value = istream.readFloat();
-		}
-
-		@Override
-		public byte getType() {
-			return TC_ENTITY_FLOAT;
-		}
-
-		@Override
-		protected void format(PrintStream out, String s) {
-			out.printf("%s%s id=%d name=%d value=%f\n", s, getClass().getSimpleName(), id, name, value);
-		}
-	}
-
-	public static class EntityStringMessage extends EntityMessage {
-
-		public String value;
-
-		public EntityStringMessage() {
-		}
-
-		public EntityStringMessage(long id, int name) {
-			super(id, name);
-		}
-
-		public EntityStringMessage(long id, int name, String value) {
-			super(id, name);
-			this.value = value;
-		}
-
-		@Override
-		public void send(DataOutputStream ostream) throws IOException {
-			super.send(ostream);
-			ostream.writeUTF(value);
-		}
-
-		@Override
-		public void receive(DataInputStream istream) throws IOException {
-			super.receive(istream);
-			value = istream.readUTF();
-		}
-
-		@Override
-		public byte getType() {
-			return TC_ENTITY_STRING;
-		}
-
-		@Override
-		protected void format(PrintStream out, String s) {
-			out.printf("%s%s id=%d name=%d value=%s\n", s, getClass().getSimpleName(), id, name, value);
-		}
-	}
-
-	public static class EntityStringListMessage extends EntityMessage {
-
-		public final List<String> value;
-
-		public EntityStringListMessage() {
-			value = new ArrayList<>();
-		}
-
-		public EntityStringListMessage(long id, int name) {
-			super(id, name);
-			value = new ArrayList<>();
-		}
-
-		public EntityStringListMessage(long id, int name, List<String> value) {
-			super(id, name);
-			this.value = value;
-		}
-
-		@Override
-		public void send(DataOutputStream ostream) throws IOException {
-			super.send(ostream);
-			ostream.writeShort(value.size());
-			for (String s : value) {
-				ostream.writeUTF(s);
-			}
-		}
-
-		@Override
-		public void receive(DataInputStream istream) throws IOException {
-			super.receive(istream);
-			int len = istream.readShort() & 0xffff;
-
-			for (int i = 0; i < len; i++)
-				value.add(istream.readUTF());
-		}
-
-		@Override
-		public byte getType() {
-			return TC_ENTITY_STRING_LIST;
-		}
-
-		@Override
-		protected void format(PrintStream out, String s) {
-			out.printf("%s%s id=%d name=%d value= {\n", s, getClass().getSimpleName(), id, name);
 			for (String v : value) {
 				out.printf("%s  '%s'\n", s, v);
 			}

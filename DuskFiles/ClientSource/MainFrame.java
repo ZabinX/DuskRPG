@@ -15,8 +15,6 @@ import javax.swing.*;
 import javax.swing.JTextPane;
 import java.util.StringTokenizer;
 import javax.swing.text.Document;
-import duskz.protocol.*;
-import duskz.protocol.DuskMessage.*;
 
 
 import javax.swing.JLayeredPane;
@@ -111,7 +109,6 @@ public class MainFrame extends JFrame implements ItemListener
     public Document docGossip;
 
 	EquipmentFrame frmEquipment;
-        ConnectFrame frmConnect;
 	Dusk appParent;
 	
 	public MainFrame(Dusk inParent)
@@ -790,14 +787,14 @@ public class MainFrame extends JFrame implements ItemListener
 				btnEquipmentActionPerformed(e);
 			}
 		});
-                btnConnect.addActionListener(new java.awt.event.ActionListener() {
 
-
-                        @Override
+		btnConnect.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				btnConnectActionPerformed(e);
+				appParent.connect();
 			}
 		});
+
 		addWindowListener(new java.awt.event.WindowAdapter() {
                         @Override
 			public void windowClosing(java.awt.event.WindowEvent e) {
@@ -805,7 +802,6 @@ public class MainFrame extends JFrame implements ItemListener
 			}
 		});
 		frmEquipment = new EquipmentFrame(appParent);
-                frmConnect = new ConnectFrame(appParent);
 	}
   
   	private boolean mShown = false;
@@ -831,205 +827,205 @@ public class MainFrame extends JFrame implements ItemListener
         public void btnPotionActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "use minormend"));
+			appParent.sendMessage("use minormend");
         }
         
         public void btnPotion2ActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "use mendpotion"));
+			appParent.sendMessage("use mendpotion");
         }
         
         public void btnPotion3ActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "use minormana"));
+			appParent.sendMessage("use minormana");
         }
         
         public void btnPotion4ActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "use manapotion"));
+			appParent.sendMessage("use manapotion");
         }
         public void btnMendActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast mend"));
+			appParent.sendMessage("cast mend");
         }
         public void btnPoisonActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast antipoison"));
+			appParent.sendMessage("cast antipoison");
         }
         public void btnArmorActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast armor"));
+			appParent.sendMessage("cast armor");
         }
         public void btnBlessActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast bless"));
+			appParent.sendMessage("cast bless");
         }
         public void btnDrinkActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast create_drink"));
+			appParent.sendMessage("cast create_drink");
         }
         public void btnFoodActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast create_food"));
+			appParent.sendMessage("cast create_food");
         }
         public void btnHealActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast heal"));
+			appParent.sendMessage("cast heal");
         }
         public void btnDetectinvisActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast detect_invis"));
+			appParent.sendMessage("cast detect_invis");
         }
         public void btnInvisActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast invis"));
+			appParent.sendMessage("cast invis");
         }
         public void btnRegenerateActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast regenerate"));
+			appParent.sendMessage("cast regenerate");
         }
         public void btnTerrorActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast terror"));
+			appParent.sendMessage("cast terror");
         }
         public void btnHardenActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast harden"));
+			appParent.sendMessage("cast harden");
         }
         public void btnEnduranceActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast endurance"));
+			appParent.sendMessage("cast endurance");
         }
         public void btnCourageActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast courage"));
+			appParent.sendMessage("cast courage");
         }
         public void btnFearActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast fear"));
+			appParent.sendMessage("cast fear");
         }
         public void btnStrengthActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast strength"));
+			appParent.sendMessage("cast strength");
         }
         public void btnWeakenActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast weaken"));
+			appParent.sendMessage("cast weaken");
         }
         public void btnAppleActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "use apple"));
+			appParent.sendMessage("use apple");
         } 
         public void btnBeerActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "use ale"));
+			appParent.sendMessage("use ale");
         }
         public void btnSandwichActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "use sandwich"));
+			appParent.sendMessage("use sandwich");
         }
         public void btnScrollActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "use recall"));
+			appParent.sendMessage("use recall");
         }
         public void btnUpActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "n"));
+			appParent.sendMessage("n");
         }
         public void btnDownActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "s"));
+			appParent.sendMessage("s");
         }
         public void btnLeftActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "w"));
+			appParent.sendMessage("w");
         }
         public void btnRightActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "e"));
+			appParent.sendMessage("e");
         }
         public void btnSoundOnActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "audio on"));
+			appParent.sendMessage("audio on");
         }
         public void btnSoundOffActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "audio off"));
+			appParent.sendMessage("audio off");
         }
         public void btnLightning1ActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast shock"));
+			appParent.sendMessage("cast shock");
         }
         public void btnLightning2ActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast ball lightning"));
+			appParent.sendMessage("cast ball lightning");
         }
         public void btnLightning3ActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast thor"));
+			appParent.sendMessage("cast thor");
         }
         public void btnIce1ActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast ice shield"));
+			appParent.sendMessage("cast ice shield");
         }
         public void btnIce2ActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast freeze"));
+			appParent.sendMessage("cast freeze");
         }
         public void btnIce3ActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast ice bolt"));
+			appParent.sendMessage("cast ice bolt");
         }
         public void btnFire1ActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast fire shield"));
+			appParent.sendMessage("cast fire shield");
         }
         public void btnFire2ActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast burn"));
+			appParent.sendMessage("cast burn");
         }
         public void btnFire3ActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "cast fire bolt"));
+			appParent.sendMessage("cast fire bolt");
         }
 	public void btnMerchantActionPerformed(java.awt.event.ActionEvent e)
 	{
@@ -1042,19 +1038,13 @@ public class MainFrame extends JFrame implements ItemListener
 		frmEquipment.show();
 		frmEquipment.setSize(300, 440);
 	}
-        
-        public void btnConnectActionPerformed(java.awt.event.ActionEvent e)
-	{
-		frmConnect.show();
-		frmConnect.setSize(350, 200);
-	}
 	
 	public void btnQuitActionPerformed(java.awt.event.ActionEvent e)
 	{
 		try
 		{
 			if (appParent.blnConnected)
-				appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "quit"));
+				appParent.sendMessage("quit");
 		}catch(Exception exc){}
 		try
 		{
@@ -1082,25 +1072,25 @@ public class MainFrame extends JFrame implements ItemListener
         public void btnPopuponActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "popup on"));
+			appParent.sendMessage("popup on");
         }
         
         public void btnPopupoffActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "popup off"));
+			appParent.sendMessage("popup off");
         }
                 
         public void btnSleepActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "sleep"));
+			appParent.sendMessage("sleep");
         }
         
         public void btnWakeActionPerformed(java.awt.event.ActionEvent e)
 	{
 		if (appParent.blnConnected)
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "wake"));
+			appParent.sendMessage("wake");
         }
 	
 	public void itemStateChanged (ItemEvent evt)
@@ -1115,13 +1105,13 @@ public class MainFrame extends JFrame implements ItemListener
 			{
 				strStore = strStore.substring(i+1,strStore.length());
 			}
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "a "+strStore));
+			appParent.sendMessage("a "+strStore);
 			appParent.blnMenuRefresh = true;
 			chcAttack.setSelectedIndex(0);
 			appParent.blnMenuRefresh = false;
 		}else if (evt.getSource() == chcAction)
 		{
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, (String)chcAction.getSelectedItem()));
+			appParent.sendMessage((String)chcAction.getSelectedItem());
 			appParent.blnMenuRefresh = true;
 			chcAction.setSelectedIndex(0);
 			appParent.blnMenuRefresh = false;
@@ -1133,21 +1123,21 @@ public class MainFrame extends JFrame implements ItemListener
 			{
 				strStore = tknStore.nextToken();
 			}
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "look "+strStore));
+			appParent.sendMessage("look "+strStore);
 			appParent.blnMenuRefresh = true;
 			chcLook.setSelectedIndex(0);
 			appParent.blnMenuRefresh = false;
 		}else if (evt.getSource() == chcGet)
 		{
 			String strStore = (String)chcGet.getSelectedItem();
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "get "+strStore));
+			appParent.sendMessage("get "+strStore);
 			appParent.blnMenuRefresh = true;
 			chcGet.setSelectedIndex(0);
 			appParent.blnMenuRefresh = false;
 		}else if (evt.getSource() == chcDrop)
 		{
 			String strStore = (String)chcDrop.getSelectedItem();
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "drop "+strStore));
+			appParent.sendMessage("drop "+strStore);
 			appParent.blnMenuRefresh = true;
 			chcDrop.setSelectedIndex(0);
 			appParent.blnMenuRefresh = false;

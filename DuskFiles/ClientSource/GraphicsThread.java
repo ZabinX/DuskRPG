@@ -26,11 +26,16 @@ public class GraphicsThread implements Runnable
 	Thread thread;
 	private CountDownLatch imageLatch;
 	boolean blnAudioLoaded = false;
+	private volatile boolean running = true;
 
 	GraphicsThread(Dusk inParent, CountDownLatch latch)
 	{
 		appParent = inParent;
 		imageLatch = latch;
+	}
+
+	public void stop() {
+		running = false;
 	}
 	
 	public void run()
@@ -103,7 +108,7 @@ public class GraphicsThread implements Runnable
 
 		// The main game loop.
 		long lastTime = System.nanoTime();
-		while (true)
+		while (running)
 		{
 			if (appParent.blnConnected && appParent.blnLoaded)
 			{

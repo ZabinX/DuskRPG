@@ -17,7 +17,6 @@
  * along with DuskZ; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package duskz.protocol;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -64,13 +63,6 @@ public class ListMessage extends DuskMessage {
 		this.value.add(DuskMessage.create(name, value));
 	}
 
-	public void add(long id, int name, int value) {
-		this.value.add(DuskMessage.create(id, name, value));
-	}
-	public void add(long id, int name, String value) {
-		this.value.add(DuskMessage.create(id, name, value));
-	}
-
 	public DuskMessage.StringListMessage add(int name, List<String> value) {
 		StringListMessage a = DuskMessage.create(name, value);
 		this.value.add(a);
@@ -96,9 +88,6 @@ public class ListMessage extends DuskMessage {
 
 		if (m instanceof IntegerMessage)
 			return ((IntegerMessage)m).value;
-		else if (m instanceof EntityIntegerMessage) {
-			return ((EntityIntegerMessage)m).value;
-		}
 		throw new ClassCastException(m.getClass().getName() + " not IntegerMessage");
 	}
 

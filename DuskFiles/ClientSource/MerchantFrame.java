@@ -18,8 +18,6 @@ import java.lang.reflect.Array;
 import java.util.StringTokenizer;
 import java.applet.*;
 import java.net.*;
-import duskz.protocol.*;
-import duskz.protocol.DuskMessage.*;
 
 class MerchantFrame extends JFrame implements MouseListener
 {
@@ -92,12 +90,12 @@ class MerchantFrame extends JFrame implements MouseListener
 		{
 			String strStore = (String)chcBuy.getSelectedItem();
 			strStore = strStore.substring(strStore.indexOf(")")+1);
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "buy "+txtQuantity.getText()+" "+strStore));
+			appParent.sendMessage("buy "+txtQuantity.getText()+" "+strStore);
 		}else if (evt.getComponent() == btnSell)
 		{
 			String strStore = (String)chcSell.getSelectedItem();
 			strStore = strStore.substring(strStore.indexOf(")")+1);
-			appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "sell "+txtQuantity.getText()+" "+strStore));
+			appParent.sendMessage("sell "+txtQuantity.getText()+" "+strStore);
 		}
 	}
 	public void mouseEntered(MouseEvent evt) {}

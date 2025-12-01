@@ -3,8 +3,6 @@ import java.util.Date;
 import java.util.Vector;
 import java.util.Iterator;
 import java.util.StringTokenizer;
-import duskz.protocol.*;
-import duskz.protocol.DuskMessage.*;
 
 
 public class Commands
@@ -361,16 +359,16 @@ public class Commands
 						{
 							if (strIP.indexOf(strBlockedIP) != -1)
 							{
-								rafBannedIP.close();
+								lt.rafFile.close();
 								return "Already blocked.";
 							}
-							strBlockedIP = rafBannedIP.readLine();
+							strBlockedIP = lt.rafFile.readLine();
 						}
-						rafBannedIP.close();
+						lt.rafFile.close();
 						rafBannedIP = new RandomAccessFile("conf/blockedIP","rw");
 						rafBannedIP.seek(rafBannedIP.length());
 						rafBannedIP.writeBytes(strIP+"\n");
-						rafBannedIP.close();
+						lt.rafFile.close();
 						return thnStore.strName+"'s IP address has been blocked.";
 					} catch (Exception e)
 					{
@@ -549,7 +547,7 @@ public class Commands
 				{
 					File filList = new File(strFileName);
 					String strResult[] = filList.list();
-					StringBuffer strBuff = new StringBuffer();
+					StringBuilder strBuff = new StringBuilder();
 					for (int i=0;i<strResult.length;i++)
 					{
 						// Only output files that do not end in .dsko
@@ -558,9 +556,9 @@ public class Commands
 							strBuff.append(strResult[i]+"\n");
 						}
 					}
-					ListMessage msg = new ListMessage(DuskProtocol.MSG_POPUP_VIEW);
-					msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_TITLE, strTitle));
-					msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_CONTENT, strBuff.toString()));
+					ListMessage msg = new ListMessage(DuskProtocol.MSG_POPUP);
+					msg.add(DuskMessage.create(DuskProtocol.FIELD_TITLE, strTitle));
+					msg.add(DuskMessage.create(DuskProtocol.FIELD_MESSAGE, strBuff.toString()));
 					lt.send(msg);
 					return null;
 				}
@@ -683,14 +681,14 @@ public class Commands
 					{
 						return "The player named \""+filView.getName()+"\" does not have a pet.";
 					}
-					ListMessage msg = new ListMessage(DuskProtocol.MSG_EDIT_FILE);
-					msg.add(new StringMessage(DuskProtocol.FIELD_EDIT_NAME, strArgs));
-					msg.add(new StringMessage(DuskProtocol.FIELD_EDIT_CONTENT, ""));
+					ListMessage msg = new ListMessage(DuskProtocol.MSG_OPEN_EDITOR);
+					msg.add(DuskMessage.create(DuskProtocol.FIELD_TITLE, strArgs));
+					msg.add(DuskMessage.create(DuskProtocol.FIELD_MESSAGE, ""));
 					lt.send(msg);
 					return null;
 				}
 				RandomAccessFile rafView=null;
-				StringBuffer strBuff = new StringBuffer();
+				StringBuilder strBuff = new StringBuilder();
 				try
 				{
 					rafView = new RandomAccessFile(filView,"rw");
@@ -701,12 +699,12 @@ public class Commands
 					String strStore2 = rafView.readLine();
 					while (strStore2 != null)
 					{
-						strBuff.append(strStore2+"\n");
+						strBuff.append(strStore2).append("\n");
 						strStore2 = rafView.readLine();
 					}
-					ListMessage msg = new ListMessage(DuskProtocol.MSG_EDIT_FILE);
-					msg.add(new StringMessage(DuskProtocol.FIELD_EDIT_NAME, strArgs));
-					msg.add(new StringMessage(DuskProtocol.FIELD_EDIT_CONTENT, strBuff.toString()));
+					ListMessage msg = new ListMessage(DuskProtocol.MSG_OPEN_EDITOR);
+					msg.add(DuskMessage.create(DuskProtocol.FIELD_TITLE, strArgs));
+					msg.add(DuskMessage.create(DuskProtocol.FIELD_MESSAGE, strBuff.toString()));
 					lt.send(msg);
 				}catch(Exception e)
 				{
@@ -1310,77 +1308,70 @@ public class Commands
 		    if (strCommand.equals("whoip"))
 		    {
 				engGame.log.printMessage(Log.INFO,"godcommand:"+lt.strName+":"+strStore+":"+lt.intLocX+","+lt.intLocY);
-				synchronized(lt.stmOut)
+				int nPlayers = engGame.vctSockets.size();
+				StringBuilder strBuff = new StringBuilder();
+				LivingThing thnStore = null;
+				for (int i=0;i<engGame.vctSockets.size();i++)
 				{
-					int nPlayers = engGame.vctSockets.size();
-					StringBuffer strBuff = new StringBuffer();
-					LivingThing thnStore = null;
-					for (int i=0;i<engGame.vctSockets.size();i++)
+					thnStore = (LivingThing)engGame.vctSockets.elementAt(i);
+					boolean hidden = false;
+					boolean skip = false;
+					if (thnStore.privs > 2)
 					{
-						thnStore = (LivingThing)engGame.vctSockets.elementAt(i);
-						boolean hidden = false;
-						boolean skip = false;
-						if (thnStore.privs > 2)
+						if (thnStore.hasCondition("invis"))
 						{
-							if (thnStore.hasCondition("invis"))
-							{
-								hidden = true;
-							}
+							hidden = true;
 						}
-						if (hidden && (lt.privs < thnStore.privs))
-						{
-							skip = true;
-							nPlayers--;
-						}
-						if (!skip)
-						{
-							String strIP = thnStore.sckConnection.getInetAddress().toString();
-							while (strIP.length() < 34)
-							{
-								strIP += " ";
-							}
-							strBuff.append("   "+strIP);
-							strBuff.append(thnStore.getCharacterPoints()+"cp ");
-							if (thnStore.privs == 1)
-							{
-								strBuff.append("{Clan Leader}");
-							}else if (thnStore.privs == 3)
-							{
-								strBuff.append("{God}");
-							}else if (thnStore.privs == 4)
-							{
-								strBuff.append("{High God}");
-							}else if (thnStore.privs > 4)
-							{
-							strBuff.append("{Master God}");
-					    }
-							if (hidden)
-							{
-								strBuff.append("{hidden}");
-							}
-							if (thnStore.noChannel != 0)
-							{
-								strBuff.append("{nochanneled}");
-							}
-							if (!thnStore.strClan.equals("none"))
-							{
-								strBuff.append("<"+thnStore.strClan+"> ");
-							}
-							strBuff.append(thnStore.strName+"\n");
-						}
-			    }
-					lt.chatMessage("\tThere are "+nPlayers+" players online:");
-					String strStore2 = strBuff.toString();
-			    intIndex = strStore2.indexOf("\n");
-					while (intIndex != -1 && strStore2.length() > 5)
-					{
-						lt.chatMessage(strStore2.substring(0,intIndex));
-						strStore2 = strStore2.substring(intIndex+1);
-						intIndex = strStore2.indexOf("\n");
 					}
-					if (strStore2 != null&& strStore2.length() > 5)
-						lt.chatMessage(strStore2);
-			}
+					if (hidden && (lt.privs < thnStore.privs))
+					{
+						skip = true;
+						nPlayers--;
+					}
+					if (!skip)
+					{
+						String strIP = thnStore.sckConnection.getInetAddress().toString();
+						while (strIP.length() < 34)
+						{
+							strIP += " ";
+						}
+						strBuff.append("   "+strIP);
+						strBuff.append(thnStore.getCharacterPoints()+"cp ");
+						if (thnStore.privs == 1)
+						{
+							strBuff.append("{Clan Leader}");
+						}else if (thnStore.privs == 3)
+						{
+							strBuff.append("{God}");
+						}else if (thnStore.privs == 4)
+						{
+							strBuff.append("{High God}");
+						}else if (thnStore.privs > 4)
+						{
+						strBuff.append("{Master God}");
+					}
+						if (hidden)
+						{
+							strBuff.append("{hidden}");
+						}
+						if (thnStore.noChannel != 0)
+						{
+							strBuff.append("{nochanneled}");
+						}
+						if (!thnStore.strClan.equals("none"))
+						{
+							strBuff.append("<"+thnStore.strClan+"> ");
+						}
+						strBuff.append(thnStore.strName+"\n");
+					}
+				}
+				lt.chatMessage("\tThere are "+nPlayers+" players online:");
+				String strStore2 = strBuff.toString();
+				String[] lines = strStore2.split("\n");
+				for(String line : lines) {
+					if(line.trim().length() > 0)
+						lt.chatMessage(line);
+				}
 				return null;
 		    }
 		    if (strStore.startsWith(">"))
@@ -1567,14 +1558,14 @@ public class Commands
 				if (lt.isPet())
 				{
 					lt.thnMaster.proceed();
-					lt.thnMaster.updateInfo();
+					lt.thnMaster.updateStats();
 				} else
 				{
 					lt.proceed();
 				}
 				engGame.removeDuskObject(lt);
 				engGame.addDuskObject(lt);
-				lt.updateInfo();
+				lt.updateStats();
 				return "Your race has been changed.";
 			}
 		}
@@ -1822,125 +1813,118 @@ public class Commands
 		}
 		if (strCommand.equals("who"))
 		{
-			synchronized(lt.stmOut)
+			int nPlayers = engGame.vctSockets.size();
+			StringBuilder strBuff = new StringBuilder();
+			LivingThing thnStore = null;
+			for (int i=0;i<engGame.vctSockets.size();i++)
 			{
-				int nPlayers = engGame.vctSockets.size();
-				StringBuffer strBuff = new StringBuffer();
-				LivingThing thnStore = null;
-				for (int i=0;i<engGame.vctSockets.size();i++)
-				{
-					thnStore = (LivingThing)engGame.vctSockets.elementAt(i);
+				thnStore = (LivingThing)engGame.vctSockets.elementAt(i);
 
-					boolean hidden = false;
-					boolean skip = false;
-					if (thnStore.privs > 2)
+				boolean hidden = false;
+				boolean skip = false;
+				if (thnStore.privs > 2)
+				{
+					if (thnStore.hasCondition("invis"))
 					{
-						if (thnStore.hasCondition("invis"))
-						{
-							hidden = true;
-						}
-					}
-					if (hidden && (lt.privs < thnStore.privs))
-					{
-						skip = true;
-						nPlayers--;
-					}
-					if (lt.privs < 3 && !thnStore.blnWorking)
-					{
-						skip = true;
-						nPlayers--;
-					}
-					if (lt.privs < 3 && !thnStore.blnReadyForTheWorld)
-					{
-						skip = true;
-						nPlayers--;
-					}
-					if (!skip)
-					{
-						if (!lt.popup)
-							strBuff.append("\t");
-						strBuff.append(thnStore.getCharacterPoints());
-						strBuff.append("cp ");
-						if (lt.privs > 2 && !thnStore.blnWorking)
-						{
-							strBuff.append("{* Not Working *}");
-						}
-						if (lt.privs > 2 && !thnStore.blnReadyForTheWorld)
-						{
-							strBuff.append("{Entering the world}");
-						}
-						if (lt.privs > 2 && !thnStore.blnCanSave)
-						{
-							strBuff.append("{Loading/Saving}");
-						}
-						if (thnStore.privs == 1)
-						{
-							strBuff.append("{Clan Leader}");
-						}else if (thnStore.privs == 3)
-						{
-							strBuff.append("{God}");
-						}else if (thnStore.privs == 4)
-						{
-							strBuff.append("{High God}");
-						}else if (thnStore.privs > 4)
-						{
-							strBuff.append("{Master God}");
-						}
-						if (hidden)
-						{
-							strBuff.append("{hidden}");
-						}
-						if (thnStore.noChannel != 0)
-						{
-							strBuff.append("{nochanneled}");
-						}
-						if (thnStore.vctIgnore.contains(lt.strName.toLowerCase()))
-						{
-							strBuff.append("{Ignoring you}");
-						}
-						if (lt.vctIgnore.contains(thnStore.strName.toLowerCase()))
-						{
-							strBuff.append("{Ignored}");
-						}
-						if (!thnStore.strClan.equals("none"))
-						{
-							strBuff.append("<");
-							strBuff.append(thnStore.strClan);
-							strBuff.append("> ");
-						}
-						if (thnStore.strTitle == null ||
-							thnStore.strTitle.equals("none"))
-						{
-							strBuff.append(thnStore.strName);
-							strBuff.append("\n");
-						}else
-						{
-							strBuff.append(thnStore.strName);
-							strBuff.append(" ");
-							strBuff.append(thnStore.strTitle);
-							strBuff.append("\n");
-						}
+						hidden = true;
 					}
 				}
-				String strStore2 = strBuff.toString();
-				if (lt.popup)
+				if (hidden && (lt.privs < thnStore.privs))
 				{
-					ListMessage msg = new ListMessage(DuskProtocol.MSG_POPUP_VIEW);
-					msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_TITLE, "There are "+nPlayers+" players online:"));
-					msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_CONTENT, strStore2));
-					lt.send(msg);
-				} else
+					skip = true;
+					nPlayers--;
+				}
+				if (lt.privs < 3 && !thnStore.blnWorking)
 				{
-					lt.chatMessage("\tThere are "+nPlayers+" players online:");
-					intIndex = strStore2.indexOf("\n");
-					while (intIndex != -1 && strStore2.length() > 5)
+					skip = true;
+					nPlayers--;
+				}
+				if (lt.privs < 3 && !thnStore.blnReadyForTheWorld)
+				{
+					skip = true;
+					nPlayers--;
+				}
+				if (!skip)
+				{
+					if (!lt.popup)
+						strBuff.append("\t");
+					strBuff.append(thnStore.getCharacterPoints());
+					strBuff.append("cp ");
+					if (lt.privs > 2 && !thnStore.blnWorking)
 					{
-						lt.chatMessage(strStore2.substring(0,intIndex));
-						strStore2 = strStore2.substring(intIndex+1);
-						intIndex = strStore2.indexOf("\n");
+						strBuff.append("{* Not Working *}");
 					}
-					if (strStore2 != null&& strStore2.length() > 5)
-						lt.chatMessage(strStore2);
+					if (lt.privs > 2 && !thnStore.blnReadyForTheWorld)
+					{
+						strBuff.append("{Entering the world}");
+					}
+					if (lt.privs > 2 && !thnStore.blnCanSave)
+					{
+						strBuff.append("{Loading/Saving}");
+					}
+					if (thnStore.privs == 1)
+					{
+						strBuff.append("{Clan Leader}");
+					}else if (thnStore.privs == 3)
+					{
+						strBuff.append("{God}");
+					}else if (thnStore.privs == 4)
+					{
+						strBuff.append("{High God}");
+					}else if (thnStore.privs > 4)
+					{
+						strBuff.append("{Master God}");
+					}
+					if (hidden)
+					{
+						strBuff.append("{hidden}");
+					}
+					if (thnStore.noChannel != 0)
+					{
+						strBuff.append("{nochanneled}");
+					}
+					if (thnStore.vctIgnore.contains(lt.strName.toLowerCase()))
+					{
+						strBuff.append("{Ignoring you}");
+					}
+					if (lt.vctIgnore.contains(thnStore.strName.toLowerCase()))
+					{
+						strBuff.append("{Ignored}");
+					}
+					if (!thnStore.strClan.equals("none"))
+					{
+						strBuff.append("<");
+						strBuff.append(thnStore.strClan);
+						strBuff.append("> ");
+					}
+					if (thnStore.strTitle == null ||
+						thnStore.strTitle.equals("none"))
+					{
+						strBuff.append(thnStore.strName);
+						strBuff.append("\n");
+					}else
+					{
+						strBuff.append(thnStore.strName);
+						strBuff.append(" ");
+						strBuff.append(thnStore.strTitle);
+						strBuff.append("\n");
+					}
+				}
+			}
+			String strStore2 = strBuff.toString();
+			if (lt.popup)
+			{
+				ListMessage msg = new ListMessage(DuskProtocol.MSG_POPUP);
+				msg.add(DuskMessage.create(DuskProtocol.FIELD_TITLE, "There are "+nPlayers+" players online:"));
+				msg.add(DuskMessage.create(DuskProtocol.FIELD_MESSAGE, strStore2));
+				lt.send(msg);
+			} else
+			{
+				lt.chatMessage("\tThere are "+nPlayers+" players online:");
+				String[] lines = strStore2.split("\n");
+				for (String s : lines) {
+					if (s.trim().length() > 0)
+						lt.chatMessage(s);
 				}
 			}
 			return null;
@@ -2195,69 +2179,65 @@ public class Commands
 		if (strCommand.equals("help"))
 		{
 			RandomAccessFile rafHelp=null;
-			synchronized(lt.stmOut)
+			try
 			{
-				try
+				String title;
+				if (strArgs == null)
 				{
-					String title;
-					if (strArgs == null)
-					{
-						rafHelp = new RandomAccessFile("help","r");
-						title = "Help";
-					}else
-					{
-						if (strArgs.indexOf("..") != -1)
-						{
-							return "There is no help on that subject";
-						}
-						String fileName = engGame.getCaseInsensitiveFile("helpFiles", strArgs);
-						File fileHelp = new File("helpFiles/"+fileName);
-						if (!fileHelp.exists())
-						{
-							return "There is no help on that subject";
-						}
-						rafHelp = new RandomAccessFile("helpFiles/"+fileName,"r");
-						title = "Help on "+strArgs;
-					}
-					if (!lt.popup) {
-						lt.chatMessage(title);
-					}
-				}catch(Exception e)
+					rafHelp = new RandomAccessFile("help","r");
+					title = "Help";
+				} else
 				{
-					engGame.log.printError("parseCommand():When "+lt.strName+" tried to get help on "+strArgs, e);
-					return "There is no help on that subject";
+					if (strArgs.indexOf("..") != -1)
+					{
+						return "There is no help on that subject";
+					}
+					String fileName = engGame.getCaseInsensitiveFile("helpFiles", strArgs);
+					File fileHelp = new File("helpFiles/"+fileName);
+					if (!fileHelp.exists())
+					{
+						return "There is no help on that subject";
+					}
+					rafHelp = new RandomAccessFile("helpFiles/"+fileName,"r");
+					title = "Help on "+strArgs;
 				}
-				try
+
+				StringBuilder content = new StringBuilder();
+				String line = rafHelp.readLine();
+				while (line != null)
 				{
-					StringBuffer content = new StringBuffer();
-					strStore = rafHelp.readLine();
-					while (strStore != null)
-					{
-						if (lt.popup)
-						{
-							content.append(strStore).append("\n");
-						} else
-						{
-							lt.chatMessage(strStore);
-						}
-						strStore = rafHelp.readLine();
-					}
-					if (lt.popup) {
-						ListMessage msg = new ListMessage(DuskProtocol.MSG_POPUP_VIEW);
-						msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_TITLE, "Help"));
-						msg.add(new StringMessage(DuskProtocol.FIELD_POPUP_CONTENT, content.toString()));
-						lt.send(msg);
-					}
-				}catch(Exception e)
-				{
-					engGame.log.printError("parseCommand():While showing "+lt.strName+" help on "+strArgs, e);
+					content.append(line).append("\n");
+					line = rafHelp.readLine();
 				}
-				try
+
+				if (lt.popup)
 				{
-					rafHelp.close();
-				}catch(Exception e)
+					ListMessage msg = new ListMessage(DuskProtocol.MSG_POPUP);
+					msg.add(DuskMessage.create(DuskProtocol.FIELD_TITLE, title));
+					msg.add(DuskMessage.create(DuskProtocol.FIELD_MESSAGE, content.toString()));
+					lt.send(msg);
+				} else
 				{
-					engGame.log.printError("parseCommand():While closing help on "+strStore+" for "+lt.strName, e);
+					lt.chatMessage(title);
+					String[] lines = content.toString().split("\n");
+					for (String s : lines)
+					{
+						lt.chatMessage(s);
+					}
+				}
+			} catch(Exception e)
+			{
+				engGame.log.printError("parseCommand():When "+lt.strName+" tried to get help on "+strArgs, e);
+				return "There is no help on that subject";
+			} finally
+			{
+				if (rafHelp != null)
+				{
+					try {
+						rafHelp.close();
+					} catch (IOException e) {
+						// Ignore
+					}
 				}
 			}
 			return null;
@@ -2411,7 +2391,7 @@ public class Commands
 			}
 			if (lt.batBattle == null)
 			{
-				lt.useItem(strArgs,3); // 3 = FOOD
+				lt.useItem(strArgs,Item.FOOD);
 			}else
 			{
 				lt.vctCommands.addElement("eat "+strArgs);
@@ -2426,7 +2406,7 @@ public class Commands
 			}
 			if (lt.batBattle == null)
 			{
-				lt.useItem(strArgs,4); // 4 = DRINK
+				lt.useItem(strArgs,Item.DRINK);
 			}else
 			{
 				lt.vctCommands.addElement("drink "+strArgs);
@@ -2482,8 +2462,8 @@ public class Commands
 					{
 						lt.cash -= intStore;
 						thnStore.cash += intStore;
-						lt.updateInfo();
-						thnStore.updateInfo();
+						lt.updateStats();
+						thnStore.updateStats();
 						thnStore.chatMessage(lt.strName+" gives you "+intStore+"gp.");
 						return "You give "+thnStore.strName+" "+intStore+"gp.";
 					}else
@@ -2630,7 +2610,7 @@ public class Commands
 								lt.vctItems.addElement(itmStore);
 							}
 							lt.updateItems();
-							lt.updateInfo();
+							lt.updateStats();
 						}
 					}
 				}
@@ -2652,7 +2632,7 @@ public class Commands
 						{
 							strArgs = strArgs.substring(6);
 							mrcStore.train(strArgs,quantity,lt.thnFollowing);
-							lt.updateInfo();
+							lt.updateStats();
 						}
 					}
 					return null;
@@ -2664,13 +2644,13 @@ public class Commands
 				{
 					strArgs = strArgs.substring(6);
 					mrcStore.train(strArgs,quantity,lt);
-					lt.updateInfo();
+					lt.updateStats();
 				}else
 				{
 					if (strArgs.startsWith("pet"))
 					{
 						mrcStore.pet(lt);
-						lt.updateInfo();
+						lt.updateStats();
 					}else
 					{
 						Item itmStore = engGame.getItem(strArgs);
@@ -2688,7 +2668,7 @@ public class Commands
 									lt.vctItems.addElement(engGame.getItem(strArgs));
 								}
 								lt.updateItems();
-								lt.updateInfo();
+								lt.updateStats();
 							}
 						}
 					}
@@ -2750,7 +2730,7 @@ public class Commands
 						}
 					}
 					lt.updateItems();
-					lt.updateInfo();
+					lt.updateStats();
 					return null;
 				}
 				return "You cannot sell items to this merchant.";
@@ -2804,7 +2784,7 @@ public class Commands
 				}
 			}
 			lt.updateItems();
-				lt.updateInfo();
+			lt.updateStats();
 			return null;
 		}
 
@@ -2870,8 +2850,8 @@ public class Commands
 				{
 					thnStore.thnFollowing = lt;
 					lt.thnMaster = thnStore;
-					thnStore.updateInfo();
-					lt.updateInfo();
+					thnStore.updateStats();
+					lt.updateStats();
 					return "You are now following "+lt.thnMaster.strName+".";
 				}
 				LivingThing thnStore2 = thnStore;
@@ -2890,8 +2870,8 @@ public class Commands
 				}
 				thnStore.thnFollowing = lt;
 				lt.thnMaster = thnStore;
-				thnStore.updateInfo();
-				lt.updateInfo();
+				thnStore.updateStats();
+				lt.updateStats();
 				return "You are now following "+lt.thnMaster.strName+".";
 			}
 			return "That's not something you can follow.";
@@ -3192,9 +3172,9 @@ public class Commands
 				}
 				lt.vctItems.removeElement(itmStore.strName);
 				if (lt.isPet())
-					lt.thnMaster.updateInfo();
+					lt.thnMaster.updateStats();
 				if (lt.isPlayer())
-					lt.updateInfo();
+					lt.updateStats();
 				lt.updateEquipment();
 				lt.updateItems();
 				return null;
@@ -3416,19 +3396,6 @@ public class Commands
 	private static DuskObject getObjectFromArgs(DuskEngine engGame, LivingThing lt, String strArgs)
 	{
 		DuskObject objStore = null;
-
-		// Try parsing the argument as a direct ID first for commands like "attack 12345"
-		try {
-			long id = Long.parseLong(strArgs);
-			objStore = getObjectByID(engGame, id);
-			if (objStore != null) {
-				return objStore;
-			}
-		} catch (NumberFormatException e) {
-			// Not a raw ID, proceed to name-based lookup below.
-		}
-
-		// Fallback for name-based lookups like "attack goblin" or "look goblin #12345"
 		int lastHash = strArgs.lastIndexOf(" #");
 		if (lastHash != -1) {
 			String idString = strArgs.substring(lastHash + 2);

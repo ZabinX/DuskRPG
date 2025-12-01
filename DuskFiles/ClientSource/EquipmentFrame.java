@@ -18,8 +18,6 @@ import java.lang.reflect.Array;
 import java.util.StringTokenizer;
 import java.applet.*;
 import java.net.*;
-import duskz.protocol.*;
-import duskz.protocol.DuskMessage.*;
 
 class EquipmentFrame extends JFrame implements ActionListener
 {
@@ -257,10 +255,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcWield.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "unwear wielded"));
+						appParent.sendMessage("unwear wielded");
 					}else
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "wear "+strStore));
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -269,10 +267,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcArms.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "unwear arms"));
+						appParent.sendMessage("unwear arms");
 					}else
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "wear "+strStore));
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -281,10 +279,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcLegs.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "unwear legs"));
+						appParent.sendMessage("unwear legs");
 					}else
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "wear "+strStore));
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -293,10 +291,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcTorso.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "unwear torso"));
+						appParent.sendMessage("unwear torso");
 					}else
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "wear "+strStore));
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -305,10 +303,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcWaist.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "unwear waist"));
+						appParent.sendMessage("unwear waist");
 					}else
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "wear "+strStore));
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -317,10 +315,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcNeck.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "unwear neck"));
+						appParent.sendMessage("unwear neck");
 					}else
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "wear "+strStore));
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -329,10 +327,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcSkull.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "unwear skull"));
+						appParent.sendMessage("unwear skull");
 					}else
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "wear "+strStore));
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -341,10 +339,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcEyes.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "unwear eyes"));
+						appParent.sendMessage("unwear eyes");
 					}else
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "wear "+strStore));
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}
@@ -353,10 +351,10 @@ class EquipmentFrame extends JFrame implements ActionListener
 					strStore = (String)chcHands.getSelectedItem();
 					if (strStore.equals("none"))
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "unwear hands"));
+						appParent.sendMessage("unwear hands");
 					}else
 					{
-						appParent.sendMessage(new StringMessage(DuskProtocol.MSG_COMMAND, "wear "+strStore));
+						appParent.sendMessage("wear "+strStore);
 					}
 					break;
 				}

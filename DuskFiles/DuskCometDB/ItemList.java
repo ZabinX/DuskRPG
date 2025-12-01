@@ -1,5 +1,6 @@
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Enumeration;
 
 public class ItemList extends Hashtable
 {
@@ -11,6 +12,10 @@ public class ItemList extends Hashtable
 	public Object get(String strItemName)
 	{
 		return super.get(strItemName.toLowerCase());
+	}
+
+	public synchronized Enumeration elements() {
+		return super.elements();
 	}
 
 	public void addElement(Item itmStore)
@@ -59,7 +64,8 @@ public class ItemList extends Hashtable
 		{
 			qStore = (LifoQueue)get(iter.next());
 			itmStore = (Item)qStore.firstElement();
-			invBuffer.append(""+(char)3).append(qStore.size()).append(" ").append(itmStore.strName).append("\n");
+			if (itmStore != null)
+				invBuffer.append(""+(char)3).append(qStore.size()).append(" ").append(itmStore.strName).append("\n");
 		}
 		return invBuffer.toString();
 	}
@@ -80,7 +86,7 @@ public class ItemList extends Hashtable
 		{
 			qStore = (LifoQueue)get(iter.next());
 			qoStore = qStore.head();
-			while(qoStore.next() != null)
+			while(qoStore != null)
 			{
 				itmStore = (Item)qoStore.getObject();
 				invBuffer.append(itmStore.toString()).append("/\n");

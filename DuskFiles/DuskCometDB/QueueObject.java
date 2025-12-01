@@ -1,47 +1,42 @@
-/*
-All code copyright Tom Weingarten (captaint@home.com) 2000
-Tom Weingarten makes no assurances as to the reliability or
-functionality of this code. Use at your own risk.
-
-You are free to edit or redistribute this code or any portion
-at your wish, under the condition that you do not edit or
-remove this license, and accompany it with all redistributions.
-*/
 import java.io.Serializable;
 
-class QueueObject implements Serializable
+class QueueObject extends Object implements Serializable
 {
-	Object o;
-	QueueObject nextObject;
+	private QueueObject next;
+	private Serializable object;
 
-	public QueueObject(Object o)
+	QueueObject(Serializable o)
 	{
-		this.o = o;
+        object = o;
+		next = null;
 	}
 
-	public void setNext(QueueObject o)
+	Serializable getObject()
 	{
-		nextObject = o;
+        return object;
 	}
 
-	public Object getObject()
+	synchronized QueueObject next()
 	{
-		return o;
+        return next;
 	}
 
-	public QueueObject next()
+	synchronized void append(QueueObject qo)
 	{
-		return nextObject;
+        next = qo;
 	}
 
-	public QueueObject prepend(QueueObject qo)
+	synchronized QueueObject prepend(QueueObject qo)
 	{
-		qo.setNext(this);
-		return qo;
+		qo.next = this;
+        return qo;
 	}
 
-	public QueueObject remove()
+	synchronized QueueObject remove()
 	{
-		return nextObject;
+		QueueObject qo = next;
+		next = null;
+        return qo;
 	}
+
 }
