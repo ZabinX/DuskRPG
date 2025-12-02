@@ -1,1 +1,0 @@
-(trigger trigger exp 0 *trigger "You need kill your first monster then you may proceed with the tutorial." trigger leave ,trigger -1  

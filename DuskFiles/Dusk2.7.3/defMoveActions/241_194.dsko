@@ -1,1 +1,0 @@
-(trigger trigger cp 39 *trigger "You need to visit the Newbie Tutorial first.  Thats south of Death Mountain village." trigger leave ,trigger -1  

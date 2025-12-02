@@ -1,0 +1,28 @@
+Version info: I've tried merging NotZed's new protocol but better choice maybe merging the other way.
+
+Client/Server = OG protocol: Most stable.
+Clientj/Serverj = Jules protocol: Most smooth maybe less stable.
+Clientz/Serverz = NotZed's duskz protocol: Broken experiment.
+Clientz2/Serverz2 = NotZed's duskz protocol: Broken experiment. New login sequence.
+
+1. To Compile the Server: **Fix me. I've Changed names testing protocols.**
+
+You need to include the Berkeley DB .jar file in the classpath. Run this command from the root directory of the repository:
+
+javac -cp DuskFiles/DuskCometDB/lib/je-3.3.75.jar DuskFiles/DuskCometDB/*.java
+
+new protocol
+
+javac -cp "DuskFiles/DuskCometDB/lib/je-3.3.75.jar:DuskFiles/DuskCometDB" DuskFiles/DuskCometDB/*.java
+
+javac -cp "DuskFiles/DuskComet-Richter/wwwClient/lib/flatlaf-3.4.1.jar:DuskFiles/ClientSource" DuskFiles/ClientSource/*.java
+
+2. To Run the Server:
+
+You must run the server from your DuskComet-Richter data directory. The command tells Java where to find the compiled code and the necessary Berkeley DB library.
+
+cd DuskFiles/DuskComet-Richter
+java -cp ../DuskCometDB/lib/je-3.3.75.jar:../DuskCometDB DuskServer
+
+cd DuskFiles/DuskComet-Richter
+javac DuskFiles/DuskServerSource/CreateTileData.java && java -cp DuskFiles/DuskServerSource CreateTileData

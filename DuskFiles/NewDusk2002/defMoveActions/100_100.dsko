@@ -1,8 +1,0 @@
-trigger boat !trigger boat -trigger 100 100 trigger "allowedboat" 
-trigger "allowedboat" trigger "inside" 
-trigger "inside" trigger "ogrefight" 
-trigger "ogrefight" trigger "guard_attack" 
-trigger "guard_attack" trigger "intown" 
-trigger "intown" trigger "searchedhere" 
-trigger "searchedhere" trigger "jailed" -trigger 123 168 *trigger "No escape for you." trigger "necrofight" 
-trigger "necrofight" /clan trigger "arena_fight" 8trigger "none"  

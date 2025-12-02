@@ -1,3 +1,0 @@
-trigger target enemy trigger target hp 1 trigger hunger *trigger "**You couldn't stand being hungry anymore so you ate the flan you just killed**   You also earned a monster point!" 
-trigger hunger 
-trigger flanfood1 	trigger nohunger 500 trigger flanpoint  

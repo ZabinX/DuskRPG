@@ -1,5 +1,0 @@
-'trigger guard1 local trigger "ball" guard1 locX 546 guard1 locY 609 -guard1 1 1 *trigger "**You step on the switch and hear a loud click!**" *trigger "**Then follows crashing, grinding, and thumping noises as the trigger keeps going off until a door opens up ahead. **" trigger reset 
-trigger puzzle trigger puzzlefinished .544 607 480 .544 608 505 *trigger "**You step on the switch and nothing happens.**" 
-trigger ballsouth4 
-trigger balleast5 
-trigger ballnorth5  

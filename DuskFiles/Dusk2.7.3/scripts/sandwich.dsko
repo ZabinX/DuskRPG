@@ -1,1 +1,0 @@
-*trigger "You eat a sandwich." 	trigger nohunger 2400 !trigger sandwich  

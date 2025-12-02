@@ -1,1 +1,0 @@
-trigger cp mod *trigger "You must experience more before you can wear this." command concat "unwear " itemname trigger command  
