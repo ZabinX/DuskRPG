@@ -674,12 +674,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					{
 						synchronized(vctEntities)
 						{
-							MapMessage mapMsg = (MapMessage)msg;
-							LocX = mapMsg.x;
-							LocY = mapMsg.y;
-							shrMap = mapMsg.tiles;
-							shrMapAlpha = mapMsg.tilesAlpha;
-							shrMapAlpha2 = mapMsg.tilesAlpha2;
+							MapMessage mm = (MapMessage)msg;
+							LocX = mm.x;
+							LocY = mm.y;
+
+							short[][][] layers = {shrMap, shrMapAlpha, shrMapAlpha2};
+							mm.readMap(layers);
 							
 							Iterator<Entity> iter = vctEntities.iterator();
 							while (iter.hasNext())
@@ -823,17 +823,93 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					case (DuskProtocol.MSG_UPDATE_STATS):
 					{
 						ListMessage list = (ListMessage)msg;
-						loncash = list.getLong(DuskProtocol.FIELD_CASH);
-						frame.txtOther.setText("Cash: "+loncash+"\n");
-						frame.txtOther.append("Experience: "+list.getLong(DuskProtocol.FIELD_EXP)+"\n");
-						frame.txtOther.append("Strength: "+list.getInteger(DuskProtocol.FIELD_STRENGTH)+" + "+list.getInteger(DuskProtocol.FIELD_STRENGTH_BONUS)+"\n");
-						frame.txtOther.append("Intelligence: "+list.getInteger(DuskProtocol.FIELD_INTELLIGENCE)+" + "+list.getInteger(DuskProtocol.FIELD_INTELLIGENCE_BONUS)+"\n");
-						frame.txtOther.append("Dexterity: "+list.getInteger(DuskProtocol.FIELD_DEXTERITY)+" + "+list.getInteger(DuskProtocol.FIELD_DEXTERITY_BONUS)+"\n");
-						frame.txtOther.append("Constitution: "+list.getInteger(DuskProtocol.FIELD_CONSTITUTION)+" + "+list.getInteger(DuskProtocol.FIELD_CONSTITUTION_BONUS)+"\n");
-						frame.txtOther.append("Wisdom: "+list.getInteger(DuskProtocol.FIELD_WISDOM)+" + "+list.getInteger(DuskProtocol.FIELD_WISDOM_BONUS)+"\n");
-						frame.txtOther.append("Damage Modifier: "+list.getInteger(DuskProtocol.FIELD_DAMMOD)+"% + "+list.getInteger(DuskProtocol.FIELD_DAMMOD_BONUS)+"%\n");
-						frame.txtOther.append("Armor Class: "+list.getInteger(DuskProtocol.FIELD_AC)+" + "+list.getInteger(DuskProtocol.FIELD_AC_BONUS)+"\n");
-						// TODO: Conditions, Skills, Spells, Following
+						frame.txtOther.setText(""); // Clear previous stats
+
+						// Extract all values first
+						long cash = 0;
+						int exp = 0;
+						int stre = 0, stre_b = 0, inte = 0, inte_b = 0, dext = 0, dext_b = 0;
+						int cons = 0, cons_b = 0, wisd = 0, wisd_b = 0, dammod = 0, dammod_b = 0;
+						int ac = 0, ac_b = 0;
+						java.util.List<String> conditions = new ArrayList<>();
+						java.util.List<String> skills = new ArrayList<>();
+						java.util.List<String> spells = new ArrayList<>();
+						String following = null;
+						String followedBy = null;
+						int petHp = -1, petMaxHp = -1;
+
+						for (DuskMessage fieldMsg : list.value) {
+							switch (fieldMsg.name) {
+								case DuskProtocol.FIELD_CASH: cash = ((DuskMessage.LongMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_EXP: exp = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_STRENGTH: stre = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_STRENGTH_BONUS: stre_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_INTELLIGENCE: inte = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_INTELLIGENCE_BONUS: inte_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_DEXTERITY: dext = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_DEXTERITY_BONUS: dext_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_CONSTITUTION: cons = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_CONSTITUTION_BONUS: cons_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_WISDOM: wisd = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_WISDOM_BONUS: wisd_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_DAMMOD: dammod = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_DAMMOD_BONUS: dammod_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_AC: ac = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_AC_BONUS: ac_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_CONDITIONS: conditions.add(((DuskMessage.StringMessage)fieldMsg).value); break;
+								case DuskProtocol.FIELD_SKILLS: skills.add(((DuskMessage.StringMessage)fieldMsg).value); break;
+								case DuskProtocol.FIELD_SPELLS: spells.add(((DuskMessage.StringMessage)fieldMsg).value); break;
+								case DuskProtocol.FIELD_FOLLOWING: following = ((DuskMessage.StringMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_FOLLOWED_BY: followedBy = ((DuskMessage.StringMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_PET_HP: petHp = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+								case DuskProtocol.FIELD_PET_MAXHP: petMaxHp = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+							}
+						}
+
+						// Now build the string
+						loncash = cash; // update global
+						frame.txtOther.append("Cash: "+cash+"\n");
+						frame.txtOther.append("Experience: "+exp+"\n");
+						frame.txtOther.append("Strength: "+stre+" + "+stre_b+"\n");
+						frame.txtOther.append("Intelligence: "+inte+" + "+inte_b+"\n");
+						frame.txtOther.append("Dexterity: "+dext+" + "+dext_b+"\n");
+						frame.txtOther.append("Constitution: "+cons+" + "+cons_b+"\n");
+						frame.txtOther.append("Wisdom: "+wisd+" + "+wisd_b+"\n");
+						frame.txtOther.append("Damage Modifier: "+dammod+"% + "+dammod_b+"%\n");
+						frame.txtOther.append("Armor Class: "+ac+" + "+ac_b+"\n");
+						
+						if (!conditions.isEmpty()) {
+							StringBuilder sb = new StringBuilder("Conditions: ");
+							for (int i = 0; i < conditions.size(); i++) {
+								sb.append(conditions.get(i));
+								if (i < conditions.size() - 1) {
+									sb.append(", ");
+								}
+							}
+							sb.append("\n");
+							frame.txtOther.append(sb.toString());
+						}
+						if (!skills.isEmpty()) {
+							frame.txtOther.append("Skills:\n");
+							for (String s : skills) {
+								frame.txtOther.append("  " + s + "\n");
+							}
+						}
+						if (!spells.isEmpty()) {
+							frame.txtOther.append("Spells:\n");
+							for (String s : spells) {
+								frame.txtOther.append("  " + s + "\n");
+							}
+						}
+						if (following != null) {
+							frame.txtOther.append("Following: " + following + "\n");
+						}
+						if (followedBy != null) {
+							frame.txtOther.append("Followed by: " + followedBy + "\n");
+							if (petHp != -1) {
+								frame.txtOther.append("Pet HP: " + petHp + "/" + petMaxHp + "\n");
+							}
+						}
 						break;
 					}
 					case (DuskProtocol.MSG_REMOVE_ENTITY):
@@ -935,6 +1011,16 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					{
 						ListMessage list = (ListMessage)msg;
 						frame.lblTarget.setText("Target: "+list.getString(DuskProtocol.FIELD_TARGET_ID)+" HP: "+list.getInteger(DuskProtocol.FIELD_HP)+"/"+list.getInteger(DuskProtocol.FIELD_MAXHP));
+						break;
+					}
+					case (DuskProtocol.MSG_UPDATE_ACTIONS):
+					{
+						ListMessage list = (ListMessage)msg;
+						vctChoiceActionItems = new Vector(0,5);
+						for (DuskMessage actionMsg : list.value) {
+							vctChoiceActionItems.addElement(((DuskMessage.StringMessage)actionMsg).value);
+						}
+						reloadJComboBoxAction();
 						break;
 					}
 				}

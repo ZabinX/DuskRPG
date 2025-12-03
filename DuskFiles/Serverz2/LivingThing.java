@@ -2094,37 +2094,10 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	public void updateMap()
 	{
-		short[][] tiles = new short[engGame.mapsizeX][engGame.mapsizeY];
-		short[][] tilesAlpha = new short[engGame.mapsizeX][engGame.mapsizeY];
-		short[][] tilesAlpha2 = new short[engGame.mapsizeX][engGame.mapsizeY];
-		for (int i=0;i<engGame.mapsizeX;i++)
-		{
-			for (int i2=0;i2<engGame.mapsizeY;i2++)
-			{
-				try
-				{
-					tiles[i][i2] = engGame.shrMap[intLocX-engGame.viewrangeX+i][intLocY-engGame.viewrangeY+i2];
-				}catch (Exception e)
-				{
-					tiles[i][i2] = 0;
-				}
-				try
-				{
-					tilesAlpha[i][i2] = engGame.shrMapAlpha[intLocX-engGame.viewrangeX+i][intLocY-engGame.viewrangeY+i2];
-				}catch (Exception e)
-				{
-					tilesAlpha[i][i2] = 0;
-				}
-				try
-				{
-					tilesAlpha2[i][i2] = engGame.shrMapAlpha2[intLocX-engGame.viewrangeX+i][intLocY-engGame.viewrangeY+i2];
-				}catch (Exception e)
-				{
-					tilesAlpha2[i][i2] = 0;
-				}
-			}
-		}
-		send(new MapMessage(DuskProtocol.MSG_UPDATE_MAP, intLocX, intLocY, tiles, tilesAlpha, tilesAlpha2));
+		MapMessage msg = new MapMessage((byte)DuskProtocol.MSG_UPDATE_MAP, intLocX, intLocY, engGame.mapsizeX, engGame.mapsizeY);
+		short[][][] layers = {engGame.shrMap, engGame.shrMapAlpha, engGame.shrMapAlpha2};
+		msg.writeMap(layers, intLocX - engGame.viewrangeX, intLocY - engGame.viewrangeY);
+		send(msg);
 	}
 
 	public void chatMessage(String inMessage)
@@ -3415,6 +3388,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			proceed();
 			engGame.vctSockets.addElement(this);
 			loadRace();
+			updateApplicationImages();
 			blnIsLoaded = true;
 			return true;
 		} catch (Exception e) {
@@ -3475,6 +3449,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			proceed();
 			engGame.vctSockets.addElement(this);
 			loadRace();
+			updateApplicationImages();
 			blnIsLoaded = true;
 			return true;
 		} catch (Exception e) {
@@ -3615,7 +3590,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	public void updateApplicationImages()
 	{
-		send(DuskMessage.create(DuskProtocol.MSG_INIT_RESOURCES, engGame.strRCName));
+		send(DuskMessage.create(DuskProtocol.MSG_INIT_RESOURCES, engGame.strRCAddress));
 	}
 
 	public void updateMusic()
@@ -4010,5 +3985,6 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		return new String(buffer, "UTF-8");
 	}
  }
+
 
 

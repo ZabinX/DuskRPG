@@ -38,7 +38,7 @@ import java.util.List;
  *
  * @author Michael Zucchi <notzed@gmail.com>
  */
-public class DuskMessage {
+public class DuskMessage implements java.io.Serializable {
 
 	// A list of any type of message including another list.
 	protected static final byte TC_LIST = 0;
@@ -225,7 +225,7 @@ public class DuskMessage {
 		}
 	}
 
-	public static class IntegerMessage extends DuskMessage {
+	public static class IntegerMessage extends DuskMessage implements java.io.Serializable {
 
 		public int value;
 
@@ -264,7 +264,7 @@ public class DuskMessage {
 		}
 	}
 
-	public static class LongMessage extends DuskMessage {
+	public static class LongMessage extends DuskMessage implements java.io.Serializable {
 
 		public long value;
 
@@ -303,7 +303,7 @@ public class DuskMessage {
 		}
 	}
 
-	public static class FloatMessage extends DuskMessage {
+	public static class FloatMessage extends DuskMessage implements java.io.Serializable {
 
 		public float value;
 
@@ -342,7 +342,7 @@ public class DuskMessage {
 		}
 	}
 
-	public static class StringMessage extends DuskMessage {
+	public static class StringMessage extends DuskMessage implements java.io.Serializable {
 
 		public String value;
 
@@ -386,7 +386,7 @@ public class DuskMessage {
 		}
 	}
 
-	public static class StringListMessage extends DuskMessage {
+	public static class StringListMessage extends DuskMessage implements java.io.Serializable {
 
 		public final List<String> value;
 

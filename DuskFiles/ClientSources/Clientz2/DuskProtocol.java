@@ -18,9 +18,9 @@ public interface DuskProtocol {
 	public final static int MSG_PLAY_SOUND = 15;
 	public final static int MSG_REMOVE_ENTITY = 16;
 	public final static int MSG_UPDATE_MERCHANT = 17;
-	public final static int MSG_POPUP_EDIT = 18;
+	public final static int MSG_OPEN_EDITOR = 18;
 	public final static int MSG_INIT_MAP = 19;
-	public final static int MSG_POPUP_VIEW = 20;
+	public final static int MSG_POPUP = 20;
 	public final static int MSG_EXIT_MERCHANT = 21;
 	public final static int MSG_UPDATE_SELL = 22;
 	public final static int MSG_CHAT_RGB = 23;
@@ -69,12 +69,12 @@ public interface DuskProtocol {
 	public final static int FIELD_MUSIC = 23;
 	public final static int FIELD_SOUND = 24;
 	public final static int FIELD_MERCHANT_ITEMS = 25;
-	public final static int FIELD_EDIT_TEXT = 26;
+	public final static int FIELD_TITLE = 26;
 	public final static int FIELD_MAP_SIZE_X = 27;
 	public final static int FIELD_MAP_SIZE_Y = 28;
 	public final static int FIELD_VIEW_RANGE_X = 29;
 	public final static int FIELD_VIEW_RANGE_Y = 30;
-	public final static int FIELD_VIEW_TEXT = 31;
+	public final static int FIELD_MESSAGE = 31;
 	public final static int FIELD_SELL_ITEMS = 32;
 	public final static int FIELD_RGB_R = 33;
 	public final static int FIELD_RGB_G = 34;

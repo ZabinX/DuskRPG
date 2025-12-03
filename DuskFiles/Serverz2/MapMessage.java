@@ -5,46 +5,20 @@ import java.io.IOException;
 public class MapMessage extends DuskMessage {
 	public int x;
 	public int y;
-	public short tiles[][];
-	public short tilesAlpha[][];
-	public short tilesAlpha2[][];
+	public int width;
+	public int height;
+	public short[][][] map;
 
 	public MapMessage() {
 	}
 
-	public MapMessage(int name, int x, int y, short tiles[][], short tilesAlpha[][], short tilesAlpha2[][]) {
+	public MapMessage(byte name, int x, int y, int width, int height) {
 		super(name);
 		this.x = x;
 		this.y = y;
-		this.tiles = tiles;
-		this.tilesAlpha = tilesAlpha;
-		this.tilesAlpha2 = tilesAlpha2;
-	}
-
-	@Override
-	public void send(DataOutputStream ostream) throws IOException {
-		super.send(ostream);
-		ostream.writeInt(x);
-		ostream.writeInt(y);
-		int w = tiles.length;
-		int h = tiles[0].length;
-		ostream.writeShort(w);
-		ostream.writeShort(h);
-		for (int i = 0; i < w; i++) {
-			for (int j = 0; j < h; j++) {
-				ostream.writeShort(tiles[i][j]);
-			}
-		}
-		for (int i = 0; i < w; i++) {
-			for (int j = 0; j < h; j++) {
-				ostream.writeShort(tilesAlpha[i][j]);
-			}
-		}
-		for (int i = 0; i < w; i++) {
-			for (int j = 0; j < h; j++) {
-				ostream.writeShort(tilesAlpha2[i][j]);
-			}
-		}
+		this.width = width;
+		this.height = height;
+		this.map = new short[3][width][height];
 	}
 
 	@Override
@@ -52,24 +26,60 @@ public class MapMessage extends DuskMessage {
 		super.receive(istream);
 		x = istream.readInt();
 		y = istream.readInt();
-		int w = istream.readShort();
-		int h = istream.readShort();
-		tiles = new short[w][h];
-		tilesAlpha = new short[w][h];
-		tilesAlpha2 = new short[w][h];
-		for (int i = 0; i < w; i++) {
-			for (int j = 0; j < h; j++) {
-				tiles[i][j] = istream.readShort();
+		width = istream.readShort();
+		height = istream.readShort();
+		map = new short[3][width][height];
+		for (int l = 0; l < 3; l++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
+					map[l][i][j] = istream.readShort();
+				}
 			}
 		}
-		for (int i = 0; i < w; i++) {
-			for (int j = 0; j < h; j++) {
-				tilesAlpha[i][j] = istream.readShort();
+	}
+
+	@Override
+	public void send(DataOutputStream out) throws IOException {
+		super.send(out);
+		out.writeInt(x);
+		out.writeInt(y);
+		out.writeShort(width);
+		out.writeShort(height);
+		for (int l = 0; l < 3; l++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
+					out.writeShort(map[l][i][j]);
+				}
 			}
 		}
-		for (int i = 0; i < w; i++) {
-			for (int j = 0; j < h; j++) {
-				tilesAlpha2[i][j] = istream.readShort();
+	}
+
+	public void writeMap(short[][][] layers, int x, int y) {
+		int mapWidth = layers[0].length;
+		int mapHeight = layers[0][0].length;
+	
+		for (int l = 0; l < 3; l++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
+					int sourceX = x + i;
+					int sourceY = y + j;
+	
+					if (sourceX >= 0 && sourceX < mapWidth && sourceY >= 0 && sourceY < mapHeight) {
+						map[l][i][j] = layers[l][sourceX][sourceY];
+					} else {
+						map[l][i][j] = 0; // Or some other default/empty tile value
+					}
+				}
+			}
+		}
+	}
+
+	public void readMap(short[][][] layers) {
+		for (int l = 0; l < 3; l++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
+					layers[l][i][j] = map[l][i][j];
+				}
 			}
 		}
 	}
