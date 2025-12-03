@@ -3,10 +3,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class MapMessage extends DuskMessage {
-	public short x;
-	public short y;
-	public short width;
-	public short height;
+	public int x;
+	public int y;
+	public int width;
+	public int height;
 	public short[][][] map;
 
 	public MapMessage() {
@@ -14,18 +14,18 @@ public class MapMessage extends DuskMessage {
 
 	public MapMessage(byte name, int x, int y, int width, int height) {
 		super(name);
-		this.x = (short)x;
-		this.y = (short)y;
-		this.width = (short)width;
-		this.height = (short)height;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 		this.map = new short[3][width][height];
 	}
 
 	@Override
 	public void receive(DataInputStream istream) throws IOException {
 		super.receive(istream);
-		x = istream.readShort();
-		y = istream.readShort();
+		x = istream.readInt();
+		y = istream.readInt();
 		width = istream.readShort();
 		height = istream.readShort();
 		map = new short[3][width][height];
@@ -41,10 +41,10 @@ public class MapMessage extends DuskMessage {
 	@Override
 	public void send(DataOutputStream out) throws IOException {
 		super.send(out);
-		out.writeShort(x);
-		out.writeShort(y);
-		out.writeShort(width);
-		out.writeShort(height);
+		out.writeInt(x);
+		out.writeInt(y);
+		out.writeInt(width);
+		out.writeInt(height);
 		for (int l = 0; l < 3; l++) {
 			for (int j = 0; j < height; j++) {
 				for (int i = 0; i < width; i++) {
