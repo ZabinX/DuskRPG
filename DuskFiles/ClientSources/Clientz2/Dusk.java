@@ -163,6 +163,26 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	{
     	startUp();
 	}
+
+	private void initData() {
+		hmpEntities = new HashMap<Long, Entity>();
+		frmMerchant = new MerchantFrame(this);
+		vctEntities = new Vector(0,3);
+		vctMerchantItems = new Vector(0,3);
+		vctSell = new Vector(0,3);
+		vctChoiceDropItems = new Vector(0,3);
+		vctChoiceActionItems = new Vector(0,3);
+		vctTileAnims = new Vector<TileAnim>(0,3);
+		vctDamageSplats = new Vector<DamageSplat>(0,3);
+		vctCrossMarkers = new Vector<CrossMarker>(0,3);
+		vctParticles = new Vector<Particle>(0,3);
+		vctParticlesBehind = new Vector<Particle>(0,3);
+		sortedEntities = new ArrayList<Entity>();
+		tempNewParticlesFront = new ArrayList<Particle>();
+		tempNewParticlesBehind = new ArrayList<Particle>();
+		movementManager = new MovementManager();
+		camera = new Camera(null);
+	}
 	
 	void startUp()
 	{
@@ -175,23 +195,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
    			}catch (Exception e) {}
 			frame = new MainFrame(this);
 			frame.initComponents();
-			hmpEntities = new HashMap<Long, Entity>();
-			frmMerchant = new MerchantFrame(this);
-			vctEntities = new Vector(0,3);
-			vctMerchantItems = new Vector(0,3);
-			vctSell = new Vector(0,3);
-			vctChoiceDropItems = new Vector(0,3);
-			vctChoiceActionItems = new Vector(0,3);
-			vctTileAnims = new Vector<TileAnim>(0,3);
-			vctDamageSplats = new Vector<DamageSplat>(0,3);
-			vctCrossMarkers = new Vector<CrossMarker>(0,3);
-			vctParticles = new Vector<Particle>(0,3);
-			vctParticlesBehind = new Vector<Particle>(0,3);
-			sortedEntities = new ArrayList<Entity>();
-			tempNewParticlesFront = new ArrayList<Particle>();
-			tempNewParticlesBehind = new ArrayList<Particle>();
-			movementManager = new MovementManager();
-			camera = new Camera(null);
+			initData();
 			frame.setVisible(true);
 			frame.docGossip.insertString(0,"Dusk Client v"+strVersion+" -- https://duskrpg.blogspot.com/\n",null);
 			addText("You are using Java version "+System.getProperty("java.version")+"\n");
@@ -199,7 +203,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			frame.addComponentListener(this);
 			frame.pnlGraphics.addMouseListener(this);
 			frame.pnlGraphics.addKeyListener(this);
-			scaleWindow();
 			try
 			{
 			if (blnApplet)
@@ -207,7 +210,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				frame.btnEquipment.repaint();
 				frame.btnMerchant.repaint();
 				frame.btnQuit.repaint();
-				paint();
 			}else
 			{
                 frame.btnConnect.repaint();
@@ -218,8 +220,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 frame.btnPotion2.repaint();
                 frame.btnPotion3.repaint();
                 frame.btnPotion4.repaint();
-				paint();
 			}
+			scaleWindow();
+			paint();
 			}catch(Exception e)
 			{
 			}
@@ -389,6 +392,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 				}
 			}
+			initData();
 
 			// Example of sending a login message. The UI should handle this.
 			// sendMessage("login username password");
