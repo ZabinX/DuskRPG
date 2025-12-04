@@ -182,7 +182,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			frame.addComponentListener(this);
 			frame.pnlGraphics.addMouseListener(this);
 			frame.pnlGraphics.addKeyListener(this);
-			scaleWindow();
 			try
 			{
 			if (blnApplet)
@@ -190,7 +189,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				frame.btnEquipment.repaint();
 				frame.btnMerchant.repaint();
 				frame.btnQuit.repaint();
-				paint();
 			}else
 			{
                 frame.btnConnect.repaint();
@@ -201,8 +199,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 frame.btnPotion2.repaint();
                 frame.btnPotion3.repaint();
                 frame.btnPotion4.repaint();
-				paint();
 			}
+			scaleWindow();
+			paint();
 			}catch(Exception e)
 			{
 			}
