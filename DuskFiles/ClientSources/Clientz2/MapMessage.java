@@ -49,8 +49,8 @@ public class MapMessage extends DuskMessage {
 		height = istream.readShort();
 		map = new short[3][width][height];
 		for (int l = 0; l < 3; l++) {
-			for (int j = 0; j < height; j++) {
-				for (int i = 0; i < width; i++) {
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
 					map[l][i][j] = istream.readShort();
 				}
 			}
@@ -65,8 +65,8 @@ public class MapMessage extends DuskMessage {
 		out.writeShort(width);
 		out.writeShort(height);
 		for (int l = 0; l < 3; l++) {
-			for (int j = 0; j < height; j++) {
-				for (int i = 0; i < width; i++) {
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
 					out.writeShort(map[l][i][j]);
 				}
 			}
@@ -78,8 +78,8 @@ public class MapMessage extends DuskMessage {
 		int mapHeight = layers[0][0].length;
 	
 		for (int l = 0; l < 3; l++) {
-			for (int j = 0; j < height; j++) {
-				for (int i = 0; i < width; i++) {
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
 					int sourceX = x + i;
 					int sourceY = y + j;
 	
@@ -95,8 +95,8 @@ public class MapMessage extends DuskMessage {
 
 	public void readMap(short[][][] layers) {
 		for (int l = 0; l < 3; l++) {
-			for (int j = 0; j < height; j++) {
-				for (int i = 0; i < width; i++) {
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
 					layers[l][i][j] = map[l][i][j];
 				}
 			}
