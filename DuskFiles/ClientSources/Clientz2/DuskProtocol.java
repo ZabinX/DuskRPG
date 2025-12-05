@@ -60,6 +60,7 @@ public interface DuskProtocol {
 
 	// FROM CLIENT
 	public final static int MSG_COMMAND = 100;
+	public final static int MSG_LOAD_COMPLETE = 101;
 
 	// MESSAGE FIELDS
 	public final static int FIELD_INTEGER = 0;
