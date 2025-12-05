@@ -684,6 +684,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 							short[][][] layers = {shrMap, shrMapAlpha, shrMapAlpha2};
 							mm.readMap(layers);
+
+							System.out.println("CLIENT MAP DATA (Sample):");
+							for (int i = 0; i < 5; i++) {
+								for (int j = 0; j < 5; j++) {
+									System.out.print(shrMap[i][j] + " ");
+								}
+								System.out.println();
+							}
 							
 							Iterator<Entity> iter = vctEntities.iterator();
 							while (iter.hasNext())
