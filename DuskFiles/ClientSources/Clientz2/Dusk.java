@@ -163,6 +163,26 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	{
     	startUp();
 	}
+
+	private void initData() {
+		hmpEntities = new HashMap<Long, Entity>();
+		frmMerchant = new MerchantFrame(this);
+		vctEntities = new Vector(0,3);
+		vctMerchantItems = new Vector(0,3);
+		vctSell = new Vector(0,3);
+		vctChoiceDropItems = new Vector(0,3);
+		vctChoiceActionItems = new Vector(0,3);
+		vctTileAnims = new Vector<TileAnim>(0,3);
+		vctDamageSplats = new Vector<DamageSplat>(0,3);
+		vctCrossMarkers = new Vector<CrossMarker>(0,3);
+		vctParticles = new Vector<Particle>(0,3);
+		vctParticlesBehind = new Vector<Particle>(0,3);
+		sortedEntities = new ArrayList<Entity>();
+		tempNewParticlesFront = new ArrayList<Particle>();
+		tempNewParticlesBehind = new ArrayList<Particle>();
+		movementManager = new MovementManager();
+		camera = new Camera(null);
+	}
 	
 	void startUp()
 	{
@@ -175,6 +195,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
    			}catch (Exception e) {}
 			frame = new MainFrame(this);
 			frame.initComponents();
+			initData();
 			frame.setVisible(true);
 			frame.docGossip.insertString(0,"Dusk Client v"+strVersion+" -- https://duskrpg.blogspot.com/\n",null);
 			addText("You are using Java version "+System.getProperty("java.version")+"\n");
@@ -182,7 +203,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			frame.addComponentListener(this);
 			frame.pnlGraphics.addMouseListener(this);
 			frame.pnlGraphics.addKeyListener(this);
-			scaleWindow();
 			try
 			{
 			if (blnApplet)
@@ -190,7 +210,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				frame.btnEquipment.repaint();
 				frame.btnMerchant.repaint();
 				frame.btnQuit.repaint();
-				paint();
 			}else
 			{
                 frame.btnConnect.repaint();
@@ -201,8 +220,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 frame.btnPotion2.repaint();
                 frame.btnPotion3.repaint();
                 frame.btnPotion4.repaint();
-				paint();
 			}
+			scaleWindow();
 			}catch(Exception e)
 			{
 			}
@@ -372,23 +391,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 				}
 			}
-			hmpEntities = new HashMap<Long, Entity>();
-			frmMerchant = new MerchantFrame(this);
-			vctEntities = new Vector(0,3);
-			vctMerchantItems = new Vector(0,3);
-			vctSell = new Vector(0,3);
-			vctChoiceDropItems = new Vector(0,3);
-			vctChoiceActionItems = new Vector(0,3);
-			vctTileAnims = new Vector<TileAnim>(0,3);
-			vctDamageSplats = new Vector<DamageSplat>(0,3);
-			vctCrossMarkers = new Vector<CrossMarker>(0,3);
-			vctParticles = new Vector<Particle>(0,3);
-			vctParticlesBehind = new Vector<Particle>(0,3);
-			sortedEntities = new ArrayList<Entity>();
-			tempNewParticlesFront = new ArrayList<Particle>();
-			tempNewParticlesBehind = new ArrayList<Particle>();
-			movementManager = new MovementManager();
-			camera = new Camera(null);
+			initData();
 
 			// Example of sending a login message. The UI should handle this.
 			// sendMessage("login username password");
@@ -640,7 +643,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			try
 			{
 				msg = DuskMessage.receiveMessage(stmIn);
-				System.out.println("CLIENT RECEIVE: " + msg.name);
 				switch (msg.name)
 				{
 					case(DuskProtocol.MSG_QUIT):
@@ -1781,8 +1783,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	public void paint()
 	{
-		frame.pnlGraphics.img = imgDisplay;
-		frame.pnlGraphics.repaint();
+		if (imgDisplay != null) {
+			frame.pnlGraphics.img = imgDisplay;
+			frame.pnlGraphics.repaint();
+			frame.pnlSouth.repaint();
+			frame.txtInput.repaint();
+			frame.btnGossip.repaint();
+			frame.btnBattle.repaint();
+		}
 	}
 
 	private void createDetectInvisRay(Particle start, Particle end, Color color, int lifetime, List<Particle> particleSystem, boolean lockToCenter) {
