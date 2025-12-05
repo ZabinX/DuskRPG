@@ -65,8 +65,8 @@ public class MapMessage extends DuskMessage {
 		out.writeShort(width);
 		out.writeShort(height);
 		for (int l = 0; l < 3; l++) {
-			for (int j = 0; j < height; j++) {
-				for (int i = 0; i < width; i++) {
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
 					out.writeShort(map[l][i][j]);
 				}
 			}

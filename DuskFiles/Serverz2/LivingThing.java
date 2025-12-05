@@ -2095,7 +2095,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	public void updateMap()
 	{
 		MapMessage msg = new MapMessage((byte)DuskProtocol.MSG_UPDATE_MAP, intLocX, intLocY, engGame.mapsizeX, engGame.mapsizeY);
-		short[][][] layers = {engGame.shrMap, engGame.shrMapAlpha, engGame.shrMapAlpha2};
+		short[][][] layers = {engGame.shrMap, engGame.shrMapAlpha2, engGame.shrMapAlpha};
 		msg.writeMap(layers, intLocX - engGame.viewrangeX, intLocY - engGame.viewrangeY);
 		send(msg);
 	}
