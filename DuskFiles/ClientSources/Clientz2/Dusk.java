@@ -1461,6 +1461,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			int endTileX = (int)Math.floor((camera.x + frame.pnlGraphics.getWidth()) / intImageSize) + 1;
 			int endTileY = (int)Math.floor((camera.y + frame.pnlGraphics.getHeight()) / intImageSize) + 1;
 	
+			System.out.println("Drawing map...");
 			double offsetX = camera.x - (startTileX * intImageSize);
 			double offsetY = camera.y - (startTileY * intImageSize);
 	
@@ -1534,6 +1535,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			// Update and draw BEHIND particles
 			updateAndDrawParticles(vctParticlesBehind, (Graphics2D)gD, deltaTime);
 	
+			System.out.println("Map drawing finished. Drawing entities...");
                 Collections.sort(sortedEntities, ySortComparator);
 
 	        for (Entity entStore : sortedEntities) {
@@ -1569,6 +1571,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		// Update and draw FRONT particles
 		updateAndDrawParticles(vctParticles, (Graphics2D)gD, deltaTime);
 	    
+		System.out.println("Entity drawing finished. Drawing markers...");
 	    	Font originalFont = gD.getFont();
 	    	Font boldFont = new Font(originalFont.getName(), Font.BOLD, 16);
 	    	gD.setFont(boldFont);
@@ -1612,6 +1615,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					g2d.setStroke(originalStroke); // Restore original stroke
 				}
 			}
+			System.out.println("Marker drawing finished.");
 	    }
 
 		// Handle lightning effect for armor spell
