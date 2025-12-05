@@ -222,6 +222,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 frame.btnPotion4.repaint();
 			}
 			scaleWindow();
+			paint();
 			}catch(Exception e)
 			{
 			}
@@ -634,407 +635,450 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 
-	public void	run()
-	{
+	public void run() {
 		DuskMessage msg = null;
-		Entity entStore=null;
-		while(blnConnected)
-		{
-			try
-			{
+		Entity entStore = null;
+		while (blnConnected) {
+			try {
 				msg = DuskMessage.receiveMessage(stmIn);
-				switch (msg.name)
-				{
-					case(DuskProtocol.MSG_QUIT):
-					{
-						blnLoaded = false;
-						blnConnected = false;
-						sckConnection.close();
-						return;
+				System.out.println("CLIENT RECEIVE: " + msg.name);
+				switch (msg.name) {
+				case (DuskProtocol.MSG_QUIT): {
+					blnLoaded = false;
+					blnConnected = false;
+					sckConnection.close();
+					return;
+				}
+				case (DuskProtocol.MSG_INIT_RESOURCES): {
+					strRCAddress = ((DuskMessage.StringMessage) msg).value;
+					CountDownLatch imageLatch = new CountDownLatch(1);
+					try {
+						thrGraphics.thread.stop();
+					} catch (Exception e) {
 					}
-					case(DuskProtocol.MSG_INIT_RESOURCES):
-					{
-						strRCAddress = ((DuskMessage.StringMessage)msg).value;
-						CountDownLatch imageLatch = new CountDownLatch(1);
-						try
-						{
-							thrGraphics.thread.stop();
-						}catch (Exception e) {}
-						thrGraphics = new GraphicsThread(this, imageLatch);
-						thrGraphics.thread = new Thread(thrGraphics);
-						thrGraphics.thread.start();
-					
-						// Wait for images to finish loading before starting audio
-						try {
-							imageLatch.await();
-						} catch (InterruptedException e) {
-							System.err.println("Image loading interrupted: " + e.toString());
-						}
-						break;
-					}
-					case (DuskProtocol.MSG_UPDATE_MAP):
-					{
-						synchronized(vctEntities)
-						{
-							MapMessage mm = (MapMessage)msg;
-							LocX = mm.x;
-							LocY = mm.y;
+					thrGraphics = new GraphicsThread(this, imageLatch);
+					thrGraphics.thread = new Thread(thrGraphics);
+					thrGraphics.thread.start();
 
-							short[][][] layers = {shrMap, shrMapAlpha, shrMapAlpha2};
-							mm.readMap(layers);
-							
-							Iterator<Entity> iter = vctEntities.iterator();
-							while (iter.hasNext())
-							{
-								entStore = iter.next();
-								// Don't remove the player entity during a map refresh
-								if (entStore != player && (Math.abs(entStore.intLocX - LocX) > viewRangeX || Math.abs(entStore.intLocY - LocY) > viewRangeY))
-								{
-									iter.remove();
-									sortedEntities.remove(entStore);
-									hmpEntities.remove(entStore.ID);
-								}
-							}
+					// Wait for images to finish loading before starting audio
+					try {
+						imageLatch.await();
+					} catch (InterruptedException e) {
+						System.err.println("Image loading interrupted: " + e.toString());
+					}
+					sendMessage(new DuskMessage(DuskProtocol.MSG_LOAD_COMPLETE));
+					break;
+				}
+				case (DuskProtocol.MSG_UPDATE_MAP): {
+					synchronized (vctEntities) {
+						MapMessage mm = (MapMessage) msg;
+						LocX = mm.x;
+						LocY = mm.y;
 
-							frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
-							vctMerchantItems = new Vector(0,5);
-							reloadJComboBoxLook();
-							reloadJComboBoxGet();
-							reloadJComboBoxAttack();
-							findPlayer();
-						}
-						break;
-					}
-					case (DuskProtocol.MSG_CHAT):
-					{
-						addText(((DuskMessage.StringMessage)msg).value+"\n");
-						break;
-					}
-					case (DuskProtocol.MSG_ADD_ENTITY):
-					{
-						synchronized(vctEntities)
-						{
-							ListMessage list = (ListMessage)msg;
-							entStore = new Entity(
-								list.getString(DuskProtocol.FIELD_ENTITY_NAME),
-								list.getLong(DuskProtocol.FIELD_ENTITY_ID),
-								list.getInteger(DuskProtocol.FIELD_ENTITY_IMAGE),
-								list.getInteger(DuskProtocol.FIELD_ENTITY_X),
-								list.getInteger(DuskProtocol.FIELD_ENTITY_Y),
-								list.getInteger(DuskProtocol.FIELD_ENTITY_STEP),
-								list.getInteger(DuskProtocol.FIELD_ENTITY_TYPE)
-							);
+						short[][][] layers = { shrMap, shrMapAlpha, shrMapAlpha2 };
+						mm.readMap(layers);
 
-							if (entStore != null)
-							{
-								addEntity(entStore);
-								if (entStore.intLocX == LocX && entStore.intLocY == LocY && entStore.intType == 0) {
-									findPlayer();
-								}
-							}
-							reloadJComboBoxLook();
-							reloadJComboBoxGet();
-							reloadJComboBoxAttack();
-						}
-						break;
-					}
-					case (DuskProtocol.MSG_UPDATE_PLAYER):
-					{
-						ListMessage list = (ListMessage)msg;
-						int oldhp = inthp;
-						inthp = list.getInteger(DuskProtocol.FIELD_HP);
-						intmaxhp = list.getInteger(DuskProtocol.FIELD_MAXHP);
-						intsp = list.getInteger(DuskProtocol.FIELD_MP);
-						intmaxsp = list.getInteger(DuskProtocol.FIELD_MAXMP);
-						if (inthp > oldhp) {
-							int hpHealed = inthp - oldhp;
-							int numStars = hpHealed;
-							spawnHealingParticles(player, numStars);
-						}
-						frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
-						break;
-					}
-					case (DuskProtocol.MSG_UPDATE_INVENTORY):
-					{
-						ListMessage list = (ListMessage)msg;
-						vctChoiceDropItems = new Vector(0,5);
-						frame.frmEquipment.blnRefreshMenus = true;
-						try
-						{
-							frame.frmEquipment.chcWield.removeAllItems();
-							frame.frmEquipment.chcArms.removeAllItems();
-							frame.frmEquipment.chcLegs.removeAllItems();
-							frame.frmEquipment.chcTorso.removeAllItems();
-							frame.frmEquipment.chcWaist.removeAllItems();
-							frame.frmEquipment.chcNeck.removeAllItems();
-							frame.frmEquipment.chcSkull.removeAllItems();
-							frame.frmEquipment.chcEyes.removeAllItems();
-							frame.frmEquipment.chcHands.removeAllItems();
-						}catch(Exception e){}
-						try
-						{
-							for (DuskMessage itemMsg : list.value) {
-								ListMessage item = (ListMessage)itemMsg;
-								int type = item.getInteger(DuskProtocol.FIELD_ENTITY_TYPE);
-								String name = item.getString(DuskProtocol.FIELD_ENTITY_NAME);
-								switch (type)
-								{
-								case (0): vctChoiceDropItems.addElement(name); break;
-								case (1): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcWield.addItem(name); break;
-								case (2): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcArms.addItem(name); break;
-								case (3): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcLegs.addItem(name); break;
-								case (4): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcTorso.addItem(name); break;
-								case (5): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcWaist.addItem(name); break;
-								case (6): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcNeck.addItem(name); break;
-								case (7): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcSkull.addItem(name); break;
-								case (8): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcEyes.addItem(name); break;
-								case (9): vctChoiceDropItems.addElement(name); frame.frmEquipment.chcHands.addItem(name); break;
-								}
-							}
-						} 
-						catch (NumberFormatException e) {}
-						frame.frmEquipment.chcWield.addItem("none");
-						frame.frmEquipment.chcArms.addItem("none");
-						frame.frmEquipment.chcLegs.addItem("none");
-						frame.frmEquipment.chcTorso.addItem("none");
-						frame.frmEquipment.chcWaist.addItem("none");
-						frame.frmEquipment.chcNeck.addItem("none");
-						frame.frmEquipment.chcSkull.addItem("none");
-						frame.frmEquipment.chcEyes.addItem("none");
-						frame.frmEquipment.chcHands.addItem("none");
-						frame.frmEquipment.blnRefreshMenus = false;
-						reloadJComboBoxDrop();
-						break;
-					}
-					case (DuskProtocol.MSG_UPDATE_WORN):
-					{
-						ListMessage list = (ListMessage)msg;
-						frame.frmEquipment.blnRefreshMenus = true;
-						frame.frmEquipment.chcWield.setSelectedItem(list.getString(DuskProtocol.FIELD_WIELD));
-						frame.frmEquipment.chcArms.setSelectedItem(list.getString(DuskProtocol.FIELD_ARMS));
-						frame.frmEquipment.chcLegs.setSelectedItem(list.getString(DuskProtocol.FIELD_LEGS));
-						frame.frmEquipment.chcTorso.setSelectedItem(list.getString(DuskProtocol.FIELD_TORSO));
-						frame.frmEquipment.chcWaist.setSelectedItem(list.getString(DuskProtocol.FIELD_WAIST));
-						frame.frmEquipment.chcNeck.setSelectedItem(list.getString(DuskProtocol.FIELD_NECK));
-						frame.frmEquipment.chcSkull.setSelectedItem(list.getString(DuskProtocol.FIELD_SKULL));
-						frame.frmEquipment.chcEyes.setSelectedItem(list.getString(DuskProtocol.FIELD_EYES));
-						frame.frmEquipment.chcHands.setSelectedItem(list.getString(DuskProtocol.FIELD_HANDS));
-						frame.frmEquipment.blnRefreshMenus = false;
-						break;
-					}
-					case (DuskProtocol.MSG_UPDATE_STATS):
-					{
-						ListMessage list = (ListMessage)msg;
-						frame.txtOther.setText(""); // Clear previous stats
-
-						// Extract all values first
-						long cash = 0;
-						int exp = 0;
-						int stre = 0, stre_b = 0, inte = 0, inte_b = 0, dext = 0, dext_b = 0;
-						int cons = 0, cons_b = 0, wisd = 0, wisd_b = 0, dammod = 0, dammod_b = 0;
-						int ac = 0, ac_b = 0;
-						java.util.List<String> conditions = new ArrayList<>();
-						java.util.List<String> skills = new ArrayList<>();
-						java.util.List<String> spells = new ArrayList<>();
-						String following = null;
-						String followedBy = null;
-						int petHp = -1, petMaxHp = -1;
-
-						for (DuskMessage fieldMsg : list.value) {
-							switch (fieldMsg.name) {
-								case DuskProtocol.FIELD_CASH: cash = ((DuskMessage.LongMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_EXP: exp = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_STRENGTH: stre = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_STRENGTH_BONUS: stre_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_INTELLIGENCE: inte = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_INTELLIGENCE_BONUS: inte_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_DEXTERITY: dext = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_DEXTERITY_BONUS: dext_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_CONSTITUTION: cons = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_CONSTITUTION_BONUS: cons_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_WISDOM: wisd = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_WISDOM_BONUS: wisd_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_DAMMOD: dammod = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_DAMMOD_BONUS: dammod_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_AC: ac = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_AC_BONUS: ac_b = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_CONDITIONS: conditions.add(((DuskMessage.StringMessage)fieldMsg).value); break;
-								case DuskProtocol.FIELD_SKILLS: skills.add(((DuskMessage.StringMessage)fieldMsg).value); break;
-								case DuskProtocol.FIELD_SPELLS: spells.add(((DuskMessage.StringMessage)fieldMsg).value); break;
-								case DuskProtocol.FIELD_FOLLOWING: following = ((DuskMessage.StringMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_FOLLOWED_BY: followedBy = ((DuskMessage.StringMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_PET_HP: petHp = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
-								case DuskProtocol.FIELD_PET_MAXHP: petMaxHp = ((DuskMessage.IntegerMessage)fieldMsg).value; break;
+						Iterator<Entity> iter = vctEntities.iterator();
+						while (iter.hasNext()) {
+							entStore = iter.next();
+							// Don't remove the player entity during a map refresh
+							if (entStore != player && (Math.abs(entStore.intLocX - LocX) > viewRangeX
+									|| Math.abs(entStore.intLocY - LocY) > viewRangeY)) {
+								iter.remove();
+								sortedEntities.remove(entStore);
+								hmpEntities.remove(entStore.ID);
 							}
 						}
 
-						// Now build the string
-						loncash = cash; // update global
-						frame.txtOther.append("Cash: "+cash+"\n");
-						frame.txtOther.append("Experience: "+exp+"\n");
-						frame.txtOther.append("Strength: "+stre+" + "+stre_b+"\n");
-						frame.txtOther.append("Intelligence: "+inte+" + "+inte_b+"\n");
-						frame.txtOther.append("Dexterity: "+dext+" + "+dext_b+"\n");
-						frame.txtOther.append("Constitution: "+cons+" + "+cons_b+"\n");
-						frame.txtOther.append("Wisdom: "+wisd+" + "+wisd_b+"\n");
-						frame.txtOther.append("Damage Modifier: "+dammod+"% + "+dammod_b+"%\n");
-						frame.txtOther.append("Armor Class: "+ac+" + "+ac_b+"\n");
-						
-						if (!conditions.isEmpty()) {
-							StringBuilder sb = new StringBuilder("Conditions: ");
-							for (int i = 0; i < conditions.size(); i++) {
-								sb.append(conditions.get(i));
-								if (i < conditions.size() - 1) {
-									sb.append(", ");
-								}
-							}
-							sb.append("\n");
-							frame.txtOther.append(sb.toString());
-						}
-						if (!skills.isEmpty()) {
-							frame.txtOther.append("Skills:\n");
-							for (String s : skills) {
-								frame.txtOther.append("  " + s + "\n");
-							}
-						}
-						if (!spells.isEmpty()) {
-							frame.txtOther.append("Spells:\n");
-							for (String s : spells) {
-								frame.txtOther.append("  " + s + "\n");
-							}
-						}
-						if (following != null) {
-							frame.txtOther.append("Following: " + following + "\n");
-						}
-						if (followedBy != null) {
-							frame.txtOther.append("Followed by: " + followedBy + "\n");
-							if (petHp != -1) {
-								frame.txtOther.append("Pet HP: " + petHp + "/" + petMaxHp + "\n");
-							}
-						}
-						break;
-					}
-					case (DuskProtocol.MSG_REMOVE_ENTITY):
-					{
-						removeEntity(((DuskMessage.LongMessage)msg).value);
+						frame.lblInfo.setText(
+								"HP: " + inthp + "/" + intmaxhp + " MP: " + intsp + "/" + intmaxsp + " Loc: " + LocX + "/" + LocY);
+						vctMerchantItems = new Vector(0, 5);
 						reloadJComboBoxLook();
 						reloadJComboBoxGet();
 						reloadJComboBoxAttack();
-						break;
+						findPlayer();
 					}
-					case (DuskProtocol.MSG_MOVE_N):
-					case (DuskProtocol.MSG_MOVE_S):
-					case (DuskProtocol.MSG_MOVE_W):
-					case (DuskProtocol.MSG_MOVE_E):
-					{
-						long entityId = ((DuskMessage.LongMessage)msg).value;
-						entStore = hmpEntities.get(entityId);
-						if (entStore != null)
-						{
-							int direction = 0;
-							switch (msg.name)
-							{
-								case DuskProtocol.MSG_MOVE_N: direction = 0; break;
-								case DuskProtocol.MSG_MOVE_S: direction = 1; break;
-								case DuskProtocol.MSG_MOVE_W: direction = 2; break;
-								case DuskProtocol.MSG_MOVE_E: direction = 3; break;
-							}
-							entStore.queuedMoves.add(direction);
-							if (!entStore.isMoving) {
-								movementManager.startMove(entStore, entStore.queuedMoves.poll(), intImageSize);
+					break;
+				}
+				case (DuskProtocol.MSG_CHAT): {
+					addText(((DuskMessage.StringMessage) msg).value + "\n");
+					break;
+				}
+				case (DuskProtocol.MSG_ADD_ENTITY): {
+					synchronized (vctEntities) {
+						ListMessage list = (ListMessage) msg;
+						entStore = new Entity(list.getString(DuskProtocol.FIELD_ENTITY_NAME),
+								list.getLong(DuskProtocol.FIELD_ENTITY_ID),
+								list.getInteger(DuskProtocol.FIELD_ENTITY_IMAGE),
+								list.getInteger(DuskProtocol.FIELD_ENTITY_X), list.getInteger(DuskProtocol.FIELD_ENTITY_Y),
+								list.getInteger(DuskProtocol.FIELD_ENTITY_STEP),
+								list.getInteger(DuskProtocol.FIELD_ENTITY_TYPE));
+
+						if (entStore != null) {
+							addEntity(entStore);
+							if (entStore.intLocX == LocX && entStore.intLocY == LocY && entStore.intType == 0) {
+								findPlayer();
 							}
 						}
-						break;
-					}
-					case (DuskProtocol.MSG_UPDATE_RANGE):
-					{
-						range = ((DuskMessage.IntegerMessage)msg).value;
+						reloadJComboBoxLook();
+						reloadJComboBoxGet();
 						reloadJComboBoxAttack();
-						break;
 					}
-					case (DuskProtocol.MSG_PROMPT_HALT):
-					{
-						frame.txtInput.setEnabled(false);
-						break;
+					break;
+				}
+				case (DuskProtocol.MSG_UPDATE_PLAYER): {
+					ListMessage list = (ListMessage) msg;
+					int oldhp = inthp;
+					inthp = list.getInteger(DuskProtocol.FIELD_HP);
+					intmaxhp = list.getInteger(DuskProtocol.FIELD_MAXHP);
+					intsp = list.getInteger(DuskProtocol.FIELD_MP);
+					intmaxsp = list.getInteger(DuskProtocol.FIELD_MAXMP);
+					if (inthp > oldhp) {
+						int hpHealed = inthp - oldhp;
+						int numStars = hpHealed;
+						spawnHealingParticles(player, numStars);
 					}
-					case (DuskProtocol.MSG_PROMPT_PROCEED):
-					{
-						frame.txtInput.setEnabled(true);
-						break;
+					frame.lblInfo.setText(
+							"HP: " + inthp + "/" + intmaxhp + " MP: " + intsp + "/" + intmaxsp + " Loc: " + LocX + "/" + LocY);
+					break;
+				}
+				case (DuskProtocol.MSG_UPDATE_INVENTORY): {
+					ListMessage list = (ListMessage) msg;
+					vctChoiceDropItems = new Vector(0, 5);
+					frame.frmEquipment.blnRefreshMenus = true;
+					try {
+						frame.frmEquipment.chcWield.removeAllItems();
+						frame.frmEquipment.chcArms.removeAllItems();
+						frame.frmEquipment.chcLegs.removeAllItems();
+						frame.frmEquipment.chcTorso.removeAllItems();
+						frame.frmEquipment.chcWaist.removeAllItems();
+						frame.frmEquipment.chcNeck.removeAllItems();
+						frame.frmEquipment.chcSkull.removeAllItems();
+						frame.frmEquipment.chcEyes.removeAllItems();
+						frame.frmEquipment.chcHands.removeAllItems();
+					} catch (Exception e) {
 					}
-					case (DuskProtocol.MSG_PING):
-					{
-						sendMessage(new DuskMessage(DuskProtocol.MSG_PING));
-						break;
-					}
-					/*
-					case (DuskProtocol.MSG_POPUP_EDIT):
-					{
-						String text = ((DuskMessage.StringMessage)msg).value;
-						new EditFrame(this,text);
-						break;
-					}
-					case (DuskProtocol.MSG_POPUP_VIEW):
-					{
-						String text = ((DuskMessage.StringMessage)msg).value;
-						new ViewFrame(this,text);
-						break;
-					}
-					*/
-					case (DuskProtocol.MSG_INIT_MAP):
-					{
-						ListMessage list = (ListMessage)msg;
-						mapSizeX = list.getInteger(DuskProtocol.FIELD_MAP_SIZE_X);
-						mapSizeY = list.getInteger(DuskProtocol.FIELD_MAP_SIZE_Y);
-						viewRangeX = list.getInteger(DuskProtocol.FIELD_VIEW_RANGE_X);
-						viewRangeY = list.getInteger(DuskProtocol.FIELD_VIEW_RANGE_Y);
-						shrMap = new short[mapSizeX][mapSizeY];
-						shrMapAlpha = new short[mapSizeX][mapSizeY];
-						shrMapAlpha2 = new short[mapSizeX][mapSizeY];
-						scaleWindow();
-						break;
-					}
-					case (DuskProtocol.MSG_UPDATE_PLAYER_TICKS):
-					{
-						playerTicks = ((DuskMessage.LongMessage)msg).value;
-						break;
-					}
-					case (DuskProtocol.MSG_BATTLE_CLEAR):
-					{
-						frame.lblTarget.setText("");
-						break;
-					}
-					case (DuskProtocol.MSG_BATTLE_TARGET):
-					{
-						frame.lblTarget.setText("Target: " + ((DuskMessage.StringMessage)msg).value);
-						break;
-					}
-					case (DuskProtocol.MSG_UPDATE_OPPONENT_HP):
-					{
-						ListMessage list = (ListMessage)msg;
-						frame.lblTarget.setText("Target: "+list.getString(DuskProtocol.FIELD_TARGET_ID)+" HP: "+list.getInteger(DuskProtocol.FIELD_HP)+"/"+list.getInteger(DuskProtocol.FIELD_MAXHP));
-						break;
-					}
-					case (DuskProtocol.MSG_UPDATE_ACTIONS):
-					{
-						ListMessage list = (ListMessage)msg;
-						vctChoiceActionItems = new Vector(0,5);
-						for (DuskMessage actionMsg : list.value) {
-							vctChoiceActionItems.addElement(((DuskMessage.StringMessage)actionMsg).value);
+					try {
+						for (DuskMessage itemMsg : list.value) {
+							ListMessage item = (ListMessage) itemMsg;
+							int type = item.getInteger(DuskProtocol.FIELD_ENTITY_TYPE);
+							String name = item.getString(DuskProtocol.FIELD_ENTITY_NAME);
+							switch (type) {
+							case (0):
+								vctChoiceDropItems.addElement(name);
+								break;
+							case (1):
+								vctChoiceDropItems.addElement(name);
+								frame.frmEquipment.chcWield.addItem(name);
+								break;
+							case (2):
+								vctChoiceDropItems.addElement(name);
+								frame.frmEquipment.chcArms.addItem(name);
+								break;
+							case (3):
+								vctChoiceDropItems.addElement(name);
+								frame.frmEquipment.chcLegs.addItem(name);
+								break;
+							case (4):
+								vctChoiceDropItems.addElement(name);
+								frame.frmEquipment.chcTorso.addItem(name);
+								break;
+							case (5):
+								vctChoiceDropItems.addElement(name);
+								frame.frmEquipment.chcWaist.addItem(name);
+								break;
+							case (6):
+								vctChoiceDropItems.addElement(name);
+								frame.frmEquipment.chcNeck.addItem(name);
+								break;
+							case (7):
+								vctChoiceDropItems.addElement(name);
+								frame.frmEquipment.chcSkull.addItem(name);
+								break;
+							case (8):
+								vctChoiceDropItems.addElement(name);
+								frame.frmEquipment.chcEyes.addItem(name);
+								break;
+							case (9):
+								vctChoiceDropItems.addElement(name);
+								frame.frmEquipment.chcHands.addItem(name);
+								break;
+							}
 						}
-						reloadJComboBoxAction();
-						break;
+					} catch (NumberFormatException e) {
 					}
+					frame.frmEquipment.chcWield.addItem("none");
+					frame.frmEquipment.chcArms.addItem("none");
+					frame.frmEquipment.chcLegs.addItem("none");
+					frame.frmEquipment.chcTorso.addItem("none");
+					frame.frmEquipment.chcWaist.addItem("none");
+					frame.frmEquipment.chcNeck.addItem("none");
+					frame.frmEquipment.chcSkull.addItem("none");
+					frame.frmEquipment.chcEyes.addItem("none");
+					frame.frmEquipment.chcHands.addItem("none");
+					frame.frmEquipment.blnRefreshMenus = false;
+					reloadJComboBoxDrop();
+					break;
+				}
+				case (DuskProtocol.MSG_UPDATE_WORN): {
+					ListMessage list = (ListMessage) msg;
+					frame.frmEquipment.blnRefreshMenus = true;
+					frame.frmEquipment.chcWield.setSelectedItem(list.getString(DuskProtocol.FIELD_WIELD));
+					frame.frmEquipment.chcArms.setSelectedItem(list.getString(DuskProtocol.FIELD_ARMS));
+					frame.frmEquipment.chcLegs.setSelectedItem(list.getString(DuskProtocol.FIELD_LEGS));
+					frame.frmEquipment.chcTorso.setSelectedItem(list.getString(DuskProtocol.FIELD_TORSO));
+					frame.frmEquipment.chcWaist.setSelectedItem(list.getString(DuskProtocol.FIELD_WAIST));
+					frame.frmEquipment.chcNeck.setSelectedItem(list.getString(DuskProtocol.FIELD_NECK));
+					frame.frmEquipment.chcSkull.setSelectedItem(list.getString(DuskProtocol.FIELD_SKULL));
+					frame.frmEquipment.chcEyes.setSelectedItem(list.getString(DuskProtocol.FIELD_EYES));
+					frame.frmEquipment.chcHands.setSelectedItem(list.getString(DuskProtocol.FIELD_HANDS));
+					frame.frmEquipment.blnRefreshMenus = false;
+					break;
+				}
+				case (DuskProtocol.MSG_UPDATE_STATS): {
+					ListMessage list = (ListMessage) msg;
+					frame.txtOther.setText(""); // Clear previous stats
+
+					// Extract all values first
+					long cash = 0;
+					int exp = 0;
+					int stre = 0, stre_b = 0, inte = 0, inte_b = 0, dext = 0, dext_b = 0;
+					int cons = 0, cons_b = 0, wisd = 0, wisd_b = 0, dammod = 0, dammod_b = 0;
+					int ac = 0, ac_b = 0;
+					java.util.List<String> conditions = new ArrayList<>();
+					java.util.List<String> skills = new ArrayList<>();
+					java.util.List<String> spells = new ArrayList<>();
+					String following = null;
+					String followedBy = null;
+					int petHp = -1, petMaxHp = -1;
+
+					for (DuskMessage fieldMsg : list.value) {
+						switch (fieldMsg.name) {
+						case DuskProtocol.FIELD_CASH:
+							cash = ((DuskMessage.LongMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_EXP:
+							exp = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_STRENGTH:
+							stre = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_STRENGTH_BONUS:
+							stre_b = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_INTELLIGENCE:
+							inte = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_INTELLIGENCE_BONUS:
+							inte_b = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_DEXTERITY:
+							dext = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_DEXTERITY_BONUS:
+							dext_b = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_CONSTITUTION:
+							cons = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_CONSTITUTION_BONUS:
+							cons_b = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_WISDOM:
+							wisd = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_WISDOM_BONUS:
+							wisd_b = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_DAMMOD:
+							dammod = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_DAMMOD_BONUS:
+							dammod_b = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_AC:
+							ac = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_AC_BONUS:
+							ac_b = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_CONDITIONS:
+							conditions.add(((DuskMessage.StringMessage) fieldMsg).value);
+							break;
+						case DuskProtocol.FIELD_SKILLS:
+							skills.add(((DuskMessage.StringMessage) fieldMsg).value);
+							break;
+						case DuskProtocol.FIELD_SPELLS:
+							spells.add(((DuskMessage.StringMessage) fieldMsg).value);
+							break;
+						case DuskProtocol.FIELD_FOLLOWING:
+							following = ((DuskMessage.StringMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_FOLLOWED_BY:
+							followedBy = ((DuskMessage.StringMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_PET_HP:
+							petHp = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						case DuskProtocol.FIELD_PET_MAXHP:
+							petMaxHp = ((DuskMessage.IntegerMessage) fieldMsg).value;
+							break;
+						}
+					}
+
+					// Now build the string
+					loncash = cash; // update global
+					frame.txtOther.append("Cash: " + cash + "\n");
+					frame.txtOther.append("Experience: " + exp + "\n");
+					frame.txtOther.append("Strength: " + stre + " + " + stre_b + "\n");
+					frame.txtOther.append("Intelligence: " + inte + " + " + inte_b + "\n");
+					frame.txtOther.append("Dexterity: " + dext + " + " + dext_b + "\n");
+					frame.txtOther.append("Constitution: " + cons + " + " + cons_b + "\n");
+					frame.txtOther.append("Wisdom: " + wisd + " + " + wisd_b + "\n");
+					frame.txtOther.append("Damage Modifier: " + dammod + "% + " + dammod_b + "%\n");
+					frame.txtOther.append("Armor Class: " + ac + " + " + ac_b + "\n");
+
+					if (!conditions.isEmpty()) {
+						StringBuilder sb = new StringBuilder("Conditions: ");
+						for (int i = 0; i < conditions.size(); i++) {
+							sb.append(conditions.get(i));
+							if (i < conditions.size() - 1) {
+								sb.append(", ");
+							}
+						}
+						sb.append("\n");
+						frame.txtOther.append(sb.toString());
+					}
+					if (!skills.isEmpty()) {
+						frame.txtOther.append("Skills:\n");
+						for (String s : skills) {
+							frame.txtOther.append("  " + s + "\n");
+						}
+					}
+					if (!spells.isEmpty()) {
+						frame.txtOther.append("Spells:\n");
+						for (String s : spells) {
+							frame.txtOther.append("  " + s + "\n");
+						}
+					}
+					if (following != null) {
+						frame.txtOther.append("Following: " + following + "\n");
+					}
+					if (followedBy != null) {
+						frame.txtOther.append("Followed by: " + followedBy + "\n");
+						if (petHp != -1) {
+							frame.txtOther.append("Pet HP: " + petHp + "/" + petMaxHp + "\n");
+						}
+					}
+					break;
+				}
+				case (DuskProtocol.MSG_REMOVE_ENTITY): {
+					removeEntity(((DuskMessage.LongMessage) msg).value);
+					reloadJComboBoxLook();
+					reloadJComboBoxGet();
+					reloadJComboBoxAttack();
+					break;
+				}
+				case (DuskProtocol.MSG_MOVE_N):
+				case (DuskProtocol.MSG_MOVE_S):
+				case (DuskProtocol.MSG_MOVE_W):
+				case (DuskProtocol.MSG_MOVE_E): {
+					long entityId = ((DuskMessage.LongMessage) msg).value;
+					entStore = hmpEntities.get(entityId);
+					if (entStore != null) {
+						int direction = 0;
+						switch (msg.name) {
+						case DuskProtocol.MSG_MOVE_N:
+							direction = 0;
+							break;
+						case DuskProtocol.MSG_MOVE_S:
+							direction = 1;
+							break;
+						case DuskProtocol.MSG_MOVE_W:
+							direction = 2;
+							break;
+						case DuskProtocol.MSG_MOVE_E:
+							direction = 3;
+							break;
+						}
+						entStore.queuedMoves.add(direction);
+						if (!entStore.isMoving) {
+							movementManager.startMove(entStore, entStore.queuedMoves.poll(), intImageSize);
+						}
+					}
+					break;
+				}
+				case (DuskProtocol.MSG_UPDATE_RANGE): {
+					range = ((DuskMessage.IntegerMessage) msg).value;
+					reloadJComboBoxAttack();
+					break;
+				}
+				case (DuskProtocol.MSG_PROMPT_HALT): {
+					frame.txtInput.setEnabled(false);
+					break;
+				}
+				case (DuskProtocol.MSG_PROMPT_PROCEED): {
+					frame.txtInput.setEnabled(true);
+					break;
+				}
+				case (DuskProtocol.MSG_PING): {
+					sendMessage(new DuskMessage(DuskProtocol.MSG_PING));
+					break;
+				}
+				/*
+				 * case (DuskProtocol.MSG_POPUP_EDIT): { String text =
+				 * ((DuskMessage.StringMessage)msg).value; new EditFrame(this,text); break; }
+				 * case (DuskProtocol.MSG_POPUP_VIEW): { String text =
+				 * ((DuskMessage.StringMessage)msg).value; new ViewFrame(this,text); break; }
+				 */
+				case (DuskProtocol.MSG_INIT_MAP): {
+					ListMessage list = (ListMessage) msg;
+					mapSizeX = list.getInteger(DuskProtocol.FIELD_MAP_SIZE_X);
+					mapSizeY = list.getInteger(DuskProtocol.FIELD_MAP_SIZE_Y);
+					viewRangeX = list.getInteger(DuskProtocol.FIELD_VIEW_RANGE_X);
+					viewRangeY = list.getInteger(DuskProtocol.FIELD_VIEW_RANGE_Y);
+					shrMap = new short[mapSizeX][mapSizeY];
+					shrMapAlpha = new short[mapSizeX][mapSizeY];
+					shrMapAlpha2 = new short[mapSizeX][mapSizeY];
+					scaleWindow();
+					break;
+				}
+				case (DuskProtocol.MSG_UPDATE_PLAYER_TICKS): {
+					playerTicks = ((DuskMessage.LongMessage) msg).value;
+					break;
+				}
+				case (DuskProtocol.MSG_BATTLE_CLEAR): {
+					frame.lblTarget.setText("");
+					break;
+				}
+				case (DuskProtocol.MSG_BATTLE_TARGET): {
+					frame.lblTarget.setText("Target: " + ((DuskMessage.StringMessage) msg).value);
+					break;
+				}
+				case (DuskProtocol.MSG_UPDATE_OPPONENT_HP): {
+					ListMessage list = (ListMessage) msg;
+					frame.lblTarget.setText("Target: " + list.getString(DuskProtocol.FIELD_TARGET_ID) + " HP: "
+							+ list.getInteger(DuskProtocol.FIELD_HP) + "/" + list.getInteger(DuskProtocol.FIELD_MAXHP));
+					break;
+				}
+				case (DuskProtocol.MSG_UPDATE_ACTIONS): {
+					ListMessage list = (ListMessage) msg;
+					vctChoiceActionItems = new Vector(0, 5);
+					for (DuskMessage actionMsg : list.value) {
+						vctChoiceActionItems.addElement(((DuskMessage.StringMessage) actionMsg).value);
+					}
+					reloadJComboBoxAction();
+					break;
+				}
 				}
 			} catch (EOFException eofe) {
 				addText("Connection to the server has been lost.\n");
 				blnConnected = false;
-			} catch(IOException | NumberFormatException e)
-			{
-				System.err.println("Error at run() with value " + msg.name +" : "+e.toString());
+			} catch (IOException | NumberFormatException e) {
+				System.err.println("Error at run() with value " + msg.name + " : " + e.toString());
 				e.printStackTrace(System.out);
 
-				addText("Error at run() with value " + msg.name +" : "+e.toString()+"\n");
+				addText("Error at run() with value " + msg.name + " : " + e.toString() + "\n");
 				blnConnected = false;
 			}
 		}
@@ -1423,8 +1467,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		}
 	}
 
-	public void update(double deltaTime)
-	{
+	public void update(double deltaTime) {
 		TileAnim.update(deltaTime);
 		synchronized (vctCrossMarkers) {
 			for (int i = vctCrossMarkers.size() - 1; i >= 0; i--) {
@@ -1435,182 +1478,187 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 			}
 		}
+		if (imgOriginalMap == null) {
+			System.out.println("imgOriginalMap is null, skipping render");
+			return;
+		}
 		synchronized (vctEntities) {
-	    movementManager.update(vctEntities, playerTicks, player, camera, deltaTime, intImageSize);
-	    camera.update(frame.pnlGraphics.getWidth(), frame.pnlGraphics.getHeight(), LocX, LocY, viewRangeX, viewRangeY, intImageSize, deltaTime);
+			movementManager.update(vctEntities, playerTicks, player, camera, deltaTime, intImageSize);
+			camera.update(frame.pnlGraphics.getWidth(), frame.pnlGraphics.getHeight(), LocX, LocY, viewRangeX, viewRangeY,
+					intImageSize, deltaTime);
 
-	    synchronized (vctDamageSplats) {
-	        for (int i = vctDamageSplats.size() - 1; i >= 0; i--) {
-	            DamageSplat splat = vctDamageSplats.elementAt(i);
-	            splat.x += splat.vx;
-	            splat.y += splat.vy;
-	            splat.lifetime--;
-	            if (splat.lifetime <= 0) {
-	                vctDamageSplats.removeElementAt(i);
-	            }
-	        }
-	    }
-			
-			gD.setColor(Color.black);
-			gD.fillRect(0, 0, imgDisplay.getWidth(null), imgDisplay.getHeight(null));
+			synchronized (vctDamageSplats) {
+			for (int i = vctDamageSplats.size() - 1; i >= 0; i--) {
+				DamageSplat splat = vctDamageSplats.elementAt(i);
+				splat.x += splat.vx;
+				splat.y += splat.vy;
+				splat.lifetime--;
+				if (splat.lifetime <= 0) {
+					vctDamageSplats.removeElementAt(i);
+				}
+			}
+		}
 
-			int startTileX = (int)Math.floor(camera.x / intImageSize);
-			int startTileY = (int)Math.floor(camera.y / intImageSize);
-			int endTileX = (int)Math.floor((camera.x + frame.pnlGraphics.getWidth()) / intImageSize) + 1;
-			int endTileY = (int)Math.floor((camera.y + frame.pnlGraphics.getHeight()) / intImageSize) + 1;
-	
-			double offsetX = camera.x - (startTileX * intImageSize);
-			double offsetY = camera.y - (startTileY * intImageSize);
-	
-			int mapStartX = LocX - viewRangeX;
-			int mapStartY = LocY - viewRangeY;
-			for (int i=startTileX; i<endTileX; i++) {
-				for (int i2=startTileY; i2<endTileY; i2++) {
-					int mapGridX = i - mapStartX;
-					int mapGridY = i2 - mapStartY;
-	
-					if (mapGridX >= 0 && mapGridX < mapSizeX && mapGridY >= 0 && mapGridY < mapSizeY) {
-						try {
-							int tileID = shrMap[mapGridX][mapGridY];
-							int tileIDToDraw = tileID;
-							TileAnim anim = null;
-							if (vctTileAnims != null) {
-								for (int j=0; j<vctTileAnims.size(); j++) {
-									TileAnim tempAnim = vctTileAnims.elementAt(j);
-									if (tempAnim.tileID == tileID) {
-										anim = tempAnim;
-										break;
-									}
+		gD.setColor(Color.black);
+		gD.fillRect(0, 0, imgDisplay.getWidth(null), imgDisplay.getHeight(null));
+
+		int startTileX = (int) Math.floor(camera.x / intImageSize);
+		int startTileY = (int) Math.floor(camera.y / intImageSize);
+		int endTileX = (int) Math.floor((camera.x + frame.pnlGraphics.getWidth()) / intImageSize) + 1;
+		int endTileY = (int) Math.floor((camera.y + frame.pnlGraphics.getHeight()) / intImageSize) + 1;
+
+		double offsetX = camera.x - (startTileX * intImageSize);
+		double offsetY = camera.y - (startTileY * intImageSize);
+
+		int mapStartX = LocX - viewRangeX;
+		int mapStartY = LocY - viewRangeY;
+		for (int i = startTileX; i < endTileX; i++) {
+			for (int i2 = startTileY; i2 < endTileY; i2++) {
+				int mapGridX = i - mapStartX;
+				int mapGridY = i2 - mapStartY;
+
+				if (mapGridX >= 0 && mapGridX < mapSizeX && mapGridY >= 0 && mapGridY < mapSizeY) {
+					try {
+						int tileID = shrMap[mapGridX][mapGridY];
+						int tileIDToDraw = tileID;
+						TileAnim anim = null;
+						if (vctTileAnims != null) {
+							for (int j = 0; j < vctTileAnims.size(); j++) {
+								TileAnim tempAnim = vctTileAnims.elementAt(j);
+								if (tempAnim.tileID == tileID) {
+									anim = tempAnim;
+									break;
 								}
 							}
-			
-							double screenX = (i - startTileX) * intImageSize - offsetX;
-							double screenY = (i2 - startTileY) * intImageSize - offsetY;
-			
-							if (anim != null) {
-								tileIDToDraw = tileID + anim.getFrame();
-							}
-							
-							gD.drawImage(imgOriginalMap,
-										(int)screenX, (int)screenY,
-										(int)(screenX + intImageSize), (int)(screenY + intImageSize),
-										tileIDToDraw * intOriginalTileSize, 0,
-										(tileIDToDraw + 1) * intOriginalTileSize, intOriginalTileSize,
-										null);
-	
-						} catch(Exception e) {}
+						}
+
+						double screenX = (i - startTileX) * intImageSize - offsetX;
+						double screenY = (i2 - startTileY) * intImageSize - offsetY;
+
+						if (anim != null) {
+							tileIDToDraw = tileID + anim.getFrame();
+						}
+
+						gD.drawImage(imgOriginalMap, (int) screenX, (int) screenY, (int) (screenX + intImageSize),
+								(int) (screenY + intImageSize), tileIDToDraw * intOriginalTileSize, 0,
+								(tileIDToDraw + 1) * intOriginalTileSize, intOriginalTileSize, null);
+
+					} catch (Exception e) {
 					}
 				}
 			}
-	
-			// Draw middle alpha layer (alpha2)
-			for (int i=startTileX; i<endTileX; i++) {
-				for (int i2=startTileY; i2<endTileY; i2++) {
-					int mapGridX = i - mapStartX;
-					int mapGridY = i2 - mapStartY;
+		}
 
-					if (mapGridX >= 0 && mapGridX < mapSizeX && mapGridY >= 0 && mapGridY < mapSizeY) {
-						try {
-							int tileID = shrMapAlpha2[mapGridX][mapGridY];
-							if (tileID == 0) continue; // Skip transparent tile
+		// Draw middle alpha layer (alpha2)
+		for (int i = startTileX; i < endTileX; i++) {
+			for (int i2 = startTileY; i2 < endTileY; i2++) {
+				int mapGridX = i - mapStartX;
+				int mapGridY = i2 - mapStartY;
 
-							double screenX = (i - startTileX) * intImageSize - offsetX;
-							double screenY = (i2 - startTileY) * intImageSize - offsetY;
-							
-							gD.drawImage(imgOriginalMapAlpha2,
-										(int)screenX, (int)screenY,
-										(int)(screenX + intImageSize), (int)(screenY + intImageSize),
-										tileID * intOriginalTileSize, 0,
-										(tileID + 1) * intOriginalTileSize, intOriginalTileSize,
-										null);
+				if (mapGridX >= 0 && mapGridX < mapSizeX && mapGridY >= 0 && mapGridY < mapSizeY) {
+					try {
+						int tileID = shrMapAlpha2[mapGridX][mapGridY];
+						if (tileID == 0)
+							continue; // Skip transparent tile
 
-						} catch(Exception e) {}
+						double screenX = (i - startTileX) * intImageSize - offsetX;
+						double screenY = (i2 - startTileY) * intImageSize - offsetY;
+
+						gD.drawImage(imgOriginalMapAlpha2, (int) screenX, (int) screenY,
+								(int) (screenX + intImageSize), (int) (screenY + intImageSize),
+								tileID * intOriginalTileSize, 0, (tileID + 1) * intOriginalTileSize,
+								intOriginalTileSize, null);
+
+					} catch (Exception e) {
 					}
 				}
 			}
-	
+		}
+		synchronized (vctEntities) {
 			// Update and draw BEHIND particles
-			updateAndDrawParticles(vctParticlesBehind, (Graphics2D)gD, deltaTime);
-	
-                Collections.sort(sortedEntities, ySortComparator);
+			updateAndDrawParticles(vctParticlesBehind, (Graphics2D) gD, deltaTime);
 
-	        for (Entity entStore : sortedEntities) {
-	            drawEntity(entStore);
-	        }
-		
-		    // Draw alpha layer
-		    for (int i=startTileX; i<endTileX; i++) {
-			for (int i2=startTileY; i2<endTileY; i2++) {
+			Collections.sort(sortedEntities, ySortComparator);
+
+			for (Entity entStore : sortedEntities) {
+				drawEntity(entStore);
+			}
+		}
+		// Draw alpha layer
+		for (int i = startTileX; i < endTileX; i++) {
+			for (int i2 = startTileY; i2 < endTileY; i2++) {
 				int mapGridX = i - mapStartX;
 				int mapGridY = i2 - mapStartY;
 
 				if (mapGridX >= 0 && mapGridX < mapSizeX && mapGridY >= 0 && mapGridY < mapSizeY) {
 					try {
 						int tileID = shrMapAlpha[mapGridX][mapGridY];
-						if (tileID == 0) continue; // Skip transparent tile
+						if (tileID == 0)
+							continue; // Skip transparent tile
 
 						double screenX = (i - startTileX) * intImageSize - offsetX;
 						double screenY = (i2 - startTileY) * intImageSize - offsetY;
-						
-						gD.drawImage(imgOriginalMapAlpha,
-									(int)screenX, (int)screenY,
-									(int)(screenX + intImageSize), (int)(screenY + intImageSize),
-									tileID * intOriginalTileSize, 0,
-									(tileID + 1) * intOriginalTileSize, intOriginalTileSize,
-									null);
 
-					} catch(Exception e) {}
+						gD.drawImage(imgOriginalMapAlpha, (int) screenX, (int) screenY,
+								(int) (screenX + intImageSize), (int) (screenY + intImageSize),
+								tileID * intOriginalTileSize, 0, (tileID + 1) * intOriginalTileSize,
+								intOriginalTileSize, null);
+
+					} catch (Exception e) {
+					}
 				}
 			}
 		}
 
 		// Update and draw FRONT particles
-		updateAndDrawParticles(vctParticles, (Graphics2D)gD, deltaTime);
-	    
-	    	Font originalFont = gD.getFont();
-	    	Font boldFont = new Font(originalFont.getName(), Font.BOLD, 16);
-	    	gD.setFont(boldFont);
-	        for (DamageSplat splat : vctDamageSplats) {
-	            double screenX = splat.x - camera.x;
-	            double screenY = splat.y - camera.y;
-	            gD.setColor(Color.BLACK);
-	            gD.drawString(splat.text, (int)screenX + 1, (int)screenY + 1);
-	            gD.setColor(splat.color);
-	            gD.drawString(splat.text, (int)screenX, (int)screenY);
-	        }
-	        gD.setFont(originalFont);
+		updateAndDrawParticles(vctParticles, (Graphics2D) gD, deltaTime);
 
-			if (vctCrossMarkers != null) {
-				synchronized (vctCrossMarkers) {
-					Graphics2D g2d = (Graphics2D) gD;
-					Stroke originalStroke = g2d.getStroke();
-					g2d.setStroke(new BasicStroke(3)); // Make the "X" thicker
-			
-					for (CrossMarker marker : vctCrossMarkers) {
-						double screenX = marker.mapX * intImageSize - camera.x;
-						double screenY = marker.mapY * intImageSize - camera.y;
-			
-						// Calculate alpha for fade-out effect
-						float alpha = (float) marker.lifetime / (float) marker.maxLifetime;
-						if (alpha < 0) alpha = 0;
-						if (alpha > 1) alpha = 1;
-			
-						// Set color with alpha
-						Color fadedColor = new Color(marker.color.getRed(), marker.color.getGreen(), marker.color.getBlue(), (int) (alpha * 255));
-						g2d.setColor(fadedColor);
-			
-						// Draw the "X"
-						int x1 = (int) screenX;
-						int y1 = (int) screenY;
-						int x2 = (int) (screenX + intImageSize);
-						int y2 = (int) (screenY + intImageSize);
-						g2d.drawLine(x1, y1, x2, y2);
-						g2d.drawLine(x1, y2, x2, y1);
-					}
-					g2d.setStroke(originalStroke); // Restore original stroke
+		Font originalFont = gD.getFont();
+		Font boldFont = new Font(originalFont.getName(), Font.BOLD, 16);
+		gD.setFont(boldFont);
+		for (DamageSplat splat : vctDamageSplats) {
+			double screenX = splat.x - camera.x;
+			double screenY = splat.y - camera.y;
+			gD.setColor(Color.BLACK);
+			gD.drawString(splat.text, (int) screenX + 1, (int) screenY + 1);
+			gD.setColor(splat.color);
+			gD.drawString(splat.text, (int) screenX, (int) screenY);
+		}
+		gD.setFont(originalFont);
+
+		if (vctCrossMarkers != null) {
+			synchronized (vctCrossMarkers) {
+				Graphics2D g2d = (Graphics2D) gD;
+				Stroke originalStroke = g2d.getStroke();
+				g2d.setStroke(new BasicStroke(3)); // Make the "X" thicker
+
+				for (CrossMarker marker : vctCrossMarkers) {
+					double screenX = marker.mapX * intImageSize - camera.x;
+					double screenY = marker.mapY * intImageSize - camera.y;
+
+					// Calculate alpha for fade-out effect
+					float alpha = (float) marker.lifetime / (float) marker.maxLifetime;
+					if (alpha < 0)
+						alpha = 0;
+					if (alpha > 1)
+						alpha = 1;
+
+					// Set color with alpha
+					Color fadedColor = new Color(marker.color.getRed(), marker.color.getGreen(),
+							marker.color.getBlue(), (int) (alpha * 255));
+					g2d.setColor(fadedColor);
+
+					// Draw the "X"
+					int x1 = (int) screenX;
+					int y1 = (int) screenY;
+					int x2 = (int) (screenX + intImageSize);
+					int y2 = (int) (screenY + intImageSize);
+					g2d.drawLine(x1, y1, x2, y2);
+					g2d.drawLine(x1, y2, x2, y1);
 				}
+				g2d.setStroke(originalStroke); // Restore original stroke
 			}
-	    }
+		}
 
 		// Handle lightning effect for armor spell
 		List<Particle> newLightningParticles = new ArrayList<>();
@@ -1781,15 +1829,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 
 	
-	public void paint()
-	{
-		if (imgDisplay != null) {
+	public void paint() {
+		if (frame.pnlGraphics != null && gD != null) {
 			frame.pnlGraphics.img = imgDisplay;
 			frame.pnlGraphics.repaint();
-			frame.pnlSouth.repaint();
-			frame.txtInput.repaint();
-			frame.btnGossip.repaint();
-			frame.btnBattle.repaint();
 		}
 	}
 

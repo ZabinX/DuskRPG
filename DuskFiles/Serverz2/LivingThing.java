@@ -3254,29 +3254,33 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			}
 		}
 
-		while(true)
-		{
+		DuskMessage msg = null;
+		while (true) {
 			if (blnStopThread) {
 				return;
 			}
-			try
-			{
-				if (!blnHalted)
-				{
-					DuskMessage msg = DuskMessage.receiveMessage(stmIn);
-					if (msg.name == DuskProtocol.MSG_COMMAND) {
+			try {
+				if (!blnHalted) {
+					msg = DuskMessage.receiveMessage(stmIn);
+					switch (msg.name) {
+					case (DuskProtocol.MSG_COMMAND): {
 						String strInput = ((DuskMessage.StringMessage) msg).value;
 						strStore = Commands.parseCommand(this, engGame, strInput);
 						if (strStore != null) {
 							chatMessage(strStore);
 						}
+						break;
+					}
+					case (DuskProtocol.MSG_LOAD_COMPLETE): {
+						changeLocBypass(intLocX, intLocY);
+						break;
+					}
 					}
 				}
-			}catch(Exception e)
-			{
-			    engGame.log.printError("LivingThing.run():"+strName+" disconnected", e);
+			} catch (Exception e) {
+				engGame.log.printError("LivingThing.run():" + strName + " disconnected", e);
 				close();
-			    return;
+				return;
 			}
 		}
 	}
