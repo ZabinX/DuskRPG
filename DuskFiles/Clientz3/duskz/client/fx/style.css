@@ -1,0 +1,85 @@
+/*
+    Document   : style
+    Created on : 21/02/2013, 11:27:00 AM
+    Author     : notzed
+    Description: A very ugly stylesheet just waiting for a graphical designer
+		to improve it.
+*/
+
+.scene {
+	/* global palette */
+	enitity-background: rgba(1,1,0.5,0.25);
+}
+.button {
+    -fx-background-color:
+        #c3c4c4,
+        linear-gradient(#d6d6d6 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+	/*   -fx-background-radius: 30;*/
+    -fx-background-insets: 0,1,1;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+}
+
+#login-window, #race-window, #shop-window {
+    -fx-padding: 10;
+	-fx-border-color: #000000;
+	-fx-border-radius: 12;
+	-fx-background-radius: 12;
+    -fx-background-color:
+        linear-gradient(to bottom right, antiquewhite, maroon);
+}
+
+#entity-label {
+	-fx-font-family: 'sans';
+	-fx-font-size: small;
+	-fx-font-weight: bold;
+	-fx-fill: white;
+	-fx-effect: dropshadow(one-pass-box, black, 4, 0, 2, 2);
+}
+#window-title {
+	-fx-font-family: 'serif';
+	-fx-font-size: x-large;
+}
+.tab-pane {
+	-fx-tab-min-width: 250px;
+}
+
+.tab-header-area {
+	-fx-alignment: center;
+}
+
+#shop-window .table-view {
+    -fx-padding: 5px;
+}
+#shop-window .table-cell {
+	-fx-font-size: small;
+	-fx-padding: 0px;
+}
+
+.table-row-cell, .list-cell {
+	-fx-background-color: lemonchiffon;
+}
+.table-row-cell:selected, .list-cell:selected {
+	-fx-background-color: burlywood;
+}
+#shop-window .label {
+	-fx-padding: 5px;
+}
+#health-bubble, #damage-bubble {
+    -fx-background-radius: 20;
+    -fx-background-insets: 0;
+    -fx-text-fill: black;
+	-fx-padding: 4;
+}
+
+#health-bubble {
+    -fx-background-color:  #33c333,
+        linear-gradient(#33c333 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+}
+#damage-bubble {
+    -fx-background-color:  #c33333,
+        linear-gradient(#c33333 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+}
