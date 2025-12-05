@@ -3031,7 +3031,3 @@ System.out.println("player range = "+pla1.getRangeWithBonus());
 		}
 	}
 }
-
-
-
-
