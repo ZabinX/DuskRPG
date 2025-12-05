@@ -88,6 +88,7 @@ public class MainFrame extends JFrame implements ItemListener
 
 		@Override
 		protected void paintComponent(Graphics g) {
+			System.out.println("GamePanel.paintComponent() called");
 			super.paintComponent(g);
 			if (img != null) {
 				g.drawImage(img, 0, 0, this);

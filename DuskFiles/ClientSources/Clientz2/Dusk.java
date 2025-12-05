@@ -1427,6 +1427,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 	public void update(double deltaTime)
 	{
+		System.out.println("Dusk.update() called");
 		TileAnim.update(deltaTime);
 		synchronized (vctCrossMarkers) {
 			for (int i = vctCrossMarkers.size() - 1; i >= 0; i--) {
@@ -1785,6 +1786,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	public void paint()
 	{
+		System.out.println("Dusk.paint() called");
 		frame.pnlGraphics.img = imgDisplay;
 		frame.pnlGraphics.repaint();
 	}
