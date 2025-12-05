@@ -61,7 +61,7 @@ public class TileMap implements Iterable<TileMap.MapData> {
 	 * Layers
 	 */
 	private int groundLayer;
-	private TileLayer layers[];
+	public TileLayer layers[];
 	/**
 	 * privileges for each cell. This appears to be unimplemented in Dusk so
 	 * isn't here either.
@@ -88,8 +88,11 @@ public class TileMap implements Iterable<TileMap.MapData> {
 		this.name = name;
 		this.rows = rows;
 		this.cols = cols;
-
-		tiles = new short[rows * cols];
+		this.layers = new TileLayer[3];
+		this.layers[0] = new TileLayer(0, 0, cols, rows);
+		this.layers[1] = new TileLayer(0, 0, cols, rows);
+		this.layers[2] = new TileLayer(0, 0, cols, rows);
+		this.tiles = this.layers[0].tiles;
 		entities = new DuskObject[rows * cols];
 	}
 
@@ -159,6 +162,15 @@ public class TileMap implements Iterable<TileMap.MapData> {
 				return tiles[tx + ty * width];
 			} else
 				return 0;
+		}
+
+		public void setTile(int tx, int ty, short t) {
+			tx -= this.x;
+			ty -= this.y;
+			if (tx >= 0 && tx < width
+				&& ty >= 0 && ty < height) {
+				tiles[tx + ty * width] = t;
+			}
 		}
 	}
 	public static final int FORMAT_BYTE = 0;
@@ -371,6 +383,11 @@ public class TileMap implements Iterable<TileMap.MapData> {
 			return null;
 		else
 			return region;
+	}
+
+	public void setTile(int l, int x, int y, short t) {
+		if (l < 3 && l >= 0)
+			layers[l].setTile(x, y, t);
 	}
 
 	public void setTile(int x, int y, int t) {

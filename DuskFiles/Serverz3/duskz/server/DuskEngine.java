@@ -125,11 +125,11 @@ public class DuskEngine implements Runnable, DuskProtocol {
 	//protected Config IDtoName;
 	//public TileMap map;
 	public final HashMap<String, TileMap> maps = new HashMap<>();
-	protected int MapRows,
+	public int MapRows,
 		MapColumns;
-	protected short shrMap[][];
-	protected short shrMapAlpha[][];
-	protected short shrMapAlpha2[][];
+	public short shrMap[][];
+	public short shrMapAlpha[][];
+	public short shrMapAlpha2[][];
 	final public List<Battle> battleList = new ArrayList<>();
 	// Indices of various Entities
 	final public HashSet<Merchant> merchantList = new HashSet<>();
@@ -266,10 +266,14 @@ public class DuskEngine implements Runnable, DuskProtocol {
 				}
 				rafFile.close();
 			}
-			TileMap map = new TileMap("main", MapColumns, MapRows, 3);
-			map.layers.add(new duskz.map.Layer(shrMap));
-			map.layers.add(new duskz.map.Layer(shrMapAlpha));
-			map.layers.add(new duskz.map.Layer(shrMapAlpha2));
+			TileMap map = new TileMap("main", MapColumns, MapRows);
+			for (int i=0;i<MapColumns;i++) {
+				for (int i2=0;i2<MapRows;i2++) {
+					map.setTile(0, i, i2, shrMap[i][i2]);
+					map.setTile(1, i, i2, shrMapAlpha[i][i2]);
+					map.setTile(2, i, i2, shrMapAlpha2[i][i2]);
+				}
+			}
 			maps.put("main", map);
 
 			log.printMessage(Log.INFO, "Map Loaded...");
