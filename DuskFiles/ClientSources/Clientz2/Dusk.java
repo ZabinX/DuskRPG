@@ -263,6 +263,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 
 			thrGraphics = new GraphicsThread(this, null);
+			thrGraphics.thread = new Thread(thrGraphics);
+			thrGraphics.thread.start();
 		}catch (Exception e)
 		{
 		}
@@ -1437,6 +1439,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 			}
 		}
+		if (imgOriginalMap == null) return;
 		synchronized (vctEntities) {
 	    movementManager.update(vctEntities, playerTicks, player, camera, deltaTime, intImageSize);
 	    camera.update(frame.pnlGraphics.getWidth(), frame.pnlGraphics.getHeight(), LocX, LocY, viewRangeX, viewRangeY, intImageSize, deltaTime);
