@@ -1482,12 +1482,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			System.out.println("imgOriginalMap is null, skipping render");
 			return;
 		}
+
 		synchronized (vctEntities) {
 			movementManager.update(vctEntities, playerTicks, player, camera, deltaTime, intImageSize);
 			camera.update(frame.pnlGraphics.getWidth(), frame.pnlGraphics.getHeight(), LocX, LocY, viewRangeX, viewRangeY,
-					intImageSize, deltaTime);
+				intImageSize, deltaTime);
+		}
 
-			synchronized (vctDamageSplats) {
+		synchronized (vctDamageSplats) {
 			for (int i = vctDamageSplats.size() - 1; i >= 0; i--) {
 				DamageSplat splat = vctDamageSplats.elementAt(i);
 				splat.x += splat.vx;
@@ -1574,16 +1576,18 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				}
 			}
 		}
-		synchronized (vctEntities) {
-			// Update and draw BEHIND particles
-			updateAndDrawParticles(vctParticlesBehind, (Graphics2D) gD, deltaTime);
 
+		// Update and draw BEHIND particles
+		updateAndDrawParticles(vctParticlesBehind, (Graphics2D) gD, deltaTime);
+
+		synchronized (vctEntities) {
 			Collections.sort(sortedEntities, ySortComparator);
 
 			for (Entity entStore : sortedEntities) {
 				drawEntity(entStore);
 			}
 		}
+
 		// Draw alpha layer
 		for (int i = startTileX; i < endTileX; i++) {
 			for (int i2 = startTileY; i2 < endTileY; i2++) {
