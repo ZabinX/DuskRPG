@@ -209,7 +209,7 @@ public class DataManagerFX extends DataManager {
 		return new ImageView();
 	}
 
-	public ImageView createSprite(String set, int tileid, int tilex, int tiley, int tilewidth, int tileheight) {
+	public ImageView createSprite(String set, int tileid, double tilex, double tiley, int tilewidth, int tileheight) {
 		try {
 			ImageSet[] tiles = sets.get(set);
 			for (int i = 0; i < tiles.length; i++) {
