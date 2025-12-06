@@ -29,4 +29,8 @@ cp DuskFiles/Clientz3/duskz/client/fx/style.css duskz/client/fx/style.css
 
 # Run the client from the data directory
 cd DuskFiles/DuskComet-Richter
+
+# Create a symbolic link to the actual resource directory
+ln -sfn wwwClient/rc rc
+
 java --module-path "$JFX_SDK_PATH/lib" --add-modules javafx.controls,javafx.fxml -cp ../../ duskz.client.fx.DuskFX
