@@ -1658,7 +1658,7 @@ public class LivingThing extends DuskObject implements Runnable, DuskProtocol {
 			}
 		}
 
-		send(new MapMessage(MSG_UPDATE_MAP, width, height, x, y, 0, 3, layers));
+		send(new MapMessage(MSG_UPDATE_MAP, width, height, x, y, 0, layers[0], layers[1], layers[2]));
 	}
 
 	public void startBattle(LivingThing opponent) {
