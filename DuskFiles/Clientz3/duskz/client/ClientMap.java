@@ -228,7 +228,7 @@ public class ClientMap {
 
 		//System.out.printf("Got map update %dx%d size %dx%dx%d\n", mm.x, mm.y, mm.width, mm.height, mm.layerCount);
 
-		this.levels = mm.layers;
+		this.levels = mm.map;
 		this.groundLevel = mm.groundLayer;
 		this.offx = mm.x - (cols - 1) / 2;
 		this.offy = mm.y - (rows - 1) / 2;
