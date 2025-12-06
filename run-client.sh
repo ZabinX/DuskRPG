@@ -23,3 +23,6 @@ javac --module-path "$JFX_SDK_PATH/lib" --add-modules javafx.controls,javafx.fxm
   DuskFiles/Clientz3/jfxtras/util/*.java \
   DuskFiles/Clientz3/duskz/client/*.java \
   DuskFiles/Clientz3/duskz/client/fx/*.java
+
+# Copy resources
+cp DuskFiles/Clientz3/duskz/client/fx/style.css duskz/client/fx/style.css
