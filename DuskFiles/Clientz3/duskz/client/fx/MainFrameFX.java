@@ -103,7 +103,11 @@ public class MainFrameFX extends StackPane implements GUI {
 	//
 	BorderPane main;
 	StackPane layers;
-	Pane graphics;
+	//Pane graphics;
+	Pane groundPane;
+	Pane objectPane;
+	Pane alphaPane1;
+	Pane alphaPane2;
 	Pane battle;
 	BorderPane panel;
 	VBox buttons;
@@ -115,6 +119,13 @@ public class MainFrameFX extends StackPane implements GUI {
 	MenuButton attack, action, look, get, drop;
 	//
 	Button connect, merchant, equipment, quit;
+		ImageView[][] groundGrid;
+		ImageView[][] alphaGrid1;
+		ImageView[][] alphaGrid2;
+		// grid size
+		int gw, gh;
+		// virtual grid size
+		int vw, vh;
 	/**
 	 * **************
 	 * Behaviour state
@@ -133,7 +144,18 @@ public class MainFrameFX extends StackPane implements GUI {
 
 		getChildren().add(main = new BorderPane());
 
-		layers.getChildren().addAll(graphics = new Pane(), battle = new Pane());
+		//layers.getChildren().addAll(graphics = new Pane(), battle = new Pane());
+		layers.getChildren().addAll(
+			groundPane = new Pane(),
+			objectPane = new Pane(),
+			alphaPane1 = new Pane(),
+			alphaPane2 = new Pane(),
+			battle = new Pane());
+		// Clip the battle pane so effects don't exit the area
+		Rectangle clip = new Rectangle();
+		clip.widthProperty().bind(layers.widthProperty());
+		clip.heightProperty().bind(layers.heightProperty());
+		battle.setClip(clip);
 
 		layers.setPrefSize(416, 416);
 		main.setCenter(layers);
@@ -869,118 +891,103 @@ public class MainFrameFX extends StackPane implements GUI {
 	}
 	HashMap<Integer, TileAnimator> animators = new HashMap<>();
 
-	@Override
-	public void updateMap(ClientMap map) {
-		// Note this has map synchronized already
+	private void initGrid(int w, int h) {
+		gw = w;
+		gh = h;
+		vw = w + 1;
+		vh = h + 1;
 
-		// Since we get a whole update for the map every time, there isn't much we
-		// can practically do apart from simply build a whole new page to display.
-		// However ... this is jused for every type of changed thing, and that
-		// isn't neccessary.
-		System.out.println("update map");
-		if (data == null) {
-			//if (tileImage == null) {
-			System.out.println("Map not ready yet");
-			return;
-		}
+		groundGrid = new ImageView[vw][vh];
+		alphaGrid1 = new ImageView[vw][vh];
+		alphaGrid2 = new ImageView[vw][vh];
 
-		final ArrayList<Node> children = new ArrayList<>();
-		final ArrayList<Node> upper = new ArrayList<>();
-		int levelCount = map.getLevelCount();
-
-		// Animated tiles stuff
-		final HashMap<Integer, List<ImageView>> animated = new HashMap<>();
-
-		// Build map layers
-		for (int l = 0; l < 3; l++) { // There are always 3 layers
-			for (int y = 0; y < map.rows; y++) {
-				for (int x = 0; x < map.cols; x++) {
-					int tileid = map.getTile(l, x, y);
-					if (tileid != 0) {
-						ImageView iv = data.createTile(tileid, x, y, tileSize, tileSize);
-						children.add(iv);
-
-						if (data.isAnimRoot(tileid)) {
-							List<ImageView> list = animated.get(tileid);
-							if (list == null) {
-								list = new ArrayList<>();
-								animated.put(tileid, list);
-							}
-							list.add(iv);
-						}
-					}
-				}
+		for (int y = 0; y < vh; y++) {
+			for (int x = 0; x < vw; x++) {
+				groundGrid[x][y] = data.createTile(0, x, y, tileSize, tileSize);
+				alphaGrid1[x][y] = data.createTile(0, x, y, tileSize, tileSize);
+				alphaGrid2[x][y] = data.createTile(0, x, y, tileSize, tileSize);
 			}
 		}
 
-		// Draw entities on top of the map
-		for (int y = 0; y < map.rows; y++) {
-			for (int x = 0; x < map.cols; x++) {
-				Collection<Entity> ents = map.getEntities(x + map.offx, y + map.offy);
-				if (ents != null) {
-					for (Entity e: ents) {
-						drawEntity(e, map.offx, map.offy, children, upper);
-					}
-				}
-			}
-		}
-
-		// Build sprites
-		//for (Entity e : map.getEntities()) {
-		//	drawEntity(map.offx, map.offy, children, e);
-		//}
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				graphics.getChildren().setAll(children);
-				graphics.getChildren().addAll(upper);
-
-				for (Map.Entry<Integer, List<ImageView>> e: animated.entrySet()) {
-					int root = e.getKey();
-					TileAnimator animator = animators.get(root);
-					DataManagerFX.AnimSetFX set = data.getAnimSet(root);
-					if (animator == null) {
-						animator = new TileAnimator(e.getValue(), Duration.seconds(0.25), set.tiles);
-						animators.put(root, animator);
-						animator.setCycleCount(Animation.INDEFINITE);
-						animator.play();
-					} else {
-						animator.setNodes(e.getValue());
+				for (int y = 0; y < vh; y++) {
+					for (int x = 0; x < vw; x++) {
+						groundPane.getChildren().add(groundGrid[x][y]);
+						alphaPane1.getChildren().add(alphaGrid1[x][y]);
+						alphaPane2.getChildren().add(alphaGrid2[x][y]);
 					}
-					System.out.printf("Set anim root %d\n", root);
 				}
 			}
 		});
 	}
-	DropShadow textShadow = new DropShadow(3, 2, 2, Color.BLACK);
 
-	// HACK: upper is used for 'upper layer', stuff drawn afterwards
-	void drawEntity(Entity e, int offx, int offy, ArrayList<Node> children, ArrayList<Node> upper) {
+	@Override
+	public void updateMap(final ClientMap map) {
+		if (data == null) {
+			return;
+		}
+		if (groundGrid == null) {
+			initGrid(map.cols, map.rows);
+		}
+
+		// Update tile layers
+		for (int y = 0; y < gh; y++) {
+			for (int x = 0; x < gw; x++) {
+				int vx = (x + map.offx) % vw;
+				int vy = (y + map.offy) % vh;
+
+				data.updateTile(groundGrid[vx][vy], map.getTile(0, x, y));
+				data.updateTile(alphaGrid1[vx][vy], map.getTile(1, x, y));
+				data.updateTile(alphaGrid2[vx][vy], map.getTile(2, x, y));
+			}
+		}
+
+		final ArrayList<Node> children = new ArrayList<>();
+
+		// Update entities
+		for (int y = 0; y < map.rows; y++) {
+			for (int x = 0; x < map.cols; x++) {
+				Collection<Entity> ents = map.getEntities(x + map.offx, y + map.offy);
+				if (ents != null) {
+					for (Entity e : ents) {
+						drawEntity(e, map.offx, map.offy, children);
+					}
+				}
+			}
+		}
+
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				objectPane.getChildren().setAll(children);
+			}
+		});
+	}
+
+	void drawEntity(Entity e, int offx, int offy, ArrayList<Node> children) {
 		double x = e.locx - offx;
 		double y = e.locy - offy;
 
-		// TODO: just make it an entity node
+		ImageView iv;
 		if (e.intStep == -1) {
-			ImageView iv = data.createSprite("sprites", e.intImage, e.locx - offx, e.locy - offy, tileSize, tileSize);
-			children.add(iv);
+			iv = data.createSprite("sprites", e.intImage, x, y, tileSize, tileSize);
+		} else {
+			iv = data.createSprite("players", e.intImage * 8 + e.intStep, x, y, tileSize, tileSize);
+		}
+		children.add(iv);
 
-		} else {
-			ImageView iv = data.createSprite("players", e.intImage * 8 + e.intStep,  e.locx - offx, e.locy - offy, tileSize, tileSize);
-			children.add(iv);
-		}
-		// FIXME: intnum not used anymore
+		Text t;
 		if (e.intNum == 0) {
-			Text t = new Text(e.getTitle());
-			t.setId("entity-label");
-			t.relocate((x * tileSize) + tileSize / 2 - t.getLayoutBounds().getWidth() / 2, ((y + 1) * tileSize));
-			upper.add(t);
+			t = new Text(e.getTitle());
 		} else {
-			Text t = new Text(e.intNum + "." + e.name);
-			t.setId("entity-label");
-			t.relocate((x * tileSize) + tileSize / 2 - t.getLayoutBounds().getWidth() / 2, ((y + 1) * tileSize));
-			upper.add(t);
+			t = new Text(e.intNum + "." + e.name);
 		}
-		//Draw flag
+		t.setId("entity-label");
+		t.relocate((x * tileSize) + tileSize / 2 - t.getLayoutBounds().getWidth() / 2, ((y + 1) * tileSize));
+		children.add(t);
+
 		if (e.flags != 0) {
 			Rectangle r = new Rectangle(1, 1, tileSize - 2, tileSize - 2);
 			if ((e.flags & 3) == 1) {
@@ -993,7 +1000,7 @@ public class MainFrameFX extends StackPane implements GUI {
 			r.setArcWidth(12);
 			r.setFill(null);
 			r.relocate(x * tileSize, y * tileSize);
-			upper.add(r);
+			children.add(r);
 		}
 	}
 }

@@ -160,14 +160,19 @@ public class DataManagerFX extends DataManager {
 		return new ImageSetFX();
 	}
 
-	public void updateTile(ImageView iv, int tileid, int tilewidth, int tileheight) {
+	public void updateTile(ImageView iv, int tileid) {
+		if (tileid == 0) {
+			iv.setVisible(false);
+			return;
+		}
+		iv.setVisible(true);
+
 		ImageSet[] tiles = sets.get("tiles");
 		for (int i = 0; i < tiles.length; i++) {
 			ImageSetFX is = (ImageSetFX)tiles[i];
 			if (tileid >= is.gid && tileid < is.gid + is.count) {
 				iv.setImage(is.tiles[tileid - is.gid]);
-				iv.setTranslateY(-(is.height - tileheight));
-				//iv.relocate(tilex * tilewidth, tiley * tileheight - (is.height - tileheight));
+				iv.setTranslateY(-(is.height - 32));
 				return;
 			}
 		}
@@ -214,12 +219,11 @@ public class DataManagerFX extends DataManager {
 
 					if (is.height != tileheight) {
 						double scale = (double)tileheight / is.height;
-
-						//iv.relocate(tilex * tilewidth - tilewidth  * scale, tiley * tileheight - tileheight * scale);
 						iv.setScaleX(scale);
 						iv.setScaleY(scale);
 					}
-					iv.relocate(tilex * tilewidth - tilewidth * 0.5, tiley * tileheight - tileheight * 0.5);
+					iv.setTranslateX(tilex * tilewidth - tilewidth * 0.5);
+					iv.setTranslateY(tiley * tileheight - tileheight * 0.5);
 					return iv;
 				}
 			}
