@@ -244,8 +244,8 @@ public class ClientMap {
 		this.mapAlpha = mm.mapAlpha;
 		this.mapAlpha2 = mm.mapAlpha2;
 		this.groundLevel = mm.groundLayer;
-		this.offx = mm.x - (cols - 1) / 2;
-		this.offy = mm.y - (rows - 1) / 2;
+		this.offx = mm.x;
+		this.offy = mm.y;
 
 		// Prune out of range thingies
 		List<Entity> removing = new ArrayList<>();

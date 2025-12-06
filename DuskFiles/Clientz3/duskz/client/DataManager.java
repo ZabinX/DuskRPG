@@ -3,10 +3,10 @@
  *
  * Copyright (C) 2013 Michael Zucchi <notzed@gmail.com>
  *
- * DuskZ is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * DuskZ is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 2
+ * of the License, or (at your option) any later version.
  *
  * DuskZ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with DuskZ.  If not, see <http://www.gnu.org/licenses/>.
+ * along with DuskZ; if not, see <http://www.gnu.org/licenses/>.
  */
 /**
  * Changes
@@ -54,18 +54,15 @@ public class DataManager {
 	}
 
 	public void load() throws IOException {
-		try (JarInputStream jis = new JarInputStream(new FileInputStream(source + ".jar"))) {
-			Map<String, Consumer<JarInputStream>> handle = new HashMap<>();
-			JarEntry je;
-
-			scanManifest(jis.getManifest(), handle);
-
-			while ((je = jis.getNextJarEntry()) != null) {
-				Consumer<JarInputStream> proc = handle.get(je.getName());
-				if (proc != null)
-					proc.accept(jis);
-			}
-		}
+		ImageSet set = createImageSet();
+		set.name = "tiles";
+		set.source = source + "/map.png";
+		set.gid = 0;
+		set.count = 1024;
+		set.width = 32;
+		set.height = 32;
+		set.load(new FileInputStream(set.source));
+		sets.put("tiles", new ImageSet[]{set});
 	}
 
 	private int getInt(Attributes a, int index, String name) {

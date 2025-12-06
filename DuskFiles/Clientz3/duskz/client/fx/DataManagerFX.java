@@ -278,14 +278,14 @@ public class DataManagerFX extends DataManager {
 				tiles[i] = new WritableImage(reader, i * width, 0, width, height);
 			}
 
-			Image imageAlpha = new Image(new FileInputStream(source + "/mapalpha.png"));
+			Image imageAlpha = new Image(new FileInputStream("rc/mapalpha.png"));
 			tilesAlpha = new Image[count];
 			PixelReader readerAlpha = imageAlpha.getPixelReader();
 			for (int i = 0; i < count; i++) {
 				tilesAlpha[i] = new WritableImage(readerAlpha, i * width, 0, width, height);
 			}
 
-			Image imageAlpha2 = new Image(new FileInputStream(source + "/mapalpha2.png"));
+			Image imageAlpha2 = new Image(new FileInputStream("rc/mapalpha2.png"));
 			tilesAlpha2 = new Image[count];
 			PixelReader readerAlpha2 = imageAlpha2.getPixelReader();
 			for (int i = 0; i < count; i++) {

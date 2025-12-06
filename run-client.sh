@@ -26,11 +26,19 @@ javac --module-path "$JFX_SDK_PATH/lib" --add-modules javafx.controls,javafx.fxm
 
 # Copy resources
 cp DuskFiles/Clientz3/duskz/client/fx/style.css duskz/client/fx/style.css
+cp DuskFiles/Clientz3/map.png duskz/client/fx/map.png
+cp DuskFiles/Clientz3/mapalpha.png duskz/client/fx/mapalpha.png
+cp DuskFiles/Clientz3/mapalpha2.png duskz/client/fx/mapalpha2.png
+
 
 # Run the client from the data directory
 cd DuskFiles/DuskComet-Richter
 
 # Create a symbolic link to the actual resource directory
 ln -sfn wwwClient/rc rc
+cp ../../DuskFiles/Clientz3/map.png rc/map.png
+cp ../../DuskFiles/Clientz3/mapalpha.png rc/mapalpha.png
+cp ../../DuskFiles/Clientz3/mapalpha2.png rc/mapalpha2.png
+
 
 java --module-path "$JFX_SDK_PATH/lib" --add-modules javafx.controls,javafx.fxml -cp ../../ duskz.client.fx.DuskFX

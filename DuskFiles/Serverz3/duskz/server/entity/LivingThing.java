@@ -1,4 +1,4 @@
- /*
+/*
  * This file is part of DuskZ, a graphical mud engine.
  *
  * Copyright (C) 2000 Tom Weingarten <captaint@home.com>
