@@ -26,3 +26,7 @@ javac --module-path "$JFX_SDK_PATH/lib" --add-modules javafx.controls,javafx.fxm
 
 # Copy resources
 cp DuskFiles/Clientz3/duskz/client/fx/style.css duskz/client/fx/style.css
+
+# Run the client from the data directory
+cd DuskFiles/DuskComet-Richter
+java --module-path "$JFX_SDK_PATH/lib" --add-modules javafx.controls,javafx.fxml -cp ../../ duskz.client.fx.DuskFX
