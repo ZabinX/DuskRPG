@@ -53,7 +53,7 @@ public class ClientMap {
 	/**
 	 * Tile indices for images
 	 */
-	short[][] levels;
+	public short[][] levels;
 	/**
 	 * Entities by id
 	 */
@@ -81,7 +81,7 @@ public class ClientMap {
 		this.cols = cols;
 		this.rows = rows;
 
-		levels = new short[1][cols * rows];
+		levels = new short[3][cols * rows];
 		groundLevel = 0;
 	}
 
@@ -98,6 +98,10 @@ public class ClientMap {
 	}
 
 	public int getTile(int level, int x, int y) {
+		if (level < 0 || level >= 3)
+			return 0;
+		if (x < 0 || y < 0 || x >= cols || y >= rows)
+			return 0;
 		return levels[level][x + y * cols];
 	}
 
@@ -224,7 +228,7 @@ public class ClientMap {
 
 		//System.out.printf("Got map update %dx%d size %dx%dx%d\n", mm.x, mm.y, mm.width, mm.height, mm.layerCount);
 
-		this.levels = mm.map;
+		this.levels = mm.layers;
 		this.groundLevel = mm.groundLayer;
 		this.offx = mm.x - (cols - 1) / 2;
 		this.offy = mm.y - (rows - 1) / 2;

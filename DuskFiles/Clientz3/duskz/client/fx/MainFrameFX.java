@@ -891,10 +891,9 @@ public class MainFrameFX extends StackPane implements GUI {
 		// Animated tiles stuff
 		final HashMap<Integer, List<ImageView>> animated = new HashMap<>();
 
-		// Build map
-		for (int l = 0; l < levelCount; l++) {
+		// Build map layers
+		for (int l = 0; l < 3; l++) { // There are always 3 layers
 			for (int y = 0; y < map.rows; y++) {
-				// Draw tiles first for whole row
 				for (int x = 0; x < map.cols; x++) {
 					int tileid = map.getTile(l, x, y);
 					if (tileid != 0) {
@@ -911,16 +910,16 @@ public class MainFrameFX extends StackPane implements GUI {
 						}
 					}
 				}
+			}
+		}
 
-				// Now check for entities over this layer row
-				if (l == map.getGroundLevel()) {
-					for (int x = 0; x < map.cols; x++) {
-						Collection<Entity> ents = map.getEntities(x + map.offx, y + map.offy);
-						if (ents != null) {
-							for (Entity e: ents) {
-								drawEntity(e, map.offx, map.offy, children, upper);
-							}
-						}
+		// Draw entities on top of the map
+		for (int y = 0; y < map.rows; y++) {
+			for (int x = 0; x < map.cols; x++) {
+				Collection<Entity> ents = map.getEntities(x + map.offx, y + map.offy);
+				if (ents != null) {
+					for (Entity e: ents) {
+						drawEntity(e, map.offx, map.offy, children, upper);
 					}
 				}
 			}
