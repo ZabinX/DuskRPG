@@ -2106,13 +2106,14 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			tiles = new short[width * height];
 		}
 		int i = 0;
-		// Column-major iteration
+		// The server stores map data in column-major order (map[x][y]).
+		// We must iterate in the same order to flatten the array correctly for the client.
 		for (int mx = x; mx < x + width; mx++) {
 			for (int my = y; my < y + height; my++) {
 				if (mx >= 0 && mx < engGame.MapColumns && my >= 0 && my < engGame.MapRows) {
 					tiles[i++] = mapLayer[mx][my];
 				} else {
-					tiles[i++] = 0;
+					tiles[i++] = 0; // Out-of-bounds tiles are empty.
 				}
 			}
 		}
@@ -2126,27 +2127,20 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 		int width = rX * 2 + 1;
 		int height = rY * 2 + 1;
-		short[] tiles = null;
-		int i = 0;
+
 		int nlayers = getMapLayerCount();
-		int nused = 0;
 		short[][] layers = new short[nlayers][];
-		int groundLayer = 0;
+		int nused = 0;
+
 		for (int l = 0; l < nlayers; l++) {
-			if (tiles == null)
-				tiles = new short[width * height];
-
-			short[] visible = getMapRegion(l, intLocX - rX, intLocY - rY, width, height, tiles);
-
+			short[] visible = getMapRegion(l, intLocX - rX, intLocY - rY, width, height, null);
 			if (visible != null) {
-				tiles = null;
-
-				if (l == 0) // Assuming ground layer is always the first one
-					groundLayer = nused;
-
 				layers[nused++] = visible;
 			}
 		}
+
+		// The ground layer is assumed to be the first layer (index 0).
+		int groundLayer = 0;
 
 		send(new MapMessage(DuskProtocol.MSG_UPDATE_MAP, width, height, intLocX, intLocY, groundLayer, nused, layers));
 	}

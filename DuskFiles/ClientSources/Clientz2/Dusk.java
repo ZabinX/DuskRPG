@@ -688,10 +688,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 										int expectedSize = mm.width * mm.height;
 										if (layerData.length == expectedSize) {
 											for (int i = 0; i < expectedSize; i++) {
-												int x = i / mm.height;
-												int y = i % mm.height;
-												if (x < clientLayers[l].length && y < clientLayers[l][x].length) {
-													clientLayers[l][x][y] = layerData[i];
+												// Server sends data in column-major order (iterates Y first for each X).
+												// We need to calculate x and y from a 1D index based on this order.
+												int x = i / mm.height; // The column index
+												int y = i % mm.height; // The row index
+												if (y < clientLayers[l].length && x < clientLayers[l][y].length) {
+													clientLayers[l][y][x] = layerData[i];
 												}
 											}
 										}
@@ -1003,9 +1005,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						viewRangeY = list.getInteger(DuskProtocol.FIELD_VIEW_RANGE_Y);
 						mapSizeX = viewRangeX * 2 + 1;
 						mapSizeY = viewRangeY * 2 + 1;
-						shrMap = new short[mapSizeX][mapSizeY];
-						shrMapAlpha = new short[mapSizeX][mapSizeY];
-						shrMapAlpha2 = new short[mapSizeX][mapSizeY];
+						shrMap = new short[mapSizeY][mapSizeX];
+						shrMapAlpha = new short[mapSizeY][mapSizeX];
+						shrMapAlpha2 = new short[mapSizeY][mapSizeX];
 						scaleWindow();
 						break;
 					}
@@ -1481,7 +1483,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					if (screenX + intImageSize > 0 && screenX < frame.pnlGraphics.getWidth() &&
 						screenY + intImageSize > 0 && screenY < frame.pnlGraphics.getHeight()) {
 
-						int tileID = shrMap[x][y];
+						int tileID = shrMap[y][x];
 						int tileIDToDraw = tileID;
 						TileAnim anim = null;
 						if (vctTileAnims != null) {
@@ -1517,7 +1519,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					if (screenX + intImageSize > 0 && screenX < frame.pnlGraphics.getWidth() &&
 						screenY + intImageSize > 0 && screenY < frame.pnlGraphics.getHeight()) {
 
-						int tileID = shrMapAlpha2[x][y];
+						int tileID = shrMapAlpha2[y][x];
 						if (tileID == 0) continue; // Skip transparent tile
 
 						gD.drawImage(imgOriginalMapAlpha2,
@@ -1548,7 +1550,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					if (screenX + intImageSize > 0 && screenX < frame.pnlGraphics.getWidth() &&
 						screenY + intImageSize > 0 && screenY < frame.pnlGraphics.getHeight()) {
 
-						int tileID = shrMapAlpha[x][y];
+						int tileID = shrMapAlpha[y][x];
 						if (tileID == 0) continue; // Skip transparent tile
 
 						gD.drawImage(imgOriginalMapAlpha,
