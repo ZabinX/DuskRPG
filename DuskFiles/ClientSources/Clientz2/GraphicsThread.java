@@ -87,6 +87,8 @@ public class GraphicsThread implements Runnable
 			}
 		}
 		appParent.numMapImages = (appParent.imgOriginalMap.getWidth(null)/appParent.imgOriginalMap.getHeight(null))-1;
+		appParent.numMapImagesAlpha = (appParent.imgOriginalMapAlpha.getWidth(null)/appParent.imgOriginalMapAlpha.getHeight(null))-1;
+		appParent.numMapImagesAlpha2 = (appParent.imgOriginalMapAlpha2.getWidth(null)/appParent.imgOriginalMapAlpha2.getHeight(null))-1;
 		appParent.intOriginalTileSize = appParent.imgOriginalMap.getHeight(null);
 		appParent.numPlayerImages = ((appParent.imgOriginalPlayers.getWidth(null)/appParent.imgOriginalPlayers.getHeight(null))/8)-1;
 		appParent.intOriginalPlayerSize = appParent.imgOriginalPlayers.getHeight(null);

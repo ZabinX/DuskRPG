@@ -65,6 +65,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	int numSpriteImages,
 	    numPlayerImages,
 	    numMapImages,
+		numMapImagesAlpha,
+		numMapImagesAlpha2,
 	    intOriginalTileSize,
 	    intOriginalPlayerSize,
 	    intOriginalSpriteSize,
@@ -1472,6 +1474,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					if (mapGridX >= 0 && mapGridX < mapSizeX && mapGridY >= 0 && mapGridY < mapSizeY) {
 						try {
 							int tileID = shrMap[mapGridX][mapGridY];
+							if (tileID < 0 || tileID > numMapImages) continue;
 							int tileIDToDraw = tileID;
 							TileAnim anim = null;
 							if (vctTileAnims != null) {
@@ -1513,6 +1516,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						try {
 							int tileID = shrMapAlpha2[mapGridX][mapGridY];
 							if (tileID == 0) continue; // Skip transparent tile
+							if (tileID < 0 || tileID > numMapImagesAlpha2) continue;
 
 							double screenX = (i - startTileX) * intImageSize - offsetX;
 							double screenY = (i2 - startTileY) * intImageSize - offsetY;
@@ -1548,6 +1552,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					try {
 						int tileID = shrMapAlpha[mapGridX][mapGridY];
 						if (tileID == 0) continue; // Skip transparent tile
+						if (tileID < 0 || tileID > numMapImagesAlpha) continue;
 
 						double screenX = (i - startTileX) * intImageSize - offsetX;
 						double screenY = (i2 - startTileY) * intImageSize - offsetY;
