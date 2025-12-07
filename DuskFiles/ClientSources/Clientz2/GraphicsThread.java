@@ -98,6 +98,7 @@ public class GraphicsThread implements Runnable
 		{
 			prefix = "file:"+System.getProperty("user.dir")+prefix;
 		}
+		appParent.blnLoaded = true;
         appParent.update(0.0008); // Initial update with a small delta to avoid large initial jump
 		appParent.paint();
 
