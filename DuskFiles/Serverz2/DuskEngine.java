@@ -185,18 +185,18 @@ public class DuskEngine implements Runnable
 						shrMapAlpha = new short[MapColumns][MapRows];
 						shrMapAlpha2 = new short[MapColumns][MapRows];
 						objEntities = new DuskObject[MapColumns][MapRows];
-						for (i2=0;i2<MapRows;i2++) {
-							for (i=0;i<MapColumns;i++) {
+						for (i=0;i<MapColumns;i++) {
+							for (i2=0;i2<MapRows;i2++) {
 								shrMap[i][i2] = rafFile.readShort();
 							}
 						}
-						for (i2=0;i2<MapRows;i2++) {
-							for (i=0;i<MapColumns;i++) {
+						for (i=0;i<MapColumns;i++) {
+							for (i2=0;i2<MapRows;i2++) {
 								shrMapAlpha[i][i2] = rafFile.readShort();
 							}
 						}
-						for (i2=0;i2<MapRows;i2++) {
-							for (i=0;i<MapColumns;i++) {
+						for (i=0;i<MapColumns;i++) {
+							for (i2=0;i2<MapRows;i2++) {
 								shrMapAlpha2[i][i2] = rafFile.readShort();
 							}
 						}
