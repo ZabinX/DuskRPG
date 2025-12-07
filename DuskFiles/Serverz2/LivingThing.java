@@ -2092,6 +2092,33 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		}
 	}
 
+	public int getMapLayerCount() {
+		return 3;
+	}
+
+	public short[] getMapRegion(int layer, int x, int y, int width, int height, short[] tiles) {
+		short[][][] allLayers = {engGame.shrMap, engGame.shrMapAlpha, engGame.shrMapAlpha2};
+		if (layer < 0 || layer >= allLayers.length) {
+			return null;
+		}
+		short[][] mapLayer = allLayers[layer];
+		if (tiles == null) {
+			tiles = new short[width * height];
+		}
+		int i = 0;
+		// Column-major iteration
+		for (int mx = x; mx < x + width; mx++) {
+			for (int my = y; my < y + height; my++) {
+				if (mx >= 0 && mx < engGame.MapColumns && my >= 0 && my < engGame.MapRows) {
+					tiles[i++] = mapLayer[mx][my];
+				} else {
+					tiles[i++] = 0;
+				}
+			}
+		}
+		return tiles;
+	}
+
 	public void updateMap()
 	{
 		int rX = engGame.viewrangeX;
@@ -2099,29 +2126,29 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 		int width = rX * 2 + 1;
 		int height = rY * 2 + 1;
-
-		short[][][] allLayers = {engGame.shrMap, engGame.shrMapAlpha, engGame.shrMapAlpha2};
-		int nlayers = allLayers.length;
+		short[] tiles = null;
+		int i = 0;
+		int nlayers = getMapLayerCount();
+		int nused = 0;
 		short[][] layers = new short[nlayers][];
 		int groundLayer = 0;
-		int nused = 0;
-
 		for (int l = 0; l < nlayers; l++) {
-			short[] visibleRegion = new short[width * height];
-			int i = 0;
-            for (int my = intLocY - rY; my <= intLocY + rY; my++) {
-                for (int mx = intLocX - rX; mx <= intLocX + rX; mx++) {
-					if (mx >= 0 && mx < engGame.MapColumns && my >= 0 && my < engGame.MapRows) {
-						visibleRegion[i++] = allLayers[l][mx][my];
-					} else {
-						visibleRegion[i++] = 0;
-					}
-				}
+			if (tiles == null)
+				tiles = new short[width * height];
+
+			short[] visible = getMapRegion(l, intLocX - rX, intLocY - rY, width, height, tiles);
+
+			if (visible != null) {
+				tiles = null;
+
+				if (l == 0) // Assuming ground layer is always the first one
+					groundLayer = nused;
+
+				layers[nused++] = visible;
 			}
-			layers[nused++] = visibleRegion;
 		}
 
-		send(new MapMessage((byte)DuskProtocol.MSG_UPDATE_MAP, width, height, intLocX, intLocY, groundLayer, nused, layers));
+		send(new MapMessage(DuskProtocol.MSG_UPDATE_MAP, width, height, intLocX, intLocY, groundLayer, nused, layers));
 	}
 
 	public void chatMessage(String inMessage)

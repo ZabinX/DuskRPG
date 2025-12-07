@@ -680,15 +680,20 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							LocX = mm.x;
 							LocY = mm.y;
 
-							// Unpack the row-major 1D arrays from the message into the client's column-major 2D arrays
 							short[][][] clientLayers = {shrMap, shrMapAlpha, shrMapAlpha2};
 							for (int l = 0; l < mm.layerCount && l < clientLayers.length; l++) {
-								short[] layerData = mm.map[l];
-								for (int y = 0; y < mm.height; y++) {
-									for (int x = 0; x < mm.width; x++) {
-										int i = y * mm.width + x;
-										if (i < layerData.length && x < clientLayers[l].length && y < clientLayers[l][x].length) {
-											clientLayers[l][x][y] = layerData[i];
+								if (l < mm.map.length) {
+									short[] layerData = mm.map[l];
+									if (layerData != null) {
+										int expectedSize = mm.width * mm.height;
+										if (layerData.length == expectedSize) {
+											for (int i = 0; i < expectedSize; i++) {
+												int x = i / mm.height;
+												int y = i % mm.height;
+												if (x < clientLayers[l].length && y < clientLayers[l][x].length) {
+													clientLayers[l][x][y] = layerData[i];
+												}
+											}
 										}
 									}
 								}
@@ -698,7 +703,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							while (iter.hasNext())
 							{
 								entStore = iter.next();
-								// Don't remove the player entity during a map refresh
 								if (entStore != player && (Math.abs(entStore.intLocX - LocX) > viewRangeX || Math.abs(entStore.intLocY - LocY) > viewRangeY))
 								{
 									iter.remove();
@@ -1468,100 +1472,92 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			int mapStartX = LocX - viewRangeX;
 			int mapStartY = LocY - viewRangeY;
 
+			// Draw ground layer
 			for (int x = 0; x < mapSizeX; x++) {
 				for (int y = 0; y < mapSizeY; y++) {
-					int worldTileX = mapStartX + x;
-					int worldTileY = mapStartY + y;
-					double screenX = worldTileX * intImageSize - camera.x;
-					double screenY = worldTileY * intImageSize - camera.y;
+					double screenX = (mapStartX + x) * intImageSize - camera.x;
+					double screenY = (mapStartY + y) * intImageSize - camera.y;
 
-					if (screenX + intImageSize < 0 || screenX > frame.pnlGraphics.getWidth() ||
-						screenY + intImageSize < 0 || screenY > frame.pnlGraphics.getHeight()) {
-						continue;
-					}
+					if (screenX + intImageSize > 0 && screenX < frame.pnlGraphics.getWidth() &&
+						screenY + intImageSize > 0 && screenY < frame.pnlGraphics.getHeight()) {
 
-					int tileID = shrMap[x][y];
-					int tileIDToDraw = tileID;
-					TileAnim anim = null;
-					if (vctTileAnims != null) {
-						for (int j=0; j<vctTileAnims.size(); j++) {
-							TileAnim tempAnim = vctTileAnims.elementAt(j);
-							if (tempAnim.tileID == tileID) {
-								anim = tempAnim;
-								break;
+						int tileID = shrMap[x][y];
+						int tileIDToDraw = tileID;
+						TileAnim anim = null;
+						if (vctTileAnims != null) {
+							for (int j=0; j<vctTileAnims.size(); j++) {
+								TileAnim tempAnim = vctTileAnims.elementAt(j);
+								if (tempAnim.tileID == tileID) {
+									anim = tempAnim;
+									break;
+								}
 							}
 						}
-					}
-	
-					if (anim != null) {
-						tileIDToDraw = tileID + anim.getFrame();
-					}
 
-					gD.drawImage(imgOriginalMap,
-								(int)screenX, (int)screenY,
-								(int)(screenX + intImageSize), (int)(screenY + intImageSize),
-								tileIDToDraw * intOriginalTileSize, 0,
-								(tileIDToDraw + 1) * intOriginalTileSize, intOriginalTileSize,
-								null);
+						if (anim != null) {
+							tileIDToDraw = tileID + anim.getFrame();
+						}
+
+						gD.drawImage(imgOriginalMap,
+									(int)screenX, (int)screenY,
+									(int)(screenX + intImageSize), (int)(screenY + intImageSize),
+									tileIDToDraw * intOriginalTileSize, 0,
+									(tileIDToDraw + 1) * intOriginalTileSize, intOriginalTileSize,
+									null);
+					}
 				}
 			}
-	
+
 			// Draw middle alpha layer (alpha2)
 			for (int x = 0; x < mapSizeX; x++) {
 				for (int y = 0; y < mapSizeY; y++) {
-					int worldTileX = mapStartX + x;
-					int worldTileY = mapStartY + y;
-					double screenX = worldTileX * intImageSize - camera.x;
-					double screenY = worldTileY * intImageSize - camera.y;
+					double screenX = (mapStartX + x) * intImageSize - camera.x;
+					double screenY = (mapStartY + y) * intImageSize - camera.y;
 
-					if (screenX + intImageSize < 0 || screenX > frame.pnlGraphics.getWidth() ||
-						screenY + intImageSize < 0 || screenY > frame.pnlGraphics.getHeight()) {
-						continue;
+					if (screenX + intImageSize > 0 && screenX < frame.pnlGraphics.getWidth() &&
+						screenY + intImageSize > 0 && screenY < frame.pnlGraphics.getHeight()) {
+
+						int tileID = shrMapAlpha2[x][y];
+						if (tileID == 0) continue; // Skip transparent tile
+
+						gD.drawImage(imgOriginalMapAlpha2,
+									(int)screenX, (int)screenY,
+									(int)(screenX + intImageSize), (int)(screenY + intImageSize),
+									tileID * intOriginalTileSize, 0,
+									(tileID + 1) * intOriginalTileSize, intOriginalTileSize,
+									null);
 					}
-
-					int tileID = shrMapAlpha2[x][y];
-					if (tileID == 0) continue; // Skip transparent tile
-
-					gD.drawImage(imgOriginalMapAlpha2,
-								(int)screenX, (int)screenY,
-								(int)(screenX + intImageSize), (int)(screenY + intImageSize),
-								tileID * intOriginalTileSize, 0,
-								(tileID + 1) * intOriginalTileSize, intOriginalTileSize,
-								null);
 				}
 			}
-	
+
 			// Update and draw BEHIND particles
 			updateAndDrawParticles(vctParticlesBehind, (Graphics2D)gD, deltaTime);
-	
-                Collections.sort(sortedEntities, ySortComparator);
 
-	        for (Entity entStore : sortedEntities) {
-	            drawEntity(entStore);
-	        }
-		
-		    // Draw alpha layer
+			Collections.sort(sortedEntities, ySortComparator);
+	
+			for (Entity entStore : sortedEntities) {
+				drawEntity(entStore);
+			}
+
+			// Draw alpha layer
 			for (int x = 0; x < mapSizeX; x++) {
 				for (int y = 0; y < mapSizeY; y++) {
-					int worldTileX = mapStartX + x;
-					int worldTileY = mapStartY + y;
-					double screenX = worldTileX * intImageSize - camera.x;
-					double screenY = worldTileY * intImageSize - camera.y;
+					double screenX = (mapStartX + x) * intImageSize - camera.x;
+					double screenY = (mapStartY + y) * intImageSize - camera.y;
 
-					if (screenX + intImageSize < 0 || screenX > frame.pnlGraphics.getWidth() ||
-						screenY + intImageSize < 0 || screenY > frame.pnlGraphics.getHeight()) {
-						continue;
+					if (screenX + intImageSize > 0 && screenX < frame.pnlGraphics.getWidth() &&
+						screenY + intImageSize > 0 && screenY < frame.pnlGraphics.getHeight()) {
+
+						int tileID = shrMapAlpha[x][y];
+						if (tileID == 0) continue; // Skip transparent tile
+
+						gD.drawImage(imgOriginalMapAlpha,
+									(int)screenX, (int)screenY,
+									(int)(screenX + intImageSize), (int)(screenY + intImageSize),
+									tileID * intOriginalTileSize, 0,
+									(tileID + 1) * intOriginalTileSize, intOriginalTileSize,
+									null);
 					}
-
-					int tileID = shrMapAlpha[x][y];
-					if (tileID == 0) continue; // Skip transparent tile
-
-					gD.drawImage(imgOriginalMapAlpha,
-								(int)screenX, (int)screenY,
-								(int)(screenX + intImageSize), (int)(screenY + intImageSize),
-								tileID * intOriginalTileSize, 0,
-								(tileID + 1) * intOriginalTileSize, intOriginalTileSize,
-								null);
 				}
 			}
 		}
