@@ -100,6 +100,7 @@ public class GraphicsThread implements Runnable
 		}
         appParent.update(0.0008); // Initial update with a small delta to avoid large initial jump
 		appParent.paint();
+		appParent.blnLoaded = true;
 
 		// The main game loop.
 		long lastTime = System.nanoTime();

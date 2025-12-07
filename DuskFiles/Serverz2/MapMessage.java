@@ -49,8 +49,8 @@ public class MapMessage extends DuskMessage {
 		height = istream.readShort();
 		map = new short[3][width][height];
 		for (int l = 0; l < 3; l++) {
-			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
 					map[l][i][j] = istream.readShort();
 				}
 			}
@@ -65,8 +65,8 @@ public class MapMessage extends DuskMessage {
 		out.writeShort(width);
 		out.writeShort(height);
 		for (int l = 0; l < 3; l++) {
-			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
 					out.writeShort(map[l][i][j]);
 				}
 			}
