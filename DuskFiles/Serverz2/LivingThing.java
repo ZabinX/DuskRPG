@@ -2109,8 +2109,8 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		for (int l = 0; l < nlayers; l++) {
 			short[] visibleRegion = new short[width * height];
 			int i = 0;
-			for (int mx = intLocX - rX; mx <= intLocX + rX; mx++) {
-				for (int my = intLocY - rY; my <= intLocY + rY; my++) {
+            for (int my = intLocY - rY; my <= intLocY + rY; my++) {
+                for (int mx = intLocX - rX; mx <= intLocX + rX; mx++) {
 					if (mx >= 0 && mx < engGame.MapColumns && my >= 0 && my < engGame.MapRows) {
 						visibleRegion[i++] = allLayers[l][mx][my];
 					} else {

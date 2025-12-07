@@ -680,17 +680,15 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							LocX = mm.x;
 							LocY = mm.y;
 
-							// Unpack the column-major 1D arrays from the message into the client's column-major 2D arrays
+							// Unpack the row-major 1D arrays from the message into the client's column-major 2D arrays
 							short[][][] clientLayers = {shrMap, shrMapAlpha, shrMapAlpha2};
 							for (int l = 0; l < mm.layerCount && l < clientLayers.length; l++) {
 								short[] layerData = mm.map[l];
-								int i = 0;
-								for (int x = 0; x < mm.width; x++) {
-									for (int y = 0; y < mm.height; y++) {
-										if (x < clientLayers[l].length && y < clientLayers[l][x].length) {
-											clientLayers[l][x][y] = layerData[i++];
-										} else {
-											i++;
+								for (int y = 0; y < mm.height; y++) {
+									for (int x = 0; x < mm.width; x++) {
+										int i = y * mm.width + x;
+										if (i < layerData.length && x < clientLayers[l].length && y < clientLayers[l][x].length) {
+											clientLayers[l][x][y] = layerData[i];
 										}
 									}
 								}
@@ -1001,6 +999,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						mapSizeY = list.getInteger(DuskProtocol.FIELD_MAP_SIZE_Y);
 						viewRangeX = list.getInteger(DuskProtocol.FIELD_VIEW_RANGE_X);
 						viewRangeY = list.getInteger(DuskProtocol.FIELD_VIEW_RANGE_Y);
+						mapSizeX = viewRangeX * 2 + 1;
+						mapSizeY = viewRangeY * 2 + 1;
 						shrMap = new short[mapSizeX][mapSizeY];
 						shrMapAlpha = new short[mapSizeX][mapSizeY];
 						shrMapAlpha2 = new short[mapSizeX][mapSizeY];
