@@ -1,0 +1,5 @@
+To build the Dusk client as an application:
+Compile all the files, except duskclient.java
+
+To build as an applet:
+Compile all the files
