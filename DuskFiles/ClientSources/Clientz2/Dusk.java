@@ -681,7 +681,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							LocY = mm.y;
 
 							// Unpack the row-major 1D arrays from the message into the client's column-major 2D arrays
-							short[][] clientLayers[] = {shrMap, shrMapAlpha, shrMapAlpha2};
+							short[][][] clientLayers = {shrMap, shrMapAlpha, shrMapAlpha2};
 							for (int l = 0; l < mm.layerCount && l < clientLayers.length; l++) {
 								short[] layerData = mm.map[l];
 								int i = 0;

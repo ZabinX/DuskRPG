@@ -2094,8 +2094,6 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	public void updateMap()
 	{
-		// This method is adapted from the duskz source. It will not compile until
-		// MapMessage.java is also updated to match the duskz protocol.
 		int rX = engGame.viewrangeX;
 		int rY = engGame.viewrangeY;
 
@@ -2103,7 +2101,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		int height = rY * 2 + 1;
 
 		short[][][] allLayers = {engGame.shrMap, engGame.shrMapAlpha, engGame.shrMapAlpha2};
-		int nlayers = 3;
+		int nlayers = allLayers.length;
 		short[][] layers = new short[nlayers][];
 		int groundLayer = 0;
 		int nused = 0;
