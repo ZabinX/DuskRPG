@@ -222,7 +222,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                 frame.btnPotion4.repaint();
 			}
 			scaleWindow();
-			paint();
 			}catch(Exception e)
 			{
 			}
@@ -357,10 +356,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		{
 			JPanel panel = new JPanel(new GridLayout(0, 1));
 			panel.add(new JLabel("Server Address:"));
-			JTextField addressField = new JTextField("100.64.17.13");
+			JTextField addressField = new JTextField("127.0.0.1");
 			panel.add(addressField);
 			panel.add(new JLabel("Port:"));
-			JTextField portField = new JTextField("2222");
+			JTextField portField = new JTextField("7474");
 			panel.add(portField);
 			panel.add(new JLabel("Username:"));
 			JTextField usernameField = new JTextField();
@@ -644,7 +643,6 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			try
 			{
 				msg = DuskMessage.receiveMessage(stmIn);
-				System.out.println("CLIENT RECEIVE: " + msg.name);
 				switch (msg.name)
 				{
 					case(DuskProtocol.MSG_QUIT):
@@ -1785,8 +1783,14 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	
 	public void paint()
 	{
-		frame.pnlGraphics.img = imgDisplay;
-		frame.pnlGraphics.repaint();
+		if (imgDisplay != null) {
+			frame.pnlGraphics.img = imgDisplay;
+			frame.pnlGraphics.repaint();
+			frame.pnlSouth.repaint();
+			frame.txtInput.repaint();
+			frame.btnGossip.repaint();
+			frame.btnBattle.repaint();
+		}
 	}
 
 	private void createDetectInvisRay(Particle start, Particle end, Color color, int lifetime, List<Particle> particleSystem, boolean lockToCenter) {
