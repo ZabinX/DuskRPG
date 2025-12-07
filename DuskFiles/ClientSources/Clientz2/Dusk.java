@@ -1447,20 +1447,20 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			}
 		}
 		synchronized (vctEntities) {
-	    movementManager.update(vctEntities, playerTicks, player, camera, deltaTime, intImageSize);
-	    camera.update(frame.pnlGraphics.getWidth(), frame.pnlGraphics.getHeight(), LocX, LocY, viewRangeX, viewRangeY, intImageSize, deltaTime);
+			movementManager.update(vctEntities, playerTicks, player, camera, deltaTime, intImageSize);
+			camera.update(frame.pnlGraphics.getWidth(), frame.pnlGraphics.getHeight(), LocX, LocY, viewRangeX, viewRangeY, intImageSize, deltaTime);
 
-	    synchronized (vctDamageSplats) {
-	        for (int i = vctDamageSplats.size() - 1; i >= 0; i--) {
-	            DamageSplat splat = vctDamageSplats.elementAt(i);
-	            splat.x += splat.vx;
-	            splat.y += splat.vy;
-	            splat.lifetime--;
-	            if (splat.lifetime <= 0) {
-	                vctDamageSplats.removeElementAt(i);
-	            }
-	        }
-	    }
+			synchronized (vctDamageSplats) {
+				for (int i = vctDamageSplats.size() - 1; i >= 0; i--) {
+					DamageSplat splat = vctDamageSplats.elementAt(i);
+					splat.x += splat.vx;
+					splat.y += splat.vy;
+					splat.lifetime--;
+					if (splat.lifetime <= 0) {
+						vctDamageSplats.removeElementAt(i);
+					}
+				}
+			}
 			
 			gD.setColor(Color.black);
 			gD.fillRect(0, 0, imgDisplay.getWidth(null), imgDisplay.getHeight(null));
@@ -1612,7 +1612,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					g2d.setStroke(originalStroke); // Restore original stroke
 				}
 			}
-	    }
+
 
 		// Handle lightning effect for armor spell
 		List<Particle> newLightningParticles = new ArrayList<>();
