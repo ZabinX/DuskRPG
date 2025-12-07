@@ -680,8 +680,21 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 							LocX = mm.x;
 							LocY = mm.y;
 
-							short[][][] layers = {shrMap, shrMapAlpha, shrMapAlpha2};
-							mm.readMap(layers);
+							// Unpack the row-major 1D arrays from the message into the client's column-major 2D arrays
+							short[][] clientLayers[] = {shrMap, shrMapAlpha, shrMapAlpha2};
+							for (int l = 0; l < mm.layerCount && l < clientLayers.length; l++) {
+								short[] layerData = mm.map[l];
+								int i = 0;
+								for (int y = 0; y < mm.height; y++) {
+									for (int x = 0; x < mm.width; x++) {
+										if (x < clientLayers[l].length && y < clientLayers[l][x].length) {
+											clientLayers[l][x][y] = layerData[i++];
+										} else {
+											i++;
+										}
+									}
+								}
+							}
 							
 							Iterator<Entity> iter = vctEntities.iterator();
 							while (iter.hasNext())
