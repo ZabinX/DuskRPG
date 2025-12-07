@@ -2094,10 +2094,36 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	public void updateMap()
 	{
-		MapMessage msg = new MapMessage((byte)DuskProtocol.MSG_UPDATE_MAP, intLocX, intLocY, engGame.mapsizeX, engGame.mapsizeY);
-		short[][][] layers = {engGame.shrMap, engGame.shrMapAlpha, engGame.shrMapAlpha2};
-		msg.writeMap(layers, intLocX - engGame.viewrangeX, intLocY - engGame.viewrangeY);
-		send(msg);
+		// This method is adapted from the duskz source. It will not compile until
+		// MapMessage.java is also updated to match the duskz protocol.
+		int rX = engGame.viewrangeX;
+		int rY = engGame.viewrangeY;
+
+		int width = rX * 2 + 1;
+		int height = rY * 2 + 1;
+
+		short[][][] allLayers = {engGame.shrMap, engGame.shrMapAlpha, engGame.shrMapAlpha2};
+		int nlayers = 3;
+		short[][] layers = new short[nlayers][];
+		int groundLayer = 0;
+		int nused = 0;
+
+		for (int l = 0; l < nlayers; l++) {
+			short[] visibleRegion = new short[width * height];
+			int i = 0;
+            for (int my = intLocY - rY; my <= intLocY + rY; my++) {
+                for (int mx = intLocX - rX; mx <= intLocX + rX; mx++) {
+					if (mx >= 0 && mx < engGame.MapColumns && my >= 0 && my < engGame.MapRows) {
+						visibleRegion[i++] = allLayers[l][mx][my];
+					} else {
+						visibleRegion[i++] = 0;
+					}
+				}
+			}
+			layers[nused++] = visibleRegion;
+		}
+
+		send(new MapMessage((byte)DuskProtocol.MSG_UPDATE_MAP, width, height, intLocX, intLocY, groundLayer, nused, layers));
 	}
 
 	public void chatMessage(String inMessage)
