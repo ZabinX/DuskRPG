@@ -2094,10 +2094,41 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 
 	public void updateMap()
 	{
-		MapMessage msg = new MapMessage((byte)DuskProtocol.MSG_UPDATE_MAP, intLocX, intLocY, engGame.mapsizeX, engGame.mapsizeY);
-		short[][][] layers = {engGame.shrMap, engGame.shrMapAlpha, engGame.shrMapAlpha2};
-		msg.writeMap(layers, intLocX - engGame.viewrangeX, intLocY - engGame.viewrangeY);
-		send(msg);
+		try {
+			int viewWidth = engGame.mapsizeX;
+			int viewHeight = engGame.mapsizeY;
+			int startX = intLocX - engGame.viewrangeX;
+			int startY = intLocY - engGame.viewrangeY;
+
+			short[][] map = new short[viewWidth][viewHeight];
+			short[][] mapAlpha = new short[viewWidth][viewHeight];
+			short[][] mapAlpha2 = new short[viewWidth][viewHeight];
+
+			for (int i = 0; i < viewWidth; i++) {
+				for (int i2 = 0; i2 < viewHeight; i2++) {
+					try {
+						map[i][i2] = engGame.shrMap[startX + i][startY + i2];
+					} catch (Exception e) {
+						map[i][i2] = 0;
+					}
+					try {
+						mapAlpha[i][i2] = engGame.shrMapAlpha[startX + i][startY + i2];
+					} catch (Exception e) {
+						mapAlpha[i][i2] = 0;
+					}
+					try {
+						mapAlpha2[i][i2] = engGame.shrMapAlpha2[startX + i][startY + i2];
+					} catch (Exception e) {
+						mapAlpha2[i][i2] = 0;
+					}
+				}
+			}
+
+			send(new MapMessage(DuskProtocol.MSG_UPDATE_MAP, viewWidth, viewHeight, map, mapAlpha, mapAlpha2));
+		} catch (Exception e) {
+			engGame.log.printError("updateMap():" + strName + " disconnected", e);
+			blnStopThread = true;
+		}
 	}
 
 	public void chatMessage(String inMessage)
@@ -3916,12 +3947,10 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	void resizeMap()
 	{
 		ListMessage msg = new ListMessage(DuskProtocol.MSG_INIT_MAP);
-		msg.add(DuskMessage.create(DuskProtocol.FIELD_MAP_SIZE_X, engGame.mapsizeX));
-		msg.add(DuskMessage.create(DuskProtocol.FIELD_MAP_SIZE_Y, engGame.mapsizeY));
-		msg.add(DuskMessage.create(DuskProtocol.FIELD_VIEW_RANGE_X, engGame.viewrangeX));
-		msg.add(DuskMessage.create(DuskProtocol.FIELD_VIEW_RANGE_Y, engGame.viewrangeY));
+		msg.add(new DuskMessage.IntegerMessage(0, engGame.mapsizeX));
+		msg.add(new DuskMessage.IntegerMessage(0, engGame.mapsizeY));
 		send(msg);
-		send(DuskMessage.create(DuskProtocol.MSG_UPDATE_PLAYER_TICKS, engGame.lngPlayerTicks));
+		send(new DuskMessage.IntegerMessage(DuskProtocol.MSG_UPDATE_PLAYER_TICKS, (int)engGame.lngPlayerTicks));
 	}
 
 	void updateSell()

@@ -677,12 +677,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 						synchronized(vctEntities)
 						{
 							MapMessage mm = (MapMessage)msg;
-							LocX = mm.x;
-							LocY = mm.y;
+							shrMap = mm.map;
+							shrMapAlpha = mm.mapAlpha;
+							shrMapAlpha2 = mm.mapAlpha2;
 
-							short[][][] layers = {shrMap, shrMapAlpha, shrMapAlpha2};
-							mm.readMap(layers);
-							
 							Iterator<Entity> iter = vctEntities.iterator();
 							while (iter.hasNext())
 							{
@@ -984,10 +982,8 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					case (DuskProtocol.MSG_INIT_MAP):
 					{
 						ListMessage list = (ListMessage)msg;
-						mapSizeX = list.getInteger(DuskProtocol.FIELD_MAP_SIZE_X);
-						mapSizeY = list.getInteger(DuskProtocol.FIELD_MAP_SIZE_Y);
-						viewRangeX = list.getInteger(DuskProtocol.FIELD_VIEW_RANGE_X);
-						viewRangeY = list.getInteger(DuskProtocol.FIELD_VIEW_RANGE_Y);
+						mapSizeX = ((DuskMessage.IntegerMessage) list.value.get(0)).value;
+						mapSizeY = ((DuskMessage.IntegerMessage) list.value.get(1)).value;
 						shrMap = new short[mapSizeX][mapSizeY];
 						shrMapAlpha = new short[mapSizeX][mapSizeY];
 						shrMapAlpha2 = new short[mapSizeX][mapSizeY];
