@@ -3223,12 +3223,17 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		{
 			do
 			{
-				DuskMessage msg = DuskMessage.receiveMessage(stmIn);
-				if (msg instanceof DuskMessage.StringMessage) {
-					strName = ((DuskMessage.StringMessage) msg).value;
-				} else {
-					closeNosavePlayer();
-					return;
+				short len = stmIn.readShort();
+				if (len > 0 && len < 32768) {
+					byte[] messageBytes = new byte[len];
+					stmIn.readFully(messageBytes);
+					DuskMessage msg = DuskMessage.receiveMessage(messageBytes);
+					if (msg instanceof DuskMessage.StringMessage) {
+						strName = ((DuskMessage.StringMessage) msg).value;
+					} else {
+						closeNosavePlayer();
+						return;
+					}
 				}
 			} while (!getPlayer());
 			if (!blnWorking)
@@ -3930,10 +3935,15 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 	}
 
 	public String getNextStringMessageInput() throws IOException {
-		DuskMessage msg = DuskMessage.receiveMessage(stmIn);
-		if (msg instanceof DuskMessage.StringMessage) {
-			return ((DuskMessage.StringMessage) msg).value;
+		short len = stmIn.readShort();
+		if (len > 0 && len < 32768) {
+			byte[] messageBytes = new byte[len];
+			stmIn.readFully(messageBytes);
+			DuskMessage msg = DuskMessage.receiveMessage(messageBytes);
+			if (msg instanceof DuskMessage.StringMessage) {
+				return ((DuskMessage.StringMessage) msg).value;
+			}
 		}
-		throw new IOException("Expected StringMessage, but received " + msg.getClass().getSimpleName());
+		throw new IOException("Expected StringMessage, but received something else.");
 	}
 }
