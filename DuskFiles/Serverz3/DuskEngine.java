@@ -1130,11 +1130,11 @@ public class DuskEngine implements Runnable
 									PlayerMerchant pmrStore = (PlayerMerchant)objStore;
 									if (thnRefresh.intLocX == pmrStore.intLocX && thnRefresh.intLocY == pmrStore.intLocY)
 									{
-									strResult = (char)17+"";
+										ListMessage msg = new ListMessage(DuskProtocol.MSG_MERCHANT_ITEMS);
 										Iterator iter = pmrStore.vctItems.keySet().iterator();
 										Vector vctStore;
-									while(iter.hasNext())
-									{
+										while(iter.hasNext())
+										{
 											vctStore = (Vector)pmrStore.vctItems.get(iter.next());
 											itmStore = (Item)vctStore.firstElement();
 											int intCost = (itmStore.intCost * 3) / 4;
@@ -1142,57 +1142,57 @@ public class DuskEngine implements Runnable
 											{
 												intCost = 0;
 											}
-										strResult += intCost+"gp)" +strStore+"\n";
+											msg.add(new DuskMessage.StringMessage(0, intCost+"gp)"+itmStore.strName));
+										}
+										thnRefresh.send(msg);
+										thnRefresh.updateSell();
 									}
-									thnRefresh.send(strResult+".\n");
-									thnRefresh.updateSell();
-								}
 								}
 								if (objStore.isMerchant())
 								{
 									mrcStore = (Merchant)objStore;
 									if (thnRefresh.intLocX == mrcStore.intLocX && thnRefresh.intLocY == mrcStore.intLocY)
 									{
-									strResult = (char)17+"";
+										ListMessage msg = new ListMessage(DuskProtocol.MSG_MERCHANT_ITEMS);
 										if (thnRefresh.thnFollowing != null && thnRefresh.thnFollowing.isPet())
 										{
-										for (int i5=0;i5<mrcStore.vctItems.size();i5++)
-										{
-											strStore = (String)mrcStore.vctItems.elementAt(i5);
-											itmStore = getItem(strStore);
-											if (itmStore != null)
+											for (int i5=0;i5<mrcStore.vctItems.size();i5++)
 											{
-												strResult += itmStore.intCost+"gp)" +strStore+"\n";
-											}else if (strStore.equals("pet"))
-											{
-												strResult += petcost+"gp)" +strStore+"\n";
-											}else
+												strStore = (String)mrcStore.vctItems.elementAt(i5);
+												itmStore = getItem(strStore);
+												if (itmStore != null)
 												{
-												strResult += traincost+"exp)"+strStore+"\n";
-												strResult += traincost+"exp)"+thnRefresh.thnFollowing.strName+":"+strStore+"\n";
-												}
-										}
-									}else
-									{
-										for (int i5=0;i5<mrcStore.vctItems.size();i5++)
-										{
-											strStore = (String)mrcStore.vctItems.elementAt(i5);
-											itmStore = getItem(strStore);
-											if (itmStore != null)
-											{
-												strResult += itmStore.intCost+"gp)" +strStore+"\n";
-											}else if (strStore.equals("pet"))
-											{
-												strResult += +petcost+"gp)" +strStore+"\n";
-											}else
+													msg.add(new DuskMessage.StringMessage(0, itmStore.intCost+"gp)"+strStore));
+												}else if (strStore.equals("pet"))
 												{
-												strResult += traincost+"exp)"+strStore+"\n";
+													msg.add(new DuskMessage.StringMessage(0, petcost+"gp)"+strStore));
+												}else
+												{
+													msg.add(new DuskMessage.StringMessage(0, traincost+"exp)"+strStore));
+													msg.add(new DuskMessage.StringMessage(0, traincost+"exp)"+thnRefresh.thnFollowing.strName+":"+strStore));
 												}
+											}
+										}else
+										{
+											for (int i5=0;i5<mrcStore.vctItems.size();i5++)
+											{
+												strStore = (String)mrcStore.vctItems.elementAt(i5);
+												itmStore = getItem(strStore);
+												if (itmStore != null)
+												{
+													msg.add(new DuskMessage.StringMessage(0, itmStore.intCost+"gp)"+strStore));
+												}else if (strStore.equals("pet"))
+												{
+													msg.add(new DuskMessage.StringMessage(0, +petcost+"gp)"+strStore));
+												}else
+												{
+													msg.add(new DuskMessage.StringMessage(0, traincost+"exp)"+strStore));
+												}
+											}
 										}
+										thnRefresh.send(msg);
+										thnRefresh.updateSell();
 									}
-									thnRefresh.send(strResult+".\n");
-									thnRefresh.updateSell();
-								}
 								}
 								if (i4 != -1)
 								{
@@ -1422,111 +1422,102 @@ public class DuskEngine implements Runnable
 										if (objRefresh.isLivingThing())
 										{
 											thnStore2 = (LivingThing)objRefresh;
+											ListMessage msg = new ListMessage(DuskProtocol.MSG_ADD_ENTITY);
+											String strName = "";
 											if (thnStore2.isPlayer())
 											{
-												if (thnStore2.blnSleep)
-												{
-													strResult += "<sleeping>";
-												}
-												if (!thnStore2.strClan.equals("none"))
-												{
-													strResult += "<" + thnStore2.strClan + ">";
-												}
-												for (i4=0;i4<thnStore2.vctFlags.size();i4++)
-												{
-													strResult += "<" + (String)thnStore2.vctFlags.elementAt(i4) + ">";
-												}
-											strResult += thnStore2.strName+"\n";
-											strResult += 0+"\n";
-											strResult += thnStore2.ID+"\n";
-											strResult += thnStore2.intLocX+"\n";
-											strResult += thnStore2.intLocY+"\n";
-											strResult += thnStore2.intImage+"\n";
-											strResult += thnStore2.intStep+"\n";
+												if (thnStore2.blnSleep) strName += "<sleeping>";
+												if (!thnStore2.strClan.equals("none")) strName += "<" + thnStore2.strClan + ">";
+												for (i4=0;i4<thnStore2.vctFlags.size();i4++) strName += "<" + (String)thnStore2.vctFlags.elementAt(i4) + ">";
+												strName += thnStore2.strName;
+												msg.add(new DuskMessage.StringMessage(0, strName));
+												msg.add(new DuskMessage.IntegerMessage(0, 0)); // type
+												msg.add(new DuskMessage.IntegerMessage(0, (int)thnStore2.ID));
+												msg.add(new DuskMessage.IntegerMessage(0, thnStore2.intLocX));
+												msg.add(new DuskMessage.IntegerMessage(0, thnStore2.intLocY));
+												msg.add(new DuskMessage.IntegerMessage(0, thnStore2.intImage));
+												msg.add(new DuskMessage.IntegerMessage(0, thnStore2.intStep));
 											}else if (thnStore2.isMob())
 											{
-												if (thnStore2.blnSleep)
-												{
-													strResult += "<sleeping>";
-												}
-												for (i4=0;i4<thnStore2.vctFlags.size();i4++)
-												{
-													strResult += "<" + (String)thnStore2.vctFlags.elementAt(i4) + ">";
-												}
-											strResult += thnStore2.strName+"\n";
-											strResult += 4+"\n";
-											strResult += thnStore2.ID+"\n";
-											strResult += thnStore2.intLocX+"\n";
-											strResult += thnStore2.intLocY+"\n";
-											strResult += thnStore2.intImage+"\n";
+												if (thnStore2.blnSleep) strName += "<sleeping>";
+												for (i4=0;i4<thnStore2.vctFlags.size();i4++) strName += "<" + (String)thnStore2.vctFlags.elementAt(i4) + ">";
+												strName += thnStore2.strName;
+												msg.add(new DuskMessage.StringMessage(0, strName));
+												msg.add(new DuskMessage.IntegerMessage(0, 4)); // type
+												msg.add(new DuskMessage.IntegerMessage(0, (int)thnStore2.ID));
+												msg.add(new DuskMessage.IntegerMessage(0, thnStore2.intLocX));
+												msg.add(new DuskMessage.IntegerMessage(0, thnStore2.intLocY));
+												msg.add(new DuskMessage.IntegerMessage(0, thnStore2.intImage));
 											}else if (thnStore2.isPet())
 											{
-												if (thnStore2.blnSleep)
-												{
-													strResult += "<sleeping>";
-												}
-												if (thnStore2.hp<0)
-												{
-													strResult += "<wounded>";
-												}
-												for (i4=0;i4<thnStore2.vctFlags.size();i4++)
-												{
-													strResult += "<" + (String)thnStore2.vctFlags.elementAt(i4) + ">";
-												}
-											strResult += thnStore2.strName+"\n";
-											strResult += 4+"\n";
-											strResult += thnStore2.ID+"\n";
-											strResult += thnStore2.intLocX+"\n";
-											strResult += thnStore2.intLocY+"\n";
-											strResult += thnStore2.intImage+"\n";
+												if (thnStore2.blnSleep) strName += "<sleeping>";
+												if (thnStore2.hp<0) strName += "<wounded>";
+												for (i4=0;i4<thnStore2.vctFlags.size();i4++) strName += "<" + (String)thnStore2.vctFlags.elementAt(i4) + ">";
+												strName += thnStore2.strName;
+												msg.add(new DuskMessage.StringMessage(0, strName));
+												msg.add(new DuskMessage.IntegerMessage(0, 4)); // type
+												msg.add(new DuskMessage.IntegerMessage(0, (int)thnStore2.ID));
+												msg.add(new DuskMessage.IntegerMessage(0, thnStore2.intLocX));
+												msg.add(new DuskMessage.IntegerMessage(0, thnStore2.intLocY));
+												msg.add(new DuskMessage.IntegerMessage(0, thnStore2.intImage));
 											}
+											thnStore.send(msg);
 										}else if (objRefresh.isItem())
 										{
 											itmStore = (Item)objRefresh;
-											strResult += itmStore.strName+"\n";
-										strResult += 1+"\n";
-										strResult += itmStore.ID+"\n";
-										strResult += itmStore.intLocX+"\n";
-										strResult += itmStore.intLocY+"\n";
-										strResult += itmStore.intImage+"\n";
+											ListMessage msg = new ListMessage(DuskProtocol.MSG_ADD_ENTITY);
+											msg.add(new DuskMessage.StringMessage(0, itmStore.strName));
+											msg.add(new DuskMessage.IntegerMessage(0, 1)); // type
+											msg.add(new DuskMessage.IntegerMessage(0, (int)itmStore.ID));
+											msg.add(new DuskMessage.IntegerMessage(0, itmStore.intLocX));
+											msg.add(new DuskMessage.IntegerMessage(0, itmStore.intLocY));
+											msg.add(new DuskMessage.IntegerMessage(0, itmStore.intImage));
+											thnStore.send(msg);
 										}else if (objRefresh.isProp())
 										{
 											prpStore = (Prop)objRefresh;
-										strResult += prpStore.strName+"\n";
-										strResult += 3+"\n";
-										strResult += prpStore.ID+"\n";
-										strResult += prpStore.intLocX+"\n";
-										strResult += prpStore.intLocY+"\n";
-										strResult += prpStore.intImage+"\n";
+											ListMessage msg = new ListMessage(DuskProtocol.MSG_ADD_ENTITY);
+											msg.add(new DuskMessage.StringMessage(0, prpStore.strName));
+											msg.add(new DuskMessage.IntegerMessage(0, 3)); // type
+											msg.add(new DuskMessage.IntegerMessage(0, (int)prpStore.ID));
+											msg.add(new DuskMessage.IntegerMessage(0, prpStore.intLocX));
+											msg.add(new DuskMessage.IntegerMessage(0, prpStore.intLocY));
+											msg.add(new DuskMessage.IntegerMessage(0, prpStore.intImage));
+											thnStore.send(msg);
 										}else if (objRefresh.isSign())
 										{
 											sgnStore = (Sign)objRefresh;
-										strResult += sgnStore.strName+"\n";
-										strResult += 3+"\n";
-										strResult += sgnStore.ID+"\n";
-										strResult += sgnStore.intLocX+"\n";
-										strResult += sgnStore.intLocY+"\n";
-										strResult += signimage+"\n";
+											ListMessage msg = new ListMessage(DuskProtocol.MSG_ADD_ENTITY);
+											msg.add(new DuskMessage.StringMessage(0, sgnStore.strName));
+											msg.add(new DuskMessage.IntegerMessage(0, 3)); // type
+											msg.add(new DuskMessage.IntegerMessage(0, (int)sgnStore.ID));
+											msg.add(new DuskMessage.IntegerMessage(0, sgnStore.intLocX));
+											msg.add(new DuskMessage.IntegerMessage(0, sgnStore.intLocY));
+											msg.add(new DuskMessage.IntegerMessage(0, signimage));
+											thnStore.send(msg);
 										}else if (objRefresh.isMerchant())
 										{
 											mrcStore = (Merchant)objRefresh;
-										strResult += "Merchant\n";
-										strResult += 2+"\n";
-										strResult += mrcStore.ID+"\n";
-										strResult += mrcStore.intLocX+"\n";
-										strResult += mrcStore.intLocY+"\n";
-										strResult += merchantimage+"\n";
+											ListMessage msg = new ListMessage(DuskProtocol.MSG_ADD_ENTITY);
+											msg.add(new DuskMessage.StringMessage(0, "Merchant"));
+											msg.add(new DuskMessage.IntegerMessage(0, 2)); // type
+											msg.add(new DuskMessage.IntegerMessage(0, (int)mrcStore.ID));
+											msg.add(new DuskMessage.IntegerMessage(0, mrcStore.intLocX));
+											msg.add(new DuskMessage.IntegerMessage(0, mrcStore.intLocY));
+											msg.add(new DuskMessage.IntegerMessage(0, merchantimage));
+											thnStore.send(msg);
 										}else if (objRefresh.isPlayerMerchant())
 										{
 											PlayerMerchant pmrStore = (PlayerMerchant)objRefresh;
-										strResult += pmrStore.strOwner+"'s Merchant\n";
-										strResult += 2+"\n";
-										strResult += pmrStore.ID+"\n";
-										strResult += pmrStore.intLocX+"\n";
-										strResult += pmrStore.intLocY+"\n";
-										strResult += merchantimage+"\n";
+											ListMessage msg = new ListMessage(DuskProtocol.MSG_ADD_ENTITY);
+											msg.add(new DuskMessage.StringMessage(0, pmrStore.strOwner+"'s Merchant"));
+											msg.add(new DuskMessage.IntegerMessage(0, 2)); // type
+											msg.add(new DuskMessage.IntegerMessage(0, (int)pmrStore.ID));
+											msg.add(new DuskMessage.IntegerMessage(0, pmrStore.intLocX));
+											msg.add(new DuskMessage.IntegerMessage(0, pmrStore.intLocY));
+											msg.add(new DuskMessage.IntegerMessage(0, merchantimage));
+											thnStore.send(msg);
 										}
-										thnStore.send(strResult);
 									}
 									}
 									}
@@ -1578,8 +1569,7 @@ public class DuskEngine implements Runnable
 									if (canSeeTo(thnStore,objRefresh.intLocX,objRefresh.intLocY))
 									{
 										thnStore.vctEntities.removeElement(objRefresh);
-										strResult=(char)16+""+objRefresh.ID+"\n";
-										thnStore.send(strResult);
+										thnStore.send(new DuskMessage.IntegerMessage(DuskProtocol.MSG_REMOVE_ENTITY, (int)objRefresh.ID));
 									}
 								}
 							}

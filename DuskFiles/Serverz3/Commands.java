@@ -184,7 +184,7 @@ public class Commands
 				thnStore.chatMessage(lt.strName+" has invited you to join the clan "+lt.strClan+". If you accept, type yes.");
 				try
 				{
-					if (thnStore.getNextInput().equalsIgnoreCase("yes"))
+					if (thnStore.getNextStringMessageInput().equalsIgnoreCase("yes"))
 					{
 						thnStore.strClan = lt.strClan;
 						if (thnStore.privs == 1)
@@ -547,17 +547,17 @@ public class Commands
 				{
 					File filList = new File(strFileName);
 					String strResult[] = filList.list();
-					StringBuffer strBuff = new StringBuffer();
-					strBuff.append(""+(char)20+strTitle+"\n");
+					ListMessage msg = new ListMessage(DuskProtocol.MSG_VIEW_TEXT);
+					msg.add(new DuskMessage.StringMessage(0, strTitle));
 					for (int i=0;i<strResult.length;i++)
 					{
 						// Only output files that do not end in .dsko
 						if (strResult[i].indexOf(".dsko") == -1)
 						{
-							strBuff.append(strResult[i]+"\n");
+							msg.add(new DuskMessage.StringMessage(0, strResult[i]));
 						}
 					}
-					lt.send(strBuff.toString());
+					lt.send(msg);
 					return null;
 				}
 				return "You can't list that.";
@@ -679,7 +679,7 @@ public class Commands
 					{
 						return "The player named \""+filView.getName()+"\" does not have a pet.";
 					}
-					lt.send((char)18+strArgs+"\n");
+					lt.send(new DuskMessage.StringMessage(DuskProtocol.MSG_VIEW_TEXT_EDITABLE, strArgs));
 					return null;
 				}
 				RandomAccessFile rafView=null;
@@ -692,14 +692,15 @@ public class Commands
 						rafView.readLine();  //Skip over users' password
 					}
 					String strStore2 = rafView.readLine();
-					strBuff.append((char)18+strArgs+"\n");
 					while (strStore2 != null)
 					{
 						strBuff.append(strStore2+"\n");
 						strStore2 = rafView.readLine();
 					}
-					strBuff.append("--EOF--\n");
-					lt.send(strBuff.toString());
+					ListMessage msg = new ListMessage(DuskProtocol.MSG_VIEW_TEXT_EDITABLE);
+					msg.add(new DuskMessage.StringMessage(0, strArgs));
+					msg.add(new DuskMessage.StringMessage(0, strBuff.toString()));
+					lt.send(msg);
 				}catch(Exception e)
 				{
 					engGame.log.printError("parseCommand():Reading file for "+filView.getName(), e);
@@ -858,7 +859,7 @@ public class Commands
 						*/
 						rafView.writeBytes(strStore+"\n");
 					}
-					strStore = lt.getNextInput();
+					strStore = lt.getNextStringMessageInput();
 					// The client now sends the entire content in a single framed message.
 					// The "--EOF--" delimiter is no longer used for this command.
 					rafView.writeBytes(strStore);
@@ -1482,6 +1483,56 @@ public class Commands
 				return null;
 		    }
 		}
+		if (strCommand.equals("whoip"))
+		{
+			engGame.log.printMessage(Log.INFO,"godcommand:"+lt.strName+":"+strStore+":"+lt.intLocX+","+lt.intLocY);
+			synchronized(lt.stmOut)
+			{
+				int nPlayers = engGame.vctSockets.size();
+				ListMessage msg = new ListMessage(DuskProtocol.MSG_VIEW_TEXT);
+				msg.add(new DuskMessage.StringMessage(0, "There are "+nPlayers+" players online:"));
+				LivingThing thnStore = null;
+				for (int i=0;i<engGame.vctSockets.size();i++)
+				{
+					thnStore = (LivingThing)engGame.vctSockets.elementAt(i);
+					boolean hidden = false;
+					boolean skip = false;
+					if (thnStore.privs > 2)
+					{
+						if (thnStore.hasCondition("invis"))
+						{
+							hidden = true;
+						}
+					}
+					if (hidden && (lt.privs < thnStore.privs))
+					{
+						skip = true;
+						nPlayers--;
+					}
+					if (!skip)
+					{
+						String strIP = thnStore.sckConnection.getInetAddress().toString();
+						while (strIP.length() < 34)
+						{
+							strIP += " ";
+						}
+						String strWho = "   "+strIP;
+						strWho += thnStore.getCharacterPoints()+"cp ";
+						if (thnStore.privs == 1) strWho += "{Clan Leader}";
+						else if (thnStore.privs == 3) strWho += "{God}";
+						else if (thnStore.privs == 4) strWho += "{High God}";
+						else if (thnStore.privs > 4) strWho += "{Master God}";
+						if (hidden) strWho += "{hidden}";
+						if (thnStore.noChannel != 0) strWho += "{nochanneled}";
+						if (!thnStore.strClan.equals("none")) strWho += "<"+thnStore.strClan+"> ";
+						strWho += thnStore.strName;
+						msg.add(new DuskMessage.StringMessage(0, strWho));
+					}
+				}
+				lt.send(msg);
+			}
+			return null;
+		}
 		if (strCommand.equals("flee"))
 		{
 			if (lt.batBattle != null)
@@ -1917,7 +1968,10 @@ public class Commands
 				String strStore2 = strBuff.toString();
 				if (lt.popup)
 				{
-					lt.send((char)20+"There are "+nPlayers+" players online:\n"+strStore2+"\n");
+					ListMessage msg = new ListMessage(DuskProtocol.MSG_VIEW_TEXT);
+					msg.add(new DuskMessage.StringMessage(0, "There are "+nPlayers+" players online:"));
+					msg.add(new DuskMessage.StringMessage(0, strStore2));
+					lt.send(msg);
 				} else
 				{
 					lt.chatMessage("\tThere are "+nPlayers+" players online:");
@@ -2193,7 +2247,14 @@ public class Commands
 						rafHelp = new RandomAccessFile("help","r");
 						if (lt.popup)
 						{
-							lt.send((char)20+"Help\n");
+							ListMessage msg = new ListMessage(DuskProtocol.MSG_VIEW_TEXT);
+							msg.add(new DuskMessage.StringMessage(0, "Help"));
+							String strLine = rafHelp.readLine();
+							while(strLine != null) {
+								msg.add(new DuskMessage.StringMessage(0, strLine));
+								strLine = rafHelp.readLine();
+							}
+							lt.send(msg);
 						} else
 						{
 							lt.chatMessage("Help");
@@ -2213,7 +2274,14 @@ public class Commands
 						rafHelp = new RandomAccessFile("helpFiles/"+fileName,"r");
 						if (lt.popup)
 						{
-							lt.send((char)20+"Help on "+strArgs+"\n");
+							ListMessage msg = new ListMessage(DuskProtocol.MSG_VIEW_TEXT);
+							msg.add(new DuskMessage.StringMessage(0, "Help on "+strArgs));
+							String strLine = rafHelp.readLine();
+							while(strLine != null) {
+								msg.add(new DuskMessage.StringMessage(0, strLine));
+								strLine = rafHelp.readLine();
+							}
+							lt.send(msg);
 						} else
 						{
 							lt.chatMessage("Help on "+strArgs);
@@ -2226,30 +2294,10 @@ public class Commands
 				}
 				try
 				{
-					strStore = rafHelp.readLine();
-					while (strStore != null)
-					{
-						if (lt.popup)
-						{
-							lt.send(strStore+"\n");
-						} else
-						{
-							lt.chatMessage(strStore);
-						}
-						strStore = rafHelp.readLine();
-					}
-					if (lt.popup)
-						lt.send("--EOF--\n");
-				}catch(Exception e)
-				{
-					engGame.log.printError("parseCommand():While showing "+lt.strName+" help on "+strArgs, e);
-				}
-				try
-				{
 					rafHelp.close();
 				}catch(Exception e)
 				{
-					engGame.log.printError("parseCommand():While closing help on "+strStore+" for "+lt.strName, e);
+					engGame.log.printError("parseCommand():While closing help on "+strArgs+" for "+lt.strName, e);
 				}
 			}
 			return null;
@@ -2904,7 +2952,7 @@ public class Commands
 					lt.chatMessage("Do you really want to permanently erase your pet?");
 					try
 					{
-						if (lt.getNextInput().equalsIgnoreCase("yes"))
+						if (lt.getNextStringMessageInput().equalsIgnoreCase("yes"))
 						{
 							lt.thnFollowing.close();
 							File deleteme = new File("pets/"+lt.strName.toLowerCase());
@@ -2975,7 +3023,7 @@ public class Commands
 			{
 				lt.halt();
 				lt.chatMessage("Are you sure you want to drop out of your clan? If so type yes.");
-				if (lt.getNextInput().equalsIgnoreCase("yes"))
+				if (lt.getNextStringMessageInput().equalsIgnoreCase("yes"))
 				{
 					lt.strClan = "none";
 					if (lt.privs==1)
@@ -3031,16 +3079,16 @@ public class Commands
 			{
 				lt.halt();
 				lt.chatMessage("Enter your current password.");
-				String strOldPass = lt.getNextInput();
+				String strOldPass = lt.getNextStringMessageInput();
 				if (!strOldPass.equals(lt.strPWord))
 				{
 					lt.proceed();
 					return "Sorry, that is not your password.";
 				}
 				lt.chatMessage("Enter a new password.");
-				String strNewPass = lt.getNextInput();
+				String strNewPass = lt.getNextStringMessageInput();
 				lt.chatMessage("Repeat that password.");
-				String strNewPassRepeat = lt.getNextInput();
+				String strNewPassRepeat = lt.getNextStringMessageInput();
 				if (strNewPass == null)
 				{
 					lt.proceed();

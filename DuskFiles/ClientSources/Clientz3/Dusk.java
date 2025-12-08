@@ -618,16 +618,16 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 
 		    switch (msg.name)
 		    {
-			case(0):
+			case(DuskProtocol.MSG_DISCONNECT):
 			{
 				blnLoaded = false;
 					blnConnected = false;
 					sckConnection.close();
 					return;
 			}
-				case(1):
+				case(DuskProtocol.MSG_RC_INFO):
 				{
-					strRCAddress = st.nextToken();
+					strRCAddress = ((DuskMessage.StringMessage)msg).value;
 					CountDownLatch imageLatch = new CountDownLatch(1);
 					try
 					{
@@ -678,326 +678,79 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 		            break;
 		        }
-		        case (3):
+		        case (DuskProtocol.MSG_CHAT):
 		        {
-				addText(st.nextToken()+"\n");
+				addText(((DuskMessage.StringMessage)msg).value+"\n");
 		            break;
 		        }
-		        case (4):
+		        case (DuskProtocol.MSG_ADD_ENTITY):
 		        {
-				synchronized(vctEntities)
-				{
-		            token = st.nextToken();
-					intStore = Byte.parseByte(st.nextToken());
-					if (intStore == 0)
-		            {
-		                try
-		                {
-					entStore = new Entity(token,
-										Long.parseLong(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												intStore);
-						}catch(NullPointerException e)
-						{
-							entStore = null;
-						}
-					}else
-		            {
-				try
-		                {
-					entStore = new Entity(token,
-										Long.parseLong(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												Integer.parseInt(st.nextToken()),
-												-1,
-												intStore);
-						}catch(NullPointerException e)
-						{
-							entStore = null;
-						}
-					}
-		            if (entStore != null)
-		            {
-					addEntity(entStore);
-					if (entStore.intLocX == LocX && entStore.intLocY == LocY && entStore.intType == 0) {
-						findPlayer();
-					}
-		            }
-					reloadJComboBoxLook();
-					reloadJComboBoxGet();
-					reloadJComboBoxAttack();
-					}
+					// This message is now a ListMessage
+				break;
+		        }
+		        case (DuskProtocol.MSG_UPDATE_INFO):
+		        {
+					// This message is now a ListMessage
 		            break;
 		        }
-		        case (5):
+		        case (DuskProtocol.MSG_UPDATE_ITEMS):
 		        {
-					int oldhp = inthp;
-					inthp = Integer.parseInt(st.nextToken());
-					intmaxhp = Integer.parseInt(st.nextToken());
-					intsp = Integer.parseInt(st.nextToken());
-					intmaxsp = Integer.parseInt(st.nextToken());
-					if (inthp > oldhp) {
-						int hpHealed = inthp - oldhp;
-						int numStars = hpHealed;
-						spawnHealingParticles(player, numStars);
-					}
-					frame.lblInfo.setText("HP: "+inthp+"/"+intmaxhp+" MP: "+intsp+"/"+intmaxsp+" Loc: "+LocX+"/"+LocY);
+					// This message is now a ListMessage
 		            break;
 		        }
-		        case (6):
+		        case (DuskProtocol.MSG_UPDATE_EQUIPMENT):
 		        {
-				vctChoiceDropItems = new Vector(0,5);
-				frame.frmEquipment.blnRefreshMenus = true;
-				try
-				{
-				frame.frmEquipment.chcWield.removeAllItems();
-				frame.frmEquipment.chcArms.removeAllItems();
-				frame.frmEquipment.chcLegs.removeAllItems();
-				frame.frmEquipment.chcTorso.removeAllItems();
-				frame.frmEquipment.chcWaist.removeAllItems();
-				frame.frmEquipment.chcNeck.removeAllItems();
-				frame.frmEquipment.chcSkull.removeAllItems();
-				frame.frmEquipment.chcEyes.removeAllItems();
-				frame.frmEquipment.chcHands.removeAllItems();
-		            }catch(Exception e){}
-		            try
-		            {
-					while (st.hasMoreTokens())
-					{
-						intStore = Integer.parseInt(st.nextToken());
-						if (!st.hasMoreTokens()) break; // Ensure there's a matching value
-						token = st.nextToken();
-						switch (intStore)
-						{
-						case (0): vctChoiceDropItems.addElement(token); break;
-						case (1): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcWield.addItem(token); break;
-						case (2): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcArms.addItem(token); break;
-						case (3): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcLegs.addItem(token); break;
-						case (4): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcTorso.addItem(token); break;
-						case (5): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcWaist.addItem(token); break;
-						case (6): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcNeck.addItem(token); break;
-						case (7): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcSkull.addItem(token); break;
-						case (8): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcEyes.addItem(token); break;
-						case (9): vctChoiceDropItems.addElement(token); frame.frmEquipment.chcHands.addItem(token); break;
-						}
-					}
-					}
-					catch (NumberFormatException e) {}
-		            frame.frmEquipment.chcWield.addItem("none");
-		            frame.frmEquipment.chcArms.addItem("none");
-		            frame.frmEquipment.chcLegs.addItem("none");
-		            frame.frmEquipment.chcTorso.addItem("none");
-		            frame.frmEquipment.chcWaist.addItem("none");
-		            frame.frmEquipment.chcNeck.addItem("none");
-		            frame.frmEquipment.chcSkull.addItem("none");
-		            frame.frmEquipment.chcEyes.addItem("none");
-		            frame.frmEquipment.chcHands.addItem("none");
-				frame.frmEquipment.blnRefreshMenus = false;
-					reloadJComboBoxDrop();
-		            break;
-		        }
-		        case (7):
-		        {
-					try
-					{
-						frame.frmEquipment.JLabel9.setText("Wielded: "+st.nextToken());
-						frame.frmEquipment.JLabel2.setText("Arms: "+st.nextToken());
-						frame.frmEquipment.JLabel3.setText("Legs: "+st.nextToken());
-						frame.frmEquipment.JLabel1.setText("Torso: "+st.nextToken());
-						frame.frmEquipment.JLabel6.setText("Waist: "+st.nextToken());
-						frame.frmEquipment.JLabel4.setText("Neck: "+st.nextToken());
-						frame.frmEquipment.lblSkull.setText("Skull: "+st.nextToken());
-						frame.frmEquipment.JLabel5.setText("Eyes: "+st.nextToken());
-						frame.frmEquipment.JLabel7.setText("Hands: "+st.nextToken());
-					}catch (Exception e) { System.err.println("Error loading equipment" + e.toString()); }
+					// This message is now a ListMessage
 					break;
 				}
-				case (8):
+				case (DuskProtocol.MSG_UPDATE_STATS):
 				{
-					try
-					{
-		                token = "";
-		                while (st.hasMoreTokens())
-		                {
-					token += st.nextToken()+"\n";
-		                }
-						frame.txtOther.setText(token);
-					}catch (Exception e) { System.err.println("Error loading stats" + e.toString()); }
+					// This message is now a ListMessage
 					break;
 				}
-				case (9):
+				case (DuskProtocol.MSG_PROMPT_HALT):
 				{
 				blnLoaded = false;
 				break;
 				}
-				case (10):
+				case (DuskProtocol.MSG_UPDATE_ACTIONS):
 				{
-			vctChoiceActionItems = new Vector(0,5);
-			while (st.hasMoreTokens())
-			{
-				vctChoiceActionItems.addElement(st.nextToken());
-			}
-					reloadJComboBoxAction();
+					// This message is now a ListMessage
 			break;
 				}
-				case(11):
+				case(DuskProtocol.MSG_UPDATE_MUSIC):
 				{
-					try {
-						addText("Loading music.\n");
-						intMusicTypes = Integer.parseInt(st.nextToken());
-						audMusic = new Clip[intMusicTypes][];
-						intNumSongs = new int[intMusicTypes];
-
-						final String[] musicPaths = new String[intMusicTypes];
-						for (int i = 0; i < intMusicTypes; i++) {
-							intNumSongs[i] = Integer.parseInt(st.nextToken());
-							audMusic[i] = new Clip[intNumSongs[i]];
-							for (int j = 0; j < intNumSongs[i]; j++) {
-								final String path = st.nextToken();
-								final int typeIndex = i;
-								final int songIndex = j;
-
-								new Thread(() -> {
-									AudioInputStream audioInputStream = null;
-									try {
-										File audioFile = new File("/app/" + path);
-										if (!audioFile.exists()) {
-											System.err.println("Dynamic music not found: " + audioFile.getPath());
-											return;
-										}
-										audioInputStream = AudioSystem.getAudioInputStream(audioFile);
-										Clip clip = AudioSystem.getClip();
-										clip.open(audioInputStream);
-										audMusic[typeIndex][songIndex] = clip;
-									} catch (Exception e) {
-										System.err.println("Error while trying to load music file " + path + ":" + e.toString());
-									} finally {
-										if (audioInputStream != null) {
-											try {
-												audioInputStream.close();
-											} catch (IOException e) {
-												System.err.println("Error closing audio stream for " + path + ":" + e.toString());
-											}
-										}
-									}
-								}).start();
-							}
-						}
-					} catch (Exception e) {
-						blnMusic = false;
-						addText("Your java virtual machine does not support midi music\n");
-						System.err.println("Error while trying to load music files:" + e.toString());
-					}
+					// This functionality is deprecated.
 					break;
 				}
-				case (60): // playLocationMusic
+				case (DuskProtocol.MSG_PLAY_LOCATION_MUSIC):
 				{
-					/* if (blnMusic) {
-						try {
-							final int songIndex = Integer.parseInt(st.nextToken());
-							new Thread(() -> {
-								try {
-									if (audMusicPlaying != null) {
-										audMusicPlaying.stop();
-									}
-
-									if (audLocationMusic != null && songIndex >= 0 && songIndex < audLocationMusic.length) {
-										Clip clipToPlay = audLocationMusic[songIndex];
-										if (clipToPlay != null && clipToPlay.isOpen()) {
-											audMusicPlaying = clipToPlay;
-											audMusicPlaying.setFramePosition(0);
-											audMusicPlaying.loop(Clip.LOOP_CONTINUOUSLY);
-										} else {
-											System.err.println("Location music clip is not loaded or open for index: " + songIndex);
-										}
-									}
-								} catch (Exception e) {
-									System.err.println("Error playing location music: " + e.toString());
-								}
-							}).start();
-						} catch (Exception e) {
-							System.err.println("Error reading song index for location music: " + e.toString());
-						}
-					} */
+					// This functionality is deprecated.
 					break;
 				}
-				case (61): // stopLocationMusic
+				case (DuskProtocol.MSG_STOP_LOCATION_MUSIC):
 				{
-					/* if (blnMusic && audMusicPlaying != null) {
-						audMusicPlaying.stop();
-					} */
+					// This functionality is deprecated.
 					break;
 				}
-                case (36):
+                case (DuskProtocol.MSG_DAMAGE_SPLAT):
                 {
-                    try {
-                        long attackerID = Long.parseLong(st.nextToken());
-                        long defenderID = Long.parseLong(st.nextToken());
-                        int damage = Integer.parseInt(st.nextToken());
-
-                        Entity attacker;
-                        Entity defender;
-                        synchronized(vctEntities) {
-                            attacker = hmpEntities.get(attackerID);
-                            defender = hmpEntities.get(defenderID);
-                        }
-
-                        if (attacker != null && defender != null) {
-                            spawnBloodParticles(attacker, defender, damage);
-                            synchronized(vctDamageSplats) {
-                                DamageSplat existingSplat = null;
-                                for (DamageSplat splat : vctDamageSplats) {
-                                    if (splat.defenderID == defenderID && splat.lifetime > 50) {
-                                        existingSplat = splat;
-                                        break;
-                                    }
-                                }
-
-                                if (existingSplat != null) {
-                                    existingSplat.damage += damage;
-                                    existingSplat.text = String.valueOf(existingSplat.damage);
-                                    existingSplat.lifetime = 60; // Reset lifetime
-                                } else {
-                                    DamageSplat splat = new DamageSplat(
-                                        damage,
-                                        attackerID,
-                                        defenderID,
-                                        defender == player ? Color.CYAN : Color.RED
-                                    );
-
-                                    double angle = Math.atan2(defender.pixelY - attacker.pixelY, defender.pixelX - attacker.pixelX);
-                                    angle += (Math.random() - 0.5) * 1.0; // Increased randomness
-                                    splat.vx = Math.cos(angle) * 0.75; // Halved speed
-                                    splat.vy = Math.sin(angle) * 0.75; // Halved speed
-                                    splat.x = defender.pixelX + intImageSize / 2;
-                                    splat.y = defender.pixelY;
-
-                                    vctDamageSplats.add(splat);
-                                }
-                            }
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error creating damage splat: " + e.getMessage());
-                    }
+					// This message is now a ListMessage
                     break;
                 }
-                case (37):
+                case (DuskProtocol.MSG_PLAYER_TICKS):
                 {
                     try {
-                        playerTicks = Long.parseLong(st.nextToken());
+                        playerTicks = ((DuskMessage.IntegerMessage)msg).value;
                     } catch (Exception e) {
                         System.err.println("Error reading playerTicks: " + e.getMessage());
                     }
                     break;
                 }
-                case (38):
+                case (DuskProtocol.MSG_EFFECT_ARMOR):
                 {
                     try {
-                        long targetID = Long.parseLong(st.nextToken());
+                        long targetID = ((DuskMessage.IntegerMessage)msg).value;
                         Entity target;
                         synchronized(vctEntities) {
                             target = hmpEntities.get(targetID);
@@ -1010,54 +763,20 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                     }
                     break;
                 }
-                case (39):
+                case (DuskProtocol.MSG_EFFECT_REGENERATE):
                 {
-                    try {
-                        String[] parts = st.nextToken().split(" ");
-                        long targetID = Long.parseLong(parts[0]);
-                        int duration = 0;
-                        if (parts.length > 1) {
-                            duration = Integer.parseInt(parts[1]);
-                        }
-
-                        Entity target;
-                        synchronized(vctEntities) {
-                            target = hmpEntities.get(targetID);
-                        }
-                        if (target != null) {
-                            spawnRegenerateParticles(target, duration);
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error processing regenerate spell effect: " + e.getMessage());
-                    }
+					// This message is now a ListMessage
                     break;
                 }
-                case (40):
+                case (DuskProtocol.MSG_EFFECT_DETECT_INVIS):
                 {
-                    try {
-                        String[] parts = st.nextToken().split(" ");
-                        long targetID = Long.parseLong(parts[0]);
-                        int duration = 0;
-                        if (parts.length > 1) {
-                            duration = Integer.parseInt(parts[1]);
-                        }
-
-                        Entity target;
-                        synchronized(vctEntities) {
-                            target = hmpEntities.get(targetID);
-                        }
-                        if (target != null) {
-                            spawnDetectInvisParticles(target, duration);
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error processing detect invis spell effect: " + e.getMessage());
-                    }
+					// This message is now a ListMessage
                     break;
                 }
-                case (41): // Harden spell effect
+                case (DuskProtocol.MSG_EFFECT_HARDEN): // Harden spell effect
                 {
                     try {
-                        long targetID = Long.parseLong(st.nextToken());
+                        long targetID = ((DuskMessage.IntegerMessage)msg).value;
                         Entity target;
                         synchronized(vctEntities) {
                             target = hmpEntities.get(targetID);
@@ -1070,10 +789,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                     }
                     break;
                 }
-                case (42): // Shock spell effect
+                case (DuskProtocol.MSG_EFFECT_SHOCK): // Shock spell effect
                 {
                     try {
-                        long targetID = Long.parseLong(st.nextToken());
+                        long targetID = ((DuskMessage.IntegerMessage)msg).value;
                         Entity target;
                         synchronized(vctEntities) {
                             target = hmpEntities.get(targetID);
@@ -1086,73 +805,31 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                     }
                     break;
                 }
-				case(12):
+				case(DuskProtocol.MSG_PLAY_MUSIC):
 				{
-					if (blnMusic) {
-						try {
-							final int musicType = Integer.parseInt(st.nextToken());
-							new Thread(() -> {
-								try {
-									if (audMusicPlaying != null) {
-										audMusicPlaying.stop();
-									}
-
-									if (audMusic != null && musicType >= 0 && musicType < audMusic.length) {
-										int songIndex = (int)(Math.random() * intNumSongs[musicType]);
-										Clip clipToPlay = audMusic[musicType][songIndex];
-
-										int waitCounter = 0;
-										while (clipToPlay == null && waitCounter < 100) { // Wait up to 10 seconds
-											Thread.sleep(100);
-											clipToPlay = audMusic[musicType][songIndex];
-											waitCounter++;
-										}
-
-										if (clipToPlay != null && clipToPlay.isOpen()) {
-											audMusicPlaying = clipToPlay;
-											audMusicPlaying.setFramePosition(0);
-											audMusicPlaying.loop(Clip.LOOP_CONTINUOUSLY);
-										} else {
-											System.err.println("Dynamic music clip is not loaded or open for type: " + musicType);
-										}
-									}
-								} catch (Exception e) {
-									System.err.println("Error playing dynamic music: " + e.toString());
-								}
-							}).start();
-						} catch (Exception e) {
-							System.err.println("Error reading music type: " + e.toString());
-						}
-					}
+					// This functionality is deprecated.
 					break;
 				}
-				case(13):
+				case(DuskProtocol.MSG_STILL_THERE):
 				{
 					sendMessage("notdead");
 					break;
 				}
-				case (14):
+				case (DuskProtocol.MSG_PROMPT_PROCEED):
 				{
 				blnLoaded = true;
 				break;
 				}
-				case (15):
+				case (DuskProtocol.MSG_PLAY_SFX):
 				{
-					/* try
-					{
-						int sfxIndex = Integer.parseInt(st.nextToken());
-						if (audSFX != null && sfxIndex >= 0 && sfxIndex < audSFX.length && audSFX[sfxIndex] != null) {
-							audSFX[sfxIndex].setFramePosition(0);
-							audSFX[sfxIndex].start();
-						}
-					}catch(Exception e){} */
+					// This functionality is deprecated.
 					break;
 				}
-				case (16):
+				case (DuskProtocol.MSG_REMOVE_ENTITY):
 				{
 					synchronized(vctEntities)
 					{
-					lngStore = Long.parseLong(st.nextToken());
+					lngStore = ((DuskMessage.IntegerMessage)msg).value;
 					removeEntity(lngStore);
 					reloadJComboBoxLook();
 					reloadJComboBoxGet();
@@ -1160,59 +837,27 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 					break;
 				}
-				case (17):
+				case (DuskProtocol.MSG_MERCHANT_ITEMS):
 				{
-					while (st.hasMoreTokens())
-					{
-						vctMerchantItems.addElement(st.nextToken());
-					}
-					frame.btnMerchant.setEnabled(true);
-					reloadJComboBoxBuy();
+					// This message is now a ListMessage
 					break;
 				}
-				case (18):
+				case (DuskProtocol.MSG_VIEW_TEXT_EDITABLE):
 				{
-					EditFrame frmEdit = new EditFrame(st.nextToken(),this,true);
-					frmEdit.show();
-					while (st.hasMoreTokens())
-					{
-						frmEdit.txtEdit.append(st.nextToken()+"\n");
-					}
+					// This message is now a ListMessage
 					break;
 				}
-				case (19):
+				case (DuskProtocol.MSG_RESIZE_MAP):
 				{
-				synchronized(vctEntities)
-				{
-					mapSizeX = Integer.parseInt(st.nextToken());
-					mapSizeY = Integer.parseInt(st.nextToken());
-					viewRangeX = (mapSizeX-1)/2;
-					viewRangeY = (mapSizeY-1)/2;
-					shrMap = new short[mapSizeX][mapSizeY];
-					shrMapAlpha = new short[mapSizeX][mapSizeY];
-					shrMapAlpha2 = new short[mapSizeX][mapSizeY];
-					if (blnApplet)
-					{
-						sendMessage("appletimages");
-					}else
-					{
-						sendMessage("applicationimages");
-					}
-					scaleWindow();
-					}
+					// This message is now a ListMessage
 					break;
 				}
-				case (20):
+				case (DuskProtocol.MSG_VIEW_TEXT):
 				{
-					EditFrame frmEdit = new EditFrame(st.nextToken(),this,false);
-					frmEdit.show();
-					while (st.hasMoreTokens())
-					{
-						frmEdit.txtEdit.append(st.nextToken()+"\n");
-					}
+					// This message is now a ListMessage
 					break;
 				}
-				case (21):
+				case (DuskProtocol.MSG_MERCHANT_CLOSE):
 				{
 					frmMerchant.hide();
 					vctMerchantItems = new Vector(0,5);
@@ -1220,29 +865,19 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					frame.btnMerchant.setEnabled(false);
 					break;
 				}
-				case (22):
+				case (DuskProtocol.MSG_MERCHANT_SELL):
 				{
-					vctSell = new Vector(0,5);
-					while (st.hasMoreTokens())
-					{
-						vctSell.addElement(st.nextToken());
-					}
-					reloadJComboBoxSell();
+					// This message is now a ListMessage
 					break;
 				}
-				case (23):
+				case (DuskProtocol.MSG_CHAT_COLOR):
 				{
-                    int red = Integer.parseInt(st.nextToken());
-                    int green = Integer.parseInt(st.nextToken());
-                    int blue = Integer.parseInt(st.nextToken());
-                    String text = st.nextToken();
-                    String formattedText = "<RGB " + red + " " + green + " " + blue + ">" + text + "</RGB>\n";
-                    addText(formattedText);
+					// This message is now a ListMessage
 		            break;
 				}
-				case (24):
+				case (DuskProtocol.MSG_MOVE_N):
 				{
-					long ID = Long.parseLong(st.nextToken());
+					long ID = ((DuskMessage.IntegerMessage)msg).value;
 					synchronized(vctEntities)
 				{
 						entStore = hmpEntities.get(ID);
@@ -1256,9 +891,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                     }
 		            break;
 				}
-				case (25):
+				case (DuskProtocol.MSG_MOVE_S):
 				{
-					long ID = Long.parseLong(st.nextToken());
+					long ID = ((DuskMessage.IntegerMessage)msg).value;
 					synchronized(vctEntities)
 				{
 						entStore = hmpEntities.get(ID);
@@ -1272,9 +907,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                     }
 		            break;
 				}
-				case (26):
+				case (DuskProtocol.MSG_MOVE_W):
 				{
-					long ID = Long.parseLong(st.nextToken());
+					long ID = ((DuskMessage.IntegerMessage)msg).value;
 					synchronized(vctEntities)
 				{
 						entStore = hmpEntities.get(ID);
@@ -1288,9 +923,9 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                     }
 		            break;
 				}
-				case (27):
+				case (DuskProtocol.MSG_MOVE_E):
 				{
-					long ID = Long.parseLong(st.nextToken());
+					long ID = ((DuskMessage.IntegerMessage)msg).value;
 					synchronized(vctEntities)
 				{
 						entStore = hmpEntities.get(ID);
@@ -1304,26 +939,17 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
                     }
 		            break;
 				}
-				case (28):
+				case (DuskProtocol.MSG_UPDATE_RANGE):
 				{
-					range = Integer.parseInt(st.nextToken());
+					range = ((DuskMessage.IntegerMessage)msg).value;
 					break;
 				}
-				case (29):
+				case (DuskProtocol.MSG_UPDATE_FLAG):
 				{
-					lngStore = Long.parseLong(st.nextToken());
-					intStore = Integer.parseInt(st.nextToken());
-					synchronized(vctEntities)
-					{
-						entStore = hmpEntities.get(lngStore);
-						if (entStore != null)
-						{
-							entStore.intFlag = intStore;
-						}
-					}
+					// This message is now a ListMessage
 					break;
 				}
-				case (30):
+				case (DuskProtocol.MSG_CLEAR_FLAGS):
 				{
 					synchronized(vctEntities)
 					{
@@ -1334,70 +960,35 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 					break;
 				}
-				case (31):
+				case (DuskProtocol.MSG_BATTLE_START_TARGET):
 				{
 					frame.txtBattle.setText("");
                     frame.lblTarget.setText("");
                     break;
 				}
-				case (32):
+				case (DuskProtocol.MSG_BATTLE_TEXT_TOP):
 				{
-                    frame.lblTarget.setText(st.nextToken());
+                    frame.lblTarget.setText(((DuskMessage.StringMessage)msg).value);
 					break;
 				}
-				case (33):
+				case (DuskProtocol.MSG_BATTLE_TEXT_BOTTOM):
 				{
-					frame.txtBattle.append(st.nextToken()+"\n");
+					frame.txtBattle.append(((DuskMessage.StringMessage)msg).value+"\n");
                     break;
 				}
-                case (34):
+                case (DuskProtocol.MSG_UPDATE_OPPONENT_HP):
                 {
-                    try {
-                        long opponentID = Long.parseLong(st.nextToken());
-                        String HpData = st.nextToken();
-                        if (HpData != null) {
-                            String[] hpValues = HpData.trim().split(" ");
-                            if (hpValues.length >= 2) {
-                                int newHp = Integer.parseInt(hpValues[0]);
-                                int newMaxHp = Integer.parseInt(hpValues[1]);
-
-                                synchronized(vctEntities) {
-                                    entStore = hmpEntities.get(opponentID);
-                                    if (entStore != null) {
-                                        entStore.hp = newHp;
-                                        entStore.maxhp = newMaxHp;
-                                    }
-                                }
-                            } else if (hpValues.length == 1 && Integer.parseInt(hpValues[0]) <= 0) {
-                                synchronized(vctEntities) {
-                                    entStore = hmpEntities.get(opponentID);
-                                    if (entStore != null) {
-                                        entStore.hp = 0;
-                                    }
-                                }
-                            }
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error updating opponent HP: " + e.getMessage());
-                    }
+					// This message is now a ListMessage
                     break;
                 }
-                case (35):
+                case (DuskProtocol.MSG_TILE_ANIMS):
 				{
-					vctTileAnims = new Vector<TileAnim>(0,5);
-					int tileID = Integer.parseInt(st.nextToken());
-					while (tileID != -1)
-					{
-						int frameCount = Integer.parseInt(st.nextToken());
-						int delay = Integer.parseInt(st.nextToken());
-						vctTileAnims.addElement(new TileAnim(tileID, frameCount, delay));
-						tileID = Integer.parseInt(st.nextToken());
-					}
+					// This message is now a ListMessage
 					break;
 				}
 				default:
 				{
-					System.err.println("Lost incoming byte: " + incoming);
+					System.err.println("Lost incoming byte: " + msg.name);
 				}
 			}
 		} catch (EOFException eofe) {
@@ -1405,10 +996,10 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 			blnConnected = false;
 		} catch(IOException | NumberFormatException e)
 		{
-			System.err.println("Error at run() with value " + incoming +" : "+e.toString());
+			System.err.println("Error at run() with value " + msg.name +" : "+e.toString());
 			e.printStackTrace(System.out);
 
-			addText("Error at run() with value " + incoming +" : "+e.toString()+"\n");
+			addText("Error at run() with value " + msg.name +" : "+e.toString()+"\n");
 			blnConnected = false;
 		}
 		}

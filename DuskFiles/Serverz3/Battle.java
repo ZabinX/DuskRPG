@@ -64,11 +64,11 @@ public class Battle
 			engGame.chatMessage("-"+inpla1.strName+" has attacked "+inpla2.strName,inpla1.intLocX,inpla1.intLocY,"default");
 			if (inpla1.popup)
 			{
-				inpla1.send(""+(char)31+inpla2.strName+"\n");
+				inpla1.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_START_TARGET, inpla2.strName));
 			}
 			if (inpla2.popup)
 			{
-				inpla2.send(""+(char)31+inpla1.strName+"\n");
+				inpla2.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_START_TARGET, inpla1.strName));
 			}
 		}catch (Exception e)
 		{
@@ -365,7 +365,7 @@ public class Battle
 		}
 		if (thnStore.popup)
 		{
-			thnStore.send(""+(char)33+"You have fled from battle\n");
+			thnStore.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_BOTTOM, "You have fled from battle"));
 		} else
 		{
 			thnStore.chatMessage("You have fled from battle");
@@ -418,7 +418,7 @@ public class Battle
 		}
 		if (thnStore.popup)
 		{
-			thnStore.send(""+(char)33+"You have lost "+money+" gp.\n");
+			thnStore.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_BOTTOM, "You have lost "+money+" gp."));
 		} else
 		{
 			thnStore.chatMessage("You have lost "+money+" gp.");
@@ -469,7 +469,7 @@ public class Battle
 	{
 		if (thnStore.popup)
 		{
-			thnStore.send(""+(char)33+"You have lost "+exp+" exp.\n");
+			thnStore.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_BOTTOM, "You have lost "+exp+" exp."));
 		} else
 		{
 			thnStore.chatMessage("You have lost "+exp+" exp.");
@@ -552,8 +552,8 @@ public class Battle
 				{
 					if (strStore2 != null)
 					{
-                                                thnStore.send(""+(char)32+strStore2+"\n");
-						thnStore.send(""+(char)33+strStore+"\n");
+						thnStore.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_TOP, strStore2));
+						thnStore.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_BOTTOM, strStore));
 					}
 				} else
 				{
@@ -567,8 +567,8 @@ public class Battle
 					{
 						if (strStore2 != null)
 						{
-							thnStore.thnMaster.send(""+(char)32+"From "+thnStore.strName+": "+strStore2+"\n");
-							thnStore.thnMaster.send(""+(char)33+"From "+thnStore.strName+": "+strStore+"\n");
+							thnStore.thnMaster.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_TOP, "From "+thnStore.strName+": "+strStore2));
+							thnStore.thnMaster.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_BOTTOM, "From "+thnStore.strName+": "+strStore));
 						}
 					} else
 					{
@@ -591,8 +591,8 @@ public class Battle
 				{
 					if (strStore2 != null)
 					{
-						thnStore.send(""+(char)32+strStore2+"\n");
-						thnStore.send(""+(char)33+strStore+"\n");
+						thnStore.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_TOP, strStore2));
+						thnStore.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_BOTTOM, strStore));
 					}
 				} else
 				{
@@ -606,8 +606,8 @@ public class Battle
 					{
 						if (strStore2 != null)
 						{
-							thnStore.thnMaster.send(""+(char)32+"From "+thnStore.strName+": "+strStore2+"\n");
-							thnStore.thnMaster.send(""+(char)33+"From "+thnStore.strName+": "+strStore+"\n");
+							thnStore.thnMaster.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_TOP, "From "+thnStore.strName+": "+strStore2));
+							thnStore.thnMaster.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_BOTTOM, "From "+thnStore.strName+": "+strStore));
 						}
 					} else
 					{
@@ -984,7 +984,7 @@ public class Battle
 					thnMember.removeFromGroup();
 					chatMessage("\t" + thnMember.strName + " is killed.");
 					if (thnMember.popup) {
-						thnMember.send("" + (char) 33 + "\tYou have died.\n");
+						thnMember.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_BOTTOM, "\tYou have died."));
 					} else {
 						thnMember.chatMessage("\tYou have died.");
 					}
@@ -1127,7 +1127,7 @@ public class Battle
 					thnMember.removeFromGroup();
 					chatMessage("\t" + thnMember.strName + " is killed.");
 					if (thnMember.popup) {
-						thnMember.send("" + (char) 33 + "\tYou have died.\n");
+						thnMember.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_BOTTOM, "\tYou have died."));
 					} else {
 						thnMember.chatMessage("\tYou have died.");
 					}

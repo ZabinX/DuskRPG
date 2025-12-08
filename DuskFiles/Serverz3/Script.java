@@ -1962,7 +1962,7 @@ public class Script
 					thnStore.chatMessage(getString());
 					try
 					{
-						strInput = thnStore.getNextInput();
+						strInput = thnStore.getNextStringMessageInput();
 						varVariables.addVariable(getString(),strInput);
 					}catch(Exception e)
 					{
@@ -2007,18 +2007,10 @@ public class Script
 				LivingThing thnStore = getLivingThing(getString());
 				String strTitle = getString();
 				String strStore2 = getString();
-				String strLine = null;
-				int intIndex = strStore2.indexOf("\n");
-					thnStore.send((char)20+strTitle+"\n");
-				while (intIndex != -1)
-				{
-						strLine = strStore2.substring(0,intIndex);
-					thnStore.send(strLine+"\n");
-					strStore2 = strStore2.substring(intIndex+1);
-					intIndex = strStore2.indexOf("\n");
-				}
-				thnStore.send(strStore2+"\n");
-				thnStore.send("--EOF--\n");
+				ListMessage msg = new ListMessage(DuskProtocol.MSG_VIEW_TEXT);
+				msg.add(new DuskMessage.StringMessage(0, strTitle));
+				msg.add(new DuskMessage.StringMessage(0, strStore2));
+				thnStore.send(msg);
 				return true;
 			}
 				case 53:
@@ -2062,7 +2054,10 @@ public class Script
 					{
 						Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnStore.intLocX, thnStore.intLocY);
 						for (LivingThing player : playersInArea) {
-							player.send("" + (char)intEffectID + thnStore.ID + " " + duration + "\n");
+							ListMessage msg = new ListMessage(intEffectID);
+							msg.add(new DuskMessage.IntegerMessage(0, (int)thnStore.ID));
+							msg.add(new DuskMessage.IntegerMessage(0, duration));
+							player.send(msg);
 						}
 					}
 					return true;
@@ -2073,15 +2068,15 @@ public class Script
 					String strEffectName = getString();
 					int intEffectID = -1;
 					if (strEffectName.equalsIgnoreCase("armor")) {
-						intEffectID = 38;
+						intEffectID = DuskProtocol.MSG_EFFECT_ARMOR;
 					} else if (strEffectName.equalsIgnoreCase("regenerate")) {
-						intEffectID = 39;
+						intEffectID = DuskProtocol.MSG_EFFECT_REGENERATE;
 					} else if (strEffectName.equalsIgnoreCase("detectinvis")) {
-						intEffectID = 40;
+						intEffectID = DuskProtocol.MSG_EFFECT_DETECT_INVIS;
 					} else if (strEffectName.equalsIgnoreCase("harden")) {
-						intEffectID = 41;
+						intEffectID = DuskProtocol.MSG_EFFECT_HARDEN;
 					} else if (strEffectName.equalsIgnoreCase("shock")) {
-						intEffectID = 42;
+						intEffectID = DuskProtocol.MSG_EFFECT_SHOCK;
 					} else {
 						try {
 							intEffectID = Integer.parseInt(strEffectName);
@@ -2093,7 +2088,7 @@ public class Script
 					if (thnStore != null && intEffectID != -1) {
 						Vector<LivingThing> playersInArea = engGame.getPlayersInArea(thnStore.intLocX, thnStore.intLocY);
 						for (LivingThing player : playersInArea) {
-							player.send("" + (char)intEffectID + thnStore.ID + "\n");
+							player.send(new DuskMessage.IntegerMessage(intEffectID, (int)thnStore.ID));
 						}
 					}
 					return true;
@@ -2148,7 +2143,7 @@ public class Script
 				{
 				if(thnStore.batBattle != null && thnStore.popup)
 						{
-						thnStore.send(""+(char)33+strStore2.substring(0,intIndex+1));
+						thnStore.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_BOTTOM, strStore2.substring(0,intIndex+1)));
 						} else
 						{
 						thnStore.chatMessage(strStore2.substring(0,intIndex));
@@ -2158,7 +2153,7 @@ public class Script
 				}
 				if(thnStore.batBattle != null && thnStore.popup)
 					{
-					thnStore.send(""+(char)33+strStore2+"\n");
+					thnStore.send(new DuskMessage.StringMessage(DuskProtocol.MSG_BATTLE_TEXT_BOTTOM, strStore2));
 					} else
 					{
 					thnStore.chatMessage(strStore2);
