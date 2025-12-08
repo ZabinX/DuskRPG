@@ -1246,6 +1246,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		blnIsClosing = true;
 		blnWorking = false;
 		blnShouldSave = true;
+		/*
 		if (isPlayer()) {
 			int chunkX = intLocX / DuskEngine.CHUNK_SIZE;
 			int chunkY = intLocY / DuskEngine.CHUNK_SIZE;
@@ -1255,6 +1256,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				}
 			}
 		}
+		*/
 		if (!vctConditions.isEmpty() && engGame.vctCheckConditions.contains(this))
 		{
 			engGame.vctCheckConditions.removeElement(this);
@@ -1820,11 +1822,13 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			intStep = intNewStep;
 			if (isPlayer())
 			{
+				/*
 				int newChunkX = intLocX / DuskEngine.CHUNK_SIZE;
 				int newChunkY = intLocY / DuskEngine.CHUNK_SIZE;
 				if (oldChunkX != newChunkX || oldChunkY != newChunkY) {
 					engGame.updatePlayerChunks(oldChunkX, oldChunkY, newChunkX, newChunkY);
 				}
+				*/
 				if (engGame.overMerchant(oldLocX,oldLocY) != null)
 					offMerchant();
 				if (engGame.overPlayerMerchant(oldLocX,oldLocY) != null)
@@ -2025,11 +2029,13 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		{
 			if (isPlayer())
 			{
+				/*
 				int newChunkX = intLocX / DuskEngine.CHUNK_SIZE;
 				int newChunkY = intLocY / DuskEngine.CHUNK_SIZE;
 				if (oldChunkX != newChunkX || oldChunkY != newChunkY) {
 					engGame.updatePlayerChunks(oldChunkX, oldChunkY, newChunkX, newChunkY);
 				}
+				*/
 				updateMap();
 				if (engGame.overMerchant(oldLocX,oldLocY) != null)
 					offMerchant();
@@ -3242,7 +3248,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		String strStore;
 		blnCanSave=true;
 		blnReadyForTheWorld=true;
-
+		/*
 		// Load initial chunks
 		if (isPlayer()) {
 			int chunkX = intLocX / DuskEngine.CHUNK_SIZE;
@@ -3253,7 +3259,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 				}
 			}
 		}
-
+		*/
 		while(true)
 		{
 			if (blnStopThread) {
