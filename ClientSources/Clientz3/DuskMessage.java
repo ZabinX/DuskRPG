@@ -69,10 +69,6 @@ public class DuskMessage {
         return a;
     }
 
-    public static DuskMessage receiveMessage(byte[] bytes) throws IOException {
-        return receiveMessage(new DataInputStream(new java.io.ByteArrayInputStream(bytes)));
-    }
-
     // Inner classes for specific message types
     public static class IntegerMessage extends DuskMessage {
         public int value;

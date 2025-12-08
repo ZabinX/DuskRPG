@@ -3287,13 +3287,18 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 			{
 				if (!blnHalted)
 				{
-					DuskMessage msg = DuskMessage.receiveMessage(stmIn);
-					if (msg instanceof DuskMessage.StringMessage) {
-						strInput = ((DuskMessage.StringMessage) msg).value;
-						strStore = Commands.parseCommand(this, engGame, strInput);
-						if (strStore != null)
-						{
-							chatMessage(strStore);
+					short len = stmIn.readShort();
+					if (len > 0 && len < 32768) {
+						byte[] messageBytes = new byte[len];
+						stmIn.readFully(messageBytes);
+						DuskMessage msg = DuskMessage.receiveMessage(messageBytes);
+						if (msg instanceof DuskMessage.StringMessage) {
+							strInput = ((DuskMessage.StringMessage) msg).value;
+							strStore = Commands.parseCommand(this, engGame, strInput);
+							if (strStore != null)
+							{
+								chatMessage(strStore);
+							}
 						}
 					}
 				}

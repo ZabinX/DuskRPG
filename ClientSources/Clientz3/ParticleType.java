@@ -1,0 +1,14 @@
+public enum ParticleType {
+    HEAL,
+    BLOOD,
+    ARMOR,
+    HARDEN,
+    LIGHTNING,
+    SHOCK,
+    REGENERATE,
+    REGENERATE_ORB,
+    REGENERATE_SPAWNER,
+    REGENERATE_CIRCLE,
+    DETECT_INVIS_SPAWNER,
+    DETECT_INVIS_RAY
+}
