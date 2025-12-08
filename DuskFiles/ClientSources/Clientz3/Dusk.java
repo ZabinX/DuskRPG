@@ -602,11 +602,12 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 		intStore = 0;
 		long lngStore;
 		boolean blnBreak=false;
+		DuskMessage msg = null;
 		while(blnConnected)
 		{
 		try
 		{
-			DuskMessage msg = DuskMessage.receiveMessage(stmIn);
+			msg = DuskMessage.receiveMessage(stmIn);
 			StringTokenizer st = null;
 			if (msg instanceof DuskMessage.StringMessage) {
 				message = ((DuskMessage.StringMessage) msg).value;
