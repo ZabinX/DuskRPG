@@ -79,6 +79,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
         range=1;
 	String strTile = "-1";
     long loncash;
+    long playerID;
     long playerTicks = 200;
 	boolean blnLoaded,
                         blnRefreshing,
@@ -992,7 +993,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					}
 					case (DuskProtocol.MSG_UPDATE_PLAYER_TICKS):
 					{
-						playerTicks = ((DuskMessage.LongMessage)msg).value;
+						playerTicks = ((DuskMessage.IntegerMessage)msg).value;
 						break;
 					}
 					case (DuskProtocol.MSG_BATTLE_CLEAR):
@@ -1009,6 +1010,11 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 					{
 						ListMessage list = (ListMessage)msg;
 						frame.lblTarget.setText("Target: "+list.getString(DuskProtocol.FIELD_TARGET_ID)+" HP: "+list.getInteger(DuskProtocol.FIELD_HP)+"/"+list.getInteger(DuskProtocol.FIELD_MAXHP));
+						break;
+					}
+					case (DuskProtocol.MSG_PLAYER_ID):
+					{
+						playerID = ((DuskMessage.LongMessage)msg).value;
 						break;
 					}
 					case (DuskProtocol.MSG_UPDATE_ACTIONS):
@@ -1154,20 +1160,18 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	}
 
 	void findPlayer() {
-	    synchronized(vctEntities) {
-	        for(int i=0; i<vctEntities.size(); i++) {
-	            Entity ent = (Entity)vctEntities.elementAt(i);
-	            if (ent.intLocX == LocX && ent.intLocY == LocY && ent.intType == 0) {
-	                player = ent;
-	                if (camera.x == 0 && camera.y == 0) {
-						camera.x = player.pixelX - ((double)frame.pnlGraphics.getWidth() / 2.0);
-						camera.y = player.pixelY - ((double)frame.pnlGraphics.getHeight() / 2.0);
-	                }
-					camera.setTarget(player);
-	                return;
-	            }
-	        }
-	    }
+		synchronized (vctEntities) {
+			player = hmpEntities.get(playerID);
+			if (player != null) {
+				LocX = player.intLocX;
+				LocY = player.intLocY;
+				if (camera.x == 0 && camera.y == 0) {
+					camera.x = player.pixelX - ((double)frame.pnlGraphics.getWidth() / 2.0);
+					camera.y = player.pixelY - ((double)frame.pnlGraphics.getHeight() / 2.0);
+				}
+				camera.setTarget(player);
+			}
+		}
 	}
 
 	Entity findMobAt(int x, int y) {

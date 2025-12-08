@@ -3248,6 +3248,7 @@ public class LivingThing extends DuskObject implements Runnable, java.io.Seriali
 		}
 		thrConnection.setName("LivingThing("+strName+")");
 		thrSend.setName("LivingThing("+strName+").send");
+		send(DuskMessage.create(DuskProtocol.MSG_PLAYER_ID, ID));
 		resizeMap();
 		changeLocBypass(intLocX,intLocY);
 		updateInfo();

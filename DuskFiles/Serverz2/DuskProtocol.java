@@ -57,6 +57,7 @@ public interface DuskProtocol {
 	public final static int MSG_INIT_TILE_ANIMS = 35;
 	public final static int MSG_DAMAGE_SPLAT = 36;
 	public final static int MSG_UPDATE_PLAYER_TICKS = 37;
+	public final static int MSG_PLAYER_ID = 38;
 
 	// FROM CLIENT
 	public final static int MSG_COMMAND = 100;
