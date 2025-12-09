@@ -163,6 +163,26 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	{
     	startUp();
 	}
+
+	private void initData() {
+		hmpEntities = new HashMap<Long, Entity>();
+		frmMerchant = new MerchantFrame(this);
+		vctEntities = new Vector(0,3);
+		vctMerchantItems = new Vector(0,3);
+		vctSell = new Vector(0,3);
+		vctChoiceDropItems = new Vector(0,3);
+		vctChoiceActionItems = new Vector(0,3);
+		vctTileAnims = new Vector<TileAnim>(0,3);
+		vctDamageSplats = new Vector<DamageSplat>(0,3);
+		vctCrossMarkers = new Vector<CrossMarker>(0,3);
+		vctParticles = new Vector<Particle>(0,3);
+		vctParticlesBehind = new Vector<Particle>(0,3);
+		sortedEntities = new ArrayList<Entity>();
+		tempNewParticlesFront = new ArrayList<Particle>();
+		tempNewParticlesBehind = new ArrayList<Particle>();
+		movementManager = new MovementManager();
+		camera = new Camera(null);
+	}
 	
 	void startUp()
 	{
@@ -174,6 +194,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
    			}catch (Exception e) {}
 			frame = new MainFrame(this);
 			frame.initComponents();
+			initData();
 			frame.setVisible(true);
 			frame.docGossip.insertString(0,"Dusk Client v"+strVersion+" -- https://duskrpg.blogspot.com/\n",null);
 			addText("You are using Java version "+System.getProperty("java.version")+"\n");
@@ -358,23 +379,7 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 				thrRun = new Thread(this);
 				thrRun.start();
 				blnConnected = true;
-				hmpEntities = new HashMap<Long, Entity>();
-				frmMerchant = new MerchantFrame(this);
-				vctEntities = new Vector(0,3);
-				vctMerchantItems = new Vector(0,3);
-				vctSell = new Vector(0,3);
-				vctChoiceDropItems = new Vector(0,3);
-				vctChoiceActionItems = new Vector(0,3);
-				vctTileAnims = new Vector<TileAnim>(0,3);
-				vctDamageSplats = new Vector<DamageSplat>(0,3);
-				vctCrossMarkers = new Vector<CrossMarker>(0,3);
-				vctParticles = new Vector<Particle>(0,3);
-				vctParticlesBehind = new Vector<Particle>(0,3);
-				sortedEntities = new ArrayList<Entity>();
-				tempNewParticlesFront = new ArrayList<Particle>();
-				tempNewParticlesBehind = new ArrayList<Particle>();
-				movementManager = new MovementManager();
-				camera = new Camera(null);
+				initData();
 
 				String username = usernameField.getText();
 				String password = new String(passwordField.getPassword());
