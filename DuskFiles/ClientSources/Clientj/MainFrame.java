@@ -109,7 +109,6 @@ public class MainFrame extends JFrame implements ItemListener
     public Document docGossip;
 
 	EquipmentFrame frmEquipment;
-        ConnectFrame frmConnect;
 	Dusk appParent;
 	
 	public MainFrame(Dusk inParent)
@@ -1043,8 +1042,7 @@ public class MainFrame extends JFrame implements ItemListener
         
         public void btnConnectActionPerformed(java.awt.event.ActionEvent e)
 	{
-		frmConnect.show();
-		frmConnect.setSize(350, 200);
+		appParent.connect();
 	}
 	
 	public void btnQuitActionPerformed(java.awt.event.ActionEvent e)
