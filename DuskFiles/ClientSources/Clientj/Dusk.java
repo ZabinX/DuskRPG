@@ -41,6 +41,11 @@ import java.awt.Stroke;
 import java.awt.BasicStroke;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 import java.awt.geom.AffineTransform;
 
 public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListener, ImageObserver
@@ -329,30 +334,60 @@ public class Dusk implements Runnable,MouseListener,KeyListener,ComponentListene
 	{
 		try
 		{
-			sckConnection = new Socket(address,port);
-			stmOut = new DataOutputStream(sckConnection.getOutputStream());
-			stmIn = new DataInputStream(sckConnection.getInputStream());
-			addText("Please enter your character name or the name of a new character: \n");
-			thrRun = new Thread(this);
-			thrRun.start();
-			blnConnected = true;
-			hmpEntities = new HashMap<Long, Entity>();
-			frmMerchant = new MerchantFrame(this);
-			vctEntities = new Vector(0,3);
-			vctMerchantItems = new Vector(0,3);
-			vctSell = new Vector(0,3);
-			vctChoiceDropItems = new Vector(0,3);
-			vctChoiceActionItems = new Vector(0,3);
-            vctTileAnims = new Vector<TileAnim>(0,3);
-            vctDamageSplats = new Vector<DamageSplat>(0,3);
-            vctCrossMarkers = new Vector<CrossMarker>(0,3);
-            vctParticles = new Vector<Particle>(0,3);
-            vctParticlesBehind = new Vector<Particle>(0,3);
-            sortedEntities = new ArrayList<Entity>();
-			tempNewParticlesFront = new ArrayList<Particle>();
-			tempNewParticlesBehind = new ArrayList<Particle>();
-			movementManager = new MovementManager();
-			camera = new Camera(null);
+			JPanel panel = new JPanel(new GridLayout(0, 1));
+			panel.add(new JLabel("Server Address:"));
+			JTextField addressField = new JTextField("127.0.0.1");
+			panel.add(addressField);
+			panel.add(new JLabel("Port:"));
+			JTextField portField = new JTextField("7474");
+			panel.add(portField);
+			panel.add(new JLabel("Username:"));
+			JTextField usernameField = new JTextField();
+			panel.add(usernameField);
+			panel.add(new JLabel("Password:"));
+			JPasswordField passwordField = new JPasswordField();
+			panel.add(passwordField);
+
+			int result = JOptionPane.showConfirmDialog(frame, panel, "Login", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+			if (result == JOptionPane.OK_OPTION) {
+				address = addressField.getText();
+				port = Integer.parseInt(portField.getText());
+				sckConnection = new Socket(address, port);
+				stmOut = new DataOutputStream(sckConnection.getOutputStream());
+				stmIn = new DataInputStream(sckConnection.getInputStream());
+				thrRun = new Thread(this);
+				thrRun.start();
+				blnConnected = true;
+				hmpEntities = new HashMap<Long, Entity>();
+				frmMerchant = new MerchantFrame(this);
+				vctEntities = new Vector(0,3);
+				vctMerchantItems = new Vector(0,3);
+				vctSell = new Vector(0,3);
+				vctChoiceDropItems = new Vector(0,3);
+				vctChoiceActionItems = new Vector(0,3);
+				vctTileAnims = new Vector<TileAnim>(0,3);
+				vctDamageSplats = new Vector<DamageSplat>(0,3);
+				vctCrossMarkers = new Vector<CrossMarker>(0,3);
+				vctParticles = new Vector<Particle>(0,3);
+				vctParticlesBehind = new Vector<Particle>(0,3);
+				sortedEntities = new ArrayList<Entity>();
+				tempNewParticlesFront = new ArrayList<Particle>();
+				tempNewParticlesBehind = new ArrayList<Particle>();
+				movementManager = new MovementManager();
+				camera = new Camera(null);
+
+				String username = usernameField.getText();
+				String password = new String(passwordField.getPassword());
+				if (username.length() > 0 && password.length() > 0) {
+					// Check if the user wants to create a new character
+					int newCharResult = JOptionPane.showConfirmDialog(frame, "Create a new character?", "New Character", JOptionPane.YES_NO_OPTION);
+					if (newCharResult == JOptionPane.YES_OPTION) {
+						sendMessage("new " + username + " " + password);
+					} else {
+						sendMessage("login " + username + " " + password);
+					}
+				}
+			}
 		}catch(Exception e)
 		{
 			System.err.println("Error connecting to server: "+e.toString());
