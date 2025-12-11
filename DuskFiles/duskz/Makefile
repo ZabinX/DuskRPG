@@ -9,7 +9,7 @@ java_MODULES =					\
 	duskz.common				\
 	duskz.client				\
 	duskz.server				\
-	duskz.tools
+	#duskz.tools
 
 duskz.client_JDEPMOD = duskz.common
 duskz.server_JDEPMOD = duskz.common
@@ -50,7 +50,7 @@ maven_central_JARS = $(xmlbind) $(rhino)
 include maven.make
 
 oldgame=game-2.7.3
-oldgame=../../ext/DuskRPG/DuskFiles/Dusk2.7.3
+oldgame=../DuskComet-Richter
 
 run-server-old: duskz.server
 	cd $(oldgame) && \
