@@ -1,0 +1,13 @@
+
+TARGET ?= linux-amd64
+
+#JAVA_HOME ?= /usr/local/jdk
+JAVAFX_HOME ?= /usr/local/javafx-sdk
+
+JAVAMODPATH = $(JAVAFX_HOME)/lib .lib bin/$(TARGET)/lib
+JAVACFLAGS = --source 19
+
+JAVA ?= $(JAVA_HOME)/bin/java
+JAVAC ?= $(JAVA_HOME)/bin/javac
+JAR ?= $(JAVA_HOME)/bin/jar
+JMOD ?= $(JAVA_HOME)/bin/jmod
